@@ -22,7 +22,7 @@
         <div v-else-if="error" class="error apollo">An error occured</div>
 
         <!-- Result -->
-        <div v-else-if="data.product" class="result apollo">
+        <div v-else-if="data && data.product" class="result apollo">
           {{ data.product.masterData.current.name }}
         </div>
 

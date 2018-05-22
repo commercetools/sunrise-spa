@@ -39,7 +39,7 @@ function restartWebsockets(wsClient) {
 // Create the apollo client
 export default function createApolloClient({
   ssr, base, endpoints, persisting, subscriptions,
-}) {
+}, authMiddleware) {
   let wsClient;
 
   let link = new HttpLink({
@@ -47,16 +47,20 @@ export default function createApolloClient({
     uri: base + endpoints.graphql,
   });
 
+  const asyncAuthHeader = new Promise(success =>
+    authMiddleware(headers => success(headers.headers.Authorization))({}, {}));
+
   // HTTP Auth header injection
-  const authLink = setContext((_, { headers }) => ({
-    headers: {
-      ...headers,
-      authorization: getAuth(),
-    },
-  }));
+  const asyncAuthLink = setContext((_, { headers }) =>
+    asyncAuthHeader.then(authHeader => ({
+      headers: {
+        ...headers,
+        authorization: authHeader,
+      },
+    })));
 
   // Concat all the http link parts
-  link = authLink.concat(link);
+  link = asyncAuthLink.concat(link);
   if (persisting) {
     link = createPersistedQueryLink().concat(link);
   }
@@ -76,7 +80,7 @@ export default function createApolloClient({
     }
 
     // File upload
-    const uploadLink = authLink.concat(createUploadLink({
+    const uploadLink = asyncAuthLink.concat(createUploadLink({
       uri: base + endpoints.graphql,
     }));
 
