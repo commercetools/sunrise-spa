@@ -1,0 +1,9 @@
+query sku2name($sku: String!) {
+  product(sku: $sku) {
+    masterData {
+      current {
+        name(locale: "en")
+      }
+    }
+  }
+}
