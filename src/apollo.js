@@ -48,7 +48,7 @@ export default function createApolloClient({
   });
 
   const asyncAuthHeader = new Promise(success =>
-    authMiddleware(headers => success(headers.headers.Authorization))({}, {}));
+    authMiddleware(headerObj => success(headerObj.headers.Authorization))({}, {}));
 
   // HTTP Auth header injection
   const asyncAuthLink = setContext((_, { headers }) =>
