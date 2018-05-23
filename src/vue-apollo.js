@@ -7,22 +7,20 @@ import createApolloClient from './apollo';
 Vue.use(VueApollo);
 
 // API client credentials for SPA
-const credentials = require('../credentials.json');
+const ctConfiguration = require('../ct-configuration.json');
 
 // Config
 const options = {
-  ssr: false,
-  base: process.env.VUE_APP_GRAPHQL_ENDPOINT || `https://api.commercetools.com/${credentials.projectKey}`,
+  base: process.env.VUE_APP_GRAPHQL_ENDPOINT || `${ctConfiguration.api.host}/${ctConfiguration.auth.projectKey}`,
   endpoints: {
     graphql: process.env.VUE_APP_GRAPHQL_PATH || '/graphql',
     subscription: process.env.VUE_APP_GRAPHQL_SUBSCRIPTIONS_PATH || '/graphql',
   },
   persisting: false,
-  subscriptions: false,
 };
 
 // Create apollo client
-const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(credentials);
+const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(ctConfiguration.api);
 export const apolloClient = createApolloClient(options, authMiddleware);
 
 // Create vue apollo provider
