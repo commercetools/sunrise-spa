@@ -9,7 +9,7 @@ In the [Admin Center](https://admin.commercetools.com/), select your project and
 #### Configure SUNRISE with your API client 
 
 Create the file `ct-configuration.json` in the root folder with the following contents:
-```
+```javascript
 {
   "auth": {
     "host": "https://auth.commercetools.com",
