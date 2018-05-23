@@ -6,7 +6,7 @@ import createApolloClient from './apollo';
 // Install the vue plugin
 Vue.use(VueApollo);
 
-// API client credentials for SPA
+// Import commercetools configuration for SPA
 const ctConfiguration = require('../ct-configuration.json');
 
 // Config
@@ -19,9 +19,11 @@ const options = {
   persisting: false,
 };
 
+// Create commercetools authentication middleware
+export const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(ctConfiguration.auth);
+
 // Create apollo client
-const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(ctConfiguration.auth);
-export const apolloClient = createApolloClient(options, authMiddleware);
+export const apolloClient = createApolloClient(options);
 
 // Create vue apollo provider
 export const apolloProvider = new VueApollo({

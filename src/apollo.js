@@ -5,25 +5,21 @@ import { createUploadLink } from 'apollo-upload-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createPersistedQueryLink } from 'apollo-link-persisted-queries';
 import { setContext } from 'apollo-link-context';
+import { authMiddleware } from './vue-apollo';
+
+function addAuthHeader(request) {
+  return new Promise(success => authMiddleware(header => success(header))(request, {}));
+}
 
 // Create the apollo client
-export default function createApolloClient({ base, endpoints, persisting }, authMiddleware) {
+export default function createApolloClient({ base, endpoints, persisting }) {
   let link = new HttpLink({
     // You should use an absolute URL here
     uri: base + endpoints.graphql,
   });
 
-  const asyncAuthHeader = new Promise(success =>
-    authMiddleware(headerObj => success(headerObj.headers.Authorization))({}, {}));
-
   // HTTP Auth header injection
-  const asyncAuthLink = setContext((_, { headers }) =>
-    asyncAuthHeader.then(authHeader => ({
-      headers: {
-        ...headers,
-        authorization: authHeader,
-      },
-    })));
+  const asyncAuthLink = setContext(request => addAuthHeader(request));
 
   // Concat all the http link parts
   link = asyncAuthLink.concat(link);
