@@ -20,7 +20,7 @@ const options = {
 };
 
 // Create apollo client
-const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(ctConfiguration.api);
+const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(ctConfiguration.auth);
 export const apolloClient = createApolloClient(options, authMiddleware);
 
 // Create vue apollo provider
