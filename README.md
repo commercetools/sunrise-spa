@@ -18,7 +18,7 @@ Create the file `ct-configuration.json` in the root folder with the following co
       "clientId": "<your-client-id>",
       "clientSecret": "<your-client-secret>"
     },
-    "scopes": ["<your-project-scope-1>", "<your-project-scope-2"]
+    "scopes": ["<your-client-scope-1>", "<your-client-scope-2"]
   },
   "api": {
     "host": "https://api.commercetools.com"
