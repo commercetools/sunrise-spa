@@ -1,0 +1,530 @@
+{
+  "main": {
+    "close": "Schließen",
+    "choose": "Auswählen",
+    "home": "Home",
+    "more": "Mehr",
+    "messages": {
+      "pleaseWait": "Bitte warten...",
+      "viewYourBagAlert": "Warenkorb ansehen",
+      "addToWishlistAlert": "Auf den Wunschzettel",
+      "requiredField": "Pflichtfeld"
+    },
+    "common": {
+      "color": "Farbe",
+      "checkout": "Checkout",
+      "description": "Beschreibung",
+      "price": "Price",
+      "totalPrice": "Gesamtpreis __totalPrice__",
+      "quantity": "Menge",
+      "size": "Größe",
+      "salesTax": "MwSt.",
+      "viewDetails": "Details ansehen"
+    },
+    "header": {
+      "title": "Sunrise",
+      "stores": "Filiale",
+      "help": "Hilfe",
+      "callUs": "Rufen Sie uns auf +44 123 456 000 an",
+      "miniCart": "Warenkorb",
+      "viewBag": "Warenkorb ansehen",
+      "checkout": "Checkout",
+      "search": "Suche",
+      "signIn": "Log In",
+      "signOut": "Log Out",
+      "language": "Sprache",
+      "country": "Land",
+      "location": "Ort",
+      "allCategories": "Alle Kategorien",
+      "teaser": "Sommer 2015 – Was ist Ihre Inspiration?",
+      "new": "Neu",
+      "sale": "Sale",
+      "brands": "Marken"
+    },
+    "footer": {
+      "paySecure": "Sicher zahlen",
+      "followUs": "Follow us",
+      "joinNewsletter": "Newsletter abonnieren",
+      "subscribe": "Anmelden",
+      "yourEmail": "Ihre E-Mail-Adresse...",
+      "customerCare": "Kundenservice",
+      "contactUs": "Kontaktieren Sie uns",
+      "help": "Hilfe",
+      "shipping": "Versand",
+      "returns": "Retoure",
+      "sizeGuide": "Größentabelle",
+      "aboutUs": "Über uns",
+      "ourStory": "Unsere Geschichte",
+      "careers": "Karriere",
+      "shortcuts": "Shortcuts",
+      "myAccount": "Mein Konto",
+      "storeLocator": "Filiale suchen",
+      "giftCards": "Geschenkkarten",
+      "payment": "Zahlung",
+      "legalInfo": "© 2015 Sunrise",
+      "imprint": "Impressum",
+      "privacyPolicy": "Datenschutz",
+      "termsOfUse": "AGB"
+    },
+    "order": {
+      "paymentStatus": {
+        "title": "Payment Status",
+        "balanceDue": "Balance due",
+        "failed": "Failed",
+        "pending": "Pending",
+        "creditOwed": "Credit owed",
+        "paid": "Paid"
+      },
+      "shippingStatus": {
+        "title": "Shipping Status",
+        "shipped": "Shipped",
+        "ready": "Ready",
+        "pending": "Pending",
+        "partial": "Partial",
+        "backorder": "Backorder",
+        "delayed": "Delayed"
+      }
+    },
+    "form": {
+      "addressOne": "Adresse 1",
+      "addressTwo": "Adresse 2",
+      "apply": "Weiter",
+      "city": "Stadt",
+      "cancel": "Abbrechen",
+      "choose": "Auswählen",
+      "country": "Land",
+      "edit": "Bearbeiten",
+      "email": "E-Mail-Adresse",
+      "emailRequired": "Wir benötigen Ihre E-Mail-Adresse, um Ihnen die Bestell- und Versand-Bestätigungs-E-Mails zu senden.",
+      "delete": "Löschen",
+      "firstName": "Vorname",
+      "formHasErrorsFlash": "Es ist ein Fehler aufgetreten",
+      "lastName": "Nachname",
+      "month": "Monat",
+      "personTitles": {
+        "mr": "Herr",
+        "mrs": "Frau",
+        "ms": "Frau",
+        "dr": "Dr."
+      },
+      "phone": "Telefon",
+      "phoneRequired": "Bitte geben Sie Ihre Telefonnummer an, damit der Lieferant Sie bei der Zustellung kontaktieren kann.",
+      "postCode": "PLZ",
+      "region": "Region",
+      "required": "Pflichtfeld",
+      "submit": "Weiter",
+      "title": "Titel",
+      "year": "Jahr"
+    },
+    "contactForm": {
+      "pleaseFill": "Kontaktformular ausfüllen",
+      "customerSupport": "Unser Kundenservice ist rund um die Uhr für Sie bei allen Fragen zur Bestellung oder Styling Beratung erreichbar.",
+      "callUsOn": "Rufen Sie uns an +49 (89) 222 435 1234",
+      "responseTime": "Wir bemühen uns Ihnen innerhalb von 24 Stunden zu antworten.",
+      "message": "Nachricht"
+    },
+    "forgotPasswordModal": {
+      "title": "Passwort vergessen",
+      "description": "Geben Sie Ihre Emailadresse ein und klicken Sie auf \"Passwort zurücksetzen\" und wir senden Ihnen einen Link, um ein neues Passwort zu setzen."
+    },
+    "storeFinder": {
+      "title": "Filiale suchen",
+      "description": "Bitte geben Sie eine Region oder PLZ ein",
+      "postcode": "PLZ",
+      "lookUp": "Suchen",
+      "orRegion": "oder Region",
+      "city": "Stadt",
+      "selectRegion": "Region auswählen",
+      "selectCity": "Stadt auswählen",
+      "address": "Adresse",
+      "workingHours": "Öffungszeit",
+      "addressLineOne": "Sunrise Street 10",
+      "addressLineTwo": "Sunrise, 10116",
+      "addressLineThree": "Sunrise",
+      "addressLineFour": "123456789123",
+      "standartHours": {
+        "title": "Öffungszeit",
+        "monFri": "Montag-Freitag: 09.00 - 20.00",
+        "weekend": "Samstag: 09.00 - 20.00"
+      },
+      "holidayHours": {
+        "title": "Öffungszeit über die Feiertage",
+        "monFri": "Montag-Freitag: 09.00 - 20.00",
+        "weekend": "Samstag: 09.00 - 20.00"
+      }
+    },
+    "storeLocation": {
+      "title": "Store location",
+      "address": "Addresse",
+      "openingTimes": "Öffungszeit",
+      "calculatingTxt": "Berechnung...",
+      "availability": {
+        "available": "verfügbar",
+        "notAvailable": "nicht verfügbar",
+        "fewItemsLeft": "wenige Artikel"
+      },
+      "reserve": "Reservieren"
+    },
+    "faq": {
+      "title": "FAQS",
+      "delivery": "Versand",
+      "returns": "Retoure"
+    },
+    "imprint": {
+      "title": "Impressum"
+    }
+  },
+  "catalog": {
+    "messages": {
+      "reachedMaximumQuantity": "Sie haben die maximale Bestellmenge erreicht.",
+      "itemAddedToCart": "Der Artikel wurde in den Warenkorb gelegt."
+    },
+    "thumbnail": {
+      "sale": "Sale",
+      "new": "Neu",
+      "quickView": "Schnellansicht",
+      "moreColors": "Mehr Farben"
+    },
+    "filters": {
+      "title": "Artikel filtern",
+      "open": "Filter öffnen",
+      "close": "Filter schließen",
+      "clear": "Alle löschen",
+      "productType": "Produktart",
+      "color": "Farbe",
+      "size": "Größe",
+      "brand": "Marke"
+    },
+    "pagination": {
+      "pageSeparator": "von",
+      "next": "Nächste",
+      "previous": "Zurück"
+    },
+    "displaySelector": {
+      "title": "Artikel pro Seite"
+    },
+    "sortSelector": {
+      "title": "Sortierung",
+      "new": "Neu eingetroffen",
+      "priceDesc": "Preis absteigend",
+      "priceAsc": "Preis aufsteigend"
+    },
+    "ratings": {
+      "text5": "5 Sterne",
+      "text4": "4 Sterne",
+      "text3": "3 Sterne",
+      "text2": "2 Sterne",
+      "text1": "1 Stern",
+      "description5": "Rocks!",
+      "description4": "Pretty good",
+      "description3": "Meh",
+      "description2": "Kinda bad",
+      "description1": "Sucks big time"
+    },
+    "availability": {
+      "available": "Verfügbar"
+    },
+    "sizeGuide": {
+      "title": "Größentabelle",
+      "clothing": "Bekleidung",
+      "shoes": "Schuhe",
+      "belt": "Gürtel"
+    },
+    "cart": {
+      "add": "In den Warenkorb"
+    },
+    "wishlist": {
+      "title": "Ihre Wunschliste",
+      "add": "Auf den Wunschzettel",
+      "view": "Wunschliste ansehen",
+      "recentlyAdded": "Zuletzt hinzugefügte Artikel"
+    },
+    "reserve": {
+      "title": {
+        "long": "Im Shop reservieren",
+        "short": "Reservieren"
+      }
+    },
+    "suggestions": {
+      "title": "Das könnte Ihnen auch gefallen"
+    },
+    "reviews": {
+      "title": "Kundenbewertungen",
+      "write": "Erste Kundenbewertung schreiben"
+    },
+    "description": {
+      "show": "Mehr",
+      "hide": "Weniger"
+    },
+    "details": {
+      "title": "Produktdetails"
+    },
+    "delivery": {
+      "title": "Versand & Retoure",
+      "freeReturns": "Kostenlose Retoure",
+      "moreDeliveryInfo": "Versandinformationen"
+    },
+    "searchResult": {
+      "title": "Suchergebnisse",
+      "of": "für",
+      "searchResultsFor": "Suchergenisse für",
+      "warning": "Ihre Suche nach \"\" ergab leider 0 Treffer. Diese Suchergebnisse enthalten Ähnlichkeiten."
+    },
+    "viewMore": {
+      "title": "Mehr anzeigen"
+    },
+    "removeBtn": {
+      "title": "Entfernen"
+    },
+    "contactUs": {
+      "title": "Kontaktieren Sie uns"
+    },
+    "noSearchResult": {
+      "searchNotFound": {
+        "title": "Suchergebnisse",
+        "notFound": "Nicht gefunden",
+        "keyword": null,
+        "description": "Es gab leider keine Treffer für Ihre Suche nach \"xxxxx\". Prüfe die Schreibweise oder suche nach einem Synonym."
+      },
+      "popularSearchPhrases": {
+        "title": "Häufig gesuchte Wörter",
+        "suggestionsTitle": "Beliebte Artikel"
+      }
+    }
+  },
+  "checkout": {
+    "addToNewsletter": "Bitte senden Sie mir den",
+    "agreeToTermsHtml": "Ich stimme den <a id=\"confirmation-termsandconditions-link\" href=\"__url__\"> <span class=\"terms-link\">AGB</span></a> zu",
+    "billingAddress": "Zahlungsadresse",
+    "completeMyOrder": "Zahlungspflichtig bestellen",
+    "confirmation": "Bestätigung",
+    "continueCheckout": "Weiter",
+    "continueShopping": "Weiter einkaufen",
+    "discountApply": "Anwenden",
+    "discountTooltip": "Weitere Rabatt Informationen...",
+    "discountPromoInfo": "Rabatte",
+    "editMyCart": "Warenkorb bearbeiten",
+    "itemsTotal": "__count__ Artikel im Warenkorb",
+    "needHelpCustomerService": "Brauchen Sie Hilfe? Kundenservice",
+    "orderDate": "Bestelldatum",
+    "orderDiscount": "Bestelldiscount",
+    "orderNumber": "Bestellnummer",
+    "orderSummary": "Bestellübersicht",
+    "payment": "Zahlung",
+    "paymentInformation": "Zahlungsdetails",
+    "promoCodeApplied": "Gutschein eingelöst",
+    "returningCustomer": "Wiederkehrender Besucher",
+    "rememberMe": "Meine Daten speichern für einen Account",
+    "shipping": "Versand",
+    "shippingAddress": "Versandadresse",
+    "shippingInformation": "Versand Information",
+    "shippingMethod": "Versandart",
+    "subtotal": "Zwischensumme",
+    "total": "Gesamtpreis",
+    "yourBag": "Ihr Einkaufswagen",
+    "cartDetailPage": {
+      "title": "Ihr Einkaufswagen"
+    },
+    "signInPage": {
+      "title": "Sicherer Bestellprozess - Anmeldung"
+    },
+    "shippingPage": {
+      "title": "Sicherer Bestellprozess - Versand",
+      "differentBillingAddressCheckboxLabel": "Abweichende Adresse als Rechnungsadresse verwenden.",
+      "emailInfo": "Bitte geben Sie Ihre E-Mail-Adresse an, damit wir Sie über den Status und Versand Ihrer Bestellung informieren können.",
+      "telNumberInfo": "Bitte geben Sie Ihre Telefonnummer an, damit unser Lieferant Sie über den Liefertermin informieren kann."
+    },
+    "paymentPage": {
+      "title": "Sicherer Bestellprozess - Bezahlung",
+      "cardName": "Name auf der Kreditkarte",
+      "cardNumber": "Kreditkartennummer",
+      "expiryDateTitle": "Gültig bis",
+      "paymentOptionsTitle": "Bitte wählen Sie eine Zahlungsart aus",
+      "securityCode": "Prüfnummer",
+      "securityCodeTooltip": "Normalerweise befindet sich der Code auf der Rückseite."
+    },
+    "confirmationPage": {
+      "title": "Sicherer Bestellprozess - Versand"
+    },
+    "thankYouPage": {
+      "title": "Vielen Dank für Ihre Bestellung!",
+      "emailSentToStart": "Eine Email wurde versandt",
+      "emailSentToEnd": "als Bestellbestätigung.",
+      "yourOrderDetails": "Ihre Bestelldetails"
+    }
+  },
+  "myAccount": {
+    "myAccount": {
+      "title": "Mein Konto"
+    },
+    "myAccountSidebar": {
+      "personalDetails": "Meine Benutzerdaten",
+      "addressBook": "Adressbuch",
+      "paymentDetails": "Meine Zahlungdaten",
+      "myOrders": "Meine Bestellungen",
+      "returnsExchange": "Meine Retouren",
+      "wishlist": "Wunschliste",
+      "signOut": "Abmelden",
+      "changePassword": "Passwort ändern"
+    },
+    "personalDetails": {
+      "title": "Ihre Benutzerdaten",
+      "shopAllBtn": "Alles bestellen",
+      "updateBtn": "Details aktualisieren",
+      "cancelBtn": "Abbrechen",
+      "bannerOne": {
+        "title": "Dein Sunrise",
+        "subtitle": "Urlaub in der Sonne"
+      },
+      "bannerTwo": {
+        "title": "Sunrise Shop",
+        "subtitle": "Neue Saison, neuer Style"
+      },
+      "welcomeBack": "Willkommen zurück",
+      "welcomeDescription": "Für einen besseren Kundenservice geben Sie bitte Ihre Kundennummer an.",
+      "subscribedToNewsletter": "Subscribed to weekly newsletter",
+      "personalDetailsForm": {
+        "title": "Title",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "phone": "Telephone Number",
+        "email": "Email Address",
+        "password": "Password",
+        "confirmPassword": "Confirm Password"
+      }
+    },
+    "addressBook": {
+      "title": "Addressbuch",
+      "defaultAddresses": {
+        "title": "Standard-Adressen"
+      },
+      "additionalAddress": {
+        "title": "Weitere Adressen"
+      },
+      "billingAddress": {
+        "title": "Rechnungsadresse",
+        "label": "Als meine Rechnungadresse verwenden"
+      },
+      "shippingAddress": {
+        "title": "Lieferadresse",
+        "label": "Als meine Lieferadresse verwenden"
+      },
+      "buttons": {
+        "saveAddressBtn": "Änderungen speichern",
+        "cancelAddressBtn": "Abbrechen",
+        "edit": "Bearbeiten",
+        "delete": "Löschen",
+        "addNewAddress": "Neue Adresse hinzufügen"
+      }
+    },
+    "myOrders": {
+      "title": "Meine Bestellungen",
+      "orderNumber": "Order Number",
+      "creationDate": "Date",
+      "totalPrice": "Total",
+      "paymentStatus": "Payment Status",
+      "shippingStatus": "Shipping Status",
+      "view": "View"
+    },
+    "myOrder": {
+      "title": "Your Order Details",
+      "orderNumber": "Order number",
+      "creationDate": "Order date",
+      "print": "Print Receipt",
+      "shippingAddress": "Shipping Address",
+      "billingAddress": "Billing Address",
+      "shippingMethod": "Shipping Method",
+      "paymentDetails": "Payment Details",
+      "price": {
+        "discountCode": "Promotional Code Applied",
+        "subtotal": "Subtotal",
+        "cartDiscount": "Order Discount",
+        "shipping": "Shipping",
+        "taxes": "Sales Tax",
+        "total": "Total"
+      },
+      "items": {
+        "productDescription": "Description",
+        "quantity": "Quantity",
+        "unitPrice": "Price",
+        "totalPrice": "Total"
+      }
+    },
+    "myWishlist": {
+      "title": "Meine Wunschliste",
+      "clear": "Alle löschen",
+      "itemsTotal": "__count__ Artikel",
+      "itemsTotal_plural": "__count__ Artikel"
+    },
+    "changePassword": {
+      "oldPasswordLabelTxt": "Aktuelles Passwort",
+      "newPasswordLabelTxt": "Neues Passwort",
+      "confirmPasswordLabelTxt": "Neues Passwort bestätigen",
+      "changePasswordTitle": "Passwort ändern",
+      "changeBtn": "Passwort ändern",
+      "backBtn": "Zurück",
+      "feedbackMessage": "Kennwort erfolgreich geändert."
+    },
+    "resetPassword": {
+      "title": "Passwort zurücksetzen",
+      "newPasswordLabelTxt": "Neues Passwort",
+      "confirmPasswordLabelTxt": "Neues Passwort bestätigen",
+      "resetBtn": "Passwort zurücksetzen",
+      "feedbackMessage": "Kennwort erfolgreich geändert."
+    },
+    "forgotPassword": {
+      "title": "Passwort vergessen",
+      "description": "Geben Sie Ihre Emailadresse ein und klicken Sie auf \"Passwort zurücksetzen\" und wir senden Ihnen einen Link, um ein neues Passwort zu setzen.",
+      "email": {
+        "from": "Sunrise Team <sunrise-noreply@commercetools.com>",
+        "subject": "Passwort zurücksetzen",
+        "passwordResetTitle": "Passwort zrücksetzen",
+        "dearUser": "Sehr geehrter",
+        "passwordResetText": "Wir haben Ihre Anfrage zum Zurücksetzen Ihres Passworts erhalten. Bitte verwenden Sie den folgenden Link um Ihr Passwort zurück zu setzen:",
+        "passwordResetTextTwo": "Bitte ignorieren Sie diese Email falls Sie Ihr Passwort nicht zurück setzen möchten.",
+        "wishes": "Mit freundlichen Grüssen",
+        "who": "SUNRISE Customer Service Team",
+        "companyEmail": "www.sunrise.commercetools.de",
+        "companyAddressOne": "Sunny Road 1",
+        "companyAddressTwo": "23456 Sunshine",
+        "companyVatNumber": "VAT Number 5123123151.",
+        "bannerTitle": "Frauen",
+        "bannerText": "Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem",
+        "bottomTextTwo": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus."
+      },
+      "feedbackMessage": "Eine Wiederherstellungs-E-Mail wurde gesendet, bitte überprüfen Sie Ihre E-Mail für Anweisungen zum Zurücksetzen Ihres Passworts."
+    },
+    "login": {
+      "pageTitle": "Kundenanmeldung",
+      "loginBox": {
+        "title": "Kundenanmeldung",
+        "required": "Pflichtfeld",
+        "description": "Für einen schnelleren Checkout Prozess, melden Sie sich bitte mit Ihrem persönlichen Kundenkonto ein.",
+        "email": "E-Mail",
+        "password": "Passwort",
+        "rememberMe": "Angemeldet bleiben",
+        "forgotPassword": "Passwort vergessen",
+        "signIn": "Anmelden"
+      },
+      "signupBox": {
+        "title": "Neukunden Resigstrierung",
+        "required": "Pflichtfeld",
+        "description": "Konto einrichten, um das Shoppen noch einfacher zu machen.",
+        "titleSelect": "Titel",
+        "firstName": "Vorname",
+        "secondName": "Nachname",
+        "email": "E-Mail",
+        "confirmEmail": "E-Mail bestätigen",
+        "password": "Passwort",
+        "confirmPassword": "Passwort bestätigen",
+        "pleaseAddMe": "Anmeldung zum",
+        "newsletter": "SUNRISE Newsletter",
+        "agreeTo": "Ich stimme den \"\" zu.",
+        "termsAndConditions": "AGB",
+        "personalInfo": "Ihre persönliche Daten werden vertaulich behandelt.",
+        "privacyPolicy": "Datenschutz",
+        "registerNow": "Jetzt registieren"
+      }
+    }
+  }
+}

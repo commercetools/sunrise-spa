@@ -1,20 +1,32 @@
 <template>
-  <div class="home">
-    <img src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <div class="home-page">
+
+      <!--{{> catalog/home/home-banners}}-->
+
+      <div class="container">
+        <!--{{> catalog/home/home-suggestions}}-->
+
+        <div class="home-viewall">
+          <!--{{> catalog/home/view-products-link}}-->
+        </div>
+      </div>
+    </div>
+    <!--{{> common/wishlist wishlist=content.wishlist}}-->
+
+    <div class="home">
     <ApolloExample/>
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
 import ApolloExample from '@/components/ApolloExample.vue';
 
 export default {
   name: 'home',
   components: {
-    HelloWorld,
     ApolloExample,
   },
 };

@@ -1,0 +1,58 @@
+banners[0]:
+  title: Sommer Essentials
+  subtitle: Die wichtigsten Stücke des Sommer Trends 2016
+  linkLabel: Jetzt bestellen
+  link: /de/men
+  backgroundImage: ../../assets/img/cms/leather1-4to3.jpg
+
+banners[1]:
+  title: Sommer Fashion
+  subtitle: Beste Outfits für die Saison
+  linkLabel: Jetzt bestellen
+  link: /de/women
+  backgroundImage: ../../assets/img/cms/woman1-4to3.jpg
+
+banners[2]:
+  title: Here comes the sun
+  subtitle: FABULOUS EVERY DAY - SUMMER CHIC
+  description: Die Modetrends für den Sommer 2016 spielen mit Prints, Army- und Safarilooks sowie Pastel Farben. Accessoires wie runde Sonnenbrillen, geschnürte Stiefel und Shopper oder Handtaschen sorgen für Abwechslung. SUNRISE stellt Ihnen die Fashion Trends für den Sommer 2016 vor. Lassen Sie sich inspirieren!<br/><br/>Kaum ist der Frühling vorbei, umfängt uns der warme Sommer. Erfahren Sie, was die wichtigsten Fashion - Trends der kommenden Sommersaison sind und welche traumhaften Stücke Sie besitzen sollen! London, New York, Mailand, Paris – SUNRISE präsentiert die aktuelle Sommermode 2016 aus den Modemetropolen . Die neuesten Kleider, elegante Tops, Hosen, Bademode, exklusive Schuhe und Ballerinas, bezaubernden Schmuck, Sonnenbrillen und Accessoires für den perfekten Sommer.
+  linkLabel: Jetzt kaufen
+  link: /de/men-clothing-shirts
+  backgroundImage: ../../assets/img/cms/man1-8to3.jpg
+
+banners[3]:
+  title: Einzigartige Stücke für jede Saison
+  subtitle: Lassen Sie sich inspirieren
+  linkLabel: Jetzt kaufen
+  link: /de/women-shoes
+  backgroundImage: ../../assets/img/cms/shoes-4to3.jpg
+
+banners[4]:
+  title: SOMMER MODE 2016
+  backgroundImage: ../../assets/img/cms/blue-bg-4to3.png
+
+banners[5]:
+  title: Sonnenbrillen-Trends 2016
+  subtitle: Unsere Fashion Must-Haves
+  linkLabel: Jetzt kaufen
+  link: /de/accessories-women-sunglasses
+  backgroundImage: ../../assets/img/cms/sunglass-4to3.jpg
+
+banners[6]:
+  title: Hauptsache überdimensional
+  subtitle: Trendy Sommer 2016 - Auffällige Sonnenbrillen
+  linkLabel: Jetzt bestellen
+  link: /de/women-clothing-dresses
+  backgroundImage: ../../assets/img/cms/woman-8to3.jpg
+
+suggestions:
+  title: Unsere Empfehlungen
+  subtitle: Sommer Must-Haves 2016
+
+viewProducts:
+  linkText: View all new products
+  linkHref: new
+
+header:
+  shopName: Sunrise
+  shopLogo: ../../assets/img/cms/logo.svg

@@ -1,4 +1,5 @@
-import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth/dist/commercetools-sdk-middleware-auth.cjs';
+import { createAuthMiddlewareForClientCredentialsFlow }
+  from '@commercetools/sdk-middleware-auth/dist/commercetools-sdk-middleware-auth.cjs';
 import Vue from 'vue';
 import VueApollo from 'vue-apollo';
 import createApolloClient from './apollo';

@@ -4148,7 +4148,7 @@ graphql-type-json@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/graphql-type-json/-/graphql-type-json-0.2.1.tgz#d2c177e2f1b17d87f81072cd05311c0754baa420"
 
-graphql@^0.13.0, graphql@^0.13.1:
+graphql@^0.13.1, graphql@^0.13.2:
   version "0.13.2"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.13.2.tgz#4c740ae3c222823e7004096f832e7b93b2108270"
   dependencies:
@@ -4935,6 +4935,10 @@ joi@^12.0.0:
     hoek "4.x.x"
     isemail "3.x.x"
     topo "2.x.x"
+
+jquery-ui@^1.12.1:
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/jquery-ui/-/jquery-ui-1.12.1.tgz#bcb4045c8dd0539c134bc1488cdd3e768a7a9e51"
 
 js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.4.5"
@@ -7459,6 +7463,10 @@ select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
 
+selectboxit@^3.8.2:
+  version "3.8.2"
+  resolved "https://registry.yarnpkg.com/selectboxit/-/selectboxit-3.8.2.tgz#40ca2b11b97cea928cdf21542e9c57a142c71fae"
+
 selenium-server@^3.12.0:
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/selenium-server/-/selenium-server-3.12.0.tgz#3ab2ef979afa058590850a1da34ffee140620f42"
@@ -8527,6 +8535,10 @@ vue-hot-reload-api@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.0.tgz#97976142405d13d8efae154749e88c4e358cf926"
 
+vue-i18n@^7.7.0:
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-7.7.0.tgz#f317581e0ebc43c128662501cfabd6ecd5e7fceb"
+
 vue-loader@^15.1.0:
   version "15.1.0"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-15.1.0.tgz#82a2a5c310951aba17ad5d8680fe016c77d37e80"
@@ -8685,7 +8697,7 @@ webpack-sources@^1.0.1, webpack-sources@^1.1.0:
     source-list-map "^2.0.0"
     source-map "~0.6.1"
 
-webpack@^4.8.2:
+webpack@^4.8.2, webpack@^4.8.3:
   version "4.8.3"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.8.3.tgz#957c8e80000f9e5cc03d775e78b472d8954f4eeb"
   dependencies:

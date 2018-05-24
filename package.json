@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@commercetools/sdk-middleware-auth": "^4.0.0",
+    "@vue/cli-shared-utils": "^3.0.0-beta.11",
     "apollo-cache-inmemory": "^1.0.0",
     "apollo-client": "^2.0.1",
     "apollo-link": "^1.0.0",
@@ -20,14 +21,20 @@
     "apollo-link-ws": "^1.0.0",
     "apollo-upload-client": "^8.0.0",
     "apollo-utilities": "^1.0.1",
-    "graphql": "^0.13.0",
+    "chalk": "^2.4.1",
+    "eslint": "^4.19.1",
+    "graphql": "^0.13.2",
     "graphql-type-json": "^0.2.1",
+    "jquery-ui": "^1.12.1",
     "register-service-worker": "^1.0.0",
+    "selectboxit": "^3.8.2",
     "subscriptions-transport-ws": "^0.9.5",
     "vue": "^2.5.16",
     "vue-apollo": "^3.0.0-alpha.1",
+    "vue-i18n": "^7.7.0",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "webpack": "^4.8.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-beta.11",
