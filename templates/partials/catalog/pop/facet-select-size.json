@@ -1,0 +1,36 @@
+{
+	"selectFacet" : true,
+	"facet" : {
+		"countHidden" : true,
+		"multiSelect" : true,
+		"available" : true,
+		"label" : "Size",
+		"key" : "size",
+		"limitedOptions" : [
+			{
+				"label" : "S",
+				"value" : "s",
+				"count" : "123",
+				"selected" : true
+			},
+			{
+				"label" : "M",
+				"value" : "m",
+				"count" : "123",
+				"selected" : false
+			},
+			{
+				"label" : "L",
+				"value" : "l",
+				"count" : "123",
+				"selected" : false
+			},
+			{
+				"label" : "XL",
+				"value" : "xl",
+				"count" : "123",
+				"selected" : false
+			}
+		]
+	}
+}

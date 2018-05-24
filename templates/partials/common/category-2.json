@@ -1,0 +1,42 @@
+{
+	"text" : "Glasses",
+	"url" : "",
+	"children" : [
+		{
+			"text" : "Lorem",
+			"url" : ""
+		},
+		{
+			"text" : "Very long navigation item",
+			"url" : ""
+		},
+		{
+			"text" : "Very long navigation items will be truncated",
+			"url" : ""
+		},
+		{
+			"text" : "Very long navigation item",
+			"url" : ""
+		},
+		{
+			"text" : "Button toolbar",
+			"url" : ""
+		},
+		{
+			"text" : "Sizing",
+			"url" : ""
+		},
+		{
+			"text" : "Nesting",
+			"url" : ""
+		},
+		{
+			"text" : "Very long navigation items will be truncated",
+			"url" : ""
+		},
+		{
+			"text" : "Very long navigation item",
+			"url" : ""
+		}
+	]
+}

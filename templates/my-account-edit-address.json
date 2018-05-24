@@ -1,0 +1,45 @@
+{
+  "header": {
+    "$ref": "common/header.json"
+  },
+  "footer": {
+    "$ref": "common/footer.json"
+  },
+  "content": {
+    "editAddressFormSettings": {
+      "title": {
+        "$ref": "form/choose-title-1.json"
+      },
+      "countries": {
+        "$ref": "form/choose-country-1.json"
+      }
+    },
+    "editAddressForm": {
+      "id": "34jhd94",
+      "title": "Mr.",
+      "firstName": "Bruce",
+      "lastName": "Wayne",
+      "streetName": "100 Gotham Street",
+      "additionalStreetInfo": "Basement",
+      "city": "Gotham",
+      "region": "NY",
+      "postalCode": "11111",
+      "countries": "UK",
+      "defaultShippingAddress": true,
+      "defaultBillingAddress": false,
+      "messages": {
+        "$ref": "form/messages.json"
+      },
+      "errors": {
+        "$ref": "form/errors.json"
+      }
+    },
+    "messages" : [
+        { "$ref" : "common/message-info.json" },
+        { "$ref" : "common/message-success.json" }
+    ]
+  },
+  "meta": {
+    "$ref": "common/meta.json"
+  }
+}

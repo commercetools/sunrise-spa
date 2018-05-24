@@ -1,0 +1,21 @@
+{
+    "storeInfo": {
+        "id": "some-other-store-id",
+        "name": "Marienplatz",
+        "address": {
+            "$ref": "../../common/address-2.json"
+        },
+        "openingTimes": "<p>Mo-Fr. 10:00 a.m - 8:00 p.m.<br/>Sa. 9:00 a.m - 6:00 p.m</p>",
+        "location" : {
+          "lat" : 48.1373932,
+          "lng" : 11.5732545
+        }
+    },
+    "prices": {
+            "value": "50,00 €",
+            "discounted": {
+                "value": "40,00 €"
+            }
+        },
+    "availability": "notAvailable"
+}

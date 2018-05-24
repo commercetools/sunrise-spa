@@ -1,0 +1,79 @@
+/*****************************************************************************/
+/*
+/* UI ICON FONT
+/*
+/*****************************************************************************/
+
+@charset "UTF-8";
+
+@font-face {
+  font-family: "ui-icons";
+  src:url("../../../public/fonts/ui-icons.eot");
+  src:url("../../../public/fonts/ui-icons.eot?#iefix") format("embedded-opentype"),
+    url("../../../public/fonts/ui-icons.woff") format("woff"),
+    url("../../../public/fonts/ui-icons.ttf") format("truetype"),
+    url("../../../public/fonts/ui-icons.svg#ui-icons") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "ui-icons" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "ui-icons" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-user:before {
+  content: "a";
+}
+.icon-hand-bag:before {
+  content: "b";
+}
+.icon-ribbon:before {
+  content: "e";
+}
+.icon-magnifying-glass:before {
+  content: "c";
+}
+.icon-marker:before {
+  content: "d";
+}
+.icon-multiple:before {
+  content: "f";
+}
+.icon-single:before {
+  content: "g";
+}
+.icon-close:before {
+  content: "h";
+}
+.icon-next:before {
+  content: "i";
+}
+.icon-prev:before {
+  content: "j";
+}
+.icon-drop-down:before {
+  content: "k";
+}

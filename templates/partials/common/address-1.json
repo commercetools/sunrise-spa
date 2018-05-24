@@ -1,0 +1,13 @@
+{
+  "title" : "Mr.",
+  "firstName" : "Bruce",
+  "lastName" : "Wayne",
+  "streetName" : "100 Gotham Street",
+  "additionalStreetInfo" : "Basement",
+  "city" : "Gotham",
+  "region" : "NY",
+  "postalCode" : "11111",
+  "country" : "United States",
+  "email" : "someone@somewhere.com",
+  "phone" : "5555-24-64"
+}

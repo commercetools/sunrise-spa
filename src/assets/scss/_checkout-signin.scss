@@ -1,0 +1,121 @@
+.returning-customer {
+  width: 100%;
+  background: $white;
+  border: 1px solid $alto;
+  padding: 20px;
+  margin-bottom: 14px;
+  .returning-customer-title {
+    border-bottom: 1px solid $alto;
+    padding-bottom: 20px;
+    h4 {
+      letter-spacing: 1px;
+      margin: 0;
+      float: left;
+      text-transform: uppercase;
+    }
+    span {
+      float: right;
+      color: $silver-chalice;
+    }
+  }
+  .returning-customer-field {
+    padding-top: 20px;
+    .if-account-title {
+      display: block;
+    }
+    .returning-customer-input {
+      padding-top: 30px;
+      .returning-customer-email-title {
+        display: block;
+        padding: 5px 0;
+        text-transform: uppercase;
+      }
+      .returning-customer-email,
+      .returning-customer-password {
+        width: 100%;
+        border: 1px solid $alto;
+        border-radius: 1px;
+      }
+      .returning-customer-password-title {
+        display: block;
+        padding: 15px 0 5px;
+        text-transform: uppercase;
+      }
+      .returning-customer-remember-forget {
+        padding-top: 15px;
+        .returning-customer-rememberme {
+          display: block;
+          float: left;
+          text-transform: uppercase;
+          color: $gray;
+          input {
+            margin-right: 5px;
+          }
+        }
+        .returning-customer-forgot {
+          display: block;
+          float: right;
+          text-transform: uppercase;
+          color: $gray;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
+    .quick-checkout-btn {
+      margin-top: 15px;
+      padding: 10px 30px;
+      letter-spacing: 1px;
+      font-size: 18px;
+      text-transform: uppercase;
+      font-weight: bold;
+      background: $my-sin;
+      &:hover {
+        background: lighten($my-sin, 5%);
+      }
+    }
+  }
+}
+
+.guest-checkout {
+  width: 100%;
+  background: $white;
+  border: 1px solid $alto;
+  padding: 20px;
+  margin-bottom: 20px;
+  .guest-checkout-title {
+    border-bottom: 1px solid $alto;
+    padding-bottom: 20px;
+    h4 {
+      letter-spacing: 1px;
+      margin: 0;
+      float: left;
+      text-transform: uppercase;
+    }
+    span {
+      float: right;
+      color: $silver-chalice;
+    }
+  }
+  .guest-checkout-first-paragraph {
+    display: block;
+    padding-top: 20px;
+  }
+  .guest-checkout-second-paragraph {
+    display: block;
+    padding-top: 15px;
+    color: $gray;
+  }
+  .continue-guest-btn {
+    margin-top: 15px;
+    padding: 10px 30px;
+    letter-spacing: 1px;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: $my-sin;
+    &:hover {
+      background: lighten($my-sin, 5%);
+    }
+  }
+}

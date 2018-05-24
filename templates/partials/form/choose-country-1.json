@@ -1,0 +1,24 @@
+{
+    "list" : [
+        {
+            "label" : "United Kingdom",
+            "value" : "UK",
+            "selected" : true
+        },
+        {
+            "label" : "Germany",
+            "value" : "DE",
+            "selected" : false
+        },
+        {
+            "label" : "France",
+            "value" : "FR",
+            "selected" : false
+        },
+        {
+            "label" : "Spain",
+            "value" : "ES",
+            "selected" : false
+        }
+    ]
+}

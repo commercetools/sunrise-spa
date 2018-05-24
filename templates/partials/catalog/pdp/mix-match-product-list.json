@@ -1,0 +1,7 @@
+{
+	"list" : [
+		{ "$ref" : "product.json" },
+		{ "$ref" : "product.json" },
+		{ "$ref" : "product.json" }
+	]
+}

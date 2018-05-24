@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {{> common/htmlhead}}
+</head>
+
+<body>
+  <div class="darkbg hidden"></div>
+  {{> common/header}}
+  <div class="my-orders">
+    <div class="container">
+      {{> common/messages}}
+      <div class="my-account-title">
+        <span class="my-account-title-text icon-user">{{i18n "my-account:myAccount.title"}}</span>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="my-orders-wrapper">
+            <div class="row">
+              <div class="col-sm-3">
+                {{> myaccount/my-account-sidebar myReturnsAndExchangesTab=true}}
+              </div>
+              <div id="my-account-desktop-content" class="col-sm-9">
+                <div class="my-orders-content">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="my-orders-title hidden-xs">
+                        {{content.contentTitle}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="my-orders-table-wrapper">
+                    <div class="row">
+                      <div class="col-sm-2 col-xs-4">
+                        <div class="my-orders-table-titles">
+                          {{content.orderNumberTitle}}
+                        </div>
+                      </div>
+                      <div class="col-sm-2 hidden-xs">
+                        <div class="my-orders-table-titles">
+                          {{content.receivedTitle}}
+                        </div>
+                      </div>
+                      <div class="col-sm-2 hidden-xs">
+                        <div class="my-orders-table-titles">
+                          {{i18n "checkout:total"}}
+                        </div>
+                      </div>
+                      <div class="col-sm-2 col-xs-4">
+                        <div class="my-orders-table-titles">
+                          {{content.refundTotalTitle}}
+                        </div>
+                      </div>
+                      <div class="col-sm-4 col-xs-4">
+                        <div class="my-orders-table-titles">
+                          &nbsp;
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {{#each content.order}}
+                    <div class="my-orders-table-order">
+                      <div class="row">
+                        <div class="col-sm-2 col-xs-4">
+                          <span>{{orderNumber}}</span>
+                        </div>
+                        <div class="col-sm-2 hidden-xs">
+                          <span>{{receivedOn}}</span>
+                        </div>
+                        <div class="col-sm-2 hidden-xs">
+                          <span>{{total}}</span>
+                        </div>
+                        <div class="col-sm-2 col-xs-4">
+                          <span>{{refundTotal}}</span>
+                        </div>
+                        <div class="col-sm-4 col-xs-4 text-right">
+                          <button class="my-orders-view-order-btn">{{view}}</button>
+                        </div>
+                      </div>
+                    </div>
+                  {{/each}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{!-- {{> common/wishlist}} --}}
+  {{> common/footer}}
+  {{> common/htmlscripts}}
+</body>
+
+</html>

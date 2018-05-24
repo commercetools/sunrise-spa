@@ -1,0 +1,18 @@
+{
+	"url" : "",
+	"quantity" : 45,
+	"list" : [
+		{
+			"name" : "some item",
+			"imageUrl" : "../../assets/img/blue-shirt.jpg"
+		},
+		{
+			"name" : "some more item",
+			"imageUrl" : "../../assets/img/blue-shirt.jpg"
+		},
+		{
+			"name" : "some other item",
+			"imageUrl" : "../../assets/img/blue-shirt.jpg"
+		}
+	]
+}

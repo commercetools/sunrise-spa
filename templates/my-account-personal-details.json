@@ -1,0 +1,27 @@
+{
+	"header" : { "$ref" : "common/header.json" },
+	"footer" : { "$ref" : "common/footer.json" },
+	"content" : {
+		"customerInfo" : {
+			"customer" : { "$ref" : "common/customer-1.json" },
+			"subscribed" : true
+		},
+		"personalDetailsFormSettings" : {
+			"title": { "$ref" : "form/choose-title-1.json" }
+		},
+		"personalDetailsForm" : {
+			"title" : "Mr.",
+			"firstName" : "Bruce",
+			"lastName" : "Wayne",
+			"email" : "somebody@somewhere.com",
+			"subscribeToNewsletter" : true,
+			"messages" : { "$ref" : "form/messages.json" },
+			"errors" : { "$ref" : "form/errors.json" }
+		},
+        "messages" : [
+            { "$ref" : "common/message-info.json" },
+            { "$ref" : "common/message-success.json" }
+        ]
+	},
+  "meta" : { "$ref" : "common/meta.json" }
+}

@@ -1,0 +1,18 @@
+{
+    "lineItemId": "123456",
+    "quantity" : 1,
+    "totalPrice" : "49,00 €",
+    "variant" : { "$ref" : "../common/product-variant-1.json" },
+    "attributes": [
+        {
+            "name": "Color",
+            "key": "color",
+            "value": "Navy Blue"
+        },
+        {
+            "name": "Size",
+            "key": "size",
+            "value": "M"
+        }
+    ]
+}

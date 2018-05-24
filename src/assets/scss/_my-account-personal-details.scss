@@ -1,0 +1,220 @@
+.my-account {
+  padding-bottom: 50px;
+}
+
+// Page title
+.my-account-title {
+  padding: 20px 0;
+  .my-account-title-text {
+    padding-left: 10px;
+    font-size: 28px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 200;
+    &:before {
+      font-size: 26px;
+      position: relative;
+      bottom: -5px;
+      margin-right: 10px;
+    }
+  }
+}
+
+// My account box
+.my-account-content {
+  background: $white;
+  border: 1px solid $alto;
+  padding: 20px;
+}
+
+// Sidebar
+.my-account-sidebar {
+  .my-account-sidebar-items {
+    padding: 10px;
+    border-top: 1px solid $alto;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    &:last-child {
+      border-bottom: 1px solid $alto;
+    }
+    &:hover {
+      background: $wild-sand;
+    }
+  }
+  .active {
+    background: $wild-sand;
+  }
+}
+.sidebar-wishlist-heart {
+  height: 15px;
+  margin-right: 5px;
+}
+.sidebar-wishlist-quantity {
+  margin-left: 5px;
+  background: $valencia;
+  border-radius: 50%;
+  padding: 0 3px;
+  color: $white;
+  float: right;
+  font-size: 13px;
+}
+
+// Banners
+.my-account-banner {
+  min-height: 100px;
+  background: $ebony-clay;
+  padding: 70px 10px;
+  text-transform: uppercase;
+  .banner-title {
+    color: $white;
+    text-align: center;
+    font-size: 26px;
+    letter-spacing: 1px;
+  }
+  .banner-hr {
+    width: 50px;
+    background: $white;
+    margin: 10px auto;
+  }
+  .banner-subtitle {
+    color: $white;
+    text-align: center;
+    font-size: 12px;
+  }
+  .banner-btn-wrapper {
+    margin-top: 15px;
+    text-align: center;
+    .banner-btn {
+      background: $my-sin;
+      text-align: center;
+      padding: 8px 12px;
+      letter-spacing: 1px;
+      &:hover {
+        background: lighten($my-sin, 5%);
+      }
+    }
+  }
+}
+.banner-two-wrapper {
+  margin-top: 25px;
+  .image-banner {
+    background: url('../img/banner_mobile.jpg') no-repeat;
+    background-size: cover;
+  }
+}
+
+// Personal details content
+.customer-number {
+  font-weight: bold;
+}
+.personal-details-title {
+  text-transform: uppercase;
+  font-size: 18px;
+  letter-spacing: 1px;
+  padding: 30px 0 10px;
+  border-bottom: 1px solid $alto;
+}
+.personal-details-box {
+  background: $wild-sand;
+  margin-top: 15px;
+  padding: 15px 10px;
+  color: $gray;
+  position: relative;
+}
+.personal-details-box-edit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 15px 15px 0 0;
+  button {
+    text-transform: uppercase;
+    font-size: 12px;
+    img {
+      height: 12px;
+      margin: 0 5px 5px 0;;
+    }
+  }
+}
+.personal-details {
+  @media screen and (max-width: 767px) {
+    padding: 20px 0;
+  }
+}
+
+// Personal details editable content
+.required-text {
+  color: $gray;
+  text-transform: none;
+  font-size: 14px;
+}
+.select-input {
+  background: url("../img/arrow-67-filled.png") no-repeat 90% 50% $white;
+  background-size: 12px;
+  border: 1px solid $alto;
+  border-radius: 1px;
+  padding: 0.5em 3em 0.5em 0.5em;
+  margin-top: 0.2em;
+  -webkit-appearance: none;
+  -moz-appearance:    none;
+  appearance:         none;
+}
+.form-labels {
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.form-inputs {
+  width: 100%;
+  border: 1px solid #D6D6D6;
+  border-radius: 1px;
+  padding: 0.5em;
+  margin-top: 0.2em;
+}
+.form-sections {
+  padding-top: 15px;;
+}
+.form-notes {
+  font-size: 12px;
+  color: $gray;
+}
+.personal-details-newsletter {
+  margin-bottom: 40px;
+  input {
+    margin-right: 5px;
+  }
+  a {
+    color: $gray;
+    text-decoration: underline;
+  }
+}
+.personal-details-edit-btn {
+  .update-btn {
+    text-transform: uppercase;
+    background: $my-sin;
+    padding: 10px 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-right: 15px;
+    font-size: 16px;
+    &:hover {
+      background: lighten($my-sin, 5%);
+    }
+    @media screen and (max-width: 767px) {
+      margin-bottom: 10px;
+    }
+  }
+  .cancel-btn {
+    border: 2px solid $silver-chalice;
+    color: $silver-chalice;
+    padding: 8px 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 16px;
+    &:hover {
+      background: $silver-chalice;
+      color: $white;
+    }
+  }
+}
+.light-grey-hr {
+  border-top: 1px solid $alto;
+}

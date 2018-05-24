@@ -1,0 +1,52 @@
+.mix-match-product {
+  padding: 40px 0 20px;
+  border-bottom: 1px solid $alto;
+}
+.mix-match-product-img {
+  img {
+    border: 1px solid $alto;
+  }
+}
+.mix-match-product-description {
+  .mix-match-product-name {
+    font-size: 20px;
+  }
+  .mix-match-product-sku {
+    color: $gray;
+    font-size: 12px;
+    padding: 10px 0;
+  }
+  .mix-match-product-oldprice {
+    text-decoration: line-through;
+    color: $gray;
+    font-size: 18px;
+    margin-right: 5px;
+  }
+  .mix-match-product-price {
+    font-size: 20px;
+    color: $valencia;
+    letter-spacing: 1px;
+  }
+}
+.mix-match-product-attributes {
+  padding-top: 20px;
+  .selectboxit-btn {
+    background: transparent url("../img/arrow-67-filled.png") no-repeat 95% 50%;
+    background-size: 12px;
+    border: solid 1px #D6D6D6;
+    min-width: 100px;
+  }
+  .mix-match-product-attr-title {
+    text-transform: uppercase;
+    padding-bottom: 5px;
+    font-size: 12px;
+  }
+  .mix-match-product-add-input {
+    input {
+      margin-right: 5px;
+    }
+    label {
+      text-transform: uppercase;
+    }
+  }
+}

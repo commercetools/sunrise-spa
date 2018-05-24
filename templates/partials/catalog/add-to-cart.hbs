@@ -1,0 +1,35 @@
+<form id="form-add-to-cart{{index}}" name="add-to-cart" method="post" action="{{@root.meta._links.addToCart.href}}">
+  <input type="hidden" name="csrfToken" value="{{@root.meta.csrfToken}}"/>
+  <input type="hidden" name="productId" value="{{product.productId}}">
+  <input type="hidden" name="variantId" value="{{product.variantId}}">
+  <input type="hidden" name="productSku" value="{{product.variant.sku}}">
+  <input type="hidden" name="productSlug" value="{{product.slug}}">
+
+  <div class="row select-row">
+    <ul class="list-inline">
+      {{#each product.attributes}}
+        {{> catalog/product-attribute attribute=this variants=../product.variants identifiers=../product.variantIdentifiers}}
+      {{/each}}
+      <li class="size-guide-li">
+        {{> catalog/size-guide}}
+      </li>
+    </ul>
+  </div>
+  <div class="row">
+    <ul class="product-actions-list list-inline">
+      <li class="bag-items-li">
+        <select value="" name="quantity" class="bag-items" required>
+          {{#each @root.meta.bagQuantityOptions}}
+          <option value="{{this}}">{{this}}</option>
+          {{/each}}
+        </select>
+      </li>
+      <li>
+        <button type="submit" class="add-to-bag-btn text-center">
+          <img class="bag-thumb" src="{{@root.meta.assetsPath}}img/hand-bag-2-black.png" alt="{{i18n "catalog:cart.add"}}">
+          {{i18n "catalog:cart.add"}}
+        </button>
+      </li>
+    </ul>
+  </div>
+</form>

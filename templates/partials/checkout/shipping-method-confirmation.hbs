@@ -1,0 +1,11 @@
+<div class="checkout-summary">
+    <div class="text-uppercase">
+        <span class="checkout-summary-title">{{i18n "checkout:shippingMethod"}}</span>
+        {{> checkout/edit-link id="confirmation-edit-method-btn" url=meta._links.editShippingMethod.href enabled=editable}}
+    </div>
+    <div class="checkout-summary-text">
+        <span>{{shippingMethod.label}}</span>
+        <br>
+        <span>{{shippingMethod.description}}</span>
+    </div>
+</div>

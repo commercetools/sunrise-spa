@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {{> common/htmlhead}}
+</head>
+
+<body>
+  <div class="darkbg hidden"></div>
+  {{> common/header}}
+  <div class="my-account">
+    <div class="container">
+      {{> common/messages}}
+      <div class="my-account-title">
+        <span class="my-account-title-text icon-user">{{i18n "my-account:myAccount.title"}}</span>
+      </div>
+      <div class="row">
+        <div class="col-sm-9">
+          <div class="my-account-content">
+            <div class="row">
+              <div class="col-sm-3">
+                {{> myaccount/my-account-sidebar myPersonalDetailsTab=true}}
+              </div>
+              <div id="my-account-desktop-content" class="col-sm-9">
+                <div class="personal-details">
+                  <div class="personal-details-text-one">
+                    <span>{{i18n "my-account:personalDetails.welcomeBack"}}</span>
+                    <span>{{content.customerInfo.customer.firstName}}</span>
+                  </div>
+                  <div class="personal-details-text-two">
+                    {{i18n "my-account:personalDetails.welcomeDescription"}}<br>
+                    <span class="customer-number">{{content.customerInfo.customer.customerNumber}}</span>
+                  </div>
+                    <div class="personal-details-title">
+                        <span>{{i18n "my-account:personalDetails.title"}}</span>
+                        <span class="pull-right required-text personal-details-edit-show">{{i18n "main:form.required"}}*</span>
+                    </div>
+
+                    <div class="personal-details-edit-hide">
+                        <div class="personal-details-box">
+                          <div>
+                              {{content.customerInfo.customer.title}}
+                              {{content.customerInfo.customer.firstName}}
+                              {{content.customerInfo.customer.lastName}}
+                          </div>
+                          <div>{{content.customerInfo.customer.email}}</div><br>
+                            {{#if content.customerInfo.subscribed}}
+                            <div>{{i18n "my-account:personalDetails.subscribedToNewsletter"}}</div>
+                            {{/if}}
+                          <div class="personal-details-box-edit">
+                            <button class="personal-details-edit-show-btn"><img src="{{@root.meta.assetsPath}}img/edit-1.png" alt="edit icon">{{i18n "main:form.edit"}}</button>
+                          </div>
+                        </div>
+                  </div>
+
+                  <div class="personal-details-edit personal-details-edit-show {{#if content.personalDetailsForm.errors}}in{{/if}}">
+                      <form id="form-edit-personal-details" action="{{@root.meta._links.editMyPersonalDetails.href}}" method="POST">
+                          <input type="hidden" name="csrfToken" value="{{@root.meta.csrfToken}}"/>
+                          <div class="row">
+                            {{> form/global-messages messages=content.personalDetailsForm.messages}}
+                            {{> form/global-errors errors=content.personalDetailsForm.errors}}
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-12">
+                              {{> form/choose-title containerClass="form-sections" selectId="personal-details-title-select" selectName="title" options=content.personalDetailsFormSettings.title}}
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <div class="form-sections">
+                                <span class="form-labels">{{i18n "my-account:personalDetails.personalDetailsForm.firstName"}}*</span><br>
+                                <input class="form-inputs" name="firstName" value="{{content.personalDetailsForm.firstName}}" type="text">
+                              </div>
+                              <div class="form-sections">
+                                <span class="form-labels">{{i18n "my-account:personalDetails.personalDetailsForm.email"}}*</span><br>
+                                <input class="form-inputs" name="email" value="{{content.personalDetailsForm.email}}" type="email"><br>
+                                <span class="form-notes"></span>
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="form-sections">
+                                <span class="form-labels">{{i18n "my-account:personalDetails.personalDetailsForm.lastName"}}*</span><br>
+                                <input class="form-inputs" name="lastName" value="{{content.personalDetailsForm.lastName}}" type="text">
+                              </div>
+                            </div>
+                          </div>
+                        <hr class="light-grey-hr">
+                        <div class="personal-details-newsletter">
+                          <span>
+                            <input name="subscribeToNewsletter" type="checkbox" {{#if personalDetails.personalDetailsForm.subscribeToNewsletter}}checked{{/if}}/>
+                            {{i18n "my-account:personalDetails.personalDetailsForm.subscribeToNewsletter"}}
+                          </span>
+                        </div>
+                        <div class="personal-details-edit-btn">
+                          <span>
+                            <button type="submit" class="update-btn">{{i18n "my-account:personalDetails.updateBtn"}}</button>
+                            <button type="button" class="cancel-btn personal-details-edit-hide-btn">{{i18n "my-account:personalDetails.cancelBtn"}}</button>
+                          </span>
+                        </div>
+                      </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="my-account-banners">
+            <div class="banner-one-wrapper hidden-xs">
+              <div class="my-account-banner">
+                <div class="banner-title">
+                  {{i18n "my-account:personalDetails.bannerOne.title"}}
+                </div>
+                <hr class="banner-hr">
+                <div class="banner-subtitle">
+                  {{i18n "my-account:personalDetails.bannerOne.subtitle"}}
+                </div>
+                <div class="banner-btn-wrapper">
+                  <a class="banner-btn" href="{{content.bannerOne.url}}">{{i18n "my-account:personalDetails.shopAllBtn"}}</a>
+                </div>
+              </div>
+            </div>
+            <div class="banner-two-wrapper">
+              <div class="my-account-banner image-banner">
+                <div class="banner-title">
+                  {{i18n "my-account:personalDetails.bannerTwo.title"}}
+                </div>
+                <hr class="banner-hr">
+                <div class="banner-subtitle">
+                  {{i18n "my-account:personalDetails.bannerTwo.subtitle"}}
+                </div>
+                <div class="banner-btn-wrapper">
+                  <a class="banner-btn" href="{{content.bannerTwo.url}}">{{i18n "my-account:personalDetails.shopAllBtn"}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{!-- {{> common/wishlist}} --}}
+  {{> common/footer}}
+  {{> common/htmlscripts}}
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+{
+	"selectFacet" : true,
+	"facet" : {
+		"available" : true,
+		"label" : "Color",
+		"key" : "color",
+		"multiSelect" : true,		
+		"limitedOptions" : [
+			{
+				"label" : "Red",
+				"value" : "red",
+				"count" : "123",
+				"selected" : true
+			},
+			{
+				"label" : "Blue",
+				"value" : "blue",
+				"count" : "123",
+				"selected" : true
+			},
+			{
+				"label" : "Pink",
+				"value" : "pink",
+				"count" : "123",
+				"selected" : false
+			},
+			{
+				"label" : "Mono",
+				"value" : "mono",
+				"count" : "123",
+				"selected" : false
+			},
+			{
+				"label" : "Red",
+				"value" : "red",
+				"count" : "123",
+				"selected" : false
+			},
+			{
+				"label" : "Blue",
+				"value" : "blue",
+				"count" : "123",
+				"selected" : false
+			},
+			{
+				"label" : "Pink",
+				"value" : "pink",
+				"count" : "123",
+				"selected" : false
+			},
+			{
+				"label" : "Mono",
+				"value" : "mono",
+				"count" : "123",
+				"selected" : false
+			},
+			{
+				"label" : "Red",
+				"value" : "red",
+				"count" : "123",
+				"selected" : false
+			},
+			{
+				"label" : "Blue",
+				"value" : "blue",
+				"count" : "123",
+				"selected" : false
+			},
+			{
+				"label" : "Pink",
+				"value" : "pink",
+				"count" : "123",
+				"selected" : false
+			},
+			{
+				"label" : "Mono",
+				"value" : "mono",
+				"count" : "123",
+				"selected" : false
+			}
+		]
+	}
+}

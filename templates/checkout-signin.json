@@ -1,0 +1,21 @@
+{
+	"header" : { "$ref" : "common/checkout-header.json" },
+	"footer" : { "$ref" : "common/checkout-footer.json" },
+  "content" : {
+    "ifYouHaveAccountTitle" : "If you have an account, please sign in for faster checkout.",
+    "emailTitle" : "Email Address",
+    "passwordTitle" : "Password",
+    "rememberMeTitle" : "Remember Me",
+    "forgotPasswordTitle" : "Forgot Password",
+    "quickCheckoutBtn" : "Quick Checkout",
+    "guestCheckoutTitle" : "Guest Checkout",
+    "guestCheckoutParagraph1" : "No problem, you do not need to create an account to place an order.",
+    "guestCheckoutParagraph2" : "To make future purchases even faster, you will have the option of creating an acocount during checkout.",
+    "continueGuestBtn" : "Continue As Guest",
+    "messages" : [
+      { "$ref" : "common/message-info.json" },
+      { "$ref" : "common/message-danger.json" }
+    ]
+  },
+  "meta" : { "$ref" : "common/meta.json" }
+}

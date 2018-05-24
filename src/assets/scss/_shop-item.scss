@@ -1,0 +1,167 @@
+.shop-item {
+  max-width: 270px;
+  position: relative;
+  background: white;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 25px;
+  border: solid 1px $alto;
+  cursor: pointer;
+  &:hover .shop-item-overlay,
+  &:focus .shop-item-overlay {
+    opacity: 1;
+  }
+
+  .pop-product-image {
+    position: relative;
+    overflow: hidden;
+    height: 40vh;
+
+    > img,
+    > picture {
+      max-width: 100%;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      max-height: 100%;
+      padding: 10px;
+      margin: auto;
+    }
+  }
+
+  .pop-product-name {
+    margin-top: 15px;
+    text-align: center;
+    text-transform: none;
+    padding: 0 20px;
+    min-height: 50px;
+    color: $gray;
+    .name-headline,
+    .name-subline {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  .pop-item-price {
+    text-align: center;
+    font-weight: 700;
+    .strikethrough {
+      text-decoration: line-through;
+    }
+    .pop-item-price-old {
+      color: $valencia;
+    }
+  }
+  .pop-product-more-colors {
+    color: $gray;
+    text-align: center;
+    margin: 10px 0;
+    font-size: 12px;
+  }
+  .product-thumbnail-swatch-red {
+    width: 10px;
+    height: 10px;
+    background-color: $valencia;
+  }
+  .product-thumbnail-swatch-green {
+    width: 10px;
+    height: 10px;
+    background-color: $highland;
+  }
+  .product-thumbnail-swatch-blue {
+    width: 10px;
+    height: 10px;
+    background-color: $ship-cove;
+  }
+  .new-flag {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    border-radius: 50%;
+    top: 10px;
+    text-align: center;
+    line-height: 36px;
+    z-index: 100;
+  }
+  .sale-flag {
+    border: 2px solid $valencia;
+    color: $valencia;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    border-radius: 50%;
+    top: 10px;
+    text-align: center;
+    line-height: 45px;
+    font-size: 16px;
+    z-index: 100;
+  }
+  .new-flag {
+    color: $mine-shaft;
+    left: 10px;
+  }
+  .heart-xs {
+    width: 50px;
+    height: 50px;
+    background: url("../img/heart_sprite.png") no-repeat;
+    background-size: 170px;
+    padding: 0;
+    margin: auto;
+    display: block;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    &:hover,
+    &:focus {
+      background-position: -60px;
+    }
+  }
+  .shop-item-overlay {
+    transition: ease all 0.25s;
+    opacity: 0;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(50, 50, 50, .1);
+    outline: solid 10px white;
+    z-index: 100;
+    .quickview {
+      display: block;
+      margin: auto;
+      width: 150px;
+      height: 45px;
+      background: rgba(42, 52, 63, .85);
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 18px;
+      border: solid 2px transparent;
+      top: 150px;
+      position: relative;
+      &:hover,
+      &:focus {
+        border: solid 2px white;
+      }
+    }
+    .heart {
+      width: 50px;
+      height: 50px;
+      background: url("../img/heart_sprite.png") no-repeat;
+      background-size: 170px;
+      padding: 0;
+      margin: auto;
+      display: block;
+      position: relative;
+      top: 170px;
+      &:hover,
+      &:focus {
+        background-position: -60px;
+      }
+    }
+  }
+}

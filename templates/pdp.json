@@ -1,0 +1,18 @@
+{
+    "header" : { "$ref" : "common/header.json" },
+    "footer" : { "$ref" : "common/footer.json" },
+    "content" : {
+        "breadcrumb" : { "$ref" : "catalog/breadcrumb.json" },
+        "product" : { "$ref" : "catalog/product.json" },
+        "deliveryRates" : { "$ref" : "catalog/pdp/delivery-rates.json" },
+        "suggestions" : { "$ref" : "catalog/product-list4.json" },
+        "reviews" : { "$ref" : "catalog/pdp/reviews.json" },
+        "wishlist" : { "$ref" :  "common/wishlist.json" },
+        "reserveInStoreUrl" : "reserve-in-store.html",
+        "messages" : [
+            { "$ref" : "common/message-info.json" },
+            { "$ref" : "common/message-success.json" }
+        ]
+    },
+    "meta" : { "$ref" : "common/meta.json" }
+}

@@ -1,0 +1,41 @@
+{
+	"header" : { "$ref" : "common/header.json" },
+	"footer" : { "$ref" : "common/footer.json" },
+	"content" : {
+        "contentTitle" : "Payment Details",
+        "defaultPaymentMethodTitle" : "Default Payment Method",
+        "defaultPaymentMethod" : {
+            "title" : "Credit Card",
+            "name" : "Bruce Wayne",
+            "type" : "Visa",
+            "number" : "**** **** **** **99",
+            "date" : "09.18",
+            "edit" : "Edit"
+        },
+        "addNewPaymentMethodBtn" : "Add New Payment Method",
+        "additionalPaymentMethodsTitle" : "Additional Payment Methods",
+        "additionalPaymentMethodOne" : {
+            "title" : "Credit Card",
+            "name" : "Bruce Wayne",
+            "type" : "Visa",
+            "number" : "**** **** **** **99",
+            "date" : "09.18",
+            "edit" : "Edit",
+            "delete" : "delete"
+        },
+        "additionalPaymentMethodTwo" : {
+            "title" : "Credit Card",
+            "name" : "Bruce Wayne",
+            "type" : "Visa",
+            "number" : "**** **** **** **99",
+            "date" : "09.18",
+            "edit" : "Edit",
+            "delete" : "delete"
+        },
+        "messages" : [
+            { "$ref" : "common/message-info.json" },
+            { "$ref" : "common/message-success.json" }
+        ]
+	},
+    "meta" : { "$ref" : "common/meta.json" }
+}

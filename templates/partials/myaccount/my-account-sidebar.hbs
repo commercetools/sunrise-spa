@@ -1,0 +1,30 @@
+<!-- start myaccount/my-account-sidebar.hbs -->
+<div class="my-account-sidebar">
+  <div {{#if myPersonalDetailsTab}}id="my-account-mobile-content"{{/if}} class="my-account-sidebar-items {{#if myPersonalDetailsTab}}active{{/if}}">
+    <a href="{{@root.meta._links.myPersonalDetails.href}}">{{i18n "my-account:myAccountSidebar.personalDetails"}}</a>
+  </div>
+  <div {{#if changeMyPasswordTab}}id="my-account-mobile-content"{{/if}}class="my-account-sidebar-items {{#if changeMyPasswordTab}}active{{/if}}">
+    <a href="{{@root.meta._links.changePassword.href}}">{{i18n "my-account:myAccountSidebar.changePassword"}}</a>
+  </div>
+  <div {{#if myAddressBookTab}}id="my-account-mobile-content"{{/if}}class="my-account-sidebar-items {{#if myAddressBookTab}}active{{/if}}">
+    <a href="{{@root.meta._links.myAddressBook.href}}">{{i18n "my-account:myAccountSidebar.addressBook"}}</a>
+  </div>
+  <div {{#if myPaymentDetailsTab}}id="my-account-mobile-content"{{/if}}class="my-account-sidebar-items {{#if myPaymentDetailsTab}}active{{/if}}">
+    <a href="{{@root.meta._links.myPaymentDetails.href}}">{{i18n "my-account:myAccountSidebar.paymentDetails"}}</a>
+  </div>
+  <div {{#if myOrdersTab}}id="my-account-mobile-content"{{/if}}class="my-account-sidebar-items {{#if myOrdersTab}}active{{/if}}">
+    <a href="{{@root.meta._links.myOrders.href}}">{{i18n "my-account:myAccountSidebar.myOrders"}}</a>
+  </div>
+  <div {{#if myReturnsAndExchangesTab}}id="my-account-mobile-content"{{/if}}class="my-account-sidebar-items {{#if myReturnsAndExchangesTab}}active{{/if}}">
+    <a href="{{@root.meta._links.myReturnsAndExchanges.href}}">{{i18n "my-account:myAccountSidebar.returnsExchange"}}</a>
+  </div>
+  <div {{#if myWishlistTab}}id="my-account-mobile-content"{{/if}}class="my-account-sidebar-items clearfix {{#if myWishlistTab}}active{{/if}}">
+    <a href="{{@root.meta._links.myWishlist.href}}">
+      <span><img class="sidebar-wishlist-heart hidden-sm" src="{{meta.assetsPath}}/img/heart-1.png" alt="heart icon"></span>{{i18n "my-account:myAccountSidebar.wishlist"}}<span class="sidebar-wishlist-quantity hidden-sm">{{content.sidebarItemSix.wishlistItems}}</span>
+    </a>
+  </div>
+  <div class="my-account-sidebar-items">
+    <a href="{{@root.meta._links.logOut.href}}">{{i18n "my-account:myAccountSidebar.signOut"}}</a>
+  </div>
+</div>
+<!-- end myaccount/my-account-sidebar.hbs -->

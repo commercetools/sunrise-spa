@@ -1,0 +1,20 @@
+{
+    "list" : [
+        {
+            "name" : "Knitwear",
+            "url" : ""
+        },
+        {
+            "name" : "Mix & Match",
+            "url" : ""
+        },
+        {
+            "name" : "Patns",
+            "url" : ""
+        },
+        {
+            "name" : "Shorts",
+            "url" : ""
+        }
+    ]
+}

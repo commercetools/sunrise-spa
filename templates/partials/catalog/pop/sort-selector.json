@@ -1,0 +1,14 @@
+{
+	"list" : [
+		{
+			"label" : "Sort by: low",
+			"value" : "",
+			"selected" : false
+		},
+		{
+			"label" : "Sort by high",
+			"value" : "",
+			"selected" : true
+		}
+	]
+}

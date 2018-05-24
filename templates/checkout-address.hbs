@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {{> common/htmlhead}}
+</head>
+
+<body>
+  {{> common/checkout-header}}
+  <div class="checkout-shipping">
+    <div class="container">
+      {{> common/messages}}
+      <div class="row">
+        <div class="col-md-6">
+          {{> checkout/secure-checkout-title titleKey="checkout:shippingPage.title"}}
+        </div>
+        <div class="col-md-6">
+          {{> checkout/step-widget}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="checkout">
+            <div class="row">
+              <div class="col-sm-7">
+                {{> checkout/address-form addressForm=content.addressForm settings=content.addressFormSettings}}
+              </div>
+              <div class="col-sm-5">
+                {{> checkout/order-summary-sidebar}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{> common/checkout-footer}}
+  {{> common/htmlscripts}}
+</body>
+
+</html>

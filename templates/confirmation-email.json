@@ -1,0 +1,101 @@
+{
+    "footer" : {
+        "terms" : "Terms",
+        "privacy" : "Privacy",
+        "unsubscribe" : "Unsubscribe"
+    },
+    "content" : {
+        "thankyouTitle" : "Thank you for your order!",
+        "dearUser" : "Dear Mr. Wayne",
+        "orderConfirmationText" : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.",
+        "orderNumber" : "Your order #10034499501",
+        "orderDate" : "Date: 24.11.2015",
+        "shippingAddress" : {
+            "title" : "Shipping Address",
+            "name" : "Mr. Bruce Wayne",
+            "street" : "100 Gotham City",
+            "city" : "Gotham City",
+            "region" : "Region",
+            "postCode" : "123456",
+            "country" : "Country",
+            "phone" : "Phone: +49 123 4567890",
+            "email" : "Email: bruce.wayne@commercetools.com"
+        },
+        "billingAddress" : {
+            "title" : "Billing Address",
+            "name" : "Mr. Bruce Wayne",
+            "street" : "100 Gotham City",
+            "city" : "Gotham City",
+            "region" : "Region",
+            "postCode" : "123456",
+            "country" : "Country",
+            "phone" : "Phone: +49 123 4567890",
+            "email" : "Email: bruce.wayne@commercetools.com"
+        },
+        "shippingMethod" : {
+            "title" : "Shipping Method",
+            "name" : "DHL Standart - Delivery 3-5 Days"
+        },
+        "paymentDetails" : {
+            "title" : "Payment Details",
+            "card" : "Credit Card",
+            "name" : "Bruce Wayne",
+            "type" : "Visa",
+            "number" : "**** **** **** **99",
+            "date" : "09.18"
+        },
+        "order" : [
+            {
+                "image" : "../../assets/img/blue-shirt.jpg",
+                "nameHeadline" : "Enditatem Product Name",
+                "nameSubline" : "Optional Line Two",
+                "sku" : "Sunrise #SUN123456",
+                "colorTitle" : "Color: ",
+                "color" : "Navy Blue",
+                "sizeTitle" : "Size: ",
+                "size" : "M",
+                "quantityTitle" : "Quantity",
+      			"quantity" : "1",
+                "priceTitle" : "Price",
+                "price" : "100,00 €",
+                "totalPriceTitle" : "Total",
+                "totalPrice" : "100,00 €"
+            },
+            {
+                "image" : "../../assets/img/blue-shirt.jpg",
+                "nameHeadline" : "Enditatem Product Name",
+                "nameSubline" : "Optional Line Two",
+                "sku" : "Sunrise #SUN123456",
+                "colorTitle" : "Color: ",
+                "color" : "Navy Blue",
+                "sizeTitle" : "Size: ",
+                "size" : "M",
+                "quantityTitle" : "Quantity",
+      			"quantity" : "1",
+                "priceTitle" : "Price",
+                "price" : "100,00 €",
+                "totalPriceTitle" : "Total",
+                "totalPrice" : "100,00 €"
+            }
+        ],
+        "totalSum" : {
+            "promoCodeTitle" : "Promotional Code Applied",
+            "promoCode" : "Sunny Sale",
+			"subtotalTitle" : "Subtotal",
+			"subtotal" : "200,00 €",
+			"orderDiscountTitle" : "Order Discount",
+			"orderDiscount" : "0,00 €",
+			"deliveryOption" : "Standard Delivery",
+			"delivery" : "10,00 €",
+			"taxTitle" : "Sales Tax",
+			"tax" : "20,00 €",
+			"orderTotalTitle" : "Order Total",
+			"orderTotal" : "230,00 €"
+		},
+        "bannerTitle" : "Women",
+        "bannerText" : "Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem",
+        "bottomTextOne" : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum hendrerit tortor. Sed semper lorem at felis. Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.",
+        "bottomTextTwo" : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus."
+    },
+    "meta" : { "$ref" : "common/meta.json" }
+}

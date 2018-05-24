@@ -1,0 +1,29 @@
+.error {
+  border: 1px solid $valencia!important; // FIXME: remove !important
+  color: $mine-shaft;
+  background: rgba(213, 77, 77, .2)!important; // FIXME: remove !important
+}
+.error-message {
+  z-index: 1;
+  position: absolute;
+  color: $white;
+  background: rgba(213, 77, 77, .9);
+  padding: 5px 10px;
+  margin-top: 5px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  &:after {
+    bottom: 100%;
+  	left: 20px;
+  	border: solid transparent;
+  	content: " ";
+  	height: 0;
+  	width: 0;
+  	position: absolute;
+  	pointer-events: none;
+  	border-color: rgba(213, 23, 30, 0);
+  	border-bottom-color: rgba(213, 77, 77, .9);
+  	border-width: 11px;
+  	margin-left: -11px;
+  }
+}

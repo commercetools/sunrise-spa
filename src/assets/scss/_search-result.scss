@@ -1,0 +1,31 @@
+.search-result {
+  text-align: center;
+  .search-results-title {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: $gray;
+  }
+  .search-result {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: $mine-shaft;
+    font-size: 42px;
+    font-weight: 200;
+  }
+  .search-result-hr {
+    border-top: 1px solid $alto;
+    width: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+.search-result-details {
+  padding: 10px 15px;
+  text-transform: none;
+  .search-result-details-data {
+
+  }
+  .search-result-details-text {
+    color: $gray;
+  }
+}

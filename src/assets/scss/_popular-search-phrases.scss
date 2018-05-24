@@ -1,0 +1,26 @@
+.popular-search-phrases-title {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 200;
+  font-size: 26px;
+  letter-spacing: 1px;
+  padding: 20px 0 40px;
+}
+.popular-search-phrases-wrapper {
+  padding-bottom: 40px;
+  border-bottom: 1px solid $alto;
+  .popular-search-phrases {
+    column-count: 4;
+    @media screen and (max-width: 767px) {
+      column-count: 2;
+    }
+  }
+}
+.popular-products-title {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 200;
+  font-size: 26px;
+  letter-spacing: 1px;
+  padding: 40px 0;
+}

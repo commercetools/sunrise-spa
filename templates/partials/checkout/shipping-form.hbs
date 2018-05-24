@@ -1,0 +1,25 @@
+<form id="form-edit-shipping" method="post" action="{{@root.meta._links.checkoutShippingSubmit.href}}">
+  <input type="hidden" name="csrfToken" value="{{@root.meta.csrfToken}}"/>
+  <div class="shipping-method input-block" id="shipping-methods-setting">
+    <div class="text-uppercase shipping-method-title">{{i18n "checkout:shippingForm"}}</div>
+      <div class="row">
+          {{> form/global-messages messages=content.shippingForm.messages}}
+          {{> form/global-errors errors=content.shippingForm.errors}}
+      </div>
+    {{#each content.shippingFormSettings.shippingMethod.list}}
+      <div class="shipping-method-option">
+        <label for="shipping-method-{{@index}}">
+          <span class="shipping-method-span">
+            <input id="shipping-method-{{@index}}" class="shipping-method-radio" type="radio" name="{{shippingFormSettings.shippingMethods.formFieldName}}{{#unless shippingFormSettings.shippingMethods.formFieldName}}shippingMethodId{{/unless}}" value="{{value}}" {{#if selected}}checked{{/if}}
+                {{!-- if it is only one element --}}{{#unless selected}}{{#if @first}}{{#if @last}}checked{{/if}}{{/if}}{{/unless}}>
+            {{label}}
+          </span>
+          <span class="text-uppercase delivery-time">{{description}}</span>
+        </label>
+        {{!--<a href="{{url}}"><span class="pull-right text-uppercase delivery-details">{{i18n "main:common.viewDetails"}}</span></a>--}}
+          <span class="pull-right">{{price}}</span>
+      </div>
+    {{/each}}
+  </div>
+  {{> checkout/continue-checkout-button}}
+</form>

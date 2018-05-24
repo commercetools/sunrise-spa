@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {{> common/htmlhead}}
+</head>
+
+<body>
+  <div class="darkbg hidden"></div>
+  {{> common/header}}
+
+  <div class="container">
+    {{> common/messages}}
+    <div class="store-finder-title">{{i18n "main:storeFinder.title"}}</div>
+    <div class="store-finder-wrapper">
+      <div class="stores-description">{{i18n "main:storeFinder.description"}}</div>
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+          <div class="store-finder-box">
+            <form id="" action="" method="post">
+              <div>
+                <label class="store-finder-label" for="postcode">{{i18n "main:storeFinder.postcode"}}</label><br>
+                <input class="store-finder-input" type="text" name="postcode" value="">
+              </div>
+              <div class="store-finder-option-select">
+                <label class="store-finder-label" for="region">{{i18n "main:storeFinder.orRegion"}}</label><br>
+                <select id="" class="store-finder-select" name="region">
+                  <option value="">{{i18n "main:storeFinder.selectRegion"}}</option>
+                  {{#each content.regionSelector}}
+                    <option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>
+                  {{/each}}
+                </select>
+              </div>
+              <div class="store-finder-option-select">
+                <label class="store-finder-label" for="city">{{i18n "main:storeFinder.city"}}</label><br>
+                <select id="" class="store-finder-select" name="city">
+                  <option value="">{{i18n "main:storeFinder.selectCity"}}</option>
+                  {{#each content.citySelector}}
+                    <option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>
+                  {{/each}}
+                </select>
+              </div>
+              <button id="" class="store-finder-submit-btn">{{i18n "main:storeFinder.lookUp"}}</button>
+            </form>
+          </div>
+          {{!-- Individual store information is currently hardcoded, needs to be adjusted according to the way the data will be fetched --}}
+          <div id="store-finder-box-3" class="store-finder-box">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="store-finder-store-info">
+                  <div class="store-finder-store-info-title">{{i18n "main:storeFinder.address"}}</div><br>
+                  <div>{{i18n "main:storeFinder.addressLineOne"}}</div>
+                  <div>{{i18n "main:storeFinder.addressLineTwo"}}</div>
+                  <div>{{i18n "main:storeFinder.addressLineThree"}}</div>
+                  <div>{{i18n "main:storeFinder.addressLineFour"}}</div>
+                </div><br>
+              </div>
+              <div class="col-sm-6">
+                <div class="store-finder-store-info">
+                  <div class="store-finder-store-info-title">{{i18n "main:storeFinder.workingHours"}}</div><br>
+                  <div><b>{{i18n "main:storeFinder.standartHours.title"}}</b></div>
+                  <div>{{i18n "main:storeFinder.standartHours.monFri"}}</div>
+                  <div>{{i18n "main:storeFinder.standartHours.weekend"}}</div><br>
+                  <div><b>{{i18n "main:storeFinder.holidayHours.title"}}</b></div>
+                  <div>{{i18n "main:storeFinder.holidayHours.monFri"}}</div>
+                  <div>{{i18n "main:storeFinder.holidayHours.weekend"}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{> common/footer}}
+  {{> common/htmlscripts}}
+</body>
+
+</html>

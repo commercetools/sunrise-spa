@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {{> common/htmlhead}}
+</head>
+
+<body>
+  <div class="darkbg hidden"></div>
+  {{> common/header}}
+    <div class="container">
+      {{> common/messages}}
+    {{> catalog/breadcrumb breadcrumb=content.breadcrumb}}
+    {{> catalog/pop/search-not-found}}
+    {{> catalog/pop/popular-search-phrases}}
+    {{> catalog/suggestions}}
+  </div>
+  {{> common/footer}}
+  {{> common/htmlscripts}}
+</body>
+</html>

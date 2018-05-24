@@ -1,0 +1,32 @@
+{{#if location}}
+<div class="location-dropdown-xs">
+  {{#if location.language}}
+  <form id="form-select-language-mobile" action="{{@root.meta._links.selectLanguage.href}}" method="POST">
+    <input type="hidden" name="csrfToken" value="{{@root.meta.csrfToken}}"/>
+    <ul>
+      <li>
+        <select name="language" id="language-select-mobile" class="select location-select">
+          {{#each location.language}}
+          <option value="{{value}}" {{#if selected}} selected {{/if}}>{{label}}</option>
+          {{/each}}
+        </select>
+      </li>
+    </ul>
+  </form>
+  {{/if}}
+  {{#if location.country}}
+  <form id="form-select-country-mobile" action="{{@root.meta._links.selectCountry.href}}" method="POST">
+    <input type="hidden" name="csrfToken" value="{{@root.meta.csrfToken}}"/>
+    <ul>
+      <li>
+        <select name="country" id="country-select-mobile" class="select location-select">
+          {{#each location.country}}
+          <option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>
+          {{/each}}
+        </select>
+      </li>
+    </ul>
+  </form>
+  {{/if}}
+</div>
+{{/if}}

@@ -1,0 +1,46 @@
+
+.modal-dialog-quickview {
+  margin-top: 7%;
+  width: 700px;
+}
+.modal-header {
+  border-bottom: none;
+  padding: 0;
+  .close {
+    margin-top: -40px;
+    margin-right: -40px;
+  }
+}
+.quickview-modal {
+  border-radius: 0;
+  height: 550px;
+  .quickview-sku {
+    text-transform: capitalize;
+  }
+  .star-rating-review {
+    text-transform: capitalize;
+  }
+  .availability {
+    text-transform: capitalize;
+    padding-left: 110px;
+  }
+  .product-info-row-pdp {
+    padding: 0;
+    .add-to-bag {
+      font-size: 0.9em;
+    }
+  }
+  .additional-description {
+    text-transform: none;
+    padding-top: 10px;
+  }
+  .pdp-product-heart {
+    margin: 1em 0;
+  }
+  .size-guide-li {
+    display: none;
+  }
+}
+.quickview-wishlist-row {
+  margin-top: -30px;
+}

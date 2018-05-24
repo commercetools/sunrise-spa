@@ -1,0 +1,20 @@
+<form class="" action="" method="post">
+  {{> form/choose-title containerClass="title" selectId="contact-title-select" selectName="title" options=settings.title}}
+  <div class="row">
+    {{> form/input-text columnWidth=6 name="firstName" labelKey="main:form.firstName" required=true value=form.firstName settings=settings.firstName}}
+    {{> form/input-text columnWidth=6 name="lastName" labelKey="main:form.lastName" required=true value=form.lastName settings=settings.lastName}}
+    {{> form/input-text columnWidth=6 name="subject" labelKey="main:form.subject" required=true value=form.subject settings=settings.subject}}
+    {{> form/input-text columnWidth=6 name="orderNumber" labelKey="main:form.orderNumber" required=true value=form.orderNumber settings=settings.orderNumber}}
+    {{> form/input-text columnWidth=6 name="email" labelKey="main:form.email" required=true value=form.email settings=settings.email}}
+    {{> form/input-text columnWidth=6 name="phone" labelKey="main:form.phone" required=false value=form.phone settings=settings.phone}}
+    <div classs="col-sm-12">
+      <div class="contact-form-form-textarea">
+        <label for="message">{{i18n "main:contactForm.message"}}*</label>
+        <textarea type="textarea" cols="40" rows="10" name="message" value="" required></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="contact-form-form-submit-btn">
+    <button>{{i18n "main:form.submit"}}</button>
+  </div>
+</form>

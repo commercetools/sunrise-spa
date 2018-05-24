@@ -1,0 +1,8 @@
+<div class="mix-match-view-more {{#if hiddenXs}}hidden-xs{{/if}}">
+  <div class="mix-match-view-more-title">{{i18n "catalog:viewMore.title"}}</div>
+  <ul class="mix-match-view-more-list list-inline">
+    {{#each content.viewMore.list}}
+      <li><a href="{{url}}">{{name}}</a></li>
+    {{/each}}
+  </ul>
+</div>

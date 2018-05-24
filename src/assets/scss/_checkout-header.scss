@@ -1,0 +1,42 @@
+.checkout-header {
+  background: $ebony-clay;
+  margin-top: -148px; // *
+}
+
+.checkout-header-logo {
+  margin: 1em 0;
+}
+
+.checkout-header-callus {
+  color: $bombay;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 1.6em 0;
+  text-align: right
+}
+
+.phone-icon {
+  margin: 0 1em;
+}
+
+.checkout-header-number {
+  color: $my-sin;
+}
+
+@media screen and (max-width: 767px) {
+  .checkout-header {
+    margin-top: -115px;
+  }
+  .checkout-header-logo {
+    margin: 0;
+    padding-bottom: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .checkout-header-callus {
+    font-size: 0.7em;
+    text-align: center;
+    margin-top: 0;
+  }
+}

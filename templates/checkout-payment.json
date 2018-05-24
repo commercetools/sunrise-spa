@@ -1,0 +1,33 @@
+{
+    "header" : { "$ref" : "common/checkout-header.json" },
+    "footer" : { "$ref" : "common/checkout-footer.json" },
+    "content" : {
+        "stepWidget" : {
+            "paymentStepActive": true
+        },
+        "paymentForm" : {
+            "paymentOptions" : { "$ref" : "checkout/payment-options.json" },
+            "expiryDate" : { "$ref" : "checkout/months.json" },
+            "year" : {
+                "list" : [
+                    {
+                        "text" : "2050",
+                        "value" : "",
+                        "selected" : false
+                    },
+                    {
+                        "text" : "2100",
+                        "value" : "",
+                        "selected" : false
+                    }
+                ]
+            }
+        },
+        "cart" : { "$ref" : "common/cart-like.json" },
+        "messages" : [
+            { "$ref" : "common/message-danger.json" },
+            { "$ref" : "common/message-success.json" }
+        ]
+    },
+    "meta" : { "$ref" : "common/meta.json" }
+}

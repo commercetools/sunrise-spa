@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {{> common/htmlhead}}
+</head>
+
+<body>
+  <div class="darkbg hidden"></div>
+  {{> common/header}}
+
+    <div class="container">
+      {{> common/messages}}
+    <div class="faq-title">{{i18n "main:faq.title"}}</div>
+    <div class="faq-wrapper">
+      <div class="faq-section-title">{{i18n "main:faq.delivery"}}</div>
+      {{#each content.deliveryFaqs}}
+        {{> faq/faq-accordion key="delivery"}}
+      {{/each}}
+      <div class="faq-section-title">{{i18n "main:faq.returns"}}</div>
+      {{#each content.returnsFaqs}}
+        {{> faq/faq-accordion key="returns"}}
+      {{/each}}
+    </div>
+  </div>
+
+  {{> common/footer}}
+  {{> common/htmlscripts}}
+</body>
+
+</html>

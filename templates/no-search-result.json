@@ -1,0 +1,10 @@
+{
+    "header" : { "$ref" : "common/header.json" },
+    "footer" : { "$ref" : "common/footer.json" },
+    "content" : {
+        "breadcrumb" : { "$ref" : "catalog/breadcrumb.json" },
+        "suggestions" : { "$ref" : "catalog/product-list4.json" },
+        "phrases" : { "$ref" : "catalog/pop/popular-search-phrases.json" }
+    },
+    "meta" : { "$ref" : "common/meta.json" }
+}

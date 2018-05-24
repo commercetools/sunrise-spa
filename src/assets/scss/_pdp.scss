@@ -1,0 +1,368 @@
+.alert-overlay-wrapper {
+  position: relative;
+}
+// Product gallery
+.bzoom_wrap {
+  > .animated-modal-action {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    transform: translateY(370px) translateX(300px);
+  }
+  > .animated-modal {
+    background: $white;
+    box-shadow: none;
+    .modal-content {
+      background: $white;
+      box-shadow: none;
+      border: none;
+      text-align: center;
+    }
+    .modal-content {
+      height: 100%;
+      border-radius: 0;
+      img {
+        max-width: 80%;
+        height: auto;
+      }
+    }
+    .modal-header {
+      background: $white;
+      padding: 20px 20px 0;
+      text-align: right;
+    }
+  }
+}
+.pdp-page {
+  @extend .product-availability;
+  padding-bottom: 2em;
+  background-color: $white;
+}
+.product-info-row-pdp {
+  padding-top: 1em;
+}
+.pdp-product-title {
+  font-size: 1.6em;
+}
+
+// Product information
+.product-description {
+  font-size: 1.2em;
+}
+
+// Product information title
+.grey-p {
+  color: $silver-chalice;
+}
+
+// Star rating
+.rating {
+  float: left;
+}
+.rating:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+  clip: rect(0,0,0,0);
+}
+.rating:not(:checked) > label {
+  float: right;
+  width: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 120%;
+  line-height: 1.2;
+  color: $silver-chalice;
+}
+.rating:not(:checked) > label:before {
+  content: '★ ';
+}
+.rating > input:checked ~ label {
+  color: $my-sin;
+}
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: $my-sin;
+}
+.rating > label:active {
+  position: relative;
+  top: 2px;
+  left: 2px;
+}
+
+// Star ratings - review
+.star-rating-review {
+  font-size: 0.9em;
+  text-decoration: underline;
+  padding: 0 0.5em;
+}
+
+// Product description
+.pdp-product-description {
+  font-size: 0.9em;
+
+  .morelink {
+    color: $gray;
+    text-transform: uppercase;
+    text-decoration: underline;
+    font-size: 0.9em;
+  }
+}
+
+// Product information text
+.additional-description {
+  display: none;
+  font-size: 0.9em;
+}
+
+// Product price
+.product-price {
+  font-size: 2em;
+
+  // @FIXME: Push this to a more general typography mixin-file
+  .discounted-price {
+    text-decoration: line-through;
+    color: fade-out($silver-chalice, 0.4);
+    font-size: 0.8em;
+    font-weight: 200;
+  }
+}
+
+// Color and Size buttons
+.select-product-detail {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0 10px 0 0;
+  background: transparent url("../img/arrow-67-filled.png") no-repeat 95% 50%;
+  background-size: 12px;
+  padding: 10px 50px 10px 10px;
+  border-radius: 0;
+  border: solid 1px $alto;
+  color: $gray;
+  font-size: 12px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+// Row of select color, size and guide
+.select-row {
+  padding: 0 0 0.5em 1em;
+}
+.size-guide-thumb {
+  height: 30px;
+  padding-right: 0.5em;
+}
+.size-guide {
+  text-transform: uppercase;
+  color: $gray;
+
+  &:hover {
+    color: $mine-shaft;
+  }
+}
+
+// List of product actions (Quantity, Add to bag & Add to wishlist)
+.product-actions-list {
+  padding: 0px 15px;
+
+  > li {
+    margin: 0px 0px 15px 0px;
+    vertical-align: top;
+
+    .bag-items {
+      height: 52px;
+      line-height: 52px;
+    }
+  }
+}
+
+// Number of bag items
+.bag-items {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent url("../img/arrow-67-filled.png") no-repeat 80% 50%;
+  background-size: 12px;
+  color: $gray;
+  padding: 10px 30px 10px 10px;
+  margin: 0 10px 0 0;
+  border-radius: 0;
+  border: 2px solid $my-sin;
+}
+
+// Add to wishlish
+.pdp-product-heart {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 20px;
+  background: url("../img/heart_sprite.png") no-repeat;
+  background-size: 167px;
+  &:hover,
+  &:focus {
+    background-position: -60px;
+  }
+}
+
+// Reserve in store button
+.pdp-product-reserve {
+  background-color: $limed-spruce;
+  color: $white !important;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 17px;
+  padding: 15px 25px;
+  &:hover,
+  &:focus {
+    color: $white;
+    background-color: $river-bed;
+  }
+}
+
+.store-thumb {
+  height: 25px;
+  margin: 0 10px 0 0;
+}
+
+// Availability
+.glyphicon-ok-sign:before {
+  padding-right: 1em;
+}
+.glyphicon-ok-sign {
+  color: $highland;
+  font-size: 0.9em;
+}
+.availability {
+  color: $gray;
+  font-size: 0.9em;
+  padding: 1em 0;
+}
+
+// Product details accordion
+.product-accordion-title {
+  background: $white;
+  letter-spacing: 0.1em;
+  border-top: 1px solid $silver-chalice;
+  padding: 0.5em 0;
+}
+.panel-group {
+  margin-bottom: 0;
+  padding-bottom: 1em;
+}
+.panel-body-pdp {
+  padding: 0.3em 0;
+  ul {
+    font-size: 14px;
+  }
+  h4 {
+    font-size: 16px;
+  }
+}
+.accordion-plus {
+  height: 1em;
+  float: right;
+  margin-right: 1em;
+}
+.accordion-minus {
+  opacity: 0.5;
+  content: url("../img/minus-1.png");
+}
+
+.product-features-list, .product-details-list, .product-delivery-list {
+  padding-left: 10px;
+  list-style: none;
+  &>li span {
+    text-transform: uppercase;
+    color: $gray;
+    padding-right: 4px;
+  }
+}
+
+// Social share
+.social-share {
+  text-transform: uppercase;
+  color: $gray;
+  font-size: 0.8em;
+}
+.pdp-social-icons {
+  padding: 0;
+}
+
+// You may also like section
+.pdp-page-review {
+  background: $spring-wood;
+}
+.may-like {
+  letter-spacing: 0.1em;
+  font-size: 1.9em;
+  padding: 1em 0;
+  margin: 0;
+  font-weight: 200;
+}
+.text-red {
+  color: $valencia;
+}
+
+// Reviews Section
+.reviews-title {
+  letter-spacing: 0.1em;
+  font-size: 1.9em;
+  padding: 1em 0;
+  margin: 0;
+  font-weight: 200;
+}
+.reviews-col {
+  padding: 0 2em;
+}
+.single-comment {
+  padding: 2em 0;
+  border-bottom: 1px solid $alto;
+}
+.rated-stars {
+  padding-right: 1em;
+}
+.comment-user {
+  padding-top: 0.3em;
+}
+.comment-date {
+  padding-left: 0.5em;
+}
+.review-top-comment {
+  font-weight: 900;
+}
+.review-comment {
+  color: $gray;
+}
+.write-review-btn {
+  color: $silver-chalice;
+  text-transform: uppercase;
+  background: $white;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border: 2px solid $silver-chalice;
+  margin: 1em 0 1em 1em;
+}
+.showmore-reviews-btn {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* Media Queries */
+@media screen and (max-width: 1200px) {
+  .size-guide-li {
+    padding-top: 1em;
+  }
+}
+@media screen and (max-width: 390px) {
+  .add-to-bag {
+    margin: 1em 0 0 1em;
+  }
+}
+@media screen and (max-width: 360px) {
+  .pdp-product-heart {
+    margin: 1em 0 0 1em;
+  }
+}

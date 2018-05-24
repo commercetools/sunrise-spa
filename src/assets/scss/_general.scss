@@ -1,0 +1,192 @@
+/*****************************************************************************/
+/*
+/* COLORS
+/*
+/*****************************************************************************/
+
+$white: #FFFFFF;
+
+// GRAY
+$alto: #D6D6D6;
+$bombay: #AAAEB2;
+$gray: #858585;
+$silver-chalice: #ADADAD;
+$spring-wood: #F5F2EA;
+$timberwolf: #D9D7CE;
+$wild-sand: #F5F5F5;
+$snow-grey: #f2f2f2;
+
+// BLUE
+$ebony-clay: #2A343F;
+$ship-cove: #6989C2;
+$limed-spruce: #353e49;
+$river-bed: #3b4551;
+
+// BLACK
+$mine-shaft: #333333;
+
+// YELLOW
+$my-sin: #FFBA27;
+
+// RED
+$red: #ff0000;
+$valencia: #D54D4D;
+
+//ORANGE
+$orange: #ff761a;
+
+// GREEN
+$highland: #699E63;
+$citron: #95c11f;
+
+/*****************************************************************************/
+/*
+/* GENERAL STYLING
+/*
+/*****************************************************************************/
+
+// Links
+a,
+a:link,
+a:visited,
+a:active,
+a:hover {
+	text-decoration: none;
+	color: inherit;
+}
+
+// Labels
+label {
+	font-weight: 400;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  background-color: $spring-wood;
+
+	/* Margin bottom by footer height */
+  margin-bottom: 50px;
+  font-family: 'Source Sans Pro', sans-serif;
+
+  // Resolves the bootstrap white gap issue
+  width: auto !important;
+  overflow-x: hidden !important;
+
+  // In order to see the page content due to fixed navigation
+  padding-top: 115px;
+
+  @media screen and (min-width: 768px) {
+    padding-top: 148px;
+  }
+
+	// Font rendering optimization
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Removes border on focus
+select:focus,
+input:focus,
+a:focus {
+  outline: none;
+}
+
+// Cross browser compatible hr
+.hr {
+  border: none;
+  margin: 0;
+  background: $timberwolf;
+  height: 1px;
+}
+
+.hr-short {
+  border: none;
+  background: $timberwolf;
+  height: 1px;
+  width: 50px;
+  margin: 0 auto;
+}
+
+// Removes unwanted box-shadow
+.panel {
+  box-shadow: none;
+}
+
+button {
+  outline: none;
+  border: none;
+  background: none;
+}
+
+// Border radius on .btn
+
+.btn {
+	border-radius: 0;
+}
+
+.btn-standard {
+	text-transform: uppercase;
+	background: $my-sin;
+	padding: 10px 20px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	font-size: 16px;
+}
+
+// Transition color effect
+.tr-efx {
+	-webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  -ms-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
+.alert {
+  margin: 10px 15px 20px;
+  padding: 10px 15px;
+  border-radius: 2px;
+  background: $white;
+  text-transform: none;
+}
+
+.alert-danger {
+  border: 1px solid $valencia;
+}
+
+.morecontent span {
+  display: none;
+}
+.morelink {
+  display: block;
+}
+
+.push-right {
+	float: right;
+}
+
+.push-left {
+	float: left;
+}
+
+.img-lazy {
+  background: white url('../img/spinner.gif') no-repeat 50% 50%;
+  color: $white;
+  display: block;
+  // image's height
+  height: 300px;
+}
+
+.img-lazy-error {
+  height: 40vh;
+}
+
+.img-lazy,
+.img-lazy-error {
+  // hides alt text
+  font-size: 0;
+}

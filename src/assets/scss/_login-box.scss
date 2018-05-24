@@ -1,0 +1,66 @@
+.login-box-wrapper {
+  background: $white;
+  border: 1px solid $alto;
+  padding: 20px;
+}
+.login-box-title {
+  text-transform: uppercase;
+  font-size: 18px;
+}
+.login-box-required {
+  color: $gray;
+}
+.login-box-hr {
+  margin: 10px 0;
+  border-top: 1px solid $alto;
+}
+.login-box-description {
+  padding: 20px 0 30px;
+}
+.login-box-input-wrapper {
+  width: 300px;
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
+}
+.login-box-input {
+  margin-top: 10px;
+  span {
+    text-transform: uppercase;
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+  input {
+    width: 100%;
+  }
+}
+.login-box-remember-me {
+  margin-top: 10px;
+  label {
+    color: $gray;
+    text-transform: uppercase;
+  }
+  input {
+    margin-right: 5px;
+  }
+}
+.login-box-forgot-password {
+  margin-top: 10px;
+  a {
+    text-decoration: underline;
+    color: $gray;
+    text-transform: uppercase;
+  }
+}
+.login-box-sign-in-btn {
+  background-color: $my-sin;
+  text-transform: uppercase;
+  padding: 10px 15px;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 1px;
+  &:hover {
+    background-color: lighten($my-sin, 5%);
+  }
+}

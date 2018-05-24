@@ -1,0 +1,6 @@
+{
+      "sale" : true,
+      "new" : true,
+      "moreColors" : true,
+      "product" : { "$ref" : "product.json" }
+}

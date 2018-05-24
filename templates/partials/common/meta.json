@@ -1,0 +1,7 @@
+{
+	"assetsPath": "../../assets/",
+	"csrfToken": "Test123",
+	"bagQuantityOptions" : [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
+	"_links" : { "$ref" : "links.json" },
+	"features" : { "$ref" : "feature-flags.json" }
+}

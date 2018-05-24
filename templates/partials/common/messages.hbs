@@ -1,0 +1,7 @@
+{{#if content.messages}}
+<div class="row">
+	{{#each content.messages}}
+   		<div class="alert alert-{{this.type}}">{{i18n this.message}}</div>
+	{{/each}}
+</div>
+{{/if}}

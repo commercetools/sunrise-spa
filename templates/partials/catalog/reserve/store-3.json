@@ -1,0 +1,18 @@
+{
+    "storeInfo": {
+        "id": "even-some-other-store-id",
+        "name": "Leopolstrasse I",
+        "address": {
+            "$ref": "../../common/address-1.json"
+        },
+        "openingTimes": "<p>Mo-Fr. 10:00 a.m - 8:00 p.m.<br/>Sa. 9:00 a.m - 6:00 p.m</p>",
+        "location" : {
+          "lat" : 48.1536723,
+          "lng" : 11.5805786
+        }
+    },
+    "prices": {
+            "value": "50,00 €"
+        },
+    "availability": "fewItemsLeft"
+}

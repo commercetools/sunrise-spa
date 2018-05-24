@@ -1,0 +1,35 @@
+{
+	"header" : { "$ref" : "common/header.json" },
+	"footer" : { "$ref" : "common/footer.json" },
+	"content" : {
+        "regionSelector" : [
+            {
+                "label" : "Region 1",
+                "value" : "Region1",
+                "selected" : false
+            },
+            {
+                "label" : "Region 2",
+                "value" : "Region2",
+                "selected" : false
+            }
+        ],
+        "citySelector" : [
+            {
+                "label" : "City 1",
+                "value" : "City1",
+                "selected" : false
+            },
+            {
+                "label" : "City 2",
+                "value" : "City2",
+                "selected" : false
+            }
+        ],
+        "messages" : [
+            { "$ref" : "common/message-info.json" },
+            { "$ref" : "common/message-danger.json" }
+        ]
+	},
+	"meta" : { "$ref" : "common/meta.json" }
+}

@@ -1,0 +1,161 @@
+.store-location-wrapper {
+  border: 1px solid $alto;
+  background-color: $white;
+  margin-bottom: 50px;
+  overflow: hidden;
+
+  .map {
+    width: 60%;
+    background: $gray;
+    float: right;
+
+    @media screen and (max-width: 991px) {
+      width: 100%;
+    }
+
+    #map {
+      height: 705px;
+      width: 100%;
+      float: left;
+      @media screen and (max-width: 991px) {
+        height: 400px;
+      }
+    }
+  }
+
+  .addresses {
+    float: right;
+    width: 40%;
+    height: 705px;
+    padding: 0;
+    @media screen and (max-width: 991px) {
+      width: 100%;
+    }
+
+    .address {
+      float: left;
+      width: 100%;
+      background-color: $snow-grey;
+      border-bottom: 1px $alto solid;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      .distance {
+        color: $mine-shaft;
+        font-size: 18px;
+        width: 50%;
+        float: left;
+
+        .icon {
+          font-size: 20px;
+          margin: 3px 3px 0 0;
+          float: left;
+        }
+      }
+
+      .price {
+        width: 50%;
+        float: right;
+        font-size: 20px;
+        font-weight: normal;
+        text-align: right;
+      }
+
+      .price-discounted {
+        width: 50%;
+        float: right;
+        font-size: 15px;
+        font-weight: normal;
+        text-align: right;
+        text-decoration: line-through;
+      }
+
+      .distance,
+      .price {
+        margin-bottom: 15px;
+      }
+
+      .title {
+        margin: 0 0 25px 0;
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .info {
+        color: $gray;
+        font-size: 14px;
+        margin-bottom: 25px;
+        display: none;
+
+        &-title {
+          width: 40%;
+          float: left;
+        }
+        &-content {
+          width: 60%;
+          float: left;
+        }
+      }
+
+      .title,
+      .info {
+        width: 100%;
+        float: left;
+      }
+
+      .box-footer {
+        @extend .product-availability;
+        width: 100%;
+        float: left;
+      }
+
+      &--active {
+        background-color: $white;
+
+        &:hover {
+          background-color: $white !important;
+          cursor: default;
+        }
+
+        .price {
+          color: $my-sin;
+          font-weight: bold !important;
+        }
+
+        .info,
+        .action {
+          display: block !important;
+        }
+      }
+    }
+    /* custom Scrollbar spacing */
+    .mCSB_inside >.mCSB_container {
+      margin-right: 0;
+    }
+    .mCSB_scrollTools {
+      width: 2px;
+    }
+  }
+
+    .list {
+      width: 100%;
+      list-style: none;
+      float: left;
+      padding: 0;
+      margin: 0;
+
+      .item {
+        transition: all 0.15s ease;
+
+        .item-link {
+          width: 100%;
+          padding: 25px;
+          float: left;
+        }
+
+        &:hover{
+          background-color: $alto;
+        }
+      }
+    }
+}

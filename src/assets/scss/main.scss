@@ -1,0 +1,61 @@
+// SCSS partials compiled into main.min.css
+
+// Components
+@import "_mixins";
+@import "_general";
+@import "_input-fields";
+@import "_icon-font";
+@import "_banners";
+@import "_pagination";
+@import "_custom-language";
+@import "_jqzoom";
+@import "_quickview";
+@import "_size-guide";
+@import "_login-box";
+@import "_signup-box";
+@import "_search-not-found";
+@import "_popular-search-phrases";
+@import "_search-result";
+@import "_mix-match-product";
+@import "_add-to-bag-btn";
+@import "_add-to-wishlist-btn";
+@import "_product-availability";
+@import "_forgot-password";
+
+
+// Partials
+@import "_navigation";
+@import "_megamenu";
+@import "_footer";
+@import "_pop-sidebar";
+@import "_shop-item";
+@import "_checkout-header";
+@import "_wishlist";
+@import "_alert-overlay";
+@import "_error-message";
+
+// Pages
+@import "_pop";
+@import "_pdp";
+@import "_cart";
+@import "_checkout-shipping";
+@import "_checkout-payment";
+@import "_checkout-confirmation";
+@import "_checkout-thankyou";
+@import "_home";
+@import "_checkout-signin";
+@import "_my-account-personal-details";
+@import "_my-account-address-book";
+@import "_my-account-payment-details";
+@import "_my-account-my-orders";
+@import "_my-account-my-orders-order";
+@import "_my-account-returns-exchange";
+@import "_my-account-returns-exchange-order";
+@import "_my-account-wishlist";
+@import "_my-account-login";
+@import "_mix-match";
+@import "_contact-form";
+@import "_store-finder";
+@import "_store-location";
+@import "_faq";
+@import "_imprint";

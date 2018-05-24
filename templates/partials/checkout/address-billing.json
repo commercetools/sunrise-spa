@@ -1,0 +1,12 @@
+{
+    "title" : "Dr.",
+    "salutation" : "Herr",
+    "firstName" : "John",
+    "lastName" : "Smith (billing)",
+    "streetName" : "Duststreet 500",
+    "city" : "",
+    "region" : "Utah",
+    "postalCode" : "56789",
+    "phone" : "+49 123 4567899 (billing)",
+    "email" : "billing@commercetools.com"
+}

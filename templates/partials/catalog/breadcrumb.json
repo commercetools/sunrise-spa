@@ -1,0 +1,12 @@
+{
+	"links" : [
+		{
+			"url" : "women/",
+			"text" : "Women"
+		},
+		{
+			"url" : "coats/",
+			"text" : "Coats"
+		}
+	]
+}

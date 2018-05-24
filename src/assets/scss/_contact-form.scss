@@ -1,0 +1,50 @@
+.contact-form-content-wrapper {
+  background: $white;
+  border: 1px solid $alto;
+  margin-bottom: 50px;
+  padding: 20px;
+}
+.contact-form-title-row {
+  border-bottom: 1px solid $alto;
+  padding-bottom: 20px;
+  .contact-form-title {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 16px;
+  }
+  .contact-form-required {
+    color: $gray;
+    float: right;
+  }
+}
+.contact-form-description {
+  padding-top: 20px;
+  .contact-form-description-respond {
+    padding-top: 20px;
+  }
+}
+.contact-form-form-submit-btn {
+  button {
+    margin-top: 20px;
+    margin-left: 14px;
+    background-color: $my-sin;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px 40px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
+.contact-form-form-textarea {
+  margin: 7px 30px;
+  label {
+    text-transform: uppercase;
+  }
+  textarea {
+    width: 100%;
+    resize: none;
+    display: block;
+    border: 1px solid $alto;
+    padding: 7px;
+  }
+}

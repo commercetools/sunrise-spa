@@ -1,0 +1,68 @@
+<div class="signup-box-wrapper">
+  <form id="form-sign-up" method="post" action="{{@root.meta._links.signUpSubmit.href}}">
+    <input type="hidden" name="csrfToken" value="{{@root.meta.csrfToken}}"/>
+    <div class="clearfix">
+      <div class="pull-left">
+        <div class="signup-box-title">{{i18n "my-account-login:signupBox.title"}}</div>
+      </div>
+      <div class="pull-right">
+        <div class="signup-box-required">{{i18n "my-account-login:signupBox.required"}}*</div>
+      </div>
+    </div>
+    <hr class="signup-box-hr">
+    <div class="signup-box-description">{{i18n "my-account-login:signupBox.description"}}</div>
+      <div class="row">
+        {{> form/global-messages messages=form.messages}}
+        {{> form/global-errors errors=form.errors}}
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+       {{> form/choose-title containerClass="signup-box-input" selectId="title" selectName="title" options=settings.title}}
+     </div>
+     </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="signup-box-input">
+            <span>{{i18n "my-account-login:signupBox.firstName"}}*</span><br>
+            <input type="text" name="firstName" value="{{form.firstName}}">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="signup-box-input">
+            <span>{{i18n "my-account-login:signupBox.secondName"}}*</span><br>
+            <input type="text" name="lastName" value="{{form.lastName}}">
+          </div>
+        </div>
+      </div>
+      <hr class="signup-box-hr">
+      <div class="signup-box-input">
+        <span>{{i18n "my-account-login:signupBox.email"}}*</span><br>
+        <input type="email" name="email" value="{{form.email}}">
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="signup-box-input">
+            <span>{{i18n "my-account-login:signupBox.password"}}*</span><br>
+            <input type="password" name="password">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="signup-box-input">
+            <span>{{i18n "my-account-login:signupBox.confirmPassword"}}*</span><br>
+            <input type="password" name="confirmPassword">
+          </div>
+        </div>
+      </div>
+      <hr class="signup-box-hr">
+      <div class="signup-box-newsletter">
+        <input type="checkbox" name="joinNewsletter" value="true" {{#if form.subscribeToNewsletter}}checked{{/if}}>
+        <span>{{i18n "my-account-login:signupBox.pleaseAddMe"}} <a href="">{{i18n "my-account-login:signupBox.newsletter"}}</a></span>
+      </div>
+      <div class="signup-box-terms">
+        <input type="checkbox" name="agreeToTerms" value="true" {{#if form.agreeToTerms}}checked{{/if}}>
+        <span>{{i18n "my-account-login:signupBox.agreeTo"}} <a href="#">{{i18n "my-account-login:signupBox.termsAndConditions"}}</a></span>
+      </div>
+      <div class="signup-box-policy">{{i18n "my-account-login:signupBox.personalInfo"}} <a href="#">{{i18n "my-account-login:signupBox.privacyPolicy"}}</a></div>
+      <button class="signup-register-btn">{{i18n "my-account-login:signupBox.registerNow"}}</button>
+    </form>
+</div>

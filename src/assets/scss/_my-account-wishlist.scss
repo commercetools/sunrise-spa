@@ -1,0 +1,82 @@
+.my-account-wishlist-items-number {
+  text-transform: none;
+  color: $ship-cove;
+  @media screen and (max-width: 767px) {
+    display: block;
+    margin-top: 10px;
+  }
+}
+.my-account-wishlist-items-wrapper {
+  @media screen and (max-width: 767px) {
+    padding-top: 30px;
+  }
+}
+.my-account-wishlist-pagination {
+  margin: 20px 0 50px 0;
+}
+.my-account-wishlist-clear {
+  button {
+    color: $gray;
+    text-decoration: underline;
+    padding: 0;
+    letter-spacing: 1px;
+  }
+}
+.my-account-wishlist-per-page {
+  text-align: right;
+  .wishlist-display-selector-title {
+    display: inline-block;
+    padding: 10px 10px 0;
+  }
+  .selectboxit-btn {
+    background: transparent url("../img/arrow-67-filled.png") no-repeat 95% 50%;
+    background-size: 12px;
+    border: solid 1px #D6D6D6;
+    min-width: 50px;
+  }
+}
+.my-account-wishlist-remove-btn {
+  margin-bottom: 20px;
+  @media screen and(max-width: 767px) {
+    text-align: center;
+  }
+  button {
+    color: $silver-chalice;
+    border: 2px solid $silver-chalice;
+    border-radius: 2px;
+    text-transform: uppercase;
+    padding: 3px 20px;
+    letter-spacing: 1px;
+    &:hover {
+      color: $gray;
+      border-color: $gray;
+    }
+  }
+}
+.my-account-wishlist-pagination-bottom {
+  padding: 30px 0 50px 0;
+  border-bottom: 1px solid $alto;
+}
+.my-account-wishlist-clear-btn {
+  margin-top: 20px;
+  @media screen and (max-width: 767px) {
+    margin: 10px 0;
+  }
+  button {
+    color: $silver-chalice;
+    border: 2px solid $silver-chalice;
+    border-radius: 2px;
+    text-transform: uppercase;
+    padding: 3px 20px;
+    letter-spacing: 1px;
+    &:hover {
+      color: $gray;
+      border-color: $gray;
+    }
+  }
+}
+.my-account-wishlist-item-wrapper {
+  @media screen and (max-width: 767px) {
+    margin-top: 20px;
+  }
+}

@@ -1,0 +1,29 @@
+{
+    "footer" : {
+        "terms" : "Terms",
+        "privacy" : "Privacy",
+        "unsubscribe" : "Unsubscribe"
+    },
+    "content" : {
+        "registrationTitle" : "Your Sunrise Registration",
+        "dearUser" : "Dear Mr. Wayne",
+        "registrationText" : "Thanks for registering with us",
+        "registrationTextTwo" : "You're now up and running! Some of the benefits of your new account are:",
+        "benefitsOne" : "Ability to save your address for seamless checkout",
+        "benefitsTwo" : "View all your past orders and keep up to date with your current ones",
+        "benefitsThree" : "Be the first to hear about our sale or promotional events",
+        "registrationTextFour" : "If you're signed up to our mailing list you'll soon start to receive emails on all the latest styles, content, special events and news from Gotham. If not, come and join us here.",
+        "registrationTextFive" : "For any questions, please feel free to contact us at any time, we're here to help at our FAQs page or contacat us.",
+        "registrationWishes" : "Kind Regards",
+        "registrationWho" : "SUNRISE Customer Service Team",
+        "companyEmail" : "www.sunrise.commercetools.com",
+        "companyAddressOne" : "Sunny Road 1",
+        "companyAddressTwo" : "23456 Sunshine",
+        "companyRegistrationNumber" : "Registration Number 1234567",
+        "companyVatNumber" : "VAT Number 5123123151.",
+        "bannerTitle" : "Women",
+        "bannerText" : "Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem",
+        "bottomTextTwo" : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus."
+    },
+    "meta" : { "$ref" : "common/meta.json" }
+}

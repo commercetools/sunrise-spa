@@ -1,0 +1,15 @@
+<div class="aspect-ratio aspect-ratio--4to3">
+  <picture>
+    <source srcset="{{cms "banners[0].backgroundImage" width="1200"}}" media="(min-width: 1200px)">
+    <source srcset="{{cms "banners[0].backgroundImage" width="992"}}" media="(min-width: 768px)">
+    <img src="{{cms "banners[0].backgroundImage" width="768"}}" class="img-responsive">
+  </picture>
+</div>
+
+<div class="banner-text">
+  <h4 class="banner-title">{{{cms "banners[0].title"}}}</h4>
+  <p class="banner-paragraph">{{{cms "banners[0].subtitle"}}}</p>
+  <a href="{{cms "banners[0].link"}}" class="btn banner-btn">
+    {{cms "banners[0].linkLabel"}}
+  </a>
+</div>

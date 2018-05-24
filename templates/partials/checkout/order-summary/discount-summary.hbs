@@ -1,0 +1,30 @@
+{{#each content.cart.discountCodes}}
+<div class="row">
+  <div class="col-sm-12">
+     <div class="col-sm-10 col-xs-7">
+        <div class="text-right payment-code-applied">
+            {{#if @first}}
+            <span class="text-uppercase payment-code-title" title="Promotion code applied">
+                {{i18n "checkout:promoCodeApplied"}}
+            </span>
+            {{/if}}
+        </div>
+     </div>
+     <div class="col-sm-2 col-xs-5 text-right">
+        <form action="{{@root.meta._links.removeDiscountCode.href}}" method="post">
+            <span class="payment-code">{{name}}</span>
+            <input type="hidden" name="csrfToken" value="{{@root.meta.csrfToken}}"/>
+            <input type="hidden" name="discountCodeId" value="{{id}}">
+            {{#if editable}}
+            <button id="cart-apply-promocode-btn">
+                <span>
+                    <img class="cart-action-icon" src="{{@root.meta.assetsPath}}/img/delete-1-421d04c332afe6d751d51e28934399fd.png"
+                        alt="{{i18n "main:form.delete"}}">
+                </span>
+            </button>
+            {{/if}}
+        </form>
+    </div>
+  </div>
+</div>
+{{/each}}

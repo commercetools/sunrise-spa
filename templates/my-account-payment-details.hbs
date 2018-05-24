@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {{> common/htmlhead}}
+</head>
+
+<body>
+  <div class="darkbg hidden"></div>
+  {{> common/header}}
+  <div class="payment-details">
+    <div class="container">
+      {{> common/messages}}
+      <div class="my-account-title">
+        <span class="my-account-title-text icon-user">{{i18n "my-account:myAccount.title"}}</span>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="payment-details-wrapper">
+            <div class="row">
+              <div class="col-sm-3">
+                {{> myaccount/my-account-sidebar myPaymentDetailsTab=true}}
+              </div>
+              <div class="col-sm-9">
+                <div id="my-account-desktop-content" class="payment-details-content">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="address-book-title hidden-xs">
+                        {{content.contentTitle}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="payment-details-box-titles">
+                        {{content.defaultPaymentMethodTitle}}
+                      </div>
+                      <div class="payment-details-dark-box">
+                        <div class="payment-details-dark-box-title">{{content.defaultPaymentMethod.title}}</div>
+                        <div>{{content.defaultPaymentMethod.name}}</div>
+                        <div>{{content.defaultPaymentMethod.type}}</div>
+                        <div>{{content.defaultPaymentMethod.number}}</div>
+                        <div>{{content.defaultPaymentMethod.date}}</div>
+                        <div class="payment-details-box-edit-btn">
+                          <button><img src="{{meta.assetsPath}}/img/edit-1.png" alt="edit icon">{{content.defaultPaymentMethod.edit}}</button>
+                        </div>
+                      </div>
+                      <div class="add-new-payment-btn">
+                        <button>{{content.addNewPaymentMethodBtn}}</button>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="payment-details-box-titles">
+                        {{content.additionalPaymentMethodsTitle}}
+                      </div>
+                      <div class="payment-details-white-box">
+                        <div class="payment-details-white-box-title">{{content.additionalPaymentMethodOne.title}}</div>
+                        <div>{{content.additionalPaymentMethodOne.name}}</div>
+                        <div>{{content.additionalPaymentMethodOne.type}}</div>
+                        <div>{{content.additionalPaymentMethodOne.number}}</div>
+                        <div>{{content.additionalPaymentMethodOne.date}}</div>
+                        <div class="payment-details-edit-delete">
+                          <div><button><img src="{{meta.assetsPath}}/img/edit-1.png" alt="">{{content.additionalPaymentMethodOne.edit}}</button></div>
+                          <div><button><img src="{{meta.assetsPath}}/img/delete-60px.png" alt="">{{content.additionalPaymentMethodOne.delete}}</button></div>
+                        </div>
+                      </div>
+                      <div class="payment-details-white-box">
+                        <div class="payment-details-white-box-title">{{content.additionalPaymentMethodTwo.title}}</div>
+                        <div>{{content.additionalPaymentMethodTwo.name}}</div>
+                        <div>{{content.additionalPaymentMethodTwo.type}}</div>
+                        <div>{{content.additionalPaymentMethodTwo.number}}</div>
+                        <div>{{content.additionalPaymentMethodTwo.date}}</div>
+                        <div class="payment-details-edit-delete">
+                          <div><button><img src="{{meta.assetsPath}}/img/edit-1.png" alt="">{{content.additionalPaymentMethodTwo.edit}}</button></div>
+                          <div><button><img src="{{meta.assetsPath}}/img/delete-60px.png" alt="">{{content.additionalPaymentMethodTwo.delete}}</button></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{!-- {{> common/wishlist}} --}}
+  {{> common/footer}}
+  {{> common/htmlscripts}}
+</body>
+
+</html>

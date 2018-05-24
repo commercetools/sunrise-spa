@@ -1,0 +1,121 @@
+/*****************************************************************************/
+/*
+/* CHECKOUT-CONFIRMATION PAGE
+/*
+/*****************************************************************************/
+.checkout-summary {
+  margin: 1em;
+  padding: 1em;
+  background: lighten($alto, 10%);
+}
+.checkout-summary-edit-icon {
+  height: 18px;
+  margin: 0 0.8em 0.5em 0;
+}
+.checkout-summary-title {
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+.checkout-summary-text {
+  padding: 1em 0;
+}
+.checkout-first-col {
+  padding-right: 0;
+}
+.checkout-second-col {
+  padding: 0;
+}
+.checkout-third-col {
+  padding-left: 0;
+}
+.quantity-number {
+  font-size: 1.2em;
+}
+.confirmation-products-title {
+  margin: 1em;
+  border-top: 1px solid $alto;
+  .cart-items-title {
+    margin-bottom: 0;
+  }
+  .single-cart-item {
+    margin: 1em 0 0;
+  }
+}
+.follow-up {
+  border-bottom: 1px solid $alto;
+  label {
+    display: block;
+    margin: 0 1em 0.5em 0;
+  }
+  label:first-child {
+    margin: 1em 1em 0.5em 0;
+  }
+  label:last-child {
+    margin: 0 1em 1em 0;
+  }
+}
+.payment-code-applied {
+  padding-bottom: 0.5em;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  padding-right: 1em;
+}
+.payment-code-title {
+  color: $gray;
+}
+.payment-code {
+  font-weight: 700;
+}
+.complete-order {
+  text-align: right;
+}
+.complete-order-btn {
+  width: 310px;
+  text-transform: uppercase;
+  font-size: 1em;
+  font-weight: 600;
+  background: $my-sin;
+  border: none;
+  margin: 1em;
+  padding: 0.5em 0;
+  &:hover {
+    background: lighten($my-sin, 5%);
+  }
+}
+.agree-to {
+  margin-right: 1em;
+}
+.terms-link {
+  text-decoration: underline;
+  color: $gray;
+}
+
+// Media Queries
+@media screen and (min-width: 767px) {
+  .checkout-first-col .checkout-summary,
+  .checkout-second-col .checkout-summary {
+    padding: 1em 1em 4.6em;
+  }
+}
+@media screen and (max-width: 767px) {
+  .complete-order-btn {
+    width: 200px;
+  }
+  .checkout-first-col {
+    padding-right: 15px;
+  }
+  .checkout-second-col {
+    padding: 0 15px;
+  }
+  .checkout-third-col {
+    padding-left: 15px;
+  }
+  .follow-up {.remember-me,
+    .add-to-newsletter {
+      margin-bottom: 0;
+    }
+  }
+  .quantity-counter {
+    text-align: right;
+  }
+}

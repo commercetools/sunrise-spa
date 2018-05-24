@@ -1,0 +1,40 @@
+{{#if miniCart.lineItems.list }}
+  <button class="not-empty link-your-bag icon-hand-bag">
+    <span class="hidden-xs hidden-sm">{{i18n "main:header.miniCart"}}</span>
+    <span class="cart-item-number">{{miniCart.totalItems}}</span>
+  </button>
+  <div class="col-xs-12">
+    <div class="nav-minicart">
+      <ul>
+        {{#each miniCart.lineItems.list}}
+        <li>
+          <form action="{{@root.meta._links.deleteLineItem.href}}" method="post">
+            <input type="hidden" name="csrfToken" value="{{@root.meta.csrfToken}}"/>
+            <a class="img" href="{{variant.url}}"><img src="{{variant.image}}" alt="{{variant.name}}" /></a>
+            <p class="product-title"><a href="{{variant.url}}">{{variant.name}}</a></p>
+            <div class="details">
+              <p class="product-quantity">{{i18n "main:common.quantity"}}<span>{{quantity}}x</span></p>
+              <p class="product-price">{{i18n "main:common.price"}}<span>{{totalPrice}}</span></p>
+                <input type="hidden" name="lineItemId" value="{{lineItemId}}">
+                <button type="submit" id="minicart-delete-button-{{@index}}" class="delete">
+                  <span>
+                    <img class="cart-action-icon" src="{{@root.meta.assetsPath}}img/delete-1.png" alt="{{i18n "main:form.delete"}}">
+                  </span>
+                </button>
+            </div>
+          </form>
+        </li>
+        {{/each}}
+      </ul>
+      <div class="gradient"></div>
+      <p class="total-price">{{i18n "main:common.totalPrice" totalPrice=miniCart.totalPrice}}</p>
+      <a href="{{@root.meta._links.cart.href}}" class="btn-grey">{{i18n "main:header.viewBag"}}</a>
+      <a href="{{@root.meta._links.checkout.href}}" class="btn-yellow">{{i18n "main:header.checkout"}}</a>
+    </div>
+  </div>
+{{else}}
+<a href="{{@root.meta._links.cart.href}}" class="not-empty link-your-bag icon-hand-bag">
+  <span class="hidden-xs hidden-sm">{{i18n "main:header.miniCart"}}</span>
+  <span class="cart-item-number">{{miniCart.totalItems}}</span>
+</a>
+{{/if}}

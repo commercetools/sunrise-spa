@@ -1,0 +1,15 @@
+<div class="status">
+  {{#*inline "available"}}
+      <div class="status-color green"></div>
+      <span class="status-text">{{i18n "main:storeLocation.availability.available"}}</span>
+  {{/inline}}
+  {{#*inline "notAvailable"}}
+      <div class="status-color red"></div>
+      <span class="status-text">{{i18n "main:storeLocation.availability.notAvailable"}}</span>
+  {{/inline}}
+  {{#*inline "fewItemsLeft"}}
+      <div class="status-color orange"></div>
+      <span class="status-text">{{i18n "main:storeLocation.availability.fewItemsLeft"}}</span>
+  {{/inline}}
+  {{#if availability}}{{> (lookup . 'availability')}}{{/if}}
+</div>

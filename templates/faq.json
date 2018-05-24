@@ -1,0 +1,27 @@
+{
+	"header" : { "$ref" : "common/header.json" },
+	"footer" : { "$ref" : "common/footer.json" },
+	"content" : {
+        "deliveryFaqs" : [
+            {
+                "title" : "1. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+                "text" : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+            },
+            {
+                "title" : "2. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+                "text" : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+            }
+        ],
+        "returnsFaqs" : [
+            {
+                "title" : "1. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+                "text" : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+            },
+            {
+                "title" : "2. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+                "text" : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+            }
+        ]
+	},
+	"meta" : { "$ref" : "common/meta.json" }
+}

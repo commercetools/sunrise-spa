@@ -1,0 +1,30 @@
+<div class="checkout-summary">
+    <div class="text-uppercase">
+        <span class="checkout-summary-title">{{i18n titleKey}}</span>
+      {{#if editable}}
+        {{> checkout/edit-link id="confirmation-edit-shipping-btn" url=editUrl enabled=editable}}
+      {{/if}}
+    </div>
+    <div class="checkout-summary-text">
+        <span>{{#if address.salutation}}{{address.salutation}}{{/if}}{{#if address.title}} {{address.title}}{{/if}}{{#if address.firstName}} {{address.firstName}}{{/if}}{{#if address.lastName}} {{address.lastName}}{{/if}}</span>
+        <br>
+        <span>{{address.streetName}} {{address.streetNumber}}</span>
+        <br>
+        <span>{{address.postalCode}} {{address.city}}</span>
+        <br>
+        <span>{{address.region}}</span>
+        <br>
+        <span>{{address.country}}</span>
+    </div>
+    <div>
+      {{#if address.phone}}
+          <span>{{i18n "main:form.phone"}}:</span>
+          <span> {{address.phone}}</span>
+          <br>
+      {{/if}}
+      {{#if address.email}}
+          <span>{{i18n "main:form.email"}}:</span>
+          <span> {{address.email}}</span>
+      {{/if}}
+    </div>
+</div>

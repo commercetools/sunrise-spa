@@ -1,0 +1,23 @@
+<div>{{addressInfo.address.title}} {{addressInfo.address.firstName}} {{addressInfo.address.lastName}}</div>
+<div>{{addressInfo.address.streetName}}</div>
+<div>{{addressInfo.address.additionalStreetInfo}}</div>
+<div>{{addressInfo.address.city}}</div>
+<div>{{addressInfo.address.postalCode}} {{addressInfo.address.region}}</div>
+<div>{{addressInfo.address.country}}</div>
+<div class="address-book-edit-delete">
+    <div>
+        <a href="{{addressInfo.addressEditUrl}}">
+            <img src="{{@root.meta.assetsPath}}img/edit-1.png" alt="edit icon">
+            {{i18n "my-account:addressBook.buttons.edit"}}
+        </a>
+    </div>
+    <div>
+        <form action="{{addressInfo.addressDeleteUrl}}" method="POST">
+            <input type="hidden" name="csrfToken" value="{{@root.meta.csrfToken}}"/>
+            <button type="submit">
+                <img src="{{@root.meta.assetsPath}}img/delete-60px.png" alt="delete icon">
+                {{i18n "my-account:addressBook.buttons.delete"}}
+            </button>
+        </form>
+    </div>
+</div>

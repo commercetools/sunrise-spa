@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {{> common/htmlhead}}
+  </head>
+
+  <body id="checkout-signin-body">
+  {{> common/checkout-header}}
+  <div class="checkout-signin">
+    <div class="container">
+      {{> common/messages}}
+      {{> checkout/secure-checkout-title titleKey="checkout:signInPage.title"}}
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="returning-customer">
+            <div class="clearfix returning-customer-title">
+              <h4>{{content.returningCustomerTitle}}</h4>
+              <span class="hidden-xs">{{i18n "main:form.required"}}*</span>
+            </div>
+            <div class="returning-customer-field">
+              <span class="if-account-title">{{content.ifYouHaveAccountTitle}}</span>
+              <div class="row">
+                <div class="col-md-8 col-sm-12">
+                  <div class="returning-customer-input">
+                    <span class="returning-customer-email-title">{{content.emailTitle}}*</span>
+                    <input id="signin-email-input" class="returning-customer-email" type="text">
+                    <span class="returning-customer-password-title">{{content.passwordTitle}}*</span>
+                    <input id="signin-password-input" class="returning-customer-password" type="password">
+                    <div class="clearfix returning-customer-remember-forget">
+                      <span class="returning-customer-rememberme"><input id="signin-remember-me-input" type="checkbox">{{content.rememberMeTitle}}</span>
+                      <span class="returning-customer-forgot"><a id="signin-forgot-password-link" data-toggle="modal" data-target="#forgot-password-modal">{{content.forgotPasswordTitle}}</a></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a id="signin-quick-checkout-btn" class="quick-checkout-btn btn" href="#">{{content.quickCheckoutBtn}}</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="guest-checkout">
+            <div class="clearfix guest-checkout-title">
+              <h4>{{content.guestCheckoutTitle}}</h4>
+            </div>
+            <span class="guest-checkout-first-paragraph">{{content.guestCheckoutParagraph1}}</span>
+            <span class="guest-checkout-second-paragraph">{{content.guestCheckoutParagraph2}}</span>
+            <a id="signin-continue-as-guest-btn" class="btn continue-guest-btn" href="#">{{content.continueGuestBtn}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{> myaccount/forgot-password}}
+  {{> common/checkout-footer}}
+  {{> common/htmlscripts}}
+  </body>
+</html>

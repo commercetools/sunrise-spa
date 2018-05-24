@@ -1,0 +1,226 @@
+.your-order-details-wrapper {
+  padding: 10px 0;
+  position: relative;
+}
+.your-order-details-title {
+  text-transform: uppercase;
+  padding: 10px 0;
+  letter-spacing: 1px;
+}
+.my-orders-print-receipt-btn {
+  position: absolute;
+  top: 25px;
+  right: 0;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  color: $silver-chalice;
+  border: 2px solid $silver-chalice;
+  font-size: 18px;
+  &:hover {
+    color: $gray;
+    border: 2px solid $gray;
+  }
+}
+.your-order-details {
+  .your-order-details-titles {
+    color: $gray;
+    min-width: 100px;
+  }
+  .your-order-details-info {
+    margin-left: 10px;
+  }
+  span {
+    display: inline-block;
+  }
+}
+.my-orders-order-dark-box {
+  background: $wild-sand;
+  padding: 15px 10px;
+  color: $gray;
+  position: relative;
+  margin-bottom: 15px;
+  .my-orders-order-dark-box-title {
+    color: $mine-shaft;
+    font-size: 14px;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+  }
+}
+.my-orders-order-price-summary-wrapper {
+  padding: 15px 0;
+  margin-bottom: 20px;
+  border-top: 1px solid $alto;
+  border-bottom: 1px solid $alto;
+}
+.my-orders-order-promocode-title {
+  color: $gray;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+.my-orders-order-promocode {
+  text-transform: uppercase;
+  font-size: 13px;
+}
+.my-orders-order-price-titles {
+  display: inline-block;
+  margin-right: 20px;
+  letter-spacing: 1px;
+}
+.my-orders-order-price {
+  display: inline-block;
+  letter-spacing: 1px;
+  width: 70px;
+}
+.order-hr {
+  margin: 10px 0;
+  margin-left: auto;
+  height: 2px;
+  background-color: $alto;
+  text-align: right;
+  width: 250px;;
+}
+.order-total-big {
+  font-size: 16px;
+  font-weight: bold;
+}
+.order-list-summary-titles-wrapper {
+  border-bottom: 1px solid $alto;
+  text-transform: uppercase;
+  color: $gray;
+  padding-bottom: 10px;
+}
+.order-detail-wrapper {
+  padding: 20px 0;
+  border-bottom: 1px solid $alto;
+}
+.order-detail-product-title {
+  font-size: 16px;
+}
+.order-sku {
+  color: $gray;
+  font-size: 12px;
+  margin: 5px 0;
+}
+.order-detail-attributes-title {
+  color: $gray;
+  display: inline-block;
+  margin: 0 5px 5px 0;
+}
+.order-detail-attributes {
+  display: inline-block;
+  margin: 0 5px 5px 0;
+}
+.order-detail-available {
+  color: $gray;
+  font-size: 12px;
+}
+.order-detail-discount-price {
+  text-decoration: line-through;
+  color: $gray;
+  font-size: 12px;
+}
+.order-print-receipt-btn-wrapper {
+  margin-top: 20px;
+  text-align: right;
+}
+.order-print-receipt-btn {
+  text-transform: uppercase;
+  padding: 10px 20px;
+  color: $silver-chalice;
+  border: 2px solid $silver-chalice;
+  font-size: 18px;
+  &:hover {
+    color: $gray;
+    border: 2px solid $gray;
+  }
+  @media screen and (max-width: 767px) {
+    margin-bottom: 15px;
+  }
+}
+
+/*****************************************************************************/
+/*
+/* PRINTING STYLES
+/*
+/*****************************************************************************/
+
+@media print {
+
+/*****************************************************************************/
+/* STRUCTURE
+/*****************************************************************************/
+  .col-sm-12,
+  .col-sm-11,
+  .col-sm-10,
+  .col-sm-9,
+  .col-sm-8,
+  .col-sm-7,
+  .col-sm-6,
+  .col-sm-5,
+  .col-sm-4,
+  .col-sm-3,
+  .col-sm-2,
+  .col-sm-1,
+  .col-sm-12{
+    float: left;
+  }
+
+  .row,
+  .col-sm-12{
+    width: 100;
+  }
+
+  .col-sm-6{
+    width:50%
+  }
+  .col-sm-5{
+    width:41.66666667%
+  }
+  .col-sm-4{
+    width:33.33333333%
+  }
+
+  .col-sm-2{
+    width:16.66666667%
+  }
+
+  /*****************************************************************************/
+  /* ELEMENTS
+  /*****************************************************************************/
+   .my-account-sidebar-items,
+   .footer,
+   .sub-footer,
+   .my-account-title,
+   .navbar-fixed-top,
+   .visible-xs,
+   .my-orders-print-receipt-btn,
+   .order-print-receipt-btn {
+     display: none !important;
+   }
+
+   .hidden-xs {
+     display: block !important;
+   }
+
+  .your-order-details-title,
+  .my-orders-order-dark-box-title {
+    font-weight: bold;
+  }
+
+  .my-orders-order-promocode-title {
+    font-style: italic;
+  }
+
+  .order-detail-attributes-title,
+  .order-detail-attributes {
+    font-size: 0.8em;
+  }
+
+  .my-orders {
+    margin-top: -100px;
+  }
+
+  .order-sku {
+    margin: 0px;
+  }
+}

@@ -1,0 +1,309 @@
+.home-page {
+  background: $spring-wood;
+}
+
+// No margin/padding helper class
+.nopadding {
+  padding: 0;
+  margin: 0;
+}
+
+// Banner option one
+.home-banner-option-one {
+  .banner-left {
+    border-right: 1px solid $white;
+  }
+  .banner-right {
+    border-left: 1px solid $white;
+  }
+  .banner-text {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: $white;
+    background: rgba(0,0,0,0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 100;
+    .banner-title {
+      font-size: 22px;
+      font-weight: 200;
+    }
+    .banner-btn {
+      margin-bottom: 10px;
+      background: $my-sin;
+      padding: 10px 20px;
+      color: $mine-shaft;
+      &:hover {
+        background: lighten($my-sin, 5%);
+      }
+    }
+  }
+}
+
+// Banner option two
+.home-banner-option-two {
+  img {
+    height: 100%;
+    width: 100%;
+  }
+  .banner-text {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    padding: 2%;
+    text-align: center;
+    max-width: 40%;
+    background: rgba(255,255,255,0.6);
+    z-index: 100;
+    img {
+      height: 40px;
+      width: 40px;
+    }
+    .banner-title {
+      font-size: 22px;
+      font-weight: 200;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .banner-subtitle {
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding-bottom: 20px;
+    }
+    .banner-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      text-transform: uppercase;
+      border: 2px solid $mine-shaft;
+      letter-spacing: 1px;
+      &:hover {
+        background: $white;
+      }
+    }
+  }
+}
+
+// Banner option three
+.home-banner-option-three {
+  .banner-left {
+    border-right: 1px solid $white;
+  }
+  .banner-right {
+    border-left: 1px solid $white;
+  }
+  .banner-text {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: $white;
+    background: rgba(0,0,0,0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 100;
+    .banner-title {
+      font-size: 22px;
+      font-weight: 200;
+    }
+    .banner-btn {
+      margin-bottom: 10px;
+      background: $my-sin;
+      padding: 10px 20px;
+      color: $mine-shaft;
+      &:hover {
+        background: lighten($my-sin, 5%);
+      }
+    }
+  }
+  .banner-xs-one {
+    background: $ebony-clay;
+    border-right: 1px solid $white;
+    .banner-text {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      text-align: center;
+      color: $white;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: none;
+      img {
+        height: 40px;
+        width: 40px;
+        margin: 20px 0 10px;
+      }
+      .banner-title {
+
+      }
+    }
+  }
+  .banner-xs-two {
+    border-left: 1px solid $white;
+    .banner-text {
+      position: absolute;
+      top: 0;
+      text-align: center;
+      color: $white;
+      background: rgba(0,0,0,0.3);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      .banner-title {
+        font-size: 22px;
+        font-weight: 200;
+      }
+      .banner-btn {
+        margin-bottom: 10px;
+        background: $my-sin;
+        padding: 10px 20px;
+        color: $mine-shaft;
+        &:hover {
+          background: lighten($my-sin, 5%);
+        }
+      }
+    }
+  }
+  .banner-sm {
+    border-top: 2px solid $white;
+    .banner-text {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      color: $white;
+      background: rgba(0,0,0,0.5);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      .banner-title {
+        font-size: 22px;
+        font-weight: 200;
+      }
+      .banner-btn {
+        margin-bottom: 10px;
+        background: $my-sin;
+        padding: 10px 20px;
+        color: $mine-shaft;
+        &:hover {
+          background: lighten($my-sin, 5%);
+        }
+      }
+    }
+  }
+}
+
+// Home suggestions
+.home-suggestions-title {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 30px;
+  text-transform: uppercase;
+  font-weight: 200;
+  letter-spacing: 1px;
+}
+
+.home-suggestions-hr {
+  width: 50px;
+  text-align: center;
+  border-top: 1px solid $gray;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.home-suggestions-description {
+  text-align: center;
+  color: $gray;
+  letter-spacing: 1px;
+  margin-bottom: 40px;
+}
+
+.home-viewall {
+  text-align: center;
+  padding: 30px 0;
+  margin-bottom: 25px;
+  .home-viewall-btn {
+    background: $my-sin;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    margin-top: 15px;
+    letter-spacing: 1px;
+    font-size: 18px;
+    color: $mine-shaft;
+    &:hover {
+      background: lighten($my-sin, 5%);
+    }
+    border-left: 25px solid $spring-wood;
+    border-right: 25px solid $spring-wood;
+  }
+  .home-viewall-hr {
+    margin: -12px 0 8px 0;
+    border-top: 1px solid $alto;
+  }
+}
+
+// Media Queries
+@media screen and (max-width: 767px) {
+  // Banner option one
+  .home-banner-option-one {
+    .banner-left {
+      border-right: none;
+    }
+    .banner-right {
+      border-left: none;
+    }
+  }
+  // Banner option two
+  .home-banner-option-two {
+    .banner-text {
+      max-width: 70%;
+      .banner-title {
+        font-size: 18px;
+      }
+      .banner-subtitle {
+        padding-bottom: 0;
+        font-size: 14px;
+      }
+      .banner-btn {
+        margin-top: 0;
+        font-size: 14px;
+      }
+    }
+  }
+  // Banner option three
+  .home-banner-option-three {
+    .banner-left {
+      border-right: 0;
+    }
+    .banner-right {
+      border-left: 0;
+    }
+    .banner-sm {
+      border-top: 0;
+    }
+    .banner-xs-one {
+      border-right: 0;
+    }
+    .banner-xs-two {
+      border-left: 0;
+    }
+  }
+  // View all products btn
+  .home-viewall {
+    .home-viewall-btn {
+      font-size: 16px;
+    }
+  }
+}
+
+.aspect-ratio {
+  &--4to3 {
+    @include aspect-ratio(4,3);
+  }
+  &--8to3 {
+    @include aspect-ratio(8,3);
+  }
+  &--16to9 {
+    @include aspect-ratio(16,9);
+  }
+}

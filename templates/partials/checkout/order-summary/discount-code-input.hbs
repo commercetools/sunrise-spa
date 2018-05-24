@@ -1,0 +1,22 @@
+{{#if editable}}
+    <div class="row">
+        <div class="col-sm-offset-6 col-sm-6">
+            {{> form/global-messages messages=content.cart.addDiscountCodeForm.messages}}
+            {{> form/global-errors errors=content.cart.addDiscountCodeForm.errors}}
+        </div>
+        <div class="col-sm-12">
+            <form id="form-add-discount-code" class="text-right promotion-info" action="{{@root.meta._links.addDiscountCode.href}}" method="post">
+                <span class="text-uppercase promo-info-text" title="{{i18n "checkout:discountTooltip"}}">
+                    {{i18n "checkout:discountPromoInfo"}}
+                    <img class="info-icon" src="{{@root.meta.assetsPath}}img/information-3787f70287d781184eef270161383e9f.png" alt="information icon">
+                </span>
+                <input type="hidden" name="csrfToken" value="{{@root.meta.csrfToken}}"/>
+                <input id="promo-code" type="text" name="code" value="{{content.cart.addDiscountCodeForm.code}}">
+                <button id="cart-apply-promocode-btn" class="text-uppercase promo-apply-btn">
+                    {{i18n "checkout:discountApply"}}
+                </button>
+            </form>
+        </div>
+    </div>
+{{/if}}
+

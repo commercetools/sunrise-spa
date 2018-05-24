@@ -1,0 +1,12 @@
+{
+    "header" : { "$ref" : "common/header.json" },
+    "footer" : { "$ref" : "common/footer.json" },
+    "content" : {
+        "breadcrumb" : { "$ref" : "catalog/breadcrumb.json" },
+        "gallery" : { "$ref" : "catalog/pdp/product-gallery.json" },
+        "mixMatchProducts" : { "$ref" : "catalog/pdp/mix-match-product-list.json" },
+        "suggestions" : { "$ref" : "catalog/product-list4.json" },
+        "viewMore" : { "$ref" : "catalog/pdp/view-more.json" }
+    },
+    "meta" : { "$ref" : "common/meta.json" }
+}

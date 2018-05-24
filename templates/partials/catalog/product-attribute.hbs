@@ -1,0 +1,12 @@
+<li>
+  <p class="text-uppercase">{{attribute.name}}</p>
+  <div>
+    <select name="attribute-{{attribute.key}}" class="select-product-detail" data-reload="{{attribute.reload}}" data-cross-select="{{json attribute.selectData}}" data-variants="{{json variants}}" data-identifiers="{{json identifiers}}" required>
+      <!--option value="">{{i18n "main:choose"}} {{attribute.name}}</option-->
+      {{#each attribute.list}}
+        <option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>
+      {{/each}}
+    </select>
+  </div>
+  {{> common/required-error-message}}
+</li>

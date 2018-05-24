@@ -1,0 +1,632 @@
+/*****************************************************************************/
+/*
+/* NAVIGATION
+/*
+/*****************************************************************************/
+
+.header {
+  height: 50px;
+  background: $ebony-clay;
+//  overflow: hidden;
+  z-index: 9999;
+  position: relative;
+
+  .col-xs-12 {
+    padding: 0;
+
+    @media screen and (min-width: 768px) {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+}
+
+.navbar {
+  min-height: 0;
+}
+
+.navbar-fixed-bottom .navbar-collapse,
+.navbar-fixed-top .navbar-collapse {
+  max-height: 400px;
+}
+
+// Dark background on menu open (mobile)
+
+.darkbg {
+  background: rgba(0, 0, 0, .7);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+}
+
+// All navigation components
+
+.nav-list {
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  letter-spacing: .125rem;
+
+  li {
+    color: $white;
+    display: inline-block;
+    width: 20%;
+    height: 50px;
+    text-align: center;
+    border-right: solid 1px #404953;
+
+    @media screen and (min-width: 768px) {
+      width: inherit;
+      text-align: left;
+    }
+
+    > a,
+    > button {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+    }
+
+  }
+
+  .list-item-nav-toggle {
+    float: left;
+
+    .navbar-toggle {
+      margin: 0;
+      padding: 14px 20px 20px;
+      border: none;
+      background: none;
+
+      .icon-bar {
+        width: 30px;
+        height: 2px;
+        margin: auto;
+        background: $white;
+        display: block;
+        border-radius: 1px;
+
+        +.icon-bar {
+          margin-top: 8px;
+        }
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  .list-item-store {
+    float: left;
+
+    .store-select {
+      color: $white;
+      padding: 10px 10px;
+
+      &.icon-marker::before {
+        font-size: 28px;
+        position: relative;
+        vertical-align: top;
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      border: none;
+
+      .store-select {
+        color: $bombay;
+        padding: 15px 10px 15px 0;
+        font-size: 12px;
+
+        &:hover,
+        &:focus {
+          color: $white;
+        }
+
+        &.icon-marker::before {
+          font-size: 26px;
+          bottom: 5px;
+          margin-right: 3px;
+        }
+      }
+    }
+  }
+
+  .list-item-help {
+    display: none;
+
+    .link-help {
+      color: $bombay;
+      padding: 15px 10px;
+      font-size: 12px;
+
+      &:hover,
+      &:focus {
+        color: $white;
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      display: inline-block;
+      border: none;
+    }
+  }
+
+  .list-item-call {
+    display: none;
+
+    .link-hotline {
+      color: $bombay;
+      padding: 15px 10px;
+      font-size: 12px;
+
+      &:hover,
+      &:focus {
+        color: $white;
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      display: inline-block;
+      border: none;
+    }
+  }
+
+  .list-item-search {
+    float: left;
+
+    .search-toggle {
+      font-size: 26px;
+      padding: 8px 10px;
+    }
+
+    .search-toggle {
+      background: none;
+      border: none;
+      outline: none;
+    }
+
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  .location-dropdown-label {
+    font-size: 0.8em;
+    padding-left: 1.1em;
+  }
+
+  .list-item-location {
+    float: right;
+    display: none;
+    img {
+      height: 20px;
+      margin-right: 10px;
+    }
+    .location-dropdown {
+      display: none;
+      position: relative;
+      background: $ebony-clay;
+      padding-bottom: 10px;
+      width: 180px;
+      top: -2px;
+      .location-select {
+        width: 120px;
+        color: $white;
+        border: 1px solid $white;
+        background: transparent url("../img/arrow-67-white.png") no-repeat 90% 50%;
+        background-size: 10px;
+        margin: 10px;
+        text-transform: capitalize;
+      }
+    }
+    li {
+      display: block;
+      border: none;
+    }
+    // Overwrite SelectBoxIt library css
+    .selectboxit-btn {
+      width: 160px !important;
+    }
+    .selectboxit-list {
+      min-width: inherit !important;
+      width: 160px !important;
+      margin: -10px 0 0 10px !important;
+      text-transform: initial;
+      font-size: 12px;
+    }
+    .selectboxit-text {
+      max-width: none !important;
+      width: 120px !important;
+    }
+    .selectboxit-option-anchor {
+      @include truncate;
+    }
+
+    @media screen and (min-width: 768px) {
+      display: inline-block;
+    }
+  }
+
+  .list-item-user {
+    float: right;
+
+    .link-user {
+      color: $white;
+      padding: 10px 20px;
+
+      &.icon-user::before {
+        font-size: 28px;
+        position: relative;
+        vertical-align: top;
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      .link-user {
+        padding: 15px 20px;
+
+        &:hover,
+        &:focus {
+          background: #353e49;
+        }
+
+        &.icon-user::before {
+          font-size: 26px;
+          bottom: 3px;
+          margin-right: 7px;
+        }
+      }
+    }
+  }
+
+  .list-item-bag,
+  .list-item-user {
+    z-index: 9999;
+    position: relative;
+  }
+
+  .list-item-bag {
+    float: right;
+    border: none;
+    position: relative;
+
+    @media screen and (min-width: 768px) {
+      border-right: solid 1px #404953;
+    }
+
+    .link-your-bag {
+      color: $white;
+      padding: 10px 20px;
+      position: relative;
+      text-transform: uppercase;
+
+      @media screen and (min-width: 768px) {
+        padding: 15px 20px;
+
+        &:hover,
+        &:focus {
+          background: #353e49;
+        }
+      }
+
+      &.icon-hand-bag::before {
+        font-size: 28px;
+        position: relative;
+        vertical-align: top;
+
+        @media screen and (min-width: 768px) {
+          font-size: 26px;
+          bottom: 3px;
+          margin-right: 7px;
+        }
+      }
+
+      &.not-empty {
+        color: $mine-shaft;
+        background: $my-sin;
+
+        .cart-item-number {
+          color: $white;
+          background: $valencia;
+        }
+
+        @media screen and (min-width: 768px) {
+          &:hover,
+          &:focus {
+            background: #ffc447;
+          }
+        }
+      }
+
+      .cart-item-number {
+        position: absolute;
+        color: $ebony-clay;
+        background: $my-sin;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 20px;
+        right: 10px;
+        bottom: 20px;
+        letter-spacing: normal;
+        font-size: 12px;
+        font-weight: bold;
+
+        @media screen and (min-width: 768px) {
+          position: relative;
+          width: 25px;
+          height: 25px;
+          bottom: 2px;
+          margin-left: 5px;
+          line-height: 26px;
+          right: 0;
+        }
+      }
+    }
+  }
+}
+
+// Sunrise logo and searchbox
+
+.brand-logo {
+  display: block;
+
+  img
+  {
+    width: 100%;
+    max-width: 220px;
+    padding: 15px 25px 10px;
+
+    @media screen and (min-width: 768px) {
+      width: 220px;
+      padding: 0;
+    }
+  }
+}
+
+.logo-search {
+
+  @media screen and (min-width: 768px) {
+    margin-top: 10px;
+  }
+}
+
+.search-box
+{
+  position: relative;
+  display: none;
+  padding: 20px 0;
+
+  @media screen and (min-width: 768px) {
+    display: block !important;
+    padding: 0;
+  }
+
+  .search-field {
+    height: 40px;
+    width: 100%;
+    background: $spring-wood;
+    border: 1px solid rgba(170, 174, 178, 0.5);
+    border-radius: 2px;
+    margin: 0;
+    padding: 0 1em;
+    font-size: 16px;
+  }
+
+  .search-button {
+    outline: none;
+    background: none;
+    border: none;
+    position: absolute;
+    top: 20px;
+    right: 0;
+    font-size: 22px;
+    color: $ebony-clay;
+    padding: 8px 10px 8px 20px;
+    line-height: 10px;
+
+    @media screen and (min-width: 768px) {
+      top: 0;
+    }
+  }
+}
+
+.search-field {
+  width: 300px;
+  margin: 6px 0;
+  height: 30px;
+}
+
+
+.nav-minicart {
+  display: none;
+  position: absolute;
+  width: 500%; // TODO: temp fix
+  right: 0;
+  background: $white;
+  border: 1px $alto solid;
+  border-top: 0;
+  padding: 20px 15px;
+  box-sizing: border-box;
+  color: $mine-shaft;
+
+  ul {
+    position: relative;
+    margin-bottom: 10px;
+    padding: 0;
+    list-style: none;
+    max-height: 13em;
+    border-bottom: 1px $alto solid;
+
+    li {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      height: auto;
+      border-bottom: 1px $alto solid;
+      padding-bottom: 20px;
+      margin-bottom: 15px;
+      color: $mine-shaft;
+      border-right: 0;
+
+      &:last-child {
+        border-bottom: 0;
+      }
+
+      a.img {
+        width: 70px;
+        min-height: 90px;
+        float: left;
+        margin-right: 15px;
+
+        img {
+          width: 100%;
+        }
+      }
+      p {
+        float: left;
+        text-transform: none;
+        letter-spacing: normal;
+
+        &.product-title {
+          margin: 0;
+          font-size: 1.1em;
+          line-height: 1.2em;
+          width: 70%;
+        }
+      }
+
+      .details {
+        position: absolute;
+        right: 0;
+        bottom: 20px;
+
+        p {
+          margin: 0;
+          font-size: 1.2em;
+          text-align: right;
+          padding-right: 15px;
+          margin-right: 15px;
+          border-right: 1px $alto solid;
+          color: $gray;
+          font-size: 1em;
+          text-transform: uppercase;
+
+          span {
+            display: block;
+            color: $mine-shaft;
+          }
+        }
+
+        .delete {
+          display: block;
+          margin-top: 8px;
+          float: left;
+
+          img {
+            margin: 0;
+          }
+        }
+      }
+
+    }
+  }
+
+
+  @mixin gradient-white() {
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjElIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuMDEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+    background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,0.01) 1%, rgba(255,255,255,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(1%,rgba(255,255,255,0.01)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.01) 1%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.01) 1%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.01) 1%,rgba(255,255,255,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.01) 1%,rgba(255,255,255,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-8 */
+  }
+
+  .gradient {
+    width: 100%;
+    height: 30px;
+    float: left;
+    position: relative;
+    left: 0px;
+    margin-top: -41px;
+    @include gradient-white;
+  }
+
+  .total-price {
+    text-align: right;
+    color: $mine-shaft;
+    margin: 20px 0px;
+    font-size: 1.3em;
+    font-weight: bold;
+  }
+
+  .btn-grey {
+    float: left;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .btn-yellow {
+    position: absolute;
+    right: 15px; //padding from parent box
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .btn-grey,
+  .btn-yellow {
+    width: 46%;
+    display: inline-block;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 400px;
+    right: 0;
+
+    ul {
+      max-height: 22em;
+
+      li {
+        a.img {
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+}
+
+// BUTTON GREY DEFAULT STYLE
+
+.btn-grey {
+  background: none;
+  border: 2px solid $alto;
+  color: $silver-chalice;
+  margin-right: 0.5em;
+  padding: 0.4em 1em;
+  font-size: 1.2em;
+  &:hover {
+    color: $gray;
+    border: 2px solid $gray;
+  }
+}
+
+.btn-yellow {
+  border: none;
+  color: $mine-shaft;
+  background: $my-sin;
+  padding: 0.5em 1em;
+  font-size: 1.2em;
+  &:hover {
+    background: lighten($my-sin, 5%);
+  }
+}

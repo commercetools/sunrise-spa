@@ -1,0 +1,78 @@
+<form method="post" action="{{@root.meta._links.checkoutPaymentSubmit.href}}">
+  <input type="hidden" name="csrfToken" value="{{@root.meta.csrfToken}}"/>
+  <div class="shipping-info">
+    <span class="text-uppercase payment-info-title">{{i18n "checkout:paymentInformation"}}</span>
+    <span class="pull-right-fields">{{i18n "main:form.required"}}*</span>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="payment-options-title">
+        <span>{{i18n "checkout:paymentPage.paymentOptionsTitle"}}:</span>
+      </div>
+    </div>
+  </div>
+    <div class="row">
+        {{> form/global-messages messages=paymentForm.messages}}
+        {{> form/global-errors errors=paymentForm.errors}}
+    </div>
+  <div class="row">
+    {{#each content.paymentFormSettings.paymentMethod.list}}
+    <div class="col-lg-3 col-md-4 col-sm-4">
+      <div class="payment-type">
+        <label for="payment-type-{{value}}">
+          {{#if image}}<img src="{{@root.meta.assetsPath}}{{image}}" class="payment-type-icon" alt="{{label}}">{{/if}}<br>
+          <input id="payment-type-{{value}}" class="payment-text" type="radio" name="payment" value="{{value}}" {{#if selected}}checked{{/if}}>{{label}}
+        </label>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  <div class="row" id="credit-card-input-field">
+    <div class="col-md-6 col-sm-8">
+      <div class="col-sm-12">
+        <div class="name-on-card">
+          <span class="text-uppercase">{{i18n "checkout:paymentPage.cardName"}}*</span><br>
+          <input id="payment-cardname-input" class="checkout-input-field" type="text">
+        </div>
+        {{> common/required-error-message}}
+      </div>
+      <div class="col-sm-12">
+        <div class="card-number">
+          <span class="text-uppercase">{{i18n "checkout:paymentPage.cardNumber"}}*</span><br>
+          <input id="payment-cardnumber-input" class="checkout-input-field card-number-input" type="text">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="expiry-date">
+          <span class="text-uppercase">{{i18n "checkout:paymentPage.expiryDateTitle"}}*</span><br>
+          <select id="payment-expirymonth-select" class="checkout-dropdown">
+            <option>{{i18n "main:form.month"}}</option>
+            {{#each content.paymentForm.expiryDate.list}}
+            <option value="{{value}}" {{#if selected}}selected{{/if}}>{{text}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="expiry-year">
+          <br>
+          <select id="payment-expiryyear-select" class="checkout-dropdown">
+            <option>{{i18n "main:form.year"}}</option>
+            {{#each content.paymentForm.year.list}}
+            <option value="{{value}}" {{#if selected}}selected{{/if}}>{{text}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-7">
+        <div class="security-code">
+          <span class="text-uppercase">{{i18n "checkout:paymentPage.securityCode"}}*</span><br>
+          <input id="payment-securitycode-input" class="checkout-input-field security-code-input" type="text">
+          <span class="security-code-info" title="{{i18n "checkout:paymentPage.securityCodeTooltip"}}"><img class="info-icon" src="{{@root.meta.assetsPath}}img/information.png" alt="information icon"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="hr-checkout-payment">
+  {{> checkout/continue-checkout-button}}
+</form>

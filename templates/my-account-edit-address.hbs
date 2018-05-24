@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {{> common/htmlhead}}
+</head>
+
+<body>
+  <div class="darkbg hidden"></div>
+  {{> common/header}}
+  <div class="address-book">
+    <div class="container">
+      {{> common/messages}}
+      <div class="my-account-title">
+        <span class="my-account-title-text icon-user">{{i18n "my-account:myAccount.title"}}</span>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="address-book-wrapper">
+            <div class="row">
+              <div class="col-sm-3">
+                {{> myaccount/my-account-sidebar myAddressBookTab=true}}
+              </div>
+              <div id="my-account-desktop-content" class="col-sm-9">
+                <div class="address-book-content edit-address-book-content">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="address-book-title hidden-xs">
+                        {{i18n "my-account:addressBook.title"}}
+                      </div>
+                    </div>
+                  </div>
+                  <form id="form-edit-my-address-book" action="{{@root.meta._links.myAddressBookEditAddressSubmit.href}}" method="POST">
+                    <input type="hidden" name="csrfToken" value="{{@root.meta.csrfToken}}"/>
+                    <input type="hidden" name="id" value="{{content.editAddressForm.id}}"/>
+                    <div class="row">
+                      {{> form/global-messages messages=content.editAddressForm.messages}}
+                      {{> form/global-errors errors=content.editAddressForm.errors}}
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        {{> myaccount/my-address-book-address-form form=content.editAddressForm settings=content.editAddressFormSettings}}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="edit-address-book-footer">
+                          <div class="btn-grey push-left">
+                            <a href="{{@root.meta._links.myAddressBook.href}}">{{i18n "my-account:addressBook.buttons.cancelAddressBtn"}}</a>
+                          </div>
+                          <div class="add-new-address-btn push-right">
+                            <button type="submit">{{i18n "my-account:addressBook.buttons.saveAddressBtn"}}</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{!-- {{> common/wishlist}} --}}
+  {{> common/footer}}
+  {{> common/htmlscripts}}
+</body>
+
+</html>

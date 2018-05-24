@@ -1,0 +1,40 @@
+{
+    "orderNumber" : "01445678",
+    "orderDate" : "Nov 10, 2015",
+    "customerEmail" : "thedoctor@commercetools.com",
+    "totalPrice" : "150.00 €",
+    "salesTax" : "23.95 €",
+    "promoCode" : "Sunny Sale",
+    "subtotalPrice" : "147.00 €",
+    "lineItems" : {
+        "list" : [
+            { "$ref" : "line-item-1.json" },
+            { "$ref" : "line-item-1.json" },
+            { "$ref" : "line-item-1.json" }
+        ]
+    },
+    "shippingAddress" : { "$ref" : "address-1.json" },
+    "billingAddress" : { "$ref" : "address-2.json" },
+    "shippingMethod" : {"$ref" : "shipping-method-1.json"},
+    "paymentDetails" : {
+        "type" : "Credit Card",
+        "name" : "P. Osgood",
+        "card" : "Visa",
+        "number" : "**** **** **** **56",
+        "date" : "09.18"
+    },
+    "discountCodes": [
+        {
+          "name": "Sunrise",
+          "id": "1234"
+        },
+        {
+          "name": "Sunny",
+          "id": "12345"
+        },
+        {
+          "name": "Sunny No",
+          "id": "12345"
+        }
+    ]
+}

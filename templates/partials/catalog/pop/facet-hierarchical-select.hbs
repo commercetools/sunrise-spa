@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="col-sm-12">
+    <ul class="dropdown-parent-category">
+      {{#each facet.limitedOptions}}
+        {{> catalog/pop/facet-option-link facet=../facet option=this}}
+      {{/each}}
+    </ul>
+  </div>
+</div>

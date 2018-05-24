@@ -1,0 +1,14 @@
+<div class="checkout-steps text-right">
+    <div>
+        <span class="step-number{{#if content.stepWidget.shippingStepActive}} step-number-active{{/if}}">1</span>
+        <span class="text-uppercase step-title{{#if content.stepWidget.shippingStepActive}} step-title-active{{/if}}">{{i18n "checkout:shipping"}}</span>
+    </div>
+    <div>
+        <span class="step-number{{#if content.stepWidget.paymentStepActive}} step-number-active{{/if}}">2</span>
+        <span class="text-uppercase step-title{{#if content.stepWidget.paymentStepActive}} step-title-active{{/if}}">{{i18n "checkout:payment"}}</span>
+    </div>
+    <div>
+        <span class="step-number{{#if content.stepWidget.confirmationStepActive}} step-number-active{{/if}}">3</span>
+        <span class="text-uppercase step-title{{#if content.stepWidget.confirmationStepActive}} step-title-active{{/if}}">{{i18n "checkout:confirmation"}}</span>
+    </div>
+</div>

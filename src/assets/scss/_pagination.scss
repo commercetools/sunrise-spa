@@ -1,0 +1,68 @@
+/*****************************************************************************/
+/*
+/* PAGINATION
+/*
+/*****************************************************************************/
+
+.item-list-pagination {
+  margin-bottom: 20px;
+  width: 75%;
+  float: right;
+
+  /* Overwrite selectboxit library */
+  .selectboxit-container span, .selectboxit-container .selectboxit-options a {
+    height: 30px;
+    line-height: 30px;
+  }
+
+
+  select.select {
+    height: 30px;
+    padding: 0 30px 0 10px;
+    color: $gray;
+  }
+
+  .item-count {
+    display: inline-block;
+    top: 0;
+    margin: 0 10px;
+  }
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    float: none;
+    margin-left: 0;
+  }
+}
+
+.custom-pagination {
+  .active {
+    color: $my-sin;
+  }
+
+  .page-numbers {
+    padding-left: 0;
+    margin: 0.3em 0 0;
+    letter-spacing: 0.1em;
+  }
+
+  .page-numbers-bottom {
+    padding-bottom: 4em;
+  }
+
+  .page-numbers li {
+    display: inline-block;
+    font-size: 12px;
+    color: $gray;
+
+    a:hover,
+    a:focus {
+      color: $my-sin;
+    }
+  }
+
+  .icon-prev::before,
+  .icon-next::before {
+    font-size: 18px;
+    vertical-align: middle;
+  }
+}

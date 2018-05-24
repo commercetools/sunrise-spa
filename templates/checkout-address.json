@@ -1,0 +1,54 @@
+{
+    "header" : { "$ref" : "common/checkout-header.json"},
+    "footer" : { "$ref" : "common/checkout-footer.json" },
+    "content" : {
+        "stepWidget" : {
+            "shippingStepActive": true
+        },
+        "addressFormSettings": {
+            "titleShipping": {
+                "$ref": "form/choose-title-1.json"
+            },
+            "titleBilling": {
+                "$ref": "form/choose-title-1.json"
+            },
+            "countriesShipping": {
+                "$ref": "form/choose-country-1.json"
+            },
+            "countriesBilling": {
+                "$ref": "form/choose-country-1.json"
+            }
+        },
+        "addressForm" : {
+            "billingAddressDifferentToBillingAddress": true,
+            "titleShipping": "Mr",
+            "firstNameShipping": "John",
+            "lastNameShipping": "Smith",
+            "streetNameShipping": "Tardisstreet",
+            "streetNumberShipping": "1",
+            "cityShipping": "London",
+            "regionShipping": "London (Region)",
+            "postalCodeShipping": "123456",
+            "countriesShipping": "UK",
+            "phoneShipping": "+49 123 4567899",
+            "emailShipping": "thedoctor@commercetools.com",
+            "titleBilling": "Mr",
+            "firstNameBilling": "John",
+            "lastNameBilling": "Smith",
+            "streetNameBilling": "Tardisstreet",
+            "streetNumberBilling": "1",
+            "cityBilling": "London",
+            "regionBilling": "London (Region)",
+            "postalCodeBilling": "123456",
+            "countriesBilling":  "UK",
+            "phoneBilling": "+49 123 4567899",
+            "emailBilling": "thedoctor@commercetools.com"
+        },
+        "cart" : { "$ref" : "common/cart-like.json" },
+        "messages" : [
+            { "$ref" : "common/message-info.json" },
+            { "$ref" : "common/message-success.json" }
+        ]
+    },
+    "meta" : { "$ref" : "common/meta.json" }
+}

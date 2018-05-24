@@ -1,0 +1,39 @@
+{{#each products.list}}
+  <div class="mix-match-product">
+    <div class="row">
+      <div class="col-xs-3">
+        <div class="mix-match-product-img">
+          <img class="img-responsive" src="{{variant.image}}" alt="product image">
+        </div>
+      </div>
+      <div class="col-xs-9">
+        <div class="mix-match-product-description">
+          <div class="mix-match-product-name">{{variant.name}}</div>
+          <div class="mix-match-product-sku">{{variant.sku}}</div>
+          <div>
+            {{#if variant.priceOld}}<span class="mix-match-product-oldprice">{{variant.priceOld}}</span>{{/if}}
+            <span class="mix-match-product-price">{{variant.price}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mix-match-product-attributes">
+      <ul class="list-inline">
+        {{#each attributes}}
+          <li>
+            <div class="mix-match-product-attr-title">{{name}}</div>
+            <select name="{{key}}" id="product-attribute-{{key}}">
+              {{#each list}}
+                <option value="{{value}}">{{label}}</option>
+              {{/each}}
+            </select>
+          </li>
+        {{/each}}
+      </ul>
+      <div class="mix-match-product-add-input">
+        <input id="" type="checkbox">
+        <label for="">{{i18n "mix-match:mixMatch.addProduct"}}</label>
+      </div>
+    </div>
+  </div>
+{{/each}}

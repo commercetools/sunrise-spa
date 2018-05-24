@@ -1,0 +1,43 @@
+<div class="login-box-wrapper">
+  <div class="clearfix">
+    <div class="pull-left">
+      <div class="login-box-title">{{i18n "my-account-login:loginBox.title"}}</div>
+    </div>
+    <div class="pull-right">
+      <div class="login-box-required">{{i18n "my-account-login:loginBox.required"}}*</div>
+    </div>
+  </div>
+  <hr class="login-box-hr">
+  <div class="login-box-description">{{i18n "my-account-login:loginBox.description"}}</div>
+  <div class="login-box-input-wrapper">
+    <form id="form-sign-in" method="POST" action="{{@root.meta._links.logInSubmit.href}}">
+      <input type="hidden" name="csrfToken" value="{{@root.meta.csrfToken}}"/>
+      <div class="row">
+        {{> form/global-messages messages=form.messages}}
+        {{> form/global-errors errors=form.errors}}
+      </div>
+      <div class="login-box-input">
+        <span>{{i18n "my-account-login:loginBox.email"}}*</span><br>
+        <input type="email" name="username" value="{{form.username}}">
+      </div>
+      <div class="login-box-input">
+        <span>{{i18n "my-account-login:loginBox.password"}}*</span><br>
+        <input type="password" name="password">
+      </div>
+      <div class="clearfix">
+        <div class="pull-left">
+          <div class="login-box-remember-me">
+            <input id="form-login-remember-me" type="checkbox" name="rememberMe" value="true" {{#if form.rememberMe}}checked{{/if}}>
+            <label for="form-login-remember-me">{{i18n "my-account-login:loginBox.rememberMe"}}</label>
+          </div>
+        </div>
+        <div class="pull-right">
+          <div class="login-box-forgot-password">
+            <a href="{{@root.meta._links.recoveryEmail.href}}">{{i18n "my-account-login:loginBox.forgotPassword"}}</a>
+          </div>
+        </div>
+      </div>
+      <button class="login-box-sign-in-btn">{{i18n "my-account-login:loginBox.signIn"}}</button>
+    </form>
+  </div>
+</div>

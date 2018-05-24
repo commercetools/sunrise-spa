@@ -1,0 +1,66 @@
+<div class="map">
+  <div id="map"></div>
+</div>
+<script>
+    var map;
+    function initialize() {
+        // creates the map with default options
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 5,
+            center: new google.maps.LatLng(50.6398421, 8.9748593), // shows Europe
+            mapTypeId: 'roadmap',
+            scrollwheel: false,
+            draggable: false
+        });
+
+        var iconBase = '../../assets/';
+
+        var iconImage = {
+          url: iconBase + 'img/map/pointer-active.png',
+          scaledSize: new google.maps.Size(42
+            , 62),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(0, 0)
+        };
+
+        // assigns the .json array to the map markers array
+        var features = [
+          {{#each stores}}
+              {
+                  position: new google.maps.LatLng({{this.storeInfo.location.lat}}, {{this.storeInfo.location.lng}}),
+                  type: 'default'
+              },
+          {{/each}}
+        ];
+
+        for (var i = 0, feature; feature = features[i]; i++) {
+            var marker = new google.maps.Marker({
+                position: feature.position,
+                icon: iconImage,
+                animation : google.maps.Animation.DROP,
+                map: map
+            });
+        }
+    }
+
+    // the default function when you click the div with the address
+    // so it will center the map to the coordinates contained in "onclick"
+    function setLocation(newLat, newLng) {
+        map.setCenter({
+            lat : newLat,
+            lng : newLng
+        });
+        map.setZoom(15);
+    }
+
+    function computeDistance(fromLat, fromLng, toLat, toLng) {
+      var fromLatLng = new google.maps.LatLng(fromLat, fromLng);
+      var toLatLng = new google.maps.LatLng(toLat, toLng);
+      var result = google.maps.geometry.spherical.computeDistanceBetween(fromLatLng, toLatLng);
+      var result = parseFloat(Math.round(result) / 1000).toFixed(2);
+
+      return result;
+    }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkfg2iJdYwmmOiUZ-DG6XpsKD5GBQO7OM&callback=initialize&libraries=geometry">
+</script>

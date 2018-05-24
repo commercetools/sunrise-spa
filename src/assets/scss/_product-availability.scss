@@ -1,0 +1,38 @@
+.product-availability {
+  .status {
+    color: $silver-chalice;
+    font-size: 17px;
+    margin-top: 8px;
+
+    .status-color {
+      width: 15px;
+      height: 15px;
+      border-radius: 15px;
+      margin: 6px 13px 0 0;
+      float: left;
+    }
+
+    .green {
+      background-color: $citron;
+    }
+
+    .orange {
+      background-color: $orange;
+    }
+
+    .red {
+      background-color: $red;
+    }
+  }
+
+  .action {
+    text-align: right;
+    display: none;
+  }
+
+  .action,
+  .status {
+    width: 50%;
+    float: left;
+  }
+}
