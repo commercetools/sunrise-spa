@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import App from './App.vue';
+import SelectBoxIt from './components/SelectBoxIt.vue';
 import router from './router';
 import store from './store';
 import './registerServiceWorker';
@@ -9,6 +10,8 @@ import i18n from './i18n/i18n';
 import './assets/scss/main.scss';
 
 Vue.config.productionTip = false;
+
+Vue.component('SelectBoxIt', SelectBoxIt);
 
 new Vue({
   router,

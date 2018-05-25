@@ -28,8 +28,6 @@
 </template>
 
 <script>
-import SelectBoxIt from '@/components/SelectBoxIt.vue';
-
 export default {
   name: 'LocationSelector',
 
@@ -42,13 +40,8 @@ export default {
 
   watch: {
     selected(selected) {
-      console.log('Changing language!');
       this.$i18n.locale = selected;
     },
-  },
-
-  components: {
-    SelectBoxIt,
   },
 };
 </script>
