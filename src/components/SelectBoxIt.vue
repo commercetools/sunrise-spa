@@ -16,8 +16,7 @@ export default {
       .val(this.value)
       .trigger('change')
       // emit event on change.
-      .on('change', () => {
-        console.log(`change language to ${this.value}!`);
+      .on('change', function emitEvent() {
         vm.$emit('input', this.value);
       });
   },

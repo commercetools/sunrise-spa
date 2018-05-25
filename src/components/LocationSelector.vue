@@ -9,7 +9,7 @@
         {{ $t("main.header.language") }}
         <input type="text" v-model="selected">
       </span>
-      <SelectBoxIt id="language-select" :options="languages" v-model="selected"></SelectBoxIt>
+      <SelectBoxIt :options="languages" v-model="selected"></SelectBoxIt>
       <!--{{/if}}-->
       <!--{{#if location.country}}-->
       <!--<form id="form-select-country" action="{{@root.meta._links.selectCountry.href}}" method="POST">-->
