@@ -7,9 +7,11 @@
       <!--{{#if location.language}}-->
       <span class="location-dropdown-label">
         {{ $t("main.header.language") }}
-        <input type="text" v-model="selected">
       </span>
-      <SelectBoxIt :options="languages" v-model="selected"></SelectBoxIt>
+      <SelectBoxIt :options="languages"
+                   v-model="selected"
+                   id="language-select"
+                   class="select location-select"/>
       <!--{{/if}}-->
       <!--{{#if location.country}}-->
       <!--<form id="form-select-country" action="{{@root.meta._links.selectCountry.href}}" method="POST">-->

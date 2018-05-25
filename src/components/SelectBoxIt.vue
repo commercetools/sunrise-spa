@@ -1,5 +1,5 @@
 <template>
-  <select id="language-select" class="select location-select">
+  <select>
     <option v-for="option in options" :value="option.id" :key="option.id">{{ option.name }}</option>
   </select>
 </template>
@@ -15,8 +15,7 @@ export default {
       .selectBoxIt()
       .val(this.value)
       .trigger('change')
-      // emit event on change.
-      .on('change', function emitEvent() {
+      .on('change', function emitEventOnChange() {
         vm.$emit('input', this.value);
       });
   },

@@ -9,7 +9,9 @@
 
               <!-- Toggle the menu on mobile -->
               <li class="list-item-nav-toggle">
-                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                <button type="button"
+                        class="navbar-toggle"
+                        data-toggle="collapse"
                         data-target=".navbar-collapse">
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
@@ -20,24 +22,30 @@
 
               <!-- Toggles the search field on mobile / not visible on desktop -->
               <li class="list-item-search">
-                <button type="button" class="search-toggle icon-magnifying-glass">
+                <button type="button"
+                        class="search-toggle icon-magnifying-glass">
                   <span class="sr-only">{{ $t("main.header.search") }}</span>
                 </button>
               </li>
               <!-- End -->
 
               <li class="list-item-store">
-                <router-link to="/stores" class="store-select icon-marker">
+                <router-link to="/stores"
+                             class="store-select icon-marker">
                   <span class="hidden-xs">{{ $t("main.header.stores") }}</span>
                 </router-link>
               </li>
 
               <li class="list-item-help">
-                <a href="#" class="link-help">{{ $t("main.header.help") }}</a>
+                <a href="#"
+                   class="link-help">
+                  {{ $t("main.header.help") }}
+                </a>
               </li>
 
               <li class="list-item-call">
-                <a href="tel:0044123456000" class="link-hotline">
+                <a href="tel:0044123456000"
+                   class="link-hotline">
                   {{ $t("main.header.callUs") }}
                 </a>
               </li>
@@ -109,11 +117,8 @@
 import LocationSelector from './LocationSelector.vue';
 
 export default {
-  name: 'Header',
-  components: { LocationSelector },
+  components: {
+    LocationSelector,
+  },
 };
 </script>
-
-<style lang="scss">
-
-</style>

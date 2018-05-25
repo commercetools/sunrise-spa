@@ -1,22 +1,22 @@
 <template>
   <div id="app">
-    <Header/>
+    <TheHeader/>
     <Home/>
-    <Footer/>
+    <TheFooter/>
   </div>
 </template>
 
 <script>
-import Header from '@/components/PageHeader.vue';
+import TheHeader from '@/components/TheHeader.vue';
 import Home from '@/views/Home.vue';
-import Footer from '@/components/PageFooter.vue';
+import TheFooter from '@/components/TheFooter.vue';
 
 export default {
   name: 'app',
   components: {
-    Header,
+    TheHeader,
     Home,
-    Footer,
+    TheFooter,
   },
 };
 </script>

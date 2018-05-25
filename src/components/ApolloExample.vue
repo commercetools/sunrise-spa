@@ -2,18 +2,14 @@
   <div class="apollo-example">
     <!-- Cute tiny form -->
     <div class="form">
-      <input
-              v-model="sku"
-              placeholder="Type a SKU"
-              class="input"
-      >
+      <input v-model="sku"
+             placeholder="Type a SKU"
+             class="input">
     </div>
 
     <!-- Apollo watched Graphql query -->
-    <ApolloQuery
-      :query="require('../graphql/HelloWorld.gql')"
-      :variables="{ sku }"
-    >
+    <ApolloQuery :query="require('../graphql/HelloWorld.gql')"
+                 :variables="{ sku }">
       <template slot-scope="{ result: { loading, error, data } }">
         <!-- Loading -->
         <div v-if="loading" class="loading apollo">Loading...</div>
