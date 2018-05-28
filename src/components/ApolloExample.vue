@@ -9,7 +9,7 @@
 
     <!-- Apollo watched Graphql query -->
     <ApolloQuery :query="require('../graphql/HelloWorld.gql')"
-                 :variables="{ sku }">
+                 :variables="{ sku, locale: $i18n.locale }">
       <template slot-scope="{ result: { loading, error, data } }">
         <!-- Loading -->
         <div v-if="loading" class="loading apollo">Loading...</div>

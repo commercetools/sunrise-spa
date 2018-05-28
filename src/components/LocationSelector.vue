@@ -28,19 +28,21 @@
 </template>
 
 <script>
+import { availableLanguages, loadLanguageAsync } from '../setup/vue-i18n-setup';
+
 export default {
   name: 'LocationSelector',
 
   data() {
     return {
-      languages: Object.keys(this.$i18n.messages).map(locale => ({ id: locale, name: locale.toUpperCase() })),
+      languages: availableLanguages.map(locale => ({ id: locale, name: locale.toUpperCase() })),
       selected: this.$i18n.locale,
     };
   },
 
   watch: {
     selected(selected) {
-      this.$i18n.locale = selected;
+      loadLanguageAsync(selected);
     },
   },
 };

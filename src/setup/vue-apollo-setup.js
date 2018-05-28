@@ -1,18 +1,40 @@
+import { createAuthMiddlewareForClientCredentialsFlow }
+  from '@commercetools/sdk-middleware-auth/dist/commercetools-sdk-middleware-auth.cjs';
+import Vue from 'vue';
+import VueApollo from 'vue-apollo';
+import { setContext } from 'apollo-link-context/lib/index';
+import { createUploadLink } from 'apollo-upload-client/lib/main/index';
+import { InMemoryCache } from 'apollo-cache-inmemory/lib/index';
+import { HttpLink } from 'apollo-link-http/lib/index';
+import { split } from 'apollo-link/lib/index';
 import { ApolloClient } from 'apollo-client';
-import { split } from 'apollo-link';
-import { HttpLink } from 'apollo-link-http';
-import { createUploadLink } from 'apollo-upload-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createPersistedQueryLink } from 'apollo-link-persisted-queries';
-import { setContext } from 'apollo-link-context';
-import { authMiddleware } from './vue-apollo';
+
+// Install the vue plugin
+Vue.use(VueApollo);
+
+// Import commercetools configuration for SPA
+const ctConfiguration = require('../../ct-configuration.json');
+
+// Config
+const options = {
+  base: process.env.VUE_APP_GRAPHQL_ENDPOINT || `${ctConfiguration.api.host}/${ctConfiguration.auth.projectKey}`,
+  endpoints: {
+    graphql: process.env.VUE_APP_GRAPHQL_PATH || '/graphql',
+    subscription: process.env.VUE_APP_GRAPHQL_SUBSCRIPTIONS_PATH || '/graphql',
+  },
+  persisting: false,
+};
+
+// Create commercetools authentication middleware
+const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(ctConfiguration.auth);
 
 function addAuthHeader(request) {
-  return new Promise(success => authMiddleware(header => success(header))(request, {}));
+  return new Promise(success => authMiddleware(requestWithAuth => success(requestWithAuth))(request, {}));
 }
 
 // Create the apollo client
-export default function createApolloClient({ base, endpoints, persisting }) {
+function createApolloClient({ base, endpoints, persisting }) {
   let link = new HttpLink({
     // You should use an absolute URL here
     uri: base + endpoints.graphql,
@@ -65,3 +87,11 @@ export default function createApolloClient({ base, endpoints, persisting }) {
     }),
   });
 }
+
+// Create apollo client
+export const apolloClient = createApolloClient(options);
+
+// Create vue apollo provider
+export const apolloProvider = new VueApollo({
+  defaultClient: apolloClient,
+});
