@@ -1,0 +1,18 @@
+query navigationalCategories($locale: Locale) {
+  categories(limit: 100, where: "parent is not defined", sort: "orderHint asc") {
+    total
+    results {
+      ...printCategory
+      children {
+        ...printCategory
+      }
+    }
+  }
+}
+
+fragment printCategory on Category {
+  id
+  externalId
+  name(locale: $locale)
+  slug(locale: $locale)
+}

@@ -21,5 +21,9 @@ export default new Router({
       path: '/stores',
       name: 'stores',
     },
+    {
+      path: '/products/:categorySlug',
+      name: 'products',
+    },
   ],
 });
