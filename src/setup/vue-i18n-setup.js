@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 
-import en from '@/lang/en';
+import en from '@/lang/en.json';
 
 Vue.use(VueI18n);
 
@@ -28,7 +28,7 @@ export const availableLanguages = ['en', 'de'];
 export function loadLanguageAsync(lang) {
   if (i18n.locale !== lang) {
     if (!loadedLanguages.includes(lang)) {
-      return import(/* webpackChunkName: "lang-[request]" */ `@/lang/${lang}`).then((msgs) => {
+      return import(/* webpackChunkName: "lang-[request]" */ `@/lang/${lang}.json`).then((msgs) => {
         i18n.setLocaleMessage(lang, msgs.default);
         loadedLanguages.push(lang);
         return setLanguage(lang);
