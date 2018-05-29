@@ -2,6 +2,7 @@
   <div id="app">
     <TheHeader/>
     <Home/>
+    <!--{{> common/wishlist wishlist=content.wishlist}}-->
     <TheFooter/>
   </div>
 </template>

@@ -30,7 +30,7 @@
               <!-- End -->
 
               <li class="list-item-store">
-                <router-link to="/stores"
+                <router-link :to="{ name: 'stores' }"
                              class="store-select icon-marker">
                   <span class="hidden-xs">{{ $t("main.header.stores") }}</span>
                 </router-link>
