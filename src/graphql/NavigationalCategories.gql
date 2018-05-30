@@ -1,5 +1,5 @@
-query navigationalCategories($locale: Locale) {
-  categories(limit: 100, where: "parent is not defined", sort: "orderHint asc") {
+query navigationalCategories($locale: Locale!) {
+  categories(limit: 10, where: "parent is not defined", sort: "orderHint asc") {
     total
     results {
       ...printCategory

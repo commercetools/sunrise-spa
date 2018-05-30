@@ -31,8 +31,6 @@
 import { availableLanguages, loadLanguageAsync } from '../setup/vue-i18n-setup';
 
 export default {
-  name: 'LocationSelector',
-
   data() {
     return {
       languages: availableLanguages.map(locale => ({ id: locale, name: locale.toUpperCase() })),

@@ -87,10 +87,23 @@
     <div id="navigation" class="container">
       <div class="row logo-search">
         <div class="col-sm-8">
-          <!--{{> common/logo}}-->
+          <router-link to="/" class="brand-logo">
+            <img class="img-responsive" src="../assets/img/logo.svg" alt="SUNRISE"/>
+          </router-link>
         </div>
         <div class="col-sm-4">
-          <!--{{> common/search}}-->
+          <!--<form id="form-search" action="#" class="search-box text-right">-->
+            <!--<input name="q"-->
+                   <!--type="search"-->
+                   <!--placeholder="{{ $t('main.header.search') }}"-->
+                   <!--id="search-input"-->
+                   <!--class="search-field"-->
+                   <!--required/>-->
+            <!--<button type="submit" id="search-button" class="search-button">-->
+              <!--<span class="icon-font icon-magnifying-glass"></span>-->
+              <!--<span class="sr-only">{{ $t('main.header.search') }}</span>-->
+            <!--</button>-->
+          <!--</form>-->
         </div>
       </div>
 
