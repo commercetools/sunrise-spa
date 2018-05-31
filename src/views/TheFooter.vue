@@ -76,18 +76,18 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="sub-footer">
-      <div class="container">
-        <div class="row text-uppercase">
-          <div class="col-sm-12">
-            <ul class="footer-title imprint-row">
-              <li class="hidden-xs">{{ $t("main.footer.legalInfo") }}</li>
-              <li><a href="#">{{ $t("main.footer.imprint") }}</a></li>
-              <li><a href="#">{{ $t("main.footer.privacyPolicy") }}</a></li>
-              <li><a href="#">{{ $t("main.footer.termsOfUse") }}</a></li>
-              <li class="visible-xs">{{ $t("main.footer.legalInfo") }}</li>
-            </ul>
+      <div class="sub-footer">
+        <div class="container">
+          <div class="row text-uppercase">
+            <div class="col-sm-12">
+              <ul class="footer-title imprint-row">
+                <li class="hidden-xs">{{ $t("main.footer.legalInfo") }}</li>
+                <li><a href="#">{{ $t("main.footer.imprint") }}</a></li>
+                <li><a href="#">{{ $t("main.footer.privacyPolicy") }}</a></li>
+                <li><a href="#">{{ $t("main.footer.termsOfUse") }}</a></li>
+                <li class="visible-xs">{{ $t("main.footer.legalInfo") }}</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
