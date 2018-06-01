@@ -1,14 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import categories from './modules/categories';
-import languages from './modules/languages';
+import i18n from './modules/i18n';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
     categories,
-    languages,
+    i18n,
   },
 
   state: {
