@@ -2,10 +2,10 @@ import Vue from 'vue';
 import App from '@/App.vue';
 import SelectBoxIt from '@/components/global/SelectBoxIt.vue';
 import router from '@/router';
-import store from '@/store';
+import store from '@/store/store';
 import '@/registerServiceWorker';
-import { apolloProvider } from '@/setup/vue-apollo-setup';
-import i18n from '@/setup/vue-i18n-setup';
+import { apolloProvider } from '@/setup/apollo-setup';
+import i18n from '@/setup/i18n-setup';
 
 import './assets/scss/main.scss';
 

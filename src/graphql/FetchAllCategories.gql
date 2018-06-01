@@ -1,10 +1,14 @@
-query navigationalCategories($locale: Locale!) {
+query fetchAllCategories($locale: Locale!) {
   categories(limit: 10, where: "parent is not defined", sort: "orderHint asc") {
     total
+    count
     results {
       ...printCategory
       children {
         ...printCategory
+        children {
+          ...printCategory
+        }
       }
     }
   }

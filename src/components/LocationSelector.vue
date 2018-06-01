@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { availableLanguages, loadLanguageAsync } from '../setup/vue-i18n-setup';
+import { availableLanguages } from '@/setup/i18n-setup';
 
 export default {
   data() {
@@ -40,7 +40,7 @@ export default {
 
   watch: {
     selected(selected) {
-      loadLanguageAsync(selected);
+      this.$store.dispatch('setLang', selected);
     },
   },
 };

@@ -16,14 +16,32 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'max-len': [
       'error', { 'code': 120 }
-    ]
+    ],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": [
+          "state",
+          "acc",
+          "e",
+          "ctx",
+          "req",
+          "request",
+          "res",
+          "response",
+          "$scope"
+        ]
+      }
+    ],
 
-    // 'graphql/template-strings': [
-    //   'error',
-    //   {
-    //     env: 'literal'
-    //   }
-    // ]
+    'graphql/template-strings': [
+      'error',
+      {
+        env: 'literal',
+        schemaJson: require('./graphql.schema.json'),
+      },
+    ]
   },
 
   parserOptions: {
