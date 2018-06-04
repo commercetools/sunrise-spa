@@ -1,5 +1,5 @@
 <template>
-  <li class="list-item-location clearfix">
+  <li v-if="active" class="list-item-location clearfix">
     <button id="location-dropdown-toggle-btn" class="location-dropdown-toggle">
       <img class="pull-right" src="../assets/img/globe-2.png" :alt="$t('main.header.location')">
     </button>
@@ -28,14 +28,21 @@
 </template>
 
 <script>
-import { availableLanguages } from '@/setup/i18n-setup';
-
 export default {
   data() {
     return {
-      languages: availableLanguages.map(locale => ({ id: locale, name: locale.toUpperCase() })),
       selected: this.$i18n.locale,
     };
+  },
+
+  computed: {
+    active() {
+      return this.$config.locales.length > 1;
+    },
+
+    languages() {
+      return this.$config.locales.map(locale => ({ id: locale.code, name: locale.name }));
+    },
   },
 
   watch: {
@@ -45,7 +52,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-
-</style>
