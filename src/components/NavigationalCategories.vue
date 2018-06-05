@@ -49,17 +49,20 @@ export default {
   data() {
     return {
       loading: false,
-      locale: this.$i18n.locale,
     };
   },
 
   created() {
-    this.refreshCategories();
+    this.loadCategories();
   },
 
   computed: {
     categoryTree() {
       return this.$store.state.categories.items;
+    },
+
+    locale() {
+      return this.$i18n.locale;
     },
   },
 
@@ -68,7 +71,7 @@ export default {
       return category.externalId === '6';
     },
 
-    refreshCategories() {
+    loadCategories() {
       this.loading = true;
       this.$store.dispatch('fetchCategories', this.$i18n.locale)
         .then(() => {
@@ -79,7 +82,7 @@ export default {
 
   watch: {
     locale() {
-      this.refreshCategories();
+      this.loadCategories();
     },
   },
 };
