@@ -4,7 +4,12 @@ import config from '@/../sunrise.config';
 
 Vue.use(VueI18n);
 
-const initialLocale = config.locales > 0 ? config.locales[0].code : 'en';
+function findInitialLocale() {
+  const storedLocale = localStorage.getItem('locale');
+  return storedLocale || (config.locales > 0 ? config.locales[0].code : 'en');
+}
+
+const initialLocale = findInitialLocale();
 
 /* eslint import/no-dynamic-require: "off" */
 const initialMsgs = require(`@/lang/${initialLocale}.json`);
@@ -24,6 +29,7 @@ export const i18n = new VueI18n({
 function setLanguage(lang) {
   i18n.locale = lang;
   document.documentElement.lang = lang;
+  localStorage.setItem('locale', lang);
   return lang;
 }
 
