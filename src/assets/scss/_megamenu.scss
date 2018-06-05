@@ -138,7 +138,7 @@
   box-shadow: none;
 }
 
-.nav-accordion > ul > li {
+.nav-accordion > div > ul > li {
   list-style-type: none;
 }
 
@@ -180,7 +180,7 @@
         -moz-column-gap: 7em; /* Firefox */
         column-gap: 7em;
       }
-    div.nav-accordion > h3 {
+    div.nav-accordion > div > h3 {
       margin-top: 0;
     }
   }
@@ -283,14 +283,14 @@
 
   .nav-accordion {
 
-    > ul {
+    > div > ul {
       text-transform: uppercase;
       margin-top: 10px;
       margin-bottom: 20px;
       padding: 0;
     }
 
-    > ul > li > a {
+    > div > ul > li > a {
       display: inline-block;
       padding: 8px 0;
       font-size: 12px;
