@@ -68,7 +68,8 @@ export default {
 
   methods: {
     isSale(category) {
-      return category.externalId === '6';
+      const categoriesConfig = this.$config.categories;
+      return categoriesConfig ? category.externalId === categoriesConfig.salesExternalId : false;
     },
 
     loadCategories() {

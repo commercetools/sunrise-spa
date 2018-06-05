@@ -10,4 +10,7 @@ module.exports = {
       name: 'Deutsch',
     },
   ],
+  categories: {
+    salesExternalId: '6',
+  },
 };
