@@ -9,7 +9,7 @@
         {{ $t("main.header.language") }}
       </span>
       <SelectBoxIt :options="languages"
-                   v-model="selected"
+                   v-model="selectedLang"
                    id="language-select"
                    class="select location-select"/>
       <!--{{/if}}-->
@@ -28,10 +28,12 @@
 </template>
 
 <script>
+import { loadLanguageAsync } from '@/setup/i18n-setup';
+
 export default {
   data() {
     return {
-      selected: this.$i18n.locale,
+      selectedLang: this.$i18n.locale,
     };
   },
 
@@ -46,8 +48,9 @@ export default {
   },
 
   watch: {
-    selected(selected) {
-      this.$store.dispatch('setLang', selected);
+    selectedLang(selectedLang) {
+      loadLanguageAsync(selectedLang)
+        .catch(error => console.error('Could not change language.', error));
     },
   },
 };
