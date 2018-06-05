@@ -16,7 +16,7 @@ Vue.component('SelectBoxIt', SelectBoxIt);
 
 Vue.prototype.$config = config;
 
-export default new Vue({
+new Vue({
   router,
   store,
   i18n,
