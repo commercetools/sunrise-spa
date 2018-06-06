@@ -1,5 +1,5 @@
 
-module.exports = {
+export default {
   locales: [
     {
       code: 'en',
