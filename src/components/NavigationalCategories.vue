@@ -1,5 +1,5 @@
 <template>
-  <ul class="nav navbar-nav">
+  <ul class="nav navbar-nav categories1stlevel">
     <li v-for="category1stLevel in categoryTree"
         :key="category1stLevel.id"
         class="dropdown menu-large">
@@ -13,7 +13,7 @@
              src="../assets/img/plus79.png"/>
       </router-link>
       <ul v-if="category1stLevel.children"
-          class="dropdown-menu megamenu row dropdown-submenu">
+          class="dropdown-menu megamenu row dropdown-submenu categories2ndlevel">
         <li class="col-sm-8">
           <div class="nav-accordion">
             <div v-for="category2ndLevel in category1stLevel.children"
@@ -23,7 +23,7 @@
                   {{category2ndLevel.name}}
                 </router-link>
               </h3>
-              <ul>
+              <ul class="categories3rdlevel">
                 <li v-for="category3rdLevel in category2ndLevel.children"
                     :key="category3rdLevel.id">
                   <router-link :to="{ name: 'products', params: { categorySlug: category3rdLevel.slug } }">

@@ -1,8 +1,10 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-describe('My First Test', () => {
-  it('Visits the app root url', () => {
+describe('My first test', () => {
+  beforeEach(() => {
     cy.visit('/');
-    cy.contains('h1', 'Welcome to Your Vue.js App');
+  });
+  it('Check categories children', () => {
+    cy.get('#navigation ul.categories1stlevel > li:nth-child(2)').trigger('mouseover');
   });
 });
