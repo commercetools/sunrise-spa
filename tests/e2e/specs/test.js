@@ -5,6 +5,6 @@ describe('My first test', () => {
     cy.visit('/');
   });
   it('Check categories children', () => {
-    cy.get('#navigation ul.categories1stlevel > li:nth-child(2)').trigger('mouseover');
+    cy.get('#navigation ul.categories-1st-level > li:nth-child(2)');
   });
 });
