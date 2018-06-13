@@ -55,7 +55,7 @@ export default {
   data() {
     return {
       loading: false,
-      submenuVisible: '',
+      visibleCategorySubmenu: '',
       categoryWasClicked: false,
     };
   },
@@ -82,16 +82,16 @@ export default {
 
     isSubmenuVisible(category) {
       const hasChildren = Array.isArray(category.children) && category.children.length;
-      return hasChildren && category.id === this.submenuVisible && !this.categoryWasClicked;
+      return hasChildren && category.id === this.visibleCategorySubmenu && !this.categoryWasClicked;
     },
 
     openMenu(rootCategory) {
-      this.submenuVisible = rootCategory.id;
+      this.visibleCategorySubmenu = rootCategory.id;
       this.categoryWasClicked = false;
     },
 
     closeMenu() {
-      this.submenuVisible = '';
+      this.visibleCategorySubmenu = '';
     },
 
     selectCategory() {
