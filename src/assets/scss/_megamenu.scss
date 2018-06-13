@@ -22,6 +22,10 @@
   border: none;
 }
 
+#navigation .megamenu.dropdown-menu {
+  display: block !important;
+}
+
 @media screen and (min-width: 768px) {
   .navbar-default .navbar-nav > li:hover > a::after,
   .navbar-default .navbar-nav > li > a:hover::after {
@@ -131,7 +135,6 @@
 }
 
 .navbar-nav>li>.megamenu {
-  padding: 0;
   width: 100%;
   border: solid 1px $alto;
   border-top: none;
@@ -167,8 +170,6 @@
 
 @media screen and (min-width: 768px) {
   .megamenu {
-    display: none;
-
       li .nav-accordion {
         -webkit-column-count: 3; /* Chrome, Safari, Opera */
         -moz-column-count: 3; /* Firefox */
@@ -189,8 +190,7 @@
     padding: 10px 15px;
   }
 
-  .dropdown:hover .megamenu {
-    display: block;
+  .dropdown .megamenu {
     padding: 20px;
   }
 
