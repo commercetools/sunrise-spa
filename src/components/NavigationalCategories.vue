@@ -1,32 +1,38 @@
 <template>
-  <ul class="nav navbar-nav categories-1st-level">
+  <ul id="nav-categories-menu"
+      class="nav navbar-nav categories-1st-level">
     <li v-for="category1stLevel in categoryTree"
         :key="category1stLevel.id"
+        @mouseover="openMenu(category1stLevel)"
+        @mouseleave="closeMenu()"
         class="dropdown menu-large">
       <router-link :to="{ name: 'products', params: { categorySlug: category1stLevel.slug } }"
-         :class="{ 'icon-ribbon sale': isSale(category1stLevel) }"
-         class="dropdown-toggle"
-         data-toggle="dropdown">
+                   @click.native="selectCategory()"
+                   :class="{ 'icon-ribbon sale': isSale(category1stLevel) }"
+                   class="dropdown-toggle"
+                   data-toggle="dropdown">
         {{category1stLevel.name}}
         <img :alt="$t('main.more')"
              class="mobile-plus-content visible-xs"
              src="../assets/img/plus79.png"/>
       </router-link>
-      <ul v-if="category1stLevel.children"
+      <ul v-if="isSubmenuVisible(category1stLevel)"
           class="dropdown-menu megamenu row dropdown-submenu categories-2nd-level">
         <li class="col-sm-8">
           <div class="nav-accordion">
             <div v-for="category2ndLevel in category1stLevel.children"
                  :key="category2ndLevel.id">
               <h3>
-                <router-link :to="{ name: 'products', params: { categorySlug: category2ndLevel.slug } }">
+                <router-link :to="{ name: 'products', params: { categorySlug: category2ndLevel.slug } }"
+                             @click.native="selectCategory()">
                   {{category2ndLevel.name}}
                 </router-link>
               </h3>
               <ul class="categories-3rd-level">
                 <li v-for="category3rdLevel in category2ndLevel.children"
                     :key="category3rdLevel.id">
-                  <router-link :to="{ name: 'products', params: { categorySlug: category3rdLevel.slug } }">
+                  <router-link :to="{ name: 'products', params: { categorySlug: category3rdLevel.slug } }"
+                               @click.native="selectCategory()">
                     {{category3rdLevel.name}}
                   </router-link>
                 </li>
@@ -49,6 +55,8 @@ export default {
   data() {
     return {
       loading: false,
+      submenuVisible: '',
+      categoryClicked: false,
     };
   },
 
@@ -70,6 +78,24 @@ export default {
     isSale(category) {
       const categoriesConfig = this.$config.categories;
       return categoriesConfig ? category.externalId === categoriesConfig.salesExternalId : false;
+    },
+
+    isSubmenuVisible(category) {
+      const hasChildren = Array.isArray(category.children) && category.children.length;
+      return hasChildren && category.id === this.submenuVisible && !this.categoryClicked;
+    },
+
+    openMenu(rootCategory) {
+      this.submenuVisible = rootCategory.id;
+      this.categoryClicked = false;
+    },
+
+    closeMenu() {
+      this.submenuVisible = '';
+    },
+
+    selectCategory() {
+      this.categoryClicked = true;
     },
 
     loadCategories() {
