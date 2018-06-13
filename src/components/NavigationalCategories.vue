@@ -56,7 +56,7 @@ export default {
     return {
       loading: false,
       submenuVisible: '',
-      categoryClicked: false,
+      categoryWasClicked: false,
     };
   },
 
@@ -82,12 +82,12 @@ export default {
 
     isSubmenuVisible(category) {
       const hasChildren = Array.isArray(category.children) && category.children.length;
-      return hasChildren && category.id === this.submenuVisible && !this.categoryClicked;
+      return hasChildren && category.id === this.submenuVisible && !this.categoryWasClicked;
     },
 
     openMenu(rootCategory) {
       this.submenuVisible = rootCategory.id;
-      this.categoryClicked = false;
+      this.categoryWasClicked = false;
     },
 
     closeMenu() {
@@ -95,7 +95,7 @@ export default {
     },
 
     selectCategory() {
-      this.categoryClicked = true;
+      this.categoryWasClicked = true;
     },
 
     loadCategories() {
