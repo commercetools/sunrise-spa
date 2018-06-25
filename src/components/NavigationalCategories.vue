@@ -9,8 +9,7 @@
       <router-link :to="{ name: 'products', params: { categorySlug: category1stLevel.slug } }"
                    @click.native="selectCategory()"
                    :class="{ 'icon-ribbon sale': isSale(category1stLevel) }"
-                   class="dropdown-toggle"
-                   data-toggle="dropdown">
+                   class="dropdown-toggle">
         {{category1stLevel.name}}
         <img :alt="$t('main.more')"
              class="mobile-plus-content visible-xs"
