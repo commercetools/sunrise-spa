@@ -3,11 +3,11 @@
       class="nav navbar-nav categories-1st-level">
     <li v-for="category1stLevel in categoryTree"
         :key="category1stLevel.id"
-        @mouseover="openMenu(category1stLevel)"
-        @mouseleave="closeMenu()"
+        @mouseover="hoverOnCategory(category1stLevel)"
+        @mouseleave="hoverOffCategory()"
         class="dropdown menu-large">
       <router-link :to="{ name: 'products', params: { categorySlug: category1stLevel.slug } }"
-                   @click.native="selectCategory()"
+                   @click.native="clickOnCategory()"
                    :class="{ 'icon-ribbon sale': isSale(category1stLevel) }"
                    class="dropdown-toggle">
         {{category1stLevel.name}}
@@ -15,7 +15,7 @@
              class="mobile-plus-content visible-xs"
              src="../assets/img/plus79.png"/>
       </router-link>
-      <ul v-if="isSubmenuVisible(category1stLevel)"
+      <ul v-if="isMenuOpen(category1stLevel)"
           class="dropdown-menu megamenu row dropdown-submenu categories-2nd-level">
         <li class="col-sm-8">
           <div class="nav-accordion">
@@ -23,7 +23,7 @@
                  :key="category2ndLevel.id">
               <h3>
                 <router-link :to="{ name: 'products', params: { categorySlug: category2ndLevel.slug } }"
-                             @click.native="selectCategory()">
+                             @click.native="clickOnCategory()">
                   {{category2ndLevel.name}}
                 </router-link>
               </h3>
@@ -31,7 +31,7 @@
                 <li v-for="category3rdLevel in category2ndLevel.children"
                     :key="category3rdLevel.id">
                   <router-link :to="{ name: 'products', params: { categorySlug: category3rdLevel.slug } }"
-                               @click.native="selectCategory()">
+                               @click.native="clickOnCategory()">
                     {{category3rdLevel.name}}
                   </router-link>
                 </li>
@@ -54,8 +54,8 @@ export default {
   data() {
     return {
       loading: false,
-      visibleCategorySubmenu: '',
-      categoryWasClicked: false,
+      openCategoryMenu: '',
+      someCategoryWasClicked: false,
     };
   },
 
@@ -79,22 +79,24 @@ export default {
       return categoriesConfig ? category.externalId === categoriesConfig.salesExternalId : false;
     },
 
-    isSubmenuVisible(category) {
+    isMenuOpen(category) {
+      return !this.someCategoryWasClicked && this.openCategoryMenu === category.id;
+    },
+
+    hoverOnCategory(category) {
       const hasChildren = Array.isArray(category.children) && category.children.length;
-      return hasChildren && category.id === this.visibleCategorySubmenu && !this.categoryWasClicked;
+      if (hasChildren) {
+        this.openCategoryMenu = category.id;
+      }
+      this.someCategoryWasClicked = false;
     },
 
-    openMenu(rootCategory) {
-      this.visibleCategorySubmenu = rootCategory.id;
-      this.categoryWasClicked = false;
+    hoverOffCategory() {
+      this.openCategoryMenu = '';
     },
 
-    closeMenu() {
-      this.visibleCategorySubmenu = '';
-    },
-
-    selectCategory() {
-      this.categoryWasClicked = true;
+    clickOnCategory() {
+      this.someCategoryWasClicked = true;
     },
 
     loadCategories() {
