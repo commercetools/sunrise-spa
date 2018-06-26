@@ -30,7 +30,7 @@ const options = {
 const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(ctConfiguration.auth);
 
 function addAuthHeader(request) {
-  return new Promise(success => authMiddleware(requestWithAuth => success(requestWithAuth))(request, {}));
+  return new Promise(success => authMiddleware(requestWithAuth => success(requestWithAuth))(request));
 }
 
 // Create the apollo client
