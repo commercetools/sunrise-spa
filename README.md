@@ -1,4 +1,4 @@
-# Sunrise
+# SUNRISE as single-page application
 
 ### Configuration
 
@@ -18,7 +18,15 @@ Create the file `ct-configuration.json` in the root folder with the following co
       "clientId": "<your-client-id>",
       "clientSecret": "<your-client-secret>"
     },
-    "scopes": ["<your-client-scope-1>", "<your-client-scope-2>"]
+    "scopes": [
+      "manage_my_orders:<your-project-key>",
+      "create_anonymous_token:<your-project-key>",
+      "view_products:<your-project-key>",
+      "manage_my_payments:<your-project-key>",
+      "manage_my_profile:<your-project-key>",
+      "manage_my_shopping_lists:<your-project-key>",
+      "view_project_settings:<your-project-key>"
+    ]
   },
   "api": {
     "host": "https://api.commercetools.com"
