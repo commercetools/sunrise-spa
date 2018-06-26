@@ -1,6 +1,6 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-describe('Categories navigation', () => {
+describe('Menu navigation', () => {
   beforeEach(() => {
     cy.visit('/');
   });
@@ -11,7 +11,7 @@ describe('Categories navigation', () => {
       .should('have.attr', 'href', '#/products/women');
   });
 
-  it('links to 2nd level category', () => {
+  it('links to 2nd level categories', () => {
     cy.get('#nav-categories-menu > li')
       .contains('Women')
       .parent()
@@ -20,7 +20,7 @@ describe('Categories navigation', () => {
       .should('have.attr', 'href', '#/products/women-shoes');
   });
 
-  it('links to 3rd level category', () => {
+  it('links to 3rd level categories', () => {
     cy.get('#nav-categories-menu > li')
       .contains('Women')
       .parent()
