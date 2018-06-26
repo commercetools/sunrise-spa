@@ -1,6 +1,4 @@
-// https://docs.cypress.io/api/introduction/api.html
-
-describe('Menu navigation', () => {
+describe('Categories menu', () => {
   beforeEach(() => {
     cy.visit('/');
   });
