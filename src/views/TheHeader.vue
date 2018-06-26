@@ -110,7 +110,7 @@
       <div class="row">
         <div class="dropdown-megamenu navbar navbar-default">
           <div class="navbar-collapse collapse">
-            <NavigationalCategories/>
+            <CategoriesMenu/>
               <!--{{#if header.location}}-->
               <!--<li class="visible-xs location-xs">-->
               <!--{{> common/location-selector-mobile location=header.location}}-->
@@ -126,12 +126,12 @@
 
 <script>
 import LocationSelector from '@/components/LocationSelector.vue';
-import NavigationalCategories from '@/components/NavigationalCategories.vue';
+import CategoriesMenu from '@/components/CategoriesMenu.vue';
 
 export default {
   components: {
     LocationSelector,
-    NavigationalCategories,
+    CategoriesMenu,
   },
 };
 </script>
