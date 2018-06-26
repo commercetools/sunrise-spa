@@ -1,4 +1,4 @@
-# SUNRISE as single-page application
+# SUNRISE as a Single-Page Application
 
 ### Configuration
 
