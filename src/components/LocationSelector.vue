@@ -10,7 +10,7 @@
       </span>
       <SelectBoxIt :options="languages"
                    v-model="selectedLang"
-                   id="language-select"
+                   id="language"
                    class="select location-select"/>
       <!--{{/if}}-->
       <!--{{#if location.country}}-->
