@@ -5,8 +5,13 @@ describe('Location selector', () => {
 
   it('checks for language selection', () => {
     cy.get('#location-dropdown-toggle-btn')
-      .click()
-      .parent()
-      .find('#languageSelectBoxItOptions');
+      .click();
+
+    cy.get('#languageSelectBoxIt')
+      .click();
+
+    cy.get('#languageSelectBoxItOptions')
+      .contains('Deutsch')
+      .click();
   });
 });
