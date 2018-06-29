@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { loadLanguageAsync } from '@/setup/i18n-setup';
+import { setLanguage } from '@/setup/i18n-setup';
 
 export default {
   data() {
@@ -49,8 +49,7 @@ export default {
 
   watch: {
     selectedLang(selectedLang) {
-      loadLanguageAsync(selectedLang)
-        .catch(error => console.error('Could not change language.', error));
+      setLanguage(selectedLang);
     },
   },
 };

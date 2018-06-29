@@ -5,7 +5,8 @@
       <header class="container">
         <div class="row">
           <div class="col-xs-12">
-            <ul class="nav-list">
+            <ul id="top-nav"
+                class="nav-list">
 
               <!-- Toggle the menu on mobile -->
               <li class="list-item-nav-toggle">
