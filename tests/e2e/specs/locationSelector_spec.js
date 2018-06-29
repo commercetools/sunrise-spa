@@ -5,7 +5,7 @@ describe('Location selector', () => {
       cy.visit('/');
     });
 
-    it('changes text to selected language', () => {
+    it('changes text to EN', () => {
       cy.get('[data-test=stores-link]').contains('Filiale');
 
       cy.get('[data-test=location-selector-open-button]').click();
