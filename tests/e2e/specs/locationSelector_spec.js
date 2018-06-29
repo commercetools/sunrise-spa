@@ -1,23 +1,25 @@
 describe('Location selector', () => {
-  beforeEach(() => {
-    cy.visit('/');
-  });
+  context('with initial DE', () => {
+    beforeEach(() => {
+      localStorage.setItem('locale', 'de');
+      cy.visit('/');
+    });
 
-  it('checks for language selection', () => {
-    cy.get('#top-nav .store-select')
-      .contains('Stores');
+    it('changes text to selected language', () => {
+      cy.get('[data-test=stores-link]').contains('Filiale');
 
-    cy.get('#location-dropdown-toggle-btn')
-      .click();
+      cy.get('[data-test=location-selector-open-button]').click();
 
-    cy.get('#languageSelectBoxIt')
-      .click();
+      cy.get('span[data-test=location-selector]')
+        .click()
+        .parent()
+        .contains('English')
+        .click()
+        .should(() => {
+          expect(localStorage.getItem('locale')).to.eq('en');
+        });
 
-    cy.get('#languageSelectBoxItOptions')
-      .contains('Deutsch')
-      .click();
-
-    cy.get('#top-nav .store-select')
-      .contains('Filiale');
+      cy.get('[data-test=stores-link]').contains('Stores');
+    });
   });
 });
