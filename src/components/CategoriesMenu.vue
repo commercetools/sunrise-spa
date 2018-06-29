@@ -1,6 +1,6 @@
 <template>
-  <ul id="nav-categories-menu"
-      class="nav navbar-nav categories-1st-level">
+  <ul data-test="categories-1st-level"
+      class="nav navbar-nav">
     <li v-for="category1stLevel in categoryTree"
         :key="category1stLevel.id"
         @mouseover="hoverOnCategory(category1stLevel)"
@@ -16,7 +16,8 @@
              src="../assets/img/plus79.png"/>
       </router-link>
       <ul v-if="isMenuOpen(category1stLevel)"
-          class="dropdown-menu megamenu row dropdown-submenu categories-2nd-level">
+          data-test="categories-2nd-level"
+          class="dropdown-menu megamenu row dropdown-submenu">
         <li class="col-sm-8">
           <div class="nav-accordion">
             <div v-for="category2ndLevel in category1stLevel.children"
@@ -27,7 +28,7 @@
                   {{category2ndLevel.name}}
                 </router-link>
               </h3>
-              <ul class="categories-3rd-level">
+              <ul data-test="categories-3rd-level">
                 <li v-for="category3rdLevel in category2ndLevel.children"
                     :key="category3rdLevel.id">
                   <router-link :to="{ name: 'products', params: { categorySlug: category3rdLevel.slug } }"

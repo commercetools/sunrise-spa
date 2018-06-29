@@ -1,28 +1,20 @@
 describe('Categories menu', () => {
-  beforeEach(() => {
+  before(() => {
     cy.visit('/');
   });
 
-  it('links to 1st level categories', () => {
-    cy.get('#nav-categories-menu > li')
+  it('links to any level category', () => {
+    cy.get('[data-test=categories-1st-level]')
       .contains('Women')
-      .should('have.attr', 'href', '#/products/women');
-  });
-
-  it('links to 2nd level categories', () => {
-    cy.get('#nav-categories-menu > li')
-      .contains('Women')
+      .should('have.attr', 'href', '#/products/women')
       .parent()
-      .trigger('mouseover')
+      .trigger('mouseover');
+
+    cy.get('[data-test=categories-2nd-level]')
       .contains('Shoes')
       .should('have.attr', 'href', '#/products/women-shoes');
-  });
 
-  it('links to 3rd level categories', () => {
-    cy.get('#nav-categories-menu > li')
-      .contains('Women')
-      .parent()
-      .trigger('mouseover')
+    cy.get('[data-test=categories-3rd-level]')
       .contains('Ankle boots')
       .should('have.attr', 'href', '#/products/women-shoes-ankle-boots');
   });

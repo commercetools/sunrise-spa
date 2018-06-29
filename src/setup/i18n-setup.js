@@ -4,9 +4,13 @@ import config from '@/../sunrise.config';
 
 Vue.use(VueI18n);
 
+function findFallbackLocale() {
+  return config.locales > 0 ? config.locales[0].code : 'en';
+}
+
 function findInitialLocale() {
   const storedLocale = localStorage.getItem('locale');
-  return storedLocale || (config.locales > 0 ? config.locales[0].code : 'en');
+  return storedLocale || findFallbackLocale();
 }
 
 function loadMessages() {
@@ -22,12 +26,10 @@ function loadMessages() {
   return messages;
 }
 
-const initialLocale = findInitialLocale();
-
 // Create VueI18n instance with options
 export const i18n = new VueI18n({
-  locale: initialLocale,
-  fallbackLocale: initialLocale,
+  locale: findInitialLocale(),
+  fallbackLocale: findFallbackLocale(),
   messages: loadMessages(),
 });
 
