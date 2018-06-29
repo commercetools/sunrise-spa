@@ -1,7 +1,12 @@
 <template>
-  <li v-if="active" class="list-item-location clearfix">
-    <button id="location-dropdown-toggle-btn" class="location-dropdown-toggle">
-      <img class="pull-right" src="../assets/img/globe-2.png" :alt="$t('main.header.location')">
+  <li v-if="active"
+      class="list-item-location clearfix">
+    <button data-test="location-selector-open-button"
+            id="location-dropdown-toggle-btn"
+            class="location-dropdown-toggle">
+      <img class="pull-right"
+           src="../assets/img/globe-2.png"
+           :alt="$t('main.header.location')">
     </button>
     <div class="location-dropdown">
       <!--{{#if location.language}}-->
@@ -11,6 +16,7 @@
       <SelectBoxIt :options="languages"
                    v-model="selectedLang"
                    id="language"
+                   data-test="location-selector"
                    class="select location-select"/>
       <!--{{/if}}-->
       <!--{{#if location.country}}-->

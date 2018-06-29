@@ -5,8 +5,7 @@
       <header class="container">
         <div class="row">
           <div class="col-xs-12">
-            <ul id="top-nav"
-                class="nav-list">
+            <ul class="nav-list">
 
               <!-- Toggle the menu on mobile -->
               <li class="list-item-nav-toggle">
@@ -30,7 +29,8 @@
               </li>
               <!-- End -->
 
-              <li class="list-item-store">
+              <li data-test="stores-link"
+                  class="list-item-store">
                 <router-link :to="{ name: 'stores' }"
                              class="store-select icon-marker">
                   <span class="hidden-xs">{{ $t("main.header.stores") }}</span>
