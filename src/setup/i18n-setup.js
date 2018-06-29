@@ -9,41 +9,31 @@ function findInitialLocale() {
   return storedLocale || (config.locales > 0 ? config.locales[0].code : 'en');
 }
 
+function loadMessages() {
+  const locales = require.context('@/lang', true, /[a-z0-9]+\.json$/i);
+  const messages = {};
+  locales.keys().forEach((key) => {
+    const matched = key.match(/([a-z0-9]+)\./i);
+    if (matched && matched.length > 1) {
+      const locale = matched[1];
+      messages[locale] = locales(key);
+    }
+  });
+  return messages;
+}
+
 const initialLocale = findInitialLocale();
-
-/* eslint import/no-dynamic-require: "off" */
-const initialMsgs = require(`@/lang/${initialLocale}.json`);
-
-// Our default language that is preloaded
-const loadedLanguages = [initialLocale];
 
 // Create VueI18n instance with options
 export const i18n = new VueI18n({
   locale: initialLocale,
   fallbackLocale: initialLocale,
-  messages: {
-    [initialLocale]: initialMsgs,
-  },
+  messages: loadMessages(),
 });
 
-function setLanguage(lang) {
+export function setLanguage(lang) {
   i18n.locale = lang;
   document.documentElement.lang = lang;
   localStorage.setItem('locale', lang);
   return lang;
-}
-
-export function loadLanguageAsync(lang) {
-  if (i18n.locale !== lang) {
-    if (!loadedLanguages.includes(lang)) {
-      return import(/* webpackChunkName: "lang-[request]" */ `@/lang/${lang}.json`)
-        .then((msgs) => {
-          i18n.setLocaleMessage(lang, msgs.default);
-          loadedLanguages.push(lang);
-          return setLanguage(lang);
-        });
-    }
-    return Promise.resolve(setLanguage(lang));
-  }
-  return Promise.resolve(lang);
 }
