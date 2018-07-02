@@ -14,7 +14,7 @@ import { createPersistedQueryLink } from 'apollo-link-persisted-queries';
 Vue.use(VueApollo);
 
 // Import commercetools configuration for SPA
-const ctConfiguration = require('../../ct-configuration.json');
+const ctConfiguration = require('@/../ct-configuration.json');
 
 // Config
 const options = {
