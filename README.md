@@ -13,7 +13,7 @@ SUNRISE_CT_AUTH_PROJECT_KEY  # your project key
 SUNRISE_CT_AUTH_CLIENT_ID  # your client ID
 SUNRISE_CT_AUTH_CLIENT_SECRET  # your client secret
 
-SUNRISE_CT_AUTH_HOST  # authentication host (default: https://auth.commercetools.com)
-SUNRISE_CT_API_HOST  # API host (default: https://api.commercetools.com)
+SUNRISE_CT_AUTH_HOST  # (optional) Auth host (default: https://auth.commercetools.com)
+SUNRISE_CT_API_HOST  # (optional) API host (default: https://api.commercetools.com)
 ```
 Remember to use an API client suited for single page applications (SPA), as your credentials will be publicly accessible through the browser.
