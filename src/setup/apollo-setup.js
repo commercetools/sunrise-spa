@@ -9,16 +9,14 @@ import { HttpLink } from 'apollo-link-http/lib/index';
 import { split } from 'apollo-link/lib/index';
 import { ApolloClient } from 'apollo-client';
 import { createPersistedQueryLink } from 'apollo-link-persisted-queries';
+import config from '@/../sunrise.config';
 
 // Install the vue plugin
 Vue.use(VueApollo);
 
-// Import commercetools configuration for SPA
-const ctConfiguration = require('@/../ct-configuration.json');
-
 // Config
 const options = {
-  base: process.env.VUE_APP_GRAPHQL_ENDPOINT || `${ctConfiguration.api.host}/${ctConfiguration.auth.projectKey}`,
+  base: `${config.ct.api.host}/${config.ct.auth.projectKey}`,
   endpoints: {
     graphql: process.env.VUE_APP_GRAPHQL_PATH || '/graphql',
     subscription: process.env.VUE_APP_GRAPHQL_SUBSCRIPTIONS_PATH || '/graphql',
@@ -27,7 +25,7 @@ const options = {
 };
 
 // Create commercetools authentication middleware
-const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(ctConfiguration.auth);
+const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(config.ct.auth);
 
 function addAuthHeader(request) {
   return new Promise(success => authMiddleware(requestWithAuth => success(requestWithAuth))(request));
