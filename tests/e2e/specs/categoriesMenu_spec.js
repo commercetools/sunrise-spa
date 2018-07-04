@@ -1,6 +1,7 @@
 describe('Categories menu', () => {
   before(() => {
-    cy.visit('/');
+    debugger;
+    cy.visit(Cypress.env('HOST') || '/');
   });
 
   it('links to any level category', () => {
