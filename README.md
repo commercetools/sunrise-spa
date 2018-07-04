@@ -1,5 +1,7 @@
 # SUNRISE as a Single-Page Application
 
+[![CircleCI](https://circleci.com/gh/commercetools/sunrise-spa.svg?style=svg)](https://circleci.com/gh/commercetools/sunrise-spa)
+
 ### How to use your own project data
 
 
