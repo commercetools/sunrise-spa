@@ -32,7 +32,7 @@ jobs:
 
       - run:
           name: Run E2E tests
-          command: yarn test:e2e
+          command: $(yarn bin)/cypress run --record
 
       - store_test_results:
           path: e2e-results
