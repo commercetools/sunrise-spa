@@ -1,8 +1,9 @@
 describe('Location selector', () => {
   context('with initial DE', () => {
     beforeEach(() => {
+      debugger;
       localStorage.setItem('locale', 'de');
-      cy.visit('/');
+      cy.visit(Cypress.env('HOST') || '/');
     });
 
     it('changes text to EN', () => {
