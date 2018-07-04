@@ -25,8 +25,8 @@ jobs:
             - v1-deps
 
       - run:
-        name: Install dependencies
-        command: yarn install --frozen-lockfile
+          name: Install dependencies
+          command: yarn install --frozen-lockfile
 
       - save_cache:
           paths:
@@ -35,10 +35,12 @@ jobs:
             - ~/.cache
           key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
 
-      - run: yarn test:e2e
+      - run:
+          name: Run E2E tests
+          command: yarn test:e2e
 
       - store_test_results:
-          path: e2e-output
+          path: e2e-results
       - store_artifacts:
           path: cypress/videos
       - store_artifacts:
