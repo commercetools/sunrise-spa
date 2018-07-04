@@ -7,6 +7,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:10.1
+      - image: cypress/base:10
 
     working_directory: ~/sunrise-spa
 
