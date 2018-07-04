@@ -1,0 +1,42 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      # the Docker image with Cypress dependencies
+      - image: cypress/base:10
+        environment:
+          # this enables colors in the output
+          TERM: xterm
+
+    working_directory: ~/sunrise-spa
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          key: v1-deps-{{ .Branch }}
+          key: v1-deps
+
+      - run:
+          name: Install dependencies
+          command: yarn install --frozen-lockfile
+
+      - save_cache:
+          key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            # cache both yarn and Cypress
+            - ~/.cache
+
+      - run:
+          name: Run E2E tests
+          command: yarn test:e2e
+
+      - store_test_results:
+          path: e2e-results
+      - store_artifacts:
+          path: cypress/videos
+      - store_artifacts:
+          path: cypress/screenshots
