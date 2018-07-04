@@ -33,8 +33,6 @@ function addAuthHeader(request) {
 
 // Create the apollo client
 function createApolloClient({ base, endpoints, persisting }) {
-  console.log('Creating apollo client');
-
   let link = new HttpLink({
     // You should use an absolute URL here
     uri: base + endpoints.graphql,
