@@ -33,7 +33,7 @@ jobs:
 
       - run:
           name: Run E2E tests
-          command: yarn test:e2e --headless
+          command: yarn test:e2e --headless --record
 
       - store_test_results:
           path: e2e-results
