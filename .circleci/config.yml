@@ -15,20 +15,15 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v4-deps-{{ checksum "yarn.lock" }}
+            - v5-deps-{{ checksum "yarn.lock" }}
             # fallback to using the latest cache if no exact match is found
-            - v4-deps
+            - v5-deps
       - run:
           name: Install dependencies
           command: |
-            yarn cache dir
-            yarn cache list
-            yarn config set cache-folder ~/.cache/yarn
-            yarn cache dir
-            yarn cache list
             yarn install --frozen-lockfile
       - save_cache:
-          key: v4-deps-{{ checksum "yarn.lock" }}
+          key: v5-deps-{{ checksum "yarn.lock" }}
           paths:
             - $(yarn cache dir)
 
