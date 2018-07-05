@@ -20,12 +20,10 @@ jobs:
             - v2-deps
       - run:
           name: Install dependencies
-          command: yarn install --frozen-lockfile && ls -la ~/.cache
+          command: yarn install --frozen-lockfile
       - save_cache:
-          name: Save yarn and Cypress cache
           key: v2-deps-{{ checksum "yarn.lock" }}
           paths:
-            # cache both yarn and Cypress
             - ~/.cache/yarn
             - ~/.cache/Cypress
 
