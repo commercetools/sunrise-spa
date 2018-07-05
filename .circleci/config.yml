@@ -20,7 +20,7 @@ jobs:
             - v3-deps
       - run:
           name: Install dependencies
-          command: yarn install --frozen-lockfile --verbose
+          command: yarn cache dir && yarn install --frozen-lockfile --verbose
       - save_cache:
           key: v3-deps-{{ checksum "yarn.lock" }}
           paths:
