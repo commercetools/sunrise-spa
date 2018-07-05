@@ -38,6 +38,6 @@ jobs:
       - store_test_results:
           path: e2e-results
       - store_artifacts:
-          path: test/e2e/videos
+          path: tests/e2e/videos
       - store_artifacts:
           path: tests/e2e/screenshots
