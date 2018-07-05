@@ -15,14 +15,14 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v2-deps-{{ checksum "yarn.lock" }}
+            - v3-deps-{{ checksum "yarn.lock" }}
             # fallback to using the latest cache if no exact match is found
-            - v2-deps
+            - v3-deps
       - run:
           name: Install dependencies
           command: yarn install --frozen-lockfile --verbose
       - save_cache:
-          key: v2-deps-{{ checksum "yarn.lock" }}
+          key: v3-deps-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache
 
