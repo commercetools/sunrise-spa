@@ -39,3 +39,8 @@ jobs:
           path: tests/e2e/videos
       - store_artifacts:
           path: tests/e2e/screenshots
+
+  dependencies:
+    post:
+      - rm -r ~/.cache
+
