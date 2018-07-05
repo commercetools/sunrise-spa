@@ -2,7 +2,9 @@
 node_modules
 /dist
 
-/tests/e2e/reports/
+/tests/e2e/videos/
+/tests/e2e/screenshots/
+/test-results/
 selenium-debug.log
 
 # local env files
@@ -22,6 +24,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+
 /sunrise.iml
-/ct-configuration.json
 /graphql.config.json
