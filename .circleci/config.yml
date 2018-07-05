@@ -30,7 +30,7 @@ jobs:
       - save_cache:
           key: v4-deps-{{ checksum "yarn.lock" }}
           paths:
-            - ~/.cache
+            - $(yarn cache dir)
 
       - run:
           name: Run E2E tests
