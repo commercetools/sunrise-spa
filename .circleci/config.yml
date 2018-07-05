@@ -24,8 +24,7 @@ jobs:
       - save_cache:
           key: v2-deps-{{ checksum "yarn.lock" }}
           paths:
-            - ~/.cache/yarn
-            - ~/.cache/Cypress
+            - ~/.cache
 
       - run:
           name: Run E2E tests
