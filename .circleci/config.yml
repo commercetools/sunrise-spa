@@ -33,10 +33,7 @@ jobs:
 
       - run:
           name: Run E2E tests
-          command: |
-            yarn serve &
-            wait-on http://localhost:8080
-            $(yarn bin)/cypress run --record
+          command: yarn test:e2e --headless
 
       - store_test_results:
           path: e2e-results
