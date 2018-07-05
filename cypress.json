@@ -3,7 +3,7 @@
   "pluginsFile": "tests/e2e/plugins/index.js",
   "projectId": "gfk5oj",
   "reporterOptions": {
-    "mochaFile": "tests/e2e/results/e2e-output.xml",
+    "mochaFile": "test-results/e2e/output.xml",
     "toConsole": true
   }
 }
