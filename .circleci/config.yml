@@ -14,16 +14,18 @@ jobs:
     steps:
       - checkout
       - restore_cache:
+          name: Restore yarn package cache
           keys:
-            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
+            - v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
             - v1-deps-{{ .Branch }}
+            # fallback to using the latest cache if no exact match is found
             - v1-deps
       - run:
           name: Install dependencies
           command: yarn install --frozen-lockfile
       - save_cache:
-          key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+          name: Save yarn package cache
+          key: v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             # cache both yarn and Cypress
             - ~/.cache
