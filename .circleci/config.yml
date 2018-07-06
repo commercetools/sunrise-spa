@@ -15,17 +15,18 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v5-deps-{{ checksum "yarn.lock" }}
+            - v6-deps-{{ checksum "yarn.lock" }}
             # fallback to using the latest cache if no exact match is found
-            - v5-deps
+            - v6-deps
       - run:
           name: Install dependencies
           command: |
             yarn install --frozen-lockfile
       - save_cache:
-          key: v5-deps-{{ checksum "yarn.lock" }}
+          key: v6-deps-{{ checksum "yarn.lock" }}
           paths:
-            - $(yarn cache dir)
+            - ~/.cache
+            - /usr/local/share/.cache
 
       - run:
           name: Run E2E tests
