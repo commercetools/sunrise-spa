@@ -24,16 +24,18 @@ jobs:
       - save_cache:
           key: v6-deps-{{ checksum "yarn.lock" }}
           paths:
-            - ~/.cache
             - /usr/local/share/.cache
 
       - run:
           name: Run E2E tests
           command: yarn test:e2e --headless --record
       - store_test_results:
+          name: Uploading E2E test results
           path: test-results
       - store_artifacts:
+          name: Store E2E videos
           path: tests/e2e/videos
       - store_artifacts:
+          name: Store E2E screenshots
           path: tests/e2e/screenshots
 
