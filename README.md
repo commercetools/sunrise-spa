@@ -6,7 +6,7 @@
 
 ### Usage
 
-With [Yarn](https://yarnpkg.com/en/):
+With [Yarn](https://yarnpkg.com/):
 ```
 yarn install
 yarn serve
