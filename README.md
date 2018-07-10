@@ -35,7 +35,7 @@ VUE_APP_CT_PROJECT_KEY=<your project key>
 VUE_APP_CT_CLIENT_ID=<your client ID>
 VUE_APP_CT_CLIENT_SECRET=<your client secret>
 ```
-**:warning: Always use an API client suited for single page applications (SPA), as your credentials will be publicly accessible through the browser.**
+> **:warning: Always use an API client suited for single page applications (SPA), as your credentials will be publicly accessible through the browser.**
 
 Optionally, you can also use a different commercetools host, instead of the default `commercetools.com` (i.e. Europe). For example, to connect to our US hosts: 
 ```
