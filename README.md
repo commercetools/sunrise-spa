@@ -38,7 +38,7 @@ VUE_APP_CT_CLIENT_SECRET=<your client secret>
 > **:warning: Always use an API client suited for single page applications (SPA), as your credentials will be publicly accessible through the browser.**
 
 Optionally, you can also use a different commercetools host, instead of the default `commercetools.com` (i.e. Europe). For example, to connect to our US hosts: 
-```
+```shell
 VUE_APP_CT_AUTH_HOST=https://auth.commercetools.co
 VUE_APP_CT_API_HOST=https://api.commercetools.co
 ```
