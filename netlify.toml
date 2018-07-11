@@ -1,3 +1,10 @@
 [build]
-    publish = "dist/"
-    command = "yarn build"
+  command = "yarn build"
+  publish = "dist"
+
+[template.environment]
+  VUE_APP_CT_PROJECT_KEY = "your commercetools project key"
+  VUE_APP_CT_CLIENT_ID = "your commercetools client ID"
+  VUE_APP_CT_CLIENT_SECRET = "your commercetools client secret"
+  VUE_APP_CT_AUTH_HOST = "https://auth.commercetools.com"
+  VUE_APP_CT_API_HOST = "https://api.commercetools.com"
