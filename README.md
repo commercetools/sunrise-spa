@@ -4,7 +4,7 @@
 
 ## Deploy it on Netlify
 
-[Netlify](https://www.netlify.com/) allows you to fork the project, configure it with your own data and deploy it, all in one click.
+[Netlify](https://www.netlify.com/) allows you to clone the repository, configure it with your own data and deploy it, all in one click.
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/commercetools/sunrise-spa)
 
