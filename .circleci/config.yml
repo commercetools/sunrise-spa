@@ -6,8 +6,7 @@ jobs:
       # the Docker image with Cypress dependencies
       - image: cypress/base:10
         environment:
-          # this enables colors in the output
-          TERM: xterm
+          JEST_JUNIT_OUTPUT: test-results/unit/output.xml
 
     working_directory: ~/sunrise-spa
 
@@ -27,12 +26,12 @@ jobs:
             - /usr/local/share/.cache
 
       - run:
-          name: Run unit tests
-          command: yarn test:unit --ci
+          name: Run Unit tests
+          command: yarn test:unit --ci --reporters=default --reporters=jest-junit
 
       - run:
           name: Run E2E tests
-          command: yarn test:e2e --headless --record
+          command: yarn test:e2e --headless --record --reporter mocha-multi-reporters
       - store_artifacts:
           name: Store E2E videos
           path: tests/e2e/videos
