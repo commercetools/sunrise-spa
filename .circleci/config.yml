@@ -27,6 +27,10 @@ jobs:
             - /usr/local/share/.cache
 
       - run:
+          name: Run unit tests
+          command: yarn test:unit --ci
+
+      - run:
           name: Run E2E tests
           command: yarn test:e2e --headless --record
       - store_artifacts:
