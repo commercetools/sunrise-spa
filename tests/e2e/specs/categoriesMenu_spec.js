@@ -5,7 +5,7 @@ describe('Categories menu', () => {
 
   it('links to any level category', () => {
     cy.get('[data-test=categories-1st-level]')
-      .contains('Women')
+      .contains('Women', { timeout: 10000 })
       .should('have.attr', 'href', '#/products/women')
       .parent()
       .trigger('mouseover');
