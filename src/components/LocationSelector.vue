@@ -1,5 +1,5 @@
 <template>
-  <li v-if="active"
+  <li v-if="availableLangs"
       class="list-item-location clearfix">
     <button data-test="location-selector-open-button"
             id="location-dropdown-toggle-btn"
@@ -14,7 +14,7 @@
         {{ $t("main.header.language") }}
       </span>
       <SelectBoxIt :options="languages"
-                   v-model="selectedLang"
+                   v-model="language"
                    id="language"
                    data-test="location-selector"
                    class="select location-select"/>
@@ -34,28 +34,23 @@
 </template>
 
 <script>
-import { setLanguage } from '@/setup/i18n-setup';
-
 export default {
   data() {
     return {
-      selectedLang: this.$i18n.locale,
+      availableLangs: {
+        en: 'English',
+        de: 'Deutsch',
+      },
     };
   },
 
   computed: {
-    active() {
-      return this.$config.locales.length > 1;
+    language() {
+      return this.$i18n.locale;
     },
 
     languages() {
-      return this.$config.locales.map(locale => ({ id: locale.code, name: locale.name }));
-    },
-  },
-
-  watch: {
-    selectedLang(selectedLang) {
-      setLanguage(selectedLang);
+      return Object.entries(this.availableLangs).map(langEntry => ({ id: langEntry[0], name: langEntry[1] }));
     },
   },
 };
