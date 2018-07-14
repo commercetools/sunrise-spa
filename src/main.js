@@ -4,9 +4,9 @@ import SelectBoxIt from '@/components/global/SelectBoxIt.vue';
 import router from '@/router';
 import store from '@/store/store';
 import '@/registerServiceWorker';
-import { apolloProvider } from '@/setup/apollo-setup';
-import { i18n } from '@/setup/i18n-setup';
-import config from '@/../sunrise.config';
+import createProvider from '@/apollo';
+import i18n from '@/i18n/i18n';
+import sunriseConfig from '@/../sunrise.config';
 
 import './assets/scss/main.scss';
 
@@ -14,12 +14,12 @@ Vue.config.productionTip = false;
 
 Vue.component('SelectBoxIt', SelectBoxIt);
 
-Vue.prototype.$config = config;
+Vue.prototype.$sunrise = sunriseConfig;
 
 new Vue({
   router,
   store,
   i18n,
-  provide: apolloProvider.provide(),
+  provide: createProvider().provide(),
   render: h => h(App),
 }).$mount('#app');
