@@ -21,6 +21,7 @@
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.16",
     "vue-apollo": "^3.0.0-beta.10",
+    "vue-cli-plugin-apollo": "^0.15.0",
     "vue-i18n": "^8.0.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
@@ -42,7 +43,7 @@
     "eslint": "^4.9.0",
     "eslint-plugin-graphql": "^2.1.1",
     "graphql": "^0.13.2",
-    "graphql-tag": "^2.5.0",
+    "graphql-tag": "^2.9.0",
     "jest-junit": "^5.1.0",
     "jest-localstorage-mock": "^2.2.0",
     "mocha": "^5.2.0",
@@ -51,7 +52,6 @@
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
     "selectboxit": "^3.8.2",
-    "vue-cli-plugin-apollo": "^0.13.9",
     "vue-cli-plugin-i18n": "^0.3.1",
     "vue-template-compiler": "^2.5.16",
     "webpack": "^4.12.2"
