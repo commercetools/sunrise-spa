@@ -10,7 +10,8 @@ describe('LocationSelector.vue', () => {
     // const msg = 'new message';
     const wrapper = shallowMount(LocationSelector, {
       mocks: {
-        $i18n: () => ({ locale: 'en' }),
+        $i18n: ({ locale: 'en' }),
+        $sunrise: ({ languages: { en: 'English', de: 'Deutsch' } }),
         $t: () => {},
       },
     });
