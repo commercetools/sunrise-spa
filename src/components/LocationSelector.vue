@@ -1,5 +1,5 @@
 <template>
-  <li v-if="availableLangs"
+  <li v-if="languages"
       class="list-item-location clearfix">
     <button data-test="location-selector-open-button"
             id="location-dropdown-toggle-btn"
@@ -14,7 +14,7 @@
         {{ $t("main.header.language") }}
       </span>
       <SelectBoxIt :options="languages"
-                   v-model="language"
+                   v-model="$i18n.locale"
                    id="language"
                    data-test="location-selector"
                    class="select location-select"/>
@@ -35,22 +35,10 @@
 
 <script>
 export default {
-  data() {
-    return {
-      availableLangs: {
-        en: 'English',
-        de: 'Deutsch',
-      },
-    };
-  },
-
   computed: {
-    language() {
-      return this.$i18n.locale;
-    },
-
     languages() {
-      return Object.entries(this.availableLangs).map(langEntry => ({ id: langEntry[0], name: langEntry[1] }));
+      return Object.entries(this.$sunrise.languages)
+        .map(langEntry => ({ id: langEntry[0], name: langEntry[1] }));
     },
   },
 };

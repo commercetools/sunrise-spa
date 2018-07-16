@@ -32,6 +32,10 @@ export default {
       host: apiHost,
     },
   },
+  languages: {
+    en: 'English',
+    de: 'Deutsch',
+  },
   categories: {
     salesExternalId: '6',
   },

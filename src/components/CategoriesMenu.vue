@@ -5,7 +5,6 @@
       <ul v-if="data"
           data-test="categories-1st-level"
           class="nav navbar-nav">
-        <!-- Loading -->
         <li v-for="category1stLevel in data.categories.results"
             :key="category1stLevel.id"
             @mouseover="hoverOnCategory(category1stLevel)"
