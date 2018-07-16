@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
+import sunriseConfig from '@/../sunrise.config';
 
 Vue.use(VueI18n);
 
-const fallbackLocale = process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'en';
+const fallbackLocale = sunriseConfig.languages ? Object.keys(sunriseConfig.languages)[0] : 'en';
 
 function loadMessages() {
   const locales = require.context('@/i18n', true, /[a-z0-9]+\.json$/i);
