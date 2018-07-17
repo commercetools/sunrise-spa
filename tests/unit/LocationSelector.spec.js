@@ -3,8 +3,6 @@ import { shallowMount } from '@vue/test-utils';
 import LocationSelector from '@/components/LocationSelector.vue';
 import SelectBoxIt from '@/components/global/SelectBoxIt.vue';
 
-require('./test-utils.config');
-
 Vue.component('SelectBoxIt', SelectBoxIt);
 
 describe('LocationSelector.vue', () => {
@@ -17,6 +15,9 @@ describe('LocationSelector.vue', () => {
     const wrapper = shallowMount(LocationSelector, {
       mocks: {
         $sunrise: ({ languages: { en: 'English', de: 'Deutsch' } }),
+      },
+      stub: {
+        SelectBoxIt: '<div></div>',
       },
     });
   });
