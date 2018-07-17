@@ -22,4 +22,5 @@ module.exports = {
   setupFiles: [
     'jest-localstorage-mock',
   ],
+  setupTestFrameworkScriptFile: '<rootDir>/tests/unit/jest.init.js',
 };
