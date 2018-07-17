@@ -3,20 +3,21 @@ import { shallowMount } from '@vue/test-utils';
 import LocationSelector from '@/components/LocationSelector.vue';
 import SelectBoxIt from '@/components/global/SelectBoxIt.vue';
 
+require('./test-utils.config');
+
 Vue.component('SelectBoxIt', SelectBoxIt);
 
 describe('LocationSelector.vue', () => {
+  it('renders a vue instance', () => {
+    const wrapper = shallowMount(LocationSelector);
+    expect(wrapper.isVueInstance()).toBe(true);
+  });
+
   it('displays languages defined in configuration', () => {
     const wrapper = shallowMount(LocationSelector, {
       mocks: {
-        $i18n: ({ locale: 'en' }),
         $sunrise: ({ languages: { en: 'English', de: 'Deutsch' } }),
-        $t: () => {},
-      },
-      stubs: {
-        SelectBoxIt: '<div/>',
       },
     });
-    console.log(wrapper.find(SelectBoxIt).props());
   });
 });

@@ -37,8 +37,9 @@
 export default {
   computed: {
     languages() {
-      return Object.entries(this.$sunrise.languages)
-        .map(langEntry => ({ id: langEntry[0], name: langEntry[1] }));
+      const configLangs = this.$sunrise.languages;
+      const langs = configLangs ? Object.entries(configLangs) : [];
+      return langs.map(langEntry => ({ id: langEntry[0], name: langEntry[1] }));
     },
   },
 };
