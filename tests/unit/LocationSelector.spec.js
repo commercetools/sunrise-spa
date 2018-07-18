@@ -7,18 +7,22 @@ Vue.component('SelectBoxIt', SelectBoxIt);
 
 describe('LocationSelector.vue', () => {
   it('renders a vue instance', () => {
-    const wrapper = shallowMount(LocationSelector);
-    expect(wrapper.isVueInstance()).toBe(true);
+    expect(shallowMount(LocationSelector).isVueInstance()).toBe(true);
   });
 
-  it('displays languages defined in configuration', () => {
+  it('computes languages defined in configuration', () => {
     const wrapper = shallowMount(LocationSelector, {
       mocks: {
-        $sunrise: ({ languages: { en: 'English', de: 'Deutsch' } }),
-      },
-      stub: {
-        SelectBoxIt: '<div></div>',
+        $sunrise: { languages: { it: 'Italiano', es: 'Español' } },
       },
     });
+    expect(wrapper.vm.languages).toEqual([{ id: 'it', name: 'Italiano' }, { id: 'es', name: 'Español' }]);
+    expect(wrapper.find('[data-test="location-selector"]').exists()).toBe(true);
+  });
+
+  it('hides selector on empty languages', () => {
+    const wrapper = shallowMount(LocationSelector);
+    expect(wrapper.vm.languages).toEqual([]);
+    expect(wrapper.find('[data-test="location-selector"]').exists()).toBe(false);
   });
 });

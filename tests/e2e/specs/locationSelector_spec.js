@@ -10,7 +10,7 @@ describe('Location selector', () => {
 
       cy.get('[data-test=location-selector-open-button]').click();
 
-      cy.get('span[data-test=location-selector]')
+      cy.get('span[data-test=location-selector-dropdown]')
         .click()
         .parent()
         .contains('English')
