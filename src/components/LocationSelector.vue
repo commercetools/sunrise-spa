@@ -1,5 +1,6 @@
 <template>
-  <li v-if="languages"
+  <li v-if="active"
+      data-test="location-selector"
       class="list-item-location clearfix">
     <button data-test="location-selector-open-button"
             id="location-dropdown-toggle-btn"
@@ -16,7 +17,7 @@
       <SelectBoxIt :options="languages"
                    v-model="$i18n.locale"
                    id="language"
-                   data-test="location-selector"
+                   data-test="location-selector-dropdown"
                    class="select location-select"/>
       <!--{{/if}}-->
       <!--{{#if location.country}}-->
@@ -40,6 +41,10 @@ export default {
       const configLangs = this.$sunrise.languages;
       const langs = configLangs ? Object.entries(configLangs) : [];
       return langs.map(langEntry => ({ id: langEntry[0], name: langEntry[1] }));
+    },
+
+    active() {
+      return this.languages.length > 0;
     },
   },
 };
