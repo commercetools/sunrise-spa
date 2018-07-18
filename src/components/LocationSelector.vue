@@ -40,7 +40,7 @@ export default {
     languages() {
       const configLangs = this.$sunrise.languages;
       const langs = configLangs ? Object.entries(configLangs) : [];
-      return langs.map(langEntry => ({ id: langEntry[0], name: langEntry[1] }));
+      return langs.map(([id, name]) => ({ id, name }));
     },
 
     active() {
