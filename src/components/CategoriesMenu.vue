@@ -64,19 +64,19 @@ export default {
   },
 
   methods: {
-    isSale(category) {
+    isSale({ externalId }) {
       const categoriesConfig = this.$sunrise.categories;
-      return categoriesConfig ? category.externalId === categoriesConfig.salesExternalId : false;
+      return categoriesConfig ? externalId === categoriesConfig.salesExternalId : false;
     },
 
-    isMenuOpen(category) {
-      return !this.someCategoryWasClicked && this.openCategoryMenu === category.id;
+    isMenuOpen({ id }) {
+      return !this.someCategoryWasClicked && this.openCategoryMenu === id;
     },
 
-    hoverOnCategory(category) {
-      const hasChildren = Array.isArray(category.children) && category.children.length;
+    hoverOnCategory({ id, children }) {
+      const hasChildren = Array.isArray(children) && children.length;
       if (hasChildren) {
-        this.openCategoryMenu = category.id;
+        this.openCategoryMenu = id;
       }
       this.someCategoryWasClicked = false;
     },
