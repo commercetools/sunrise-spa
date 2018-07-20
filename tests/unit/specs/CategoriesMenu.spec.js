@@ -6,6 +6,13 @@ const localVue = createLocalVue();
 localVue.use(VueRouter);
 const router = new VueRouter();
 
+const category = {
+  id: 'category-id',
+  externalId: 'category-external-id',
+  name: 'category-name',
+  slug: 'category-slug',
+};
+
 describe('CategoriesMenu.vue', () => {
   it('renders a vue instance', () => {
     expect(shallowMount(CategoriesMenu).isVueInstance()).toBe(true);
@@ -32,12 +39,11 @@ describe('CategoriesMenu.vue', () => {
     });
     wrapper.setData({
       categories: {
-        results: [{ id: 'category', name: 'Category' }],
+        results: [category],
       },
     });
-    expect(wrapper.vm.isMenuOpen({ id: 'category' })).toBe(false);
-    console.log(wrapper.html());
+    expect(wrapper.vm.isMenuOpen(category)).toBe(false);
     wrapper.find('[data-test="categories-1st-level"] > li').trigger('mouseover');
-    expect(wrapper.vm.isMenuOpen({ id: 'category' })).toBe(true);
+    expect(wrapper.vm.isMenuOpen(category)).toBe(true);
   });
 });
