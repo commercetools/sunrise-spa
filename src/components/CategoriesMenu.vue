@@ -1,5 +1,5 @@
 <template>
-  <ul v-if="categories"
+  <ul v-if="active"
       data-test="categories-1st-level"
       class="nav navbar-nav">
     <li v-for="category1stLevel in categories.results"
@@ -61,6 +61,12 @@ export default {
       someCategoryWasClicked: false,
       categories: {},
     };
+  },
+
+  computed: {
+    active() {
+      return this.categories.results;
+    },
   },
 
   methods: {
