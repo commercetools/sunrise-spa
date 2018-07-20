@@ -4,7 +4,6 @@ import CategoriesMenu from '@/components/CategoriesMenu.vue';
 
 const localVue = createLocalVue();
 localVue.use(VueRouter);
-const router = new VueRouter();
 
 const category = {
   id: 'category-id',
@@ -34,8 +33,6 @@ describe('CategoriesMenu.vue', () => {
   it.skip('opens a submenu', () => {
     const wrapper = shallowMount(CategoriesMenu, {
       localVue,
-      router,
-      stubs: ['router-link', 'router-view'],
     });
     wrapper.setData({
       categories: {
