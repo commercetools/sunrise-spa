@@ -17,7 +17,7 @@ describe('CategoriesMenu.vue', () => {
     expect(shallowMount(CategoriesMenu).isVueInstance()).toBe(true);
   });
 
-  it('decorates sales category', () => {
+  it('identifies sales category', () => {
     const wrapper = shallowMount(CategoriesMenu, {
       mocks: {
         $sunrise: {
@@ -30,7 +30,7 @@ describe('CategoriesMenu.vue', () => {
     expect(wrapper.vm.isSale({ externalId: 'sale' })).toBe(true);
   });
 
-  it.skip('opens a submenu', () => {
+  it.skip('decides when a submenu should be open', () => {
     const wrapper = shallowMount(CategoriesMenu, {
       localVue,
     });
