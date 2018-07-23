@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import TheHeader from '@/views/TheHeader.vue';
 import HomePage from '@/views/HomePage.vue';
-import ProductListPage from '@/views/ProductListPage.vue';
+import ProductOverviewPage from '@/views/ProductOverviewPage.vue';
 
 Vue.use(Router);
 
@@ -24,7 +24,7 @@ export default new Router({
       path: '/products/:categorySlug',
       name: 'products',
       components: {
-        default: ProductListPage,
+        default: ProductOverviewPage,
         header: TheHeader,
       },
       props: {
