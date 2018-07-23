@@ -1,9 +1,9 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
-import VueRouter from 'vue-router';
+import { shallowMount } from '@vue/test-utils';
 import CategoriesMenu from '@/components/CategoriesMenu.vue';
 
-const localVue = createLocalVue();
-localVue.use(VueRouter);
+const routerLinkStub = {
+  'router-link': '<a></a>',
+};
 
 const categoryWithChildren1 = {
   id: 'category-children-1-id',
@@ -29,6 +29,17 @@ describe('CategoriesMenu.vue', () => {
     expect(shallowMount(CategoriesMenu).isVueInstance()).toBe(true);
   });
 
+  it('hides when there are no categories', () => {
+    const wrapper = shallowMount(CategoriesMenu, { stubs: routerLinkStub });
+    expect(wrapper.vm.active).toBe(false);
+    wrapper.setData({
+      categories: {
+        results: [categoryWithChildren1],
+      },
+    });
+    expect(wrapper.vm.active).toBe(true);
+  });
+
   it('identifies sales category', () => {
     const wrapper = shallowMount(CategoriesMenu, {
       mocks: {
@@ -39,26 +50,23 @@ describe('CategoriesMenu.vue', () => {
         },
       },
     });
-    expect(wrapper.vm.isSale({ externalId: 'not-sale' })).toBe(false);
     expect(wrapper.vm.isSale({ externalId: 'sale' })).toBe(true);
+    expect(wrapper.vm.isSale({ externalId: 'not-sale' })).toBe(false);
+    expect(wrapper.vm.isSale({})).toBe(false);
   });
 
   it('identifies sales category when no sales category is configured', () => {
     const wrapper = shallowMount(CategoriesMenu);
-    expect(wrapper.vm.isSale({})).toBe(false);
     expect(wrapper.vm.isSale({ externalId: 'sale' })).toBe(false);
   });
 
   it('decides when a category with children should be open', () => {
-    const wrapper = shallowMount(CategoriesMenu, {
-      localVue,
-    });
+    const wrapper = shallowMount(CategoriesMenu, { stubs: routerLinkStub });
     wrapper.setData({
       categories: {
         results: [categoryWithChildren1, categoryWithChildren2],
       },
     });
-
     expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBe(false);
     expect(wrapper.vm.isMenuOpen(categoryWithChildren2)).toBe(false);
 
@@ -74,15 +82,12 @@ describe('CategoriesMenu.vue', () => {
   });
 
   it('decides a category without children should not be open', () => {
-    const wrapper = shallowMount(CategoriesMenu, {
-      localVue,
-    });
+    const wrapper = shallowMount(CategoriesMenu, { stubs: routerLinkStub });
     wrapper.setData({
       categories: {
         results: [childlessCategory],
       },
     });
-
     expect(wrapper.vm.isMenuOpen(childlessCategory)).toBe(false);
     wrapper.find('[data-test="categories-1st-level"] > li').trigger('mouseover');
     expect(wrapper.vm.isMenuOpen(childlessCategory)).toBe(false);
@@ -91,15 +96,12 @@ describe('CategoriesMenu.vue', () => {
   });
 
   it('closes submenu when a 1st level category is clicked', () => {
-    const wrapper = shallowMount(CategoriesMenu, {
-      localVue,
-    });
+    const wrapper = shallowMount(CategoriesMenu, { stubs: routerLinkStub });
     wrapper.setData({
       categories: {
         results: [categoryWithChildren1],
       },
     });
-
     expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBe(false);
     wrapper.find('[data-test="categories-1st-level"] > li').trigger('mouseover');
     expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBe(true);
@@ -108,15 +110,12 @@ describe('CategoriesMenu.vue', () => {
   });
 
   it('closes submenu when 2nd level category is clicked', () => {
-    const wrapper = shallowMount(CategoriesMenu, {
-      localVue,
-    });
+    const wrapper = shallowMount(CategoriesMenu, { stubs: routerLinkStub });
     wrapper.setData({
       categories: {
         results: [categoryWithChildren1],
       },
     });
-
     expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBe(false);
     wrapper.find('[data-test="categories-1st-level"] > li').trigger('mouseover');
     expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBe(true);
@@ -125,9 +124,7 @@ describe('CategoriesMenu.vue', () => {
   });
 
   it('closes submenu when 3rd level category is clicked', () => {
-    const wrapper = shallowMount(CategoriesMenu, {
-      localVue,
-    });
+    const wrapper = shallowMount(CategoriesMenu, { stubs: routerLinkStub });
     wrapper.setData({
       categories: {
         results: [categoryWithChildren1],
