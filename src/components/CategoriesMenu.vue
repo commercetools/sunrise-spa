@@ -23,7 +23,7 @@
           <div class="nav-accordion">
             <div v-for="category2ndLevel in category1stLevel.children"
                  :key="category2ndLevel.id">
-              <h3>
+              <h3 data-test="category-2nd-level-name">
                 <router-link :to="{ name: 'products', params: { categorySlug: category2ndLevel.slug } }"
                              @click.native="clickOnCategory()">
                   {{category2ndLevel.name}}
