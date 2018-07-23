@@ -65,7 +65,7 @@ export default {
 
   computed: {
     active() {
-      return this.categories.results;
+      return Object.keys(this.categories).length > 0;
     },
   },
 
