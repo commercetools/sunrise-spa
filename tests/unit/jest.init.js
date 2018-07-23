@@ -7,3 +7,7 @@ VueTestUtils.config.mocks = {
   $t: jest.fn(),
   $sunrise: {},
 };
+
+VueTestUtils.config.stubs = {
+  'router-link': '<a></a>',
+};
