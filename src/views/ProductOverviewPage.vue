@@ -41,7 +41,7 @@
           <!-- End mobile version -->
 
           <form id="form-filter-products" name="filter-products" action="#">
-<!--            {{#if content.searchTerm}}
+<!--        {{#if content.searchTerm}}
             <input type="hidden" name="q" value="{{content.searchTerm}}"/>
             {{/if}}-->
 
@@ -74,14 +74,8 @@
             </div>
           </form>
 
-          <div id="pop-product-list" class="row">
-            {{ categorySlug }}
-            <!--{{#each products.list}}-->
-            <!--<div class="col-xs-12 col-sm-6 col-md-4">-->
-              <!--{{> catalog/product-thumbnail thumbnail=this index=@index}}-->
-            <!--</div>-->
-            <!--{{/each}}-->
-          </div>
+          <ProductList :categorySlug="categorySlug" />
+
           <div class="row">
             <div class="col-sm-9 col-sm-offset-3 col-xs-12 text-center custom-pagination">
               <ul class="page-numbers page-numbers-bottom">
@@ -97,11 +91,13 @@
 </template>
 
 <script>
+import ProductList from '@/components/ProductList.vue';
+
 export default {
+  components: {
+    ProductList,
+  },
+
   props: ['categorySlug'],
 };
 </script>
-
-<style scoped>
-
-</style>
