@@ -1,12 +1,9 @@
 <template>
   <div id="pop-product-list" class="row">
     {{ categorySlug }}
-    <div v-for="product in products.results"
-        :key="product.id"
-        class="col-xs-12 col-sm-6 col-md-4">
-        <h1>{{product}}</h1>
-        <!-- <ProductThumbnail :product="product" /> -->
-    </div>
+    <ProductThumbnail v-for="product in products.results"
+                      :key="product.id"
+                      :product="product" />
   </div>
 </template>
 
@@ -21,11 +18,9 @@ export default {
 
   props: ['categorySlug'],
 
-  data() {
-    return {
-      products: {},
-    };
-  },
+  data: () => ({
+    products: {},
+  }),
 
   apollo: {
     products: {
