@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="col-xs-12 col-sm-6 col-md-4">
     <!-- <a id="link-product-thumbnail{{index}}" href="{{thumbnail.product.variant.url}}"> -->
     <div class="shop-item">
       <!-- {{#if thumbnail.sale}}
