@@ -1,14 +1,8 @@
 export default {
-  computed: {
-    priceAmount() {
-      const { price } = this.product.masterData.current.masterVariant;
-      if (price) {
-        return price.value.centAmount / (10 ** price.value.fractionDigits);
-      }
-      return false;
-    },
-    currencyCode() {
-      return this.product.masterData.current.masterVariant.price.value.currencyCode;
+  methods: {
+    formatPrice({ centAmount, fractionDigits }) {
+      const priceAmount = centAmount / (10 ** fractionDigits);
+      return this.$n(priceAmount, 'currency', this.$store.state.country);
     },
   },
 };
