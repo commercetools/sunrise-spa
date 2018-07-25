@@ -1,6 +1,5 @@
 <template>
   <div id="pop-product-list" class="row">
-    {{ categorySlug }}
     <ProductThumbnail v-for="product in products.results"
                       :key="product.id"
                       :product="product" />
@@ -40,7 +39,8 @@ export default {
                   price(currency: $currency) {
                     value {
                       centAmount,
-                      currencyCode
+                      currencyCode,
+                      fractionDigits
                     }
                   } 
                 }
@@ -52,7 +52,7 @@ export default {
       variables() {
         return {
           locale: this.$i18n.locale,
-          currency: this.$store.state.currency,
+          currency: this.$i18n.numberFormats[this.$store.state.country].currency.currency,
         };
       },
     },

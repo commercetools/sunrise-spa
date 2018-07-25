@@ -39,9 +39,8 @@
           <span class="pop-item-price-old">{{thumbnail.product.variant.price}}</span>
         {{else}}
         {{/if}} -->
-          <span>
-            {{product.masterData.current.masterVariant.price.value.centAmount}}
-            {{product.masterData.current.masterVariant.price.value.currencyCode}}
+          <span v-if="centAmount">
+            {{ $n(centAmount, 'currency', $store.state.country) }}
           </span>
       </div>
       <div class="pop-product-more-colors">
@@ -88,6 +87,19 @@ export default {
     product: {
       type: Object,
       required: true,
+    },
+  },
+
+  computed: {
+    centAmount() {
+      const { price } = this.product.masterData.current.masterVariant;
+      if (price) {
+        return price.value.centAmount / (10 ** price.value.fractionDigits);
+      }
+      return false;
+    },
+    currencyCode() {
+      return this.product.masterData.current.masterVariant.price.value.currencyCode;
     },
   },
 };
