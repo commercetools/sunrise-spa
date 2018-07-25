@@ -22,9 +22,9 @@
           <span class="sr-only">{{ $t("catalog.wishlist.add") }}</span>
         </button>
       </form> -->
-      <div class="pop-product-image">
+      <div v-if="hasImages" class="pop-product-image">
         <img class="img-lazy"
-             :src="matchingVariant.images[0].url"
+             :src="displayedImage"
              :alt="currentProduct.name"/>
       </div>
       <div class="pop-product-name">
@@ -39,7 +39,7 @@
           <span class="pop-item-price-old">{{thumbnail.product.variant.price}}</span>
         {{else}}
         {{/if}} -->
-          <span v-if="matchingVariant.price">
+          <span v-if="hasPrice">
             {{ formatPrice(matchingVariant.price.value) }}
           </span>
       </div>
@@ -99,6 +99,18 @@ export default {
 
     matchingVariant() {
       return this.currentProduct.masterVariant;
+    },
+
+    hasImages() {
+      return this.matchingVariant.images.length > 0;
+    },
+
+    hasPrice() {
+      return this.matchingVariant.price;
+    },
+
+    displayedImage() {
+      return this.matchingVariant.images[0].url;
     },
   },
 
