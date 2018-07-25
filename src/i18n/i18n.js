@@ -24,11 +24,25 @@ function findInitialLocale() {
   return storedLocale || fallbackLocale;
 }
 
+const numberFormats = {
+  'en-US': {
+    currency: {
+      style: 'currency', currency: 'USD'
+    }
+  },
+  'de-DE': {
+    currency: {
+      style: 'currency', currency: 'EUR', currencyDisplay: 'symbol'
+    }
+  }
+}
+
 // Create VueI18n instance with options
 const i18n = new VueI18n({
   locale: findInitialLocale(),
   fallbackLocale,
   messages: loadMessages(),
+  numberFormats,
 });
 
 i18n.vm.$watch('locale', (locale) => {
