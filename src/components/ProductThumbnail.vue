@@ -2,12 +2,12 @@
   <div class="col-xs-12 col-sm-6 col-md-4">
     <!-- <a id="link-product-thumbnail{{index}}" href="{{thumbnail.product.variant.url}}"> -->
     <div class="shop-item">
-      <!-- {{#if thumbnail.sale}}
-        <div class="sale-flag">{{i18n "catalog:thumbnail.sale"}}</div>
-      {{/if}}
-      {{#if thumbnail.new}}
-        <div class="new-flag">{{i18n "catalog:thumbnail.new"}}</div>
-      {{/if}} -->
+        <!-- <div v-if="thumbnail.sale" class="sale-flag">
+          {{ $t('catalog.thumbnail.sale') }}
+        </div> -->
+        <!-- <div v-if="thumbnail.new" class="new-flag">
+          {{ $t('catalog.thumbnail.new') }}
+        </div> -->
       <!-- <form id="form-add-to-wishlist-mobile{{index}}"
             method="post"
             {{#if wishlist}}class="hidden"{{/if}}
@@ -23,9 +23,9 @@
         </button>
       </form> -->
       <div class="pop-product-image">
-        <!-- <img class="img-lazy"
-             data-original="{{thumbnail.product.variant.image}}"
-             alt="{{thumbnail.product.variant.name}}"/> -->
+        <img class="img-lazy"
+             :src="product.masterData.current.masterVariant.images[0].url"
+             :alt="product.masterData.current.name"/>
       </div>
       <div class="pop-product-name">
         <span class="name-headline">
@@ -38,8 +38,11 @@
           <span class="strikethrough">{{thumbnail.product.variant.priceOld}}</span>
           <span class="pop-item-price-old">{{thumbnail.product.variant.price}}</span>
         {{else}}
-          <span>{{thumbnail.product.variant.price}}</span>
         {{/if}} -->
+          <span>
+            {{product.masterData.current.masterVariant.price.value.centAmount}}
+            {{product.masterData.current.masterVariant.price.value.currencyCode}}
+          </span>
       </div>
       <div class="pop-product-more-colors">
         <!-- {{#if thumbnail.moreColors}}{{i18n "catalog:thumbnail.moreColors"}}{{/if}}&nbsp; -->
