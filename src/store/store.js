@@ -9,7 +9,7 @@ export default new Vuex.Store({
   },
 
   state: {
-
+    currency: 'EUR',
   },
 
   getters: {
