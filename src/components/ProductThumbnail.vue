@@ -39,8 +39,8 @@
           <span class="pop-item-price-old">{{thumbnail.product.variant.price}}</span>
         {{else}}
         {{/if}} -->
-          <span v-if="centAmount">
-            {{ $n(centAmount, 'currency', $store.state.country) }}
+          <span v-if="priceAmount">
+            {{ $n(priceAmount, 'currency', $store.state.country) }}
           </span>
       </div>
       <div class="pop-product-more-colors">
@@ -82,6 +82,8 @@
 </template>
 
 <script>
+import priceFormat from '@/mixins/priceFormat';
+
 export default {
   props: {
     product: {
@@ -90,18 +92,7 @@ export default {
     },
   },
 
-  computed: {
-    centAmount() {
-      const { price } = this.product.masterData.current.masterVariant;
-      if (price) {
-        return price.value.centAmount / (10 ** price.value.fractionDigits);
-      }
-      return false;
-    },
-    currencyCode() {
-      return this.product.masterData.current.masterVariant.price.value.currencyCode;
-    },
-  },
+  mixins: [priceFormat],
 };
 </script>
 
