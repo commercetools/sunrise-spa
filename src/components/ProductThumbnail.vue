@@ -33,16 +33,16 @@
         </span>
         <!-- <span class="name-subline">{{thumbnail.product.variant.description}}</span> -->
       </div>
-      <div class="pop-item-price">
-        <!-- {{#if thumbnail.product.variant.priceOld}}
-          <span class="strikethrough">{{thumbnail.product.variant.priceOld}}</span>
-          <span class="pop-item-price-old">{{thumbnail.product.variant.price}}</span>
-        {{else}}
-        {{/if}} -->
-          <span v-if="hasPrice">
-            {{ formatPrice(matchingVariant.price.value) }}
-          </span>
+      <div v-if="hasPrice" class="pop-item-price">
+        <div v-if="hasDiscount">
+           <span class="strikethrough"> {{ formatPrice(originalPrice) }} </span>
+           <span class="pop-item-price-old"> {{ formatPrice(discountedPrice) }} </span>
+        </div>
+        <span v-else>
+          {{ formatPrice(originalPrice) }}
+        </span>
       </div>
+
       <div class="pop-product-more-colors">
         <!-- {{#if thumbnail.moreColors}}{{i18n "catalog:thumbnail.moreColors"}}{{/if}}&nbsp; -->
         <ul class="list-inline">
@@ -109,8 +109,20 @@ export default {
       return this.matchingVariant.price;
     },
 
+    hasDiscount() {
+      return this.matchingVariant.price.discounted;
+    },
+
     displayedImage() {
       return this.matchingVariant.images[0].url;
+    },
+
+    discountedPrice() {
+      return this.matchingVariant.price.discounted.value;
+    },
+
+    originalPrice() {
+      return this.matchingVariant.price.value;
     },
   },
 

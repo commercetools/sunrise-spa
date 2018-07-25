@@ -37,9 +37,14 @@ export default {
                     url
                   }
                   price(currency: $currency) {
+                    discounted {
+                      value {
+                        centAmount
+                        fractionDigits
+                      }
+                    } 
                     value {
-                      centAmount,
-                      currencyCode,
+                      centAmount
                       fractionDigits
                     }
                   } 
