@@ -25,22 +25,34 @@ export default {
   apollo: {
     products: {
       query: gql`
-        query listProducts($locale: Locale!) {
-          products(limit: 20) {
-            total
-            results {
-              id
-              masterData {
-                current {
-                  name(locale: $locale) 
+      query listProducts($locale: Locale!, $currency: Currency!) {
+        products(limit: 20) {
+          total
+          results {
+            id
+            masterData {
+              current {
+                name(locale: $locale) 
+                masterVariant {
+                  images {
+                    url
+                  }
+                  price(currency: $currency) {
+                    value {
+                      centAmount,
+                      currencyCode
+                    }
+                  } 
                 }
               }
             }
           }
-        }`,
+        }
+      }`,
       variables() {
         return {
           locale: this.$i18n.locale,
+          currency: this.$store.state.currency,
         };
       },
     },
