@@ -24,12 +24,12 @@
       </form> -->
       <div class="pop-product-image">
         <img class="img-lazy"
-             :src="product.masterData.current.masterVariant.images[0].url"
-             :alt="product.masterData.current.name"/>
+             :src="matchingVariant.images[0].url"
+             :alt="currentProduct.name"/>
       </div>
       <div class="pop-product-name">
         <span class="name-headline">
-          {{product.masterData.current.name}}
+          {{ currentProduct.name }}
         </span>
         <!-- <span class="name-subline">{{thumbnail.product.variant.description}}</span> -->
       </div>
@@ -39,8 +39,8 @@
           <span class="pop-item-price-old">{{thumbnail.product.variant.price}}</span>
         {{else}}
         {{/if}} -->
-          <span v-if="priceAmount">
-            {{ $n(priceAmount, 'currency', $store.state.country) }}
+          <span v-if="matchingVariant.price">
+            {{ formatPrice(matchingVariant.price.value) }}
           </span>
       </div>
       <div class="pop-product-more-colors">
@@ -92,10 +92,17 @@ export default {
     },
   },
 
+  computed: {
+    currentProduct() {
+      return this.product.masterData.current;
+    },
+
+    matchingVariant() {
+      return this.currentProduct.masterVariant;
+    },
+  },
+
   mixins: [priceFormat],
 };
 </script>
 
-<style>
-
-</style>
