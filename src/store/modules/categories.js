@@ -1,19 +1,23 @@
-export const SET_SLUG_TO_ID = 'SET_SLUG_TO_ID';
+export const SET_DATA_BY_SLUG = 'SET_DATA_BY_SLUG';
 
-function obtainSlugToId(categories) {
-  const slugToId = {};
+function obtainDataBySlug(categories) {
+  const dataBySlug = {};
   if (Array.isArray(categories)) {
-    categories.forEach(({ id, slug, children }) => {
-      slugToId[slug] = id;
-      Object.assign(slugToId, obtainSlugToId(children));
+    categories.forEach(({
+      id, name, slug, ancestors, children,
+    }) => {
+      dataBySlug[slug] = ({
+        id, name, slug, ancestors,
+      });
+      Object.assign(dataBySlug, obtainDataBySlug(children));
     });
   }
-  return slugToId;
+  return dataBySlug;
 }
 
 export default {
   state: {
-    slugToId: {},
+    dataBySlug: {},
   },
 
   getters: {
@@ -22,14 +26,14 @@ export default {
 
   actions: {
     setCategories: ({ commit }, categories) => {
-      const slugToId = obtainSlugToId(categories.results);
-      commit(SET_SLUG_TO_ID, slugToId);
+      const dataBySlug = obtainDataBySlug(categories.results);
+      commit(SET_DATA_BY_SLUG, dataBySlug);
     },
   },
 
   mutations: {
-    [SET_SLUG_TO_ID](state, slugToId) {
-      state.slugToId = slugToId;
+    [SET_DATA_BY_SLUG](state, dataBySlug) {
+      state.dataBySlug = dataBySlug;
     },
   },
 };

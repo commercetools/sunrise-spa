@@ -126,6 +126,10 @@ export default {
           externalId
           name(locale: $locale)
           slug(locale: $locale)
+          ancestors {
+            name(locale: $locale)
+            slug(locale: $locale)
+          }
         }`,
       variables() {
         return {
