@@ -17,7 +17,7 @@
       </div>
       <div class="row row-offcanvas row-offcanvas-left">
         <div class="col-xs-12">
-          <Breadcrumbs />
+          <Breadcrumb :categorySlug="categorySlug" />
         </div>
         <div class="col-sm-12">
           <div class="dark-overlay"></div>
@@ -92,12 +92,12 @@
 
 <script>
 import ProductList from '@/components/ProductList.vue';
-import Breadcrumbs from '@/components/Breadcrumbs.vue';
+import Breadcrumb from '@/components/Breadcrumb.vue';
 
 export default {
   components: {
     ProductList,
-    Breadcrumbs,
+    Breadcrumb,
   },
 
   props: ['categorySlug'],

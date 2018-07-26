@@ -1,12 +1,11 @@
 <template>
   <div>
-    <ol class="breadcrumb">
+    <ol v-if="category" class="breadcrumb">
       <li>
         <router-link to="/">
           {{ $t('main.home') }}
         </router-link>
       </li>
-
       <li v-for="ancestor in category.ancestors" :key="ancestor.id">
         <router-link :to="{ name: 'products', params: { categorySlug: ancestor.slug } }">
           {{ ancestor.name }}
@@ -25,23 +24,12 @@
 
 <script>
 export default {
-  data() {
-    return {
-      category: {
-        name: 'Jacken',
-        slug: 'jacket',
-        ancestors: [
-          {
-            name: 'Women',
-            slug: 'women',
-          },
-          {
-            name: 'Clothing',
-            slug: 'clothing',
-          },
-        ],
-      },
-    };
+  props: ['categorySlug'],
+
+  computed: {
+    category() {
+      return this.$store.state.categories.dataBySlug[this.categorySlug];
+    },
   },
 };
 </script>
