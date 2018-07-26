@@ -22,12 +22,12 @@ export default {
   }),
 
   computed: {
-    categoryId() {
-      return this.$store.state.categories.slugToId[this.categorySlug];
+    category() {
+      return this.$store.state.categories.dataBySlug[this.categorySlug];
     },
 
     gqlPredicate() {
-      return this.categoryId ? `masterData(current(categories(id="${this.categoryId}")))` : null;
+      return this.category ? `masterData(current(categories(id="${this.category.id}")))` : null;
     },
   },
 
