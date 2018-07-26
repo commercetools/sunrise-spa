@@ -95,6 +95,13 @@ export default {
       this.someCategoryWasClicked = true;
     },
   },
+
+  watch: {
+    categories(categories) {
+      this.$store.dispatch('setCategories', categories);
+    },
+  },
+
   apollo: {
     categories: {
       query: gql`
@@ -119,6 +126,10 @@ export default {
           externalId
           name(locale: $locale)
           slug(locale: $locale)
+          ancestors {
+            name(locale: $locale)
+            slug(locale: $locale)
+          }
         }`,
       variables() {
         return {
