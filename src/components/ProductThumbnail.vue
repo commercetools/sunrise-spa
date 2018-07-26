@@ -60,9 +60,9 @@
         </div>
       </div>
       <div class="shop-item-overlay hidden-xs">
-        <!-- <button type="button" class="quickview" data-modal="quickview-modal{{index}}">
+        <button type="button" class="quickview" data-modal="quickview-modal">
           {{ $t("catalog.thumbnail.quickView") }}
-        </button> -->
+        </button>
          <!-- <form id="form-add-to-wishlist{{index}}"
                     method="post"
                     {{#if wishlist}}class="hidden"{{/if}}
