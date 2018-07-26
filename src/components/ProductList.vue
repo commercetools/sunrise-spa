@@ -35,7 +35,7 @@ export default {
     products: {
       query: gql`
       query listProducts($locale: Locale!, $currency: Currency!, $where: String) {
-        products(limit: 20, where: $where) {
+        products(limit: 20, where: $where, sort: "id asc") {
           total
           results {
             id
