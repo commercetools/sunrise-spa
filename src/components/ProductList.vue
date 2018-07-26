@@ -21,11 +21,21 @@ export default {
     products: {},
   }),
 
+  computed: {
+    categoryId() {
+      return this.$store.state.categories.slugToId[this.categorySlug];
+    },
+
+    gqlPredicate() {
+      return this.categoryId ? `masterData(current(categories(id="${this.categoryId}")))` : null;
+    },
+  },
+
   apollo: {
     products: {
       query: gql`
-      query listProducts($locale: Locale!, $currency: Currency!) {
-        products(limit: 20) {
+      query listProducts($locale: Locale!, $currency: Currency!, $where: String) {
+        products(limit: 20, where: $where) {
           total
           results {
             id
@@ -58,6 +68,7 @@ export default {
         return {
           locale: this.$i18n.locale,
           currency: this.$i18n.numberFormats[this.$store.state.country].currency.currency,
+          where: this.gqlPredicate,
         };
       },
     },
