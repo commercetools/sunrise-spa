@@ -44,18 +44,20 @@
       </div>
 
       <div class="pop-product-more-colors">
-        <!-- {{#if thumbnail.moreColors}}{{i18n "catalog:thumbnail.moreColors"}}{{/if}}&nbsp; -->
-        <ul class="list-inline">
-          <li>
-            <div class="product-thumbnail-swatch-red"></div>
-          </li>
-          <li>
-            <div class="product-thumbnail-swatch-green"></div>
-          </li>
-          <li>
-            <div class="product-thumbnail-swatch-blue"></div>
-          </li>
-        </ul>
+        <div v-if="hasMoreColors">
+          {{ $t('catalog.thumbnail.moreColors')}} &nbsp;
+          <ul class="list-inline">
+            <li>
+              <div class="product-thumbnail-swatch-red"></div>
+            </li>
+            <li>
+              <div class="product-thumbnail-swatch-green"></div>
+            </li>
+            <li>
+              <div class="product-thumbnail-swatch-blue"></div>
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="shop-item-overlay hidden-xs">
         <!-- <button type="button" class="quickview" data-modal="quickview-modal{{index}}">
@@ -99,6 +101,11 @@ export default {
 
     matchingVariant() {
       return this.currentProduct.masterVariant;
+    },
+
+    hasMoreColors() {
+      // with sunrise data it is not possible to determine
+      return false;
     },
 
     hasImages() {
