@@ -1,7 +1,8 @@
 <template>
   <div class="col-xs-12 col-sm-6 col-md-4">
     <!-- <a id="link-product-thumbnail{{index}}" href="{{thumbnail.product.variant.url}}"> -->
-    <div class="shop-item">
+    <div data-test="product-thumbnail-item"
+         class="shop-item">
         <div v-if="hasDiscount" class="sale-flag">
           {{ $t('catalog.thumbnail.sale') }}
         </div>
@@ -28,14 +29,24 @@
              :alt="currentProduct.name"/>
       </div>
       <div class="pop-product-name">
-        <span class="name-headline">
+        <span data-test="product-thumbnail-name"
+              class="name-headline">
           {{ currentProduct.name }}
         </span>
       </div>
-      <div v-if="hasPrice" class="pop-item-price">
+      <div v-if="hasPrice"
+           data-test="product-thumbnail-price"
+           class="pop-item-price">
         <div v-if="hasDiscount">
-           <span class="strikethrough"> {{ formatPrice(originalPrice) }} </span>
-           <span class="pop-item-price-old"> {{ formatPrice(discountedPrice) }} </span>
+          <span data-test="product-thumbnail-original-price"
+                class="strikethrough">
+            {{ formatPrice(originalPrice) }}
+          </span>
+          <span data-test="product-thumbnail-discounted-price"
+                class="pop-item-price-old">
+            {{ formatPrice(discountedPrice) }}
+          </span>
+
         </div>
         <span v-else>
           {{ formatPrice(originalPrice) }}
