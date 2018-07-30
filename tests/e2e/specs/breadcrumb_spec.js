@@ -3,7 +3,7 @@ describe('Breadcrumb', () => {
     cy.visit('/#/products/women-shoes-ankle-boots/');
   });
 
-  it('displays and links to each category\'s ancestor', () => {
+  it('links to each category of the breadcrumb', () => {
     cy.get('[data-test=breadcrumb-home-link]', { timeout: 10000 })
       .should('contain', 'Home')
       .should('have.attr', 'href', '#/')
