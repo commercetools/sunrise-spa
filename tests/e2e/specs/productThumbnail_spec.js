@@ -1,4 +1,4 @@
-describe('Product list', () => {
+describe('Product thumbnail', () => {
   before(() => {
     cy.visit('/#/products/women-shoes-ankle-boots/');
   });
