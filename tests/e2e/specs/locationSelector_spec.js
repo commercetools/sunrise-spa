@@ -6,7 +6,7 @@ describe('Location selector', () => {
     });
 
     it('changes text to EN', () => {
-      cy.get('[data-test=stores-link]').contains('Filiale');
+      cy.get('[data-test=stores-link]').should('contain', 'Filiale');
 
       cy.get('[data-test=location-selector-open-button]').click();
 
@@ -19,7 +19,7 @@ describe('Location selector', () => {
           expect(localStorage.getItem('locale')).to.eq('en');
         });
 
-      cy.get('[data-test=stores-link]').contains('Stores');
+      cy.get('[data-test=stores-link]').should('contain', 'Stores');
     });
   });
 });
