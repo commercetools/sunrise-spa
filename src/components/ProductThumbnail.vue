@@ -4,7 +4,8 @@
     <div data-test="product-thumbnail"
          class="shop-item">
         <div v-if="hasDiscount"
-             class="sale-flag">
+             class="sale-flag"
+             data-test="product-thumbnail-sale-flag">
           {{ $t('catalog.thumbnail.sale') }}
         </div>
         <!-- <div v-if="thumbnail.new" class="new-flag">
@@ -39,7 +40,7 @@
       <div v-if="hasPrice"
            class="pop-item-price">
         <div v-if="hasDiscount">
-          <span data-test="product-thumbnail-original-price"
+          <span data-test="product-thumbnail-price"
                 class="strikethrough">
             {{ formatPrice(originalPrice) }}
           </span>
