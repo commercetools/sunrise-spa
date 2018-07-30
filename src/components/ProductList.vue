@@ -1,5 +1,6 @@
 <template>
-  <div id="pop-product-list" class="row">
+  <div id="pop-product-list"
+       class="row">
     <ProductThumbnail v-for="product in products.results"
                       :key="product.id"
                       :product="product" />

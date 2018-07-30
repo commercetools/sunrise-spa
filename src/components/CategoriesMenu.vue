@@ -1,14 +1,15 @@
 <template>
   <ul v-if="active"
-      data-test="categories-1st-level"
       class="nav navbar-nav">
     <li v-for="category1stLevel in categories.results"
         :key="category1stLevel.id"
         @mouseover="hoverOnCategory(category1stLevel)"
         @mouseleave="hoverOffCategory()"
+        data-test="category-1st-level"
         class="dropdown menu-large">
       <router-link :to="{ name: 'products', params: { categorySlug: category1stLevel.slug } }"
                    @click.native="clickOnCategory()"
+                   data-test="category-1st-level-link"
                    :class="{ 'icon-ribbon sale': isSale(category1stLevel) }"
                    class="dropdown-toggle">
         {{category1stLevel.name}}
@@ -17,23 +18,24 @@
              src="../assets/img/plus79.png"/>
       </router-link>
       <ul v-if="isMenuOpen(category1stLevel)"
-          data-test="categories-2nd-level"
           class="dropdown-menu megamenu row dropdown-submenu">
         <li class="col-sm-8">
           <div class="nav-accordion">
             <div v-for="category2ndLevel in category1stLevel.children"
                  :key="category2ndLevel.id">
-              <h3 data-test="category-2nd-level-name">
+              <h3>
                 <router-link :to="{ name: 'products', params: { categorySlug: category2ndLevel.slug } }"
-                             @click.native="clickOnCategory()">
+                             @click.native="clickOnCategory()"
+                             data-test="category-2nd-level-link">
                   {{category2ndLevel.name}}
                 </router-link>
               </h3>
-              <ul data-test="categories-3rd-level">
+              <ul>
                 <li v-for="category3rdLevel in category2ndLevel.children"
                     :key="category3rdLevel.id">
                   <router-link :to="{ name: 'products', params: { categorySlug: category3rdLevel.slug } }"
-                               @click.native="clickOnCategory()">
+                               @click.native="clickOnCategory()"
+                               data-test="category-3rd-level-link">
                     {{category3rdLevel.name}}
                   </router-link>
                 </li>
@@ -98,7 +100,7 @@ export default {
 
   watch: {
     categories(categories) {
-      this.$store.dispatch('setCategories', categories);
+      this.$store.dispatch('setCategories', categories.results);
     },
   },
 
@@ -107,8 +109,6 @@ export default {
       query: gql`
         query fetchAllCategories($locale: Locale!) {
           categories(limit: 10, where: "parent is not defined", sort: "orderHint asc") {
-            total
-            count
             results {
               ...printCategory
               children {
