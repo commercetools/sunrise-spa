@@ -1,20 +1,25 @@
 <template>
   <div>
-    <ol v-if="category" class="breadcrumb">
+    <ol v-if="category"
+        class="breadcrumb">
       <li>
-        <router-link to="/">
+        <router-link to="/"
+                     data-test="breadcrumb-home-link">
           {{ $t('main.home') }}
         </router-link>
       </li>
-      <li v-for="ancestor in category.ancestors" :key="ancestor.id">
-        <router-link :to="{ name: 'products', params: { categorySlug: ancestor.slug } }">
+      <li v-for="ancestor in category.ancestors"
+          :key="ancestor.id">
+        <router-link :to="{ name: 'products', params: { categorySlug: ancestor.slug } }"
+                     data-test="breadcrumb-ancestor-link">
           {{ ancestor.name }}
         </router-link>
       </li>
 
       <li class="active">
         <router-link :to="{ name: 'products', params: { categorySlug: category.slug } }"
-                    class="active">
+                     data-test="breadcrumb-category-link"
+                     class="active">
           {{ category.name }}
         </router-link>
       </li>
