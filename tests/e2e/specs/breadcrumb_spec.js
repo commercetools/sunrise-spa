@@ -26,7 +26,7 @@ describe('Breadcrumb', () => {
       .should('not.exist');
 
     cy.get('[data-test=breadcrumb-category-link]')
-      .contains('Ankle boots')
+      .should('contain', 'Ankle boots')
       .should('have.attr', 'href', '#/products/women-shoes-ankle-boots')
       .should('have.class', 'active');
   });
