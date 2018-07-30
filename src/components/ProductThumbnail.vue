@@ -1,9 +1,10 @@
 <template>
   <div class="col-xs-12 col-sm-6 col-md-4">
     <!-- <a id="link-product-thumbnail{{index}}" href="{{thumbnail.product.variant.url}}"> -->
-    <div data-test="product-thumbnail-item"
+    <div data-test="product-thumbnail"
          class="shop-item">
-        <div v-if="hasDiscount" class="sale-flag">
+        <div v-if="hasDiscount"
+             class="sale-flag">
           {{ $t('catalog.thumbnail.sale') }}
         </div>
         <!-- <div v-if="thumbnail.new" class="new-flag">
@@ -23,7 +24,8 @@
           <span class="sr-only">{{ $t("catalog.wishlist.add") }}</span>
         </button>
       </form> -->
-      <div v-if="hasImages" class="pop-product-image">
+      <div v-if="hasImages"
+           class="pop-product-image">
         <img class="img-lazy"
              :src="displayedImage"
              :alt="currentProduct.name"/>
@@ -35,7 +37,6 @@
         </span>
       </div>
       <div v-if="hasPrice"
-           data-test="product-thumbnail-price"
            class="pop-item-price">
         <div v-if="hasDiscount">
           <span data-test="product-thumbnail-original-price"
@@ -48,7 +49,8 @@
           </span>
 
         </div>
-        <span v-else>
+        <span v-else
+              data-test="product-thumbnail-price">
           {{ formatPrice(originalPrice) }}
         </span>
       </div>
@@ -70,7 +72,9 @@
         </div>
       </div>
       <div class="shop-item-overlay hidden-xs">
-        <button type="button" class="quickview" data-modal="quickview-modal">
+        <button type="button"
+                class="quickview"
+                data-modal="quickview-modal">
           {{ $t("catalog.thumbnail.quickView") }}
         </button>
          <!-- <form id="form-add-to-wishlist{{index}}"

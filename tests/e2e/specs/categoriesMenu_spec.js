@@ -4,18 +4,25 @@ describe('Categories menu', () => {
   });
 
   it('links to any level category', () => {
-    cy.get('[data-test=categories-1st-level]')
-      .contains('Women', { timeout: 10000 })
-      .should('have.attr', 'href', '#/products/women')
-      .parent()
-      .trigger('mouseover');
+    cy.get('[data-test=category-1st-level]', { timeout: 10000 })
+      .eq(1)
+      .then(($menu) => {
+        cy.wrap($menu)
+          .find('[data-test=category-1st-level-link]')
+          .contains('Women')
+          .should('have.attr', 'href', '#/products/women');
 
-    cy.get('[data-test=categories-2nd-level]')
-      .contains('Shoes')
-      .should('have.attr', 'href', '#/products/women-shoes');
+        cy.wrap($menu).trigger('mouseover');
 
-    cy.get('[data-test=categories-3rd-level]')
-      .contains('Ankle boots')
-      .should('have.attr', 'href', '#/products/women-shoes-ankle-boots');
+        cy.wrap($menu)
+          .find('[data-test=category-2nd-level-link]')
+          .contains('Shoes')
+          .should('have.attr', 'href', '#/products/women-shoes');
+
+        cy.wrap($menu)
+          .find('[data-test=category-3rd-level-link]')
+          .contains('Ankle boots')
+          .should('have.attr', 'href', '#/products/women-shoes-ankle-boots');
+      });
   });
 });

@@ -4,24 +4,23 @@ describe('Product list', () => {
   });
 
   it('displays products information', () => {
-    cy.get('[data-test=product-thumbnail-item]', { timeout: 10000 })
-      .eq(1)
-      .find('img').should('have.attr', 'src')
-      .should('include', '.jpg');
-
-    cy.get('[data-test=product-thumbnail-item]')
-      .eq(1)
-      .find('[data-test=product-thumbnail-name]')
+    cy.get('[data-test=product-thumbnail-name]', { timeout: 10000 })
       .contains('Booties Lemare grey')
-      .parentsUntil('[data-test=product-thumbnail-item]')
+      .parentsUntil('[data-test=product-thumbnail]')
       .parent()
-      .find('[data-test=product-thumbnail-original-price]')
-      .contains('248,75')
-      .contains('€')
-      .parentsUntil('[data-test=product-thumbnail-price]')
-      .parent()
-      .find('[data-test=product-thumbnail-discounted-price]')
-      .contains('174,12')
-      .contains('€');
+      .then(($thumbnail) => {
+        cy.wrap($thumbnail)
+          .find('img')
+          .should('have.attr', 'src')
+          .should('include', '.jpg');
+
+        cy.wrap($thumbnail)
+          .find('[data-test=product-thumbnail-original-price]')
+          .should('contain', '248,75 €');
+
+        cy.wrap($thumbnail)
+          .find('[data-test=product-thumbnail-discounted-price]')
+          .should('contain', '174,12 €');
+      });
   });
 });

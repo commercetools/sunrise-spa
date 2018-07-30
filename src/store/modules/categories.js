@@ -26,7 +26,7 @@ export default {
 
   actions: {
     setCategories: ({ commit }, categories) => {
-      const dataBySlug = obtainDataBySlug(categories.results);
+      const dataBySlug = obtainDataBySlug(categories);
       commit(SET_DATA_BY_SLUG, dataBySlug);
     },
   },
