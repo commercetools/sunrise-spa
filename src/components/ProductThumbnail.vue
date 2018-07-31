@@ -3,7 +3,7 @@
     <!-- <a id="link-product-thumbnail{{index}}" href="{{thumbnail.product.variant.url}}"> -->
     <div data-test="product-thumbnail"
          class="shop-item">
-        <div v-if="hasDiscount"
+        <div v-if="hasPrice && hasDiscount"
              class="sale-flag"
              data-test="product-thumbnail-sale-flag">
           {{ $t('catalog.thumbnail.sale') }}
@@ -111,11 +111,12 @@ export default {
 
   computed: {
     currentProduct() {
-      return this.product.masterData.current;
+      return this.product.masterData.current || {};
     },
 
     matchingVariant() {
-      return this.currentProduct.masterVariant;
+      // with query endpoint we cannot really determine
+      return this.currentProduct.masterVariant || {};
     },
 
     hasMoreColors() {
@@ -124,7 +125,7 @@ export default {
     },
 
     hasImages() {
-      return this.matchingVariant.images.length > 0;
+      return Array.isArray(this.matchingVariant.images) && this.matchingVariant.images.length > 0;
     },
 
     hasPrice() {
