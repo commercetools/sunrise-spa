@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import categoryData from '@/mixins/categoryData';
+
 export default {
   props: ['categorySlug'],
 
@@ -38,9 +40,10 @@ export default {
     },
 
     category() {
-      const category = this.$store.state.categories.dataBySlug[this.categorySlug];
-      return category || {};
+      return this.categoryBySlug(this.categorySlug) || {};
     },
   },
+
+  mixins: [categoryData],
 };
 </script>

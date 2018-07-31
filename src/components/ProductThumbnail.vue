@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import priceFormat from '@/mixins/priceFormat';
+import priceFormatter from '@/mixins/priceFormatter';
 
 export default {
   props: {
@@ -149,7 +149,7 @@ export default {
     },
   },
 
-  mixins: [priceFormat],
+  mixins: [priceFormatter],
 };
 </script>
 

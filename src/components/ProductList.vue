@@ -10,6 +10,7 @@
 <script>
 import gql from 'graphql-tag';
 import ProductThumbnail from '@/components/ProductThumbnail.vue';
+import categoryData from '@/mixins/categoryData';
 
 export default {
   components: {
@@ -24,13 +25,15 @@ export default {
 
   computed: {
     category() {
-      return this.$store.state.categories.dataBySlug[this.categorySlug];
+      return this.categoryBySlug(this.categorySlug);
     },
 
     gqlPredicate() {
       return this.category ? `masterData(current(categories(id="${this.category.id}")))` : null;
     },
   },
+
+  mixins: [categoryData],
 
   apollo: {
     products: {
@@ -50,13 +53,11 @@ export default {
                   price(currency: $currency) {
                     discounted {
                       value {
-                        centAmount
-                        fractionDigits
+                        ...printPrice
                       }
                     } 
                     value {
-                      centAmount
-                      fractionDigits
+                      ...printPrice
                     }
                   } 
                 }
@@ -64,6 +65,11 @@ export default {
             }
           }
         }
+      }
+
+      fragment printPrice on BaseMoney {
+        centAmount
+        fractionDigits
       }`,
       variables() {
         return {
