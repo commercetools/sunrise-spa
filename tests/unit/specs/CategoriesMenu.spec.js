@@ -76,11 +76,9 @@ describe('CategoriesMenu.vue', () => {
 
     it('hides when there are no categories', () => {
       expect(wrapper.vm.active).toBe(true);
-      wrapper.setData({
-        categories: {
-          results: [],
-        },
-      });
+      wrapper.vm.$set(wrapper.vm, 'categories', {});
+      expect(wrapper.vm.active).toBe(false);
+      wrapper.setData({ categories: { results: [] } });
       expect(wrapper.vm.active).toBe(false);
     });
 

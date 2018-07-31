@@ -67,9 +67,7 @@ export default {
 
   computed: {
     active() {
-      return Object.keys(this.categories).length > 0
-        && Array.isArray(this.categories.results)
-        && this.categories.results.length > 0;
+      return Array.isArray(this.categories.results) && this.categories.results.length > 0;
     },
   },
 
@@ -102,7 +100,8 @@ export default {
 
   watch: {
     categories(categories) {
-      this.$store.dispatch('setCategories', categories.results);
+      const categoryItems = Array.isArray(categories.results) ? categories.results : [];
+      this.$store.dispatch('setCategories', categoryItems);
     },
   },
 
