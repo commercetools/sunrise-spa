@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ol v-if="category"
+    <ol v-if="active"
         class="breadcrumb">
       <li>
         <router-link to="/"
@@ -16,7 +16,8 @@
         </router-link>
       </li>
 
-      <li class="active">
+      <li v-if="category"
+          class="active">
         <router-link :to="{ name: 'products', params: { categorySlug: category.slug } }"
                      data-test="breadcrumb-category-link"
                      class="active">
@@ -32,8 +33,13 @@ export default {
   props: ['categorySlug'],
 
   computed: {
+    active() {
+      return this.categorySlug;
+    },
+
     category() {
-      return this.$store.state.categories.dataBySlug[this.categorySlug];
+      const category = this.$store.state.categories.dataBySlug[this.categorySlug];
+      return category || {};
     },
   },
 };

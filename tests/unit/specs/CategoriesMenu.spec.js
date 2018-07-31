@@ -7,7 +7,7 @@ localVue.use(Vuex);
 
 describe('CategoriesMenu.vue', () => {
   it('renders a vue instance', () => {
-    expect(shallowMount(CategoriesMenu).isVueInstance()).toBe(true);
+    expect(shallowMount(CategoriesMenu).isVueInstance()).toBeTruthy();
   });
 
   it('identifies sales category', () => {
@@ -20,14 +20,14 @@ describe('CategoriesMenu.vue', () => {
         },
       },
     });
-    expect(wrapper.vm.isSale({ externalId: 'sale' })).toBe(true);
-    expect(wrapper.vm.isSale({ externalId: 'not-sale' })).toBe(false);
-    expect(wrapper.vm.isSale({})).toBe(false);
+    expect(wrapper.vm.isSale({ externalId: 'sale' })).toBeTruthy();
+    expect(wrapper.vm.isSale({ externalId: 'not-sale' })).toBeFalsy();
+    expect(wrapper.vm.isSale({})).toBeFalsy();
   });
 
   it('identifies sales category when no sales category is configured', () => {
     const wrapper = shallowMount(CategoriesMenu);
-    expect(wrapper.vm.isSale({ externalId: 'sale' })).toBe(false);
+    expect(wrapper.vm.isSale({ externalId: 'sale' })).toBeFalsy();
   });
 
   describe('given it has 2 categories with children', () => {
@@ -51,13 +51,8 @@ describe('CategoriesMenu.vue', () => {
     let wrapper;
 
     beforeEach(() => {
-      actions = {
-        setCategories: jest.fn(),
-      };
-      store = new Vuex.Store({
-        state: {},
-        actions,
-      });
+      actions = { setCategories: jest.fn() };
+      store = new Vuex.Store({ actions });
       wrapper = shallowMount(CategoriesMenu, {
         localVue,
         store,
@@ -75,22 +70,22 @@ describe('CategoriesMenu.vue', () => {
     });
 
     it('hides when there are no categories', () => {
-      expect(wrapper.vm.active).toBe(true);
+      expect(wrapper.vm.active).toBeTruthy();
       wrapper.vm.$set(wrapper.vm, 'categories', {});
-      expect(wrapper.vm.active).toBe(false);
+      expect(wrapper.vm.active).toBeFalsy();
       wrapper.setData({ categories: { results: [] } });
-      expect(wrapper.vm.active).toBe(false);
+      expect(wrapper.vm.active).toBeFalsy();
     });
 
     it('decides when a category with children should be open', () => {
-      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBe(false);
-      expect(wrapper.vm.isMenuOpen(categoryWithChildren2)).toBe(false);
+      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeFalsy();
+      expect(wrapper.vm.isMenuOpen(categoryWithChildren2)).toBeFalsy();
       wrapper.find('[data-test="category-1st-level"]').trigger('mouseover');
-      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBe(true);
-      expect(wrapper.vm.isMenuOpen(categoryWithChildren2)).toBe(false);
+      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeTruthy();
+      expect(wrapper.vm.isMenuOpen(categoryWithChildren2)).toBeFalsy();
       wrapper.find('[data-test="category-1st-level"]').trigger('mouseleave');
-      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBe(false);
-      expect(wrapper.vm.isMenuOpen(categoryWithChildren2)).toBe(false);
+      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeFalsy();
+      expect(wrapper.vm.isMenuOpen(categoryWithChildren2)).toBeFalsy();
     });
 
     it('decides a category without children should not be open', () => {
@@ -100,35 +95,35 @@ describe('CategoriesMenu.vue', () => {
           results: [childlessCategory],
         },
       });
-      expect(wrapper.vm.isMenuOpen(childlessCategory)).toBe(false);
+      expect(wrapper.vm.isMenuOpen(childlessCategory)).toBeFalsy();
       wrapper.find('[data-test="category-1st-level"]').trigger('mouseover');
-      expect(wrapper.vm.isMenuOpen(childlessCategory)).toBe(false);
+      expect(wrapper.vm.isMenuOpen(childlessCategory)).toBeFalsy();
       wrapper.find('[data-test="category-1st-level"]').trigger('mouseleave');
-      expect(wrapper.vm.isMenuOpen(childlessCategory)).toBe(false);
+      expect(wrapper.vm.isMenuOpen(childlessCategory)).toBeFalsy();
     });
 
     it('closes submenu when a 1st level category is clicked', () => {
-      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBe(false);
+      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeFalsy();
       wrapper.find('[data-test="category-1st-level"]').trigger('mouseover');
-      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBe(true);
+      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeTruthy();
       wrapper.find('[data-test="category-1st-level-link"]').trigger('click');
-      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBe(false);
+      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeFalsy();
     });
 
     it('closes submenu when 2nd level category is clicked', () => {
-      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBe(false);
+      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeFalsy();
       wrapper.find('[data-test="category-1st-level"]').trigger('mouseover');
-      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBe(true);
+      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeTruthy();
       wrapper.find('[data-test="category-2nd-level-link"]').trigger('click');
-      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBe(false);
+      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeFalsy();
     });
 
     it('closes submenu when 3rd level category is clicked', () => {
-      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBe(false);
+      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeFalsy();
       wrapper.find('[data-test="category-1st-level"]').trigger('mouseover');
-      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBe(true);
+      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeTruthy();
       wrapper.find('[data-test="category-3rd-level-link"]').trigger('click');
-      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBe(false);
+      expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeFalsy();
     });
   });
 });
