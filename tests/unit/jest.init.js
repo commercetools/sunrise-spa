@@ -5,9 +5,5 @@ VueTestUtils.config.mocks = {
   $t: jest.fn(),
   $n: jest.fn(),
   $sunrise: {},
-  $store: {
-    state: {
-      country: 'de-DE',
-    },
-  },
+  $store: {},
 };
