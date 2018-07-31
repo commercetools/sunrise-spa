@@ -56,7 +56,7 @@ describe('CategoriesMenu.vue', () => {
       wrapper = shallowMount(CategoriesMenu, {
         localVue,
         store,
-        stubs: { 'router-link': '<a></a>' },
+        stubs: { 'router-link': '<a/>' },
       });
       wrapper.setData({
         categories: {
