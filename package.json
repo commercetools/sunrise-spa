@@ -10,7 +10,7 @@
     "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
-    "@commercetools/sdk-middleware-auth": "^4.0.0",
+    "@commercetools/sdk-middleware-auth": "^4.0.2",
     "apollo-cache-inmemory": "^1.2.5",
     "apollo-client": "^2.3.5",
     "apollo-link": "^1.2.2",
