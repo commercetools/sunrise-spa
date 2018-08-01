@@ -10,7 +10,7 @@
 <script>
 import gql from 'graphql-tag';
 import ProductThumbnail from '@/components/ProductThumbnail.vue';
-import categoryData from '@/mixins/categoryData';
+import categoryMixin from '@/mixins/categoryMixin';
 
 export default {
   components: {
@@ -33,7 +33,7 @@ export default {
     },
   },
 
-  mixins: [categoryData],
+  mixins: [categoryMixin],
 
   apollo: {
     products: {
