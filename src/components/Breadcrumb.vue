@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import categoryData from '@/mixins/categoryData';
+import categoryMixin from '@/mixins/categoryMixin';
 
 export default {
   props: ['categorySlug'],
@@ -44,6 +44,6 @@ export default {
     },
   },
 
-  mixins: [categoryData],
+  mixins: [categoryMixin],
 };
 </script>
