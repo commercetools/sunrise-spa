@@ -8,3 +8,4 @@
   VUE_APP_CT_CLIENT_SECRET = "Your client secret (optional)"
   VUE_APP_CT_AUTH_HOST = "Auth host (default Europe)"
   VUE_APP_CT_API_HOST = "API host (default Europe)"
+  YARN_FLAGS = "--no-ignore-optional"
