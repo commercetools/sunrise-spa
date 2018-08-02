@@ -4,7 +4,7 @@ describe('Product thumbnail', () => {
   });
 
   it('displays product information', () => {
-    cy.get('[data-test=product-thumbnail-name]', { timeout: 10000 })
+    cy.get('[data-test=product-thumbnail-name]', { timeout: 20000 })
       .contains('Booties Lemare grey')
       .parentsUntil('[data-test=product-thumbnail]')
       .parent()

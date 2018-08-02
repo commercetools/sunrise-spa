@@ -4,7 +4,7 @@ describe('Categories menu', () => {
   });
 
   it('links to any level category', () => {
-    cy.get('[data-test=category-1st-level]', { timeout: 10000 })
+    cy.get('[data-test=category-1st-level]', { timeout: 20000 })
       .eq(1)
       .then(($menu) => {
         cy.wrap($menu)
