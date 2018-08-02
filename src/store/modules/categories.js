@@ -1,6 +1,6 @@
 export const SET_DATA_BY_SLUG = 'SET_DATA_BY_SLUG';
 
-function obtainDataBySlug(categories) {
+export function obtainDataBySlug(categories) {
   const dataBySlug = {};
   if (Array.isArray(categories)) {
     categories.forEach(({
