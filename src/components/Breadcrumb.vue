@@ -39,7 +39,7 @@ export default {
     },
 
     active() {
-      return this.categorySlug && this.category;
+      return this.category;
     },
   },
 
