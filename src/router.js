@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import TheHeader from '@/views/TheHeader.vue';
 import HomePage from '@/views/HomePage.vue';
 import ProductOverviewPage from '@/views/ProductOverviewPage.vue';
+import LoginPage from '@/views/LoginPage.vue';
 
 Vue.use(Router);
 
@@ -19,6 +20,14 @@ export default new Router({
     {
       path: '/stores',
       name: 'stores',
+    },
+    {
+      path: '/login',
+      name: 'login',
+      components: {
+        default: LoginPage,
+        header: TheHeader,
+      },
     },
     {
       path: '/products/:categorySlug',

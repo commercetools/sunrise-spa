@@ -69,13 +69,14 @@
               <!--</a>-->
               <!--</li>-->
               <!--{{else}}-->
-              <!--<li class="list-item-user">-->
-              <!--<a href="{{@root.meta._links.signIn.href}}" class="link-user icon-user">-->
-              <!--<span class="hidden-xs hidden-sm"-->
-              <!--{{ $t("main.header.signIn") }}-->
-              <!--</span>-->
-              <!--</a>-->
-              <!--</li>-->
+              <li class="list-item-user">
+                <router-link :to="{ name: 'login' }"
+                             class="link-user icon-user">
+                  <span class="hidden-xs hidden-sm">
+                    {{ $t("main.header.signIn") }}
+                  </span>
+                </router-link>
+              </li>
               <!--{{/if}}-->
 
               <LocationSelector/>
