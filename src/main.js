@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import App from '@/App.vue';
 import SelectBoxIt from '@/components/global/SelectBoxIt.vue';
+import Vuelidate from 'vuelidate';
 import router from '@/router';
 import store from '@/store/store';
 import '@/registerServiceWorker';
@@ -11,6 +12,8 @@ import sunriseConfig from '@/../sunrise.config';
 import './assets/scss/main.scss';
 
 Vue.config.productionTip = false;
+
+Vue.use(Vuelidate);
 
 Vue.component('SelectBoxIt', SelectBoxIt);
 
