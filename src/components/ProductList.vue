@@ -1,9 +1,20 @@
 <template>
-  <div id="pop-product-list"
-       class="row">
-    <ProductThumbnail v-for="product in products.results"
-                      :key="product.id"
-                      :product="product" />
+  <div>
+    <div v-if="loading">
+      <img src="../assets/img/spinner.gif"/>
+    </div>
+    <div v-else-if="empty">
+      {{ $t('catalog.searchNotFound.notFound') }}
+    </div>
+    <transition name="fade">
+      <div v-if="!loading && !empty"
+           id="pop-product-list"
+           class="row">
+        <ProductThumbnail v-for="product in products.results"
+                          :key="product.id"
+                          :product="product" />
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -24,6 +35,14 @@ export default {
   }),
 
   computed: {
+    loading() {
+      return this.$apollo.queries.products.loading;
+    },
+
+    empty() {
+      return !(Array.isArray(this.products.results) && this.products.results.length > 0);
+    },
+
     category() {
       return this.categoryBySlug(this.categorySlug);
     },
@@ -40,12 +59,11 @@ export default {
       query: gql`
       query listProducts($locale: Locale!, $currency: Currency!, $where: String) {
         products(limit: 20, where: $where, sort: "id asc") {
-          total
           results {
             id
             masterData {
               current {
-                name(locale: $locale) 
+                name(locale: $locale)
                 masterVariant {
                   images {
                     url
@@ -55,11 +73,11 @@ export default {
                       value {
                         ...printPrice
                       }
-                    } 
+                    }
                     value {
                       ...printPrice
                     }
-                  } 
+                  }
                 }
               }
             }
@@ -77,6 +95,9 @@ export default {
           currency: this.$i18n.numberFormats[this.$store.state.country].currency.currency,
           where: this.gqlPredicate,
         };
+      },
+      skip() {
+        return !this.gqlPredicate;
       },
     },
   },
