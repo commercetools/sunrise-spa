@@ -6,13 +6,29 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 
 describe('CategoriesMenu.vue', () => {
+  let options;
+
+  beforeEach(() => {
+    options = {
+      mocks: {
+        $apollo: {
+          queries: {
+            categories: { loading: false },
+          },
+        },
+      },
+    };
+  });
+
   it('renders a vue instance', () => {
-    expect(shallowMount(CategoriesMenu).isVueInstance()).toBeTruthy();
+    expect(shallowMount(CategoriesMenu, options).isVueInstance()).toBeTruthy();
   });
 
   it('identifies sales category', () => {
     const wrapper = shallowMount(CategoriesMenu, {
+      ...options,
       mocks: {
+        ...options.mocks,
         $sunrise: {
           categories: {
             salesExternalId: 'sale',
@@ -26,7 +42,7 @@ describe('CategoriesMenu.vue', () => {
   });
 
   it('identifies sales category when no sales category is configured', () => {
-    const wrapper = shallowMount(CategoriesMenu);
+    const wrapper = shallowMount(CategoriesMenu, options);
     expect(wrapper.vm.isSale({ externalId: 'sale' })).toBeFalsy();
   });
 
@@ -54,6 +70,7 @@ describe('CategoriesMenu.vue', () => {
       actions = { setCategories: jest.fn() };
       store = new Vuex.Store({ actions });
       wrapper = shallowMount(CategoriesMenu, {
+        ...options,
         localVue,
         store,
         stubs: { 'router-link': '<a/>' },
@@ -69,12 +86,12 @@ describe('CategoriesMenu.vue', () => {
       expect(actions.setCategories).toHaveBeenCalled();
     });
 
-    it('hides when there are no categories', () => {
-      expect(wrapper.vm.active).toBeTruthy();
+    it('detects when there are no categories', () => {
+      expect(wrapper.vm.empty).toBeFalsy();
       wrapper.vm.$set(wrapper.vm, 'categories', {});
-      expect(wrapper.vm.active).toBeFalsy();
+      expect(wrapper.vm.empty).toBeTruthy();
       wrapper.setData({ categories: { results: [] } });
-      expect(wrapper.vm.active).toBeFalsy();
+      expect(wrapper.vm.empty).toBeTruthy();
     });
 
     it('decides when a category with children should be open', () => {

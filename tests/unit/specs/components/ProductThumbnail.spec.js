@@ -19,6 +19,8 @@ describe('ProductThumbnail.vue', () => {
   };
 
   let product;
+  let formatPrice;
+  let options;
 
   beforeEach(() => {
     product = {
@@ -28,16 +30,24 @@ describe('ProductThumbnail.vue', () => {
         },
       },
     };
+    formatPrice = jest.fn();
+    options = {
+      propsData: { product },
+      methods: { formatPrice },
+    };
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(ProductThumbnail, { propsData: { product } }).isVueInstance()).toBeTruthy();
+    expect(shallowMount(ProductThumbnail, options).isVueInstance()).toBeTruthy();
   });
 
   it('obtains current version of the product', () => {
     const current = { foo: 'bar' };
     product.masterData.current = current;
-    const wrapper = shallowMount(ProductThumbnail, { propsData: { product } });
+    const wrapper = shallowMount(ProductThumbnail, {
+      ...options,
+      propsData: { product },
+    });
 
     expect(wrapper.vm.currentProduct).toEqual(current);
   });
@@ -45,19 +55,28 @@ describe('ProductThumbnail.vue', () => {
   it.skip('obtains matching variant of the product', () => {
     const matchingVariant = { foo: 'bar' };
     product.masterData.current.masterVariant = matchingVariant;
-    const wrapper = shallowMount(ProductThumbnail, { propsData: { product } });
+    const wrapper = shallowMount(ProductThumbnail, {
+      ...options,
+      propsData: { product },
+    });
 
     expect(wrapper.vm.matchingVariant).toEqual(matchingVariant);
   });
 
   it.skip('obtains whether product has more colors', () => {
-    const wrapper = shallowMount(ProductThumbnail, { propsData: { product } });
+    const wrapper = shallowMount(ProductThumbnail, {
+      ...options,
+      propsData: { product },
+    });
 
     expect(wrapper.vm.hasMoreColors).toBeFalsy();
   });
 
   it('obtains whether product has images', () => {
-    const wrapper = shallowMount(ProductThumbnail, { propsData: { product } });
+    const wrapper = shallowMount(ProductThumbnail, {
+      ...options,
+      propsData: { product },
+    });
 
     expect(wrapper.vm.hasImages).toBeFalsy();
 
@@ -76,8 +95,8 @@ describe('ProductThumbnail.vue', () => {
 
   it('obtains whether product has a price', () => {
     const wrapper = shallowMount(ProductThumbnail, {
+      ...options,
       propsData: { product },
-      methods: { formatPrice: jest.fn() },
     });
 
     expect(wrapper.vm.hasPrice).toBeFalsy();
@@ -92,8 +111,8 @@ describe('ProductThumbnail.vue', () => {
   it('obtains whether product has a discount', () => {
     product.masterData.current.masterVariant.price = { ...originalPrice };
     const wrapper = shallowMount(ProductThumbnail, {
+      ...options,
       propsData: { product },
-      methods: { formatPrice: jest.fn() },
     });
 
     expect(wrapper.vm.hasDiscount).toBeFalsy();
@@ -107,7 +126,10 @@ describe('ProductThumbnail.vue', () => {
 
   it('obtains the image to be displayed', () => {
     product.masterData.current.masterVariant.images = [{ url: 'image1' }, { url: 'image2' }];
-    const wrapper = shallowMount(ProductThumbnail, { propsData: { product } });
+    const wrapper = shallowMount(ProductThumbnail, {
+      ...options,
+      propsData: { product },
+    });
 
     expect(wrapper.vm.displayedImage).toContain('image');
   });
@@ -115,8 +137,8 @@ describe('ProductThumbnail.vue', () => {
   it('obtains the discounted price', () => {
     product.masterData.current.masterVariant.price = { ...discountedPrice, ...originalPrice };
     const wrapper = shallowMount(ProductThumbnail, {
+      ...options,
       propsData: { product },
-      methods: { formatPrice: jest.fn() },
     });
 
     expect(wrapper.vm.discountedPrice).toEqual(discountedPrice.discounted.value);
@@ -125,8 +147,8 @@ describe('ProductThumbnail.vue', () => {
   it('obtains the original price', () => {
     product.masterData.current.masterVariant.price = { ...discountedPrice, ...originalPrice };
     const wrapper = shallowMount(ProductThumbnail, {
+      ...options,
       propsData: { product },
-      methods: { formatPrice: jest.fn() },
     });
 
     expect(wrapper.vm.originalPrice).toEqual(originalPrice.value);
