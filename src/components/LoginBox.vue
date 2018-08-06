@@ -11,19 +11,19 @@
     <hr class="login-box-hr">
     <div class="login-box-description">{{ $t('myAccount.login.loginBox.description') }}</div>
     <div class="login-box-input-wrapper">
-      <form @submit="logIn">
+      <form @submit.prevent="logIn">
         <div class="login-box-input">
           <span>{{ $t('myAccount.login.loginBox.email') }}*</span><br>
           <input v-model.trim="username"
                  type="email"/>
-          <div class="error" v-if="!$v.username.required">Field is required</div>
-          <div class="error" v-if="!$v.username.email">It should be an email</div>
+          <div v-if="!$v.username.required" class="error">Field is required</div>
+          <div v-if="!$v.username.email" class="error">It should be an email</div>
         </div>
         <div class="login-box-input">
           <span>{{ $t('myAccount.login.loginBox.password') }}*</span><br>
           <input v-model.trim="password"
                  type="password"/>
-          <div class="error" v-if="!$v.password.required">Field is required</div>
+          <div v-if="!$v.password.required" class="error">Field is required</div>
         </div>
         <div class="clearfix">
           <div class="pull-left">
@@ -77,7 +77,7 @@ export default {
 
   methods: {
     logIn() {
-      if (!this.$v.invalid) {
+      if (!this.$v.$invalid) {
         onLogin(this.$apollo.provider.clients.me, this.username, this.password)
           .then(() => {
             this.isLoggedIn = true;
