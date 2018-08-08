@@ -55,29 +55,7 @@
                 <!--{{> common/mini-cart miniCart=header.miniCart}}-->
               </li>
 
-              <!--{{#if @root.meta.user.loggedIn}}-->
-              <!--<li class="list-item-user">-->
-              <!--<a href="{{@root.meta._links.logOut.href}}" class="link-user">-->
-              <!--<span>{{ $t("main.header.signOut") }}</span>-->
-              <!--</a>-->
-              <!--</li>-->
-              <!--<li class="list-item-user">-->
-              <!--<a href="{{@root.meta._links.myAccount.href}}" class="link-user icon-user">-->
-              <!--<span class="hidden-xs hidden-sm"-->
-              <!--{{@root.meta.user.name}}-->
-              <!--</span>-->
-              <!--</a>-->
-              <!--</li>-->
-              <!--{{else}}-->
-              <li class="list-item-user">
-                <router-link :to="{ name: 'login' }"
-                             class="link-user icon-user">
-                  <span class="hidden-xs hidden-sm">
-                    {{ $t("main.header.signIn") }}
-                  </span>
-                </router-link>
-              </li>
-              <!--{{/if}}-->
+              <LoginBoxHeader/>
 
               <LocationSelector/>
             </ul>
@@ -129,11 +107,13 @@
 <script>
 import LocationSelector from '@/components/LocationSelector.vue';
 import CategoriesMenu from '@/components/CategoriesMenu.vue';
+import LoginBoxHeader from '@/components/LoginBoxHeader.vue';
 
 export default {
   components: {
     LocationSelector,
     CategoriesMenu,
+    LoginBoxHeader,
   },
 };
 </script>

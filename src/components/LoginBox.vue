@@ -11,7 +11,7 @@
     <hr class="login-box-hr">
     <div class="login-box-description">{{ $t('myAccount.login.loginBox.description') }}</div>
     <div class="login-box-input-wrapper">
-      <form @submit.prevent="logIn">
+      <form @submit.prevent="login">
         <div class="login-box-input">
           <span>{{ $t('myAccount.login.loginBox.email') }}*</span><br>
           <input v-model.trim="username"
@@ -50,19 +50,12 @@
 </template>
 
 <script>
-import { onLogin, onLogout } from '@/apollo';
-import UserInfo from '@/components/UserInfo.vue';
 import { required, email } from 'vuelidate/lib/validators';
 
 export default {
-  components: {
-    UserInfo,
-  },
-
   data: () => ({
     username: null,
     password: null,
-    isLoggedIn: false,
   }),
 
   validations: {
@@ -76,17 +69,14 @@ export default {
   },
 
   methods: {
-    logIn() {
+    login() {
       if (!this.$v.$invalid) {
-        onLogin(this.$apollo.provider.clients.me, this.username, this.password)
-          .then(() => {
-            this.isLoggedIn = true;
-          });
+        this.$store.dispatch('login', {
+          apollo: this.$apollo,
+          username: this.username,
+          password: this.password,
+        });
       }
-    },
-    logOut() {
-      this.isLoggedIn = false;
-      onLogout(this.$apollo.provider.clients.me);
     },
   },
 };
