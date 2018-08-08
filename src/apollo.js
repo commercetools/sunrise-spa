@@ -20,16 +20,12 @@ const defaultOptions = {
   cache: new InMemoryCache({ fragmentMatcher }),
 };
 
-// Create commercetools authentication middlewares
-const clientCredentialsFlowMiddleware = createAuthMiddlewareForClientCredentialsFlow(config.ct.auth);
-let passwordFlowMiddleware;
-
-function createAuthLink(getAuthMiddleware) {
+function createAuthLink(getClient) {
   return setContext((_, prevContext) => {
-    const authMiddleware = getAuthMiddleware();
-    return new Promise((success, reject) => {
+    const { authMiddleware } = getClient();
+    return new Promise((resolve, reject) => {
       if (authMiddleware) {
-        authMiddleware(newContext => success(newContext))(prevContext);
+        authMiddleware(newContext => resolve(newContext))(prevContext, { resolve, reject });
       } else {
         reject(new Error('Could not authenticate, probably you are not logged in'));
       }
@@ -37,56 +33,55 @@ function createAuthLink(getAuthMiddleware) {
   });
 }
 
+function createClient(options) {
+  const defaultAuthMiddleware = createAuthMiddlewareForClientCredentialsFlow(config.ct.auth);
+
+  const { apolloClient, wsClient } = createApolloClient({
+    ...defaultOptions,
+    ...options,
+    link: createAuthLink(() => apolloClient),
+  });
+
+  apolloClient.wsClient = wsClient;
+  apolloClient.authMiddleware = defaultAuthMiddleware;
+
+  apolloClient.login = async (username, password) => {
+    apolloClient.authMiddleware = createAuthMiddlewareForPasswordFlow({
+      ...config.ct.auth,
+      credentials: {
+        ...config.ct.auth.credentials,
+        user: { username, password },
+      },
+    });
+    if (apolloClient.wsClient) restartWebsockets(apolloClient.wsClient);
+    try {
+      await apolloClient.resetStore();
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error('%cError on cache reset (login)', 'color: orange;', e.message);
+    }
+  };
+
+  apolloClient.logout = async () => {
+    apolloClient.authMiddleware = defaultAuthMiddleware;
+    if (apolloClient.wsClient) restartWebsockets(apolloClient.wsClient);
+    try {
+      await apolloClient.resetStore();
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error('%cError on cache reset (logout)', 'color: orange;', e.message);
+    }
+  };
+
+  return apolloClient;
+}
+
 export default function createProvider(options = {}) {
-  const defaultClient = createApolloClient({
-    ...defaultOptions,
-    ...options,
-    link: createAuthLink(() => clientCredentialsFlowMiddleware),
-  }).apolloClient;
-
-  const meClient = createApolloClient({
-    ...defaultOptions,
-    ...options,
-    link: createAuthLink(() => passwordFlowMiddleware),
-  }).apolloClient;
-
-  // Create vue apollo provider
   return new VueApollo({
-    defaultClient,
-    clients: {
-      me: meClient,
-    },
+    defaultClient: createClient(options),
     errorHandler(error) {
       // eslint-disable-next-line no-console
       console.error(error.message);
     },
   });
-}
-
-export async function onLogin(apolloClient, username, password) {
-  passwordFlowMiddleware = createAuthMiddlewareForPasswordFlow({
-    ...config.ct.auth,
-    credentials: {
-      ...config.ct.auth.credentials,
-      user: { username, password },
-    },
-  });
-  if (apolloClient.wsClient) restartWebsockets(apolloClient.wsClient);
-  try {
-    await apolloClient.resetStore();
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.error('%cError on cache reset (login)', 'color: orange;', e.message);
-  }
-}
-
-export async function onLogout(apolloClient) {
-  passwordFlowMiddleware = null;
-  if (apolloClient.wsClient) restartWebsockets(apolloClient.wsClient);
-  try {
-    await apolloClient.resetStore();
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.error('%cError on cache reset (logout)', 'color: orange;', e.message);
-  }
 }

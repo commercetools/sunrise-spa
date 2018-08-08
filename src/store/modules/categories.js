@@ -1,4 +1,4 @@
-export const SET_DATA_BY_SLUG = 'SET_DATA_BY_SLUG';
+const SET_DATA_BY_SLUG = 'SET_DATA_BY_SLUG';
 
 export function obtainDataBySlug(categories) {
   const dataBySlug = {};

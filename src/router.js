@@ -30,6 +30,10 @@ export default new Router({
       },
     },
     {
+      path: '/user',
+      name: 'user',
+    },
+    {
       path: '/products/:categorySlug',
       name: 'products',
       components: {
