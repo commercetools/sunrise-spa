@@ -1,12 +1,12 @@
 import gql from 'graphql-tag';
 
 const SET_IS_LOGGED_IN = 'SET_IS_LOGGED_IN';
-const SET_EMAIL = 'SET_EMAIL';
+const SET_INFO = 'SET_INFO';
 
 export default {
   state: {
     isLoggedIn: false,
-    email: null,
+    info: null,
   },
 
   getters: {
@@ -22,12 +22,13 @@ export default {
               me {
                 customer {
                   email
+                  firstName
                 }
               }
             }`,
         }).then((response) => {
           commit(SET_IS_LOGGED_IN, true);
-          commit(SET_EMAIL, response.data.me.customer.email);
+          commit(SET_INFO, response.data.me.customer);
         }));
     },
 
@@ -35,7 +36,7 @@ export default {
       apollo.provider.defaultClient.logout()
         .then(() => {
           commit(SET_IS_LOGGED_IN, false);
-          commit(SET_EMAIL, null);
+          commit(SET_INFO, null);
         });
     },
   },
@@ -45,8 +46,8 @@ export default {
       state.isLoggedIn = isLoggedIn;
     },
 
-    [SET_EMAIL](state, email) {
-      state.email = email;
+    [SET_INFO](state, customer) {
+      state.info = customer;
     },
   },
 };
