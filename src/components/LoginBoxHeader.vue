@@ -1,41 +1,41 @@
 <template>
-  <ul>
-    <li v-if="isLoggedIn"
-        class="list-item-user">
-      <a @click="logout"
-         class="link-user">
-        <span>{{ $t("main.header.signOut") }}</span>
-      </a>
-    </li>
-    <li v-if="isLoggedIn"
-        class="list-item-user">
-      <router-link :to="{ name: 'user' }"
-                   class="link-user icon-user">
-      <span class="hidden-xs hidden-sm">
-        User name
-      </span>
-      </router-link>
-    </li>
-    <li v-else
-        class="list-item-user">
-      <router-link :to="{ name: 'login' }"
-                   class="link-user icon-user">
-      <span class="hidden-xs hidden-sm">
-        {{ $t("main.header.signIn") }}
-      </span>
-      </router-link>
-    </li>
-  </ul>
+  <li class="list-item-user">
+    <ul class="nav-list">
+      <li v-if="isLoggedIn"
+          class="list-item-user">
+        <a @click="logout"
+           class="link-user">
+          <span>{{ $t("main.header.signOut") }}</span>
+        </a>
+      </li>
+      <li v-if="isLoggedIn"
+          class="list-item-user">
+        <router-link :to="{ name: 'user' }"
+                     class="link-user icon-user">
+        <span class="hidden-xs hidden-sm">{{ firstName }}</span>
+        </router-link>
+      </li>
+      <li v-else
+          class="list-item-user">
+        <router-link :to="{ name: 'login' }"
+                     class="link-user icon-user">
+        <span class="hidden-xs hidden-sm">
+          {{ $t("main.header.signIn") }}
+        </span>
+        </router-link>
+      </li>
+    </ul>
+  </li>
 </template>
 
 <script>
-export default {
+import { mapState } from 'vuex';
 
-  computed: {
-    isLoggedIn() {
-      return this.$store.state.user.isLoggedIn;
-    },
-  },
+export default {
+  computed: mapState({
+    isLoggedIn: state => state.user.isLoggedIn,
+    firstName: state => state.user.info.firstName,
+  }),
 
   methods: {
     logout() {
