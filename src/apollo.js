@@ -23,13 +23,8 @@ const defaultOptions = {
 function createAuthLink(getClient) {
   return setContext((_, prevContext) => {
     const { authMiddleware } = getClient();
-    return new Promise((resolve, reject) => {
-      if (authMiddleware) {
-        authMiddleware(newContext => resolve(newContext))(prevContext, { resolve, reject });
-      } else {
-        reject(new Error('Could not authenticate, probably you are not logged in'));
-      }
-    });
+    return new Promise((resolve, reject) =>
+      authMiddleware(newContext => resolve(newContext))(prevContext, { resolve, reject }));
   });
 }
 
