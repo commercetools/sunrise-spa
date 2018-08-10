@@ -8,7 +8,10 @@
       "pleaseWait": "Please wait...",
       "viewYourBagAlert": "View your bag",
       "addToWishlistAlert": "Add to wishlist",
-      "requiredField": "Required field"
+      "requiredField": "Required field",
+      "requiredEmail": "A valid email is required",
+      "networkError": "There was a error in the connection, please try again later",
+      "unknownError": "Something went wrong"
     },
     "common": {
       "color": "Color",
@@ -494,16 +497,6 @@
     },
     "login": {
       "pageTitle": "Customer Sign In",
-      "loginBox": {
-        "title": "Returning Customer Sign In",
-        "required": "Required Fields",
-        "description": "If you have an account, please sign in for a faster checkout",
-        "email": "Email",
-        "password": "Password",
-        "rememberMe": "Remember Me",
-        "forgotPassword": "Forgot Password",
-        "signIn": "Sign In"
-      },
       "signupBox": {
         "title": "New Customer Registration",
         "required": "Required Fields",

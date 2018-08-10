@@ -40,6 +40,7 @@ function createClient(options) {
   apolloClient.wsClient = wsClient;
   apolloClient.authMiddleware = defaultAuthMiddleware;
 
+  // Add login function
   apolloClient.login = async (username, password) => {
     apolloClient.authMiddleware = createAuthMiddlewareForPasswordFlow({
       ...config.ct.auth,
@@ -57,6 +58,7 @@ function createClient(options) {
     }
   };
 
+  // Add logout function
   apolloClient.logout = async () => {
     apolloClient.authMiddleware = defaultAuthMiddleware;
     if (apolloClient.wsClient) restartWebsockets(apolloClient.wsClient);
