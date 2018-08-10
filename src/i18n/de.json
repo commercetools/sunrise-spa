@@ -43,31 +43,6 @@
       "sale": "Sale",
       "brands": "Marken"
     },
-    "footer": {
-      "paySecure": "Sicher zahlen",
-      "followUs": "Follow us",
-      "joinNewsletter": "Newsletter abonnieren",
-      "subscribe": "Anmelden",
-      "yourEmail": "Ihre E-Mail-Adresse...",
-      "customerCare": "Kundenservice",
-      "contactUs": "Kontaktieren Sie uns",
-      "help": "Hilfe",
-      "shipping": "Versand",
-      "returns": "Retoure",
-      "sizeGuide": "Größentabelle",
-      "aboutUs": "Über uns",
-      "ourStory": "Unsere Geschichte",
-      "careers": "Karriere",
-      "shortcuts": "Shortcuts",
-      "myAccount": "Mein Konto",
-      "storeLocator": "Filiale suchen",
-      "giftCards": "Geschenkkarten",
-      "payment": "Zahlung",
-      "legalInfo": "© 2015 Sunrise",
-      "imprint": "Impressum",
-      "privacyPolicy": "Datenschutz",
-      "termsOfUse": "AGB"
-    },
     "order": {
       "paymentStatus": {
         "title": "Payment Status",
