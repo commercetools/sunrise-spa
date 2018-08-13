@@ -14,16 +14,16 @@
       <form @submit.prevent="login">
         <div v-if="serverError"
              class="error">
-          <span v-if="hasInvalidCredentialsError">{{ $t('invalidCredentials') }}</span>
-          <span v-else-if="serverError.networkError">{{ $t('main.messages.networkError') }}</span>
-          <span v-else>{{ $t('main.messages.unknownError') }}</span>
+          <div v-if="hasInvalidCredentialsError">{{ $t('invalidCredentials') }}</div>
+          <div v-else-if="serverError.networkError">{{ $t('main.messages.networkError') }}</div>
+          <div v-else>{{ $t('main.messages.unknownError') }}</div>
         </div>
         <div class="login-box-input">
           <span>{{ $t('email') }}*</span><br>
           <div v-if="$v.email.$error"
                class="error">
-            <span v-if="!$v.email.required">{{ $t('main.messages.requiredField') }}</span>
-            <span v-if="!$v.email.email">{{ $t('main.messages.requiredEmail') }}</span>
+            <div v-if="!$v.email.required">{{ $t('main.messages.requiredField') }}</div>
+            <div v-if="!$v.email.email">{{ $t('main.messages.requiredEmail') }}</div>
           </div>
           <input v-model.trim.lazy="$v.email.$model"
                  autocomplete="username"
@@ -34,8 +34,8 @@
           <span>{{ $t('password') }}*</span><br>
           <div v-if="$v.password.$error"
                class="error">
-            <span v-if="!$v.password.required">{{ $t('main.messages.requiredField') }}</span>
-            <span v-if="!$v.password.minLength">{{ $t('passwordMinLength') }}</span>
+            <div v-if="!$v.password.required">{{ $t('main.messages.requiredField') }}</div>
+            <div v-if="!$v.password.minLength">{{ $t('passwordMinLength') }}</div>
           </div>
           <input v-model.trim.lazy="$v.password.$model"
                  autocomplete="current-password"
@@ -58,7 +58,7 @@
             </div>
           </div>
         </div>
-        <button :disabled="loading"
+        <button :disabled="loading || $v.$anyError"
                 class="login-box-sign-in-btn"
                 data-test="login-form-submit" >
           <span v-if="loading">
@@ -97,7 +97,15 @@ export default {
 
   computed: {
     hasInvalidCredentialsError() {
-      return this.serverError.graphQLErrors.some(error => error.code === 'InvalidCredentials');
+      return this.serverError && Array.isArray(this.serverError.graphQLErrors)
+        && this.serverError.graphQLErrors.some(error => error.code === 'InvalidCredentials');
+    },
+
+    credentials() {
+      return {
+        email: this.email,
+        password: this.password,
+      };
     },
   },
 
@@ -107,15 +115,12 @@ export default {
       this.serverError = null;
       if (!this.$v.$invalid) {
         this.loading = true;
-        this.$store.dispatch('login', {
-          apollo: this.$apollo,
-          email: this.email,
-          password: this.password,
-        }).catch((error) => {
-          this.serverError = error;
-        }).finally(() => {
-          this.loading = false;
-        });
+        this.$store.dispatch('login', this.credentials)
+          .catch((error) => {
+            this.serverError = error;
+          }).finally(() => {
+            this.loading = false;
+          });
       }
     },
   },

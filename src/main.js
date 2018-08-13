@@ -19,10 +19,13 @@ Vue.component('SelectBoxIt', SelectBoxIt);
 
 Vue.prototype.$sunrise = sunriseConfig;
 
-new Vue({
+export const apolloProvider = createProvider();
+
+export default new Vue({
+  el: '#app',
   router,
   store,
   i18n,
-  provide: createProvider().provide(),
+  provide: apolloProvider.provide(),
   render: h => h(App),
-}).$mount('#app');
+});
