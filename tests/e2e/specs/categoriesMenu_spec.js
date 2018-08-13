@@ -10,19 +10,19 @@ describe('Categories menu', () => {
         cy.wrap($menu)
           .find('[data-test=category-1st-level-link]')
           .contains('Women')
-          .should('have.attr', 'href', '#/products/women');
+          .should('have.attr', 'href', '/products/women');
 
         cy.wrap($menu).trigger('mouseover');
 
         cy.wrap($menu)
           .find('[data-test=category-2nd-level-link]')
           .contains('Shoes')
-          .should('have.attr', 'href', '#/products/women-shoes');
+          .should('have.attr', 'href', '/products/women-shoes');
 
         cy.wrap($menu)
           .find('[data-test=category-3rd-level-link]')
           .contains('Ankle boots')
-          .should('have.attr', 'href', '#/products/women-shoes-ankle-boots');
+          .should('have.attr', 'href', '/products/women-shoes-ankle-boots');
       });
   });
 });

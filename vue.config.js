@@ -1,6 +1,8 @@
 module.exports = {
   pluginOptions: {
-    enableInSFC: true,
+    i18n: {
+      enableInSFC: true,
+    },
   },
   configureWebpack: {
     performance: {
