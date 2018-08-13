@@ -27,7 +27,8 @@
           </div>
           <input v-model.trim.lazy="$v.email.$model"
                  autocomplete="username"
-                 type="email"/>
+                 type="email"
+                 data-test="login-form-email" />
         </div>
         <div class="login-box-input">
           <span>{{ $t('password') }}*</span><br>
@@ -38,7 +39,8 @@
           </div>
           <input v-model.trim.lazy="$v.password.$model"
                  autocomplete="current-password"
-                 type="password"/>
+                 type="password"
+                 data-test="login-form-password" />
         </div>
         <div class="clearfix">
           <div class="pull-left">
@@ -57,7 +59,8 @@
           </div>
         </div>
         <button :disabled="loading"
-                class="login-box-sign-in-btn">
+                class="login-box-sign-in-btn"
+                data-test="login-form-submit" >
           <span v-if="loading">
             {{ $t('main.messages.pleaseWait') }}
           </span>
