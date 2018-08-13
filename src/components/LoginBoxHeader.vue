@@ -42,7 +42,7 @@ export default {
 
   methods: {
     logout() {
-      this.$store.dispatch('logout', this.$apollo);
+      this.$store.dispatch('logout');
     },
   },
 };
