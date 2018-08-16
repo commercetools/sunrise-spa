@@ -1,6 +1,7 @@
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import ProductList from '@/components/ProductList.vue';
+import ProductThumbnail from '@/components/ProductThumbnail.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -14,6 +15,7 @@ describe('ProductList.vue', () => {
     options = {
       methods: { categoryBySlug },
       mocks: {
+        $t: jest.fn(),
         $apollo: {
           queries: {
             products: { loading: false },
@@ -39,22 +41,21 @@ describe('ProductList.vue', () => {
   });
 
   it('calls ProductThumbnail for each obtained product', () => {
-    const wrapper = shallowMount(ProductList, {
-      ...options,
-      stubs: { ProductThumbnail: '<div data-test="product-thumbnail"/>' },
-    });
+    const wrapper = shallowMount(ProductList, options);
     wrapper.setData({
       products: {
         results: [
           { id: 'product-id-1' },
           { id: 'product-id-2' },
           { id: 'product-id-3' },
-          { id: 'product-id-4' },
         ],
       },
     });
-
-    expect(wrapper.findAll('[data-test=product-thumbnail]').length).toBe(4);
+    const thumbnails = wrapper.findAll(ProductThumbnail);
+    expect(thumbnails.length).toBe(3);
+    expect(thumbnails.at(0).props().product.id).toEqual('product-id-1');
+    expect(thumbnails.at(1).props().product.id).toEqual('product-id-2');
+    expect(thumbnails.at(2).props().product.id).toEqual('product-id-3');
   });
 
   it('detects when there are no products', () => {

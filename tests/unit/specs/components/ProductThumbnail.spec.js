@@ -34,6 +34,7 @@ describe('ProductThumbnail.vue', () => {
     options = {
       propsData: { product },
       methods: { formatPrice },
+      mocks: { $t: jest.fn() },
     };
   });
 

@@ -12,15 +12,11 @@
     <div class="login-box-description">{{ $t('description') }}</div>
     <div class="login-box-input-wrapper">
       <form @submit.prevent="login">
-        <div v-if="serverError"
-             class="error">
-          <div v-if="hasInvalidCredentialsError">{{ $t('invalidCredentials') }}</div>
-          <div v-else-if="serverError.networkError">{{ $t('main.messages.networkError') }}</div>
-          <div v-else>{{ $t('main.messages.unknownError') }}</div>
-        </div>
+        <ServerError :error="serverError"/>
         <div class="login-box-input">
           <span>{{ $t('email') }}*</span><br>
           <div v-if="$v.email.$error"
+               data-test="login-form-email-errors"
                class="error">
             <div v-if="!$v.email.required">{{ $t('main.messages.requiredField') }}</div>
             <div v-if="!$v.email.email">{{ $t('main.messages.requiredEmail') }}</div>
@@ -33,6 +29,7 @@
         <div class="login-box-input">
           <span>{{ $t('password') }}*</span><br>
           <div v-if="$v.password.$error"
+               data-test="login-form-password-errors"
                class="error">
             <div v-if="!$v.password.required">{{ $t('main.messages.requiredField') }}</div>
             <div v-if="!$v.password.minLength">{{ $t('passwordMinLength') }}</div>
@@ -75,8 +72,11 @@
 
 <script>
 import { required, email, minLength } from 'vuelidate/lib/validators';
+import ServerError from '@/components/ServerError.vue';
 
 export default {
+  components: { ServerError },
+
   data: () => ({
     email: null,
     password: null,
@@ -96,11 +96,6 @@ export default {
   },
 
   computed: {
-    hasInvalidCredentialsError() {
-      return this.serverError && Array.isArray(this.serverError.graphQLErrors)
-        && this.serverError.graphQLErrors.some(error => error.code === 'InvalidCredentials');
-    },
-
     credentials() {
       return {
         email: this.email,
@@ -110,17 +105,16 @@ export default {
   },
 
   methods: {
-    login() {
+    async login() {
       this.$v.$touch();
       this.serverError = null;
       if (!this.$v.$invalid) {
         this.loading = true;
-        this.$store.dispatch('login', this.credentials)
+        await this.$store.dispatch('login', this.credentials)
           .catch((error) => {
             this.serverError = error;
-          }).finally(() => {
-            this.loading = false;
           });
+        this.loading = false;
       }
     },
   },
@@ -139,8 +133,7 @@ export default {
     "rememberMe": "Remember Me",
     "forgotPassword": "Forgot Password",
     "signIn": "Sign In",
-    "passwordMinLength": "Password should contain at least 5 characters",
-    "invalidCredentials": "Invalid credentials"
+    "passwordMinLength": "Password should contain at least 5 characters"
   },
   "de": {
     "title": "Kundenanmeldung",
@@ -151,8 +144,7 @@ export default {
     "rememberMe": "Angemeldet bleiben",
     "forgotPassword": "Passwort vergessen",
     "signIn": "Anmelden",
-    "passwordMinLength": "Das Passwort sollte mindestens 5 Zeichen enthalten",
-    "invalidCredentials": "Ungültige Anmeldeinformationen"
+    "passwordMinLength": "Das Passwort sollte mindestens 5 Zeichen enthalten"
   }
 }
 </i18n>

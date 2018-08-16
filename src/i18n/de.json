@@ -9,8 +9,7 @@
       "viewYourBagAlert": "Warenkorb ansehen",
       "addToWishlistAlert": "Auf den Wunschzettel",
       "requiredField": "Pflichtfeld",
-      "requiredEmail": "Eine gültige E-Mail ist erforderlich",
-      "unknownError": "Etwas ist schief gelaufen"
+      "requiredEmail": "Eine gültige E-Mail ist erforderlich"
     },
     "common": {
       "color": "Farbe",

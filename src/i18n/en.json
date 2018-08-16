@@ -9,9 +9,7 @@
       "viewYourBagAlert": "View your bag",
       "addToWishlistAlert": "Add to wishlist",
       "requiredField": "Required field",
-      "requiredEmail": "A valid email is required",
-      "networkError": "There was a error in the connection, please try again later",
-      "unknownError": "Something went wrong"
+      "requiredEmail": "A valid email is required"
     },
     "common": {
       "color": "Color",

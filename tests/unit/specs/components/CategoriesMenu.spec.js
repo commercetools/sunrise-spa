@@ -11,6 +11,7 @@ describe('CategoriesMenu.vue', () => {
   beforeEach(() => {
     options = {
       mocks: {
+        $t: jest.fn(),
         $apollo: {
           queries: {
             categories: { loading: false },
