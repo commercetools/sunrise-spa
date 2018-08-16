@@ -1,20 +1,25 @@
 import Vuex from 'vuex';
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { ApolloError } from 'apollo-client';
 import LoginBox from '@/components/LoginBox.vue';
+import ServerError from '@/components/ServerError.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 localVue.use(Vuelidate);
 
-function setLazyValue(input, value) {
+function setInputValue(input, value) {
   input.setValue(value);
   input.trigger('change');
+  input.trigger('blur');
 }
 
 describe('LoginBox.vue', () => {
-  const validEmail = 'willy.wonka@commercetools.com';
-  const validPassword = 'p@ssword';
+  const credentials = {
+    email: 'willy.wonka@commercetools.com',
+    password: 'p@ssword',
+  };
 
   let options;
   let actions;
@@ -26,6 +31,9 @@ describe('LoginBox.vue', () => {
     options = {
       localVue,
       store,
+      mocks: {
+        $t: jest.fn(),
+      },
     };
   });
 
@@ -33,44 +41,62 @@ describe('LoginBox.vue', () => {
     expect(shallowMount(LoginBox, options).isVueInstance()).toBeTruthy();
   });
 
-  it('detects invalid credentials error', () => {
-    const wrapper = shallowMount(LoginBox, options);
-    expect(wrapper.vm.hasInvalidCredentialsError).toBeFalsy();
-
-    wrapper.setData({
-      serverError: {
-        graphQLErrors: [{ code: 'AnError' }, { code: 'InvalidCredentials' }],
-      },
-    });
-    expect(wrapper.vm.hasInvalidCredentialsError).toBeTruthy();
-
-    wrapper.setData({
-      serverError: {
-        graphQLErrors: [{ code: 'AnError' }, { code: 'SomeOtherError' }],
-      },
-    });
-    expect(wrapper.vm.hasInvalidCredentialsError).toBeFalsy();
-  });
-
   it('builds a correct credentials object', () => {
     const wrapper = shallowMount(LoginBox, options);
     expect(wrapper.vm.credentials).toEqual({ email: null, password: null });
 
-    setLazyValue(wrapper.find('input[data-test="login-form-email"]'), validEmail);
-    expect(wrapper.vm.credentials).toEqual({ email: validEmail, password: null });
+    setInputValue(wrapper.find('[data-test="login-form-email"]'), credentials.email);
+    expect(wrapper.vm.credentials).toEqual({ email: credentials.email, password: null });
 
-    setLazyValue(wrapper.find('input[data-test="login-form-password"]'), validPassword);
-    expect(wrapper.vm.credentials).toEqual({ email: validEmail, password: validPassword });
+    setInputValue(wrapper.find('[data-test="login-form-password"]'), credentials.password);
+    expect(wrapper.vm.credentials).toEqual({ email: credentials.email, password: credentials.password });
   });
 
-  it.skip('logs in', () => {
+  it('logs in when form is valid', () => {
     const wrapper = shallowMount(LoginBox, options);
     wrapper.vm.login();
     expect(actions.login).not.toHaveBeenCalled();
 
-    setLazyValue(wrapper.find('input[data-test="login-form-email"]'), validEmail);
-    setLazyValue(wrapper.find('input[data-test="login-form-password"]'), validPassword);
+    setInputValue(wrapper.find('[data-test="login-form-email"]'), credentials.email);
     wrapper.vm.login();
-    expect(actions.login).toHaveBeenCalled();
+    expect(actions.login).not.toHaveBeenCalled();
+
+    setInputValue(wrapper.find('[data-test="login-form-password"]'), credentials.password);
+    wrapper.vm.login();
+    expect(actions.login).toHaveBeenCalledWith(expect.anything(), credentials, undefined);
+  });
+
+  it('shows form errors', () => {
+    const wrapper = shallowMount(LoginBox, options);
+    expect(wrapper.find('[data-test="login-form-email-errors"]').exists()).toBeFalsy();
+    expect(wrapper.find('[data-test="login-form-password-errors"]').exists()).toBeFalsy();
+
+    wrapper.vm.login();
+    wrapper.vm.$forceUpdate();
+    expect(wrapper.find('[data-test="login-form-email-errors"]').exists()).toBeTruthy();
+    expect(wrapper.find('[data-test="login-form-password-errors"]').exists()).toBeTruthy();
+
+    setInputValue(wrapper.find('[data-test="login-form-email"]'), credentials.email);
+    expect(wrapper.find('[data-test="login-form-email-errors"]').exists()).toBeFalsy();
+    expect(wrapper.find('[data-test="login-form-password-errors"]').exists()).toBeTruthy();
+
+    setInputValue(wrapper.find('[data-test="login-form-password"]'), credentials.password);
+    expect(wrapper.find('[data-test="login-form-email-errors"]').exists()).toBeFalsy();
+    expect(wrapper.find('[data-test="login-form-password-errors"]').exists()).toBeFalsy();
+  });
+
+  it('catches server errors', () => {
+    const wrapper = shallowMount(LoginBox, options);
+    expect(wrapper.find(ServerError).props().error).toBeNull();
+
+    const error = new ApolloError({
+      graphQLErrors: [{ code: 'Error1' }, { code: 'Error2' }],
+    });
+    actions.login.mockRejectedValue(error);
+    setInputValue(wrapper.find('[data-test="login-form-email"]'), credentials.email);
+    setInputValue(wrapper.find('[data-test="login-form-password"]'), credentials.password);
+    wrapper.vm.login().then(() => {
+      expect(wrapper.find(ServerError).props().error).toEqual(error);
+    });
   });
 });

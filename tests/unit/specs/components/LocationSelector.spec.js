@@ -6,13 +6,24 @@ import SelectBoxIt from '@/components/global/SelectBoxIt.vue';
 Vue.component('SelectBoxIt', SelectBoxIt);
 
 describe('LocationSelector.vue', () => {
+  let options;
+
+  beforeEach(() => {
+    options = {
+      mocks: { $t: jest.fn() },
+    };
+  });
+
   it('renders a vue instance', () => {
-    expect(shallowMount(LocationSelector).isVueInstance()).toBe(true);
+    expect(shallowMount(LocationSelector, options).isVueInstance()).toBe(true);
   });
 
   it('computes languages defined in configuration', () => {
     const wrapper = shallowMount(LocationSelector, {
+      ...options,
       mocks: {
+        ...options.mocks,
+        $i18n: {},
         $sunrise: { languages: { it: 'Italiano', es: 'Español' } },
       },
     });

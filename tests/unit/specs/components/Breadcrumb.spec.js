@@ -9,6 +9,7 @@ describe('Breadcrumb.vue', () => {
     categoryBySlug = jest.fn();
     options = {
       methods: { categoryBySlug },
+      mocks: { $t: jest.fn() },
       stubs: { 'router-link': '<a/>' },
     };
   });

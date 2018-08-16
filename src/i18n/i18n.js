@@ -35,7 +35,7 @@ const numberFormats = {
       style: 'currency', currency: 'EUR', currencyDisplay: 'symbol'
     }
   }
-}
+};
 
 // Create VueI18n instance with options
 const i18n = new VueI18n({
