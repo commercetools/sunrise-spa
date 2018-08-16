@@ -18,6 +18,7 @@ describe('CategoriesMenu.vue', () => {
           },
         },
       },
+      stubs: { 'router-link': '<a/>' },
     };
   });
 
@@ -26,17 +27,13 @@ describe('CategoriesMenu.vue', () => {
   });
 
   it('identifies sales category', () => {
-    const wrapper = shallowMount(CategoriesMenu, {
-      ...options,
-      mocks: {
-        ...options.mocks,
-        $sunrise: {
-          categories: {
-            salesExternalId: 'sale',
-          },
-        },
+    options.mocks.$sunrise = {
+      categories: {
+        salesExternalId: 'sale',
       },
-    });
+    };
+    const wrapper = shallowMount(CategoriesMenu, options);
+
     expect(wrapper.vm.isSale({ externalId: 'sale' })).toBeTruthy();
     expect(wrapper.vm.isSale({ externalId: 'not-sale' })).toBeFalsy();
     expect(wrapper.vm.isSale({})).toBeFalsy();
@@ -64,18 +61,13 @@ describe('CategoriesMenu.vue', () => {
     };
 
     let actions;
-    let store;
     let wrapper;
 
     beforeEach(() => {
       actions = { setCategories: jest.fn() };
-      store = new Vuex.Store({ actions });
-      wrapper = shallowMount(CategoriesMenu, {
-        ...options,
-        localVue,
-        store,
-        stubs: { 'router-link': '<a/>' },
-      });
+      options.store = new Vuex.Store({ actions });
+      options.localVue = localVue;
+      wrapper = shallowMount(CategoriesMenu, options);
       wrapper.setData({
         categories: {
           results: [categoryWithChildren1, categoryWithChildren2],

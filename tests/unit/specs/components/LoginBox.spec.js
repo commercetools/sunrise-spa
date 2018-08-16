@@ -23,14 +23,12 @@ describe('LoginBox.vue', () => {
 
   let options;
   let actions;
-  let store;
 
   beforeEach(() => {
     actions = { login: jest.fn() };
-    store = new Vuex.Store({ actions });
     options = {
       localVue,
-      store,
+      store: new Vuex.Store({ actions }),
       mocks: {
         $t: jest.fn(),
       },
@@ -54,15 +52,16 @@ describe('LoginBox.vue', () => {
 
   it('logs in when form is valid', () => {
     const wrapper = shallowMount(LoginBox, options);
-    wrapper.vm.login();
+    const form = wrapper.find('form');
+    form.trigger('submit');
     expect(actions.login).not.toHaveBeenCalled();
 
     setInputValue(wrapper.find('[data-test="login-form-email"]'), credentials.email);
-    wrapper.vm.login();
+    form.trigger('submit');
     expect(actions.login).not.toHaveBeenCalled();
 
     setInputValue(wrapper.find('[data-test="login-form-password"]'), credentials.password);
-    wrapper.vm.login();
+    form.trigger('submit');
     expect(actions.login).toHaveBeenCalledWith(expect.anything(), credentials, undefined);
   });
 

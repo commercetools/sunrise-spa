@@ -2,13 +2,11 @@ import { shallowMount } from '@vue/test-utils';
 import Breadcrumb from '@/components/Breadcrumb.vue';
 
 describe('Breadcrumb.vue', () => {
-  let categoryBySlug;
   let options;
 
   beforeEach(() => {
-    categoryBySlug = jest.fn();
     options = {
-      methods: { categoryBySlug },
+      methods: { categoryBySlug: jest.fn() },
       mocks: { $t: jest.fn() },
       stubs: { 'router-link': '<a/>' },
     };
@@ -19,29 +17,25 @@ describe('Breadcrumb.vue', () => {
   });
 
   it('hides when there is no category information', () => {
-    const wrapper = shallowMount(Breadcrumb, {
-      ...options,
-      methods: { categoryBySlug: () => null },
-    });
+    options.methods.categoryBySlug = () => null;
+    const wrapper = shallowMount(Breadcrumb, options);
+
     expect(wrapper.vm.active).toBeFalsy();
   });
 
   it('shows when there is category information', () => {
-    const wrapper = shallowMount(Breadcrumb, {
-      ...options,
-      methods: { categoryBySlug: () => ({ }) },
-    });
+    options.methods.categoryBySlug = () => ({ });
+    const wrapper = shallowMount(Breadcrumb, options);
+
     expect(wrapper.vm.active).toBeTruthy();
   });
 
   it('obtains corresponding category information', () => {
-    const wrapper = shallowMount(Breadcrumb, {
-      ...options,
-      propsData: { categorySlug: 'some-category-slug' },
-    });
+    const wrapper = shallowMount(Breadcrumb, options);
+    wrapper.setProps({ categorySlug: 'some-category-slug' });
 
     // eslint-disable-next-line no-unused-vars
     const unused = wrapper.vm.category;
-    expect(categoryBySlug).toHaveBeenCalledWith('some-category-slug');
+    expect(options.methods.categoryBySlug).toHaveBeenCalledWith('some-category-slug');
   });
 });
