@@ -19,14 +19,10 @@ describe('LocationSelector.vue', () => {
   });
 
   it('computes languages defined in configuration', () => {
-    const wrapper = shallowMount(LocationSelector, {
-      ...options,
-      mocks: {
-        ...options.mocks,
-        $i18n: {},
-        $sunrise: { languages: { it: 'Italiano', es: 'Español' } },
-      },
-    });
+    options.mocks.$i18n = {};
+    options.mocks.$sunrise = { languages: { it: 'Italiano', es: 'Español' } };
+    const wrapper = shallowMount(LocationSelector, options);
+
     expect(wrapper.vm.languages).toEqual([{ id: 'it', name: 'Italiano' }, { id: 'es', name: 'Español' }]);
     expect(wrapper.vm.active).toBe(true);
     expect(wrapper.find('[data-test="location-selector"]').exists()).toBe(true);
@@ -34,6 +30,7 @@ describe('LocationSelector.vue', () => {
 
   it('hides selector on empty languages', () => {
     const wrapper = shallowMount(LocationSelector);
+
     expect(wrapper.vm.languages).toEqual([]);
     expect(wrapper.vm.active).toBe(false);
     expect(wrapper.find('[data-test="location-selector"]').exists()).toBe(false);

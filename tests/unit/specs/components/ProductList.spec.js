@@ -7,13 +7,11 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 
 describe('ProductList.vue', () => {
-  let categoryBySlug;
   let options;
 
   beforeEach(() => {
-    categoryBySlug = jest.fn();
     options = {
-      methods: { categoryBySlug },
+      methods: { categoryBySlug: jest.fn() },
       mocks: {
         $t: jest.fn(),
         $apollo: {
@@ -30,14 +28,12 @@ describe('ProductList.vue', () => {
   });
 
   it('obtains corresponding category information', () => {
-    const wrapper = shallowMount(ProductList, {
-      ...options,
-      propsData: { categorySlug: 'some-category-slug' },
-    });
+    const wrapper = shallowMount(ProductList, options);
+    wrapper.setProps({ categorySlug: 'some-category-slug' });
 
     // eslint-disable-next-line no-unused-vars
     const unused = wrapper.vm.category;
-    expect(categoryBySlug).toHaveBeenCalledWith('some-category-slug');
+    expect(options.methods.categoryBySlug).toHaveBeenCalledWith('some-category-slug');
   });
 
   it('calls ProductThumbnail for each obtained product', () => {
@@ -52,6 +48,7 @@ describe('ProductList.vue', () => {
       },
     });
     const thumbnails = wrapper.findAll(ProductThumbnail);
+
     expect(thumbnails.length).toBe(3);
     expect(thumbnails.at(0).props().product.id).toEqual('product-id-1');
     expect(thumbnails.at(1).props().product.id).toEqual('product-id-2');
@@ -61,8 +58,10 @@ describe('ProductList.vue', () => {
   it('detects when there are no products', () => {
     const wrapper = shallowMount(ProductList, options);
     expect(wrapper.vm.empty).toBeTruthy();
+
     wrapper.setData({ products: { results: [] } });
     expect(wrapper.vm.empty).toBeTruthy();
+
     wrapper.setData({ products: { results: [{}] } });
     expect(wrapper.vm.empty).toBeFalsy();
   });
@@ -71,19 +70,15 @@ describe('ProductList.vue', () => {
     const filterByCategoryPredicate = 'masterData(current(categories(id="some-category-id")))';
 
     it('does not generate a predicate to filter by category when category is missing ', () => {
-      const wrapper = shallowMount(ProductList, {
-        ...options,
-        methods: { categoryBySlug: () => null },
-      });
+      options.methods.categoryBySlug = () => null;
+      const wrapper = shallowMount(ProductList, options);
 
       expect(wrapper.vm.gqlPredicate).toBeNull();
     });
 
     it('generates a predicate to filter by category when a category exists', () => {
-      const wrapper = shallowMount(ProductList, {
-        ...options,
-        methods: { categoryBySlug: () => ({ id: 'some-category-id' }) },
-      });
+      options.methods.categoryBySlug = () => ({ id: 'some-category-id' });
+      const wrapper = shallowMount(ProductList, options);
 
       expect(wrapper.vm.gqlPredicate).toContain(filterByCategoryPredicate);
     });
