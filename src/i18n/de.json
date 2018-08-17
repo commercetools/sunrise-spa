@@ -330,9 +330,6 @@
     }
   },
   "myAccount": {
-    "myAccount": {
-      "title": "Mein Konto"
-    },
     "myAccountSidebar": {
       "personalDetails": "Meine Benutzerdaten",
       "addressBook": "Adressbuch",
@@ -342,32 +339,6 @@
       "wishlist": "Wunschliste",
       "signOut": "Abmelden",
       "changePassword": "Passwort ändern"
-    },
-    "personalDetails": {
-      "title": "Ihre Benutzerdaten",
-      "shopAllBtn": "Alles bestellen",
-      "updateBtn": "Details aktualisieren",
-      "cancelBtn": "Abbrechen",
-      "bannerOne": {
-        "title": "Dein Sunrise",
-        "subtitle": "Urlaub in der Sonne"
-      },
-      "bannerTwo": {
-        "title": "Sunrise Shop",
-        "subtitle": "Neue Saison, neuer Style"
-      },
-      "welcomeBack": "Willkommen zurück",
-      "welcomeDescription": "Für einen besseren Kundenservice geben Sie bitte Ihre Kundennummer an.",
-      "subscribedToNewsletter": "Subscribed to weekly newsletter",
-      "personalDetailsForm": {
-        "title": "Title",
-        "firstName": "First Name",
-        "lastName": "Last Name",
-        "phone": "Telephone Number",
-        "email": "Email Address",
-        "password": "Password",
-        "confirmPassword": "Confirm Password"
-      }
     },
     "addressBook": {
       "title": "Addressbuch",
