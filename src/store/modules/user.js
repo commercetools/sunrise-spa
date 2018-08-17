@@ -7,7 +7,7 @@ const SET_INFO = 'SET_INFO';
 export default {
   state: {
     isLoggedIn: false,
-    info: null,
+    info: {},
   },
 
   getters: {
@@ -39,7 +39,7 @@ export default {
       apolloProvider.defaultClient.logout()
         .then(() => {
           commit(SET_IS_LOGGED_IN, false);
-          commit(SET_INFO, null);
+          commit(SET_INFO, {});
         }),
   },
 
