@@ -3,11 +3,11 @@
     <ul class="nav-list">
       <li v-if="isLoggedIn"
           class="list-item-user">
-        <a @click="logout"
+        <button @click="logout"
            class="link-user"
            data-test="logout-button">
           <span>{{ $t("main.header.signOut") }}</span>
-        </a>
+        </button>
       </li>
       <li v-if="isLoggedIn"
           class="list-item-user">
@@ -22,9 +22,9 @@
           data-test="login-button">
         <router-link :to="{ name: 'login' }"
                      class="link-user icon-user">
-        <span class="hidden-xs hidden-sm">
-          {{ $t("main.header.signIn") }}
-        </span>
+          <span class="hidden-xs hidden-sm">
+            {{ $t("main.header.signIn") }}
+          </span>
         </router-link>
       </li>
     </ul>
