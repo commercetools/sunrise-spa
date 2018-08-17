@@ -10,11 +10,11 @@
         </a>
       </li>
       <li v-if="isLoggedIn"
-          class="list-item-user"
-          data-test="login-info-name">
+          class="list-item-user">
         <router-link :to="{ name: 'user' }"
+                     data-test="login-info-name"
                      class="link-user icon-user">
-        <span class="hidden-xs hidden-sm">{{ firstName }}</span>
+          <span class="hidden-xs hidden-sm">{{ firstName }}</span>
         </router-link>
       </li>
       <li v-else
