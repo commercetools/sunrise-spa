@@ -8,13 +8,13 @@ localVue.use(Vuex);
 describe('LoginBoxHeader.vue', () => {
   let options;
   let actions;
-  let state;
+  let getters;
 
   beforeEach(() => {
     actions = { logout: jest.fn() };
-    state = {
-      isLoggedIn: false,
-      info: {},
+    getters = {
+      isAuthenticated: jest.fn(),
+      user: jest.fn(),
     };
     options = {
       localVue,
@@ -22,7 +22,7 @@ describe('LoginBoxHeader.vue', () => {
         modules: {
           user: {
             actions,
-            state,
+            getters,
           },
         },
       }),
@@ -36,7 +36,8 @@ describe('LoginBoxHeader.vue', () => {
   });
 
   it('logs out', () => {
-    state.isLoggedIn = true;
+    getters.isAuthenticated.mockReturnValue(true);
+    getters.user.mockReturnValue({});
     const wrapper = shallowMount(LoginBoxHeader, options);
     wrapper.find('[data-test="logout-button"]').trigger('click');
     expect(actions.logout).toHaveBeenCalled();

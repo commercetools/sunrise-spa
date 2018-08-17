@@ -75,6 +75,7 @@ import { required, email, minLength } from 'vuelidate/lib/validators';
 import ServerError from '@/components/ServerError.vue';
 
 export default {
+  name: 'LoginBox',
   components: { ServerError },
 
   data: () => ({
@@ -111,8 +112,9 @@ export default {
       if (!this.$v.$invalid) {
         this.loading = true;
         await this.$store.dispatch('login', this.credentials)
-          .then(() => this.$router.push({ name: 'user' }))
-          .catch((error) => {
+          .then(() => {
+            this.$router.push({ name: 'user' });
+          }).catch((error) => {
             this.serverError = error;
           });
         this.loading = false;
