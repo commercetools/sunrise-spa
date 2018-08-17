@@ -111,6 +111,7 @@ export default {
       if (!this.$v.$invalid) {
         this.loading = true;
         await this.$store.dispatch('login', this.credentials)
+          .then(() => this.$router.push({ name: 'user' }))
           .catch((error) => {
             this.serverError = error;
           });

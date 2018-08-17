@@ -1,7 +1,7 @@
 <template>
   <li class="list-item-user">
     <ul class="nav-list">
-      <li v-if="isLoggedIn"
+      <li v-if="isAuthenticated"
           class="list-item-user">
         <button @click="logout"
            class="link-user"
@@ -9,12 +9,12 @@
           <span>{{ $t("main.header.signOut") }}</span>
         </button>
       </li>
-      <li v-if="isLoggedIn"
+      <li v-if="isAuthenticated"
           class="list-item-user">
         <router-link :to="{ name: 'user' }"
                      data-test="login-info-name"
                      class="link-user icon-user">
-          <span class="hidden-xs hidden-sm">{{ firstName }}</span>
+          <span class="hidden-xs hidden-sm">{{ user.firstName }}</span>
         </router-link>
       </li>
       <li v-else
@@ -32,17 +32,17 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
-  computed: mapState({
-    isLoggedIn: state => state.user.isLoggedIn,
-    firstName: state => state.user.info.firstName,
-  }),
+  computed: {
+    ...mapGetters(['isAuthenticated', 'user']),
+  },
 
   methods: {
     logout() {
-      this.$store.dispatch('logout');
+      this.$store.dispatch('logout')
+        .then(() => this.$router.push('/'));
     },
   },
 };
