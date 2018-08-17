@@ -2,13 +2,19 @@
   <div>
     <div v-for="graphQLError in graphQLErrors"
          :key="graphQLError.code"
-         data-test="server-error-graphql"
+         data-test="server-error"
          class="error">
       {{ translateErrorMessage(graphQLError) }}
     </div>
     <div v-if="hasNetworkError"
+         data-test="server-error"
          class="error">
       {{ $t('networkError') }}
+    </div>
+    <div v-if="isInternalError"
+         data-test="server-error"
+         class="error">
+      {{ $t('unknownError') }}
     </div>
   </div>
 </template>
@@ -21,11 +27,15 @@ export default {
 
   props: {
     error: {
-      type: ApolloError,
+      type: Error,
     },
   },
 
   computed: {
+    isInternalError() {
+      return this.error && !(this.error instanceof ApolloError);
+    },
+
     hasNetworkError() {
       return this.error && this.error.networkError;
     },
