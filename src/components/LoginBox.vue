@@ -55,7 +55,7 @@
             </div>
           </div>
         </div>
-        <button :disabled="loading || $v.$anyError"
+        <button :disabled="loading"
                 class="login-box-sign-in-btn"
                 data-test="login-form-submit" >
           <span v-if="loading">
