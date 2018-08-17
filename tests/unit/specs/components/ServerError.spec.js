@@ -33,6 +33,14 @@ describe('ServerError.vue', () => {
     expect(shallowMount(ServerError).isVueInstance()).toBeTruthy();
   });
 
+  it('detects internal errors', () => {
+    const wrapper = shallowMount(ServerError, options);
+    expect(wrapper.vm.isInternalError).toBeFalsy();
+
+    wrapper.setProps({ error: new Error('error') });
+    expect(wrapper.vm.isInternalError).toBeTruthy();
+  });
+
   it('detects network errors', () => {
     const wrapper = shallowMount(ServerError, options);
     expect(wrapper.vm.hasNetworkError).toBeFalsy();
@@ -102,13 +110,35 @@ describe('ServerError.vue', () => {
 
   it('renders each GraphQL error', () => {
     const wrapper = shallowMount(ServerError, options);
-    expect(wrapper.findAll('[data-test="server-error-graphql"]').length).toBe(0);
+    expect(wrapper.findAll('[data-test="server-error"]').length).toBe(0);
 
     wrapper.setProps({
       error: new ApolloError({
         graphQLErrors: [graphQLError1, graphQLError2],
       }),
     });
-    expect(wrapper.findAll('[data-test="server-error-graphql"]').length).toBe(2);
+    expect(wrapper.findAll('[data-test="server-error"]').length).toBe(2);
+  });
+
+  it('renders internal error', () => {
+    const wrapper = shallowMount(ServerError, options);
+    expect(wrapper.findAll('[data-test="server-error"]').length).toBe(0);
+
+    wrapper.setProps({
+      error: new Error('some error'),
+    });
+    expect(wrapper.findAll('[data-test="server-error"]').length).toBe(1);
+  });
+
+  it('renders network error', () => {
+    const wrapper = shallowMount(ServerError, options);
+    expect(wrapper.findAll('[data-test="server-error"]').length).toBe(0);
+
+    wrapper.setProps({
+      error: new ApolloError({
+        networkError: { message: 'Some error' },
+      }),
+    });
+    expect(wrapper.findAll('[data-test="server-error"]').length).toBe(1);
   });
 });
