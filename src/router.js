@@ -10,15 +10,9 @@ import NotFoundPage from '@/views/NotFoundPage.vue';
 
 Vue.use(Router);
 
-function allowIfAuthenticated(to, from, next) {
-  if (store.getters.isAuthenticated) {
-    next();
-  } else {
-    next({ name: 'login' });
-  }
-}
+const requiresAuth = true;
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -50,15 +44,6 @@ export default new Router({
       },
     },
     {
-      path: '/user',
-      name: 'user',
-      components: {
-        default: MyAccountPage,
-        header: TheHeader,
-      },
-      beforeEnter: allowIfAuthenticated,
-    },
-    {
       path: '/products/:categorySlug',
       name: 'products',
       components: {
@@ -70,5 +55,29 @@ export default new Router({
         header: false,
       },
     },
+    {
+      path: '/user',
+      name: 'user',
+      components: {
+        default: MyAccountPage,
+        header: TheHeader,
+      },
+      meta: { requiresAuth },
+    },
   ],
 });
+
+const authGuard = (to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.isAuthenticated) {
+      next();
+    } else {
+      next({ name: 'login' });
+    }
+  } else {
+    next();
+  }
+};
+router.beforeEach(authGuard);
+
+export default router;
