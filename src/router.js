@@ -68,12 +68,9 @@ const router = new Router({
 });
 
 const authGuard = (to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (store.getters.isAuthenticated) {
-      next();
-    } else {
-      next({ name: 'login' });
-    }
+  const routeRequiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  if (routeRequiresAuth && !store.getters.isAuthenticated) {
+    next({ name: 'login' });
   } else {
     next();
   }
