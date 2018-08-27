@@ -19,13 +19,13 @@ describe('categoryMixin', () => {
     };
   }
 
-  const category3 = generateCategory(3, [generateAncestor(2), generateAncestor(1)], []);
-  const category2 = generateCategory(2, [generateAncestor(1)], [category3]);
-  const category1 = generateCategory(1, [], [category2]);
+  const grandchildCategory = generateCategory(3, [generateAncestor(2), generateAncestor(1)], []);
+  const childCategory = generateCategory(2, [generateAncestor(1)], [grandchildCategory]);
+  const rootCategory = generateCategory(1, [], [childCategory]);
 
 
   it('structures category data', () => {
-    const dataBySlug = obtainDataBySlug([category1, category2, category3]);
+    const dataBySlug = obtainDataBySlug([rootCategory]);
     expect(dataBySlug).toEqual({
       slug1: {
         id: 'id1',
