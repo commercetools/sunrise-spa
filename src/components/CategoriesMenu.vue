@@ -14,7 +14,7 @@
                      :class="{ 'icon-ribbon sale': isSale(category1stLevel) }"
                      class="dropdown-toggle">
           {{category1stLevel.name}}
-          <img :alt="$t('main.more')"
+          <img :alt="$t('more')"
                class="mobile-plus-content visible-xs"
                src="../assets/img/plus79.png"/>
         </router-link>
@@ -45,7 +45,7 @@
             </div>
           </li>
           <li class="col-sm-4 hidden-xs">
-            <img :alt="$t('main.header.teaser')"
+            <img :alt="$t('teaser')"
                  src="../assets/img/menu-teaser.jpg"
                  class="img-responsive megamenu-img">
           </li>
@@ -147,3 +147,16 @@ export default {
   },
 };
 </script>
+
+<i18n>
+{
+  "en": {
+    "more": "More",
+    "teaser": "Summer 2015 – What inspires you?"
+  },
+  "de": {
+    "more": "Mehr",
+    "teaser": "Sommer 2015 – Was ist Ihre Inspiration?"
+  }
+}
+</i18n>

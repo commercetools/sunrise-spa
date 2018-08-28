@@ -3,7 +3,7 @@
     <!--{{> common/messages}}-->
 
     <div class="my-account-login-page-title">
-      <span class="icon-user">{{ $t('myAccount.login.pageTitle') }}</span>
+      <span class="icon-user">{{ $t('pageTitle') }}</span>
     </div>
 
     <div class="login-signup-box-wrapper">
@@ -32,6 +32,13 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<i18n>
+{
+  "en": {
+    "pageTitle": "Customer Sign In"
+  },
+  "de": {
+    "pageTitle": "Kundenanmeldung"
+  }
+}
+</i18n>
