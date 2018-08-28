@@ -430,7 +430,6 @@
       "feedbackMessage": "Eine Wiederherstellungs-E-Mail wurde gesendet, bitte überprüfen Sie Ihre E-Mail für Anweisungen zum Zurücksetzen Ihres Passworts."
     },
     "login": {
-      "pageTitle": "Kundenanmeldung",
       "signupBox": {
         "title": "Neukunden Resigstrierung",
         "required": "Pflichtfeld",

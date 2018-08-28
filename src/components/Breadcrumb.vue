@@ -5,7 +5,7 @@
       <li>
         <router-link to="/"
                      data-test="breadcrumb-home-link">
-          {{ $t('main.home') }}
+          {{ $t('home') }}
         </router-link>
       </li>
       <li v-for="ancestor in category.ancestors"
@@ -46,3 +46,14 @@ export default {
   mixins: [categoryMixin],
 };
 </script>
+
+<i18n>
+{
+  "en": {
+    "home": "Home"
+  },
+  "de": {
+    "home": "Home"
+  }
+}
+</i18n>
