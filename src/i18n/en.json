@@ -427,7 +427,6 @@
       "feedbackMessage": "A recovery email has been sent, please check your email for instructions on how to reset your password."
     },
     "login": {
-      "pageTitle": "Customer Sign In",
       "signupBox": {
         "title": "New Customer Registration",
         "required": "Required Fields",
