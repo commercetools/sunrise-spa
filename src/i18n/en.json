@@ -149,12 +149,6 @@
       "reachedMaximumQuantity": "You have reached the maximum quantity you can add to your bag",
       "itemAddedToCart": "This item has been added to your bag"
     },
-    "thumbnail": {
-      "sale": "Sale",
-      "new": "New",
-      "quickView": "Quick view",
-      "moreColors": "More colours"
-    },
     "filters": {
       "title": "Filter Products",
       "open": "Filter",

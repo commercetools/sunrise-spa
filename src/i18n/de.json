@@ -149,12 +149,6 @@
       "reachedMaximumQuantity": "Sie haben die maximale Bestellmenge erreicht.",
       "itemAddedToCart": "Der Artikel wurde in den Warenkorb gelegt."
     },
-    "thumbnail": {
-      "sale": "Sale",
-      "new": "Neu",
-      "quickView": "Schnellansicht",
-      "moreColors": "Mehr Farben"
-    },
     "filters": {
       "title": "Artikel filtern",
       "open": "Filter öffnen",
