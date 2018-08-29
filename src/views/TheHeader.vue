@@ -24,7 +24,7 @@
               <li class="list-item-search">
                 <button type="button"
                         class="search-toggle icon-magnifying-glass">
-                  <span class="sr-only">{{ $t("main.header.search") }}</span>
+                  <span class="sr-only">{{ $t("search") }}</span>
                 </button>
               </li>
               <!-- End -->
@@ -33,21 +33,21 @@
                   class="list-item-store">
                 <router-link :to="{ name: 'stores' }"
                              class="store-select icon-marker">
-                  <span class="hidden-xs">{{ $t("main.header.stores") }}</span>
+                  <span class="hidden-xs">{{ $t("stores") }}</span>
                 </router-link>
               </li>
 
               <li class="list-item-help">
                 <a href="#"
                    class="link-help">
-                  {{ $t("main.header.help") }}
+                  {{ $t("help") }}
                 </a>
               </li>
 
               <li class="list-item-call">
                 <a href="tel:0044123456000"
                    class="link-hotline">
-                  {{ $t("main.header.callUs") }}
+                  {{ $t("callUs") }}
                 </a>
               </li>
 
@@ -117,3 +117,21 @@ export default {
   },
 };
 </script>
+
+<!-- eslint-disable -->
+<i18n>
+  {
+    "en": {
+      "search": "Search",
+      "stores": "Stores",
+      "help": "Help",
+      "callUs": "Call us on +44 123 456 000"
+    },
+    "de": {
+      "search": "Suche",
+      "stores": "Filiale",
+      "help": "Hilfe",
+      "callUs": "Rufen Sie uns auf +44 123 456 000 an"
+    }
+  }
+</i18n>

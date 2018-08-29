@@ -6,10 +6,10 @@
         <div v-if="hasPrice && hasDiscount"
              class="sale-flag"
              data-test="product-thumbnail-sale-flag">
-          {{ $t('catalog.thumbnail.sale') }}
+          {{ $t('sale') }}
         </div>
         <!-- <div v-if="thumbnail.new" class="new-flag">
-          {{ $t('catalog.thumbnail.new') }}
+          {{ $t('new') }}
         </div> -->
       <!-- <form id="form-add-to-wishlist-mobile{{index}}"
             method="post"
@@ -58,7 +58,7 @@
 
       <div class="pop-product-more-colors">
         <div v-if="hasMoreColors">
-          {{ $t('catalog.thumbnail.moreColors')}} &nbsp;
+          {{ $t('moreColors')}} &nbsp;
           <ul class="list-inline">
             <li>
               <div class="product-thumbnail-swatch-red"></div>
@@ -76,7 +76,7 @@
         <button type="button"
                 class="quickview"
                 data-modal="quickview-modal">
-          {{ $t("catalog.thumbnail.quickView") }}
+          {{ $t("quickView") }}
         </button>
          <!-- <form id="form-add-to-wishlist{{index}}"
                     method="post"
@@ -153,3 +153,20 @@ export default {
 };
 </script>
 
+<!-- eslint-disable -->
+<i18n>
+  {
+   "en": {
+      "sale": "Sale",
+      "new": "New",
+      "quickView": "Quick view",
+      "moreColors": "More colours"
+   },
+   "de": {
+      "sale": "Sale",
+      "new": "Neu",
+      "quickView": "Schnellansicht",
+      "moreColors": "Mehr Farben"
+   }
+  }
+</i18n>

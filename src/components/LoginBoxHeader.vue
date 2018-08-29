@@ -6,7 +6,7 @@
         <button @click="logout"
            class="link-user"
            data-test="logout-button">
-          <span>{{ $t("main.header.signOut") }}</span>
+          <span>{{ $t("signOut") }}</span>
         </button>
       </li>
       <li v-if="isAuthenticated"
@@ -23,7 +23,7 @@
         <router-link :to="{ name: 'login' }"
                      class="link-user icon-user">
           <span class="hidden-xs hidden-sm">
-            {{ $t("main.header.signIn") }}
+            {{ $t("signIn") }}
           </span>
         </router-link>
       </li>
@@ -49,3 +49,17 @@ export default {
   },
 };
 </script>
+
+<!-- eslint-disable -->
+<i18n>
+ {
+  "en": {
+    "signOut": "Log Out",
+    "signIn": "Sign In"
+  },
+  "de": {
+    "signOut": "Log Out",
+    "signIn": "Log In"
+  }
+ }
+</i18n>

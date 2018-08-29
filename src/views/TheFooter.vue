@@ -95,6 +95,7 @@
   </footer>
 </template>
 
+<!-- eslint-disable -->
 <i18n>
 {
   "en": {

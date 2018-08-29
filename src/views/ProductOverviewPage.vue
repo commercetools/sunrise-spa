@@ -5,7 +5,7 @@
         <div class="pop-alert-wrapper">
           <div class="pop-alert-box">
             <div class="pop-alert-text">
-              {{ $t('main.messages.pleaseWait') }}
+              {{ $t('pleaseWait') }}
             </div>
           </div>
         </div>
@@ -31,7 +31,7 @@
                           class="offcanvas-btn offcanvas-open"
                           data-toggle="modal"
                           data-target="#sidebar-overlay">
-                    {{ $t('catalog.filters.open') }}
+                    {{ $t('open') }}
                   </button>
                 </li>
               </ul>
@@ -103,3 +103,17 @@ export default {
   props: ['categorySlug'],
 };
 </script>
+
+<!-- eslint-disable -->
+<i18n>
+{
+  "en": {
+    "pleaseWait": "Please wait...",
+    "open": "Filter"
+  },
+  "de": {
+    "pleaseWait": "Bitte warten...",
+    "open": "Filter öffnen"
+  }
+}
+</i18n>

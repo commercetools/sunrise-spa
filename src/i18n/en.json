@@ -24,15 +24,9 @@
     },
     "header": {
       "title": "Sunrise",
-      "stores": "Stores",
-      "help": "Help",
-      "callUs": "Call us on +44 123 456 000",
       "miniCart": "Cart",
       "viewBag": "View Bag",
       "checkout": "Checkout",
-      "search": "Search",
-      "signIn": "Sign In",
-      "signOut": "Log Out",
       "language": "Language",
       "country": "Country",
       "location": "Location",
@@ -154,12 +148,6 @@
     "messages": {
       "reachedMaximumQuantity": "You have reached the maximum quantity you can add to your bag",
       "itemAddedToCart": "This item has been added to your bag"
-    },
-    "thumbnail": {
-      "sale": "Sale",
-      "new": "New",
-      "quickView": "Quick view",
-      "moreColors": "More colours"
     },
     "filters": {
       "title": "Filter Products",
@@ -439,7 +427,6 @@
       "feedbackMessage": "A recovery email has been sent, please check your email for instructions on how to reset your password."
     },
     "login": {
-      "pageTitle": "Customer Sign In",
       "signupBox": {
         "title": "New Customer Registration",
         "required": "Required Fields",

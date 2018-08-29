@@ -24,15 +24,9 @@
     },
     "header": {
       "title": "Sunrise",
-      "stores": "Filiale",
-      "help": "Hilfe",
-      "callUs": "Rufen Sie uns auf +44 123 456 000 an",
       "miniCart": "Warenkorb",
       "viewBag": "Warenkorb ansehen",
       "checkout": "Checkout",
-      "search": "Suche",
-      "signIn": "Log In",
-      "signOut": "Log Out",
       "language": "Sprache",
       "country": "Land",
       "location": "Ort",
@@ -154,12 +148,6 @@
     "messages": {
       "reachedMaximumQuantity": "Sie haben die maximale Bestellmenge erreicht.",
       "itemAddedToCart": "Der Artikel wurde in den Warenkorb gelegt."
-    },
-    "thumbnail": {
-      "sale": "Sale",
-      "new": "Neu",
-      "quickView": "Schnellansicht",
-      "moreColors": "Mehr Farben"
     },
     "filters": {
       "title": "Artikel filtern",
@@ -442,7 +430,6 @@
       "feedbackMessage": "Eine Wiederherstellungs-E-Mail wurde gesendet, bitte überprüfen Sie Ihre E-Mail für Anweisungen zum Zurücksetzen Ihres Passworts."
     },
     "login": {
-      "pageTitle": "Kundenanmeldung",
       "signupBox": {
         "title": "Neukunden Resigstrierung",
         "required": "Pflichtfeld",
