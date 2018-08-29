@@ -20,7 +20,11 @@
                 {{ $t('main.form.required') }}*
               </span>
           </div>
-          <div class="personal-details-edit-hide">
+
+          <EditProfileForm v-if="showEditForm"
+                           @close="showEditForm = false"/>
+
+          <div v-else class="personal-details-edit-hide">
             <div class="personal-details-box">
               <div>
                   {{ user.title }} {{ user.firstName }} {{ user.lastName}}
@@ -31,7 +35,8 @@
               <!--<div>{{ $t('subscribedToNewsletter') }}</div>-->
               <!--{{/if}}-->
               <div class="personal-details-box-edit">
-                <button class="personal-details-edit-show-btn">
+                <button @click="showEditForm = true"
+                        class="personal-details-edit-show-btn">
                   <img src="../assets/img/edit-1.png" alt="edit icon">
                   {{ $t('main.form.edit') }}
                 </button>
@@ -115,9 +120,18 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import EditProfileForm from '@/components/EditProfileForm.vue';
 
 export default {
   name: 'UserProfile',
+
+  components: {
+    EditProfileForm,
+  },
+
+  data: () => ({
+    showEditForm: false,
+  }),
 
   computed: {
     ...mapGetters(['user']),
@@ -125,6 +139,7 @@ export default {
 };
 </script>
 
+<!-- eslint-disable -->
 <i18n>
 {
   "en": {
