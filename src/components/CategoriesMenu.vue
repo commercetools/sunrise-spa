@@ -148,6 +148,7 @@ export default {
 };
 </script>
 
+<!-- eslint-disable -->
 <i18n>
 {
   "en": {
