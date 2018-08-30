@@ -158,13 +158,13 @@ export default {
     "updateBtn": "Details aktualisieren",
     "cancelBtn": "Abbrechen",
     "title": "Title",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "phone": "Telephone Number",
-    "email": "Email Address",
-    "password": "Password",
-    "confirmPassword": "Confirm Password",
-    "subscribeToNewsletter": "Please add me to the Sunrise Newsletter"
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "phone": "Telefonnummer",
+    "email": "Email Adresse",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "subscribeToNewsletter": "Ich möchte den Sunrise Newsletter erhalten."
   }
 }
 </i18n>
