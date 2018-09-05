@@ -42,6 +42,42 @@ export default {
         .then(() => {
           commit(SET_INFO, null);
         }),
+
+    saveInfo: ({ commit }, {
+      firstName,
+      lastName,
+      email,
+      version,
+    }) => {
+      apolloProvider.defaultClient.mutate({
+        mutation: gql`
+          mutation saveInfo($actions: [MyCustomerUpdateAction!]!, $version: Long!) {
+            updateMyCustomer(version: $version, actions: $actions) {
+              email
+              firstName
+              lastName
+              version
+            }
+          }`,
+        variables: {
+          version,
+          actions: [
+            { changeEmail: { email } },
+            { setFirstName: { firstName } },
+            { setLastName: { lastName } },
+          ],
+        },
+      }).then((response) => {
+        // const customerData = response.data.updateMyCustomer;
+        // apolloProvider.defaultClient.saveInfo(
+        //   customerData.firstName,
+        //   customerData.lastName,
+        //   customerData.email,
+        //   customerData.version,
+        // );
+        commit(SET_INFO, response.data.updateMyCustomer);
+      });
+    },
   },
 
   mutations: {

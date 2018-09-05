@@ -14,7 +14,8 @@
       <form @submit.prevent="login">
         <ServerError :error="serverError"/>
         <div class="login-box-input">
-          <span>{{ $t('email') }}*</span><br>
+          <span>{{ $t('email') }}*</span>
+          <br>
           <div v-if="$v.email.$error"
                data-test="login-form-email-errors"
                class="error">

@@ -1,72 +1,77 @@
 <template>
 <div>
   <div class="personal-details-edit personal-details-edit-show">
-    <form @submit.prevent="edit"
+    <form @submit.prevent="save"
           id="form-edit-personal-details">
-          <ServerError :error="serverError" />
-
+      <ServerError :error="serverError" />
       <!-- <input type="hidden" name="csrfToken"/> -->
-        <!-- <div class="row"> -->
-          <!-- {{> form/global-messages messages=content.personalDetailsForm.messages}} -->
-          <!-- {{> form/global-errors errors=content.personalDetailsForm.errors}} -->
+      <!-- <div class="row"> -->
+        <!-- {{> form/global-messages messages=content.personalDetailsForm.messages}} -->
+        <!-- {{> form/global-errors errors=content.personalDetailsForm.errors}} -->
+      <!-- </div> -->
+      <!-- <div class="row"> -->
+        <!-- <div class="col-sm-12"> -->
+          <!-- <ChooseTitle  /> -->
+          <!-- {{> form/choose-title containerClass="form-sections" -->
+          <!-- selectId="personal-details-title-select" -->
+          <!-- selectName="title" -->
+          <!-- options=content.personalDetailsFormSettings.title}} -->
         <!-- </div> -->
-
-        <!-- <div class="row"> -->
-          <!-- <div class="col-sm-12"> -->
-            <!-- <ChooseTitle  /> -->
-            <!-- {{> form/choose-title containerClass="form-sections" -->
-            <!-- selectId="personal-details-title-select" -->
-            <!-- selectName="title" -->
-            <!-- options=content.personalDetailsFormSettings.title}} -->
-          <!-- </div> -->
-        <!-- </div> -->
-
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-sections">
-              <span class="form-labels">
-                {{ $t('firstName') }}*
-              </span>
-              <br>
-
-              <input  v-model.trim.lazy="$v.firstName.$model"
-                      autocomplete="fname"
-                      type="text"
-                      class="form-inputs"/>
+      <!-- </div> -->
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-sections">
+            <span class="form-labels">{{ $t('firstName') }}*</span>
+            <br>
+            <div v-if="$v.firstName.$error"
+                 data-test="edit-form-firstname-error"
+                 class="error">
+              <div v-if="!$v.firstName.required">{{ $t('main.messages.requiredField') }}</div>
             </div>
-
-            <div class="form-sections">
-              <span class="form-labels">
-                {{ $t('email') }}*
-              </span>
-              <br>
-
-              <input  v-model.trim.lazy="$v.email.$model"
-                      autocomplete="email"
-                      type="email"
-                      class="form-inputs"/>
-              <br>
-              <span class="form-notes"></span>
-            </div>
+            <input  v-model.trim.lazy="user.firstName"
+                    @input="setFirstname($event.target.value)"
+                    autocomplete="fname"
+                    type="text"
+                    class="form-inputs"/>
           </div>
 
-          <div class="col-sm-6">
-            <div class="form-sections">
-              <span class="form-labels">
-                {{ $t('lastName') }}*
-              </span>
-              <br>
-
-              <input  v-model.trim.lazy="$v.lastName.$model"
-                      autocomplete="lname"
-                      type="text"
-                      class="form-inputs"/>
+          <div class="form-sections">
+            <span class="form-labels">{{ $t('email') }}*</span>
+            <br>
+            <div v-if="$v.email.$error"
+                  data-test="edit-form-email-errors"
+                  class="error">
+              <div v-if="!$v.email.required">{{ $t('main.messages.requiredField') }}</div>
+              <div v-if="!$v.email.email">{{ $t('main.messages.requiredEmail') }}</div>
             </div>
+            <input  v-model.trim.lazy="user.email"
+                    @input="setEmail($event.target.value)"
+                    autocomplete="email"
+                    type="email"
+                    class="form-inputs"/>
+            <br>
+            <span class="form-notes"></span>
+          </div>
+
+        </div>
+        <div class="col-sm-6">
+          <div class="form-sections">
+            <span class="form-labels">{{ $t('lastName') }}*</span>
+            <br>
+            <div v-if="$v.lastName.$error"
+                  data-test="edit-form-lastname-error"
+                  class="error">
+              <div v-if="!$v.lastName.required">{{ $t('main.messages.requiredField') }}</div>
+            </div>
+            <input  v-model.trim.lazy="user.lastName"
+                    @input="setLastname($event.target.value)"
+                    autocomplete="lname"
+                    type="text"
+                    class="form-inputs"/>
           </div>
         </div>
-
+      </div>
       <hr class="light-grey-hr">
-
       <!-- <div class="personal-details-newsletter"> -->
         <!-- <span> -->
           <!-- <input name="subscribeToNewsletter" -->
@@ -75,7 +80,6 @@
           <!-- {{ $t('personalDetailsForm.subscribeToNewsletter') }} -->
         <!-- </span> -->
       <!-- </div> -->
-
       <div class="personal-details-edit-btn">
         <span>
           <button :disabled="loading"
@@ -88,7 +92,6 @@
               {{ $t('updateBtn') }}
             </span>
           </button>
-
           <button @click="$emit('close')"
                   type="button"
                   class="cancel-btn personal-details-edit-hide-btn">
@@ -129,9 +132,60 @@ export default {
     },
   },
 
+  created() {
+    const userInfo = this.$store.state.user.info;
+
+    this.email = userInfo.email;
+    this.firstName = userInfo.firstName;
+    this.lastName = userInfo.lastName;
+  },
+
+  computed: {
+    user: {
+      get() {
+        return this.$store.state.user.info;
+      },
+    },
+  },
+
   methods: {
-    edit() {
-      console.log('Edit form method');
+    save() {
+      this.$v.$touch();
+      this.serverError = null;
+      if (!this.$v.$invalid) {
+        this.saveToPlatform();
+      } else {
+        console.log('ERROR');
+      }
+    },
+
+    saveToPlatform() {
+      this.loading = true;
+      this.$store.dispatch('saveInfo', {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        version: this.user.version,
+      })
+        .then(() => {
+          this.loading = false;
+        }).catch((error) => {
+          this.serverError = error;
+          this.loading = false;
+        });
+    },
+
+    setFirstname(value) {
+      this.firstName = value;
+      this.$v.firstName.$touch();
+    },
+    setLastname(value) {
+      this.lastName = value;
+      this.$v.lastName.$touch();
+    },
+    setEmail(value) {
+      this.email = value;
+      this.$v.email.$touch();
     },
   },
 };
