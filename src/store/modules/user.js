@@ -26,6 +26,7 @@ export default {
                 firstName
                 lastName
                 customerNumber
+                version
               }
             }
           }`,
