@@ -168,7 +168,7 @@ export default {
         version: this.user.version,
       })
         .then(() => {
-          this.loading = false;
+          this.loading = true;
         }).catch((error) => {
           this.serverError = error;
           this.loading = false;
