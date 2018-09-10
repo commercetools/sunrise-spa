@@ -44,7 +44,7 @@ export default {
           commit(SET_INFO, null);
         }),
 
-    updateCustomer: ({ commit, getters }, actions) => {
+    updateCustomer: ({ commit, getters }, actions) =>
       apolloProvider.defaultClient.mutate({
         mutation: gql`
           mutation updateMyCustomer($actions: [MyCustomerUpdateAction!]!, $version: Long!) {
@@ -61,8 +61,7 @@ export default {
         },
       }).then((response) => {
         commit(SET_INFO, response.data.updateMyCustomer);
-      });
-    },
+      }),
   },
 
   mutations: {
