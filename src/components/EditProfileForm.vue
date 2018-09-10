@@ -28,11 +28,10 @@
                  class="error">
               <div v-if="!$v.firstName.required">{{ $t('main.messages.requiredField') }}</div>
             </div>
-            <input  v-model.trim.lazy="user.firstName"
-                    @input="setFirstname($event.target.value)"
+            <input  v-model.trim.lazy="$v.firstName.$model"
                     autocomplete="fname"
                     type="text"
-                    class="form-inputs"/>
+                    class="form-inputs" />
           </div>
 
           <div class="form-sections">
@@ -44,8 +43,7 @@
               <div v-if="!$v.email.required">{{ $t('main.messages.requiredField') }}</div>
               <div v-if="!$v.email.email">{{ $t('main.messages.requiredEmail') }}</div>
             </div>
-            <input  v-model.trim.lazy="user.email"
-                    @input="setEmail($event.target.value)"
+            <input  v-model.trim.lazy="$v.email.$model"
                     autocomplete="email"
                     type="email"
                     class="form-inputs"/>
@@ -63,8 +61,7 @@
                   class="error">
               <div v-if="!$v.lastName.required">{{ $t('main.messages.requiredField') }}</div>
             </div>
-            <input  v-model.trim.lazy="user.lastName"
-                    @input="setLastname($event.target.value)"
+            <input  v-model.trim.lazy="$v.lastName.$model"
                     autocomplete="lname"
                     type="text"
                     class="form-inputs"/>
@@ -107,6 +104,7 @@
 <script>
 import { required, email } from 'vuelidate/lib/validators';
 import ServerError from '@/components/ServerError.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   components: { ServerError },
@@ -119,6 +117,41 @@ export default {
     serverError: null,
   }),
 
+  created() {
+    this.email = this.user.email;
+    this.firstName = this.user.firstName;
+    this.lastName = this.user.lastName;
+  },
+
+  computed: {
+    ...mapGetters(['user']),
+
+    updateActions() {
+      return [
+        { changeEmail: { email: this.email } },
+        { setFirstName: { firstName: this.firstName } },
+        { setLastName: { lastName: this.lastName } },
+      ];
+    },
+  },
+
+  methods: {
+    async save() {
+      this.$v.$touch();
+      this.serverError = null;
+      if (!this.$v.$invalid) {
+        this.loading = true;
+        await this.$store.dispatch('updateCustomer', this.updateActions)
+          .then(() => {
+            this.$emit('close');
+          }).catch((error) => {
+            this.serverError = error;
+          });
+        this.loading = false;
+      }
+    },
+  },
+
   validations: {
     email: {
       required,
@@ -129,63 +162,6 @@ export default {
     },
     lastName: {
       required,
-    },
-  },
-
-  created() {
-    const userInfo = this.$store.state.user.info;
-
-    this.email = userInfo.email;
-    this.firstName = userInfo.firstName;
-    this.lastName = userInfo.lastName;
-  },
-
-  computed: {
-    user: {
-      get() {
-        return this.$store.state.user.info;
-      },
-    },
-  },
-
-  methods: {
-    save() {
-      this.$v.$touch();
-      this.serverError = null;
-      if (!this.$v.$invalid) {
-        this.saveToPlatform();
-      } else {
-        console.log('ERROR');
-      }
-    },
-
-    saveToPlatform() {
-      this.loading = true;
-      this.$store.dispatch('saveInfo', {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        email: this.email,
-        version: this.user.version,
-      })
-        .then(() => {
-          this.loading = true;
-        }).catch((error) => {
-          this.serverError = error;
-          this.loading = false;
-        });
-    },
-
-    setFirstname(value) {
-      this.firstName = value;
-      this.$v.firstName.$touch();
-    },
-    setLastname(value) {
-      this.lastName = value;
-      this.$v.lastName.$touch();
-    },
-    setEmail(value) {
-      this.email = value;
-      this.$v.email.$touch();
     },
   },
 };

@@ -86,17 +86,6 @@ export default {
     serverError: null,
   }),
 
-  validations: {
-    email: {
-      required,
-      email,
-    },
-    password: {
-      required,
-      minLength: minLength(5),
-    },
-  },
-
   computed: {
     credentials() {
       return {
@@ -120,6 +109,17 @@ export default {
           });
         this.loading = false;
       }
+    },
+  },
+
+  validations: {
+    email: {
+      required,
+      email,
+    },
+    password: {
+      required,
+      minLength: minLength(5),
     },
   },
 };
