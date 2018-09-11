@@ -13,7 +13,7 @@
         </div>
         <div class="col-sm-6">
           <div class="signup-box-mobile">
-            <!--{{> myaccount/signup-box form=content.signUpForm settings=content.signUpFormSettings}}-->
+            <SignUpForm/>
           </div>
         </div>
       </div>
@@ -24,11 +24,10 @@
 
 <script>
 import LoginBox from '@/components/LoginBox.vue';
+import SignUpForm from '@/components/SignUpForm.vue';
 
 export default {
-  components: {
-    LoginBox,
-  },
+  components: { LoginBox, SignUpForm },
 };
 </script>
 
