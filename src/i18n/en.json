@@ -425,27 +425,6 @@
         "bottomTextTwo": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus."
       },
       "feedbackMessage": "A recovery email has been sent, please check your email for instructions on how to reset your password."
-    },
-    "login": {
-      "signupBox": {
-        "title": "New Customer Registration",
-        "required": "Required Fields",
-        "description": "Create an account to store your products, easy checkouts, customer discounts, benefits and more.",
-        "titleSelect": "Title",
-        "firstName": "First Name",
-        "secondName": "Second Name",
-        "email": "Email",
-        "confirmEmail": "Confirm Email",
-        "password": "Password",
-        "confirmPassword": "Confirm Password",
-        "pleaseAddMe": "Please add me to the",
-        "newsletter": "SUNRISE Newsletter",
-        "agreeTo": "I agree to the",
-        "termsAndConditions": "Terms and Conditions",
-        "personalInfo": "Sunrise does not share or sell personal information. See",
-        "privacyPolicy": "Privacy Policy",
-        "registerNow": "Register Now"
-      }
     }
   }
 }

@@ -428,27 +428,6 @@
         "bottomTextTwo": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus."
       },
       "feedbackMessage": "Eine Wiederherstellungs-E-Mail wurde gesendet, bitte überprüfen Sie Ihre E-Mail für Anweisungen zum Zurücksetzen Ihres Passworts."
-    },
-    "login": {
-      "signupBox": {
-        "title": "Neukunden Resigstrierung",
-        "required": "Pflichtfeld",
-        "description": "Konto einrichten, um das Shoppen noch einfacher zu machen.",
-        "titleSelect": "Titel",
-        "firstName": "Vorname",
-        "secondName": "Nachname",
-        "email": "E-Mail",
-        "confirmEmail": "E-Mail bestätigen",
-        "password": "Passwort",
-        "confirmPassword": "Passwort bestätigen",
-        "pleaseAddMe": "Anmeldung zum",
-        "newsletter": "SUNRISE Newsletter",
-        "agreeTo": "Ich stimme den \"\" zu.",
-        "termsAndConditions": "AGB",
-        "personalInfo": "Ihre persönliche Daten werden vertaulich behandelt.",
-        "privacyPolicy": "Datenschutz",
-        "registerNow": "Jetzt registieren"
-      }
     }
   }
 }

@@ -32,7 +32,6 @@
                data-test="login-form-password-errors"
                class="error">
             <div v-if="!$v.password.required">{{ $t('main.messages.requiredField') }}</div>
-            <div v-if="!$v.password.minLength">{{ $t('passwordMinLength') }}</div>
           </div>
           <input v-model.trim.lazy="$v.password.$model"
                  autocomplete="current-password"
@@ -71,7 +70,7 @@
 </template>
 
 <script>
-import { required, email, minLength } from 'vuelidate/lib/validators';
+import { required, email } from 'vuelidate/lib/validators';
 import ServerError from '@/components/ServerError.vue';
 
 export default {
@@ -92,7 +91,6 @@ export default {
     },
     password: {
       required,
-      minLength: minLength(5),
     },
   },
 
@@ -135,8 +133,7 @@ export default {
     "password": "Password",
     "rememberMe": "Remember Me",
     "forgotPassword": "Forgot Password",
-    "signIn": "Sign In",
-    "passwordMinLength": "Password should contain at least 5 characters"
+    "signIn": "Sign In"
   },
   "de": {
     "title": "Kundenanmeldung",
@@ -146,8 +143,7 @@ export default {
     "password": "Passwort",
     "rememberMe": "Angemeldet bleiben",
     "forgotPassword": "Passwort vergessen",
-    "signIn": "Anmelden",
-    "passwordMinLength": "Das Passwort sollte mindestens 5 Zeichen enthalten"
+    "signIn": "Anmelden"
   }
 }
 </i18n>
