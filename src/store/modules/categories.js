@@ -1,39 +1,75 @@
-const SET_DATA_BY_SLUG = 'SET_DATA_BY_SLUG';
+import { apolloProvider } from '@/main';
+import i18n from '@/i18n/i18n';
+import gql from 'graphql-tag';
 
-export function obtainDataBySlug(categories) {
-  const dataBySlug = {};
+const SET_ITEMS = 'SET_ITEMS';
+
+export function obtainItemsBySlug(categories) {
+  const itemsBySlug = {};
   if (Array.isArray(categories)) {
     categories.forEach(({
       id, name, slug, ancestors, children,
     }) => {
-      dataBySlug[slug] = ({
+      itemsBySlug[slug] = ({
         id, name, slug, ancestors,
       });
-      Object.assign(dataBySlug, obtainDataBySlug(children));
+      Object.assign(itemsBySlug, obtainItemsBySlug(children));
     });
   }
-  return dataBySlug;
+  return itemsBySlug;
 }
 
 export default {
   state: {
-    dataBySlug: {},
+    items: [],
   },
 
   getters: {
-
+    hasCategories: state => state.items.length < 1,
+    categoryTree: state => state.items,
+    categoryBySlug: state => obtainItemsBySlug(state.items),
   },
 
   actions: {
-    setCategories: ({ commit }, categories) => {
-      const dataBySlug = obtainDataBySlug(categories);
-      commit(SET_DATA_BY_SLUG, dataBySlug);
-    },
+    fetchCategories: ({ commit }) => apolloProvider.defaultClient.addSmartQuery('categories', {
+      query: gql`
+          query fetchAllCategories($locale: Locale!) {
+            categories(limit: 10, where: "parent is not defined", sort: "orderHint asc") {
+              results {
+                ...printCategory
+                children {
+                  ...printCategory
+                  children {
+                    ...printCategory
+                  }
+                }
+              }
+            }
+          }
+
+          fragment printCategory on Category {
+            id
+            externalId
+            name(locale: $locale)
+            slug(locale: $locale)
+            ancestors {
+              name(locale: $locale)
+              slug(locale: $locale)
+            }
+          }`,
+      variables() {
+        return {
+          locale: i18n.locale,
+        };
+      },
+    }).then((response) => {
+      commit(SET_ITEMS, response.data.categories.results);
+    }),
   },
 
   mutations: {
-    [SET_DATA_BY_SLUG](state, dataBySlug) {
-      state.dataBySlug = dataBySlug;
+    [SET_ITEMS](state, items) {
+      state.items = items;
     },
   },
 };
