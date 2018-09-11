@@ -1,8 +1,8 @@
 <template>
   <transition name="fade">
-    <ul v-if="!loading && !empty"
+    <ul v-if="!loading && hasCategories"
         class="nav navbar-nav">
-      <li v-for="category1stLevel in categories.results"
+      <li v-for="category1stLevel in categoryTree"
          :key="category1stLevel.id"
           @mouseover="hoverOnCategory(category1stLevel)"
           @mouseleave="hoverOffCategory()"
@@ -56,24 +56,21 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
+import { mapGetters } from 'vuex';
 
 export default {
   data() {
     return {
       openCategoryMenu: '',
       someCategoryWasClicked: false,
-      categories: {},
     };
   },
 
   computed: {
-    loading() {
-      return this.$apollo.queries.categories.loading;
-    },
+    ...mapGetters(['categoryTree', 'hasCategories']),
 
-    empty() {
-      return !(Array.isArray(this.categories.results) && this.categories.results.length > 0);
+    loading() {
+      return this.$apollo.queries.categories && this.$apollo.queries.categories.loading;
     },
   },
 
@@ -101,48 +98,6 @@ export default {
 
     clickOnCategory() {
       this.someCategoryWasClicked = true;
-    },
-  },
-
-  watch: {
-    categories(categories) {
-      const categoryItems = Array.isArray(categories.results) ? categories.results : [];
-      this.$store.dispatch('setCategories', categoryItems);
-    },
-  },
-
-  apollo: {
-    categories: {
-      query: gql`
-        query fetchAllCategories($locale: Locale!) {
-          categories(limit: 10, where: "parent is not defined", sort: "orderHint asc") {
-            results {
-              ...printCategory
-              children {
-                ...printCategory
-                children {
-                  ...printCategory
-                }
-              }
-            }
-          }
-        }
-
-        fragment printCategory on Category {
-          id
-          externalId
-          name(locale: $locale)
-          slug(locale: $locale)
-          ancestors {
-            name(locale: $locale)
-            slug(locale: $locale)
-          }
-        }`,
-      variables() {
-        return {
-          locale: this.$i18n.locale,
-        };
-      },
     },
   },
 };
