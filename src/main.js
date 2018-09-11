@@ -27,5 +27,8 @@ export default new Vue({
   store,
   i18n,
   provide: apolloProvider.provide(),
+  created() {
+    this.$store.dispatch('fetchCategories');
+  },
   render: h => h(App),
 });
