@@ -31,7 +31,8 @@
             <input  v-model.trim.lazy="$v.firstName.$model"
                     autocomplete="fname"
                     type="text"
-                    class="form-inputs" />
+                    class="form-inputs"
+                    data-test="edit-form-firstName"/>
           </div>
 
           <div class="form-sections">
@@ -46,7 +47,8 @@
             <input  v-model.trim.lazy="$v.email.$model"
                     autocomplete="email"
                     type="email"
-                    class="form-inputs"/>
+                    class="form-inputs"
+                    data-test="edit-form-email"/>
             <br>
             <span class="form-notes"></span>
           </div>
@@ -64,7 +66,8 @@
             <input  v-model.trim.lazy="$v.lastName.$model"
                     autocomplete="lname"
                     type="text"
-                    class="form-inputs"/>
+                    class="form-inputs"
+                    data-test="edit-form-lastName"/>
           </div>
         </div>
       </div>
@@ -81,7 +84,8 @@
         <span>
           <button :disabled="loading"
                   type="submit"
-                  class="update-btn">
+                  class="update-btn"
+                  data-test="edit-form-submit">
             <span v-if="loading">
               {{ $t('main.messages.pleaseWait') }}
             </span>
@@ -133,13 +137,20 @@ export default {
         { setLastName: { lastName: this.lastName } },
       ];
     },
+
+    hasFormChanged() {
+      const hasEmailChanged = this.email !== this.user.email;
+      const hasFirstNameChanged = this.firstName !== this.user.firstName;
+      const hasLastNameChanged = this.lastName !== this.user.lastName;
+      return hasEmailChanged || hasFirstNameChanged || hasLastNameChanged;
+    },
   },
 
   methods: {
     async save() {
       this.$v.$touch();
       this.serverError = null;
-      if (!this.$v.$invalid) {
+      if (!this.$v.$invalid && this.hasFormChanged) {
         this.loading = true;
         await this.$store.dispatch('updateCustomer', this.updateActions)
           .then(() => {
