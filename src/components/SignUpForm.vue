@@ -11,17 +11,16 @@
     <hr class="signup-box-hr">
     <div class="signup-box-description">{{ $t('description') }}</div>
     <form @submit.prevent="signup">
-      <ServerError :error="serverError"/>
+      <ServerError :error="serverError">
+        <template slot-scope="{ graphQLError }">
+          {{ getErrorMessage(graphQLError) }}
+        </template>
+      </ServerError>
       <div class="row">
         <div class="col-sm-6">
           <div class="signup-box-input">
-            <span>{{ $t('firstName') }}*</span>
-            <br>
-            <div v-if="$v.firstName.$error"
-                 data-test="signup-form-firstname-errors"
-                 class="error">
-              <div v-if="!$v.firstName.required">{{ $t('main.messages.requiredField') }}</div>
-            </div>
+            <span>{{ $t('firstName') }}*</span><br>
+            <ValidationError :vuelidate="$v.firstName" />
             <input v-model.trim.lazy="$v.firstName.$model"
                    autocomplete="fname"
                    type="text"
@@ -30,13 +29,8 @@
         </div>
         <div class="col-sm-6">
           <div class="signup-box-input">
-            <span>{{ $t('secondName') }}*</span>
-            <br>
-            <div v-if="$v.lastName.$error"
-                 data-test="signup-form-lastname-errors"
-                 class="error">
-              <div v-if="!$v.lastName.required">{{ $t('main.messages.requiredField') }}</div>
-            </div>
+            <span>{{ $t('secondName') }}*</span><br>
+            <ValidationError :vuelidate="$v.lastName" />
             <input v-model.trim.lazy="$v.lastName.$model"
                    autocomplete="lname"
                    type="text"
@@ -46,30 +40,18 @@
       </div>
       <hr class="signup-box-hr">
       <div class="signup-box-input">
-        <span>{{ $t('email') }}*</span>
-        <br>
-        <div v-if="$v.email.$error"
-             data-test="signup-form-email-errors"
-             class="error">
-          <div v-if="!$v.email.required">{{ $t('main.messages.requiredField') }}</div>
-          <div v-if="!$v.email.email">{{ $t('main.messages.requiredEmail') }}</div>
-        </div>
+        <span>{{ $t('email') }}*</span><br>
+        <ValidationError :vuelidate="$v.email" />
         <input v-model.trim.lazy="$v.email.$model"
-               autocomplete="off"
+               autocomplete="username"
                type="email"
                data-test="signup-form-email" />
       </div>
       <div class="row">
         <div class="col-sm-6">
           <div class="signup-box-input">
-            <span>{{ $t('password') }}*</span>
-            <br>
-            <div v-if="$v.password.$error"
-                 data-test="signup-form-password-errors"
-                 class="error">
-              <div v-if="!$v.password.required">{{ $t('main.messages.requiredField') }}</div>
-              <div v-if="!$v.password.minLength">{{ $t('passwordMinLength') }}</div>
-            </div>
+            <span>{{ $t('password') }}*</span><br/>
+            <ValidationError :vuelidate="$v.password" />
             <input v-model.trim.lazy="$v.password.$model"
                    autocomplete="off"
                    type="password"
@@ -78,13 +60,9 @@
         </div>
         <div class="col-sm-6">
           <div class="signup-box-input">
-            <span>{{ $t('repeatPassword') }}*</span>
-            <br>
-            <div v-if="$v.repeatPassword.$error"
-                 data-test="signup-form-repeatpassword-errors"
-                 class="error">
-              <div v-if="!$v.repeatPassword.sameAsPassword">{{ $t('repeatPasswordError') }}</div>
-            </div>
+            <span>{{ $t('repeatPassword') }}*</span><br>
+            <ValidationError :vuelidate="$v.repeatPassword"
+                             :customMessages="{ sameAsPassword: $t('repeatPasswordError') }"/>
             <input v-model.trim.lazy="$v.repeatPassword.$model"
                    autocomplete="off"
                    type="password"
@@ -99,11 +77,8 @@
         <!--<span>{{ $t('pleaseAddMe') }} <a href="">{{ $t('newsletter') }}</a></span>-->
       <!--</div>-->
       <div class="signup-box-terms">
-        <div v-if="$v.agreeToTerms.$error"
-             data-test="signup-form-password-errors"
-             class="error">
-          <div v-if="!$v.agreeToTerms.agreed">{{ $t('agreeToError') }}</div>
-        </div>
+        <ValidationError :vuelidate="$v.agreeToTerms"
+                         :customMessages="{ mustBeAgreed: $t('agreeToTermsError') }"/>
         <input v-model.trim.lazy="$v.agreeToTerms.$model"
                autocomplete="off"
                type="checkbox"
@@ -128,10 +103,11 @@
 <script>
 import { required, email, minLength, sameAs } from 'vuelidate/lib/validators';
 import ServerError from '@/components/ServerError.vue';
+import ValidationError from '@/components/ValidationError.vue';
 
 export default {
   name: 'LoginBox',
-  components: { ServerError },
+  components: { ServerError, ValidationError },
 
   data: () => ({
     firstName: null,
@@ -145,10 +121,12 @@ export default {
   }),
 
   computed: {
-    credentials() {
+    customerDraft() {
       return {
         email: this.email,
         password: this.password,
+        firstName: this.firstName,
+        lastName: this.lastName,
       };
     },
   },
@@ -159,14 +137,21 @@ export default {
       this.serverError = null;
       if (!this.$v.$invalid) {
         this.loading = true;
-        // await this.$store.dispatch('signup', this.credentials)
-        //   .then(() => {
-        //     this.$router.push({ name: 'user' });
-        //   }).catch((error) => {
-        //     this.serverError = error;
-        //   });
+        await this.$store.dispatch('signup', this.customerDraft)
+          .then(() => {
+            this.$router.push({ name: 'user' });
+          }).catch((error) => {
+            this.serverError = error;
+          });
         this.loading = false;
       }
+    },
+
+    getErrorMessage({ code, field }) {
+      if (code === 'DuplicateField' && field === 'email') {
+        return this.$t('duplicatedEmail');
+      }
+      return null;
     },
   },
 
@@ -189,7 +174,7 @@ export default {
       sameAsPassword: sameAs('password'),
     },
     agreeToTerms: {
-      agreed: sameAs(() => true),
+      mustBeAgreed: sameAs(() => true),
     },
   },
 };
@@ -214,11 +199,11 @@ export default {
     "newsletter": "SUNRISE Newsletter",
     "agreeTo": "I agree to the",
     "termsAndConditions": "Terms and Conditions",
-    "agreeToError": "You must agree to the terms",
+    "agreeToTermsError": "You must agree to the terms",
     "personalInfo": "Sunrise does not share or sell personal information. See",
     "privacyPolicy": "Privacy Policy",
     "registerNow": "Register Now",
-    "passwordMinLength": "Password should contain at least 5 characters"
+    "duplicatedEmail": "A customer with this email already exists"
   },
   "de": {
     "title": "Neukunden Resigstrierung",
@@ -236,11 +221,11 @@ export default {
     "newsletter": "SUNRISE Newsletter",
     "agreeTo": "Ich stimme den \"\" zu.",
     "termsAndConditions": "AGB",
-    "agreeToError": "Sie müssen den Bedingungen zustimmen",
+    "agreeToTermsError": "Sie müssen den Bedingungen zustimmen",
     "personalInfo": "Ihre persönliche Daten werden vertaulich behandelt.",
     "privacyPolicy": "Datenschutz",
     "registerNow": "Jetzt registieren",
-    "passwordMinLength": "Das Passwort sollte mindestens 5 Zeichen enthalten"
+    "duplicatedEmail": "Ein Kunde mit dieser E-Mail existiert bereits"
   }
 }
 </i18n>
