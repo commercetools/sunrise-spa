@@ -1,27 +1,18 @@
 <template>
-  <div>
-    <div v-for="graphQLError in graphQLErrors"
-         :key="graphQLError.code"
-         data-test="server-error"
-         class="error">
-      {{ translateErrorMessage(graphQLError) }}
-    </div>
-    <div v-if="hasNetworkError"
-         data-test="server-error"
-         class="error">
-      {{ $t('networkError') }}
-    </div>
-    <div v-if="isInternalError"
-         data-test="server-error"
-         class="error">
-      {{ $t('unknownError') }}
-    </div>
+  <div v-if="error"
+       class="error">
+    <span v-if="isGraphQLError">
+      <slot v-for="graphQLError in graphQLErrors"
+            :graphQLError="graphQLError">
+        {{ $t('unknownError') }}
+      </slot>
+    </span>
+    <span v-else-if="isNetworkError">{{ $t('networkError') }}</span>
+    <span v-else>{{ $t('unknownError') }}</span>
   </div>
 </template>
 
 <script>
-import { ApolloError } from 'apollo-client';
-
 export default {
   name: 'ServerError',
 
@@ -32,28 +23,16 @@ export default {
   },
 
   computed: {
-    isInternalError() {
-      return this.error && !(this.error instanceof ApolloError);
-    },
-
-    hasNetworkError() {
+    isNetworkError() {
       return this.error && this.error.networkError;
     },
 
-    hasGraphQLErrors() {
-      return this.error && Array.isArray(this.error.graphQLErrors) && this.error.graphQLErrors.length > 0;
+    isGraphQLError() {
+      return this.error && Array.isArray(this.error.graphQLErrors) && this.error.graphQLErrors.length;
     },
 
     graphQLErrors() {
-      return this.hasGraphQLErrors ? this.error.graphQLErrors : [];
-    },
-  },
-
-  methods: {
-    translateErrorMessage(error) {
-      const key = `errorCodes.${error.code}`;
-      const hasTranslation = error.code && this.$te(key);
-      return hasTranslation ? this.$t(key) : this.$t('unknownError');
+      return this.isGraphQLError ? this.error.graphQLErrors : [];
     },
   },
 };
@@ -63,16 +42,10 @@ export default {
 <i18n>
 {
   "en": {
-    "errorCodes": {
-      "InvalidCredentials": "Invalid credentials"
-    },
     "networkError": "There was a error in the connection, please try again later",
     "unknownError": "Something went wrong"
   },
   "de": {
-    "errorCodes": {
-      "InvalidCredentials": "Ungültige Anmeldeinformationen"
-    },
     "networkError": "Bei der Verbindung ist ein Fehler aufgetreten, versuchen Sie es bitte später nochmals",
     "unknownError": "Etwas ist schief gelaufen"
   }
