@@ -7,13 +7,12 @@ const authHost = process.env.VUE_APP_CT_AUTH_HOST || 'https://auth.commercetools
 const apiHost = process.env.VUE_APP_CT_API_HOST || 'https://api.commercetools.com';
 
 function scopes() {
-  return ['manage_my_orders',
-    'create_anonymous_token',
+  return ['create_anonymous_token',
     'view_products',
+    'manage_my_orders',
     'manage_my_payments',
     'manage_my_profile',
-    'manage_my_shopping_lists',
-    'view_project_settings']
+    'manage_my_shopping_lists']
     .map(scope => `${scope}:${projectKey}`);
 }
 

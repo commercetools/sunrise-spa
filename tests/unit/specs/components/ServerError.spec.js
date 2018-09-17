@@ -33,49 +33,41 @@ describe('ServerError.vue', () => {
     expect(shallowMount(ServerError).isVueInstance()).toBeTruthy();
   });
 
-  it('detects internal errors', () => {
-    const wrapper = shallowMount(ServerError, options);
-    expect(wrapper.vm.isInternalError).toBeFalsy();
-
-    wrapper.setProps({ error: new Error('error') });
-    expect(wrapper.vm.isInternalError).toBeTruthy();
-  });
-
   it('detects network errors', () => {
     const wrapper = shallowMount(ServerError, options);
-    expect(wrapper.vm.hasNetworkError).toBeFalsy();
+    expect(wrapper.vm.isNetworkError).toBeFalsy();
 
     wrapper.setProps({ error: new ApolloError({}) });
-    expect(wrapper.vm.hasNetworkError).toBeFalsy();
+    expect(wrapper.vm.isNetworkError).toBeFalsy();
 
     wrapper.setProps({
       error: new ApolloError({
         networkError: { message: 'Some error' },
       }),
     });
-    expect(wrapper.vm.hasNetworkError).toBeTruthy();
+    expect(wrapper.vm.isNetworkError).toBeTruthy();
   });
 
   it('detects GraphQL errors', () => {
     const wrapper = shallowMount(ServerError, options);
-    expect(wrapper.vm.hasGraphQLErrors).toBeFalsy();
+    expect(wrapper.vm.isGraphQLError).toBeFalsy();
 
     wrapper.setProps({ error: new ApolloError({}) });
-    expect(wrapper.vm.hasGraphQLErrors).toBeFalsy();
+    expect(wrapper.vm.isGraphQLError).toBeFalsy();
 
     wrapper.setProps({
       error: new ApolloError({
         graphQLErrors: [],
       }),
     });
-    expect(wrapper.vm.hasGraphQLErrors).toBeFalsy();
+    expect(wrapper.vm.isGraphQLError).toBeFalsy();
 
     wrapper.setProps({
       error: new ApolloError({
         graphQLErrors: [graphQLError1, graphQLError2],
       }),
     });
-    expect(wrapper.vm.hasGraphQLErrors).toBeTruthy();
+    expect(wrapper.vm.isGraphQLError).toBeTruthy();
   });
 
   it('obtains all GraphQL errors', () => {
@@ -97,48 +89,52 @@ describe('ServerError.vue', () => {
     expect(wrapper.vm.graphQLErrors).toEqual([graphQLError1, graphQLError2]);
   });
 
-  it('translates error message', () => {
-    const validErrorTranslation = 'bar';
+  it('renders each GraphQL error using slot', () => {
+    options.scopedSlots = {
+      default: '<div slot-scope="{ graphQLError }">{{graphQLError.code}}</div>',
+    };
     const wrapper = shallowMount(ServerError, options);
-    wrapper.vm.$i18n.mergeLocaleMessage('en', {
-      errorCodes: { foo: validErrorTranslation },
-    });
-    expect(wrapper.vm.translateErrorMessage({ code: 'foo' })).toBe(validErrorTranslation);
-    expect(wrapper.vm.translateErrorMessage({ code: 'notfound' })).toBe(unknownErrorTranslation);
-    expect(wrapper.vm.translateErrorMessage({})).toBe(unknownErrorTranslation);
-  });
-
-  it('renders each GraphQL error', () => {
-    const wrapper = shallowMount(ServerError, options);
-    expect(wrapper.findAll('[data-test="server-error"]').length).toBe(0);
+    expect(wrapper.text()).toBe('');
 
     wrapper.setProps({
       error: new ApolloError({
         graphQLErrors: [graphQLError1, graphQLError2],
       }),
     });
-    expect(wrapper.findAll('[data-test="server-error"]').length).toBe(2);
+    expect(wrapper.text()).toMatch(/ErrorA\s*ErrorB/);
+  });
+
+  it('renders each GraphQL error as unknown when no slot is provided', () => {
+    const wrapper = shallowMount(ServerError, options);
+    expect(wrapper.text()).toBe('');
+
+    wrapper.setProps({
+      error: new ApolloError({
+        graphQLErrors: [graphQLError1, graphQLError2],
+      }),
+    });
+    expect(wrapper.text()).toMatch(/unknown error\s*unknown error/);
   });
 
   it('renders internal error', () => {
     const wrapper = shallowMount(ServerError, options);
-    expect(wrapper.findAll('[data-test="server-error"]').length).toBe(0);
+    expect(wrapper.text()).toBe('');
 
     wrapper.setProps({
       error: new Error('some error'),
     });
-    expect(wrapper.findAll('[data-test="server-error"]').length).toBe(1);
+    expect(wrapper.text()).toBe('unknown error');
   });
 
   it('renders network error', () => {
     const wrapper = shallowMount(ServerError, options);
-    expect(wrapper.findAll('[data-test="server-error"]').length).toBe(0);
+    expect(wrapper.text()).toBe('');
 
     wrapper.setProps({
       error: new ApolloError({
         networkError: { message: 'Some error' },
       }),
     });
-    expect(wrapper.findAll('[data-test="server-error"]').length).toBe(1);
+    expect(wrapper.text()).toBe('network error');
   });
 });
