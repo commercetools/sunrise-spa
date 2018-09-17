@@ -89,9 +89,9 @@ describe('ServerError.vue', () => {
     expect(wrapper.vm.graphQLErrors).toEqual([graphQLError1, graphQLError2]);
   });
 
-  it('renders each GraphQL error using slot', () => {
+  it('renders each GraphQL error', () => {
     options.scopedSlots = {
-      default: '<div slot-scope="{ graphQLError }">{{graphQLError.code}}</div>',
+      default: '<error slot-scope="{ graphQLError }">{{graphQLError.code}}</error>',
     };
     const wrapper = shallowMount(ServerError, options);
     expect(wrapper.text()).toBe('');
@@ -101,19 +101,22 @@ describe('ServerError.vue', () => {
         graphQLErrors: [graphQLError1, graphQLError2],
       }),
     });
-    expect(wrapper.text()).toMatch(/ErrorA\s*ErrorB/);
+    const errors = wrapper.findAll('error');
+    expect(errors.length).toBe(2);
+    expect(errors.at(0).text()).toBe(graphQLError1.code);
+    expect(errors.at(1).text()).toBe(graphQLError2.code);
   });
 
-  it('renders each GraphQL error as unknown when no slot is provided', () => {
+  it('renders GraphQL error as unknown when no slot is provided', () => {
     const wrapper = shallowMount(ServerError, options);
     expect(wrapper.text()).toBe('');
 
     wrapper.setProps({
       error: new ApolloError({
-        graphQLErrors: [graphQLError1, graphQLError2],
+        graphQLErrors: [graphQLError1],
       }),
     });
-    expect(wrapper.text()).toMatch(/unknown error\s*unknown error/);
+    expect(wrapper.text()).toBe(unknownErrorTranslation);
   });
 
   it('renders internal error', () => {
@@ -123,7 +126,7 @@ describe('ServerError.vue', () => {
     wrapper.setProps({
       error: new Error('some error'),
     });
-    expect(wrapper.text()).toBe('unknown error');
+    expect(wrapper.text()).toBe(unknownErrorTranslation);
   });
 
   it('renders network error', () => {
@@ -135,6 +138,6 @@ describe('ServerError.vue', () => {
         networkError: { message: 'Some error' },
       }),
     });
-    expect(wrapper.text()).toBe('network error');
+    expect(wrapper.text()).toBe(networkErrorTranslation);
   });
 });

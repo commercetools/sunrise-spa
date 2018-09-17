@@ -1,11 +1,11 @@
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import LoginBoxHeader from '@/components/LoginBoxHeader.vue';
+import LoginHeaderButton from '@/components/LoginHeaderButton.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
-describe('LoginBoxHeader.vue', () => {
+describe('LoginHeaderButton.vue', () => {
   let options;
   let actions;
   let getters;
@@ -32,13 +32,13 @@ describe('LoginBoxHeader.vue', () => {
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(LoginBoxHeader, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(LoginHeaderButton, options).isVueInstance()).toBeTruthy();
   });
 
   it('logs out', () => {
     getters.isAuthenticated.mockReturnValue(true);
     getters.user.mockReturnValue({});
-    const wrapper = shallowMount(LoginBoxHeader, options);
+    const wrapper = shallowMount(LoginHeaderButton, options);
     wrapper.find('[data-test="logout-button"]').trigger('click');
     expect(actions.logout).toHaveBeenCalled();
   });
