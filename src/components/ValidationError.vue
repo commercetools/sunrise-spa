@@ -4,7 +4,7 @@
     <div v-for="validation in validations"
          :key="validation">
       <div v-if="!vuelidate[validation]"
-            :validation="validation">
+           :validation="validation">
         {{ getErrorMessage(validation) }}
       </div>
     </div>
