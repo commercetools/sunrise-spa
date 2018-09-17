@@ -18,6 +18,7 @@ export default {
   props: {
     vuelidate: {
       type: Object,
+      required: true,
     },
     customMessages: {
       type: Object,
