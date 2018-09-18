@@ -25,18 +25,20 @@
                            @close="showEditForm = false"/>
 
           <div v-else class="personal-details-edit-hide">
-            <div class="personal-details-box">
-              <div>
+            <div class="personal-details-box"
+                data-test="personal-details-box">
+              <div data-test="personal-details-box-name">
                   {{ user.title }} {{ user.firstName }} {{ user.lastName}}
               </div>
-              <div>{{ user.email }}</div>
+              <div data-test="personal-details-box-email">{{ user.email }}</div>
               <br>
               <!--{{#if content.customerInfo.subscribed}}-->
               <!--<div>{{ $t('subscribedToNewsletter') }}</div>-->
               <!--{{/if}}-->
               <div class="personal-details-box-edit">
                 <button @click="showEditForm = true"
-                        class="personal-details-edit-show-btn">
+                        class="personal-details-edit-show-btn"
+                        data-test="personal-details-edit-show-btn">
                   <img src="../assets/img/edit-1.png" alt="edit icon">
                   {{ $t('main.form.edit') }}
                 </button>
