@@ -1,7 +1,6 @@
 <template>
 <div>
   <div class="personal-details-edit personal-details-edit-show">
-<<<<<<< HEAD
     <form @submit.prevent="save"
           id="form-edit-personal-details">
       <ServerError :error="serverError" />
@@ -73,74 +72,6 @@
         </div>
       </div>
       <hr class="light-grey-hr">
-=======
-    <form @submit.prevent="edit"
-          id="form-edit-personal-details">
-          <ServerError :error="serverError" />
-
-      <!-- <input type="hidden" name="csrfToken"/> -->
-        <!-- <div class="row"> -->
-          <!-- {{> form/global-messages messages=content.personalDetailsForm.messages}} -->
-          <!-- {{> form/global-errors errors=content.personalDetailsForm.errors}} -->
-        <!-- </div> -->
-
-        <!-- <div class="row"> -->
-          <!-- <div class="col-sm-12"> -->
-            <!-- <ChooseTitle  /> -->
-            <!-- {{> form/choose-title containerClass="form-sections" -->
-            <!-- selectId="personal-details-title-select" -->
-            <!-- selectName="title" -->
-            <!-- options=content.personalDetailsFormSettings.title}} -->
-          <!-- </div> -->
-        <!-- </div> -->
-
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-sections">
-              <span class="form-labels">
-                {{ $t('firstName') }}*
-              </span>
-              <br>
-
-              <input  v-model.trim.lazy="$v.firstName.$model"
-                      autocomplete="fname"
-                      type="text"
-                      class="form-inputs"/>
-            </div>
-
-            <div class="form-sections">
-              <span class="form-labels">
-                {{ $t('email') }}*
-              </span>
-              <br>
-
-              <input  v-model.trim.lazy="$v.email.$model"
-                      autocomplete="email"
-                      type="email"
-                      class="form-inputs"/>
-              <br>
-              <span class="form-notes"></span>
-            </div>
-          </div>
-
-          <div class="col-sm-6">
-            <div class="form-sections">
-              <span class="form-labels">
-                {{ $t('lastName') }}*
-              </span>
-              <br>
-
-              <input  v-model.trim.lazy="$v.lastName.$model"
-                      autocomplete="lname"
-                      type="text"
-                      class="form-inputs"/>
-            </div>
-          </div>
-        </div>
-
-      <hr class="light-grey-hr">
-
->>>>>>> Implement dummy profile edit form component
       <!-- <div class="personal-details-newsletter"> -->
         <!-- <span> -->
           <!-- <input name="subscribeToNewsletter" -->
@@ -149,20 +80,12 @@
           <!-- {{ $t('personalDetailsForm.subscribeToNewsletter') }} -->
         <!-- </span> -->
       <!-- </div> -->
-<<<<<<< HEAD
-=======
-
->>>>>>> Implement dummy profile edit form component
       <div class="personal-details-edit-btn">
         <span>
           <button :disabled="loading"
                   type="submit"
-<<<<<<< HEAD
                   class="update-btn"
                   data-test="edit-form-submit">
-=======
-                  class="update-btn">
->>>>>>> Implement dummy profile edit form component
             <span v-if="loading">
               {{ $t('main.messages.pleaseWait') }}
             </span>
@@ -170,10 +93,6 @@
               {{ $t('updateBtn') }}
             </span>
           </button>
-<<<<<<< HEAD
-=======
-
->>>>>>> Implement dummy profile edit form component
           <button @click="$emit('close')"
                   type="button"
                   class="cancel-btn personal-details-edit-hide-btn">
@@ -189,10 +108,7 @@
 <script>
 import { required, email } from 'vuelidate/lib/validators';
 import ServerError from '@/components/ServerError.vue';
-<<<<<<< HEAD
 import { mapGetters } from 'vuex';
-=======
->>>>>>> Implement dummy profile edit form component
 
 export default {
   components: { ServerError },
@@ -205,7 +121,6 @@ export default {
     serverError: null,
   }),
 
-<<<<<<< HEAD
   created() {
     this.email = this.user.email;
     this.firstName = this.user.firstName;
@@ -248,8 +163,6 @@ export default {
     },
   },
 
-=======
->>>>>>> Implement dummy profile edit form component
   validations: {
     email: {
       required,
@@ -262,15 +175,6 @@ export default {
       required,
     },
   },
-<<<<<<< HEAD
-=======
-
-  methods: {
-    edit() {
-      console.log('Edit form method');
-    },
-  },
->>>>>>> Implement dummy profile edit form component
 };
 </script>
 
@@ -295,7 +199,6 @@ export default {
     "updateBtn": "Details aktualisieren",
     "cancelBtn": "Abbrechen",
     "title": "Title",
-<<<<<<< HEAD
     "firstName": "Vorname",
     "lastName": "Nachname",
     "phone": "Telefonnummer",
@@ -303,15 +206,6 @@ export default {
     "password": "Passwort",
     "confirmPassword": "Passwort bestätigen",
     "subscribeToNewsletter": "Ich möchte den Sunrise Newsletter erhalten."
-=======
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "phone": "Telephone Number",
-    "email": "Email Address",
-    "password": "Password",
-    "confirmPassword": "Confirm Password",
-    "subscribeToNewsletter": "Please add me to the Sunrise Newsletter"
->>>>>>> Implement dummy profile edit form component
   }
 }
 </i18n>
