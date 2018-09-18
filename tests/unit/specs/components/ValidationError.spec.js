@@ -25,7 +25,7 @@ describe('ValidationError.vue', () => {
         },
       }),
       propsData: {
-        vuelidate: { $params: {} },
+        vuelidate: { $params: {}, $error: true },
       },
     };
   });
@@ -91,7 +91,7 @@ describe('ValidationError.vue', () => {
     expect(wrapper.vm.getErrorMessage('params')).toEqual('min 3 max 5');
   });
 
-  it('does not show error if no error flag', () => {
+  it('does not render if no error flag', () => {
     const wrapper = shallowMount(ValidationError, options);
     wrapper.setProps({
       vuelidate: {
@@ -108,5 +108,27 @@ describe('ValidationError.vue', () => {
       },
     });
     expect(wrapper.html()).not.toBeUndefined();
+  });
+
+  it('renders each validation error', () => {
+    const wrapper = shallowMount(ValidationError, options);
+    expect(wrapper.findAll('[data-test="validation-error"]').length).toBe(0);
+
+    wrapper.setProps({
+      vuelidate: {
+        $error: true,
+        $params: {
+          required: { type: 'required' },
+          email: { type: 'email' },
+          custom: { type: 'custom error' },
+        },
+      },
+      customMessages: { custom: 'custom message' },
+    });
+    const errors = wrapper.findAll('[data-test="validation-error"]');
+    expect(errors.length).toBe(3);
+    expect(errors.at(0).text()).toBe(requiredTranslation);
+    expect(errors.at(1).text()).toBe(unknownValidationTranslation);
+    expect(errors.at(2).text()).toBe('custom message');
   });
 });
