@@ -23,9 +23,9 @@
           <div class="personal-details-edit-hide">
             <div class="personal-details-box">
               <div>
-                  {{ user.title }} {{ user.firstName }} {{ user.lastName}}
+                <span data-test="user-profile-name">{{ user.firstName }} {{ user.lastName}}</span>
               </div>
-              <div>{{ user.email }}</div>
+              <div data-test="user-profile-email">{{ user.email }}</div>
               <br>
               <!--{{#if content.customerInfo.subscribed}}-->
               <!--<div>{{ $t('subscribedToNewsletter') }}</div>-->
