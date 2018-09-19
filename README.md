@@ -24,7 +24,7 @@ SUNRISE comes with some read-only data set by default that you can use. But if y
 Once you have created your commercetools project and populated it with data, follow the next steps to connect to it.
 
 ### 1. Create an API client for a SPA
-In the [Merchant Center](https://mc.commercetools.com/), select your project and go to `Settings` then click on `Developer Settings` section and you should find yourself in the New API Client tab. Now click on the `Create New API client` button to display a form. There, enter a descriptive name for your new API client and click on `Select Template for a Mobile client` then click on `Create API Client` button, now you should be able to see your project credentials.
+In the [Merchant Center](https://mc.commercetools.com/), select your project and go to `Settings` then click on `Developer Settings` section and you should find yourself in the `API Clients` tab. Now click on the `Create New API client` button to display a form. There, enter a descriptive name for your new API client and Select Template for a `Mobile client` Once you have filled the form, submit it by clicking on `Create API Client` button, you should now be able to see your project credentials.
 
 ### 2. Configure SUNRISE with your API client 
 Set environment variables with your project credentials. For example, by creating an [`.env` file](https://www.npmjs.com/package/dotenv#usage) (e.g. `.env.local`) in the root folder of the project, as follows:
