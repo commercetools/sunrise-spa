@@ -6,7 +6,7 @@ module.exports = {
     jquery: true
   },
 
-  'extends': [
+  extends: [
     'plugin:vue/essential',
     '@vue/airbnb'
   ],

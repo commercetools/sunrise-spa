@@ -10,11 +10,30 @@ export default {
 
   getters: {
     user: state => state.info || {},
-
     isAuthenticated: state => !!state.info,
   },
 
   actions: {
+    signup: ({ commit }, draft) =>
+      apolloProvider.defaultClient.mutate({
+        mutation: gql`
+          mutation signup($draft: CustomerSignMeUpDraft!) {
+            customerSignMeUp(draft: $draft) {
+              customer {
+                email
+                title
+                firstName
+                lastName
+                customerNumber
+              }
+            }
+          }`,
+        variables: { draft },
+      }).then((response) => {
+        apolloProvider.defaultClient.login(draft.email, draft.password);
+        commit(SET_INFO, response.data.customerSignMeUp.customer);
+      }),
+
     login: ({ commit }, { email, password }) =>
       apolloProvider.defaultClient.mutate({
         mutation: gql`

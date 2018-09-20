@@ -55,7 +55,7 @@
                 <!--{{> common/mini-cart miniCart=header.miniCart}}-->
               </li>
 
-              <LoginBoxHeader/>
+              <LoginHeaderButton/>
 
               <LocationSelector/>
             </ul>
@@ -107,13 +107,13 @@
 <script>
 import LocationSelector from '@/components/LocationSelector.vue';
 import CategoriesMenu from '@/components/CategoriesMenu.vue';
-import LoginBoxHeader from '@/components/LoginBoxHeader.vue';
+import LoginHeaderButton from '@/components/LoginHeaderButton.vue';
 
 export default {
   components: {
+    LoginHeaderButton,
     LocationSelector,
     CategoriesMenu,
-    LoginBoxHeader,
   },
 };
 </script>

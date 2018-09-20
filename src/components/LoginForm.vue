@@ -12,16 +12,14 @@
     <div class="login-box-description">{{ $t('description') }}</div>
     <div class="login-box-input-wrapper">
       <form @submit.prevent="login">
-        <ServerError :error="serverError"/>
+        <ServerError :error="serverError">
+          <template slot-scope="{ graphQLError }">
+            {{ getErrorMessage(graphQLError) }}
+          </template>
+        </ServerError>
         <div class="login-box-input">
-          <span>{{ $t('email') }}*</span>
-          <br>
-          <div v-if="$v.email.$error"
-               data-test="login-form-email-errors"
-               class="error">
-            <div v-if="!$v.email.required">{{ $t('main.messages.requiredField') }}</div>
-            <div v-if="!$v.email.email">{{ $t('main.messages.requiredEmail') }}</div>
-          </div>
+          <span>{{ $t('email') }}*</span><br>
+          <ValidationError :vuelidate="$v.email"/>
           <input v-model.trim.lazy="$v.email.$model"
                  autocomplete="username"
                  type="email"
@@ -29,12 +27,7 @@
         </div>
         <div class="login-box-input">
           <span>{{ $t('password') }}*</span><br>
-          <div v-if="$v.password.$error"
-               data-test="login-form-password-errors"
-               class="error">
-            <div v-if="!$v.password.required">{{ $t('main.messages.requiredField') }}</div>
-            <div v-if="!$v.password.minLength">{{ $t('passwordMinLength') }}</div>
-          </div>
+          <ValidationError :vuelidate="$v.password"/>
           <input v-model.trim.lazy="$v.password.$model"
                  autocomplete="current-password"
                  type="password"
@@ -72,12 +65,12 @@
 </template>
 
 <script>
-import { required, email, minLength } from 'vuelidate/lib/validators';
+import { required, email } from 'vuelidate/lib/validators';
 import ServerError from '@/components/ServerError.vue';
+import ValidationError from '@/components/ValidationError.vue';
 
 export default {
-  name: 'LoginBox',
-  components: { ServerError },
+  components: { ServerError, ValidationError },
 
   data: () => ({
     email: null,
@@ -110,6 +103,13 @@ export default {
         this.loading = false;
       }
     },
+
+    getErrorMessage({ code }) {
+      if (code === 'InvalidCredentials') {
+        return this.$t('invalidCredentials');
+      }
+      return null;
+    },
   },
 
   validations: {
@@ -119,7 +119,6 @@ export default {
     },
     password: {
       required,
-      minLength: minLength(5),
     },
   },
 };
@@ -137,7 +136,7 @@ export default {
     "rememberMe": "Remember Me",
     "forgotPassword": "Forgot Password",
     "signIn": "Sign In",
-    "passwordMinLength": "Password should contain at least 5 characters"
+    "invalidCredentials": "Invalid credentials"
   },
   "de": {
     "title": "Kundenanmeldung",
@@ -148,7 +147,7 @@ export default {
     "rememberMe": "Angemeldet bleiben",
     "forgotPassword": "Passwort vergessen",
     "signIn": "Anmelden",
-    "passwordMinLength": "Das Passwort sollte mindestens 5 Zeichen enthalten"
+    "invalidCredentials": "Ungültige Anmeldeinformationen"
   }
 }
 </i18n>
