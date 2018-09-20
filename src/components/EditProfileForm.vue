@@ -4,51 +4,26 @@
     <form @submit.prevent="save"
           id="form-edit-personal-details">
       <ServerError :error="serverError" />
-      <!-- <input type="hidden" name="csrfToken"/> -->
-      <!-- <div class="row"> -->
-        <!-- {{> form/global-messages messages=content.personalDetailsForm.messages}} -->
-        <!-- {{> form/global-errors errors=content.personalDetailsForm.errors}} -->
-      <!-- </div> -->
-      <!-- <div class="row"> -->
-        <!-- <div class="col-sm-12"> -->
-          <!-- <ChooseTitle  /> -->
-          <!-- {{> form/choose-title containerClass="form-sections" -->
-          <!-- selectId="personal-details-title-select" -->
-          <!-- selectName="title" -->
-          <!-- options=content.personalDetailsFormSettings.title}} -->
-        <!-- </div> -->
-      <!-- </div> -->
       <div class="row">
         <div class="col-sm-6">
           <div class="form-sections">
-            <span class="form-labels">{{ $t('firstName') }}*</span>
-            <br>
-            <div v-if="$v.firstName.$error"
-                 data-test="edit-form-firstname-error"
-                 class="error">
-              <div v-if="!$v.firstName.required">{{ $t('main.messages.requiredField') }}</div>
-            </div>
-            <input  v-model.trim.lazy="$v.firstName.$model"
-                    autocomplete="fname"
-                    type="text"
-                    class="form-inputs"
-                    data-test="edit-form-firstName"/>
+            <span class="form-labels">{{ $t('firstName') }}*</span><br>
+            <ValidationError :vuelidate="$v.firstName" />
+            <input v-model.trim.lazy="$v.firstName.$model"
+                   autocomplete="fname"
+                   type="text"
+                   class="form-inputs"
+                   data-test="edit-profile-form-firstname"/>
           </div>
 
           <div class="form-sections">
-            <span class="form-labels">{{ $t('email') }}*</span>
-            <br>
-            <div v-if="$v.email.$error"
-                  data-test="edit-form-email-errors"
-                  class="error">
-              <div v-if="!$v.email.required">{{ $t('main.messages.requiredField') }}</div>
-              <div v-if="!$v.email.email">{{ $t('main.messages.requiredEmail') }}</div>
-            </div>
-            <input  v-model.trim.lazy="$v.email.$model"
-                    autocomplete="email"
-                    type="email"
-                    class="form-inputs"
-                    data-test="edit-form-email"/>
+            <span class="form-labels">{{ $t('email') }}*</span><br>
+            <ValidationError :vuelidate="$v.email" />
+            <input v-model.trim.lazy="$v.email.$model"
+                   autocomplete="email"
+                   type="email"
+                   class="form-inputs"
+                   data-test="edit-profile-form-email"/>
             <br>
             <span class="form-notes"></span>
           </div>
@@ -56,18 +31,13 @@
         </div>
         <div class="col-sm-6">
           <div class="form-sections">
-            <span class="form-labels">{{ $t('lastName') }}*</span>
-            <br>
-            <div v-if="$v.lastName.$error"
-                  data-test="edit-form-lastname-error"
-                  class="error">
-              <div v-if="!$v.lastName.required">{{ $t('main.messages.requiredField') }}</div>
-            </div>
-            <input  v-model.trim.lazy="$v.lastName.$model"
-                    autocomplete="lname"
-                    type="text"
-                    class="form-inputs"
-                    data-test="edit-form-lastName"/>
+            <span class="form-labels">{{ $t('lastName') }}*</span><br>
+            <ValidationError :vuelidate="$v.lastName" />
+            <input v-model.trim.lazy="$v.lastName.$model"
+                   autocomplete="lname"
+                   type="text"
+                   class="form-inputs"
+                   data-test="edit-profile-form-lastname"/>
           </div>
         </div>
       </div>
@@ -85,7 +55,7 @@
           <button :disabled="loading"
                   type="submit"
                   class="update-btn"
-                  data-test="edit-form-submit">
+                  data-test="edit-profile-form-submit">
             <span v-if="loading">
               {{ $t('main.messages.pleaseWait') }}
             </span>
@@ -108,10 +78,11 @@
 <script>
 import { required, email } from 'vuelidate/lib/validators';
 import ServerError from '@/components/ServerError.vue';
+import ValidationError from '@/components/ValidationError.vue';
 import { mapGetters } from 'vuex';
 
 export default {
-  components: { ServerError },
+  components: { ValidationError, ServerError },
 
   data: () => ({
     firstName: null,

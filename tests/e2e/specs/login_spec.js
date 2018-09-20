@@ -1,9 +1,10 @@
 import { randomCustomer } from '../support/utils';
 
 describe('Login', () => {
-  const customer = randomCustomer();
+  let customer;
 
   before(() => {
+    customer = randomCustomer();
     cy.signup(customer);
     cy.logout();
     cy.visit('/login');
