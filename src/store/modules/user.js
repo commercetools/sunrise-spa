@@ -21,10 +21,10 @@ export default {
             customerSignMeUp(draft: $draft) {
               customer {
                 email
-                title
                 firstName
                 lastName
                 customerNumber
+                version
               }
             }
           }`,
@@ -41,7 +41,6 @@ export default {
             customerSignMeIn(draft: $draft) {
               customer {
                 email
-                title
                 firstName
                 lastName
                 customerNumber
@@ -71,6 +70,7 @@ export default {
               email
               firstName
               lastName
+              customerNumber
               version
             }
           }`,
