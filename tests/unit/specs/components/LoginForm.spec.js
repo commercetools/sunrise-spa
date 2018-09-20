@@ -16,6 +16,11 @@ function setInputValue(input, value) {
   input.trigger('blur');
 }
 
+function fillForm(wrapper, credentials) {
+  setInputValue(wrapper.find('[data-test="login-form-email"]'), credentials.email);
+  setInputValue(wrapper.find('[data-test="login-form-password"]'), credentials.password);
+}
+
 describe('LoginForm.vue', () => {
   const credentials = {
     email: 'willy.wonka@commercetools.com',
@@ -47,7 +52,7 @@ describe('LoginForm.vue', () => {
     setInputValue(wrapper.find('[data-test="login-form-email"]'), credentials.email);
     expect(wrapper.vm.credentials).toEqual({ email: credentials.email, password: null });
 
-    setInputValue(wrapper.find('[data-test="login-form-password"]'), credentials.password);
+    fillForm(wrapper, credentials);
     expect(wrapper.vm.credentials).toEqual({ email: credentials.email, password: credentials.password });
   });
 
@@ -60,7 +65,7 @@ describe('LoginForm.vue', () => {
     wrapper.vm.login();
     expect(actions.login).not.toHaveBeenCalled();
 
-    setInputValue(wrapper.find('[data-test="login-form-password"]'), credentials.password);
+    fillForm(wrapper, credentials);
     wrapper.vm.login();
     expect(actions.login).toHaveBeenCalledWith(expect.anything(), credentials, undefined);
   });
@@ -78,8 +83,7 @@ describe('LoginForm.vue', () => {
       graphQLErrors: [{ code: 'Error1' }, { code: 'Error2' }],
     });
     actions.login.mockRejectedValue(error);
-    setInputValue(wrapper.find('[data-test="login-form-email"]'), credentials.email);
-    setInputValue(wrapper.find('[data-test="login-form-password"]'), credentials.password);
+    fillForm(wrapper, credentials);
     wrapper.vm.login().then(() => {
       expect(wrapper.find(ServerError).props().error).toEqual(error);
     });
