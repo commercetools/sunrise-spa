@@ -106,7 +106,6 @@ import ServerError from '@/components/ServerError.vue';
 import ValidationError from '@/components/ValidationError.vue';
 
 export default {
-  name: 'LoginBox',
   components: { ServerError, ValidationError },
 
   data: () => ({

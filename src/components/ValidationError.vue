@@ -14,8 +14,6 @@
 
 <script>
 export default {
-  name: 'ValidationError',
-
   props: {
     vuelidate: {
       type: Object,
