@@ -14,8 +14,6 @@
 
 <script>
 export default {
-  name: 'ServerError',
-
   props: {
     error: {
       type: Error,

@@ -117,8 +117,6 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'UserProfile',
-
   computed: {
     ...mapGetters(['user']),
   },
