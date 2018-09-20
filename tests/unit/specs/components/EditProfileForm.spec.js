@@ -4,6 +4,7 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import { ApolloError } from 'apollo-client';
 import EditProfileForm from '@/components/EditProfileForm.vue';
 import ServerError from '@/components/ServerError.vue';
+import ValidationError from '@/components/ValidationError.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -13,6 +14,12 @@ function setInputValue(input, value) {
   input.setValue(value);
   input.trigger('change');
   input.trigger('blur');
+}
+
+function fillForm(wrapper, customer) {
+  setInputValue(wrapper.find('[data-test="edit-profile-form-firstname"]'), customer.firstName);
+  setInputValue(wrapper.find('[data-test="edit-profile-form-lastname"]'), customer.lastName);
+  setInputValue(wrapper.find('[data-test="edit-profile-form-email"]'), customer.email);
 }
 
 describe('EditProfileForm.vue', () => {
@@ -65,9 +72,7 @@ describe('EditProfileForm.vue', () => {
       { setLastName: { lastName: originalUser.lastName } },
     ]);
 
-    setInputValue(wrapper.find('[data-test="edit-form-email"]'), newUser.email);
-    setInputValue(wrapper.find('[data-test="edit-form-firstName"]'), newUser.firstName);
-    setInputValue(wrapper.find('[data-test="edit-form-lastName"]'), newUser.lastName);
+    fillForm(wrapper, newUser);
     expect(wrapper.vm.updateActions).toEqual([
       { changeEmail: { email: newUser.email } },
       { setFirstName: { firstName: newUser.firstName } },
@@ -77,7 +82,7 @@ describe('EditProfileForm.vue', () => {
 
   it('updates user info when one form field is valid', () => {
     const wrapper = shallowMount(EditProfileForm, options);
-    setInputValue(wrapper.find('[data-test="edit-form-firstName"]'), newUser.firstName);
+    setInputValue(wrapper.find('[data-test="edit-profile-form-firstname"]'), newUser.firstName);
     wrapper.vm.save();
 
     const expectedUpdateActions = [
@@ -90,9 +95,7 @@ describe('EditProfileForm.vue', () => {
 
   it('updates user info when form is valid', () => {
     const wrapper = shallowMount(EditProfileForm, options);
-    setInputValue(wrapper.find('[data-test="edit-form-firstName"]'), newUser.firstName);
-    setInputValue(wrapper.find('[data-test="edit-form-email"]'), newUser.email);
-    setInputValue(wrapper.find('[data-test="edit-form-lastName"]'), newUser.lastName);
+    fillForm(wrapper, newUser);
     wrapper.vm.save();
 
     const expectedUpdateActions = [
@@ -105,7 +108,7 @@ describe('EditProfileForm.vue', () => {
 
   it('does not update customer info when form is invalid', () => {
     const wrapper = shallowMount(EditProfileForm, options);
-    setInputValue(wrapper.find('[data-test="edit-form-firstName"]'), '');
+    setInputValue(wrapper.find('[data-test="edit-profile-form-firstname"]'), '');
     wrapper.vm.save();
     expect(actions.updateCustomer).not.toHaveBeenCalled();
   });
@@ -120,28 +123,16 @@ describe('EditProfileForm.vue', () => {
     const wrapper = shallowMount(EditProfileForm, options);
     expect(wrapper.vm.hasFormChanged).toBeFalsy();
 
-    setInputValue(wrapper.find('[data-test="edit-form-email"]'), newUser.email);
+    setInputValue(wrapper.find('[data-test="edit-profile-form-email"]'), newUser.email);
     expect(wrapper.vm.hasFormChanged).toBeTruthy();
 
-    setInputValue(wrapper.find('[data-test="edit-form-email"]'), originalUser.email);
+    setInputValue(wrapper.find('[data-test="edit-profile-form-email"]'), originalUser.email);
     expect(wrapper.vm.hasFormChanged).toBeFalsy();
   });
 
   it('shows form error', () => {
     const wrapper = shallowMount(EditProfileForm, options);
-    expect(wrapper.find('[data-test="edit-form-email-errors"]').exists()).toBeFalsy();
-    expect(wrapper.find('[data-test="edit-form-firstName-errors"]').exists()).toBeFalsy();
-    expect(wrapper.find('[data-test="edit-form-lastName-errors"]').exists()).toBeFalsy();
-
-    setInputValue(wrapper.find('[data-test="edit-form-email"]'), 'willy.gmail.com');
-    expect(wrapper.find('[data-test="edit-form-email-errors"]').exists()).toBeTruthy();
-    expect(wrapper.find('[data-test="edit-form-firstName-errors"]').exists()).toBeFalsy();
-    expect(wrapper.find('[data-test="edit-form-lastName-errors"]').exists()).toBeFalsy();
-
-    setInputValue(wrapper.find('[data-test="edit-form-email"]'), 'willy@gmail.com');
-    expect(wrapper.find('[data-test="edit-form-email-errors"]').exists()).toBeFalsy();
-    expect(wrapper.find('[data-test="edit-form-firstName-errors"]').exists()).toBeFalsy();
-    expect(wrapper.find('[data-test="edit-form-lastName-errors"]').exists()).toBeFalsy();
+    expect(wrapper.findAll(ValidationError).length).toBe(3);
   });
 
   it('catches server errors', () => {
@@ -152,9 +143,7 @@ describe('EditProfileForm.vue', () => {
       graphQLErrors: [{ code: 'Error1' }, { code: 'Error2' }],
     });
     actions.updateCustomer.mockRejectedValue(error);
-    setInputValue(wrapper.find('[data-test="edit-form-email"]'), newUser.email);
-    setInputValue(wrapper.find('[data-test="edit-form-firstName"]'), newUser.firstName);
-    setInputValue(wrapper.find('[data-test="edit-form-lastName"]'), newUser.lastName);
+    fillForm(wrapper, newUser);
     wrapper.vm.save().then(() => {
       expect(wrapper.find(ServerError).props().error).toEqual(error);
     });
