@@ -3,6 +3,6 @@
 export const randomCustomer = () => ({
   firstName: 'Charlie',
   lastName: 'Bucket',
-  email: `charlie.bucket+${Cypress.moment().format('YYYYMMDDHHmmssSS')}@commercetools.com`,
+  email: `charlie.bucket.${Cypress.moment().format('YYYYMMDDHHmmssSS')}@commercetools.com`,
   password: 'p@ssword',
 });
