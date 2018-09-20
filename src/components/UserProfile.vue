@@ -16,13 +16,15 @@
           </div>
           <div class="personal-details-title">
               <span>{{ $t('title') }}</span>
-              <span class="pull-right required-text personal-details-edit-show">
+              <span v-if="showEditForm"
+                    class="pull-right required-text personal-details-edit-show">
                 {{ $t('main.form.required') }}*
               </span>
           </div>
           <EditProfileForm v-if="showEditForm"
                            @close="showEditForm = false"/>
-          <div class="personal-details-edit-hide">
+          <div v-else
+               class="personal-details-edit-hide">
             <div class="personal-details-box">
               <div>
                 <span data-test="user-profile-name">{{ user.firstName }} {{ user.lastName}}</span>
