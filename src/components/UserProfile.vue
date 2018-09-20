@@ -16,7 +16,7 @@
           </div>
           <div class="personal-details-title">
               <span>{{ $t('title') }}</span>
-              <span v-if="!showEditForm"
+              <span v-if="showEditForm"
                     class="pull-right required-text personal-details-edit-show">
                 {{ $t('main.form.required') }}*
               </span>
