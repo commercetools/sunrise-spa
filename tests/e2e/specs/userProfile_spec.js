@@ -1,6 +1,6 @@
 import { randomCustomer } from '../support/utils';
 
-describe('edit profile form', () => {
+describe('user profile', () => {
   let oldCustomer;
   let newCustomer;
 
@@ -24,6 +24,11 @@ describe('edit profile form', () => {
     cy.get('[data-test=edit-profile-form-submit]').click();
 
     cy.get('[data-test=user-profile-name]').should('contain', `${newCustomer.firstName} ${newCustomer.lastName}`);
+    cy.get('[data-test=user-profile-email]').should('contain', newCustomer.email);
+
+    cy.get('[data-test=edit-profile-form-show]').click();
+    cy.get('[data-test=user-profile-email]').should('not.contain', newCustomer.email);
+    cy.get('[data-test=edit-profile-form-cancel]').click();
     cy.get('[data-test=user-profile-email]').should('contain', newCustomer.email);
   });
 });

@@ -65,7 +65,8 @@
           </button>
           <button @click="$emit('close')"
                   type="button"
-                  class="cancel-btn personal-details-edit-hide-btn">
+                  class="cancel-btn personal-details-edit-hide-btn"
+                  data-test="edit-profile-form-cancel">
             {{ $t('cancelBtn') }}
           </button>
         </span>
