@@ -9,11 +9,11 @@
     <div class="login-signup-box-wrapper">
       <div class="row">
         <div class="col-sm-6">
-          <LoginBox/>
+          <LoginForm/>
         </div>
         <div class="col-sm-6">
           <div class="signup-box-mobile">
-            <!--{{> myaccount/signup-box form=content.signUpForm settings=content.signUpFormSettings}}-->
+            <SignUpForm/>
           </div>
         </div>
       </div>
@@ -23,12 +23,11 @@
 </template>
 
 <script>
-import LoginBox from '@/components/LoginBox.vue';
+import LoginForm from '@/components/LoginForm.vue';
+import SignUpForm from '@/components/SignUpForm.vue';
 
 export default {
-  components: {
-    LoginBox,
-  },
+  components: { LoginForm, SignUpForm },
 };
 </script>
 
