@@ -74,39 +74,15 @@ export default {
 {
   "en": {
     "title": "Your Personal Details",
-    "updateBtn": "Update Details",
-    "cancelBtn": "Cancel",
     "welcomeBack": "Welcome back, {name}",
     "welcomeDescription": "for an even better customer service please provide your customer number",
     "subscribedToNewsletter": "Subscribed to weekly newsletter",
-    "personalDetailsForm": {
-      "title": "Title",
-      "firstName": "First Name",
-      "lastName": "Last Name",
-      "phone": "Telephone Number",
-      "email": "Email Address",
-      "password": "Password",
-      "confirmPassword": "Confirm Password",
-      "subscribeToNewsletter": "Please add me to the Sunrise Newsletter"
-    }
   },
   "de": {
     "title": "Ihre Benutzerdaten",
-    "updateBtn": "Details aktualisieren",
-    "cancelBtn": "Abbrechen",
     "welcomeBack": "Willkommen zurück, {name}",
     "welcomeDescription": "Für einen besseren Kundenservice geben Sie bitte Ihre Kundennummer an.",
     "subscribedToNewsletter": "Subscribed to weekly newsletter",
-    "personalDetailsForm": {
-      "title": "Title",
-      "firstName": "First Name",
-      "lastName": "Last Name",
-      "phone": "Telephone Number",
-      "email": "Email Address",
-      "password": "Password",
-      "confirmPassword": "Confirm Password",
-      "subscribeToNewsletter": "Please add me to the Sunrise Newsletter"
-    }
   }
 }
 </i18n>

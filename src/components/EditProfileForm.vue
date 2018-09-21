@@ -156,26 +156,18 @@ export default {
     "title": "Your Personal Details",
     "updateBtn": "Update Details",
     "cancelBtn": "Cancel",
-    "title": "Title",
     "firstName": "First Name",
     "lastName": "Last Name",
-    "phone": "Telephone Number",
     "email": "Email Address",
-    "password": "Password",
-    "confirmPassword": "Confirm Password",
     "subscribeToNewsletter": "Please add me to the Sunrise Newsletter"
   },
   "de": {
     "title": "Ihre Benutzerdaten",
     "updateBtn": "Details aktualisieren",
     "cancelBtn": "Abbrechen",
-    "title": "Title",
     "firstName": "Vorname",
     "lastName": "Nachname",
-    "phone": "Telefonnummer",
     "email": "Email Adresse",
-    "password": "Passwort",
-    "confirmPassword": "Passwort bestätigen",
     "subscribeToNewsletter": "Ich möchte den Sunrise Newsletter erhalten."
   }
 }
