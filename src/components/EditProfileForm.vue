@@ -3,7 +3,11 @@
   <div class="personal-details-edit personal-details-edit-show">
     <form @submit.prevent="save"
           id="form-edit-personal-details">
-      <ServerError :error="serverError" />
+      <ServerError :error="serverError">
+        <template slot-scope="{ graphQLError }">
+          {{ getErrorMessage(graphQLError) }}
+        </template>
+      </ServerError>
       <div class="row">
         <div class="col-sm-6">
           <div class="form-sections">
@@ -133,6 +137,13 @@ export default {
         this.loading = false;
       }
     },
+
+    getErrorMessage({ code, field }) {
+      if (code === 'DuplicateField' && field === 'email') {
+        return this.$t('duplicatedEmail');
+      }
+      return null;
+    },
   },
 
   validations: {
@@ -160,7 +171,8 @@ export default {
     "firstName": "First Name",
     "lastName": "Last Name",
     "email": "Email Address",
-    "subscribeToNewsletter": "Please add me to the Sunrise Newsletter"
+    "subscribeToNewsletter": "Please add me to the Sunrise Newsletter",
+    "duplicatedEmail": "A customer with this email already exists"
   },
   "de": {
     "title": "Ihre Benutzerdaten",
@@ -169,7 +181,8 @@ export default {
     "firstName": "Vorname",
     "lastName": "Nachname",
     "email": "Email Adresse",
-    "subscribeToNewsletter": "Ich möchte den Sunrise Newsletter erhalten."
+    "subscribeToNewsletter": "Ich möchte den Sunrise Newsletter erhalten.",
+    "duplicatedEmail": "Ein Kunde mit dieser E-Mail existiert bereits"
   }
 }
 </i18n>
