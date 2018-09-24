@@ -28,7 +28,7 @@ export default new Vue({
   i18n,
   provide: apolloProvider.provide(),
   created() {
-    this.$store.dispatch('fetchCategories');
+    this.$store.dispatch('fetchCategories', i18n.locale);
   },
   render: h => h(App),
 });
