@@ -1,5 +1,4 @@
 import { apolloProvider } from '@/main';
-import i18n from '@/i18n/i18n';
 import gql from 'graphql-tag';
 
 const SET_ITEMS = 'SET_ITEMS';
@@ -25,14 +24,15 @@ export default {
   },
 
   getters: {
-    hasCategories: state => state.items.length < 1,
+    hasCategories: state => state.items.length > 0,
     categoryTree: state => state.items,
     categoryBySlug: state => obtainItemsBySlug(state.items),
   },
 
   actions: {
-    fetchCategories: ({ commit }) => apolloProvider.defaultClient.addSmartQuery('categories', {
-      query: gql`
+    fetchCategories: ({ commit }, locale) =>
+      apolloProvider.defaultClient.query({
+        query: gql`
           query fetchAllCategories($locale: Locale!) {
             categories(limit: 10, where: "parent is not defined", sort: "orderHint asc") {
               results {
@@ -46,7 +46,7 @@ export default {
               }
             }
           }
-
+  
           fragment printCategory on Category {
             id
             externalId
@@ -57,14 +57,10 @@ export default {
               slug(locale: $locale)
             }
           }`,
-      variables() {
-        return {
-          locale: i18n.locale,
-        };
-      },
-    }).then((response) => {
-      commit(SET_ITEMS, response.data.categories.results);
-    }),
+        variables: { locale },
+      }).then((response) => {
+        commit(SET_ITEMS, response.data.categories.results);
+      }),
   },
 
   mutations: {
