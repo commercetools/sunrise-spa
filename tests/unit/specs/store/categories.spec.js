@@ -1,4 +1,10 @@
-import { obtainItemsBySlug } from '@/store/modules/categories';
+import Vuex from 'vuex';
+import { createLocalVue } from '@vue/test-utils';
+import categories from '@/store/modules/categories';
+import { cloneDeep } from 'lodash';
+
+const localVue = createLocalVue();
+localVue.use(Vuex);
 
 describe('categoryMixin', () => {
   function generateCategory(index, ancestors, children) {
@@ -22,10 +28,34 @@ describe('categoryMixin', () => {
   const grandchildCategory = generateCategory(3, [generateAncestor(2), generateAncestor(1)], []);
   const childCategory = generateCategory(2, [generateAncestor(1)], [grandchildCategory]);
   const rootCategory = generateCategory(1, [], [childCategory]);
+  let config;
 
-  it('structures category data', () => {
-    const dataBySlug = obtainItemsBySlug([rootCategory]);
-    expect(dataBySlug).toEqual({
+  beforeEach(() => {
+    config = cloneDeep(categories);
+  });
+
+  it('has categories on empty items', () => {
+    config.state.items = [];
+    const store = new Vuex.Store(config);
+    expect(store.getters.hasCategories).toBeFalsy();
+  });
+
+  it('does not have categories on non empty items', () => {
+    config.state.items = [{}, {}];
+    const store = new Vuex.Store(config);
+    expect(store.getters.hasCategories).toBeTruthy();
+  });
+
+  it('does not have categories on non empty items', () => {
+    config.state.items = [rootCategory];
+    const store = new Vuex.Store(config);
+    expect(store.getters.categoryTree).toEqual([rootCategory]);
+  });
+
+  it('returns structured categories by slug', () => {
+    config.state.items = [rootCategory];
+    const store = new Vuex.Store(config);
+    expect(store.getters.categoryBySlug).toEqual({
       slug1: {
         id: 'id1',
         name: 'name1',
@@ -61,8 +91,9 @@ describe('categoryMixin', () => {
     });
   });
 
-  it('structures empty category list', () => {
-    const dataBySlug = obtainItemsBySlug([]);
-    expect(dataBySlug).toEqual({});
+  it('returns empty object on empty categories', () => {
+    config.state.items = [];
+    const store = new Vuex.Store(config);
+    expect(store.getters.categoryBySlug).toEqual({});
   });
 });
