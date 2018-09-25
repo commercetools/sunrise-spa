@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 
 const SET_ITEMS = 'SET_ITEMS';
 
-export function obtainItemsBySlug(categories) {
+function obtainItemsBySlug(categories) {
   const itemsBySlug = {};
   if (Array.isArray(categories)) {
     categories.forEach(({
