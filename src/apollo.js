@@ -7,6 +7,7 @@ import { setContext } from 'apollo-link-context';
 import { createApolloClient, restartWebsockets } from 'vue-cli-plugin-apollo/graphql-client';
 import config from '@/../sunrise.config';
 import introspectionQueryResultData from '@/../graphql-fragments.json';
+import 'isomorphic-fetch';
 
 // Install the vue plugin
 Vue.use(VueApollo);
@@ -28,12 +29,11 @@ function createAuthLink(getClient) {
   });
 }
 
-function createClient(options) {
+function createClient() {
   const defaultAuthMiddleware = createAuthMiddlewareForClientCredentialsFlow(config.ct.auth);
 
   const { apolloClient, wsClient } = createApolloClient({
     ...defaultOptions,
-    ...options,
     link: createAuthLink(() => apolloClient),
   });
 
@@ -73,12 +73,11 @@ function createClient(options) {
   return apolloClient;
 }
 
-export default function createProvider(options = {}) {
-  return new VueApollo({
-    defaultClient: createClient(options),
-    errorHandler(error) {
-      // eslint-disable-next-line no-console
-      console.error(error.message);
-    },
-  });
-}
+const apolloProvider = new VueApollo({
+  defaultClient: createClient(),
+  errorHandler(error) {
+    // eslint-disable-next-line no-console
+    console.error(error.message);
+  },
+});
+export default apolloProvider;

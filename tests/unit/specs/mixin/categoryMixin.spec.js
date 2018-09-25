@@ -7,12 +7,10 @@ describe('categoryMixin', () => {
 
     const $store = {
       $store: {
-        state: {
-          categories: {
-            dataBySlug: {
-              slug1: category1,
-              slug2: category2,
-            },
+        getters: {
+          categoryBySlug: {
+            slug1: category1,
+            slug2: category2,
           },
         },
       },
