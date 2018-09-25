@@ -20,53 +20,58 @@
         <div class="col-sm-6">
           <div class="signup-box-input">
             <span>{{ $t('firstName') }}*</span><br>
-            <input v-model.trim.lazy="$v.firstName.$model"
-                   autocomplete="fname"
-                   type="text"
-                   data-test="signup-form-firstname" />
-            <ValidationError :vuelidate="$v.firstName" />
+            <ValidationError :vuelidate="$v.firstName">
+              <input v-model.trim.lazy="$v.firstName.$model"
+                     autocomplete="fname"
+                     type="text"
+                     data-test="signup-form-firstname" />
+            </ValidationError>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="signup-box-input">
             <span>{{ $t('secondName') }}*</span><br>
-            <input v-model.trim.lazy="$v.lastName.$model"
-                   autocomplete="lname"
-                   type="text"
-                   data-test="signup-form-lastname" >
-            <ValidationError :vuelidate="$v.lastName" />
+            <ValidationError :vuelidate="$v.lastName">
+              <input v-model.trim.lazy="$v.lastName.$model"
+                     autocomplete="lname"
+                     type="text"
+                     data-test="signup-form-lastname" >
+            </ValidationError>
           </div>
         </div>
       </div>
       <hr class="signup-box-hr">
       <div class="signup-box-input">
         <span>{{ $t('email') }}*</span><br>
-        <input v-model.trim.lazy="$v.email.$model"
-               autocomplete="username"
-               type="email"
-               data-test="signup-form-email" />
-        <ValidationError :vuelidate="$v.email" />
+        <ValidationError :vuelidate="$v.email">
+          <input v-model.trim.lazy="$v.email.$model"
+                 autocomplete="username"
+                 type="email"
+                 data-test="signup-form-email" />
+        </ValidationError>
       </div>
       <div class="row">
         <div class="col-sm-6">
           <div class="signup-box-input">
             <span>{{ $t('password') }}*</span><br/>
-            <input v-model.trim.lazy="$v.password.$model"
-                   autocomplete="off"
-                   type="password"
-                   data-test="signup-form-password" />
-            <ValidationError :vuelidate="$v.password" />
+            <ValidationError :vuelidate="$v.password">
+              <input v-model.trim.lazy="$v.password.$model"
+                     autocomplete="off"
+                     type="password"
+                     data-test="signup-form-password" />
+            </ValidationError>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="signup-box-input">
             <span>{{ $t('repeatPassword') }}*</span><br>
-            <input v-model.trim.lazy="$v.repeatPassword.$model"
-                   autocomplete="off"
-                   type="password"
-                   data-test="signup-form-repeatpassword" />
             <ValidationError :vuelidate="$v.repeatPassword"
-                             :customMessages="{ sameAsPassword: $t('repeatPasswordError') }"/>
+                             :customMessages="{ sameAsPassword: $t('repeatPasswordError') }">
+              <input v-model.trim.lazy="$v.repeatPassword.$model"
+                     autocomplete="off"
+                     type="password"
+                     data-test="signup-form-repeatpassword" />
+            </ValidationError>
           </div>
         </div>
       </div>
@@ -77,15 +82,19 @@
         <!--<span>{{ $t('pleaseAddMe') }} <a href="">{{ $t('newsletter') }}</a></span>-->
       <!--</div>-->
       <div class="signup-box-terms">
-        <input v-model.trim.lazy="$v.agreeToTerms.$model"
-               autocomplete="off"
-               type="checkbox"
-               data-test="signup-form-agreetoterms" />
-        <span>{{ $t('agreeTo') }} <a href="#">{{ $t('termsAndConditions') }}</a></span>
           <ValidationError :vuelidate="$v.agreeToTerms"
-                           :customMessages="{ mustBeAgreed: $t('agreeToTermsError') }"/>
+                           :customMessages="{ mustBeAgreed: $t('agreeToTermsError') }">
+            <input v-model.trim.lazy="$v.agreeToTerms.$model"
+                   autocomplete="off"
+                   type="checkbox"
+                   data-test="signup-form-agreetoterms" />
+        <span>{{ $t('agreeTo') }} <a href="#">{{ $t('termsAndConditions') }}</a></span>
+          </ValidationError>
       </div>
-      <div class="signup-box-policy">{{ $t('personalInfo') }} <a href="#">{{ $t('privacyPolicy') }}</a></div>
+      <div class="signup-box-policy">
+        {{ $t('personalInfo') }}
+        <a href="#">{{ $t('privacyPolicy') }}</a>
+      </div>
       <button :disabled="loading"
               class="signup-register-btn"
               data-test="signup-form-submit">

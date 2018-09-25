@@ -5,11 +5,11 @@ import Vuelidate from 'vuelidate';
 import router from '@/router';
 import store from '@/store/store';
 import '@/registerServiceWorker';
-import createProvider from '@/apollo';
+import apolloProvider from '@/apollo';
 import i18n from '@/i18n/i18n';
 import sunriseConfig from '@/../sunrise.config';
 
-import './assets/scss/main.scss';
+import '@/assets/scss/main.scss';
 
 Vue.config.productionTip = false;
 
@@ -19,10 +19,7 @@ Vue.component('SelectBoxIt', SelectBoxIt);
 
 Vue.prototype.$sunrise = sunriseConfig;
 
-export const apolloProvider = createProvider();
-
-export default new Vue({
-  el: '#app',
+new Vue({
   router,
   store,
   i18n,
@@ -50,4 +47,4 @@ export default new Vue({
       this.fetchCategories();
     },
   },
-});
+}).$mount('#app');

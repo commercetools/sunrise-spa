@@ -1,4 +1,4 @@
-import { apolloProvider } from '@/main';
+import apolloProvider from '@/apollo';
 import gql from 'graphql-tag';
 
 const SET_ITEMS = 'SET_ITEMS';

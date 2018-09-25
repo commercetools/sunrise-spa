@@ -19,19 +19,21 @@
         </ServerError>
         <div class="login-box-input">
           <span>{{ $t('email') }}*</span><br>
-          <input v-model.trim.lazy="$v.email.$model"
-                 autocomplete="username"
-                 type="email"
-                 data-test="login-form-email" />
-          <ValidationError :vuelidate="$v.email"/>
+          <ValidationError :vuelidate="$v.email">
+            <input v-model.trim.lazy="$v.email.$model"
+                   autocomplete="username"
+                   type="email"
+                   data-test="login-form-email" />
+          </ValidationError>
         </div>
         <div class="login-box-input">
           <span>{{ $t('password') }}*</span><br>
-          <input v-model.trim.lazy="$v.password.$model"
-                 autocomplete="current-password"
-                 type="password"
-                 data-test="login-form-password" />
-          <ValidationError :vuelidate="$v.password"/>
+          <ValidationError :vuelidate="$v.password">
+            <input v-model.trim.lazy="$v.password.$model"
+                   autocomplete="current-password"
+                   type="password"
+                   data-test="login-form-password" />            
+          </ValidationError>
         </div>
         <div class="clearfix">
           <div class="pull-left">

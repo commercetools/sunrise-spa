@@ -12,22 +12,24 @@
         <div class="col-sm-6">
           <div class="form-sections">
             <span class="form-labels">{{ $t('firstName') }}*</span><br>
-            <input v-model.trim.lazy="$v.firstName.$model"
-                   autocomplete="fname"
-                   type="text"
-                   class="form-inputs"
-                   data-test="edit-profile-form-firstname"/>
-            <ValidationError :vuelidate="$v.firstName" />
+            <ValidationError :vuelidate="$v.firstName">
+              <input v-model.trim.lazy="$v.firstName.$model"
+                     autocomplete="fname"
+                     type="text"
+                     class="form-inputs"
+                     data-test="edit-profile-form-firstname"/>
+            </ValidationError>
           </div>
 
           <div class="form-sections">
             <span class="form-labels">{{ $t('email') }}*</span><br>
-            <input v-model.trim.lazy="$v.email.$model"
-                   autocomplete="email"
-                   type="email"
-                   class="form-inputs"
-                   data-test="edit-profile-form-email"/>
-            <ValidationError :vuelidate="$v.email" />
+            <ValidationError :vuelidate="$v.email">
+              <input v-model.trim.lazy="$v.email.$model"
+                     autocomplete="email"
+                     type="email"
+                     class="form-inputs"
+                     data-test="edit-profile-form-email"/>
+            </ValidationError>
             <br>
             <span class="form-notes"></span>
           </div>
@@ -36,12 +38,13 @@
         <div class="col-sm-6">
           <div class="form-sections">
             <span class="form-labels">{{ $t('lastName') }}*</span><br>
-            <ValidationError :vuelidate="$v.lastName" />
-            <input v-model.trim.lazy="$v.lastName.$model"
-                   autocomplete="lname"
-                   type="text"
-                   class="form-inputs"
-                   data-test="edit-profile-form-lastname"/>
+            <ValidationError :vuelidate="$v.lastName">
+              <input v-model.trim.lazy="$v.lastName.$model"
+                     autocomplete="lname"
+                      type="text"
+                      class="form-inputs"
+                      data-test="edit-profile-form-lastname"/>
+            </ValidationError>
           </div>
         </div>
       </div>

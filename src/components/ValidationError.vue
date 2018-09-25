@@ -1,4 +1,6 @@
 <template>
+<div :class="vuelidate.$error ? 'form-validation-error': ''">
+  <slot></slot>
   <div v-if="vuelidate.$error"
        class="error">
     <div v-for="validation in validations"
@@ -12,6 +14,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -70,10 +73,10 @@ export default {
   z-index: 1000;
   padding: 5px;
   margin-top: 6px;
-	background: white;
-  border: 0.5px solid rgba(136, 136, 136, 0.747);
+	background: rgb(250, 226, 226);
+  border: 0px solid rgba(136, 136, 136, 0.747);
   border-radius: 4px;
-  color: rgb(177, 45, 45);
+  color: rgb(114, 36, 36);
   box-shadow: 1px 1px 1px rgb(153, 153, 153);
 }
 
@@ -85,9 +88,13 @@ export default {
 	width: 0;
 	height: 0;
 	border: 6px solid transparent;
-	border-bottom-color: rgb(136, 136, 136);
+	border-bottom-color: rgb(255, 234, 234);
 	border-top: 0;
 	margin-left: -20px;
 	margin-top: -6px;
 }
+
+.form-validation-error input:not([type=checkbox]) {
+  border: 1px solid rgba(206, 65, 65, 0.651);;
+} 
 </style>

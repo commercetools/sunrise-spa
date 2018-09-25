@@ -1,4 +1,4 @@
-import { obtainDataBySlug } from '@/store/modules/categories';
+import { obtainItemsBySlug } from '@/store/modules/categories';
 
 describe('categoryMixin', () => {
   function generateCategory(index, ancestors, children) {
@@ -23,9 +23,8 @@ describe('categoryMixin', () => {
   const childCategory = generateCategory(2, [generateAncestor(1)], [grandchildCategory]);
   const rootCategory = generateCategory(1, [], [childCategory]);
 
-
   it('structures category data', () => {
-    const dataBySlug = obtainDataBySlug([rootCategory]);
+    const dataBySlug = obtainItemsBySlug([rootCategory]);
     expect(dataBySlug).toEqual({
       slug1: {
         id: 'id1',
@@ -63,7 +62,7 @@ describe('categoryMixin', () => {
   });
 
   it('structures empty category list', () => {
-    const dataBySlug = obtainDataBySlug([]);
+    const dataBySlug = obtainItemsBySlug([]);
     expect(dataBySlug).toEqual({});
   });
 });
