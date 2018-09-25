@@ -23,7 +23,7 @@ new Vue({
   router,
   store,
   i18n,
-  provide: apolloProvider.provide(),
+  apolloProvider,
   render: h => h(App),
 
   created() {
