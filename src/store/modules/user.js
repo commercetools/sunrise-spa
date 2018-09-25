@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { apolloProvider } from '@/main';
+import apolloProvider from '@/apollo';
 
 const SET_INFO = 'SET_INFO';
 
