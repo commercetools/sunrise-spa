@@ -88,7 +88,7 @@ export default {
 	width: 0;
 	height: 0;
 	border: 6px solid transparent;
-	border-bottom-color: rgb(255, 234, 234);
+	border-bottom-color: rgb(250, 226, 226);
 	border-top: 0;
 	margin-left: -20px;
 	margin-top: -6px;

@@ -32,7 +32,7 @@
             <input v-model.trim.lazy="$v.password.$model"
                    autocomplete="current-password"
                    type="password"
-                   data-test="login-form-password" />            
+                   data-test="login-form-password" />
           </ValidationError>
         </div>
         <div class="clearfix">
