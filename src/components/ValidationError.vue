@@ -6,9 +6,9 @@
       <div v-if="!vuelidate[validation]"
            :validation="validation"
            data-test="validation-error">
-            <span class="validation-error">
+            <div class="validation-error">
               {{ getErrorMessage(validation) }}
-            </span>
+            </div>
       </div>
     </div>
   </div>
@@ -65,15 +65,29 @@ export default {
 </i18n>
 
 <style lang="scss" scoped>
-
-span.validation-error{ 
+.validation-error {
   position: absolute;
-  background-color: rgb(243, 119, 119);  
   z-index: 1000;
   padding: 5px;
-  border-radius: 5px;
-  text-transform: capitalize;
-  color: rgb(87, 31, 31);
+  margin-top: 6px;
+	background: white;
+  border: 0.5px solid rgba(136, 136, 136, 0.747);
+  border-radius: 4px;
+  color: rgb(177, 45, 45);
   box-shadow: 1px 1px 1px rgb(153, 153, 153);
+}
+
+.validation-error:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 6px solid transparent;
+	border-bottom-color: rgb(136, 136, 136);
+	border-top: 0;
+	margin-left: -20px;
+	margin-top: -6px;
 }
 </style>
