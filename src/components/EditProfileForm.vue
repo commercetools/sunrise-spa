@@ -12,22 +12,22 @@
         <div class="col-sm-6">
           <div class="form-sections">
             <span class="form-labels">{{ $t('firstName') }}*</span><br>
-            <ValidationError :vuelidate="$v.firstName" />
             <input v-model.trim.lazy="$v.firstName.$model"
                    autocomplete="fname"
                    type="text"
                    class="form-inputs"
                    data-test="edit-profile-form-firstname"/>
+            <ValidationError :vuelidate="$v.firstName" />
           </div>
 
           <div class="form-sections">
             <span class="form-labels">{{ $t('email') }}*</span><br>
-            <ValidationError :vuelidate="$v.email" />
             <input v-model.trim.lazy="$v.email.$model"
                    autocomplete="email"
                    type="email"
                    class="form-inputs"
                    data-test="edit-profile-form-email"/>
+            <ValidationError :vuelidate="$v.email" />
             <br>
             <span class="form-notes"></span>
           </div>
