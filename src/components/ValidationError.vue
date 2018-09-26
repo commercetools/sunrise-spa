@@ -1,14 +1,13 @@
 <template>
-<div :class="vuelidate.$error ? 'form-validation-error': ''">
+<div :class="vuelidate.$error ? 'form-error': ''">
   <slot></slot>
-  <div v-if="vuelidate.$error"
-       class="error">
+  <div v-if="vuelidate.$error">
     <div v-for="validation in validations"
          :key="validation">
       <div v-if="!vuelidate[validation]"
            :validation="validation"
            data-test="validation-error">
-            <div class="validation-error">
+            <div class="form-error-bubble">
               {{ getErrorMessage(validation) }}
             </div>
       </div>
@@ -68,7 +67,7 @@ export default {
 </i18n>
 
 <style lang="scss" scoped>
-.validation-error {
+.form-error-bubble {
   position: absolute;
   z-index: 1000;
   padding: 5px;
@@ -80,7 +79,7 @@ export default {
   box-shadow: 1px 1px 1px rgb(153, 153, 153);
 }
 
-.validation-error:after {
+.form-error-bubble:after {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -94,7 +93,7 @@ export default {
 	margin-top: -6px;
 }
 
-.form-validation-error input:not([type=checkbox]) {
+.form-error input:not([type=checkbox]) {
   border: 1px solid rgba(206, 65, 65, 0.651);;
 } 
 </style>
