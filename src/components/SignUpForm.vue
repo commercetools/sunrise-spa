@@ -85,9 +85,9 @@
         <ValidationError :vuelidate="$v.agreeToTerms"
                          :customMessages="{ mustBeAgreed: $t('agreeToTermsError') }">
           <input v-model.trim.lazy="$v.agreeToTerms.$model"
-                  autocomplete="off"
-                  type="checkbox"
-                  data-test="signup-form-agreetoterms" />
+                 autocomplete="off"
+                 type="checkbox"
+                 data-test="signup-form-agreetoterms" />
           <span>{{ $t('agreeTo') }} <a href="#">{{ $t('termsAndConditions') }}</a></span>
         </ValidationError>
       </div>

@@ -8,9 +8,9 @@
       <div v-if="!vuelidate[validation]"
            :validation="validation"
            data-test="validation-error">
-            <div class="form-error-bubble">
-              {{ getErrorMessage(validation) }}
-            </div>
+        <div class="form-error-bubble">
+          {{ getErrorMessage(validation) }}
+        </div>
       </div>
     </div>
   </div>
