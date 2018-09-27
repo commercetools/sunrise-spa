@@ -14,6 +14,7 @@
     "apollo-cache-inmemory": "^1.2.7",
     "apollo-client": "^2.3.8",
     "apollo-link-context": "^1.0.8",
+    "babel-loader": "^8.0.2",
     "graphql-tag": "^2.9.0",
     "isomorphic-fetch": "^2.2.1",
     "register-service-worker": "^1.0.0",

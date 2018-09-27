@@ -91,15 +91,21 @@ describe('ValidationError.vue', () => {
     expect(wrapper.vm.getErrorMessage('params')).toEqual('min 3 max 5');
   });
 
-  it('does not render if no error flag', () => {
+  it('does not render errors if no error flag', () => {
+    options.slots = {
+      default: '<input data-test="validation-error-test-input"></input>',
+    };
     const wrapper = shallowMount(ValidationError, options);
+
     wrapper.setProps({
       vuelidate: {
         $error: false,
         $params: {},
       },
     });
-    expect(wrapper.html()).toBeUndefined();
+    expect(wrapper.find('div.form-error').exists()).toBe(false);
+    expect(wrapper.find('input').exists()).toBe(true);
+    expect(wrapper.find('[data-test="validation-error-list"]').exists()).toBe(false);
 
     wrapper.setProps({
       vuelidate: {
@@ -107,7 +113,9 @@ describe('ValidationError.vue', () => {
         $params: {},
       },
     });
-    expect(wrapper.html()).not.toBeUndefined();
+    expect(wrapper.find('div.form-error').exists()).toBe(true);
+    expect(wrapper.find('input').exists()).toBe(true);
+    expect(wrapper.find('[data-test="validation-error-list"]').exists()).toBe(true);
   });
 
   it('renders each validation error', () => {

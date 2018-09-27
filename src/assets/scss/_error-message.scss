@@ -1,8 +1,8 @@
-.error {
-  border: 1px solid $valencia!important; // FIXME: remove !important
-  color: $mine-shaft;
-  background: rgba(213, 77, 77, .2)!important; // FIXME: remove !important
+.error{
+  color: rgb(196, 56, 56);
+  font-weight: bold;
 }
+
 .error-message {
   z-index: 1;
   position: absolute;
