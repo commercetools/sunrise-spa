@@ -41,9 +41,9 @@
             <ValidationError :vuelidate="$v.lastName">
               <input v-model.trim.lazy="$v.lastName.$model"
                      autocomplete="lname"
-                      type="text"
-                      class="form-inputs"
-                      data-test="edit-profile-form-lastname"/>
+                     type="text"
+                     class="form-inputs"
+                     data-test="edit-profile-form-lastname"/>
             </ValidationError>
           </div>
         </div>
