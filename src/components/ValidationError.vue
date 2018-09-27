@@ -1,7 +1,8 @@
 <template>
 <div :class="vuelidate.$error ? 'form-error': ''">
   <slot></slot>
-  <div v-if="vuelidate.$error">
+  <div v-if="vuelidate.$error"
+       data-test="validation-error-list">
     <div v-for="validation in validations"
          :key="validation">
       <div v-if="!vuelidate[validation]"
