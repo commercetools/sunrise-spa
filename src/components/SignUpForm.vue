@@ -83,7 +83,7 @@
       <!--</div>-->
       <div class="signup-box-terms">
         <ValidationError :vuelidate="$v.agreeToTerms"
-                          :customMessages="{ mustBeAgreed: $t('agreeToTermsError') }">
+                         :customMessages="{ mustBeAgreed: $t('agreeToTermsError') }">
           <input v-model.trim.lazy="$v.agreeToTerms.$model"
                   autocomplete="off"
                   type="checkbox"
