@@ -88,7 +88,7 @@
                   autocomplete="off"
                   type="checkbox"
                   data-test="signup-form-agreetoterms" />
-        <span>{{ $t('agreeTo') }} <a href="#">{{ $t('termsAndConditions') }}</a></span>
+          <span>{{ $t('agreeTo') }} <a href="#">{{ $t('termsAndConditions') }}</a></span>
         </ValidationError>
       </div>
       <div class="signup-box-policy">
