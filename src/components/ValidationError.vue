@@ -95,6 +95,6 @@ export default {
 }
 
 .form-error input:not([type=checkbox]) {
-  border: 1px solid rgba(206, 65, 65, 0.651);;
-} 
+  border-color: rgba(206, 65, 65, 0.6);
+}
 </style>
