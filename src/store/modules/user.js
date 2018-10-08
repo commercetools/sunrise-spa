@@ -3,6 +3,16 @@ import apolloProvider from '@/apollo';
 
 const SET_INFO = 'SET_INFO';
 
+const customerInfoFragment = gql`
+  fragment printCustomerInfo on Customer {
+    email
+    firstName
+    lastName
+    customerNumber
+    version
+  }
+`;
+
 export default {
   state: {
     info: null,
@@ -20,14 +30,11 @@ export default {
           mutation signup($draft: CustomerSignMeUpDraft!) {
             customerSignMeUp(draft: $draft) {
               customer {
-                email
-                firstName
-                lastName
-                customerNumber
-                version
+                ...printCustomerInfo
               }
             }
-          }`,
+          }
+          ${customerInfoFragment}`,
         variables: { draft },
       }).then((response) => {
         apolloProvider.defaultClient.login(draft.email, draft.password);
@@ -40,14 +47,11 @@ export default {
           mutation login($draft: CustomerSignMeInDraft!) {
             customerSignMeIn(draft: $draft) {
               customer {
-                email
-                firstName
-                lastName
-                customerNumber
-                version
+                ...printCustomerInfo
               }
             }
-          }`,
+          }
+          ${customerInfoFragment}`,
         variables: {
           draft: { email, password },
         },
@@ -67,13 +71,10 @@ export default {
         mutation: gql`
           mutation updateMyCustomer($actions: [MyCustomerUpdateAction!]!, $version: Long!) {
             updateMyCustomer(version: $version, actions: $actions) {
-              email
-              firstName
-              lastName
-              customerNumber
-              version
+              ...printCustomerInfo
             }
-          }`,
+          }
+          ${customerInfoFragment}`,
         variables: {
           version: getters.user.version,
           actions,
