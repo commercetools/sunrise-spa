@@ -1,3 +1,3 @@
-* [ ] Unit Tests
-* [ ] E2E Tests
+* [ ] Unit tests
+* [ ] E2E tests
 * [ ] Documentation
