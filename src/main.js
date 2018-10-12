@@ -28,6 +28,7 @@ new Vue({
 
   created() {
     this.fetchCategories();
+    this.fetchProduct();
   },
 
   computed: {
@@ -40,11 +41,15 @@ new Vue({
     fetchCategories() {
       this.$store.dispatch('fetchCategories', i18n.locale);
     },
+    fetchProduct() {
+      this.$store.dispatch('fetchProduct', i18n.locale);
+    },
   },
 
   watch: {
     locale() {
       this.fetchCategories();
+      this.fetchProduct();
     },
   },
 }).$mount('#app');
