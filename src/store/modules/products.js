@@ -9,46 +9,45 @@ export default {
   },
 
   getters: {
-    hasProduct: state => state.product,
+    productInfo: state => state.product,
   },
 
   actions: {
-    fetchProduct: ({ commit }) =>
+    fetchProduct: ({ commit }, locale) =>
       apolloProvider.defaultClient.query({
         query: gql`
-          query Product {
-            product(sku: "M0E20000000EATE") {
-              key
+          query Product($locale: Locale!) {
+            product(sku: "M0E20000000FBLQ") {
               id
               masterData {
-                staged {
-                  nameAllLocales {
-                    locale
-                    value
-                  }
-                  descriptionAllLocales {
-                    locale
-                    value
-                  }
-                  masterVariant{
-                    prices {
+                current {
+                  name(locale: $locale)
+                  slug(locale: $locale)
+                  masterVariant {
+                    price(currency: "EUR") {
                       value {
-                        currencyCode
                         centAmount
+                        fractionDigits
                       }
                       discounted {
-                        value{
-                          currencyCode
+                        value {
                           centAmount
+                          fractionDigits
                         }
                       }
                     }
+                    images {
+                      url
+                    }
                   }
-                  skus        
+                skus
                 }
               }
             }
           }`,
+        variables: {
+          locale,
+        },
       }).then((response) => {
         commit(SET_PRODUCT, response.data.product);
       }),
