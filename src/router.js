@@ -66,7 +66,7 @@ const router = new Router({
       meta: { requiresAuth },
     },
     {
-      path: '/product',
+      path: '/product/:sku',
       name: 'product',
       components: {
         default: ProductDetailPage,

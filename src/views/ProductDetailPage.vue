@@ -12,7 +12,7 @@
         </div>
         <div class="row product-info-row-pdp">
           <!-- {{> catalog/pdp/product-info product=content.product deliveryRates=content.deliveryRates}} -->
-        <ProductInfo />
+        <ProductInfo :product="productInfo" />
         </div>
       </div>
     </div>
@@ -42,11 +42,48 @@
 <script>
 import Breadcrumb from '@/components/Breadcrumb.vue';
 import ProductInfo from '@/components/ProductInfo.vue';
+import { mapGetters } from 'vuex';
 
 export default {
+  props: ['productSlug', 'sku'],
+
   components: {
     Breadcrumb,
     ProductInfo,
+  },
+
+  computed: {
+    ...mapGetters(['productInfo']),
+
+    locale() {
+      return this.$i18n.locale;
+    },
+
+    currency() {
+      // return this.$i18n.numberFormats[this.$store.state.country].currency.currency;
+      return 'EUR';
+    },
+  },
+
+  methods: {
+    fetchProduct() {
+      this.$store.dispatch('fetchProduct', {
+        locale: this.$i18n.locale, currency: this.currency, productSlug: this.productSlug, sku: this.sku,
+      });
+    },
+  },
+
+  created() {
+    this.fetchProduct();
+  },
+
+  watch: {
+    locale() {
+      this.fetchProduct();
+    },
+    currency() {
+      this.fetchProduct();
+    },
   },
 };
 </script>

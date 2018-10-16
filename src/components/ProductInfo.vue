@@ -2,10 +2,8 @@
   <div>
     <div class="col-md-4 col-md-offset-1 col-sm-6">
       <!-- {{> catalog/pdp/product-gallery gallery=product.gallery}} -->
-      <div  v-if="hasImages"
-            class="bzoom_wrap hidden-xs">
-        <img :src="displayedImage"
-             :alt="currentProduct.name"/>
+      <div class="bzoom_wrap hidden-xs">
+        <!-- <img :src="displayedImage"/> -->
       </div>
     </div>
     <div class="col-sm-6 product-description">
@@ -13,10 +11,10 @@
         <div class="col-sm-12">
             <h1 class="text-uppercase pdp-product-title">
               {{currentProduct.name}}
+
             </h1>
             <span class="grey-p quickview-sku">
               <!-- {{product.variant.sku}} -->
-              {{currentProduct.skus[0]}}
             </span>
         </div>
       </div>
@@ -35,8 +33,7 @@
       </div>
 
       <div class="row">
-        <div v-if="hasPrice"
-             class="col-sm-12">
+        <div class="col-sm-12">
           <!-- {{> catalog/product-price}} -->
         <!-- <div v-if="hasDiscount">
           <span
@@ -51,7 +48,7 @@
 
           <p class="product-price">
             <span>
-              {{ formatPrice(originalPrice) }}
+              <!-- {{ formatPrice(originalPrice) }} -->
             </span>
           </p>
 
@@ -88,62 +85,21 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import priceMixin from '@/mixins/priceMixin';
 
 export default {
+  props: {
+    product: {
+      type: Object,
+      required: true,
+    },
+  },
+
   computed: {
-    ...mapGetters(['productInfo']),
-
     currentProduct() {
-      return this.productInfo.masterData ? this.productInfo.masterData.current || {} : {};
-    },
-
-    matchingVariant() {
-      return this.currentProduct.masterVariant || {};
-    },
-
-    hasPrice() {
-      return this.matchingVariant.price;
-    },
-
-    originalPrice() {
-      return this.matchingVariant.price.value;
-    },
-
-    hasImages() {
-      return Array.isArray(this.matchingVariant.images) && this.matchingVariant.images.length > 0;
-    },
-
-    displayedImage() {
-      return this.matchingVariant.images[0].url;
-    },
-
-    locale() {
-      return this.$i18n.locale;
-    },
-    // hasDiscount: vm => vm.matchingVariant.price.discounted,
-
-    // discountedPrice: vm => vm.matchingVariant.price.discounted.value,
-  },
-
-  created() {
-    this.fetchProduct();
-  },
-
-  methods: {
-    fetchProduct() {
-      this.$store.dispatch('fetchProduct', this.$i18n.locale);
+      return this.product.masterData ? this.product.masterData.current || {} : {};
     },
   },
-
-  watch: {
-    locale() {
-      this.fetchProduct();
-    },
-  },
-
-
   mixins: [priceMixin],
 };
 </script>

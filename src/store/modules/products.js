@@ -13,18 +13,23 @@ export default {
   },
 
   actions: {
-    fetchProduct: ({ commit }, locale) =>
+    fetchProduct: ({ commit }, {
+      locale, currency, sku,
+    }) => {
       apolloProvider.defaultClient.query({
         query: gql`
-          query Product($locale: Locale!) {
-            product(sku: "M0E20000000FBLQ") {
+          query Product($locale: Locale!, $sku: String!, $currency: Currency!) {
+            product(sku: $sku) {
               id
               masterData {
                 current {
                   name(locale: $locale)
                   slug(locale: $locale)
                   masterVariant {
-                    price(currency: "EUR") {
+                    images {
+                      url
+                    }
+                    price(currency: $currency) {
                       value {
                         centAmount
                         fractionDigits
@@ -36,9 +41,6 @@ export default {
                         }
                       }
                     }
-                    images {
-                      url
-                    }
                   }
                 skus
                 }
@@ -47,11 +49,13 @@ export default {
           }`,
         variables: {
           locale,
+          currency,
+          sku,
         },
       }).then((response) => {
         commit(SET_PRODUCT, response.data.product);
-      }),
-
+      }).catch(error => console.log(JSON.stringify(error)));
+    },
   },
 
   mutations: {
