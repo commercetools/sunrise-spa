@@ -220,14 +220,6 @@
       "show": "Mehr",
       "hide": "Weniger"
     },
-    "details": {
-      "title": "Produktdetails"
-    },
-    "delivery": {
-      "title": "Versand & Retoure",
-      "freeReturns": "Kostenlose Retoure",
-      "moreDeliveryInfo": "Versandinformationen"
-    },
     "searchResult": {
       "title": "Suchergebnisse",
       "of": "für",

@@ -217,14 +217,6 @@
       "show": "Show more",
       "hide": "Show less"
     },
-    "details": {
-      "title": "Product Details"
-    },
-    "delivery": {
-      "title": "Delivery & Returns",
-      "freeReturns": "Free return for all orders.",
-      "moreDeliveryInfo": ""
-    },
     "searchResult": {
       "title": "Search Results",
       "of": "of",

@@ -12,7 +12,9 @@
         </div>
         <div class="row product-info-row-pdp">
           <!-- {{> catalog/pdp/product-info product=content.product deliveryRates=content.deliveryRates}} -->
-        <ProductInfo :product="productInfo" />
+        <ProductInfo v-if="productInfo.id"
+                     :product="productInfo"
+                     :key="productInfo.id" />
         </div>
       </div>
     </div>
@@ -68,7 +70,10 @@ export default {
   methods: {
     fetchProduct() {
       this.$store.dispatch('fetchProduct', {
-        locale: this.$i18n.locale, currency: this.currency, productSlug: this.productSlug, sku: this.sku,
+        locale: this.$i18n.locale,
+        currency: this.currency,
+        productSlug: this.productSlug,
+        sku: this.sku,
       });
     },
   },
