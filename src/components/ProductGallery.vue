@@ -7,25 +7,30 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-
 export default {
+  props: {
+    productImage: {
+      type: String,
+      required: true,
+    },
+  },
+
   data: () => ({
     images: {
       normal_size:
       [
         { id: 1, url: null },
         { id: 2, url: null },
+        { id: 3, url: null },
       ],
       // thumbs:
       // [
       //   { id: 3, url: null },
-      //   { id: 4, url: null },
       // ],
     },
     zoomerOptions: {
       zoomFactor: 3,
-      pane: 'pane',
+      pane: 'container-round',
       hoverDelay: 100,
       namespace: 'zoomer',
       move_by_click: false,
@@ -35,12 +40,10 @@ export default {
   }),
 
   created() {
-    this.images.normal_size[0].url = this.productInfo.masterData.current.masterVariant.images[0].url;
-    // this.images.thumbs[0].url = this.productInfo.masterData.current.masterVariant.images[0].url;
-  },
-
-  computed: {
-    ...mapGetters(['productInfo']),
+    this.images.normal_size[0].url = this.productImage;
+    this.images.normal_size[1].url = this.productImage;
+    this.images.normal_size[2].url = this.productImage;
+    // this.images.thumbs[0].url = this.productImage;
   },
 };
 </script>

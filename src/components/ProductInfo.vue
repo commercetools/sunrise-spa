@@ -2,7 +2,7 @@
   <div>
     <div class="col-md-4 col-md-offset-1 col-sm-6">
       <!-- {{> catalog/pdp/product-gallery gallery=product.gallery}} -->
-      <ProductGallery :displayedImage="displayedImage" />
+      <ProductGallery :productImage="productImage" />
     </div>
     <div class="col-sm-6 product-description">
       <div class="row">
@@ -43,9 +43,9 @@
         </div> -->
 
           <p class="product-price">
-            <!-- <span>
+            <span>
               {{ formatPrice(originalPrice) }}
-            </span> -->
+            </span>
           </p>
 
         </div>
@@ -112,6 +112,10 @@ export default {
       return this.product.masterData.current;
     },
 
+    matchingVariant() {
+      return this.currentProduct.masterVariant;
+    },
+
     hasPrice() {
       return this.matchingVariant.price;
     },
@@ -120,8 +124,7 @@ export default {
       return this.currentProduct.masterVariant.price.value;
     },
 
-    displayedImage() {
-      console.log('CHILD', this.currency());
+    productImage() {
       return this.currentProduct.masterVariant.images[0].url;
     },
   },
