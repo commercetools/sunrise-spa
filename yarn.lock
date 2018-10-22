@@ -11037,6 +11037,10 @@ vue-i18n@^8.0.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.1.0.tgz#a2bce3879f595b6188b419f8d2c6a74d8aee5eb7"
 
+vue-i18n@^8.2.1:
+  version "8.2.1"
+  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.2.1.tgz#7e21fed5f18dec6025992522500e9bd62cbe6668"
+
 vue-jest@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/vue-jest/-/vue-jest-2.6.0.tgz#23dc99a4dce0bb59fea3946e1317b234968cf12a"

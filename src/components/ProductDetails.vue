@@ -9,7 +9,9 @@
           aria-expanded="false"
           aria-controls="collapseProductDetails">
         {{ $t('details.title') }}
-        <img class="accordion-plus"
+        <img  @click="toggle"
+              class="accordion-plus"
+              :class="{ 'accordion-minus': !visible }"
               src="../assets/img/plus79.png"
               alt="accordion content">
       </a>
@@ -37,7 +39,17 @@
 
 <script>
 export default {
+  data() {
+    return {
+      visible: true,
+    };
+  },
 
+  methods: {
+    toggle() {
+      this.visible = !this.visible;
+    },
+  },
 };
 </script>
 
