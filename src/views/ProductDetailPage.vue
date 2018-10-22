@@ -10,11 +10,11 @@
           <Breadcrumb />
           </div>
         </div>
-        <div class="row product-info-row-pdp">
+        <div v-if="!loading && !empty"
+             class="row product-info-row-pdp">
           <!-- {{> catalog/pdp/product-info product=content.product deliveryRates=content.deliveryRates}} -->
-        <ProductInfo v-if="productInfo.id"
-                     :product="productInfo"
-                     :key="productInfo.id" />
+        <ProductInfo :product="product"
+                     :key="product.id" />
         </div>
       </div>
     </div>
@@ -42,9 +42,10 @@
 </template>
 
 <script>
+import gql from 'graphql-tag';
 import Breadcrumb from '@/components/Breadcrumb.vue';
 import ProductInfo from '@/components/ProductInfo.vue';
-import { mapGetters } from 'vuex';
+import priceMixin from '@/mixins/priceMixin';
 
 export default {
   props: ['productSlug', 'sku'],
@@ -55,39 +56,59 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['productInfo']),
-
-    locale() {
-      return this.$i18n.locale;
+    loading() {
+      // console.log('PARENT', this.currency());
+      return this.$apollo.queries.product.loading;
     },
 
-    currency() {
-      // return this.$i18n.numberFormats[this.$store.state.country].currency.currency;
-      return 'EUR';
+    empty() {
+      return !this.product;
     },
   },
 
-  methods: {
-    fetchProduct() {
-      this.$store.dispatch('fetchProduct', {
-        locale: this.$i18n.locale,
-        currency: this.currency,
-        productSlug: this.productSlug,
-        sku: this.sku,
-      });
-    },
-  },
+  mixins: [priceMixin],
 
-  created() {
-    this.fetchProduct();
-  },
-
-  watch: {
-    locale() {
-      this.fetchProduct();
-    },
-    currency() {
-      this.fetchProduct();
+  apollo: {
+    product: {
+      query: gql`
+        query Product($locale: Locale!, $sku: String!, $currency: Currency!) {
+          product(sku: $sku) {
+            id
+            masterData {
+              current {
+                name(locale: $locale)
+                slug(locale: $locale)
+                masterVariant {
+                  sku
+                  images {
+                    url
+                  }
+                  price(currency: $currency) {
+                    value {
+                      ...printPrice
+                    }
+                    discounted {
+                      value {
+                        ...printPrice
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        fragment printPrice on BaseMoney {
+          centAmount
+          fractionDigits
+        }`,
+      variables() {
+        return {
+          locale: this.$i18n.locale,
+          currency: 'EUR',
+          sku: this.sku,
+        };
+      },
     },
   },
 };

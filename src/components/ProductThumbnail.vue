@@ -1,7 +1,7 @@
 <template>
   <div class="col-xs-12 col-sm-6 col-md-4">
-    <!-- <a id="link-product-thumbnail{{index}}" href="{{thumbnail.product.variant.url}}"> -->
-    <div data-test="product-thumbnail"
+    <router-link :to="{ name: 'product', params: { productSlug, sku } }">
+      <div data-test="product-thumbnail"
          class="shop-item">
         <div v-if="hasPrice && hasDiscount"
              class="sale-flag"
@@ -93,7 +93,7 @@
         </form> -->
       </div>
     </div>
-  <!-- </a> -->
+  </router-link>
   <!-- {{> catalog/quickview wishlist=wishlist}} -->
   </div>
 </template>
@@ -146,6 +146,14 @@ export default {
 
     originalPrice() {
       return this.matchingVariant.price.value;
+    },
+
+    productSlug() {
+      return this.currentProduct.slug;
+    },
+
+    sku() {
+      return this.matchingVariant.sku;
     },
   },
 

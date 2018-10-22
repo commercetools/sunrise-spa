@@ -2,7 +2,7 @@
   <div>
     <div class="col-md-4 col-md-offset-1 col-sm-6">
       <!-- {{> catalog/pdp/product-gallery gallery=product.gallery}} -->
-      <ProductGallery />
+      <ProductGallery :displayedImage="displayedImage" />
     </div>
     <div class="col-sm-6 product-description">
       <div class="row">
@@ -11,7 +11,7 @@
               {{currentProduct.name}}
             </h1>
             <span class="grey-p quickview-sku">
-              <!-- {{product.variant.sku}} -->
+              {{currentProduct.masterVariant.sku}}
             </span>
         </div>
       </div>
@@ -43,9 +43,9 @@
         </div> -->
 
           <p class="product-price">
-            <span>
+            <!-- <span>
               {{ formatPrice(originalPrice) }}
-            </span>
+            </span> -->
           </p>
 
         </div>
@@ -78,7 +78,6 @@
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <!-- {{> catalog/pdp/product-social}} -->
           <ProductSocial />
         </div>
       </div>
@@ -112,10 +111,17 @@ export default {
     currentProduct() {
       return this.product.masterData.current;
     },
-    originalPrice() {
-      return this.product.masterData.current.masterVariant.price.value;
+
+    hasPrice() {
+      return this.matchingVariant.price;
     },
+
+    originalPrice() {
+      return this.currentProduct.masterVariant.price.value;
+    },
+
     displayedImage() {
+      console.log('CHILD', this.currency());
       return this.currentProduct.masterVariant.images[0].url;
     },
   },

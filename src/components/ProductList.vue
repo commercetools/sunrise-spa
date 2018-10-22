@@ -64,7 +64,9 @@ export default {
             masterData {
               current {
                 name(locale: $locale)
+                slug(locale: $locale)
                 masterVariant {
+                  sku
                   images {
                     url
                   }
