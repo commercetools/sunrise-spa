@@ -57,7 +57,6 @@ export default {
 
   computed: {
     loading() {
-      // console.log('PARENT', this.currency());
       return this.$apollo.queries.product.loading;
     },
 

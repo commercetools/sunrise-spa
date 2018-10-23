@@ -30,20 +30,20 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-12">
+        <div v-if="hasPrice" class="col-sm-12">
           <!-- {{> catalog/product-price}} -->
-        <!-- <div v-if="hasDiscount">
-          <span class="strikethrough">
-            {{ formatPrice(originalPrice) }}
-          </span>
-          <span data-test="product-thumbnail-discounted-price"
-                class="pop-item-price-old">
-            {{ formatPrice(discountedPrice) }}
-          </span>
-        </div> -->
 
           <p class="product-price">
-            <span>
+            <span v-if="hasDiscount">
+              <span class="discounted-price">
+                {{ formatPrice(originalPrice) }}
+              </span>
+              <span>
+                {{ formatPrice(discountedPrice) }}
+              </span>
+            </span>
+
+            <span v-else>
               {{ formatPrice(originalPrice) }}
             </span>
           </p>
@@ -124,6 +124,14 @@ export default {
       return this.currentProduct.masterVariant.price.value;
     },
 
+    hasDiscount() {
+      return this.matchingVariant.price.discounted;
+    },
+
+    discountedPrice() {
+      return this.matchingVariant.price.discounted.value;
+    },
+
     productImage() {
       return this.currentProduct.masterVariant.images[0].url;
     },
@@ -131,4 +139,3 @@ export default {
   mixins: [priceMixin],
 };
 </script>
-
