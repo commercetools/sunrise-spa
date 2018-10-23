@@ -9,4 +9,10 @@ export default {
       return centAmount / (10 ** fractionDigits);
     },
   },
+
+  computed: {
+    currency() {
+      return this.$i18n.numberFormats[this.$store.state.country].currency.currency;
+    },
+  },
 };

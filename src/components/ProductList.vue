@@ -22,6 +22,7 @@
 import gql from 'graphql-tag';
 import ProductThumbnail from '@/components/ProductThumbnail.vue';
 import categoryMixin from '@/mixins/categoryMixin';
+import priceMixin from '@/mixins/priceMixin';
 
 export default {
   components: {
@@ -52,7 +53,7 @@ export default {
     },
   },
 
-  mixins: [categoryMixin],
+  mixins: [categoryMixin, priceMixin],
 
   apollo: {
     products: {
@@ -94,7 +95,7 @@ export default {
       variables() {
         return {
           locale: this.$i18n.locale,
-          currency: this.$i18n.numberFormats[this.$store.state.country].currency.currency,
+          currency: this.currency,
           where: this.gqlPredicate,
         };
       },
