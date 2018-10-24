@@ -11,7 +11,7 @@
               {{currentProduct.name}}
             </h1>
             <span class="grey-p quickview-sku">
-              {{currentProduct.masterVariant.sku}}
+              {{matchingVariant.sku}}
             </span>
         </div>
       </div>
@@ -31,8 +31,6 @@
 
       <div class="row">
         <div v-if="hasPrice" class="col-sm-12">
-          <!-- {{> catalog/product-price}} -->
-
           <p class="product-price">
             <span v-if="hasDiscount">
               <span class="discounted-price">
@@ -113,7 +111,7 @@ export default {
     },
 
     matchingVariant() {
-      return this.currentProduct.masterVariant;
+      return this.currentProduct.variant;
     },
 
     hasPrice() {
@@ -121,7 +119,7 @@ export default {
     },
 
     originalPrice() {
-      return this.currentProduct.masterVariant.price.value;
+      return this.matchingVariant.price.value;
     },
 
     hasDiscount() {
@@ -133,9 +131,27 @@ export default {
     },
 
     productImage() {
-      return this.currentProduct.masterVariant.images[0].url;
+      return this.matchingVariant.images[0].url;
     },
   },
   mixins: [priceMixin],
 };
 </script>
+
+<!-- eslint-disable -->
+<i18n>
+{
+  "de": {
+    "description": {
+      "show": "Mehr",
+      "hide": "Weniger"
+    }
+  },
+  "en": {
+    "description": {
+      "show": "Show more",
+      "hide": "Show less"
+    }
+  }
+}
+</i18n>

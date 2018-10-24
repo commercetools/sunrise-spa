@@ -77,8 +77,12 @@ export default {
               current {
                 name(locale: $locale)
                 slug(locale: $locale)
-                masterVariant {
+                variant(sku: $sku) {
                   sku
+                  attributesRaw(includeNames:["colorFreeDefinition", "designer"]){
+                    name
+                    value(locale: $locale)
+                  }
                   images {
                     url
                   }
@@ -88,7 +92,7 @@ export default {
                     }
                     discounted {
                       value {
-                        ...printPrice
+                       ...printPrice
                       }
                     }
                   }
@@ -97,6 +101,7 @@ export default {
             }
           }
         }
+
         fragment printPrice on BaseMoney {
           centAmount
           fractionDigits

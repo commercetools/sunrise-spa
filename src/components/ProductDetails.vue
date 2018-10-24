@@ -2,13 +2,14 @@
 <div class="panel panel-default">
   <div class="panel-heading" role="tab" id="headingProductDetails">
     <h4 class="panel-title product-accordion-title text-uppercase">
-      <a id="pdp-product-details-toggle" class="collapsed pdp-accord-toggle"
-          data-toggle="collapse"
-          data-parent="#accordion-product-info"
-          href="#collapseProductDetails"
-          aria-expanded="false"
-          aria-controls="collapseProductDetails">
-        {{ $t('details.title') }}
+      <a id="pdp-product-details-toggle"
+         class="collapsed pdp-accord-toggle"
+         data-toggle="collapse"
+         data-parent="#accordion-product-info"
+         href="#collapseProductDetails"
+         aria-expanded="false"
+         aria-controls="collapseProductDetails">
+          {{ $t('details.title') }}
         <img  @click="toggle"
               class="accordion-plus"
               :class="{ 'accordion-minus': !visible }"
