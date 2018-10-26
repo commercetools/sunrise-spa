@@ -1,49 +1,48 @@
 <template>
-  <div>
-      <ProductZoomer
-        :base-images="images"
-        :base-zoomer-options="zoomerOptions" />
-  </div>
+  <ProductZoomer :base-images="images"
+                 :base-zoomer-options="zoomerOptions" />
 </template>
 
 <script>
 export default {
   props: {
-    productImage: {
-      type: String,
+    productImages: {
+      type: Array,
       required: true,
     },
   },
 
-  data: () => ({
-    images: {
-      normal_size:
-      [
-        { id: 1, url: null },
-        { id: 2, url: null },
-        { id: 3, url: null },
-      ],
-      // thumbs:
-      // [
-      //   { id: 3, url: null },
-      // ],
+  computed: {
+    images() {
+      const imageInfos = this.productImages.map((image, index) => ({
+        id: index,
+        url: image.url,
+      }));
+      return {
+        thumbs: imageInfos,
+        normal_size: imageInfos,
+        large_size: imageInfos,
+      };
     },
-    zoomerOptions: {
-      zoomFactor: 3,
-      pane: 'container-round',
-      hoverDelay: 100,
-      namespace: 'zoomer',
-      move_by_click: false,
-      scroll_items: 4,
-      choosed_thumb_border_color: 'lightgrey',
-    },
-  }),
 
-  created() {
-    this.images.normal_size[0].url = this.productImage;
-    this.images.normal_size[1].url = this.productImage;
-    this.images.normal_size[2].url = this.productImage;
-    // this.images.thumbs[0].url = this.productImage;
+    zoomerOptions() {
+      return {
+        zoomFactor: 4,
+        pane: 'pane',
+        hoverDelay: 300,
+        namespace: 'product-gallery',
+        move_by_click: true,
+        scroll_items: Math.min(this.productImages.length, 5),
+        choosed_thumb_border_color: '#FEC14E',
+      };
+    },
   },
 };
 </script>
+
+<style>
+  .product-gallery-zoomer-box .control svg {
+    display: block;
+    margin: auto;
+  }
+</style>

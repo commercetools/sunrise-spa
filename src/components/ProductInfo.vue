@@ -1,8 +1,7 @@
 <template>
   <div>
-    <div class="col-md-4 col-md-offset-1 col-sm-6">
-      <!-- {{> catalog/pdp/product-gallery gallery=product.gallery}} -->
-      <ProductGallery :productImage="productImage" />
+    <div class="col-md-4 col-md-offset-1 col-sm-6 product-gallery">
+      <ProductGallery :productImages="images" />
     </div>
     <div class="col-sm-6 product-description">
       <div class="row">
@@ -130,8 +129,8 @@ export default {
       return this.matchingVariant.price.discounted.value;
     },
 
-    productImage() {
-      return this.matchingVariant.images[0].url;
+    images() {
+      return this.matchingVariant.images;
     },
   },
   mixins: [priceMixin],
