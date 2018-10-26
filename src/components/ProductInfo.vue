@@ -22,8 +22,8 @@
       <div class="row">
         <div class="col-sm-12">
           <p class="pdp-product-description view-details more"
-            data-text-show="$t('description.show')"
-            data-text-hide="$t('description.hide')">
+             data-text-show="$t('description.show')"
+             data-text-hide="$t('description.hide')">
           </p>
         </div>
       </div>
@@ -66,32 +66,32 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="panel-group panel-group-pdp"
-              id="accordion-product-info"
-              role="tablist"
-              aria-multiselectable="true">
+               id="accordion-product-info"
+               role="tablist"
+               aria-multiselectable="true">
             <div class="panel panel-default">
               <div class="panel-heading"
-                  role="tab"
-                  id="headingProductDetails">
+                   role="tab"
+                   id="headingProductDetails">
                   <h4 class="panel-title product-accordion-title text-uppercase">
                     <a id="pdp-product-details-toggle"
-                      class="collapsed pdp-accord-toggle"
-                      data-toggle="collapse"
-                      data-parent="#accordion-product-info"
-                      href="#collapseProductDetails"
-                      aria-expanded="false"
-                      aria-controls="collapseProductDetails">
+                       class="collapsed pdp-accord-toggle"
+                       data-toggle="collapse"
+                       data-parent="#accordion-product-info"
+                       href="#collapseProductDetails"
+                       aria-expanded="false"
+                       aria-controls="collapseProductDetails">
                       {{ $t('details.title') }}
                       <img class="accordion-plus"
-                          src="../assets/img/plus79.png"
-                          alt="accordion content">
+                           src="../assets/img/plus79.png"
+                           alt="accordion content">
                     </a>
                 </h4>
               </div>
               <div id="collapseProductDetails"
-                  class="panel-collapse collapse"
-                  role="tabpanel"
-                  aria-labelledby="headingProductDetails">
+                   class="panel-collapse collapse"
+                   role="tabpanel"
+                   aria-labelledby="headingProductDetails">
                 <div class="panel-body panel-body-pdp">
                   <ul class="product-features-list">
                     <li v-for="attribute in productAttributes"
@@ -110,23 +110,23 @@
               <div class="panel-heading" role="tab" id="headingDelivery">
                 <h4 class="panel-title product-accordion-title text-uppercase">
                   <a id="pdp-delivery-returns-toggle"
-                    class="collapsed pdp-accord-toggle"
-                    data-toggle="collapse"
-                    data-parent="#accordion-product-info"
-                    href="#collapseDelivery"
-                    aria-expanded="false true"
-                    aria-controls="collapseDelivery">
+                     class="collapsed pdp-accord-toggle"
+                     data-toggle="collapse"
+                     data-parent="#accordion-product-info"
+                     href="#collapseDelivery"
+                     aria-expanded="false true"
+                     aria-controls="collapseDelivery">
                   {{ $t('delivery.title') }}
                     <img class="accordion-plus"
-                        src="../assets/img/plus79.png"
-                        alt="accordion content" />
+                         src="../assets/img/plus79.png"
+                         alt="accordion content" />
                   </a>
                 </h4>
               </div>
               <div id="collapseDelivery"
-                  class="panel-collapse collapse"
-                  role="tabpanel"
-                  aria-labelledby="headingDelivery">
+                   class="panel-collapse collapse"
+                   role="tabpanel"
+                   aria-labelledby="headingDelivery">
                 <div class="panel-body panel-body-pdp">
                   <ul class="product-delivery-list">
 
@@ -155,22 +155,22 @@
               <a href="">
                 <li>
                   <img class="social-icon"
-                      src="../assets/img/Facebook.png"
-                      alt="facebook">
+                       src="../assets/img/Facebook.png"
+                       alt="facebook">
                 </li>
               </a>
               <a href="">
                 <li>
                   <img class="social-icon"
-                      src="../assets/img/Pinterest.png"
-                      alt="pinterest">
+                       src="../assets/img/Pinterest.png"
+                       alt="pinterest">
                 </li>
               </a>
               <a href="">
                 <li>
                   <img class="social-icon"
-                      src="../assets/img/Google.png"
-                      alt="google plus">
+                       src="../assets/img/Google.png"
+                       alt="google plus">
                 </li>
               </a>
             </ul>

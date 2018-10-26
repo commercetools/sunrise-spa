@@ -2,7 +2,7 @@
   <div class="col-xs-12 col-sm-6 col-md-4">
     <router-link :to="{ name: 'product', params: { productSlug, sku } }">
       <div data-test="product-thumbnail"
-         class="shop-item">
+           class="shop-item">
         <div v-if="hasPrice && hasDiscount"
              class="sale-flag"
              data-test="product-thumbnail-sale-flag">

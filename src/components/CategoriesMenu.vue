@@ -3,7 +3,7 @@
     <ul v-if="!loading && hasCategories"
         class="nav navbar-nav">
       <li v-for="category1stLevel in categoryTree"
-         :key="category1stLevel.id"
+          :key="category1stLevel.id"
           @mouseover="hoverOnCategory(category1stLevel)"
           @mouseleave="hoverOffCategory()"
           data-test="category-1st-level"
