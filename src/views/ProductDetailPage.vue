@@ -1,10 +1,7 @@
 <template>
   <div>
-    <div class="darkbg hidden"></div>
-    <!-- {{> common/header}} -->
     <div class="pdp-page">
       <div class="container">
-        <!-- {{> common/messages}} -->
         <div class="row">
           <div class="col-xs-12 breadcrumb-col">
           <Breadcrumb />
@@ -79,9 +76,36 @@ export default {
                 slug(locale: $locale)
                 variant(sku: $sku) {
                   sku
-                  attributesRaw(includeNames:["colorFreeDefinition", "designer"]){
-                    name
-                    value(locale: $locale)
+                  attributes {
+                    ...on mainProductType {
+                      designer {
+                        label
+                        key
+                        name
+                      }
+                      colorFreeDefinition {
+                        value(locale: $locale)
+                        name
+                      }
+                      size{
+                        value
+                        name
+                      }
+                      style{
+                        key
+                        label
+                        name
+                      }
+                      gender{
+                        key
+                        label
+                        name
+                      }
+                      articleNumberManufacturer{
+                        name
+                        value
+                      }
+                    }
                   }
                   images {
                     url

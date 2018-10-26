@@ -48,7 +48,6 @@
 
         </div>
       </div>
-
       <!-- {{> catalog/add-to-cart}}
       {{> catalog/add-to-wishlist-btn}}
       {{> catalog/reserve-in-store-btn}} -->
@@ -63,20 +62,122 @@
           <!-- {{> catalog/product-availability availability=product.availability}} -->
         </div>
       </div>
+
+      <!-- toggles -->
       <div class="row">
         <div class="col-sm-12">
           <div class="panel-group panel-group-pdp"
-               id="accordion-product-info"
-               role="tablist"
-               aria-multiselectable="true">
-            <ProductDetails />
-            <DeliveryRates />
+              id="accordion-product-info"
+              role="tablist"
+              aria-multiselectable="true">
+            <div class="panel panel-default">
+              <div class="panel-heading"
+                  role="tab"
+                  id="headingProductDetails">
+                  <h4 class="panel-title product-accordion-title text-uppercase">
+                    <a id="pdp-product-details-toggle"
+                      class="collapsed pdp-accord-toggle"
+                      data-toggle="collapse"
+                      data-parent="#accordion-product-info"
+                      href="#collapseProductDetails"
+                      aria-expanded="false"
+                      aria-controls="collapseProductDetails">
+                      {{ $t('details.title') }}
+                      <img class="accordion-plus"
+                          src="../assets/img/plus79.png"
+                          alt="accordion content">
+                    </a>
+                </h4>
+              </div>
+              <div id="collapseProductDetails"
+                  class="panel-collapse collapse"
+                  role="tabpanel"
+                  aria-labelledby="headingProductDetails">
+                <div class="panel-body panel-body-pdp">
+                  <ul class="product-features-list">
+                    <li v-for="attribute in productAttributes"
+                        :key="attribute.name">
+                      <span v-if="attribute.name">
+                        {{attribute.name}}:
+                      </span>
+                      {{attribute.label || attribute.value}}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingDelivery">
+                <h4 class="panel-title product-accordion-title text-uppercase">
+                  <a id="pdp-delivery-returns-toggle"
+                    class="collapsed pdp-accord-toggle"
+                    data-toggle="collapse"
+                    data-parent="#accordion-product-info"
+                    href="#collapseDelivery"
+                    aria-expanded="false true"
+                    aria-controls="collapseDelivery">
+                  {{ $t('delivery.title') }}
+                    <img class="accordion-plus"
+                        src="../assets/img/plus79.png"
+                        alt="accordion content" />
+                  </a>
+                </h4>
+              </div>
+              <div id="collapseDelivery"
+                  class="panel-collapse collapse"
+                  role="tabpanel"
+                  aria-labelledby="headingDelivery">
+                <div class="panel-body panel-body-pdp">
+                  <ul class="product-delivery-list">
+
+                    <!-- {{#each deliveryRates.list}}
+                    <li>
+                      <span>{{name}}:</span> {{price}}{{#if freeAbove}} (FREE for orders above {{freeAbove}}){{/if}}
+                      {{#if description}}. {{description}}.{{/if}}
+                    </li>
+                    {{/each}} -->
+
+                    <li>{{ $t('delivery.freeReturns') }}</li>
+                    <li>{{ $t('delivery.moreDeliveryInfo') }}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- Social media icons-->
       <div class="row">
         <div class="col-sm-12">
-          <ProductSocial />
+          <div class="social-share">
+            <ul class="social-icons pdp-social-icons">
+              <a href="">
+                <li>
+                  <img class="social-icon"
+                      src="../assets/img/Facebook.png"
+                      alt="facebook">
+                </li>
+              </a>
+              <a href="">
+                <li>
+                  <img class="social-icon"
+                      src="../assets/img/Pinterest.png"
+                      alt="pinterest">
+                </li>
+              </a>
+              <a href="">
+                <li>
+                  <img class="social-icon"
+                      src="../assets/img/Google.png"
+                      alt="google plus">
+                </li>
+              </a>
+            </ul>
+            <ul class="social-icons">
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -85,16 +186,10 @@
 
 <script>
 import priceMixin from '@/mixins/priceMixin';
-import ProductDetails from '@/components/ProductDetails.vue';
-import DeliveryRates from '@/components/DeliveryRates.vue';
-import ProductSocial from '@/components/ProductSocial.vue';
 import ProductGallery from '@/components/ProductGallery.vue';
 
 export default {
   components: {
-    ProductDetails,
-    DeliveryRates,
-    ProductSocial,
     ProductGallery,
   },
 
@@ -133,6 +228,9 @@ export default {
     productImage() {
       return this.matchingVariant.images[0].url;
     },
+    productAttributes() {
+      return this.product.masterData.current.variant.attributes;
+    },
   },
   mixins: [priceMixin],
 };
@@ -145,12 +243,28 @@ export default {
     "description": {
       "show": "Mehr",
       "hide": "Weniger"
+    },
+    "details": {
+      "title": "Produktdetails"
+    },
+    "delivery": {
+      "title": "Versand & Retoure",
+      "freeReturns": "Kostenlose Retoure",
+      "moreDeliveryInfo": "Versandinformationen"
     }
   },
   "en": {
     "description": {
       "show": "Show more",
       "hide": "Show less"
+    },
+    "details": {
+      "title": "Product Details"
+    },
+    "delivery": {
+      "title": "Delivery & Returns",
+      "freeReturns": "Free return for all orders.",
+      "moreDeliveryInfo": " "
     }
   }
 }
