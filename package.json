@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@commercetools/sdk-middleware-auth": "^4.0.6",
+    "@commercetools/sdk-auth": "^1.0.1",
     "apollo-cache-inmemory": "^1.2.7",
     "apollo-client": "^2.3.8",
     "apollo-link-context": "^1.0.8",

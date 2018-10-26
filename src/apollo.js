@@ -1,3 +1,4 @@
+import SdkAuth from '@commercetools/sdk-auth';
 import { createAuthMiddlewareForClientCredentialsFlow, createAuthMiddlewareForPasswordFlow }
   from '@commercetools/sdk-middleware-auth/dist/commercetools-sdk-middleware-auth.cjs';
 import Vue from 'vue';
@@ -11,6 +12,26 @@ import 'isomorphic-fetch';
 
 // Install the vue plugin
 Vue.use(VueApollo);
+
+const params = {
+  ...config.ct.auth,
+  fetch: window.fetch,
+  // fetch: (url, args) => {
+  //   console.log(url);
+  //   console.log(args);
+  //   return window.fetch(url, args).then((x) => {
+  //     console.log(x);
+  //     return x;
+  //   });
+  // },
+};
+const authClient = new SdkAuth(params);
+authClient.clientCredentialsFlow().then(x => console.log(x));
+
+// const authClient = new SdkAuth({
+//   ...config.ct.auth,
+//   fetch,
+// });
 
 // Matcher for fragments on unions and interfaces
 const fragmentMatcher = new IntrospectionFragmentMatcher({ introspectionQueryResultData });
