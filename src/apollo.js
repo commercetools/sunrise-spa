@@ -8,7 +8,6 @@ import { setContext } from 'apollo-link-context';
 import { createApolloClient, restartWebsockets } from 'vue-cli-plugin-apollo/graphql-client';
 import config from '@/../sunrise.config';
 import introspectionQueryResultData from '@/../graphql-fragments.json';
-import 'isomorphic-fetch';
 
 // Install the vue plugin
 Vue.use(VueApollo);
