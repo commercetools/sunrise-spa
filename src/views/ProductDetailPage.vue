@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="pdp-page">
+    <div id="pdp-page">
       <div class="container">
         <div class="row">
           <div class="col-xs-12 breadcrumb-col">

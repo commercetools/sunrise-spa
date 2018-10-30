@@ -69,7 +69,8 @@
                id="accordion-product-info"
                role="tablist"
                aria-multiselectable="true">
-            <div class="panel panel-default">
+            <div class="panel panel-default"
+                 @click="openAccordion">
               <div class="panel-heading"
                    role="tab"
                    id="headingProductDetails">
@@ -196,6 +197,22 @@ export default {
     product: {
       type: Object,
       required: true,
+    },
+  },
+
+  methods: {
+    openAccordion(e) {
+      console.log(e);
+      const pdpAccordion = $('.pdp-accord-toggle');
+      const contextPanelGroup = pdpAccordion.parents('.panel-group-pdp');
+      const context = $(this);
+      const contextPanel = context.parents('.panel-default');
+      const contextButton = $('.accordion-plus', contextPanel);
+
+      contextButton.toggleClass('accordion-minus');
+
+      // Remove minus class on all other buttons
+      contextPanelGroup.find('.accordion-plus').not(contextButton).removeClass('accordion-minus');
     },
   },
 
