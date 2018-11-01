@@ -69,8 +69,7 @@
                id="accordion-product-info"
                role="tablist"
                aria-multiselectable="true">
-            <div class="panel panel-default"
-                 @click="openAccordion">
+            <div class="panel panel-default">
               <div class="panel-heading"
                    role="tab"
                    id="headingProductDetails">
@@ -81,7 +80,8 @@
                        data-parent="#accordion-product-info"
                        href="#collapseProductDetails"
                        aria-expanded="false"
-                       aria-controls="collapseProductDetails">
+                       aria-controls="collapseProductDetails"
+                       @click="openAccordion">
                       {{ $t('details.title') }}
                       <img class="accordion-plus"
                            src="../assets/img/plus79.png"
@@ -108,7 +108,9 @@
             </div>
 
             <div class="panel panel-default">
-              <div class="panel-heading" role="tab" id="headingDelivery">
+              <div class="panel-heading"
+                   role="tab"
+                   id="headingDelivery">
                 <h4 class="panel-title product-accordion-title text-uppercase">
                   <a id="pdp-delivery-returns-toggle"
                      class="collapsed pdp-accord-toggle"
@@ -116,7 +118,8 @@
                      data-parent="#accordion-product-info"
                      href="#collapseDelivery"
                      aria-expanded="false true"
-                     aria-controls="collapseDelivery">
+                     aria-controls="collapseDelivery"
+                     @click="openAccordion">
                   {{ $t('delivery.title') }}
                     <img class="accordion-plus"
                          src="../assets/img/plus79.png"
@@ -202,11 +205,8 @@ export default {
 
   methods: {
     openAccordion(e) {
-      console.log(e);
-      const pdpAccordion = $('.pdp-accord-toggle');
-      const contextPanelGroup = pdpAccordion.parents('.panel-group-pdp');
-      const context = $(this);
-      const contextPanel = context.parents('.panel-default');
+      const contextPanelGroup = $('.pdp-accord-toggle').parents('.panel-group-pdp');
+      const contextPanel = $(e.target).parents('.panel-default');
       const contextButton = $('.accordion-plus', contextPanel);
 
       contextButton.toggleClass('accordion-minus');
