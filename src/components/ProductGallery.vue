@@ -32,7 +32,7 @@ export default {
         hoverDelay: 300,
         namespace: 'product-gallery',
         move_by_click: true,
-        scroll_items: Math.min(this.productImages.length, 5),
+        scroll_items: Math.min(this.productImages.length, 4),
         choosed_thumb_border_color: '#FEC14E',
       };
     },
@@ -45,4 +45,11 @@ export default {
     display: block;
     margin: auto;
   }
+
+  .product-gallery-zoomer-box .thumb-list img {
+    max-height: 100px;
+    width: auto;
+    margin: 2px;
+  }
+
 </style>
