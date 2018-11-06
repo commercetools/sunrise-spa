@@ -24,6 +24,21 @@ export default {
   },
 
   actions: {
+    fetchCustomer: ({ commit }) =>
+      apolloProvider.defaultClient.query({
+        query: gql`
+          query fetchCustomer {
+            me {
+              customer {
+                ...printCustomerInfo
+              }
+            }
+          }
+          ${customerInfoFragment}`,
+      }).then((response) => {
+        commit(SET_INFO, response.data.me.customer);
+      }),
+
     signup: ({ commit }, draft) =>
       apolloProvider.defaultClient.mutate({
         mutation: gql`
