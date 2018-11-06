@@ -16,6 +16,10 @@ function saveRefreshToken(response) {
   }
 }
 
+function deleteRefreshToken() {
+  localStorage.removeItem(refreshTokenName);
+}
+
 export function refreshTokenExists() {
   return localStorage.getItem(refreshTokenName) !== null;
 }
@@ -26,6 +30,7 @@ export function login(username, password) {
 }
 
 export function logout() {
+  deleteRefreshToken();
   tokenInfoPromise = authClient.clientCredentialsFlow();
   return tokenInfoPromise;
 }
