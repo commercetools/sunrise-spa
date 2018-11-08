@@ -1,15 +1,19 @@
 <template>
   <div>
-    <div class="col-md-4 col-md-offset-1 col-sm-6 product-gallery">
+    <div data-test="product-gallery"
+         class="col-md-4 col-md-offset-1 col-sm-6 product-gallery">
       <ProductGallery :productImages="images" />
     </div>
-    <div class="col-sm-6 product-description">
+    <div data-test="product-description"
+         class="col-sm-6 product-description">
       <div class="row">
         <div class="col-sm-12">
-            <h1 class="text-uppercase pdp-product-title">
+            <h1 data-test="pdp-product-title"
+                class="text-uppercase pdp-product-title">
               {{currentProduct.name}}
             </h1>
-            <span class="grey-p quickview-sku">
+            <span data-test="quickview-sku"
+                  class="grey-p quickview-sku">
               {{matchingVariant.sku}}
             </span>
         </div>
@@ -31,17 +35,18 @@
       <div class="row">
         <div v-if="hasPrice" class="col-sm-12">
           <p class="product-price">
-            <span v-if="hasDiscount">
-              <span class="discounted-price">
+            <span v-if="!hasDiscount"
+                  data-test="product-original-price">
+              {{ formatPrice(originalPrice) }}
+            </span>
+            <span v-else>
+              <span data-test="product-discounted-price"
+                    class="discounted-price">
                 {{ formatPrice(originalPrice) }}
               </span>
-              <span>
+              <span data-test="product-discount-price">
                 {{ formatPrice(discountedPrice) }}
               </span>
-            </span>
-
-            <span v-else>
-              {{ formatPrice(originalPrice) }}
             </span>
           </p>
 
@@ -50,7 +55,9 @@
       <!-- {{> catalog/add-to-cart}}
       {{> catalog/add-to-wishlist-btn}}
       {{> catalog/reserve-in-store-btn}} -->
-      <button id="" class="add-to-bag-btn">
+      <button id=""
+              data-test="add-to-cart-button"
+              class="add-to-bag-btn">
         <img class="bag-thumb"
              src="../assets/img/hand-bag-2-black.png"
              alt="$t('catalog.cart.add')">
@@ -65,16 +72,19 @@
       <!-- toggles -->
       <div class="row">
         <div class="col-sm-12">
-          <div class="panel-group panel-group-pdp"
+          <div data-test="panel-group-pdp"
+               class="panel-group panel-group-pdp"
                id="accordion-product-info"
                role="tablist"
                aria-multiselectable="true">
-            <div class="panel panel-default">
+            <div data-test="panel-default"
+                 class="panel panel-default">
               <div class="panel-heading"
                    role="tab"
                    id="headingProductDetails">
                   <h4 class="panel-title product-accordion-title text-uppercase">
-                    <a id="pdp-product-details-toggle"
+                    <a data-test="accordion-toggle"
+                       id="pdp-product-details-toggle"
                        class="collapsed pdp-accord-toggle"
                        data-toggle="collapse"
                        data-parent="#accordion-product-info"
@@ -83,7 +93,8 @@
                        aria-controls="collapseProductDetails"
                        @click="openAccordion">
                       {{ $t('details.title') }}
-                      <img class="accordion-plus"
+                      <img data-test="accordion-plus"
+                           class="accordion-plus"
                            src="../assets/img/plus79.png"
                            alt="accordion content">
                     </a>
@@ -93,9 +104,11 @@
                    class="panel-collapse collapse"
                    role="tabpanel"
                    aria-labelledby="headingProductDetails">
-                <div class="panel-body panel-body-pdp">
+                <div data-test="product-features-list"
+                     class="panel-body panel-body-pdp">
                   <ul class="product-features-list">
                     <li v-for="attribute in productAttributes"
+                        data-test="list-attributes"
                         :key="attribute.name">
                       <span v-if="attribute.name">
                         {{attribute.name}}:
