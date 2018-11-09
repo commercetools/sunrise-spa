@@ -40,7 +40,6 @@ export function getAuthToken() {
     const refreshToken = getRefreshToken();
     if (refreshToken) {
       tokenInfoPromise = authClient.refreshTokenFlow(refreshToken);
-      tokenInfoPromise.then(response => saveRefreshToken(response));
     } else {
       tokenInfoPromise = authClient.clientCredentialsFlow();
     }
