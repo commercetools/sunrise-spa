@@ -4,8 +4,6 @@ import config from '@/../sunrise.config';
 const authClient = new SdkAuth(config.ct.auth);
 const refreshTokenName = 'refresh-token';
 
-let tokenInfoPromise = null;
-
 function getRefreshToken() {
   return localStorage.getItem(refreshTokenName);
 }
@@ -24,25 +22,20 @@ export function refreshTokenExists() {
   return localStorage.getItem(refreshTokenName) !== null;
 }
 
+let tokenProvider = authClient.tokenProvider({ refreshToken: getRefreshToken() });
+
 export function login(username, password) {
-  tokenInfoPromise = authClient.customerPasswordFlow({ username, password });
-  return tokenInfoPromise.then(response => saveRefreshToken(response));
+  tokenProvider = authClient.tokenProvider({ username, password });
 }
 
 export function logout() {
   deleteRefreshToken();
-  tokenInfoPromise = authClient.clientCredentialsFlow();
-  return tokenInfoPromise;
+  tokenProvider = authClient.tokenProvider();
 }
 
 export function getAuthToken() {
-  if (tokenInfoPromise === null) {
-    const refreshToken = getRefreshToken();
-    if (refreshToken) {
-      tokenInfoPromise = authClient.refreshTokenFlow(refreshToken);
-    } else {
-      tokenInfoPromise = authClient.clientCredentialsFlow();
-    }
-  }
-  return tokenInfoPromise.then(tokenInfo => `${tokenInfo.token_type} ${tokenInfo.access_token}`);
+  return tokenProvider.get().then((tokenInfo) => {
+    saveRefreshToken(tokenInfo);
+    return `${tokenInfo.token_type} ${tokenInfo.access_token}`;
+  });
 }
