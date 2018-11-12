@@ -9,7 +9,10 @@ describe('ProductInfo.vue', () => {
     product = {
       masterData: {
         current: {
-          variant: {},
+          variant: {
+            images: [],
+            attributes: {},
+          },
         },
       },
     };
@@ -23,29 +26,24 @@ describe('ProductInfo.vue', () => {
           },
         },
       },
-      setData: { product },
     };
   });
 
-  it.skip('renders a vue instance', () => {
+  it('renders a vue instance', () => {
     expect(shallowMount(ProductInfo, options).isVueInstance()).toBeTruthy();
   });
 
-  it.skip('obtains current version of the product', () => {
-    const current = { foo: 'bar' };
-    product.masterData.current = current;
+  it('obtains current version of the product', () => {
     const wrapper = shallowMount(ProductInfo, options);
-
     wrapper.setData({ product });
 
-    expect(wrapper.vm.currentProduct).toEqual(current);
+    expect(wrapper.vm.currentProduct).toEqual(product.masterData.current);
   });
 
-  it.skip('obtains matching variant of the product', () => {
-    const matchingVariant = { foo: 'bar' };
-    options.propsData.product.masterData.current.masterVariant = matchingVariant;
+  it('obtains matching variant of the product', () => {
     const wrapper = shallowMount(ProductInfo, options);
+    wrapper.setData({ product });
 
-    expect(wrapper.vm.matchingVariant).toEqual(matchingVariant);
+    expect(wrapper.vm.matchingVariant).toEqual(product.masterData.current.variant);
   });
 });

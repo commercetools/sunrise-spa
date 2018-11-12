@@ -238,8 +238,9 @@ export default {
     },
 
     empty() {
-      return !this.product;
+      return !Object.keys(this.product).length;
     },
+
     currentProduct() {
       return this.product.masterData.current;
     },
@@ -269,7 +270,7 @@ export default {
     },
 
     productAttributes() {
-      return this.product.masterData.current.variant.attributes;
+      return this.matchingVariant.attributes;
     },
   },
 
