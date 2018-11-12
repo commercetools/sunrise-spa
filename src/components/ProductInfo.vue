@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!empty && !loading">
     <div data-test="product-gallery"
          class="col-md-4 col-md-offset-1 col-sm-6 product-gallery">
       <ProductGallery :productImages="images" />
@@ -201,19 +201,22 @@
 </template>
 
 <script>
-import priceMixin from '@/mixins/priceMixin';
+import gql from 'graphql-tag';
 import ProductGallery from '@/components/ProductGallery.vue';
+import priceMixin from '@/mixins/priceMixin';
 
 export default {
   components: {
     ProductGallery,
   },
 
+  data: () => ({
+    product: {},
+  }),
+
   props: {
-    product: {
-      type: Object,
-      required: true,
-    },
+    productSlug: String,
+    sku: String,
   },
 
   methods: {
@@ -230,6 +233,13 @@ export default {
   },
 
   computed: {
+    loading() {
+      return this.$apollo.queries.product.loading;
+    },
+
+    empty() {
+      return !this.product;
+    },
     currentProduct() {
       return this.product.masterData.current;
     },
@@ -257,10 +267,88 @@ export default {
     images() {
       return this.matchingVariant.images;
     },
+
     productAttributes() {
       return this.product.masterData.current.variant.attributes;
     },
   },
+
+  apollo: {
+    product: {
+      query: gql`
+        query Product($locale: Locale!, $sku: String!, $currency: Currency!) {
+          product(sku: $sku) {
+            id
+            masterData {
+              current {
+                name(locale: $locale)
+                slug(locale: $locale)
+                variant(sku: $sku) {
+                  sku
+                  attributes {
+                    ...on mainProductType {
+                      designer {
+                        label
+                        key
+                        name
+                      }
+                      colorFreeDefinition {
+                        value(locale: $locale)
+                        name
+                      }
+                      size{
+                        value
+                        name
+                      }
+                      style{
+                        key
+                        label
+                        name
+                      }
+                      gender{
+                        key
+                        label
+                        name
+                      }
+                      articleNumberManufacturer{
+                        name
+                        value
+                      }
+                    }
+                  }
+                  images {
+                    url
+                  }
+                  price(currency: $currency) {
+                    value {
+                      ...printPrice
+                    }
+                    discounted {
+                      value {
+                       ...printPrice
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        fragment printPrice on BaseMoney {
+          centAmount
+          fractionDigits
+        }`,
+      variables() {
+        return {
+          locale: this.$i18n.locale,
+          currency: 'EUR',
+          sku: this.sku,
+        };
+      },
+    },
+  },
+
   mixins: [priceMixin],
 };
 </script>

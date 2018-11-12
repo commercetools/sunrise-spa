@@ -7,11 +7,10 @@
           <Breadcrumb />
           </div>
         </div>
-        <div v-if="!loading && !empty"
-             class="row product-info-row-pdp">
+        <div class="row product-info-row-pdp">
           <!-- {{> catalog/pdp/product-info product=content.product deliveryRates=content.deliveryRates}} -->
-        <ProductInfo :product="product"
-                     :key="product.id" />
+        <ProductInfo :productSlug="productSlug"
+                     :sku="sku" />
         </div>
       </div>
     </div>
@@ -39,105 +38,24 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
 import Breadcrumb from '@/components/Breadcrumb.vue';
 import ProductInfo from '@/components/ProductInfo.vue';
-import priceMixin from '@/mixins/priceMixin';
 
 export default {
-  props: ['productSlug', 'sku'],
+  props: {
+    productSlug: {
+      type: String,
+      required: true,
+    },
+    sku: {
+      type: String,
+      required: true,
+    },
+  },
 
   components: {
     Breadcrumb,
     ProductInfo,
-  },
-
-  computed: {
-    loading() {
-      return this.$apollo.queries.product.loading;
-    },
-
-    empty() {
-      return !this.product;
-    },
-  },
-
-  mixins: [priceMixin],
-
-  apollo: {
-    product: {
-      query: gql`
-        query Product($locale: Locale!, $sku: String!, $currency: Currency!) {
-          product(sku: $sku) {
-            id
-            masterData {
-              current {
-                name(locale: $locale)
-                slug(locale: $locale)
-                variant(sku: $sku) {
-                  sku
-                  attributes {
-                    ...on mainProductType {
-                      designer {
-                        label
-                        key
-                        name
-                      }
-                      colorFreeDefinition {
-                        value(locale: $locale)
-                        name
-                      }
-                      size{
-                        value
-                        name
-                      }
-                      style{
-                        key
-                        label
-                        name
-                      }
-                      gender{
-                        key
-                        label
-                        name
-                      }
-                      articleNumberManufacturer{
-                        name
-                        value
-                      }
-                    }
-                  }
-                  images {
-                    url
-                  }
-                  price(currency: $currency) {
-                    value {
-                      ...printPrice
-                    }
-                    discounted {
-                      value {
-                       ...printPrice
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-
-        fragment printPrice on BaseMoney {
-          centAmount
-          fractionDigits
-        }`,
-      variables() {
-        return {
-          locale: this.$i18n.locale,
-          currency: 'EUR',
-          sku: this.sku,
-        };
-      },
-    },
   },
 };
 </script>
