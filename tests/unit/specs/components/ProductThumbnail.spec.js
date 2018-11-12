@@ -33,6 +33,7 @@ describe('ProductThumbnail.vue', () => {
       methods: { formatPrice: jest.fn() },
       mocks: { $t: jest.fn() },
       propsData: { product },
+      stubs: { 'router-link': '<a/>' },
     };
   });
 
@@ -112,5 +113,21 @@ describe('ProductThumbnail.vue', () => {
     const wrapper = shallowMount(ProductThumbnail, options);
 
     expect(wrapper.vm.originalPrice).toEqual(originalPrice.value);
+  });
+
+  it('obtains the product slug', () => {
+    const slug = { foo: 'bar' };
+    options.propsData.product.masterData.current.slug = slug;
+    const wrapper = shallowMount(ProductThumbnail, options);
+
+    expect(wrapper.vm.productSlug).toEqual(slug);
+  });
+
+  it('obtains the product sku', () => {
+    const sku = { foo: 'bar' };
+    options.propsData.product.masterData.current.masterVariant.sku = sku;
+    const wrapper = shallowMount(ProductThumbnail, options);
+
+    expect(wrapper.vm.sku).toEqual(sku);
   });
 });
