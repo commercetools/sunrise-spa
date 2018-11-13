@@ -24,10 +24,10 @@ SUNRISE comes with some read-only data set by default that you can use. But if y
 Once you have created your commercetools project and populated it with data, follow the next steps to connect to it.
 
 ### 1. Create an API client for a SPA
-In the [Merchant Center](https://mc.commercetools.com/), select your project and go to `Settings`, then click on `Developer Settings` section. You should now find yourself in the `API Clients` tab. Click on the `Create New API Client` button to display a form. There, enter a descriptive name for your new API client and select the `Mobile client` template. Once you have filled the form, submit it by clicking on `Create API Client`, you should now be able to see your project credentials.
+In the [Merchant Center](https://mc.commercetools.com/), select your project and go to `Settings`, then click on `Developer Settings` section. You should now find yourself in the `API Clients` tab. Click on the `Create New API Client` button to display a form. There, enter a descriptive name for your new API client and select the `Mobile & single-page application client` template. Once you have filled the form, submit it by clicking on `Create API Client`, you should now be able to see your project credentials.
 
 ### 2. Configure SUNRISE with your API client 
-Set environment variables with your project credentials. For example, by creating an [`.env` file](https://www.npmjs.com/package/dotenv#usage) (e.g. `.env.local`) in the root folder of the project, as follows:
+Create the file `.env.local` (or any other [`.env` file](https://www.npmjs.com/package/dotenv#usage)) in the root folder of your project with the following content:
 
 ```shell
 VUE_APP_CT_PROJECT_KEY=<your project key>
@@ -41,3 +41,5 @@ Optionally, you can also use a different commercetools host, instead of the defa
 VUE_APP_CT_AUTH_HOST=https://auth.commercetools.co
 VUE_APP_CT_API_HOST=https://api.commercetools.co
 ```
+
+This will set up the necessary environment variables required to run SUNRISE. Feel free to choose any other approach that best suits your needs.
