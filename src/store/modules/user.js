@@ -9,7 +9,6 @@ const customerInfoFragment = gql`
     firstName
     lastName
     customerNumber
-    version
   }
 `;
 
@@ -80,23 +79,6 @@ export default {
         .then(() => {
           commit(SET_INFO, null);
         }),
-
-    updateCustomer: ({ commit, getters }, actions) =>
-      apolloProvider.defaultClient.mutate({
-        mutation: gql`
-          mutation updateMyCustomer($actions: [MyCustomerUpdateAction!]!, $version: Long!) {
-            updateMyCustomer(version: $version, actions: $actions) {
-              ...printCustomerInfo
-            }
-          }
-          ${customerInfoFragment}`,
-        variables: {
-          version: getters.user.version,
-          actions,
-        },
-      }).then((response) => {
-        commit(SET_INFO, response.data.updateMyCustomer);
-      }),
   },
 
   mutations: {
