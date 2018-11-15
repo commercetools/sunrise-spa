@@ -158,6 +158,7 @@ export default {
           version: this.me.customer.version,
           actions: this.updateActions,
         },
+        refetchQueries: ['fetchCustomer'],
       });
     },
 
