@@ -1,6 +1,6 @@
 <template>
-<div>
-  <div class="personal-details-edit personal-details-edit-show">
+  <div v-if="!empty && !loading"
+       class="personal-details-edit personal-details-edit-show">
     <form @submit.prevent="save"
           id="form-edit-personal-details">
       <ServerError :error="serverError">
@@ -59,11 +59,11 @@
       <!-- </div> -->
       <div class="personal-details-edit-btn">
         <span>
-          <button :disabled="loading"
+          <button :disabled="updating"
                   type="submit"
                   class="update-btn"
                   data-test="edit-profile-form-submit">
-            <span v-if="loading">
+            <span v-if="updating">
               {{ $t('main.messages.pleaseWait') }}
             </span>
             <span v-else>
@@ -80,34 +80,38 @@
       </div>
     </form>
   </div>
-</div>
 </template>
 
 <script>
 import { required, email } from 'vuelidate/lib/validators';
+import gql from 'graphql-tag';
 import ServerError from '@/components/ServerError.vue';
 import ValidationError from '@/components/ValidationError.vue';
-import { mapGetters } from 'vuex';
+
+const customerFragment = gql`
+  fragment customerFragment on Customer {
+    email
+    firstName
+    lastName
+    version
+  }`;
 
 export default {
   components: { ValidationError, ServerError },
 
   data: () => ({
+    me: {},
     firstName: null,
     lastName: null,
     email: null,
-    loading: false,
+    updating: false,
     serverError: null,
   }),
 
-  created() {
-    this.email = this.user.email;
-    this.firstName = this.user.firstName;
-    this.lastName = this.user.lastName;
-  },
-
   computed: {
-    ...mapGetters(['user']),
+    empty: vm => !Object.keys(vm.me).length,
+
+    loading: vm => vm.$apollo.queries.me.loading,
 
     updateActions() {
       return [
@@ -118,9 +122,9 @@ export default {
     },
 
     hasFormChanged() {
-      const hasEmailChanged = this.email !== this.user.email;
-      const hasFirstNameChanged = this.firstName !== this.user.firstName;
-      const hasLastNameChanged = this.lastName !== this.user.lastName;
+      const hasEmailChanged = this.email !== this.me.customer.email;
+      const hasFirstNameChanged = this.firstName !== this.me.customer.firstName;
+      const hasLastNameChanged = this.lastName !== this.me.customer.lastName;
       return hasEmailChanged || hasFirstNameChanged || hasLastNameChanged;
     },
   },
@@ -130,15 +134,31 @@ export default {
       this.$v.$touch();
       this.serverError = null;
       if (!this.$v.$invalid && this.hasFormChanged) {
-        this.loading = true;
-        await this.$store.dispatch('updateCustomer', this.updateActions)
+        this.updating = true;
+        await this.updateCustomer()
           .then(() => {
             this.$emit('close');
           }).catch((error) => {
             this.serverError = error;
           });
-        this.loading = false;
+        this.updating = false;
       }
+    },
+
+    updateCustomer() {
+      return this.$apollo.mutate({
+        mutation: gql`
+          mutation updateMyCustomer($actions: [MyCustomerUpdateAction!]!, $version: Long!) {
+            updateMyCustomer(version: $version, actions: $actions) {
+              ...customerFragment
+            }
+          }
+          ${customerFragment}`,
+        variables: {
+          version: this.me.customer.version,
+          actions: this.updateActions,
+        },
+      });
     },
 
     getErrorMessage({ code, field }) {
@@ -146,6 +166,28 @@ export default {
         return this.$t('duplicatedEmail');
       }
       return null;
+    },
+  },
+
+  watch: {
+    me(value) {
+      this.firstName = value.customer.firstName;
+      this.lastName = value.customer.lastName;
+      this.email = value.customer.email;
+    },
+  },
+
+  apollo: {
+    me: {
+      query: gql`
+        query fetchCustomer {
+          me {
+            customer {
+              ...customerFragment
+            }
+          }
+        }
+        ${customerFragment}`,
     },
   },
 

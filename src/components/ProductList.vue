@@ -57,25 +57,26 @@ export default {
   apollo: {
     products: {
       query: gql`
-      query listProducts($locale: Locale!, $currency: Currency!, $where: String) {
-        products(limit: 20, where: $where, sort: "id asc") {
-          results {
-            id
-            masterData {
-              current {
-                name(locale: $locale)
-                masterVariant {
-                  images {
-                    url
-                  }
-                  price(currency: $currency) {
-                    discounted {
+        query listProducts($locale: Locale!, $currency: Currency!, $where: String) {
+          products(limit: 20, where: $where, sort: "id asc") {
+            results {
+              id
+              masterData {
+                current {
+                  name(locale: $locale)
+                  masterVariant {
+                    images {
+                      url
+                    }
+                    price(currency: $currency) {
+                      discounted {
+                        value {
+                          ...printPrice
+                        }
+                      }
                       value {
                         ...printPrice
                       }
-                    }
-                    value {
-                      ...printPrice
                     }
                   }
                 }
@@ -83,12 +84,11 @@ export default {
             }
           }
         }
-      }
 
-      fragment printPrice on BaseMoney {
-        centAmount
-        fractionDigits
-      }`,
+        fragment printPrice on BaseMoney {
+          centAmount
+          fractionDigits
+        }`,
       variables() {
         return {
           locale: this.$i18n.locale,
