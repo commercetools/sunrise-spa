@@ -2,7 +2,8 @@
   <div v-if="!empty && !loading">
     <div data-test="product-gallery"
          class="col-md-4 col-md-offset-1 col-sm-6 product-gallery">
-      <ProductGallery :productImages="images" />
+      <ProductGallery v-if="images"
+                      :productImages="images" />
     </div>
     <div data-test="product-description"
          class="col-sm-6 product-description">
@@ -33,7 +34,8 @@
       </div>
 
       <div class="row">
-        <div v-if="hasPrice" class="col-sm-12">
+        <div v-if="hasPrice"
+             class="col-sm-12">
           <p class="product-price">
             <span v-if="!hasDiscount"
                   data-test="product-original-price">
@@ -106,7 +108,8 @@
                    aria-labelledby="headingProductDetails">
                 <div data-test="product-features-list"
                      class="panel-body panel-body-pdp">
-                  <ul class="product-features-list">
+                  <ul v-if="productAttributes"
+                      class="product-features-list">
                     <li v-for="attribute in productAttributes"
                         data-test="list-attributes"
                         :key="attribute.name">
@@ -242,19 +245,15 @@ export default {
     },
 
     currentProduct() {
-      return this.product.masterData.current;
+      return this.product.masterData.current || {};
     },
 
     matchingVariant() {
-      return this.currentProduct.variant;
+      return this.currentProduct.variant || {};
     },
 
     hasPrice() {
       return this.matchingVariant.price;
-    },
-
-    originalPrice() {
-      return this.matchingVariant.price.value;
     },
 
     hasDiscount() {
@@ -263,6 +262,10 @@ export default {
 
     discountedPrice() {
       return this.matchingVariant.price.discounted.value;
+    },
+
+    originalPrice() {
+      return this.matchingVariant.price.value;
     },
 
     images() {
