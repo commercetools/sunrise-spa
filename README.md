@@ -27,7 +27,7 @@ Once you have created your commercetools project and populated it with data, fol
 In the [Merchant Center](https://mc.commercetools.com/), select your project and go to `Settings`, then click on `Developer Settings` section. You should now find yourself in the `API Clients` tab. Click on the `Create New API Client` button to display a form. There, enter a descriptive name for your new API client and select the `Mobile & single-page application client` template. Once you have filled the form, submit it by clicking on `Create API Client`, you should now be able to see your project credentials.
 
 ### 2. Configure SUNRISE with your API client 
-Create the file `.env.local` (or any other [`.env` file](https://www.npmjs.com/package/dotenv#usage)) in the root folder of your project with the following content:
+Create the file `.env.local` (or any other [`.env` file](https://www.npmjs.com/package/dotenv#usage)) in the root folder of your project with the following content, replacing the data in the template (i.e. `<your project key>`) for your own:
 
 ```shell
 VUE_APP_CT_PROJECT_KEY=<your project key>
