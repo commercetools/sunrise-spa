@@ -9,7 +9,7 @@ export default {
   props: {
     productImages: {
       type: Array,
-      required: true,
+      default: () => [],
     },
   },
 
