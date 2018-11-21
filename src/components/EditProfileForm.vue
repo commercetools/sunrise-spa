@@ -1,7 +1,7 @@
 <template>
-  <div v-if="!empty && !loading"
+  <div v-if="me"
        class="personal-details-edit personal-details-edit-show">
-    <form @submit.prevent="save"
+    <form @submit.prevent="onSubmit"
           id="form-edit-personal-details">
       <ServerError :error="serverError">
         <template slot-scope="{ graphQLError }">
@@ -59,11 +59,11 @@
       <!-- </div> -->
       <div class="personal-details-edit-btn">
         <span>
-          <button :disabled="updating"
+          <button :disabled="loading"
                   type="submit"
                   class="update-btn"
                   data-test="edit-profile-form-submit">
-            <span v-if="updating">
+            <span v-if="loading">
               {{ $t('main.messages.pleaseWait') }}
             </span>
             <span v-else>
@@ -88,8 +88,9 @@ import gql from 'graphql-tag';
 import ServerError from '@/components/ServerError.vue';
 import ValidationError from '@/components/ValidationError.vue';
 
-const customerFragment = gql`
-  fragment customerFragment on Customer {
+const customerInfoFragment = gql`
+  fragment CustomerInfo on Customer {
+    id
     email
     firstName
     lastName
@@ -100,27 +101,14 @@ export default {
   components: { ValidationError, ServerError },
 
   data: () => ({
-    me: {},
     firstName: null,
     lastName: null,
     email: null,
-    updating: false,
+    loading: false,
     serverError: null,
   }),
 
   computed: {
-    empty: vm => !Object.keys(vm.me).length,
-
-    loading: vm => vm.$apollo.queries.me.loading,
-
-    updateActions() {
-      return [
-        { changeEmail: { email: this.email } },
-        { setFirstName: { firstName: this.firstName } },
-        { setLastName: { lastName: this.lastName } },
-      ];
-    },
-
     hasFormChanged() {
       const hasEmailChanged = this.email !== this.me.customer.email;
       const hasFirstNameChanged = this.firstName !== this.me.customer.firstName;
@@ -130,35 +118,38 @@ export default {
   },
 
   methods: {
-    async save() {
+    async onSubmit() {
       this.$v.$touch();
       this.serverError = null;
       if (!this.$v.$invalid && this.hasFormChanged) {
-        this.updating = true;
-        await this.updateCustomer()
+        this.loading = true;
+        await this.updateMyCustomer()
           .then(() => {
             this.$emit('close');
           }).catch((error) => {
             this.serverError = error;
           });
-        this.updating = false;
+        this.loading = false;
       }
     },
 
-    updateCustomer() {
+    updateMyCustomer() {
       return this.$apollo.mutate({
         mutation: gql`
           mutation updateMyCustomer($actions: [MyCustomerUpdateAction!]!, $version: Long!) {
             updateMyCustomer(version: $version, actions: $actions) {
-              ...customerFragment
+              ...CustomerInfo
             }
           }
-          ${customerFragment}`,
+          ${customerInfoFragment}`,
         variables: {
           version: this.me.customer.version,
-          actions: this.updateActions,
+          actions: [
+            { changeEmail: { email: this.email } },
+            { setFirstName: { firstName: this.firstName } },
+            { setLastName: { lastName: this.lastName } },
+          ],
         },
-        refetchQueries: ['fetchCustomer'],
       });
     },
 
@@ -166,7 +157,7 @@ export default {
       if (code === 'DuplicateField' && field === 'email') {
         return this.$t('duplicatedEmail');
       }
-      return null;
+      return this.$t('unknownError');
     },
   },
 
@@ -181,14 +172,15 @@ export default {
   apollo: {
     me: {
       query: gql`
-        query fetchCustomer {
+        query me {
           me {
             customer {
-              ...customerFragment
+              ...CustomerInfo
             }
           }
         }
-        ${customerFragment}`,
+        ${customerInfoFragment}`,
+      skip: vm => !vm.$store.state.authenticated,
     },
   },
 
