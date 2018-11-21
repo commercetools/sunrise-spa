@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import store from '@/store/store';
 import Router from 'vue-router';
+import { refreshTokenExists } from '@/auth';
 import TheHeader from '@/views/TheHeader.vue';
 import HomePage from '@/views/HomePage.vue';
 import ProductOverviewPage from '@/views/ProductOverviewPage.vue';
@@ -80,9 +81,14 @@ const router = new Router({
   ],
 });
 
-const authGuard = (to, from, next) => {
+const isNotAuthenticated = () => !store.getters.isAuthenticated;
+
+const authGuard = async (to, from, next) => {
+  if (isNotAuthenticated() && refreshTokenExists()) {
+    await store.dispatch('fetchCustomer');
+  }
   const routeRequiresAuth = to.matched.some(record => record.meta.requiresAuth);
-  if (routeRequiresAuth && !store.getters.isAuthenticated) {
+  if (routeRequiresAuth && isNotAuthenticated()) {
     next({ name: 'login' });
   } else {
     next();
