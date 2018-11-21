@@ -122,7 +122,7 @@ export default {
       if (code === 'InvalidCredentials') {
         return this.$t('invalidCredentials');
       }
-      return $('unknownError');
+      return this.$t('unknownError');
     },
   },
 
