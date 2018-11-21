@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import categories from '@/store/modules/categories';
-import user from '@/store/modules/user';
 
 Vue.use(Vuex);
 
@@ -10,7 +9,6 @@ const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 export default new Vuex.Store({
   modules: {
     categories,
-    user,
   },
 
   state: {
