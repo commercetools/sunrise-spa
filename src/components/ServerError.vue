@@ -40,12 +40,10 @@ export default {
 <i18n>
 {
   "en": {
-    "networkError": "There was a error in the connection, please try again later",
-    "unknownError": "Something went wrong"
+    "networkError": "There was a error in the connection, please try again later"
   },
   "de": {
-    "networkError": "Bei der Verbindung ist ein Fehler aufgetreten, versuchen Sie es bitte später nochmals",
-    "unknownError": "Etwas ist schief gelaufen"
+    "networkError": "Bei der Verbindung ist ein Fehler aufgetreten, versuchen Sie es bitte später nochmals"
   }
 }
 </i18n>

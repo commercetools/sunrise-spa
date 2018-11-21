@@ -1,5 +1,5 @@
 <template>
-   <div v-if="!empty && !loading"
+   <div v-if="me"
         class="my-account-content">
     <div class="row">
       <div class="col-sm-3">
@@ -56,27 +56,19 @@ import gql from 'graphql-tag';
 import EditProfileForm from '@/components/EditProfileForm.vue';
 
 export default {
-  components: {
-    EditProfileForm,
-  },
+  components: { EditProfileForm },
 
   data: () => ({
-    me: {},
     showEditForm: false,
   }),
-
-  computed: {
-    empty: vm => !Object.keys(vm.me).length,
-
-    loading: vm => vm.$apollo.queries.me.loading,
-  },
 
   apollo: {
     me: {
       query: gql`
-        query fetchCustomer {
+        query me {
           me {
             customer {
+              id
               email
               firstName
               lastName
@@ -84,6 +76,7 @@ export default {
             }
           }
         }`,
+      skip: vm => !vm.$store.state.authenticated,
     },
   },
 };

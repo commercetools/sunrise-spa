@@ -17,27 +17,7 @@ export default {
     info: null,
   },
 
-  getters: {
-    user: state => state.info || {},
-    isAuthenticated: state => !!state.info,
-  },
-
   actions: {
-    fetchCustomer: ({ commit }) =>
-      apolloProvider.defaultClient.query({
-        query: gql`
-          query fetchCustomer {
-            me {
-              customer {
-                ...printCustomerInfo
-              }
-            }
-          }
-          ${customerInfoFragment}`,
-      }).then((response) => {
-        commit(SET_INFO, response.data.me.customer);
-      }),
-
     signup: ({ commit }, draft) =>
       apolloProvider.defaultClient.mutate({
         mutation: gql`
@@ -54,31 +34,6 @@ export default {
         apolloProvider.defaultClient.login(draft.email, draft.password);
         commit(SET_INFO, response.data.customerSignMeUp.customer);
       }),
-
-    login: ({ commit }, { email, password }) =>
-      apolloProvider.defaultClient.mutate({
-        mutation: gql`
-          mutation login($draft: CustomerSignMeInDraft!) {
-            customerSignMeIn(draft: $draft) {
-              customer {
-                ...printCustomerInfo
-              }
-            }
-          }
-          ${customerInfoFragment}`,
-        variables: {
-          draft: { email, password },
-        },
-      }).then((response) => {
-        apolloProvider.defaultClient.login(email, password);
-        commit(SET_INFO, response.data.customerSignMeIn.customer);
-      }),
-
-    logout: ({ commit }) =>
-      apolloProvider.defaultClient.logout()
-        .then(() => {
-          commit(SET_INFO, null);
-        }),
   },
 
   mutations: {

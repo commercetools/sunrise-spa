@@ -1,4 +1,5 @@
 {
+  "unknownError": "Something went wrong",
   "main": {
     "close": "Close",
     "choose": "Choose",
