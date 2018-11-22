@@ -137,7 +137,7 @@ export default {
       if (!this.$v.$invalid) {
         this.loading = true;
         this.customerSignMeUp()
-          .then(() => clientLogin(this.email, this.password))
+          .then(() => clientLogin(this.$store, this.email, this.password))
           .then(() => this.$router.push({ name: 'user' }))
           .catch((error) => {
             this.serverError = error;

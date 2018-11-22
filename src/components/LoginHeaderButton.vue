@@ -36,13 +36,17 @@ import gql from 'graphql-tag';
 import { clientLogout } from '@/auth';
 
 export default {
+  data: () => ({
+    me: null,
+  }),
+
   computed: {
     showLoggedIn: vm => vm.$store.state.authenticated && vm.me,
   },
 
   methods: {
     logout() {
-      clientLogout().then(() => this.$router.replace({ query: { logout: true } }));
+      clientLogout(this.$store).then(() => this.$router.replace({ query: { logout: true } }));
     },
   },
 
