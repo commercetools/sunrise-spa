@@ -21,7 +21,6 @@ function createClient() {
     httpEndpoint: process.env.VUE_APP_GRAPHQL_HTTP || `${config.ct.api.host}/${config.ct.auth.projectKey}/graphql`,
     cache: new InMemoryCache({
       fragmentMatcher,
-      dataIdFromObject: object => object.id,
     }),
     link: authLink,
   });
