@@ -69,7 +69,7 @@ const router = new Router({
 });
 
 const authGuard = async (to, from, next) => {
-  await initialize();
+  await initialize(store);
   const routeRequiresAuth = to.matched.some(record => record.meta.requiresAuth);
   if (routeRequiresAuth && !store.state.authenticated) {
     next({ name: 'login' });

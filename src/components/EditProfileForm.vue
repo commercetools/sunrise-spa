@@ -118,18 +118,18 @@ export default {
   },
 
   methods: {
-    async onSubmit() {
+    onSubmit() {
       this.$v.$touch();
       this.serverError = null;
       if (!this.$v.$invalid && this.hasFormChanged) {
         this.loading = true;
-        await this.updateMyCustomer()
+        this.updateMyCustomer()
           .then(() => {
             this.$emit('close');
           }).catch((error) => {
             this.serverError = error;
+            this.loading = false;
           });
-        this.loading = false;
       }
     },
 
