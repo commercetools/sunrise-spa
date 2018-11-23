@@ -1,5 +1,6 @@
 import SdkAuth from '@commercetools/sdk-auth';
 import apolloProvider from '@/apollo';
+import store from '@/store/store';
 import config from '@/../sunrise.config';
 
 const authClient = new SdkAuth(config.ct.auth);
@@ -21,7 +22,7 @@ function deleteRefreshToken() {
   localStorage.removeItem(refreshTokenName);
 }
 
-export function initialize(store) {
+export function initialize() {
   if (tokenInfoPromise === null) {
     const refreshToken = getRefreshToken();
     if (refreshToken) {
@@ -36,7 +37,7 @@ export function initialize(store) {
   return tokenInfoPromise;
 }
 
-export function clientLogin(store, username, password) {
+export function clientLogin(username, password) {
   tokenInfoPromise = authClient.customerPasswordFlow({ username, password });
   return tokenInfoPromise.then((response) => {
     saveRefreshToken(response);
@@ -44,7 +45,7 @@ export function clientLogin(store, username, password) {
   });
 }
 
-export function clientLogout(store) {
+export function clientLogout() {
   deleteRefreshToken();
   tokenInfoPromise = authClient.clientCredentialsFlow();
   return apolloProvider.defaultClient.clearStore()

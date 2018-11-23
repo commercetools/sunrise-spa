@@ -25,26 +25,4 @@ new Vue({
   i18n,
   apolloProvider,
   render: h => h(App),
-
-  created() {
-    this.fetchCategories();
-  },
-
-  computed: {
-    locale() {
-      return i18n.locale;
-    },
-  },
-
-  methods: {
-    fetchCategories() {
-      this.$store.dispatch('fetchCategories', i18n.locale);
-    },
-  },
-
-  watch: {
-    locale() {
-      this.fetchCategories();
-    },
-  },
 }).$mount('#app');

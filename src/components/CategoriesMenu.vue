@@ -1,8 +1,8 @@
 <template>
   <transition name="fade">
-    <ul v-if="!loading && hasCategories"
+    <ul v-if="categories && categories.results.length"
         class="nav navbar-nav">
-      <li v-for="category1stLevel in categoryTree"
+      <li v-for="category1stLevel in categories.results"
          :key="category1stLevel.id"
           @mouseover="hoverOnCategory(category1stLevel)"
           @mouseleave="hoverOffCategory()"
@@ -56,23 +56,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import gql from 'graphql-tag';
 
 export default {
-  data() {
-    return {
-      openCategoryMenu: '',
-      someCategoryWasClicked: false,
-    };
-  },
-
-  computed: {
-    ...mapGetters(['categoryTree', 'hasCategories']),
-
-    loading() {
-      return this.$apollo.queries.categories && this.$apollo.queries.categories.loading;
-    },
-  },
+  data: () => ({
+    categories: null,
+    openCategoryMenu: '',
+    someCategoryWasClicked: false,
+  }),
 
   methods: {
     isSale({ externalId }) {
@@ -98,6 +89,37 @@ export default {
 
     clickOnCategory() {
       this.someCategoryWasClicked = true;
+    },
+  },
+
+  apollo: {
+    categories: {
+      query: gql`
+        query categories($locale: Locale!) {
+          categories(limit: 10, where: "parent is not defined", sort: "orderHint asc") {
+            results {
+            ...CategoryInfo
+              children {
+              ...CategoryInfo
+                children {
+                ...CategoryInfo
+                }
+              }
+            }
+          }
+        }
+
+        fragment CategoryInfo on Category {
+          id
+          externalId
+          name(locale: $locale)
+          slug(locale: $locale)
+        }`,
+      variables() {
+        return {
+          locale: this.$i18n.locale,
+        };
+      },
     },
   },
 };
