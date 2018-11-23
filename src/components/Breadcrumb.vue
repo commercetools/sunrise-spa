@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ol v-if="categories"
+    <ol v-if="categories && category"
         class="breadcrumb">
       <li>
         <router-link to="/"
