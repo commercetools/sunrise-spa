@@ -20,7 +20,7 @@ describe('Breadcrumb.vue', () => {
     expect(shallowMount(Breadcrumb, options).isVueInstance()).toBeTruthy();
   });
 
-  it('obtains category', () => {
+  it('obtains category information', () => {
     const wrapper = shallowMount(Breadcrumb, options);
     wrapper.setData({
       categories: {
