@@ -46,7 +46,7 @@ export default {
 
   methods: {
     logout() {
-      clientLogout(this.$store).then(() => this.$router.replace({ query: { logout: true } }));
+      clientLogout().then(() => this.$router.replace({ query: { logout: true } }));
     },
   },
 
