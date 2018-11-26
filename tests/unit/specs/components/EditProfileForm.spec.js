@@ -1,4 +1,3 @@
-import Vuex from 'vuex';
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import { ApolloError } from 'apollo-client';
@@ -7,7 +6,6 @@ import ServerError from '@/components/ServerError.vue';
 import ValidationError from '@/components/ValidationError.vue';
 
 const localVue = createLocalVue();
-localVue.use(Vuex);
 localVue.use(Vuelidate);
 
 function setInputValue(input, value) {
@@ -23,10 +21,12 @@ function fillForm(wrapper, customer) {
 }
 
 describe('EditProfileForm.vue', () => {
-  const originalUser = {
-    email: 'willy.wonka@commercetools.com',
-    firstName: 'Willy',
-    lastName: 'Wonka',
+  const me = {
+    customer: {
+      email: 'willy.wonka@commercetools.com',
+      firstName: 'Willy',
+      lastName: 'Wonka',
+    },
   };
 
   const newUser = {
@@ -36,26 +36,13 @@ describe('EditProfileForm.vue', () => {
   };
 
   let options;
-  let actions;
-  let getters;
 
   beforeEach(() => {
-    actions = { updateCustomer: jest.fn() };
-    getters = {
-      user: () => originalUser,
-    };
     options = {
       localVue,
-      store: new Vuex.Store({
-        modules: {
-          user: {
-            actions,
-            getters,
-          },
-        },
-      }),
-      mocks: {
-        $t: jest.fn(),
+      mocks: { $t: jest.fn() },
+      methods: {
+        updateMyCustomer: jest.fn(),
       },
     };
   });
@@ -64,87 +51,74 @@ describe('EditProfileForm.vue', () => {
     expect(shallowMount(EditProfileForm, options).isVueInstance()).toBeTruthy();
   });
 
-  it('builds a correct updateActions array', () => {
+  it('displays current form values', () => {
     const wrapper = shallowMount(EditProfileForm, options);
-    expect(wrapper.vm.updateActions).toEqual([
-      { changeEmail: { email: originalUser.email } },
-      { setFirstName: { firstName: originalUser.firstName } },
-      { setLastName: { lastName: originalUser.lastName } },
-    ]);
-
-    fillForm(wrapper, newUser);
-    expect(wrapper.vm.updateActions).toEqual([
-      { changeEmail: { email: newUser.email } },
-      { setFirstName: { firstName: newUser.firstName } },
-      { setLastName: { lastName: newUser.lastName } },
-    ]);
+    wrapper.setData({ me });
+    expect(wrapper.find('[data-test="edit-profile-form-firstname"]').element.value).toBe(me.customer.firstName);
+    expect(wrapper.find('[data-test="edit-profile-form-lastname"]').element.value).toBe(me.customer.lastName);
+    expect(wrapper.find('[data-test="edit-profile-form-email"]').element.value).toBe(me.customer.email);
   });
 
   it('updates user info when one form field is valid', () => {
     const wrapper = shallowMount(EditProfileForm, options);
+    wrapper.setData({ me });
     setInputValue(wrapper.find('[data-test="edit-profile-form-firstname"]'), newUser.firstName);
-    wrapper.vm.save();
-
-    const expectedUpdateActions = [
-      { changeEmail: { email: originalUser.email } },
-      { setFirstName: { firstName: newUser.firstName } },
-      { setLastName: { lastName: originalUser.lastName } },
-    ];
-    expect(actions.updateCustomer).toHaveBeenCalledWith(expect.anything(), expectedUpdateActions, undefined);
+    wrapper.vm.onSubmit();
+    expect(options.methods.updateMyCustomer).toHaveBeenCalled();
   });
 
   it('updates user info when form is valid', () => {
     const wrapper = shallowMount(EditProfileForm, options);
+    wrapper.setData({ me });
     fillForm(wrapper, newUser);
-    wrapper.vm.save();
-
-    const expectedUpdateActions = [
-      { changeEmail: { email: newUser.email } },
-      { setFirstName: { firstName: newUser.firstName } },
-      { setLastName: { lastName: newUser.lastName } },
-    ];
-    expect(actions.updateCustomer).toHaveBeenCalledWith(expect.anything(), expectedUpdateActions, undefined);
+    wrapper.vm.onSubmit();
+    expect(options.methods.updateMyCustomer).toHaveBeenCalled();
   });
 
   it('does not update customer info when form is invalid', () => {
     const wrapper = shallowMount(EditProfileForm, options);
+    wrapper.setData({ me });
     setInputValue(wrapper.find('[data-test="edit-profile-form-firstname"]'), '');
-    wrapper.vm.save();
-    expect(actions.updateCustomer).not.toHaveBeenCalled();
+    wrapper.vm.onSubmit();
+    expect(options.methods.updateMyCustomer).not.toHaveBeenCalled();
   });
 
   it('does not update customer info when form has not changed', () => {
     const wrapper = shallowMount(EditProfileForm, options);
-    wrapper.vm.save();
-    expect(actions.updateCustomer).not.toHaveBeenCalled();
+    wrapper.setData({ me });
+    wrapper.vm.onSubmit();
+    expect(options.methods.updateMyCustomer).not.toHaveBeenCalled();
   });
 
   it('checks if any of form values have changed', () => {
     const wrapper = shallowMount(EditProfileForm, options);
+    wrapper.setData({ me });
     expect(wrapper.vm.hasFormChanged).toBeFalsy();
 
     setInputValue(wrapper.find('[data-test="edit-profile-form-email"]'), newUser.email);
     expect(wrapper.vm.hasFormChanged).toBeTruthy();
 
-    setInputValue(wrapper.find('[data-test="edit-profile-form-email"]'), originalUser.email);
+    setInputValue(wrapper.find('[data-test="edit-profile-form-email"]'), me.customer.email);
     expect(wrapper.vm.hasFormChanged).toBeFalsy();
   });
 
   it('shows form error', () => {
     const wrapper = shallowMount(EditProfileForm, options);
+    wrapper.setData({ me });
     expect(wrapper.findAll(ValidationError).length).toBe(3);
   });
 
   it('catches server errors', () => {
     const wrapper = shallowMount(EditProfileForm, options);
+    wrapper.setData({ me });
     expect(wrapper.find(ServerError).props().error).toBeNull();
 
     const error = new ApolloError({
       graphQLErrors: [{ code: 'Error1' }, { code: 'Error2' }],
     });
-    actions.updateCustomer.mockRejectedValue(error);
+    options.methods.updateMyCustomer.mockRejectedValue(error);
     fillForm(wrapper, newUser);
-    wrapper.vm.save().then(() => {
+    wrapper.vm.onSubmit().then(() => {
       expect(wrapper.find(ServerError).props().error).toEqual(error);
     });
   });

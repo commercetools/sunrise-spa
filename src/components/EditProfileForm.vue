@@ -101,6 +101,7 @@ export default {
   components: { ValidationError, ServerError },
 
   data: () => ({
+    me: null,
     firstName: null,
     lastName: null,
     email: null,
@@ -118,12 +119,12 @@ export default {
   },
 
   methods: {
-    onSubmit() {
+    async onSubmit() {
       this.$v.$touch();
       this.serverError = null;
       if (!this.$v.$invalid && this.hasFormChanged) {
         this.loading = true;
-        this.updateMyCustomer()
+        await this.updateMyCustomer()
           .then(() => {
             this.$emit('close');
           }).catch((error) => {

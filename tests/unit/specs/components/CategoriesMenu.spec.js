@@ -1,9 +1,5 @@
-import Vuex from 'vuex';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import CategoriesMenu from '@/components/CategoriesMenu.vue';
-
-const localVue = createLocalVue();
-localVue.use(Vuex);
 
 describe('CategoriesMenu.vue', () => {
   const categoryWithChildren1 = {
@@ -22,29 +18,11 @@ describe('CategoriesMenu.vue', () => {
   };
 
   let options;
-  let getters;
 
   beforeEach(() => {
-    getters = {
-      hasCategories: () => true,
-      categoryTree: jest.fn(),
-    };
     options = {
-      localVue,
-      store: new Vuex.Store({
-        modules: {
-          categories: { getters },
-        },
-      }),
-      mocks: {
-        $t: jest.fn(),
-        $apollo: {
-          queries: {
-            categories: { loading: false },
-          },
-        },
-      },
-      stubs: { 'router-link': '<a/>' },
+      mocks: { $t: jest.fn() },
+      stubs: { 'router-link': true },
     };
   });
 
@@ -72,8 +50,12 @@ describe('CategoriesMenu.vue', () => {
 
   it('decides a category without children should not be open', () => {
     const childlessCategory = { id: 'category-childless-id' };
-    getters.categoryTree.mockReturnValue([childlessCategory]);
     const wrapper = shallowMount(CategoriesMenu, options);
+    wrapper.setData({
+      categories: {
+        results: [childlessCategory],
+      },
+    });
     expect(wrapper.vm.isMenuOpen(childlessCategory)).toBeFalsy();
 
     wrapper.find('[data-test="category-1st-level"]').trigger('mouseover');
@@ -84,8 +66,12 @@ describe('CategoriesMenu.vue', () => {
   });
 
   it('decides when a category with children should be open', () => {
-    getters.categoryTree.mockReturnValue([categoryWithChildren1, categoryWithChildren2]);
     const wrapper = shallowMount(CategoriesMenu, options);
+    wrapper.setData({
+      categories: {
+        results: [categoryWithChildren1, categoryWithChildren2],
+      },
+    });
     expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeFalsy();
     expect(wrapper.vm.isMenuOpen(categoryWithChildren2)).toBeFalsy();
 
@@ -99,8 +85,12 @@ describe('CategoriesMenu.vue', () => {
   });
 
   it('closes submenu when a 1st level category is clicked', () => {
-    getters.categoryTree.mockReturnValue([categoryWithChildren1, categoryWithChildren2]);
     const wrapper = shallowMount(CategoriesMenu, options);
+    wrapper.setData({
+      categories: {
+        results: [categoryWithChildren1, categoryWithChildren2],
+      },
+    });
     expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeFalsy();
 
     wrapper.find('[data-test="category-1st-level"]').trigger('mouseover');
@@ -111,8 +101,12 @@ describe('CategoriesMenu.vue', () => {
   });
 
   it('closes submenu when 2nd level category is clicked', () => {
-    getters.categoryTree.mockReturnValue([categoryWithChildren1, categoryWithChildren2]);
     const wrapper = shallowMount(CategoriesMenu, options);
+    wrapper.setData({
+      categories: {
+        results: [categoryWithChildren1, categoryWithChildren2],
+      },
+    });
     expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeFalsy();
 
     wrapper.find('[data-test="category-1st-level"]').trigger('mouseover');
@@ -123,8 +117,12 @@ describe('CategoriesMenu.vue', () => {
   });
 
   it('closes submenu when 3rd level category is clicked', () => {
-    getters.categoryTree.mockReturnValue([categoryWithChildren1, categoryWithChildren2]);
     const wrapper = shallowMount(CategoriesMenu, options);
+    wrapper.setData({
+      categories: {
+        results: [categoryWithChildren1, categoryWithChildren2],
+      },
+    });
     expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeFalsy();
 
     wrapper.find('[data-test="category-1st-level"]').trigger('mouseover');
