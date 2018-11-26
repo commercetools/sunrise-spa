@@ -1,10 +1,6 @@
-import Vuex from 'vuex';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import ProductList from '@/components/ProductList.vue';
 import ProductThumbnail from '@/components/ProductThumbnail.vue';
-
-const localVue = createLocalVue();
-localVue.use(Vuex);
 
 describe('ProductList.vue', () => {
   let options;
