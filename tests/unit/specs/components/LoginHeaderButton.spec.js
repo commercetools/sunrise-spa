@@ -2,32 +2,23 @@ import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import LoginHeaderButton from '@/components/LoginHeaderButton.vue';
 
+jest.mock('@/auth', () => ({ clientLogout: jest.fn() }));
+
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
 describe('LoginHeaderButton.vue', () => {
   let options;
-  let actions;
-  let getters;
+  let state;
 
   beforeEach(() => {
-    actions = { logout: jest.fn() };
-    getters = {
-      isAuthenticated: jest.fn(),
-      user: jest.fn(),
-    };
+    state = { authenticated: false };
     options = {
       localVue,
-      store: new Vuex.Store({
-        modules: {
-          user: {
-            actions,
-            getters,
-          },
-        },
-      }),
+      methods: { logout: jest.fn() },
+      store: new Vuex.Store({ state }),
       mocks: { $t: jest.fn() },
-      stubs: { 'router-link': '<a></a>' },
+      stubs: { 'router-link': true },
     };
   });
 
@@ -35,11 +26,29 @@ describe('LoginHeaderButton.vue', () => {
     expect(shallowMount(LoginHeaderButton, options).isVueInstance()).toBeTruthy();
   });
 
-  it('logs out', () => {
-    getters.isAuthenticated.mockReturnValue(true);
-    getters.user.mockReturnValue({});
+  it('shows logout and user info when authenticated', () => {
     const wrapper = shallowMount(LoginHeaderButton, options);
+    expect(wrapper.vm.showLoggedIn).toBeFalsy();
+
+    wrapper.setData({
+      me: {
+        customer: {
+          id: 'some-id',
+          firstName: 'Willy',
+        },
+      },
+    });
+    expect(wrapper.vm.showLoggedIn).toBeFalsy();
+
+    state.authenticated = true;
+    expect(wrapper.vm.showLoggedIn).toBeTruthy();
+  });
+
+  it('logs out', () => {
+    state.authenticated = true;
+    const wrapper = shallowMount(LoginHeaderButton, options);
+    wrapper.setData({ me: { customer: {} } });
     wrapper.find('[data-test="logout-button"]').trigger('click');
-    expect(actions.logout).toHaveBeenCalled();
+    expect(options.methods.logout).toHaveBeenCalled();
   });
 });
