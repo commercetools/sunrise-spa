@@ -1,4 +1,3 @@
-import Vuex from 'vuex';
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import { ApolloError } from 'apollo-client';
@@ -6,8 +5,11 @@ import LoginForm from '@/components/LoginForm.vue';
 import ServerError from '@/components/ServerError.vue';
 import ValidationError from '@/components/ValidationError.vue';
 
+jest.mock('@/auth', () => ({
+  clientLogin: jest.fn(),
+}));
+
 const localVue = createLocalVue();
-localVue.use(Vuex);
 localVue.use(Vuelidate);
 
 function setInputValue(input, value) {
@@ -28,16 +30,12 @@ describe('LoginForm.vue', () => {
   };
 
   let options;
-  let actions;
 
   beforeEach(() => {
-    actions = { login: jest.fn() };
     options = {
       localVue,
-      store: new Vuex.Store({ actions }),
-      mocks: {
-        $t: jest.fn(),
-      },
+      mocks: { $t: jest.fn() },
+      methods: { customerSignMeIn: jest.fn() },
     };
   });
 
@@ -45,29 +43,18 @@ describe('LoginForm.vue', () => {
     expect(shallowMount(LoginForm, options).isVueInstance()).toBeTruthy();
   });
 
-  it('builds a correct credentials object', () => {
-    const wrapper = shallowMount(LoginForm, options);
-    expect(wrapper.vm.credentials).toEqual({ email: null, password: null });
-
-    setInputValue(wrapper.find('[data-test="login-form-email"]'), credentials.email);
-    expect(wrapper.vm.credentials).toEqual({ email: credentials.email, password: null });
-
-    fillForm(wrapper, credentials);
-    expect(wrapper.vm.credentials).toEqual({ email: credentials.email, password: credentials.password });
-  });
-
   it('logs in when form is valid', () => {
     const wrapper = shallowMount(LoginForm, options);
-    wrapper.vm.login();
-    expect(actions.login).not.toHaveBeenCalled();
+    wrapper.vm.onSubmit();
+    expect(options.methods.customerSignMeIn).not.toHaveBeenCalled();
 
     setInputValue(wrapper.find('[data-test="login-form-email"]'), credentials.email);
-    wrapper.vm.login();
-    expect(actions.login).not.toHaveBeenCalled();
+    wrapper.vm.onSubmit();
+    expect(options.methods.customerSignMeIn).not.toHaveBeenCalled();
 
     fillForm(wrapper, credentials);
-    wrapper.vm.login();
-    expect(actions.login).toHaveBeenCalledWith(expect.anything(), credentials, undefined);
+    wrapper.vm.onSubmit();
+    expect(options.methods.customerSignMeIn).toHaveBeenCalled();
   });
 
   it('shows form errors', () => {
@@ -82,9 +69,9 @@ describe('LoginForm.vue', () => {
     const error = new ApolloError({
       graphQLErrors: [{ code: 'Error1' }, { code: 'Error2' }],
     });
-    actions.login.mockRejectedValue(error);
+    options.methods.customerSignMeIn.mockRejectedValue(error);
     fillForm(wrapper, credentials);
-    wrapper.vm.login().then(() => {
+    wrapper.vm.onSubmit().then(() => {
       expect(wrapper.find(ServerError).props().error).toEqual(error);
     });
   });

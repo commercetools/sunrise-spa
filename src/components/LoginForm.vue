@@ -84,12 +84,12 @@ export default {
   }),
 
   methods: {
-    onSubmit() {
+    async onSubmit() {
       this.$v.$touch();
       this.serverError = null;
       if (!this.$v.$invalid) {
         this.loading = true;
-        this.customerSignMeIn()
+        await this.customerSignMeIn()
           .then(() => clientLogin(this.email, this.password))
           .then(() => this.$router.push({ name: 'user' }))
           .catch((error) => {
