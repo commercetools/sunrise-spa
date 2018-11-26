@@ -5,9 +5,7 @@ import LoginForm from '@/components/LoginForm.vue';
 import ServerError from '@/components/ServerError.vue';
 import ValidationError from '@/components/ValidationError.vue';
 
-jest.mock('@/auth', () => ({
-  clientLogin: jest.fn(),
-}));
+jest.mock('@/auth', () => ({ clientLogin: jest.fn() }));
 
 const localVue = createLocalVue();
 localVue.use(Vuelidate);
