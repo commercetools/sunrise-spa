@@ -22,19 +22,17 @@ function deleteRefreshToken() {
   localStorage.removeItem(refreshTokenName);
 }
 
-export function initialize() {
-  if (tokenInfoPromise === null) {
-    const refreshToken = getRefreshToken();
-    if (refreshToken) {
-      tokenInfoPromise = authClient.refreshTokenFlow(refreshToken);
-      tokenInfoPromise.then(() => {
-        store.dispatch('setAuthenticated', true);
+export async function authenticate() {
+  const refreshToken = getRefreshToken();
+  if (refreshToken) {
+    tokenInfoPromise = authClient.refreshTokenFlow(refreshToken);
+    await tokenInfoPromise
+      .then(() => store.dispatch('setAuthenticated', true))
+      .catch(() => {
+        deleteRefreshToken();
+        tokenInfoPromise = null;
       });
-    } else {
-      tokenInfoPromise = authClient.clientCredentialsFlow();
-    }
   }
-  return tokenInfoPromise;
 }
 
 export function clientLogin(username, password) {
@@ -57,5 +55,8 @@ export function clientLogout() {
 }
 
 export function getAuthToken() {
+  if (tokenInfoPromise === null) {
+    tokenInfoPromise = authClient.clientCredentialsFlow();
+  }
   return tokenInfoPromise.then(tokenInfo => `${tokenInfo.token_type} ${tokenInfo.access_token}`);
 }

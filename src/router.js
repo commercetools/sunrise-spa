@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import store from '@/store/store';
-import { initialize } from '@/auth';
+import { authenticate } from '@/auth';
 import TheHeader from '@/views/TheHeader.vue';
 import HomePage from '@/views/HomePage.vue';
 import ProductOverviewPage from '@/views/ProductOverviewPage.vue';
@@ -69,7 +69,7 @@ const router = new Router({
 });
 
 const authGuard = async (to, from, next) => {
-  await initialize(store);
+  await authenticate(store);
   const routeRequiresAuth = to.matched.some(record => record.meta.requiresAuth);
   if (routeRequiresAuth && !store.state.authenticated) {
     next({ name: 'login' });
