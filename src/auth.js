@@ -8,17 +8,7 @@ const refreshTokenName = 'refresh-token';
 
 let tokenInfoPromise = null;
 
-function saveSession(requestPromise) {
-  tokenInfoPromise = requestPromise;
-  return tokenInfoPromise.then((response) => {
-    if (response.refresh_token) {
-      localStorage.setItem(refreshTokenName, response.refresh_token);
-    }
-    return store.dispatch('setAuthenticated', true);
-  });
-}
-
-function removeSession() {
+export function clientLogout() {
   localStorage.removeItem(refreshTokenName);
   tokenInfoPromise = null;
   return apolloProvider.defaultClient.clearStore()
@@ -29,22 +19,29 @@ function removeSession() {
     });
 }
 
+export function clientLogin(username, password) {
+  tokenInfoPromise = authClient.customerPasswordFlow({ username, password });
+  return tokenInfoPromise
+    .then((response) => {
+      if (response.refresh_token) {
+        localStorage.setItem(refreshTokenName, response.refresh_token);
+      }
+      return store.dispatch('setAuthenticated', true);
+    }).catch((error) => {
+      // eslint-disable-next-line no-console
+      console.error('%cError on cache reset', 'color: orange;', error.message);
+      return clientLogout();
+    });
+}
+
 export async function authenticate() {
   const refreshToken = localStorage.getItem(refreshTokenName);
   if (refreshToken) {
     tokenInfoPromise = authClient.refreshTokenFlow(refreshToken);
     await tokenInfoPromise
       .then(() => store.dispatch('setAuthenticated', true))
-      .catch(() => removeSession());
+      .catch(() => clientLogout());
   }
-}
-
-export function clientLogin(username, password) {
-  return saveSession(authClient.customerPasswordFlow({ username, password }));
-}
-
-export function clientLogout() {
-  return removeSession();
 }
 
 export function getAuthToken() {
