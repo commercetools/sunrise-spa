@@ -72,11 +72,11 @@ export default {
                     price(currency: $currency) {
                       discounted {
                         value {
-                          ...printPrice
+                          ...ProductListPriceInfo
                         }
                       }
                       value {
-                        ...printPrice
+                        ...ProductListPriceInfo
                       }
                     }
                   }
@@ -86,7 +86,7 @@ export default {
           }
         }
 
-        fragment printPrice on BaseMoney {
+        fragment ProductListPriceInfo on BaseMoney {
           centAmount
           fractionDigits
         }`,
