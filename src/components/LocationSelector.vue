@@ -15,7 +15,7 @@
         <!--{{#if location.language}}-->
         <span class="location-dropdown-label">
         {{ $t("main.header.language") }}
-      </span>
+        </span>
         <SelectBoxIt :options="languages"
                      v-model="$i18n.locale"
                      id="language"
