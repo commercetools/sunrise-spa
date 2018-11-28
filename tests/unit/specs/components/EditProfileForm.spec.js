@@ -63,7 +63,7 @@ describe('EditProfileForm.vue', () => {
     const wrapper = shallowMount(EditProfileForm, options);
     wrapper.setData({ me });
     setInputValue(wrapper.find('[data-test="edit-profile-form-firstname"]'), newUser.firstName);
-    wrapper.vm.onSubmit();
+    wrapper.vm.submit();
     expect(options.methods.updateMyCustomer).toHaveBeenCalled();
   });
 
@@ -71,7 +71,7 @@ describe('EditProfileForm.vue', () => {
     const wrapper = shallowMount(EditProfileForm, options);
     wrapper.setData({ me });
     fillForm(wrapper, newUser);
-    wrapper.vm.onSubmit();
+    wrapper.vm.submit();
     expect(options.methods.updateMyCustomer).toHaveBeenCalled();
   });
 
@@ -79,14 +79,14 @@ describe('EditProfileForm.vue', () => {
     const wrapper = shallowMount(EditProfileForm, options);
     wrapper.setData({ me });
     setInputValue(wrapper.find('[data-test="edit-profile-form-firstname"]'), '');
-    wrapper.vm.onSubmit();
+    wrapper.vm.submit();
     expect(options.methods.updateMyCustomer).not.toHaveBeenCalled();
   });
 
   it('does not update customer info when form has not changed', () => {
     const wrapper = shallowMount(EditProfileForm, options);
     wrapper.setData({ me });
-    wrapper.vm.onSubmit();
+    wrapper.vm.submit();
     expect(options.methods.updateMyCustomer).not.toHaveBeenCalled();
   });
 
@@ -118,7 +118,7 @@ describe('EditProfileForm.vue', () => {
     });
     options.methods.updateMyCustomer.mockRejectedValue(error);
     fillForm(wrapper, newUser);
-    wrapper.vm.onSubmit().then(() => {
+    wrapper.vm.submit().then(() => {
       expect(wrapper.find(ServerError).props().error).toEqual(error);
     });
   });

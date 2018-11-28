@@ -10,7 +10,7 @@
     </div>
     <hr class="signup-box-hr">
     <div class="signup-box-description">{{ $t('description') }}</div>
-    <form @submit.prevent="onSubmit">
+    <form @submit.prevent="submit">
       <ServerError :error="serverError">
         <template slot-scope="{ graphQLError }">
           {{ getErrorMessage(graphQLError) }}
@@ -131,7 +131,7 @@ export default {
   }),
 
   methods: {
-    async onSubmit() {
+    async submit() {
       this.$v.$touch();
       this.serverError = null;
       if (!this.$v.$invalid) {
