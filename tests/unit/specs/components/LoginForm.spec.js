@@ -43,15 +43,15 @@ describe('LoginForm.vue', () => {
 
   it('logs in when form is valid', () => {
     const wrapper = shallowMount(LoginForm, options);
-    wrapper.vm.onSubmit();
+    wrapper.vm.submit();
     expect(options.methods.customerSignMeIn).not.toHaveBeenCalled();
 
     setInputValue(wrapper.find('[data-test="login-form-email"]'), credentials.email);
-    wrapper.vm.onSubmit();
+    wrapper.vm.submit();
     expect(options.methods.customerSignMeIn).not.toHaveBeenCalled();
 
     fillForm(wrapper, credentials);
-    wrapper.vm.onSubmit();
+    wrapper.vm.submit();
     expect(options.methods.customerSignMeIn).toHaveBeenCalled();
   });
 
@@ -69,7 +69,7 @@ describe('LoginForm.vue', () => {
     });
     options.methods.customerSignMeIn.mockRejectedValue(error);
     fillForm(wrapper, credentials);
-    wrapper.vm.onSubmit().then(() => {
+    wrapper.vm.submit().then(() => {
       expect(wrapper.find(ServerError).props().error).toEqual(error);
     });
   });

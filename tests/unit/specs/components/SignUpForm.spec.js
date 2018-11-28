@@ -49,15 +49,15 @@ describe('SignUpForm.vue', () => {
 
   it('signs up when form is valid', () => {
     const wrapper = shallowMount(SignUpForm, options);
-    wrapper.vm.onSubmit();
+    wrapper.vm.submit();
     expect(options.methods.customerSignMeUp).not.toHaveBeenCalled();
 
     setInputValue(wrapper.find('[data-test="signup-form-email"]'), customer.email);
-    wrapper.vm.onSubmit();
+    wrapper.vm.submit();
     expect(options.methods.customerSignMeUp).not.toHaveBeenCalled();
 
     fillForm(wrapper, customer);
-    wrapper.vm.onSubmit();
+    wrapper.vm.submit();
     expect(options.methods.customerSignMeUp).toHaveBeenCalled();
   });
 
@@ -75,7 +75,7 @@ describe('SignUpForm.vue', () => {
     });
     options.methods.customerSignMeUp.mockRejectedValue(error);
     fillForm(wrapper, customer);
-    wrapper.vm.onSubmit().then(() => {
+    wrapper.vm.submit().then(() => {
       expect(wrapper.find(ServerError).props().error).toEqual(error);
     });
   });

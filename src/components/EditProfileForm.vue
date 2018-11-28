@@ -1,7 +1,7 @@
 <template>
   <div v-if="me"
        class="personal-details-edit personal-details-edit-show">
-    <form @submit.prevent="onSubmit"
+    <form @submit.prevent="submit"
           id="form-edit-personal-details">
       <ServerError :error="serverError">
         <template slot-scope="{ graphQLError }">
@@ -119,7 +119,7 @@ export default {
   },
 
   methods: {
-    async onSubmit() {
+    async submit() {
       this.$v.$touch();
       this.serverError = null;
       if (!this.$v.$invalid && this.hasFormChanged) {

@@ -11,7 +11,7 @@
     <hr class="login-box-hr">
     <div class="login-box-description">{{ $t('description') }}</div>
     <div class="login-box-input-wrapper">
-      <form @submit.prevent="onSubmit">
+      <form @submit.prevent="submit">
         <ServerError :error="serverError">
           <template slot-scope="{ graphQLError }">
             {{ getErrorMessage(graphQLError) }}
@@ -84,7 +84,7 @@ export default {
   }),
 
   methods: {
-    async onSubmit() {
+    async submit() {
       this.$v.$touch();
       this.serverError = null;
       if (!this.$v.$invalid) {
