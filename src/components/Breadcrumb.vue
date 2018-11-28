@@ -47,14 +47,14 @@ export default {
         query categories($locale: Locale!, $where: String) {
           categories(where: $where, limit: 1) {
             results {
-              ...CategoryInfo
+              ...BreadcrumbCategoryInfo
               ancestors {
-                ...CategoryInfo
+                ...BreadcrumbCategoryInfo
               }
             }
           }
         }
-        fragment CategoryInfo on Category {
+        fragment BreadcrumbCategoryInfo on Category {
           id
           name(locale: $locale)
           slug(locale: $locale)

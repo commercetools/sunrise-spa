@@ -89,7 +89,7 @@ import ServerError from '@/components/ServerError.vue';
 import ValidationError from '@/components/ValidationError.vue';
 
 const customerInfoFragment = gql`
-  fragment CustomerInfo on Customer {
+  fragment EditProfileCustomerInfo on Customer {
     id
     email
     firstName
@@ -139,7 +139,7 @@ export default {
         mutation: gql`
           mutation updateMyCustomer($actions: [MyCustomerUpdateAction!]!, $version: Long!) {
             updateMyCustomer(version: $version, actions: $actions) {
-              ...CustomerInfo
+              ...EditProfileCustomerInfo
             }
           }
           ${customerInfoFragment}`,
@@ -176,7 +176,7 @@ export default {
         query me {
           me {
             customer {
-              ...CustomerInfo
+              ...EditProfileCustomerInfo
             }
           }
         }

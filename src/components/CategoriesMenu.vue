@@ -98,18 +98,18 @@ export default {
         query categories($locale: Locale!) {
           categories(limit: 10, where: "parent is not defined", sort: "orderHint asc") {
             results {
-            ...CategoryInfo
+            ...MenuCategoryInfo
               children {
-              ...CategoryInfo
+              ...MenuCategoryInfo
                 children {
-                ...CategoryInfo
+                ...MenuCategoryInfo
                 }
               }
             }
           }
         }
 
-        fragment CategoryInfo on Category {
+        fragment MenuCategoryInfo on Category {
           id
           externalId
           name(locale: $locale)
