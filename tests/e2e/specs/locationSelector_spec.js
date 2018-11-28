@@ -9,7 +9,6 @@ describe('Location selector', () => {
       cy.get('[data-test=stores-link]').should('contain', 'Filiale');
 
       cy.get('[data-test=location-selector-open-button]').click();
-
       cy.get('span[data-test=location-selector-dropdown]')
         .click()
         .parent()
@@ -20,6 +19,10 @@ describe('Location selector', () => {
         });
 
       cy.get('[data-test=stores-link]').should('contain', 'Stores');
+      cy.get('span[data-test=location-selector-dropdown]').should('exist');
+
+      cy.get('body').click(0, 0);
+      cy.get('span[data-test=location-selector-dropdown]').should('not.exist');
     });
   });
 });
