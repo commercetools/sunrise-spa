@@ -8,50 +8,43 @@ const refreshTokenName = 'refresh-token';
 
 let tokenInfoPromise = null;
 
-function getRefreshToken() {
-  return localStorage.getItem(refreshTokenName);
-}
-
-function saveRefreshToken(response) {
-  if (response.refresh_token) {
-    localStorage.setItem(refreshTokenName, response.refresh_token);
-  }
-}
-
-function deleteRefreshToken() {
-  localStorage.removeItem(refreshTokenName);
-}
-
-export async function authenticate() {
-  const refreshToken = getRefreshToken();
-  if (refreshToken) {
-    tokenInfoPromise = authClient.refreshTokenFlow(refreshToken);
-    await tokenInfoPromise
-      .then(() => store.dispatch('setAuthenticated', true))
-      .catch(() => {
-        deleteRefreshToken();
-        tokenInfoPromise = null;
-      });
-  }
-}
-
-export function clientLogin(username, password) {
-  tokenInfoPromise = authClient.customerPasswordFlow({ username, password });
+function saveSession(requestPromise) {
+  tokenInfoPromise = requestPromise;
   return tokenInfoPromise.then((response) => {
-    saveRefreshToken(response);
+    if (response.refresh_token) {
+      localStorage.setItem(refreshTokenName, response.refresh_token);
+    }
     return store.dispatch('setAuthenticated', true);
   });
 }
 
-export function clientLogout() {
-  deleteRefreshToken();
-  tokenInfoPromise = authClient.clientCredentialsFlow();
+function removeSession() {
+  localStorage.removeItem(refreshTokenName);
+  tokenInfoPromise = null;
   return apolloProvider.defaultClient.clearStore()
     .then(() => store.dispatch('setAuthenticated', false))
     .catch((error) => {
       // eslint-disable-next-line no-console
       console.error('%cError on cache reset', 'color: orange;', error.message);
     });
+}
+
+export async function authenticate() {
+  const refreshToken = localStorage.getItem(refreshTokenName);
+  if (refreshToken) {
+    tokenInfoPromise = authClient.refreshTokenFlow(refreshToken);
+    await tokenInfoPromise
+      .then(() => store.dispatch('setAuthenticated', true))
+      .catch(() => removeSession());
+  }
+}
+
+export function clientLogin(username, password) {
+  return saveSession(authClient.customerPasswordFlow({ username, password }));
+}
+
+export function clientLogout() {
+  return removeSession();
 }
 
 export function getAuthToken() {
