@@ -3,13 +3,6 @@ import { randomCustomer } from '../support/utils';
 describe('Login', () => {
   let customer;
 
-  before(() => {
-    customer = randomCustomer();
-    cy.signup(customer);
-    cy.logout();
-    cy.visit('/login');
-  });
-
   function shouldBeLoggedIn() {
     cy.location('pathname').should('eq', '/user');
     cy.get('[data-test=login-info-name]').should('contain', customer.firstName);
@@ -18,6 +11,13 @@ describe('Login', () => {
     cy.get('[data-test=user-profile-name]').should('contain', `${customer.firstName} ${customer.lastName}`);
     cy.get('[data-test=user-profile-email]').should('contain', customer.email);
   }
+
+  before(() => {
+    customer = randomCustomer();
+    cy.signup(customer);
+    cy.logout();
+    cy.visit('/login');
+  });
 
   it('logs in', () => {
     cy.get('[data-test=login-button]').click();
