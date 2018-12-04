@@ -56,7 +56,7 @@ End-to-end     | `yarn test:e2e`                       | `npm run test:e2e`     
 ### Configure end-to-end tests
 In order to continue, it is necessary that you have full control over the commercetools project associated with SUNRISE.
 
-Follow the same steps explained in the section [How to use your own project data](#how-to-use-your-own-project-data), but create the API client with the `Admin client` template instead. Then add your client ID and secret as the following environment variables (e.g. in `.env.local` file): 
+Follow the same steps explained in the section [How to use your own project data](#how-to-use-your-own-project-data) to create a second API client, but this time create it with the `Admin client` template instead. Then add your new client ID and secret as the following environment variables (e.g. in `.env.local` file): 
 
 ```shell
 CYPRESS_CT_CLIENT_ID=<your client ID>
