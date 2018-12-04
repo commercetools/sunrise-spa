@@ -27,6 +27,7 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@cypress/webpack-preprocessor": "^4.0.2",
     "@kazupon/vue-i18n-loader": "^0.3.0",
     "@vue/cli-plugin-babel": "^3.0.3",
     "@vue/cli-plugin-e2e-cypress": "^3.0.3",
