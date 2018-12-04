@@ -43,3 +43,22 @@ VUE_APP_CT_API_HOST=https://api.commercetools.co
 ```
 
 This will set up the necessary environment variables required to run SUNRISE. Feel free to choose any other approach that best suits your needs.
+
+
+## Run tests
+The project has unit and end-to-end tests covering each functionality. Unit tests will run out of the box, but end-to-end tests require some further configuration, explained in the section below.
+
+Test   | with [Yarn](https://yarnpkg.com/)  | with [NPM](https://www.npmjs.com/) |
+------- | ---------------------------------- | ---------------------------------- |
+Unit | `yarn test:unit`                     | `npm run test:unit`                      |
+End-to-end     | `yarn test:e2e`                       | `npm run test:e2e`                    |
+
+### Configure end-to-end tests
+In order to continue, it is necessary that you have full control over the commercetools project associated with SUNRISE.
+
+Follow the same steps explained in the section [How to use your own project data](#how-to-use-your-own-project-data), but create the API client with the `Admin client` template instead. Then add your client ID and secret as the following environment variables (e.g. in `.env.local` file): 
+
+```shell
+CYPRESS_CT_CLIENT_ID=<your client ID>
+CYPRESS_CT_CLIENT_SECRET=<your client secret>
+```
