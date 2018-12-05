@@ -81,7 +81,7 @@ Cypress.Commands.add('deleteCustomer', ({ email }) => {
           id: customer.id,
           version: customer.version,
         },
-      }).catch(e => console.error('Customer already deleted', e));
+      }).catch(e => console.warn('Customer already deleted', e));
     }
   });
 
