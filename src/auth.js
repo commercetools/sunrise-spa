@@ -1,52 +1,54 @@
-import SdkAuth from '@commercetools/sdk-auth';
+import SdkAuth, { TokenProvider } from '@commercetools/sdk-auth';
 import apolloProvider from '@/apollo';
 import store from '@/store/store';
 import config from '@/../sunrise.config';
 
-const authClient = new SdkAuth(config.ct.auth);
 const refreshTokenName = 'refresh-token';
 
-let tokenInfoPromise = null;
+const tokenProvider = new TokenProvider({
+  sdkAuth: new SdkAuth(config.ct.auth),
+  fetchTokenInfo: sdkAuth => sdkAuth.clientCredentialsFlow(),
+  onTokenInfoChanged: (newTokenInfo) => {
+    if (newTokenInfo.refresh_token) {
+      localStorage.setItem(refreshTokenName, newTokenInfo.refresh_token);
+    }
+  },
+});
 
 export function clientLogout() {
   localStorage.removeItem(refreshTokenName);
-  tokenInfoPromise = null;
+  tokenProvider.fetchTokenInfo = sdkAuth => sdkAuth.clientCredentialsFlow();
   return apolloProvider.defaultClient.clearStore()
     .then(() => store.dispatch('setAuthenticated', false))
     .catch((error) => {
       // eslint-disable-next-line no-console
-      console.error('%cError on cache reset', 'color: orange;', error.message);
+      console.error('Error on cache reset', error);
     });
 }
 
 export function clientLogin(username, password) {
-  tokenInfoPromise = authClient.customerPasswordFlow({ username, password });
-  return tokenInfoPromise
-    .then((response) => {
-      if (response.refresh_token) {
-        localStorage.setItem(refreshTokenName, response.refresh_token);
-      }
-      return store.dispatch('setAuthenticated', true);
-    }).catch((error) => {
-      // eslint-disable-next-line no-console
-      console.error('%cError on cache reset', 'color: orange;', error.message);
-      return clientLogout();
-    });
+  tokenProvider.fetchTokenInfo = sdkAuth => sdkAuth.customerPasswordFlow({ username, password });
+  store.dispatch('setAuthenticated', true);
 }
 
 export async function authenticate() {
   const refreshToken = localStorage.getItem(refreshTokenName);
   if (refreshToken) {
-    tokenInfoPromise = authClient.refreshTokenFlow(refreshToken);
-    await tokenInfoPromise
-      .then(() => store.dispatch('setAuthenticated', true))
-      .catch(() => clientLogout());
+    tokenProvider.fetchTokenInfo = sdkAuth => sdkAuth.refreshTokenFlow(refreshToken);
+    store.dispatch('setAuthenticated', true);
   }
 }
 
+const extractAuthToken = tokenInfo => `${tokenInfo.token_type} ${tokenInfo.access_token}`;
+
 export function getAuthToken() {
-  if (tokenInfoPromise === null) {
-    tokenInfoPromise = authClient.clientCredentialsFlow();
-  }
-  return tokenInfoPromise.then(tokenInfo => `${tokenInfo.token_type} ${tokenInfo.access_token}`);
+  return tokenProvider.getTokenInfo()
+    .then(tokenInfo => extractAuthToken(tokenInfo))
+    .catch((error) => {
+      // eslint-disable-next-line no-console
+      console.warn('Could not connect to commercetools, cleaning up session...', error);
+      return clientLogout()
+        .then(() => tokenProvider.getTokenInfo()
+          .then(tokenInfo => extractAuthToken(tokenInfo)));
+    });
 }
