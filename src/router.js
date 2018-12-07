@@ -8,6 +8,7 @@ import LoginPage from '@/components/login/LoginPage.vue';
 import MyAccountPage from '@/components/useraccount/UserAccountPage.vue';
 import NotFoundPage from '@/components/common/NotFoundPage.vue';
 import ProductDetailPage from '@/components/productdetail/ProductDetailPage.vue';
+import CartPage from '@/views/CartPage.vue';
 
 Vue.use(Router);
 
@@ -75,6 +76,14 @@ const router = new Router({
       props: {
         default: true,
         header: false,
+      },
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      components: {
+        default: CartPage,
+        header: TheHeader,
       },
     },
   ],
