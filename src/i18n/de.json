@@ -269,7 +269,6 @@
     "discountTooltip": "Weitere Rabatt Informationen...",
     "discountPromoInfo": "Rabatte",
     "editMyCart": "Warenkorb bearbeiten",
-    "itemsTotal": "__count__ Artikel im Warenkorb",
     "needHelpCustomerService": "Brauchen Sie Hilfe? Kundenservice",
     "orderDate": "Bestelldatum",
     "orderDiscount": "Bestelldiscount",
@@ -286,7 +285,6 @@
     "shippingMethod": "Versandart",
     "subtotal": "Zwischensumme",
     "total": "Gesamtpreis",
-    "yourBag": "Ihr Einkaufswagen",
     "cartDetailPage": {
       "title": "Ihr Einkaufswagen"
     },
