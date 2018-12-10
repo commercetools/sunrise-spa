@@ -18,8 +18,7 @@
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <CartSummary :cart="cart"
-                       :editable="true"
+          <CartSummary :editable="true"
                        class="cart-content"/>
           <!--{{> checkout/order-summary cart=content.cart mainClass="cart-content" editable=true}}-->
         </div>
@@ -55,56 +54,19 @@ export default {
   apollo: {
     me: {
       query: gql`
-        query me($locale: Locale!) {
+        query me {
           me {
             carts(limit: 1) {
               results {
                 id
-                totalPrice {
-                  centAmount
-                  currencyCode
-                  fractionDigits
-                }
                 lineItems {
                   id
-                  productSlug(locale: $locale)
-                  name(locale: $locale)
                   quantity
-                  price {
-                    value {
-                      centAmount
-                      currencyCode
-                      fractionDigits
-                    }
-                    discounted {
-                      value {
-                        centAmount
-                        currencyCode
-                        fractionDigits
-                      }
-                    }
-                  }
-                  totalPrice {
-                    centAmount
-                    currencyCode
-                    fractionDigits
-                  }
-                  variant {
-                    sku
-                    images {
-                      url
-                    }
-                  }
                 }
               }
             }
           }
         }`,
-      variables() {
-        return {
-          locale: this.$i18n.locale,
-        };
-      },
     },
   },
 };
