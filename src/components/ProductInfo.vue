@@ -207,6 +207,7 @@
 import gql from 'graphql-tag';
 import ProductGallery from '@/components/ProductGallery.vue';
 import priceMixin from '@/mixins/priceMixin';
+import productMixin from '@/mixins/productMixin';
 
 export default {
   components: {
@@ -244,28 +245,8 @@ export default {
       return !Object.keys(this.product).length;
     },
 
-    currentProduct() {
-      return this.product.masterData.current || {};
-    },
-
     matchingVariant() {
       return this.currentProduct.variant || {};
-    },
-
-    hasPrice() {
-      return this.matchingVariant.price;
-    },
-
-    hasDiscount() {
-      return this.matchingVariant.price.discounted;
-    },
-
-    discountedPrice() {
-      return this.matchingVariant.price.discounted.value;
-    },
-
-    originalPrice() {
-      return this.matchingVariant.price.value;
     },
 
     images() {
@@ -353,7 +334,7 @@ export default {
     },
   },
 
-  mixins: [priceMixin],
+  mixins: [priceMixin, productMixin],
 };
 </script>
 

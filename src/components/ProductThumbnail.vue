@@ -110,10 +110,6 @@ export default {
   },
 
   computed: {
-    currentProduct() {
-      return this.product.masterData.current || {};
-    },
-
     matchingVariant() {
       // with query endpoint we cannot really determine
       return this.currentProduct.masterVariant || {};
@@ -128,24 +124,8 @@ export default {
       return Array.isArray(this.matchingVariant.images) && this.matchingVariant.images.length > 0;
     },
 
-    hasPrice() {
-      return this.matchingVariant.price;
-    },
-
-    hasDiscount() {
-      return this.matchingVariant.price.discounted;
-    },
-
     displayedImage() {
       return this.matchingVariant.images[0].url;
-    },
-
-    discountedPrice() {
-      return this.matchingVariant.price.discounted.value;
-    },
-
-    originalPrice() {
-      return this.matchingVariant.price.value;
     },
 
     productSlug() {
