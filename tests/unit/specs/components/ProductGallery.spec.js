@@ -24,7 +24,9 @@ describe('Product gallery', () => {
   });
 
   it('tranforms product images into ProductZoomer structure', () => {
-    const images = {
+    const wrapper = shallowMount(ProductGallery, options);
+    wrapper.setProps({ productImages });
+    expect(wrapper.vm.images).toEqual({
       thumbs: [
         {
           id: 0,
@@ -57,10 +59,7 @@ describe('Product gallery', () => {
           url: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/079535_1_large.jpg',
         },
       ],
-    };
-    const wrapper = shallowMount(ProductGallery, options);
-    wrapper.setProps({ productImages });
-    expect(wrapper.vm.images).toEqual(images);
+    });
   });
 
   it('does not fail when there are no images', () => {
