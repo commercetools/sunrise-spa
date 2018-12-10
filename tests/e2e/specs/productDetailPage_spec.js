@@ -4,25 +4,22 @@ describe('Product detail page', () => {
   });
 
   it('Displays a single product details', () => {
-    cy.get('[data-test=pdp-product-title]', { timeout: 20000 })
-      .contains('Booties Lemare grey')
-      .parentsUntil('[data-test=product-description]')
-      .parent()
-      .find('[data-test=quickview-sku]')
-      .contains('M0E20000000E0WX')
-      .parentsUntil('[data-test=product-description]')
-      .parent()
+    cy.get('[data-test=product-description]', { timeout: 20000 })
       .then(($product) => {
+        cy.wrap($product)
+          .find('[data-test=pdp-product-title]')
+          .should('contain', 'Booties Lemare grey');
+
+        cy.wrap($product)
+          .find('[data-test=product-sku]')
+          .should('contain', 'M0E20000000E0WX');
+
         cy.wrap($product)
           .find('[data-test=product-discounted-price]')
           .should('contain', '248,75 €');
         cy.wrap($product)
           .find('[data-test=product-discount-price]')
           .should('contain', '174,12 €');
-
-        cy.wrap($product)
-          .find('[data-test=add-to-cart-button]')
-          .should('exist');
 
         cy.wrap($product)
           .find('[data-test=panel-default]')
