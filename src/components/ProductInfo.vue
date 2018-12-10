@@ -11,11 +11,11 @@
         <div class="col-sm-12">
             <h1 data-test="pdp-product-title"
                 class="text-uppercase pdp-product-title">
-              {{currentProduct.name}}
+              {{ currentProduct.name }}
             </h1>
-            <span data-test="quickview-sku"
+            <span data-test="product-sku"
                   class="grey-p quickview-sku">
-              {{matchingVariant.sku}}
+              {{ matchingVariant.sku }}
             </span>
         </div>
       </div>
@@ -62,8 +62,8 @@
               class="add-to-bag-btn">
         <img class="bag-thumb"
              src="../assets/img/hand-bag-2-black.png"
-             alt="$t('catalog.cart.add')">
-        {{ $t('catalog.cart.add') }}
+             alt="$t('cart.add')">
+        {{ $t('cart.add') }}
       </button>
       <div class="row">
         <div class="col-sm-12">
@@ -114,9 +114,9 @@
                         data-test="list-attributes"
                         :key="attribute.name">
                       <span v-if="attribute.name">
-                        {{attribute.name}}:
+                        {{ attribute.name }}:
                       </span>
-                      {{attribute.label || attribute.value}}
+                      {{ attribute.label || attribute.value }}
                     </li>
                   </ul>
                 </div>
@@ -213,14 +213,14 @@ export default {
     ProductGallery,
   },
 
-  data: () => ({
-    product: {},
-  }),
-
   props: {
     productSlug: String,
     sku: String,
   },
+
+  data: () => ({
+    product: {},
+  }),
 
   methods: {
     openAccordion(e) {
@@ -300,21 +300,21 @@ export default {
                         value(locale: $locale)
                         name
                       }
-                      size{
+                      size {
                         value
                         name
                       }
-                      style{
+                      style {
                         key
                         label
                         name
                       }
-                      gender{
+                      gender {
                         key
                         label
                         name
                       }
-                      articleNumberManufacturer{
+                      articleNumberManufacturer {
                         name
                         value
                       }
@@ -372,6 +372,9 @@ export default {
       "title": "Versand & Retoure",
       "freeReturns": "Kostenlose Retoure",
       "moreDeliveryInfo": "Versandinformationen"
+    },
+    "cart": {
+      "add": "In den Warenkorb"
     }
   },
   "en": {
@@ -386,6 +389,9 @@ export default {
       "title": "Delivery & Returns",
       "freeReturns": "Free return for all orders.",
       "moreDeliveryInfo": " "
+    },
+    "cart": {
+      "add": "Add to Bag"
     }
   }
 }

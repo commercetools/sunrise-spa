@@ -182,9 +182,6 @@
       "shoes": "Shoes",
       "belt": "Belt"
     },
-    "cart": {
-      "add": "Add to Bag"
-    },
     "wishlist": {
       "title": "Your Wishlist",
       "add": "Add item to wishlist",
