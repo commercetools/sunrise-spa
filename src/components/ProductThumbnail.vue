@@ -100,6 +100,7 @@
 
 <script>
 import priceMixin from '@/mixins/priceMixin';
+import productMixin from '@/mixins/productMixin';
 
 export default {
   props: {
@@ -137,7 +138,7 @@ export default {
     },
   },
 
-  mixins: [priceMixin],
+  mixins: [priceMixin, productMixin],
 };
 </script>
 
