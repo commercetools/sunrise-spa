@@ -6,7 +6,7 @@
         <div class="col-sm-8 col-xs-12">
           <div class="current-in-bag">
             <span>
-              <img class="bag-icon-lg" src="../assets/img/hand-bag-2-black.png" alt="bag icon">
+              <img class="bag-icon-lg" src="../../assets/img/hand-bag-2-black.png" alt="bag icon">
             </span>
             <span class="text-uppercase your-bag-txt">{{ $t('yourBag') }}: </span>
             <span class="items-total-txt">{{ $tc('itemsTotal', totalItems) }}</span>
@@ -18,9 +18,9 @@
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <CartSummary :editable="true"
-                       class="cart-content"/>
-          <!--{{> checkout/order-summary cart=content.cart mainClass="cart-content" editable=true}}-->
+          <CartContents :editable="true"
+                        class="cart-content"/>
+          <PriceCalculation/>
         </div>
       </div>
       <div class="row bottom-cart-btns">
@@ -37,10 +37,11 @@
 
 <script>
 import gql from 'graphql-tag';
-import CartSummary from '@/components/CartSummary.vue';
+import CartContents from '@/components/cart/CartContents.vue';
+import PriceCalculation from '@/components/cart/PriceCalculation.vue';
 
 export default {
-  components: { CartSummary },
+  components: { CartContents, PriceCalculation },
   data: () => ({
     me: null,
   }),
