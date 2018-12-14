@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!empty && !loading">
+  <div v-if="product">
     <div data-test="product-gallery"
          class="col-md-4 col-md-offset-1 col-sm-6 product-gallery">
       <ProductGallery v-if="images"
@@ -220,7 +220,7 @@ export default {
   },
 
   data: () => ({
-    product: {},
+    product: null,
   }),
 
   methods: {
@@ -237,14 +237,6 @@ export default {
   },
 
   computed: {
-    loading() {
-      return this.$apollo.queries.product.loading;
-    },
-
-    empty() {
-      return !Object.keys(this.product).length;
-    },
-
     matchingVariant() {
       return this.currentProduct.variant || {};
     },
@@ -257,6 +249,8 @@ export default {
       return this.matchingVariant.attributes;
     },
   },
+
+  mixins: [priceMixin, productMixin],
 
   apollo: {
     product: {
@@ -334,7 +328,6 @@ export default {
     },
   },
 
-  mixins: [priceMixin, productMixin],
 };
 </script>
 
