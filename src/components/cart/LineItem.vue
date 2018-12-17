@@ -47,7 +47,7 @@
         <div class="sm-pull-right quantity-spinner">
           <span @click="quantity -= 1"
                 class="input-number-decrement">–</span>
-          <input v-model.trim.lazy="$v.quantity.$model"
+          <input v-model.trim.number="$v.quantity.$model"
                  type="text"
                  class="input-number"/>
           <span @click="quantity += 1"
@@ -95,7 +95,7 @@ import _ from 'lodash';
 import gql from 'graphql-tag';
 import priceMixin from '@/mixins/priceMixin';
 import displayableMoneyFragment from '@/components/DisplayableMoney.graphql';
-import { required, minValue, integer } from 'vuelidate/lib/validators';
+import { required, minValue } from 'vuelidate/lib/validators';
 
 
 const updateCartInfoFragment = gql`
@@ -240,7 +240,6 @@ export default {
     quantity(newQuantity) {
       this.$v.$touch();
       if (!this.$v.$invalid && this.lineItem.quantity !== newQuantity) {
-        console.log('correct');
         this.debouncedEditQuantity();
       }
     },
@@ -252,7 +251,6 @@ export default {
     quantity: {
       required,
       minValue: minValue(1),
-      integer,
     },
   },
 };
