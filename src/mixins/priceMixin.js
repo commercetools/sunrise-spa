@@ -1,3 +1,16 @@
+const numberFormats = {
+  'en-US': {
+    currency: {
+      style: 'currency', currency: 'USD',
+    },
+  },
+  'de-DE': {
+    currency: {
+      style: 'currency', currency: 'EUR', currencyDisplay: 'symbol',
+    },
+  },
+};
+
 export default {
   methods: {
     formatPrice(price) {
@@ -12,7 +25,7 @@ export default {
 
   computed: {
     currency() {
-      return this.$i18n.numberFormats[this.$store.state.country].currency.currency;
+      return numberFormats[this.$store.state.country].currency.currency;
     },
   },
 };

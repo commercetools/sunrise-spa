@@ -321,7 +321,7 @@ export default {
       variables() {
         return {
           locale: this.$i18n.locale,
-          currency: 'EUR',
+          currency: this.currency,
           sku: this.sku,
         };
       },
