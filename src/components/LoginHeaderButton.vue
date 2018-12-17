@@ -1,7 +1,7 @@
 <template>
   <li class="list-item-user">
     <ul class="nav-list">
-      <li v-if="isAuthenticated"
+      <li v-if="showLoggedIn"
           class="list-item-user">
         <button @click="logout"
            class="link-user"
@@ -9,12 +9,12 @@
           <span>{{ $t("signOut") }}</span>
         </button>
       </li>
-      <li v-if="isAuthenticated"
+      <li v-if="showLoggedIn"
           class="list-item-user">
         <router-link :to="{ name: 'user' }"
                      data-test="login-info-name"
                      class="link-user icon-user">
-          <span class="hidden-xs hidden-sm">{{ user.firstName }}</span>
+          <span class="hidden-xs hidden-sm">{{ me.customer.firstName }}</span>
         </router-link>
       </li>
       <li v-else
@@ -32,19 +32,36 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import gql from 'graphql-tag';
+import { clientLogout } from '@/auth';
 
 export default {
+  data: () => ({
+    me: null,
+  }),
+
   computed: {
-    ...mapGetters(['isAuthenticated', 'user']),
+    showLoggedIn: vm => vm.$store.state.authenticated && vm.me,
   },
 
   methods: {
     logout() {
-      this.$store.dispatch('logout')
-        .then(() => {
-          this.$router.replace({ query: { logout: true } });
-        });
+      clientLogout().then(() => this.$router.replace({ query: { logout: true } }));
+    },
+  },
+
+  apollo: {
+    me: {
+      query: gql`
+        query me {
+          me {
+            customer {
+              id
+              firstName
+            }
+          }
+        }`,
+      skip: vm => !vm.$store.state.authenticated,
     },
   },
 };

@@ -11,7 +11,7 @@
     <hr class="login-box-hr">
     <div class="login-box-description">{{ $t('description') }}</div>
     <div class="login-box-input-wrapper">
-      <form @submit.prevent="login">
+      <form @submit.prevent="submit">
         <ServerError :error="serverError">
           <template slot-scope="{ graphQLError }">
             {{ getErrorMessage(graphQLError) }}
@@ -68,6 +68,8 @@
 
 <script>
 import { required, email } from 'vuelidate/lib/validators';
+import gql from 'graphql-tag';
+import { clientLogin } from '@/auth';
 import ServerError from '@/components/ServerError.vue';
 import ValidationError from '@/components/ValidationError.vue';
 
@@ -81,36 +83,46 @@ export default {
     serverError: null,
   }),
 
-  computed: {
-    credentials() {
-      return {
-        email: this.email,
-        password: this.password,
-      };
-    },
-  },
-
   methods: {
-    async login() {
+    async submit() {
       this.$v.$touch();
       this.serverError = null;
       if (!this.$v.$invalid) {
         this.loading = true;
-        await this.$store.dispatch('login', this.credentials)
-          .then(() => {
-            this.$router.push({ name: 'user' });
-          }).catch((error) => {
+        await this.customerSignMeIn()
+          .then(() => clientLogin(this.email, this.password))
+          .then(() => this.$router.push({ name: 'user' }))
+          .catch((error) => {
             this.serverError = error;
+            this.loading = false;
           });
-        this.loading = false;
       }
+    },
+
+    customerSignMeIn() {
+      return this.$apollo.mutate({
+        mutation: gql`
+          mutation customerSignMeIn($draft: CustomerSignMeInDraft!) {
+            customerSignMeIn(draft: $draft) {
+              customer {
+                id
+              }
+            }
+          }`,
+        variables: {
+          draft: {
+            email: this.email,
+            password: this.password,
+          },
+        },
+      });
     },
 
     getErrorMessage({ code }) {
       if (code === 'InvalidCredentials') {
         return this.$t('invalidCredentials');
       }
-      return null;
+      return this.$t('unknownError');
     },
   },
 

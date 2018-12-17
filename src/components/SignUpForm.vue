@@ -10,7 +10,7 @@
     </div>
     <hr class="signup-box-hr">
     <div class="signup-box-description">{{ $t('description') }}</div>
-    <form @submit.prevent="signup">
+    <form @submit.prevent="submit">
       <ServerError :error="serverError">
         <template slot-scope="{ graphQLError }">
           {{ getErrorMessage(graphQLError) }}
@@ -111,6 +111,8 @@
 
 <script>
 import { required, email, minLength, sameAs } from 'vuelidate/lib/validators';
+import gql from 'graphql-tag';
+import { clientLogin } from '@/auth';
 import ServerError from '@/components/ServerError.vue';
 import ValidationError from '@/components/ValidationError.vue';
 
@@ -128,38 +130,48 @@ export default {
     serverError: null,
   }),
 
-  computed: {
-    customerDraft() {
-      return {
-        email: this.email,
-        password: this.password,
-        firstName: this.firstName,
-        lastName: this.lastName,
-      };
-    },
-  },
-
   methods: {
-    async signup() {
+    async submit() {
       this.$v.$touch();
       this.serverError = null;
       if (!this.$v.$invalid) {
         this.loading = true;
-        await this.$store.dispatch('signup', this.customerDraft)
-          .then(() => {
-            this.$router.push({ name: 'user' });
-          }).catch((error) => {
+        await this.customerSignMeUp()
+          .then(() => clientLogin(this.email, this.password))
+          .then(() => this.$router.push({ name: 'user' }))
+          .catch((error) => {
             this.serverError = error;
+            this.loading = false;
           });
-        this.loading = false;
       }
+    },
+
+    customerSignMeUp() {
+      return this.$apollo.mutate({
+        mutation: gql`
+          mutation customerSignMeUp($draft: CustomerSignMeUpDraft!) {
+            customerSignMeUp(draft: $draft) {
+              customer {
+                id
+              }
+            }
+          }`,
+        variables: {
+          draft: {
+            email: this.email,
+            password: this.password,
+            firstName: this.firstName,
+            lastName: this.lastName,
+          },
+        },
+      });
     },
 
     getErrorMessage({ code, field }) {
       if (code === 'DuplicateField' && field === 'email') {
         return this.$t('duplicatedEmail');
       }
-      return null;
+      return this.$t('unknownError');
     },
   },
 

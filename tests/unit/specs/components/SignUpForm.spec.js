@@ -1,4 +1,3 @@
-import Vuex from 'vuex';
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import { ApolloError } from 'apollo-client';
@@ -6,8 +5,9 @@ import SignUpForm from '@/components/SignUpForm.vue';
 import ServerError from '@/components/ServerError.vue';
 import ValidationError from '@/components/ValidationError.vue';
 
+jest.mock('@/auth', () => ({ clientLogin: jest.fn() }));
+
 const localVue = createLocalVue();
-localVue.use(Vuex);
 localVue.use(Vuelidate);
 
 function setInputValue(input, value) {
@@ -34,16 +34,12 @@ describe('SignUpForm.vue', () => {
   };
 
   let options;
-  let actions;
 
   beforeEach(() => {
-    actions = { signup: jest.fn() };
     options = {
       localVue,
-      store: new Vuex.Store({ actions }),
-      mocks: {
-        $t: jest.fn(),
-      },
+      mocks: { $t: jest.fn() },
+      methods: { customerSignMeUp: jest.fn() },
     };
   });
 
@@ -51,35 +47,18 @@ describe('SignUpForm.vue', () => {
     expect(shallowMount(SignUpForm, options).isVueInstance()).toBeTruthy();
   });
 
-  it('builds a correct customer draft object', () => {
-    const wrapper = shallowMount(SignUpForm, options);
-    expect(wrapper.vm.customerDraft).toEqual({
-      firstName: null, lastName: null, email: null, password: null,
-    });
-
-    setInputValue(wrapper.find('[data-test="signup-form-email"]'), customer.email);
-    expect(wrapper.vm.customerDraft).toEqual({
-      firstName: null, lastName: null, email: customer.email, password: null,
-    });
-
-    fillForm(wrapper, customer);
-    expect(wrapper.vm.customerDraft).toEqual({
-      firstName: customer.firstName, lastName: customer.lastName, email: customer.email, password: customer.password,
-    });
-  });
-
   it('signs up when form is valid', () => {
     const wrapper = shallowMount(SignUpForm, options);
-    wrapper.vm.signup();
-    expect(actions.signup).not.toHaveBeenCalled();
+    wrapper.vm.submit();
+    expect(options.methods.customerSignMeUp).not.toHaveBeenCalled();
 
     setInputValue(wrapper.find('[data-test="signup-form-email"]'), customer.email);
-    wrapper.vm.signup();
-    expect(actions.signup).not.toHaveBeenCalled();
+    wrapper.vm.submit();
+    expect(options.methods.customerSignMeUp).not.toHaveBeenCalled();
 
     fillForm(wrapper, customer);
-    wrapper.vm.signup();
-    expect(actions.signup).toHaveBeenCalledWith(expect.anything(), customer, undefined);
+    wrapper.vm.submit();
+    expect(options.methods.customerSignMeUp).toHaveBeenCalled();
   });
 
   it('shows form errors', () => {
@@ -94,9 +73,9 @@ describe('SignUpForm.vue', () => {
     const error = new ApolloError({
       graphQLErrors: [{ code: 'Error1' }, { code: 'Error2' }],
     });
-    actions.signup.mockRejectedValue(error);
+    options.methods.customerSignMeUp.mockRejectedValue(error);
     fillForm(wrapper, customer);
-    wrapper.vm.signup().then(() => {
+    wrapper.vm.submit().then(() => {
       expect(wrapper.find(ServerError).props().error).toEqual(error);
     });
   });

@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div v-if="loading">
+    <div v-if="!products">
       <img src="../assets/img/spinner.gif"/>
     </div>
-    <div v-else-if="empty">
+    <div v-else-if="!products.results.length">
       {{ $t('catalog.searchNotFound.notFound') }}
     </div>
     <transition name="fade">
-      <div v-if="!loading && !empty"
+      <div v-if="products && products.results.length"
            id="pop-product-list"
            class="row">
         <ProductThumbnail v-for="product in products.results"
@@ -21,8 +21,6 @@
 <script>
 import gql from 'graphql-tag';
 import ProductThumbnail from '@/components/ProductThumbnail.vue';
-import categoryMixin from '@/mixins/categoryMixin';
-import priceMixin from '@/mixins/priceMixin';
 
 export default {
   components: {
@@ -32,53 +30,57 @@ export default {
   props: ['categorySlug'],
 
   data: () => ({
-    products: {},
+    categories: null,
+    products: null,
   }),
 
   computed: {
-    loading() {
-      return this.$apollo.queries.products.loading;
-    },
-
-    empty() {
-      return !(Array.isArray(this.products.results) && this.products.results.length > 0);
-    },
-
-    category() {
-      return this.categoryBySlug(this.categorySlug);
-    },
-
-    gqlPredicate() {
-      return this.category ? `masterData(current(categories(id="${this.category.id}")))` : null;
-    },
+    category: vm => vm.categories.results[0],
   },
 
-  mixins: [categoryMixin, priceMixin],
-
   apollo: {
+    categories: {
+      query: gql`
+        query categories($where: String) {
+          categories(where: $where, limit: 1) {
+            results {
+              id
+            }
+          }
+        }`,
+      variables() {
+        return {
+          where: `slug(${this.$i18n.locale}="${this.categorySlug}")`,
+        };
+      },
+      skip: vm => !vm.categorySlug,
+    },
+
     products: {
       query: gql`
-      query listProducts($locale: Locale!, $currency: Currency!, $where: String) {
-        products(limit: 20, where: $where, sort: "id asc") {
-          results {
-            id
-            masterData {
-              current {
-                name(locale: $locale)
-                slug(locale: $locale)
-                masterVariant {
-                  sku
-                  images {
-                    url
-                  }
-                  price(currency: $currency) {
-                    discounted {
-                      value {
-                        ...printPrice
-                      }
+        query products($locale: Locale!, $currency: Currency!, $where: String) {
+          products(limit: 20, where: $where, sort: "id asc") {
+            results {
+              id
+              masterData {
+                current {
+                  name(locale: $locale)
+                  slug(locale: $locale)
+
+                  masterVariant {
+                    sku
+                    images {
+                      url
                     }
-                    value {
-                      ...printPrice
+                    price(currency: $currency) {
+                      discounted {
+                        value {
+                          ...ProductListPriceInfo
+                        }
+                      }
+                      value {
+                        ...ProductListPriceInfo
+                      }
                     }
                   }
                 }
@@ -86,22 +88,19 @@ export default {
             }
           }
         }
-      }
 
-      fragment printPrice on BaseMoney {
-        centAmount
-        fractionDigits
-      }`,
+        fragment ProductListPriceInfo on BaseMoney {
+          centAmount
+          fractionDigits
+        }`,
       variables() {
         return {
           locale: this.$i18n.locale,
-          currency: this.currency,
-          where: this.gqlPredicate,
+          currency: this.$i18n.numberFormats[this.$store.state.country].currency.currency,
+          where: `masterData(current(categories(id="${this.category.id}")))`,
         };
       },
-      skip() {
-        return !this.gqlPredicate;
-      },
+      skip: vm => !vm.categories,
     },
   },
 };

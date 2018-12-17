@@ -2,8 +2,8 @@ import Vue from 'vue';
 import VueApollo from 'vue-apollo';
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context';
-import { getAuthToken, login, logout } from '@/auth';
-import { createApolloClient, restartWebsockets } from 'vue-cli-plugin-apollo/graphql-client';
+import { getAuthToken } from '@/auth';
+import { createApolloClient } from 'vue-cli-plugin-apollo/graphql-client';
 import config from '@/../sunrise.config';
 import introspectionQueryResultData from '@/../graphql-fragments.json';
 
@@ -24,23 +24,6 @@ function createClient() {
   });
 
   apolloClient.wsClient = wsClient;
-
-  async function restartClient() {
-    if (apolloClient.wsClient) restartWebsockets(apolloClient.wsClient);
-    try {
-      await apolloClient.resetStore();
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error('%cError on cache reset', 'color: orange;', e.message);
-    }
-  }
-
-  apolloClient.login = async (usr, pwd) => {
-    await login(usr, pwd).then(() => restartClient());
-  };
-  apolloClient.logout = async () => {
-    await logout().then(() => restartClient());
-  };
 
   return apolloClient;
 }

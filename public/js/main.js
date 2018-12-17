@@ -81,17 +81,11 @@ $(document).ready(() => {
     $('.nav-minicart').slideToggle();
   });
 
-  // Location dropdown
-  $('.location-dropdown-toggle').click(() => {
-    $('.location-dropdown').slideToggle();
-  });
-
   // Closing dropdown on click outside of it
   $('html').click(() => {
-    $('.location-dropdown').hide();
     $('.nav-minicart').hide();
   });
-  $('.list-item-location, .list-item-bag, .nav-minicart').click((event) => {
+  $('.list-item-bag, .nav-minicart').click((event) => {
     event.stopPropagation();
   });
 });

@@ -1,5 +1,6 @@
 <template>
-   <div class="my-account-content">
+   <div v-if="me"
+        class="my-account-content">
     <div class="row">
       <div class="col-sm-3">
         <!--{{> myaccount/my-account-sidebar myPersonalDetailsTab=true}}-->
@@ -7,12 +8,12 @@
       <div id="my-account-desktop-content" class="col-sm-9">
         <div class="personal-details">
           <div class="personal-details-text-one">
-            <span>{{ $t('welcomeBack', { name: user.firstName }) }}</span>
+            <span>{{ $t('welcomeBack', { name: me.customer.firstName }) }}</span>
           </div>
           <div class="personal-details-text-two">
             {{ $t('welcomeDescription') }}
             <br>
-            <span class="customer-number">{{ user.customerNumber }}</span>
+            <span class="customer-number">{{ me.customer.customerNumber }}</span>
           </div>
           <div class="personal-details-title">
               <span>{{ $t('title') }}</span>
@@ -27,9 +28,9 @@
                class="personal-details-edit-hide">
             <div class="personal-details-box">
               <div>
-                <span data-test="user-profile-name">{{ user.firstName }} {{ user.lastName}}</span>
+                <span data-test="user-profile-name">{{ me.customer.firstName }} {{ me.customer.lastName}}</span>
               </div>
-              <div data-test="user-profile-email">{{ user.email }}</div>
+              <div data-test="user-profile-email">{{ me.customer.email }}</div>
               <br>
               <!--{{#if content.customerInfo.subscribed}}-->
               <!--<div>{{ $t('subscribedToNewsletter') }}</div>-->
@@ -51,20 +52,32 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import gql from 'graphql-tag';
 import EditProfileForm from '@/components/EditProfileForm.vue';
 
 export default {
-  components: {
-    EditProfileForm,
-  },
+  components: { EditProfileForm },
 
   data: () => ({
     showEditForm: false,
   }),
 
-  computed: {
-    ...mapGetters(['user']),
+  apollo: {
+    me: {
+      query: gql`
+        query me {
+          me {
+            customer {
+              id
+              email
+              firstName
+              lastName
+              customerNumber
+            }
+          }
+        }`,
+      skip: vm => !vm.$store.state.authenticated,
+    },
   },
 };
 </script>

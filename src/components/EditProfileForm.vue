@@ -1,7 +1,7 @@
 <template>
-<div>
-  <div class="personal-details-edit personal-details-edit-show">
-    <form @submit.prevent="save"
+  <div v-if="me"
+       class="personal-details-edit personal-details-edit-show">
+    <form @submit.prevent="submit"
           id="form-edit-personal-details">
       <ServerError :error="serverError">
         <template slot-scope="{ graphQLError }">
@@ -80,19 +80,28 @@
       </div>
     </form>
   </div>
-</div>
 </template>
 
 <script>
 import { required, email } from 'vuelidate/lib/validators';
+import gql from 'graphql-tag';
 import ServerError from '@/components/ServerError.vue';
 import ValidationError from '@/components/ValidationError.vue';
-import { mapGetters } from 'vuex';
+
+const customerInfoFragment = gql`
+  fragment EditProfileCustomerInfo on Customer {
+    id
+    email
+    firstName
+    lastName
+    version
+  }`;
 
 export default {
   components: { ValidationError, ServerError },
 
   data: () => ({
+    me: null,
     firstName: null,
     lastName: null,
     email: null,
@@ -100,52 +109,79 @@ export default {
     serverError: null,
   }),
 
-  created() {
-    this.email = this.user.email;
-    this.firstName = this.user.firstName;
-    this.lastName = this.user.lastName;
-  },
-
   computed: {
-    ...mapGetters(['user']),
-
-    updateActions() {
-      return [
-        { changeEmail: { email: this.email } },
-        { setFirstName: { firstName: this.firstName } },
-        { setLastName: { lastName: this.lastName } },
-      ];
-    },
-
     hasFormChanged() {
-      const hasEmailChanged = this.email !== this.user.email;
-      const hasFirstNameChanged = this.firstName !== this.user.firstName;
-      const hasLastNameChanged = this.lastName !== this.user.lastName;
+      const hasEmailChanged = this.email !== this.me.customer.email;
+      const hasFirstNameChanged = this.firstName !== this.me.customer.firstName;
+      const hasLastNameChanged = this.lastName !== this.me.customer.lastName;
       return hasEmailChanged || hasFirstNameChanged || hasLastNameChanged;
     },
   },
 
   methods: {
-    async save() {
+    async submit() {
       this.$v.$touch();
       this.serverError = null;
       if (!this.$v.$invalid && this.hasFormChanged) {
         this.loading = true;
-        await this.$store.dispatch('updateCustomer', this.updateActions)
+        await this.updateMyCustomer()
           .then(() => {
             this.$emit('close');
           }).catch((error) => {
             this.serverError = error;
+            this.loading = false;
           });
-        this.loading = false;
       }
+    },
+
+    updateMyCustomer() {
+      return this.$apollo.mutate({
+        mutation: gql`
+          mutation updateMyCustomer($actions: [MyCustomerUpdateAction!]!, $version: Long!) {
+            updateMyCustomer(version: $version, actions: $actions) {
+              ...EditProfileCustomerInfo
+            }
+          }
+          ${customerInfoFragment}`,
+        variables: {
+          version: this.me.customer.version,
+          actions: [
+            { changeEmail: { email: this.email } },
+            { setFirstName: { firstName: this.firstName } },
+            { setLastName: { lastName: this.lastName } },
+          ],
+        },
+      });
     },
 
     getErrorMessage({ code, field }) {
       if (code === 'DuplicateField' && field === 'email') {
         return this.$t('duplicatedEmail');
       }
-      return null;
+      return this.$t('unknownError');
+    },
+  },
+
+  watch: {
+    me(value) {
+      this.firstName = value.customer.firstName;
+      this.lastName = value.customer.lastName;
+      this.email = value.customer.email;
+    },
+  },
+
+  apollo: {
+    me: {
+      query: gql`
+        query me {
+          me {
+            customer {
+              ...EditProfileCustomerInfo
+            }
+          }
+        }
+        ${customerInfoFragment}`,
+      skip: vm => !vm.$store.state.authenticated,
     },
   },
 

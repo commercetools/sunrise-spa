@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ol v-if="active"
+    <ol v-if="categories && category"
         class="breadcrumb">
       <li>
         <router-link to="/"
@@ -28,22 +28,46 @@
 </template>
 
 <script>
-import categoryMixin from '@/mixins/categoryMixin';
+import gql from 'graphql-tag';
 
 export default {
   props: ['categorySlug'],
 
-  computed: {
-    category() {
-      return this.categoryBySlug(this.categorySlug);
-    },
+  data: () => ({
+    categories: null,
+  }),
 
-    active() {
-      return this.category;
-    },
+  computed: {
+    category: vm => vm.categories.results[0],
   },
 
-  mixins: [categoryMixin],
+  apollo: {
+    categories: {
+      query: gql`
+        query categories($locale: Locale!, $where: String) {
+          categories(where: $where, limit: 1) {
+            results {
+              ...BreadcrumbCategoryInfo
+              ancestors {
+                ...BreadcrumbCategoryInfo
+              }
+            }
+          }
+        }
+        fragment BreadcrumbCategoryInfo on Category {
+          id
+          name(locale: $locale)
+          slug(locale: $locale)
+        }`,
+      variables() {
+        return {
+          locale: this.$i18n.locale,
+          where: `slug(${this.$i18n.locale}="${this.categorySlug}")`,
+        };
+      },
+      skip: vm => !vm.categorySlug,
+    },
+  },
 };
 </script>
 
