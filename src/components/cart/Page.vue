@@ -1,6 +1,6 @@
 <template>
   <div class="cart-page">
-    <div v-if="me && cart"
+    <div v-if="me && me.activeCart"
          class="container">
       <div class="row">
         <div class="col-sm-8 col-xs-12">
@@ -18,8 +18,8 @@
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <CartContents :editable="true"
-                        class="cart-content"/>
+          <CartContent :editable="true"
+                       class="cart-content"/>
           <PriceCalculation/>
         </div>
       </div>
@@ -32,24 +32,25 @@
         </div>
       </div>
     </div>
+    <div v-else>
+      {{ $t('empty') }}
+    </div>
   </div>
 </template>
 
 <script>
 import gql from 'graphql-tag';
-import CartContents from '@/components/cart/CartContents.vue';
+import CartContent from '@/components/cart/CartContent.vue';
 import PriceCalculation from '@/components/cart/PriceCalculation.vue';
 
 export default {
-  components: { CartContents, PriceCalculation },
+  components: { CartContent, PriceCalculation },
   data: () => ({
     me: null,
   }),
 
   computed: {
-    cart: vm => vm.me.carts.results[0],
-
-    totalItems: vm => vm.cart.lineItems.reduce((acc, li) => acc + li.quantity, 0),
+    totalItems: vm => vm.me.activeCart.lineItems.reduce((acc, li) => acc + li.quantity, 0),
   },
 
   apollo: {
@@ -57,13 +58,11 @@ export default {
       query: gql`
         query me {
           me {
-            carts(limit: 1) {
-              results {
+            activeCart {
+              id
+              lineItems {
                 id
-                lineItems {
-                  id
-                  quantity
-                }
+                quantity
               }
             }
           }
@@ -77,11 +76,13 @@ export default {
 {
   "en": {
     "yourBag": "Your Bag",
-    "itemsTotal": "{n} item in total | {n} items in total"
+    "itemsTotal": "{n} item in total | {n} items in total",
+    "empty": "Your bag is empty :("
   },
   "de": {
     "yourBag": "Ihr Einkaufswagen",
-    "itemsTotal": "{n} Artikel im Warenkorb"
+    "itemsTotal": "{n} Artikel im Warenkorb",
+    "empty": "Ihr Einkaufswagen ist leer :("
   }
 }
 </i18n>
