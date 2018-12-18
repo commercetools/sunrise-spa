@@ -1,27 +1,27 @@
 <template>
-  <div v-if="me && cart">
+  <div v-if="me && me.activeCart">
     <div class="row">
       <div class="col-sm-12">
         <div class="total-price-calc">
           <div class="row">
             <div class="col-sm-10 col-xs-7">
               <div class="text-right subtotal">
-                <span class="subtotal-title">{{ $t('checkout.subtotal') }}</span>
+                <span class="subtotal-title">{{ $t('subtotal') }}</span>
               </div>
               <div class="text-right">
                 <!--<span class="order-discount">{{ $t('checkout.orderDiscount') }}</span>-->
               </div>
-              <div v-if="cart.shippingInfo"
+              <div v-if="me.activeCart.shippingInfo"
                    class="text-right delivery-info">
-                <span class="delivery-info-title">{{ $t('checkout.shipping') }}</span>
+                <span class="delivery-info-title">{{ $t('shipping') }}</span>
               </div>
               <hr class="total-divider">
-              <div v-if="cart.taxedPrice"
+              <div v-if="me.activeCart.taxedPrice"
                    class="text-right">
-                <span>{{ $t('main.common.salesTax') }}</span>
+                <span>{{ $t('salesTax') }}</span>
               </div>
               <div class="text-right">
-                <span class="order-total">{{ $t('checkout.total') }}</span>
+                <span class="order-total">{{ $t('total') }}</span>
               </div>
             </div>
             <div class="col-sm-2 col-xs-5 text-right">
@@ -32,14 +32,20 @@
                 <!--<span class="order-discount">{{ cart.discount }}</span>-->
               </div>
               <div>
-                <span v-if="cart.shippingInfo">{{ formatPrice(cart.shippingInfo.price) }}</span>
+                <span v-if="me.activeCart.shippingInfo">
+                  {{ formatPrice(me.activeCart.shippingInfo.price) }}
+                </span>
               </div>
               <hr>
               <div>
-                <span v-if="cart.taxedPrice">{{ cart.salesTax }}</span>
+                <span v-if="me.activeCart.taxedPrice">
+                  {{ formatPrice(taxes) }}
+                </span>
               </div>
               <div>
-                <span class="order-total">{{ formatPrice(cart.totalPrice) }}</span>
+                <span class="order-total">
+                  {{ formatPrice(me.activeCart.totalPrice) }}
+                </span>
               </div>
             </div>
 
@@ -64,12 +70,10 @@ import DisplayableMoneyFragment from '@/components/DisplayableMoney.graphql';
 
 export default {
   computed: {
-    cart: vm => vm.me.carts.results[0],
-
     subtotal() {
-      const { currencyCode, fractionDigits } = this.cart.totalPrice;
+      const { currencyCode, fractionDigits } = this.me.activeCart.totalPrice;
       return {
-        centAmount: this.cart.lineItems.reduce((acc, li) => acc + li.totalPrice.centAmount, 0),
+        centAmount: this.me.activeCart.lineItems.reduce((acc, li) => acc + li.totalPrice.centAmount, 0),
         currencyCode,
         fractionDigits,
       };
@@ -78,7 +82,7 @@ export default {
     taxes() {
       const { currencyCode, fractionDigits } = this.cart.totalPrice;
       return {
-        centAmount: this.cart.taxedPrice.totalGross.centAmount - this.cart.taxedPrice.totalNet.centAmount,
+        centAmount: this.me.activeCart.taxedPrice.totalGross.centAmount - this.cart.taxedPrice.totalNet.centAmount,
         currencyCode,
         fractionDigits,
       };
@@ -92,30 +96,28 @@ export default {
       query: gql`
         query me {
           me {
-            carts(limit: 1) {
-              results {
+            activeCart {
+              id
+              lineItems {
                 id
-                lineItems {
-                  id
-                  totalPrice {
-                    ...DisplayableMoney
-                  }
-                }
                 totalPrice {
-                 ...DisplayableMoney
+                  ...DisplayableMoney
                 }
-                shippingInfo {
-                  price {
-                    ...DisplayableMoney
-                  }
+              }
+              totalPrice {
+               ...DisplayableMoney
+              }
+              shippingInfo {
+                price {
+                  ...DisplayableMoney
                 }
-                taxedPrice {
-                  totalGross {
-                    ...DisplayableMoney
-                  }
-                  totalNet {
-                    ...DisplayableMoney
-                  }
+              }
+              taxedPrice {
+                totalGross {
+                  ...DisplayableMoney
+                }
+                totalNet {
+                  ...DisplayableMoney
                 }
               }
             }
@@ -130,8 +132,16 @@ export default {
 <i18n>
 {
   "en": {
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "salesTax": "Sales Tax",
+    "total": "Total"
   },
   "de": {
+    "subtotal": "Zwischensumme",
+    "shipping": "Versand",
+    "salesTax": "MwSt.",
+    "total": "Gesamtpreis"
   }
 }
 </i18n>
