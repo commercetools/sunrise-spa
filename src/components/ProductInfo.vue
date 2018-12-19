@@ -5,11 +5,11 @@
       <ProductGallery v-if="images"
                       :productImages="images" />
     </div>
-    <div data-test="product-description"
+    <div data-test="product-data"
          class="col-sm-6 product-description">
       <div class="row">
         <div class="col-sm-12">
-            <h1 data-test="pdp-product-title"
+            <h1 data-test="product-name"
                 class="text-uppercase pdp-product-title">
               {{ currentProduct.name }}
             </h1>
@@ -42,11 +42,11 @@
               {{ formatPrice(originalPrice) }}
             </span>
             <span v-else>
-              <span data-test="product-discounted-price"
+              <span data-test="product-old-price"
                     class="discounted-price">
                 {{ formatPrice(originalPrice) }}
               </span>
-              <span data-test="product-discount-price">
+              <span data-test="product-new-price">
                 {{ formatPrice(discountedPrice) }}
               </span>
             </span>
@@ -57,8 +57,7 @@
       <!-- {{> catalog/add-to-cart}}
       {{> catalog/add-to-wishlist-btn}}
       {{> catalog/reserve-in-store-btn}} -->
-      <button id=""
-              data-test="add-to-cart-button"
+      <button data-test="add-to-cart-button"
               class="add-to-bag-btn">
         <img class="bag-thumb"
              src="../assets/img/hand-bag-2-black.png"
@@ -79,13 +78,12 @@
                id="accordion-product-info"
                role="tablist"
                aria-multiselectable="true">
-            <div data-test="panel-default"
-                 class="panel panel-default">
+            <div class="panel panel-default">
               <div class="panel-heading"
                    role="tab"
                    id="headingProductDetails">
                   <h4 class="panel-title product-accordion-title text-uppercase">
-                    <a data-test="accordion-toggle"
+                    <a data-test="product-attributes-accordion"
                        id="pdp-product-details-toggle"
                        class="collapsed pdp-accord-toggle"
                        data-toggle="collapse"
@@ -95,8 +93,7 @@
                        aria-controls="collapseProductDetails"
                        @click="openAccordion">
                       {{ $t('details.title') }}
-                      <img data-test="accordion-plus"
-                           class="accordion-plus"
+                      <img class="accordion-plus"
                            src="../assets/img/plus79.png"
                            alt="accordion content">
                     </a>
@@ -106,17 +103,19 @@
                    class="panel-collapse collapse"
                    role="tabpanel"
                    aria-labelledby="headingProductDetails">
-                <div data-test="product-features-list"
-                     class="panel-body panel-body-pdp">
+                <div class="panel-body panel-body-pdp">
                   <ul v-if="productAttributes"
                       class="product-features-list">
                     <li v-for="attribute in productAttributes"
-                        data-test="list-attributes"
+                        data-test="product-attributes-list"
                         :key="attribute.name">
-                      <span v-if="attribute.name">
+                      <span v-if="attribute.name"
+                            class="attribute-name">
                         {{ attribute.name }}:
                       </span>
-                      {{ attribute.label || attribute.value }}
+                      <span>
+                        {{ attribute.label || attribute.value }}
+                      </span>
                     </li>
                   </ul>
                 </div>

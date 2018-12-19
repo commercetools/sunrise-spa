@@ -245,7 +245,7 @@
 .product-features-list, .product-details-list, .product-delivery-list {
   padding-left: 10px;
   list-style: none;
-  &>li span {
+  &>li span.attribute-name {
     text-transform: uppercase;
     color: $gray;
     padding-right: 4px;
