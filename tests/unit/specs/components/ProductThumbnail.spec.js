@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
 import ProductThumbnail from '@/components/ProductThumbnail.vue';
 
-describe.skip('ProductThumbnail.vue', () => {
+describe('ProductThumbnail.vue', () => {
   let product;
   let options;
 
