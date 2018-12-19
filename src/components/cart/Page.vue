@@ -18,9 +18,10 @@
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <CartContent :editable="true"
-                       class="cart-content"/>
-          <PriceCalculation/>
+          <div class="cart-content">
+            <CartContent :editable="true"/>
+            <PriceCalculation/>
+          </div>
         </div>
       </div>
       <div class="row bottom-cart-btns">

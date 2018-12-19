@@ -22,8 +22,7 @@
               :lineItem="lineItem"
               :editable="editable"
               @removeLineItem="removeLineItem"
-              @changeLineItemQuantity="changeLineItemQuantity"
-              class="row single-cart-item"/>
+              @changeLineItemQuantity="changeLineItemQuantity"/>
     <!--{{> checkout/order-summary/discount-code-input}}-->
     <!--{{> checkout/order-summary/discount-summary}}-->
     <!--{{#if checkoutConfirmation}}-->
