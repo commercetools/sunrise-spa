@@ -12,7 +12,7 @@ try {
     store.dispatch('setAuthenticated', true);
   }
 } catch (error) {
-  console.warn('Could not retrieve token from local storage', error);
+  console.error('Could not retrieve token from local storage', error);
 }
 
 const tokenProvider = new TokenProvider({
