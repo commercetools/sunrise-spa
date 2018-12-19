@@ -9,9 +9,6 @@ describe('Product gallery', () => {
     {
       url: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/079535_1_large.jpg',
     },
-    {
-      url: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/079535_1_large.jpg',
-    },
   ];
 
   let options;
