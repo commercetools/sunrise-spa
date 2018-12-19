@@ -29,9 +29,7 @@ describe('Product detail page', () => {
           .find('[data-test=product-attributes-list]')
           .should('have.length', 7)
           .eq(2)
-          .should('contain', 'size:')
-          .parent()
-          .should('contain', '34');
+          .contains(/\s*size:\s+34\s*/);
       });
 
     cy.get('[data-test=product-gallery]')
