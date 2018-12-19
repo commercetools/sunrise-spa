@@ -3,36 +3,36 @@ module.exports = {
 
   env: {
     node: true,
-    jquery: true
+    jquery: true,
   },
 
   extends: [
     'plugin:vue/essential',
-    '@vue/airbnb'
+    '@vue/airbnb',
   ],
 
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'max-len': [
-      'error', { 'code': 120 }
+      'error', { code: 120 },
     ],
-    "no-param-reassign": [
-      "error",
+    'no-param-reassign': [
+      'error',
       {
-        "props": true,
-        "ignorePropertyModificationsFor": [
-          "state",
-          "acc",
-          "e",
-          "ctx",
-          "req",
-          "request",
-          "res",
-          "response",
-          "$scope"
-        ]
-      }
+        props: true,
+        ignorePropertyModificationsFor: [
+          'state',
+          'acc',
+          'e',
+          'ctx',
+          'req',
+          'request',
+          'res',
+          'response',
+          '$scope',
+        ],
+      },
     ],
 
     'graphql/template-strings': [
@@ -41,14 +41,14 @@ module.exports = {
         env: 'literal',
         schemaJson: require('./graphql.schema.json'),
       },
-    ]
+    ],
   },
 
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
   },
 
   plugins: [
-    'graphql'
-  ]
+    'graphql',
+  ],
 };

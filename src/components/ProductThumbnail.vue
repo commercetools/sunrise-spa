@@ -1,8 +1,8 @@
 <template>
   <div class="col-xs-12 col-sm-6 col-md-4">
-    <!-- <a id="link-product-thumbnail{{index}}" href="{{thumbnail.product.variant.url}}"> -->
-    <div data-test="product-thumbnail"
-         class="shop-item">
+    <router-link :to="{ name: 'product', params: { productSlug, sku } }">
+      <div data-test="product-thumbnail"
+           class="shop-item">
         <div v-if="hasPrice && hasDiscount"
              class="sale-flag"
              data-test="product-thumbnail-sale-flag">
@@ -93,13 +93,14 @@
         </form> -->
       </div>
     </div>
-  <!-- </a> -->
+  </router-link>
   <!-- {{> catalog/quickview wishlist=wishlist}} -->
   </div>
 </template>
 
 <script>
 import priceMixin from '@/mixins/priceMixin';
+import productMixin from '@/mixins/productMixin';
 
 export default {
   props: {
@@ -110,10 +111,6 @@ export default {
   },
 
   computed: {
-    currentProduct() {
-      return this.product.masterData.current || {};
-    },
-
     matchingVariant() {
       // with query endpoint we cannot really determine
       return this.currentProduct.masterVariant || {};
@@ -128,28 +125,20 @@ export default {
       return Array.isArray(this.matchingVariant.images) && this.matchingVariant.images.length > 0;
     },
 
-    hasPrice() {
-      return this.matchingVariant.price;
-    },
-
-    hasDiscount() {
-      return this.matchingVariant.price.discounted;
-    },
-
     displayedImage() {
       return this.matchingVariant.images[0].url;
     },
 
-    discountedPrice() {
-      return this.matchingVariant.price.discounted.value;
+    productSlug() {
+      return this.currentProduct.slug;
     },
 
-    originalPrice() {
-      return this.matchingVariant.price.value;
+    sku() {
+      return this.matchingVariant.sku;
     },
   },
 
-  mixins: [priceMixin],
+  mixins: [priceMixin, productMixin],
 };
 </script>
 

@@ -174,18 +174,6 @@
       "priceDesc": "Preis absteigend",
       "priceAsc": "Preis aufsteigend"
     },
-    "ratings": {
-      "text5": "5 Sterne",
-      "text4": "4 Sterne",
-      "text3": "3 Sterne",
-      "text2": "2 Sterne",
-      "text1": "1 Stern",
-      "description5": "Rocks!",
-      "description4": "Pretty good",
-      "description3": "Meh",
-      "description2": "Kinda bad",
-      "description1": "Sucks big time"
-    },
     "availability": {
       "available": "Verfügbar"
     },
@@ -194,9 +182,6 @@
       "clothing": "Bekleidung",
       "shoes": "Schuhe",
       "belt": "Gürtel"
-    },
-    "cart": {
-      "add": "In den Warenkorb"
     },
     "wishlist": {
       "title": "Ihre Wunschliste",
@@ -216,18 +201,6 @@
     "reviews": {
       "title": "Kundenbewertungen",
       "write": "Erste Kundenbewertung schreiben"
-    },
-    "description": {
-      "show": "Mehr",
-      "hide": "Weniger"
-    },
-    "details": {
-      "title": "Produktdetails"
-    },
-    "delivery": {
-      "title": "Versand & Retoure",
-      "freeReturns": "Kostenlose Retoure",
-      "moreDeliveryInfo": "Versandinformationen"
     },
     "searchResult": {
       "title": "Suchergebnisse",

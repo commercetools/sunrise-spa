@@ -174,18 +174,6 @@
       "priceDesc": "Price: Descending",
       "priceAsc": "Price: Ascending"
     },
-    "ratings": {
-      "text5": "5 stars",
-      "text4": "4 stars",
-      "text3": "3 stars",
-      "text2": "2 stars",
-      "text1": "1 star",
-      "description5": "Rocks!",
-      "description4": "Pretty good",
-      "description3": "Meh",
-      "description2": "Kinda bad",
-      "description1": "Sucks big time"
-    },
     "availability": {
       "available": "Available"
     },
@@ -194,9 +182,6 @@
       "clothing": "Clothing",
       "shoes": "Shoes",
       "belt": "Belt"
-    },
-    "cart": {
-      "add": "Add to Bag"
     },
     "wishlist": {
       "title": "Your Wishlist",
@@ -213,18 +198,6 @@
     "reviews": {
       "title": "Reviews",
       "write": "Write first review"
-    },
-    "description": {
-      "show": "Show more",
-      "hide": "Show less"
-    },
-    "details": {
-      "title": "Product Details"
-    },
-    "delivery": {
-      "title": "Delivery & Returns",
-      "freeReturns": "Free return for all orders.",
-      "moreDeliveryInfo": ""
     },
     "searchResult": {
       "title": "Search Results",
