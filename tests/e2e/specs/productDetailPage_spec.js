@@ -4,10 +4,10 @@ describe('Product detail page', () => {
   });
 
   it('Displays a single product details', () => {
-    cy.get('[data-test=product-description]', { timeout: 20000 })
+    cy.get('[data-test=product-data]', { timeout: 20000 })
       .then(($product) => {
         cy.wrap($product)
-          .find('[data-test=pdp-product-title]')
+          .find('[data-test=product-name]')
           .should('contain', 'Booties Lemare grey');
 
         cy.wrap($product)
@@ -15,20 +15,18 @@ describe('Product detail page', () => {
           .should('contain', 'M0E20000000E0WX');
 
         cy.wrap($product)
-          .find('[data-test=product-discounted-price]')
+          .find('[data-test=product-old-price]')
           .should('contain', '248,75 €');
         cy.wrap($product)
-          .find('[data-test=product-discount-price]')
+          .find('[data-test=product-new-price]')
           .should('contain', '174,12 €');
 
         cy.wrap($product)
-          .find('[data-test=panel-default]')
-          .should('exist')
-          .find('[data-test=accordion-toggle]')
+          .find('[data-test=product-attributes-accordion]')
           .click();
 
         cy.wrap($product)
-          .find('[data-test=list-attributes]')
+          .find('[data-test=product-attributes-list]')
           .should('have.length', 7)
           .eq(2)
           .should('contain', 'size:')
@@ -39,8 +37,5 @@ describe('Product detail page', () => {
     cy.get('[data-test=product-gallery]')
       .find('[data-test=product-image]')
       .should('exist');
-
-    cy.get('.thumb-list > .responsive-image')
-      .should('have.length', 2);
   });
 });
