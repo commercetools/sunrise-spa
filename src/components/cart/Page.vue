@@ -26,7 +26,10 @@
       </div>
       <div class="row bottom-cart-btns">
         <div class="col-sm-6">
-          <!--{{> checkout/continue-shopping-button-left}}-->
+          <router-link to="/"
+             class="text-uppercase continue-shopping-btn">
+            {{ $t('continueShopping') }}
+          </router-link>
         </div>
         <div class="col-sm-6">
           <!--{{> checkout/start-checkout-link bottom=true}}-->
@@ -46,6 +49,7 @@ import PriceCalculation from '@/components/cart/PriceCalculation.vue';
 
 export default {
   components: { CartContent, PriceCalculation },
+
   data: () => ({
     me: null,
   }),
@@ -78,12 +82,14 @@ export default {
   "en": {
     "yourBag": "Your Bag",
     "itemsTotal": "{n} item in total | {n} items in total",
-    "empty": "Your bag is empty :("
+    "empty": "Your bag is empty",
+    "continueShopping": "Continue Shopping"
   },
   "de": {
     "yourBag": "Ihr Einkaufswagen",
     "itemsTotal": "{n} Artikel im Warenkorb",
-    "empty": "Ihr Einkaufswagen ist leer :("
+    "empty": "Ihr Einkaufswagen ist leer :(",
+    "continueShopping": "Weiter einkaufen"
   }
 }
 </i18n>
