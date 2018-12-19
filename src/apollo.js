@@ -32,7 +32,7 @@ const apolloProvider = new VueApollo({
   defaultClient: createClient(),
   errorHandler(error) {
     // eslint-disable-next-line no-console
-    console.error(error.message);
+    console.error(error);
   },
 });
 export default apolloProvider;
