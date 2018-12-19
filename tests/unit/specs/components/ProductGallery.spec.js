@@ -26,7 +26,7 @@ describe('Product gallery', () => {
     expect(shallowMount(ProductGallery, options).isVueInstance()).toBeTruthy();
   });
 
-  it.skip('tranforms product images into ProductZoomer structure', () => {
+  it('tranforms product images into ProductZoomer structure', () => {
     const wrapper = shallowMount(ProductGallery, options);
     wrapper.setProps({ productImages });
     expect(wrapper.vm.images).toEqual({
