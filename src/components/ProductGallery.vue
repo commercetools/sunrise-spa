@@ -33,9 +33,13 @@ export default {
         hoverDelay: 300,
         namespace: 'product-gallery',
         move_by_click: true,
-        scroll_items: Math.min(this.productImages.length, 3),
+        scroll_items: this.galleryThumbnailsCount,
         choosed_thumb_border_color: '#FEC14E',
       };
+    },
+
+    galleryThumbnailsCount() {
+      return Math.min(this.productImages.length, 3);
     },
   },
 };

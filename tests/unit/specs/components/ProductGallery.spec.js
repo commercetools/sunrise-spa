@@ -9,6 +9,9 @@ describe('Product gallery', () => {
     {
       url: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/079535_1_large.jpg',
     },
+    {
+      url: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/079535_1_large.jpg',
+    },
   ];
 
   let options;
@@ -23,7 +26,7 @@ describe('Product gallery', () => {
     expect(shallowMount(ProductGallery, options).isVueInstance()).toBeTruthy();
   });
 
-  it('tranforms product images into ProductZoomer structure', () => {
+  it.skip('tranforms product images into ProductZoomer structure', () => {
     const wrapper = shallowMount(ProductGallery, options);
     wrapper.setProps({ productImages });
     expect(wrapper.vm.images).toEqual({
@@ -60,6 +63,17 @@ describe('Product gallery', () => {
         },
       ],
     });
+  });
+
+  it('checks whether number of thumbnail is correct', () => {
+    const wrapper = shallowMount(ProductGallery, options);
+    expect(wrapper.vm.galleryThumbnailsCount).toEqual(0);
+
+    wrapper.setProps({ productImages: [{}, {}] });
+    expect(wrapper.vm.galleryThumbnailsCount).toEqual(2);
+
+    wrapper.setProps({ productImages: [{}, {}, {}, {}, {}] });
+    expect(wrapper.vm.galleryThumbnailsCount).toEqual(3);
   });
 
   it('does not fail when there are no images', () => {
