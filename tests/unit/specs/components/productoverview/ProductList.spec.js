@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
-import ProductList from '@/components/ProductList.vue';
-import ProductThumbnail from '@/components/ProductThumbnail.vue';
+import ProductList from '@/components/productoverview/ProductList.vue';
+import ProductThumbnail from '@/components/common/ProductThumbnail.vue';
 
 describe('ProductList.vue', () => {
   let options;

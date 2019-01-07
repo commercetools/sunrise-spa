@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import ProductThumbnail from '@/components/ProductThumbnail.vue';
+import ProductThumbnail from '@/components/common/ProductThumbnail.vue';
 
 describe('ProductThumbnail.vue', () => {
   let product;
