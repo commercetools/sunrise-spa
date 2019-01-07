@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import TheFooter from '@/views/TheFooter.vue';
+import TheFooter from '@/components/footer/TheFooter.vue';
 
 export default {
   name: 'app',

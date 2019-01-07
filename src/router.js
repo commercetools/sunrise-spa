@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import store from '@/store/store';
-import TheHeader from '@/views/TheHeader.vue';
-import HomePage from '@/views/HomePage.vue';
-import ProductOverviewPage from '@/views/ProductOverviewPage.vue';
-import LoginPage from '@/views/LoginPage.vue';
-import MyAccountPage from '@/views/MyAccountPage.vue';
-import NotFoundPage from '@/views/NotFoundPage.vue';
-import ProductDetailPage from '@/views/ProductDetailPage.vue';
+import TheHeader from '@/components/header/TheHeader.vue';
+import HomePage from '@/components/home/HomePage.vue';
+import ProductOverviewPage from '@/components/productoverview/ProductOverviewPage.vue';
+import LoginPage from '@/components/login/LoginPage.vue';
+import MyAccountPage from '@/components/useraccount/UserAccountPage.vue';
+import NotFoundPage from '@/components/common/NotFoundPage.vue';
+import ProductDetailPage from '@/components/productdetail/ProductDetailPage.vue';
 
 Vue.use(Router);
 

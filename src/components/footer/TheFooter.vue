@@ -36,39 +36,24 @@
             </div>
           </div>
           <div class="col-sm-6 text-center newsletter-box">
-            <div class="row">
-              <div class="col-sm-5 text-left footer-title-yellow">
-                <p>{{ $t("joinNewsletter") }}</p>
-              </div>
-              <div class="col-sm-7">
-                <form action="#" method="POST" id="form-newsletter" class="email-submit">
-                  <!--<input type="hidden" name="csrfToken" value="{{@root.meta.csrfToken}}"/>-->
-                  <input name="email" id="newsletter-input" class="email-box" type="email"
-                         :placeholder="$t('yourEmail')" required>
-                  <button id="newsletter-button" type="submit" class="search-button">
-                    <span class="icon-font icon-next"></span>
-                    <span class="sr-only">{{ $t("subscribe") }}</span>
-                  </button>
-                </form>
-              </div>
-            </div>
+            <NewsletterForm/>
             <div class="row">
               <div class="col-sm-8 text-left card-info footer-title">
                 <p>{{ $t("paySecure") }}</p>
-                <img src="../assets/img/cards.png" alt="payment types"
+                <img src="../../assets/img/cards.png" alt="payment types"
                      class="img-responsive payment-cards"/>
               </div>
               <div class="col-sm-4 text-left card-info footer-title">
                 <p>{{ $t("followUs") }}</p>
                 <ul class="social-icons">
                   <li><a href="#">
-                    <img class="social-icon" src="../assets/img/Facebook.png" alt="Facebook">
+                    <img class="social-icon" src="../../assets/img/Facebook.png" alt="Facebook">
                   </a></li>
                   <li><a href="#">
-                    <img class="social-icon" src="../assets/img/Pinterest.png" alt="Pinterest">
+                    <img class="social-icon" src="../../assets/img/Pinterest.png" alt="Pinterest">
                   </a></li>
                   <li><a href="#">
-                    <img class="social-icon" src="../assets/img/Google.png" alt="Google+">
+                    <img class="social-icon" src="../../assets/img/Google.png" alt="Google+">
                   </a></li>
                 </ul>
               </div>
@@ -95,15 +80,22 @@
   </footer>
 </template>
 
+<script>
+import NewsletterForm from './NewsletterForm.vue';
+
+export default {
+  components: {
+    NewsletterForm,
+  },
+};
+</script>
+
 <!-- eslint-disable -->
 <i18n>
 {
   "en": {
     "paySecure": "Pay securely with these payment methods",
     "followUs": "Follow us",
-    "joinNewsletter": "Join our newsletter",
-    "subscribe": "Subscribe",
-    "yourEmail": "Your email...",
     "customerCare": "Customer Care",
     "contactUs": "Contact Us",
     "help": "Help",
@@ -126,9 +118,6 @@
   "de": {
     "paySecure": "Sicher zahlen",
     "followUs": "Follow us",
-    "joinNewsletter": "Newsletter abonnieren",
-    "subscribe": "Anmelden",
-    "yourEmail": "Ihre E-Mail-Adresse...",
     "customerCare": "Kundenservice",
     "contactUs": "Kontaktieren Sie uns",
     "help": "Hilfe",

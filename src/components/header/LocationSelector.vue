@@ -5,7 +5,7 @@
     <button @click="toggle = !toggle"
             data-test="location-selector-open-button">
       <img class="pull-right"
-           src="../assets/img/globe-2.png"
+           src="../../assets/img/globe-2.png"
            :alt="$t('main.header.location')">
     </button>
     <transition name="fade">

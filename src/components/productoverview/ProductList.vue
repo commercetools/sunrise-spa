@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="!products">
-      <img src="../assets/img/spinner.gif"/>
+      <img src="../../assets/img/spinner.gif"/>
     </div>
     <div v-else-if="!products.results.length">
       {{ $t('catalog.searchNotFound.notFound') }}
@@ -20,7 +20,7 @@
 
 <script>
 import gql from 'graphql-tag';
-import ProductThumbnail from '@/components/ProductThumbnail.vue';
+import ProductThumbnail from '../common/ProductThumbnail.vue';
 
 export default {
   components: {

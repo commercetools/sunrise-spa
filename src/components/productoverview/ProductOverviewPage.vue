@@ -91,8 +91,8 @@
 </template>
 
 <script>
-import ProductList from '@/components/ProductList.vue';
-import Breadcrumb from '@/components/Breadcrumb.vue';
+import ProductList from './ProductList.vue';
+import Breadcrumb from '../common/Breadcrumb.vue';
 
 export default {
   components: {
