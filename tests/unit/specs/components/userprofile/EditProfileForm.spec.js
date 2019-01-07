@@ -1,9 +1,9 @@
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import { ApolloError } from 'apollo-client';
-import EditProfileForm from '@/components/EditProfileForm.vue';
-import ServerError from '@/components/ServerError.vue';
-import ValidationError from '@/components/ValidationError.vue';
+import EditProfileForm from '@/components/useraccount/EditProfileForm.vue';
+import ServerError from '@/components/common/ServerError.vue';
+import ValidationError from '@/components/common/ValidationError.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuelidate);

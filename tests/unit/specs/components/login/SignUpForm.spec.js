@@ -1,9 +1,9 @@
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import { ApolloError } from 'apollo-client';
-import SignUpForm from '@/components/SignUpForm.vue';
-import ServerError from '@/components/ServerError.vue';
-import ValidationError from '@/components/ValidationError.vue';
+import SignUpForm from '@/components/login/SignUpForm.vue';
+import ServerError from '@/components/common/ServerError.vue';
+import ValidationError from '@/components/common/ValidationError.vue';
 
 jest.mock('@/auth', () => ({ clientLogin: jest.fn() }));
 

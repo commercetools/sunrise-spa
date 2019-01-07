@@ -1,7 +1,7 @@
 import VueI18n from 'vue-i18n';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import { ApolloError } from 'apollo-client';
-import ServerError from '@/components/ServerError.vue';
+import ServerError from '@/components/common/ServerError.vue';
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);
