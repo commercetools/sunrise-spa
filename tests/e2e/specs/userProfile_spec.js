@@ -1,17 +1,20 @@
-import { randomCustomer } from '../support/utils';
-
 describe('user profile', () => {
-  let oldCustomer;
-  let newCustomer;
+  const oldCustomer = {
+    firstName: 'Charlie',
+    lastName: 'Bucket',
+    email: 'charlie.bucket+ci@commercetools.com',
+    password: 'p@ssword',
+  };
+
+  const newCustomer = {
+    firstName: `new-${oldCustomer.firstName}`,
+    lastName: `new-${oldCustomer.lastName}`,
+    email: `new-${oldCustomer.email}`,
+  };
 
   before(() => {
-    oldCustomer = randomCustomer();
-    newCustomer = {
-      firstName: `new-${oldCustomer.firstName}`,
-      lastName: `new-${oldCustomer.lastName}`,
-      email: `new-${oldCustomer.email}`,
-    };
-    cy.signup(oldCustomer);
+    cy.deleteCustomer(newCustomer);
+    cy.login(oldCustomer);
   });
 
   it('updates customer info', () => {

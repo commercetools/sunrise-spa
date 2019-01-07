@@ -7,6 +7,7 @@ import ProductOverviewPage from '@/views/ProductOverviewPage.vue';
 import LoginPage from '@/views/LoginPage.vue';
 import MyAccountPage from '@/views/MyAccountPage.vue';
 import NotFoundPage from '@/views/NotFoundPage.vue';
+import ProductDetailPage from '@/views/ProductDetailPage.vue';
 
 Vue.use(Router);
 
@@ -63,6 +64,18 @@ const router = new Router({
         header: TheHeader,
       },
       meta: { requiresAuth },
+    },
+    {
+      path: '/product/:productSlug/:sku',
+      name: 'product',
+      components: {
+        default: ProductDetailPage,
+        header: TheHeader,
+      },
+      props: {
+        default: true,
+        header: false,
+      },
     },
   ],
 });
