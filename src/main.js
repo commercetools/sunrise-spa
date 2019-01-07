@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import App from '@/App.vue';
-import SelectBoxIt from '@/components/global/SelectBoxIt.vue';
+import SelectBoxIt from '@/components/common/SelectBoxIt.vue';
 import Vuelidate from 'vuelidate';
 import router from '@/router';
 import store from '@/store/store';

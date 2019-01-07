@@ -38,8 +38,8 @@
 </template>
 
 <script>
-import Breadcrumb from '@/components/Breadcrumb.vue';
-import ProductInfo from '@/components/ProductInfo.vue';
+import Breadcrumb from '../common/Breadcrumb.vue';
+import ProductInfo from './ProductInfo.vue';
 
 export default {
   props: {

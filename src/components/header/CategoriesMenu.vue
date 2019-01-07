@@ -16,7 +16,7 @@
           {{category1stLevel.name}}
           <img :alt="$t('more')"
                class="mobile-plus-content visible-xs"
-               src="../assets/img/plus79.png"/>
+               src="../../assets/img/plus79.png"/>
         </router-link>
         <ul v-if="isMenuOpen(category1stLevel)"
             class="dropdown-menu megamenu row dropdown-submenu">
@@ -46,7 +46,7 @@
           </li>
           <li class="col-sm-4 hidden-xs">
             <img :alt="$t('teaser')"
-                 src="../assets/img/menu-teaser.jpg"
+                 src="../../assets/img/menu-teaser.jpg"
                  class="img-responsive megamenu-img">
           </li>
         </ul>

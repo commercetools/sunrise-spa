@@ -60,7 +60,7 @@
       <button data-test="add-to-cart-button"
               class="add-to-bag-btn">
         <img class="bag-thumb"
-             src="../assets/img/hand-bag-2-black.png"
+             src="../../assets/img/hand-bag-2-black.png"
              alt="$t('cart.add')">
         {{ $t('cart.add') }}
       </button>
@@ -94,7 +94,7 @@
                        @click="openAccordion">
                       {{ $t('details.title') }}
                       <img class="accordion-plus"
-                           src="../assets/img/plus79.png"
+                           src="../../assets/img/plus79.png"
                            alt="accordion content">
                     </a>
                 </h4>
@@ -137,7 +137,7 @@
                      @click="openAccordion">
                   {{ $t('delivery.title') }}
                     <img class="accordion-plus"
-                         src="../assets/img/plus79.png"
+                         src="../../assets/img/plus79.png"
                          alt="accordion content" />
                   </a>
                 </h4>
@@ -174,21 +174,21 @@
               <a href="">
                 <li>
                   <img class="social-icon"
-                       src="../assets/img/Facebook.png"
+                       src="../../assets/img/Facebook.png"
                        alt="facebook">
                 </li>
               </a>
               <a href="">
                 <li>
                   <img class="social-icon"
-                       src="../assets/img/Pinterest.png"
+                       src="../../assets/img/Pinterest.png"
                        alt="pinterest">
                 </li>
               </a>
               <a href="">
                 <li>
                   <img class="social-icon"
-                       src="../assets/img/Google.png"
+                       src="../../assets/img/Google.png"
                        alt="google plus">
                 </li>
               </a>
@@ -204,9 +204,9 @@
 
 <script>
 import gql from 'graphql-tag';
-import ProductGallery from '@/components/ProductGallery.vue';
 import priceMixin from '@/mixins/priceMixin';
 import productMixin from '@/mixins/productMixin';
+import ProductGallery from './ProductGallery.vue';
 
 export default {
   components: {

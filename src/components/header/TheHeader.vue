@@ -68,7 +68,7 @@
       <div class="row logo-search">
         <div class="col-sm-8">
           <router-link to="/" class="brand-logo">
-            <img class="img-responsive" src="../assets/img/logo.svg" alt="SUNRISE"/>
+            <img class="img-responsive" src="../../assets/img/logo.svg" alt="SUNRISE"/>
           </router-link>
         </div>
         <div class="col-sm-4">
@@ -105,9 +105,9 @@
 </template>
 
 <script>
-import LocationSelector from '@/components/LocationSelector.vue';
-import CategoriesMenu from '@/components/CategoriesMenu.vue';
-import LoginHeaderButton from '@/components/LoginHeaderButton.vue';
+import LocationSelector from './LocationSelector.vue';
+import CategoriesMenu from './CategoriesMenu.vue';
+import LoginHeaderButton from './LoginButton.vue';
 
 export default {
   components: {

@@ -5,7 +5,7 @@
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" :aria-label='$t("main.close")'>
           <span aria-hidden="true">
-            <img src="../assets/img/close.png" :alt='$t("main:close")' />
+            <img src="../../assets/img/close.png" :alt='$t("main:close")' />
           </span>
           </button>
         </div>

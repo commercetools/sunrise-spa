@@ -70,8 +70,8 @@
 import { required, email } from 'vuelidate/lib/validators';
 import gql from 'graphql-tag';
 import { clientLogin } from '@/auth';
-import ServerError from '@/components/ServerError.vue';
-import ValidationError from '@/components/ValidationError.vue';
+import ServerError from '../common/ServerError.vue';
+import ValidationError from '../common/ValidationError.vue';
 
 export default {
   components: { ServerError, ValidationError },
