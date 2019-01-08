@@ -1,5 +1,5 @@
 <template>
-  <li v-if="active"
+  <li v-if="languages.length"
       data-test="location-selector"
       class="list-item-location clearfix">
     <button @click="toggle = !toggle"
@@ -50,10 +50,6 @@ export default {
       const configLangs = this.$sunrise.languages;
       const langs = configLangs ? Object.entries(configLangs) : [];
       return langs.map(([id, name]) => ({ id, name }));
-    },
-
-    active() {
-      return this.languages.length > 0;
     },
   },
 

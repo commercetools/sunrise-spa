@@ -27,7 +27,10 @@ import LoginForm from './LoginForm.vue';
 import SignUpForm from './SignUpForm.vue';
 
 export default {
-  components: { LoginForm, SignUpForm },
+  components: {
+    LoginForm,
+    SignUpForm,
+  },
 };
 </script>
 

@@ -24,7 +24,6 @@ describe('LocationSelector.vue', () => {
     const wrapper = shallowMount(LocationSelector, options);
 
     expect(wrapper.vm.languages).toEqual([{ id: 'it', name: 'Italiano' }, { id: 'es', name: 'Español' }]);
-    expect(wrapper.vm.active).toBe(true);
     expect(wrapper.find('[data-test="location-selector"]').exists()).toBe(true);
   });
 
@@ -32,7 +31,6 @@ describe('LocationSelector.vue', () => {
     const wrapper = shallowMount(LocationSelector);
 
     expect(wrapper.vm.languages).toEqual([]);
-    expect(wrapper.vm.active).toBe(false);
     expect(wrapper.find('[data-test="location-selector"]').exists()).toBe(false);
   });
 });
