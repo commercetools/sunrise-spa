@@ -1,5 +1,6 @@
 <template>
-  <div class="row">
+  <div v-if="product"
+       class="row">
     <div class="col-sm-12">
       <div data-test="panel-group-pdp"
            class="panel-group panel-group-pdp"
@@ -96,11 +97,29 @@
 </template>
 
 <script>
+import gql from 'graphql-tag';
 import DetailsSection from './DetailsSection.vue';
 
 export default {
   components: {
     DetailsSection,
+  },
+
+  props: {
+    sku: {
+      type: String,
+      required: true,
+    },
+  },
+
+  data: () => ({
+    product: null,
+  }),
+
+  computed: {
+    productAttributes() {
+      return this.product.masterData.current.variant.attributes;
+    },
   },
 
   methods: {
@@ -113,6 +132,60 @@ export default {
 
       // Remove minus class on all other buttons
       contextPanelGroup.find('.accordion-plus').not(contextButton).removeClass('accordion-minus');
+    },
+  },
+
+  apollo: {
+    product: {
+      query: gql`
+        query ProductDetailsSection($locale: Locale!, $sku: String!) {
+          product(sku: $sku) {
+            id
+            masterData {
+              current {
+                variant(sku: $sku) {
+                  attributes {
+                    ...on mainProductType {
+                      designer {
+                        label
+                        key
+                        name
+                      }
+                      colorFreeDefinition {
+                        value(locale: $locale)
+                        name
+                      }
+                      size {
+                        value
+                        name
+                      }
+                      style {
+                        key
+                        label
+                        name
+                      }
+                      gender {
+                        key
+                        label
+                        name
+                      }
+                      articleNumberManufacturer {
+                        name
+                        value
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }`,
+      variables() {
+        return {
+          locale: this.$i18n.locale,
+          sku: this.sku,
+        };
+      },
     },
   },
 };

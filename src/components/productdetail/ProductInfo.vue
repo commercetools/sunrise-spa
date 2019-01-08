@@ -2,8 +2,7 @@
   <div v-if="product">
     <div data-test="product-gallery"
          class="col-md-4 col-md-offset-1 col-sm-6 product-gallery">
-      <ProductGallery v-if="images"
-                      :productImages="images" />
+      <ProductGallery :sku="sku" />
     </div>
     <div data-test="product-data"
          class="col-sm-6 product-description">
@@ -63,7 +62,7 @@
           <!-- {{> catalog/product-availability availability=product.availability}} -->
         </div>
       </div>
-      <DetailsSection/>
+      <DetailsSection :sku="sku"/>
       <SocialMediaLinks/>
     </div>
   </div>
@@ -99,14 +98,6 @@ export default {
     matchingVariant() {
       return this.currentProduct.variant || {};
     },
-
-    images() {
-      return this.matchingVariant.images;
-    },
-
-    productAttributes() {
-      return this.matchingVariant.attributes;
-    },
   },
 
   mixins: [priceMixin, productMixin],
@@ -123,40 +114,6 @@ export default {
                 slug(locale: $locale)
                 variant(sku: $sku) {
                   sku
-                  attributes {
-                    ...on mainProductType {
-                      designer {
-                        label
-                        key
-                        name
-                      }
-                      colorFreeDefinition {
-                        value(locale: $locale)
-                        name
-                      }
-                      size {
-                        value
-                        name
-                      }
-                      style {
-                        key
-                        label
-                        name
-                      }
-                      gender {
-                        key
-                        label
-                        name
-                      }
-                      articleNumberManufacturer {
-                        name
-                        value
-                      }
-                    }
-                  }
-                  images {
-                    url
-                  }
                   price(currency: $currency) {
                     value {
                       ...printPrice
