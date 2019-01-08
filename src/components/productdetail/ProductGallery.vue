@@ -1,20 +1,31 @@
 <template>
-  <ProductZoomer data-test="product-image"
-                 :base-images="images"
+  <ProductZoomer v-if="product"
+                 data-test="product-image"
+                 :base-images="zoomerImages"
                  :base-zoomer-options="zoomerOptions" />
 </template>
 
 <script>
+import gql from 'graphql-tag';
+
 export default {
   props: {
-    productImages: {
-      type: Array,
-      default: () => [],
+    sku: {
+      type: String,
+      required: true,
     },
   },
 
+  data: () => ({
+    product: null,
+  }),
+
   computed: {
-    images() {
+    productImages() {
+      return this.product.masterData.current.variant.images;
+    },
+
+    zoomerImages() {
       const imageInfos = this.productImages.map((image, index) => ({
         id: index,
         url: image.url,
@@ -40,6 +51,31 @@ export default {
 
     galleryThumbnailsCount() {
       return Math.min(this.productImages.length, 3);
+    },
+  },
+
+  apollo: {
+    product: {
+      query: gql`
+        query ProductGallery($sku: String!) {
+          product(sku: $sku) {
+            id
+            masterData {
+              current {
+                variant(sku: $sku) {
+                  images {
+                    url
+                  }
+                }
+              }
+            }
+          }
+        }`,
+      variables() {
+        return {
+          sku: this.sku,
+        };
+      },
     },
   },
 };
