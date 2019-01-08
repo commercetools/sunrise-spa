@@ -14,7 +14,7 @@
             </h1>
             <span data-test="product-sku"
                   class="grey-p quickview-sku">
-              {{ matchingVariant.sku }}
+              {{ sku }}
             </span>
         </div>
       </div>
@@ -86,8 +86,10 @@ export default {
   },
 
   props: {
-    productSlug: String,
-    sku: String,
+    sku: {
+      type: String,
+      required: true,
+    },
   },
 
   data: () => ({
@@ -113,7 +115,6 @@ export default {
                 name(locale: $locale)
                 slug(locale: $locale)
                 variant(sku: $sku) {
-                  sku
                   price(currency: $currency) {
                     value {
                       ...printPrice
