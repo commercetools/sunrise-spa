@@ -18,13 +18,8 @@ describe('ProductInfo.vue', () => {
       methods: { formatPrice: jest.fn() },
       mocks: {
         $t: jest.fn(),
-        $apollo: {
-          queries: {
-            product: { loading: false },
-          },
-        },
       },
-      propsData: { product },
+      propsData: { sku: 'product-sku' },
     };
   });
 
@@ -39,21 +34,5 @@ describe('ProductInfo.vue', () => {
 
     wrapper.setData({ product });
     expect(wrapper.vm.matchingVariant).toEqual(matchingVariant);
-  });
-
-  it('obtains attributes of the product', () => {
-    const productAttributes = [{ foo: 'bar' }, { bar: 'foo' }];
-    product.masterData.current.variant.attributes = productAttributes;
-    const wrapper = shallowMount(ProductInfo, options);
-
-    wrapper.setData({ product });
-    expect(wrapper.vm.productAttributes).toEqual(productAttributes);
-  });
-
-  it('obtains images of the product', () => {
-    product.masterData.current.variant.images = [{}, {}];
-    const wrapper = shallowMount(ProductInfo, options);
-    wrapper.setData({ product });
-    expect(wrapper.vm.images).toBeTruthy();
   });
 });
