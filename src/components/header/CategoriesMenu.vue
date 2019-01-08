@@ -13,7 +13,7 @@
                      data-test="category-1st-level-link"
                      :class="{ 'icon-ribbon sale': isSale(category1stLevel) }"
                      class="dropdown-toggle">
-          {{category1stLevel.name}}
+          {{ category1stLevel.name }}
           <img :alt="$t('more')"
                class="mobile-plus-content visible-xs"
                src="../../assets/img/plus79.png"/>
@@ -28,7 +28,7 @@
                   <router-link :to="{ name: 'products', params: { categorySlug: category2ndLevel.slug } }"
                                @click.native="clickOnCategory()"
                                data-test="category-2nd-level-link">
-                    {{category2ndLevel.name}}
+                    {{ category2ndLevel.name }}
                   </router-link>
                 </h3>
                 <ul>
@@ -37,7 +37,7 @@
                     <router-link :to="{ name: 'products', params: { categorySlug: category3rdLevel.slug } }"
                                  @click.native="clickOnCategory()"
                                  data-test="category-3rd-level-link">
-                      {{category3rdLevel.name}}
+                      {{ category3rdLevel.name }}
                     </router-link>
                   </li>
                 </ul>

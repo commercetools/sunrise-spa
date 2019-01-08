@@ -1,12 +1,10 @@
 <template>
   <div class="navbar navbar-fixed-top">
-
     <div class="header">
       <header class="container">
         <div class="row">
           <div class="col-xs-12">
             <ul class="nav-list">
-
               <!-- Toggle the menu on mobile -->
               <li class="list-item-nav-toggle">
                 <button type="button"
@@ -55,8 +53,7 @@
                 <!--{{> common/mini-cart miniCart=header.miniCart}}-->
               </li>
 
-              <LoginHeaderButton/>
-
+              <LoginButton/>
               <LocationSelector/>
             </ul>
           </div>
@@ -107,13 +104,13 @@
 <script>
 import LocationSelector from './LocationSelector.vue';
 import CategoriesMenu from './CategoriesMenu.vue';
-import LoginHeaderButton from './LoginButton.vue';
+import LoginButton from './LoginButton.vue';
 
 export default {
   components: {
-    LoginHeaderButton,
     LocationSelector,
     CategoriesMenu,
+    LoginButton,
   },
 };
 </script>
