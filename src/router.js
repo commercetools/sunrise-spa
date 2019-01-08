@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import store from '@/store/store';
+import store from '@/store';
 import TheHeader from '@/components/header/TheHeader.vue';
 import HomePage from '@/components/home/HomePage.vue';
 import ProductOverviewPage from '@/components/productoverview/ProductOverviewPage.vue';
