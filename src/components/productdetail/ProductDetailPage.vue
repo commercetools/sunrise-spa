@@ -9,8 +9,7 @@
         </div>
         <div class="row product-info-row-pdp">
           <!-- {{> catalog/pdp/product-info product=content.product deliveryRates=content.deliveryRates}} -->
-        <ProductInfo :productSlug="productSlug"
-                     :sku="sku" />
+        <ProductInfo :sku="sku" />
         </div>
       </div>
     </div>
