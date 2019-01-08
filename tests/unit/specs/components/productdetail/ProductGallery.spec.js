@@ -72,22 +72,28 @@ describe('Product gallery', () => {
     });
   });
 
-  it('checks whether number of thumbnail is correct', () => {
-    const productImagesMock = jest.fn();
-    options.computed = { productImages: productImagesMock };
-    const wrapper = shallowMount(ProductGallery, options);
+  describe('in order to obtain the number of thumbnails', () => {
+    it('returns 0 when there are no images', () => {
+      options.computed = { productImages: jest.fn(() => []) };
+      const wrapper = shallowMount(ProductGallery, options);
+      expect(wrapper.vm.galleryThumbnailsCount).toEqual(0);
+    });
 
-    productImagesMock.mockReturnValueOnce([]);
-    expect(wrapper.vm.galleryThumbnailsCount).toEqual(0);
+    it('returns the images count', () => {
+      options.computed = { productImages: jest.fn(() => [{}, {}]) };
+      const wrapper = shallowMount(ProductGallery, options);
+      expect(wrapper.vm.galleryThumbnailsCount).toEqual(2);
+    });
 
-    productImagesMock.mockReturnValueOnce([{}, {}]);
-    expect(wrapper.vm.galleryThumbnailsCount).toEqual(2);
-
-    productImagesMock.mockReturnValueOnce([{}, {}, {}, {}, {}]);
-    expect(wrapper.vm.galleryThumbnailsCount).toEqual(3);
+    it('returns 3 when there is more than 3 images', () => {
+      options.computed = { productImages: jest.fn(() => [{}, {}, {}, {}, {}]) };
+      const wrapper = shallowMount(ProductGallery, options);
+      expect(wrapper.vm.galleryThumbnailsCount).toEqual(3);
+    });
   });
 
   it('does not fail when there are no images', () => {
+    options.computed = { productImages: jest.fn(() => []) };
     const wrapper = shallowMount(ProductGallery, options);
     expect(wrapper.vm.zoomerImages).toEqual({ large_size: [], normal_size: [], thumbs: [] });
   });
