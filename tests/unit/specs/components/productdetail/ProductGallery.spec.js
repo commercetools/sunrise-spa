@@ -2,19 +2,29 @@ import { shallowMount } from '@vue/test-utils';
 import ProductGallery from '@/components/productdetail/ProductGallery.vue';
 
 describe('Product gallery', () => {
-  const productImages = [
-    {
-      url: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/079536_1_large.jpg',
-    },
-    {
-      url: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/079535_1_large.jpg',
-    },
-  ];
-
   let options;
+  let product;
 
   beforeEach(() => {
+    product = {
+      masterData: {
+        current: {
+          variant: {
+            images: [
+              {
+                url: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/079536_1_large.jpg',
+              },
+              {
+                url: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/079535_1_large.jpg',
+              },
+            ],
+          },
+        },
+      },
+    };
+
     options = {
+      propsData: { sku: 'product-sku' },
       stubs: { ProductZoomer: true },
     };
   });
@@ -25,8 +35,8 @@ describe('Product gallery', () => {
 
   it('tranforms product images into ProductZoomer structure', () => {
     const wrapper = shallowMount(ProductGallery, options);
-    wrapper.setProps({ productImages });
-    expect(wrapper.vm.images).toEqual({
+    wrapper.setData({ product });
+    expect(wrapper.vm.zoomerImages).toEqual({
       thumbs: [
         {
           id: 0,
@@ -63,18 +73,22 @@ describe('Product gallery', () => {
   });
 
   it('checks whether number of thumbnail is correct', () => {
+    const productImagesMock = jest.fn();
+    options.computed = { productImages: productImagesMock };
     const wrapper = shallowMount(ProductGallery, options);
+
+    productImagesMock.mockReturnValueOnce([]);
     expect(wrapper.vm.galleryThumbnailsCount).toEqual(0);
 
-    wrapper.setProps({ productImages: [{}, {}] });
+    productImagesMock.mockReturnValueOnce([{}, {}]);
     expect(wrapper.vm.galleryThumbnailsCount).toEqual(2);
 
-    wrapper.setProps({ productImages: [{}, {}, {}, {}, {}] });
+    productImagesMock.mockReturnValueOnce([{}, {}, {}, {}, {}]);
     expect(wrapper.vm.galleryThumbnailsCount).toEqual(3);
   });
 
   it('does not fail when there are no images', () => {
     const wrapper = shallowMount(ProductGallery, options);
-    expect(wrapper.vm.images).toEqual({ large_size: [], normal_size: [], thumbs: [] });
+    expect(wrapper.vm.zoomerImages).toEqual({ large_size: [], normal_size: [], thumbs: [] });
   });
 });

@@ -66,7 +66,6 @@ export default {
                 current {
                   name(locale: $locale)
                   slug(locale: $locale)
-
                   masterVariant {
                     sku
                     images {
