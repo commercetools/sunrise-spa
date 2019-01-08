@@ -16,9 +16,7 @@ describe('ProductInfo.vue', () => {
 
     options = {
       methods: { formatPrice: jest.fn() },
-      mocks: {
-        $t: jest.fn(),
-      },
+      mocks: { $t: jest.fn() },
       propsData: { sku: 'product-sku' },
     };
   });
