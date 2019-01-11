@@ -35,47 +35,8 @@
 import gql from 'graphql-tag';
 import priceMixin from '@/mixins/priceMixin';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.graphql';
+import UpdatableCartInfoFragment from '@/components/UpdatableCartInfo.graphql';
 import LineItem from './LineItem.vue';
-
-const UpdatableCartInfoFragment = gql`
-  fragment UpdatableCartInfo on Cart {
-    id
-    version
-    totalPrice {
-      ...DisplayableMoney
-    }
-    shippingInfo {
-      price {
-        ...DisplayableMoney
-      }
-    }
-    taxedPrice {
-      totalGross {
-        ...DisplayableMoney
-      }
-      totalNet {
-        ...DisplayableMoney
-      }
-    }
-    lineItems {
-      id
-      quantity
-      price {
-        value {
-          ...DisplayableMoney
-        }
-        discounted {
-          value {
-            ...DisplayableMoney
-          }
-        }
-      }
-      totalPrice {
-        ...DisplayableMoney
-      }
-    }
-  }
-  ${DisplayableMoneyFragment}`;
 
 export default {
   components: { LineItem },

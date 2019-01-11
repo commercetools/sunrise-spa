@@ -98,7 +98,10 @@ const customerInfoFragment = gql`
   }`;
 
 export default {
-  components: { ValidationError, ServerError },
+  components: {
+    ValidationError,
+    ServerError,
+  },
 
   data: () => ({
     me: null,
