@@ -44,6 +44,9 @@
   .active {
     background: $wild-sand;
   }
+  button {
+    text-transform: uppercase;
+  }
 }
 .sidebar-wishlist-heart {
   height: 15px;
