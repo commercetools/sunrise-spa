@@ -292,16 +292,6 @@
     }
   },
   "myAccount": {
-    "myAccountSidebar": {
-      "personalDetails": "Meine Benutzerdaten",
-      "addressBook": "Adressbuch",
-      "paymentDetails": "Meine Zahlungdaten",
-      "myOrders": "Meine Bestellungen",
-      "returnsExchange": "Meine Retouren",
-      "wishlist": "Wunschliste",
-      "signOut": "Abmelden",
-      "changePassword": "Passwort ändern"
-    },
     "addressBook": {
       "title": "Addressbuch",
       "defaultAddresses": {

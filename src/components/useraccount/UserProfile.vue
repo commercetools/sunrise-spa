@@ -4,6 +4,14 @@
     <div class="row">
       <div class="col-sm-3">
         <!--{{> myaccount/my-account-sidebar myPersonalDetailsTab=true}}-->
+        <div class="my-account-sidebar">
+          <div class="my-account-sidebar-items">
+            <router-link :to="{ name:'login' }"
+                          @click="logout">
+              {{ $t("myAccountSidebar.signOut") }}
+            </router-link>
+          </div>
+        </div>
       </div>
       <div id="my-account-desktop-content" class="col-sm-9">
         <div class="personal-details">
@@ -53,6 +61,7 @@
 
 <script>
 import gql from 'graphql-tag';
+import { clientLogout } from '@/auth';
 import EditProfileForm from './EditProfileForm.vue';
 
 export default {
@@ -61,6 +70,12 @@ export default {
   data: () => ({
     showEditForm: false,
   }),
+
+  methods: {
+    logout() {
+      clientLogout().then(() => this.$router.replace({ query: { logout: true } }));
+    },
+  },
 
   apollo: {
     me: {
@@ -89,13 +104,33 @@ export default {
     "title": "Your Personal Details",
     "welcomeBack": "Welcome back, {name}",
     "welcomeDescription": "for an even better customer service please provide your customer number",
-    "subscribedToNewsletter": "Subscribed to weekly newsletter"
+    "subscribedToNewsletter": "Subscribed to weekly newsletter",
+    "myAccountSidebar": {
+      "personalDetails": "Personal Details",
+      "addressBook": "Address Book",
+      "paymentDetails": "Payment Details",
+      "myOrders": "My Orders",
+      "returnsExchange": "Returns / Exchange",
+      "wishlist": "Wishlist",
+      "signOut": "Sign Out",
+      "changePassword": "Change password"
+    }
   },
   "de": {
     "title": "Ihre Benutzerdaten",
     "welcomeBack": "Willkommen zurück, {name}",
     "welcomeDescription": "Für einen besseren Kundenservice geben Sie bitte Ihre Kundennummer an.",
-    "subscribedToNewsletter": "Subscribed to weekly newsletter"
+    "subscribedToNewsletter": "Subscribed to weekly newsletter",
+    "myAccountSidebar": {
+      "personalDetails": "Meine Benutzerdaten",
+      "addressBook": "Adressbuch",
+      "paymentDetails": "Meine Zahlungdaten",
+      "myOrders": "Meine Bestellungen",
+      "returnsExchange": "Meine Retouren",
+      "wishlist": "Wunschliste",
+      "signOut": "Abmelden",
+      "changePassword": "Passwort ändern"
+    }
   }
 }
 </i18n>
