@@ -1,34 +1,34 @@
 <template>
-  <li class="list-item-user">
-    <ul class="nav-list">
-      <li v-if="showLoggedIn"
-          class="list-item-user">
-        <button @click="logout"
-           class="link-user"
-           data-test="logout-button">
-          <span>{{ $t("signOut") }}</span>
-        </button>
-      </li>
-      <li v-if="showLoggedIn"
-          class="list-item-user">
-        <router-link :to="{ name: 'user' }"
-                     data-test="login-info-name"
-                     class="link-user icon-user">
-          <span class="hidden-xs hidden-sm">{{ me.customer.firstName }}</span>
-        </router-link>
-      </li>
-      <li v-else
-          class="list-item-user"
-          data-test="login-button">
-        <router-link :to="{ name: 'login' }"
-                     class="link-user icon-user">
-          <span class="hidden-xs hidden-sm">
-            {{ $t("signIn") }}
-          </span>
-        </router-link>
-      </li>
-    </ul>
-  </li>
+<li class="list-item-user">
+  <ul class="nav-list">
+    <li v-if="showLoggedIn"
+      class="list-item-user hidden-xs">
+      <button @click="logout"
+              class="link-user"
+              data-test="logout-button">
+        <span>{{ $t("signOut") }}</span>
+      </button>
+    </li>
+    <li v-if="showLoggedIn"
+        class="list-item-user">
+      <router-link :to="{ name: 'user' }"
+                  data-test="login-info-name"
+                  class="link-user icon-user">
+        <span class="hidden-xs hidden-sm">{{ me.customer.firstName }}</span>
+      </router-link>
+    </li>
+    <li v-else
+        class="list-item-user"
+        data-test="login-button">
+      <router-link :to="{ name: 'login' }"
+                    class="link-user icon-user">
+        <span class="hidden-xs hidden-sm">
+          {{ $t("signIn") }}
+        </span>
+      </router-link>
+    </li>
+  </ul>
+</li>
 </template>
 
 <script>
@@ -80,3 +80,12 @@ export default {
   }
  }
 </i18n>
+
+<style lang="scss">
+  .list-item-user > .nav-list > .list-item-user {
+    @media screen and (max-width: 767px) {
+      width: 100%;
+      border: none; 
+    }
+  }
+</style>
