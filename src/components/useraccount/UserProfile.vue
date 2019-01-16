@@ -10,14 +10,15 @@
             <span>Personal Details</span>
           </div>
           <div class="my-account-sidebar-items">
-            <router-link :to="{ name:'login' }"
-                          @click="logout">
-              {{ $t("myAccountSidebar.signOut") }}
-            </router-link>
+            <button @click="logout">
+              <span>
+                {{ $t("myAccountSidebar.signOut") }}
+              </span>
+            </button>
           </div>
-
         </div>
       </div>
+
       <div id="my-account-desktop-content" class="col-sm-9">
         <div class="personal-details">
           <div class="personal-details-text-one">
