@@ -2,10 +2,10 @@
   <li class="list-item-user">
     <ul class="nav-list">
       <li v-if="showLoggedIn"
-          class="list-item-user">
+          class="list-item-user hidden-xs">
         <button @click="logout"
-           class="link-user"
-           data-test="logout-button">
+                class="link-user"
+                data-test="logout-button">
           <span>{{ $t("signOut") }}</span>
         </button>
       </li>
@@ -80,3 +80,13 @@ export default {
   }
  }
 </i18n>
+
+<style lang="scss">
+  .list-item-user > .nav-list > .list-item-user {
+    @media screen and (max-width: 767px) {
+      width: 100%;
+      border: none; 
+    }
+  }
+</style>
+
