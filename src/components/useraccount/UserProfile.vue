@@ -5,12 +5,17 @@
       <div class="col-sm-3">
         <!--{{> myaccount/my-account-sidebar myPersonalDetailsTab=true}}-->
         <div class="my-account-sidebar">
+          <div id="my-account-mobile-content"
+               class="my-account-sidebar-items active">
+            <span>Personal Details</span>
+          </div>
           <div class="my-account-sidebar-items">
             <router-link :to="{ name:'login' }"
                           @click="logout">
               {{ $t("myAccountSidebar.signOut") }}
             </router-link>
           </div>
+
         </div>
       </div>
       <div id="my-account-desktop-content" class="col-sm-9">
