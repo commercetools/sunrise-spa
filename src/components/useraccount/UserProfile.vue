@@ -4,19 +4,7 @@
     <div class="row">
       <div class="col-sm-3">
         <!--{{> myaccount/my-account-sidebar myPersonalDetailsTab=true}}-->
-        <div class="my-account-sidebar">
-          <div id="my-account-mobile-content"
-               class="my-account-sidebar-items active">
-            <span>Personal Details</span>
-          </div>
-          <div class="my-account-sidebar-items">
-            <button @click="logout">
-              <span>
-                {{ $t("myAccountSidebar.signOut") }}
-              </span>
-            </button>
-          </div>
-        </div>
+        <SidebarMenu/>
       </div>
 
       <div id="my-account-desktop-content" class="col-sm-9">
@@ -67,21 +55,15 @@
 
 <script>
 import gql from 'graphql-tag';
-import { clientLogout } from '@/auth';
 import EditProfileForm from './EditProfileForm.vue';
+import SidebarMenu from './SidebarMenu.vue';
 
 export default {
-  components: { EditProfileForm },
+  components: { EditProfileForm, SidebarMenu },
 
   data: () => ({
     showEditForm: false,
   }),
-
-  methods: {
-    logout() {
-      clientLogout().then(() => this.$router.replace({ query: { logout: true } }));
-    },
-  },
 
   apollo: {
     me: {
@@ -110,33 +92,13 @@ export default {
     "title": "Your Personal Details",
     "welcomeBack": "Welcome back, {name}",
     "welcomeDescription": "for an even better customer service please provide your customer number",
-    "subscribedToNewsletter": "Subscribed to weekly newsletter",
-    "myAccountSidebar": {
-      "personalDetails": "Personal Details",
-      "addressBook": "Address Book",
-      "paymentDetails": "Payment Details",
-      "myOrders": "My Orders",
-      "returnsExchange": "Returns / Exchange",
-      "wishlist": "Wishlist",
-      "signOut": "Sign Out",
-      "changePassword": "Change password"
-    }
+    "subscribedToNewsletter": "Subscribed to weekly newsletter"
   },
   "de": {
     "title": "Ihre Benutzerdaten",
     "welcomeBack": "Willkommen zurück, {name}",
     "welcomeDescription": "Für einen besseren Kundenservice geben Sie bitte Ihre Kundennummer an.",
-    "subscribedToNewsletter": "Subscribed to weekly newsletter",
-    "myAccountSidebar": {
-      "personalDetails": "Meine Benutzerdaten",
-      "addressBook": "Adressbuch",
-      "paymentDetails": "Meine Zahlungdaten",
-      "myOrders": "Meine Bestellungen",
-      "returnsExchange": "Meine Retouren",
-      "wishlist": "Wunschliste",
-      "signOut": "Abmelden",
-      "changePassword": "Passwort ändern"
-    }
+    "subscribedToNewsletter": "Subscribed to weekly newsletter"
   }
 }
 </i18n>
