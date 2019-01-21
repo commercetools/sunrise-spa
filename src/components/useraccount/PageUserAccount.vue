@@ -55,7 +55,7 @@
 import UserProfile from './UserProfile.vue';
 
 export default {
-  name: 'MyAccount',
+  name: 'UserAccount',
   components: { UserProfile },
 };
 </script>
