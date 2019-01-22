@@ -36,19 +36,7 @@
         <div v-if="hasPrice"
              class="col-sm-12">
           <p class="product-price">
-            <span v-if="!hasDiscount"
-                  data-test="product-original-price">
-              {{ formatPrice(originalPrice) }}
-            </span>
-            <span v-else>
-              <span data-test="product-old-price"
-                    class="discounted-price">
-                {{ formatPrice(originalPrice) }}
-              </span>
-              <span data-test="product-new-price">
-                {{ formatPrice(discountedPrice) }}
-              </span>
-            </span>
+            <BasePrice :price="matchingVariant.price"/>
           </p>
 
         </div>
@@ -76,6 +64,7 @@ import ProductGallery from './ProductGallery.vue';
 import SocialMediaLinks from './SocialMediaLinks.vue';
 import DetailsSection from './DetailsSection.vue';
 import AddToCartButton from './AddToCartButton.vue';
+import BasePrice from '../common/BasePrice.vue';
 
 export default {
   components: {
@@ -83,6 +72,7 @@ export default {
     ProductGallery,
     SocialMediaLinks,
     AddToCartButton,
+    BasePrice,
   },
 
   props: {
