@@ -47,11 +47,10 @@
   .pop-item-price {
     text-align: center;
     font-weight: 700;
-    .strikethrough {
-      text-decoration: line-through;
+    .old-price {
       padding-right: 10px;
     }
-    .pop-item-price-old {
+    .new-price {
       color: $valencia;
     }
   }
