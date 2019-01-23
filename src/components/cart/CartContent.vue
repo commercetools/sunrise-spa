@@ -33,9 +33,9 @@
 
 <script>
 import gql from 'graphql-tag';
+import cartMixin from '@/mixins/cartMixin';
 import priceMixin from '@/mixins/priceMixin';
-import DisplayableMoneyFragment from '@/components/DisplayableMoney.graphql';
-import UpdatableCartInfoFragment from '@/components/UpdatableCartInfo.graphql';
+import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 import LineItem from './LineItem.vue';
 
 export default {
@@ -48,62 +48,30 @@ export default {
     },
   },
 
-  mixins: [priceMixin],
-
   methods: {
     removeLineItem(lineItemId) {
-      return this.$apollo.mutate({
-        mutation: gql`
-          mutation removeLineItem(
-            $actions: [MyCartUpdateAction!]!,
-            $id: String!,
-            $version: Long!) {
-            updateMyCart(id: $id, version: $version, actions: $actions) {
-              ...UpdatableCartInfo
-            }
-          }
-          ${UpdatableCartInfoFragment}`,
-        variables: {
-          id: this.me.activeCart.id,
-          version: this.me.activeCart.version,
-          actions: [
-            {
-              removeLineItem: {
-                lineItemId,
-              },
-            },
-          ],
+      return this.updateMyCart([
+        {
+          removeLineItem: {
+            lineItemId,
+          },
         },
-      });
+      ]);
     },
 
     changeLineItemQuantity(lineItemId, quantity) {
-      return this.$apollo.mutate({
-        mutation: gql`
-          mutation changeLineItemQuantity(
-            $actions: [MyCartUpdateAction!]!,
-            $id: String!,
-            $version: Long!) {
-            updateMyCart(id: $id, version: $version, actions: $actions) {
-              ...UpdatableCartInfo
-            }
-          }
-          ${UpdatableCartInfoFragment}`,
-        variables: {
-          id: this.me.activeCart.id,
-          version: this.me.activeCart.version,
-          actions: [
-            {
-              changeLineItemQuantity: {
-                lineItemId,
-                quantity,
-              },
-            },
-          ],
+      return this.updateMyCart([
+        {
+          changeLineItemQuantity: {
+            lineItemId,
+            quantity,
+          },
         },
-      });
+      ]);
     },
   },
+
+  mixins: [cartMixin, priceMixin],
 
   apollo: {
     me: {

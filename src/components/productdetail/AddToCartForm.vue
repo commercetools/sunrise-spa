@@ -43,7 +43,8 @@
 <script>
 import gql from 'graphql-tag';
 import { required, numeric, between } from 'vuelidate/lib/validators';
-import UpdatableCartInfoFragment from '@/components/UpdatableCartInfo.graphql';
+import UpdatableCartInfoFragment from '@/components/UpdatableCartInfo.gql';
+import cartMixin from '@/mixins/cartMixin';
 import priceMixin from '@/mixins/priceMixin';
 import ServerError from '../common/ServerError.vue';
 import ValidationError from '../common/ValidationError.vue';
@@ -119,31 +120,15 @@ export default {
     },
 
     updateCartWithLineItem(lineItem) {
-      return this.$apollo.mutate({
-        mutation: gql`
-          mutation updateCartWithLineItem(
-            $actions: [MyCartUpdateAction!]!,
-            $id: String!,
-            $version: Long!) {
-            updateMyCart(id: $id, version: $version, actions: $actions) {
-              ...UpdatableCartInfo
-            }
-          }
-          ${UpdatableCartInfoFragment}`,
-        variables: {
-          id: this.me.activeCart.id,
-          version: this.me.activeCart.version,
-          actions: [
-            {
-              addLineItem: lineItem,
-            },
-          ],
+      return this.updateMyCart([
+        {
+          addLineItem: lineItem,
         },
-      });
+      ]);
     },
   },
 
-  mixins: [priceMixin],
+  mixins: [cartMixin, priceMixin],
 
   apollo: {
     me: {

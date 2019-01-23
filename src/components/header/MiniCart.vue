@@ -69,7 +69,7 @@ import Vue from 'vue';
 import gql from 'graphql-tag';
 import VueClickaway from 'vue-clickaway';
 import priceMixin from '@/mixins/priceMixin';
-import DisplayableMoneyFragment from '@/components/DisplayableMoney.graphql';
+import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {
   data: () => ({

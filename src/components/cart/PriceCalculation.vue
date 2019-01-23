@@ -66,7 +66,7 @@
 <script>
 import gql from 'graphql-tag';
 import priceMixin from '@/mixins/priceMixin';
-import DisplayableMoneyFragment from '@/components/DisplayableMoney.graphql';
+import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {
   computed: {

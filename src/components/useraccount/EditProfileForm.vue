@@ -85,17 +85,9 @@
 <script>
 import { required, email } from 'vuelidate/lib/validators';
 import gql from 'graphql-tag';
+import customerMixin from '@/mixins/customerMixin';
 import ServerError from '../common/ServerError.vue';
 import ValidationError from '../common/ValidationError.vue';
-
-const customerInfoFragment = gql`
-  fragment EditProfileCustomerInfo on Customer {
-    id
-    email
-    firstName
-    lastName
-    version
-  }`;
 
 export default {
   components: {
@@ -127,7 +119,7 @@ export default {
       this.serverError = null;
       if (!this.$v.$invalid && this.hasFormChanged) {
         this.loading = true;
-        await this.updateMyCustomer()
+        await this.updateCustomerProfile()
           .then(() => {
             this.$emit('close');
           }).catch((error) => {
@@ -137,24 +129,12 @@ export default {
       }
     },
 
-    updateMyCustomer() {
-      return this.$apollo.mutate({
-        mutation: gql`
-          mutation updateMyCustomer($actions: [MyCustomerUpdateAction!]!, $version: Long!) {
-            updateMyCustomer(version: $version, actions: $actions) {
-              ...EditProfileCustomerInfo
-            }
-          }
-          ${customerInfoFragment}`,
-        variables: {
-          version: this.me.customer.version,
-          actions: [
-            { changeEmail: { email: this.email } },
-            { setFirstName: { firstName: this.firstName } },
-            { setLastName: { lastName: this.lastName } },
-          ],
-        },
-      });
+    updateCustomerProfile() {
+      return this.updateMyCustomer([
+        { changeEmail: { email: this.email } },
+        { setFirstName: { firstName: this.firstName } },
+        { setLastName: { lastName: this.lastName } },
+      ]);
     },
 
     getErrorMessage({ code, field }) {
@@ -173,17 +153,22 @@ export default {
     },
   },
 
+  mixins: [customerMixin],
+
   apollo: {
     me: {
       query: gql`
         query me {
           me {
             customer {
-              ...EditProfileCustomerInfo
+              id
+              version
+              email
+              firstName
+              lastName
             }
           }
-        }
-        ${customerInfoFragment}`,
+        }`,
       skip: vm => !vm.$store.state.authenticated,
     },
   },
