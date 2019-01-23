@@ -59,6 +59,7 @@ export default {
   components: { EditProfileForm },
 
   data: () => ({
+    me: null,
     showEditForm: false,
   }),
 
