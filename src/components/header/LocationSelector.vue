@@ -1,5 +1,6 @@
 <template>
   <li v-if="languages.length"
+      v-on-clickaway="onClickAway"
       data-test="location-selector"
       class="list-item-location clearfix">
     <button @click="toggle = !toggle"
@@ -10,7 +11,6 @@
     </button>
     <transition name="fade">
       <div v-if="toggle"
-           v-on-clickaway="onClickAway"
            class="location-dropdown">
         <!--{{#if location.language}}-->
         <span class="location-dropdown-label">

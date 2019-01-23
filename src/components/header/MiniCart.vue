@@ -1,0 +1,179 @@
+<template>
+  <li v-on-clickaway="onClickAway"
+      class="list-item-bag">
+    <button @click="show = !show"
+            class="not-empty link-your-bag icon-hand-bag">
+      <span class="hidden-xs hidden-sm">{{ $t('miniCart') }}</span>
+      <span class="cart-item-number">{{ totalItems }}</span>
+    </button>
+    <div v-if="me && me.activeCart && totalItems"
+         class="col-xs-12">
+      <transition name="fade">
+        <div v-show="show"
+             class="nav-minicart">
+          <ul>
+            <li v-for="lineItem in sortedLineItems"
+                :key="lineItem.id">
+              <form>
+                <router-link :to="{
+                  name: 'product',
+                  params: { productSlug: lineItem.productSlug, sku: lineItem.variant.sku }}"
+                  class="img">
+                  <img :src="lineItem.variant.images[0].url"
+                       :alt="lineItem.name"
+                       class="img"/>
+                </router-link>
+                <router-link :to="{
+                  name: 'product',
+                  params: { productSlug: lineItem.productSlug, sku: lineItem.variant.sku }}">
+                  <p class="product-title">{{ lineItem.name }}</p>
+                </router-link>
+                <div class="details">
+                  <p class="product-quantity">
+                    {{ $t('quantity') }}
+                    <span>{{ lineItem.quantity }}x</span>
+                  </p>
+                  <p class="product-price">
+                    {{ $t('price') }}
+                    <span>{{ formatPrice(lineItem.totalPrice) }}</span>
+                  </p>
+                  <button type="submit" class="delete">
+                      <span>
+                        <img src="../../assets/img/delete-1.png"
+                             class="cart-action-icon"
+                             :alt="$t('delete')"/>
+                      </span>
+                  </button>
+                </div>
+              </form>
+            </li>
+          </ul>
+          <div class="gradient"></div>
+          <p class="total-price">
+            {{ $t('totalPrice', { totalPrice: formatPrice(me.activeCart.totalPrice) }) }}
+          </p>
+          <router-link :to="{ name: 'cart' }"
+                       class="btn-grey">
+            {{ $t('viewBag') }}
+          </router-link>
+          <router-link :to="{ name: 'cart' }"
+                       class="btn-yellow">{{ $t('checkout') }}</router-link>
+        </div>
+      </transition>
+    </div>
+  </li>
+</template>
+
+<script>
+import Vue from 'vue';
+import gql from 'graphql-tag';
+import VueClickaway from 'vue-clickaway';
+import priceMixin from '@/mixins/priceMixin';
+import DisplayableMoneyFragment from '@/components/DisplayableMoney.graphql';
+
+export default {
+  data: () => ({
+    me: null,
+    show: false,
+  }),
+
+  computed: {
+    sortedLineItems() {
+      const { lineItems } = this.me.activeCart;
+      return lineItems.reverse();
+    },
+
+    totalItems() {
+      if (this.me && this.me.activeCart) {
+        return this.me.activeCart.lineItems.reduce((acc, li) => acc + li.quantity, 0);
+      }
+      return 0;
+    },
+  },
+
+  methods: {
+    applyCustomScrollbar() {
+      $('.nav-minicart ul').mCustomScrollbar({
+        theme: 'dark',
+        scrollInertia: 50,
+        advanced: {
+          updateOnContentResize: true,
+        },
+      });
+    },
+
+    onClickAway() {
+      this.show = false;
+    },
+  },
+
+  watch: {
+    me() {
+      Vue.nextTick(() => this.applyCustomScrollbar());
+    },
+  },
+
+  mixins: [VueClickaway.mixin, priceMixin],
+
+  apollo: {
+    me: {
+      query: gql`
+        query me($locale: Locale!) {
+          me {
+            activeCart {
+              id
+              lineItems {
+                id
+                quantity
+                name(locale: $locale)
+                productSlug(locale: $locale)
+                variant {
+                  sku
+                  images {
+                    url
+                  }
+                }
+                totalPrice {
+                  ...DisplayableMoney
+                }
+              }
+              totalPrice {
+                ...DisplayableMoney
+              }
+            }
+          }
+        }
+        ${DisplayableMoneyFragment}`,
+      variables() {
+        return {
+          locale: this.$i18n.locale,
+        };
+      },
+    },
+  },
+};
+</script>
+
+<!-- eslint-disable -->
+<i18n>
+{
+  "de": {
+    "miniCart": "Warenkorb",
+    "viewBag": "Warenkorb ansehen",
+    "quantity": "Menge",
+    "price": "Price",
+    "totalPrice": "Gesamtpreis {totalPrice}",
+    "delete": "Löschen",
+    "checkout": "Checkout"
+  },
+  "en": {
+    "miniCart": "Cart",
+    "viewBag": "View Bag",
+    "quantity": "quantity",
+    "price": "Price",
+    "totalPrice": "Total {totalPrice}",
+    "delete": "Delete",
+    "checkout": "Checkout"
+  }
+}
+</i18n>

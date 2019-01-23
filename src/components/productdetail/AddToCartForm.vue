@@ -121,7 +121,7 @@ export default {
     updateCartWithLineItem(lineItem) {
       return this.$apollo.mutate({
         mutation: gql`
-          mutation addLineItem(
+          mutation updateCartWithLineItem(
             $actions: [MyCartUpdateAction!]!,
             $id: String!,
             $version: Long!) {

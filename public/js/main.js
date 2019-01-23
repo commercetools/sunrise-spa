@@ -57,7 +57,7 @@ sizeGuideTable.prototype = {
 $(document).ready(() => {
   $(window).load(() => {
     // makes the scrollbar's design the same in all browsers
-    $('.nav-minicart ul, .order-summary-items').mCustomScrollbar({
+    $('.order-summary-items').mCustomScrollbar({
       theme: 'dark',
       scrollInertia: 50,
     });
@@ -74,19 +74,6 @@ $(document).ready(() => {
   // Toggle search bar on mobile
   $('.search-toggle').click(() => {
     $('.search-box').slideToggle();
-  });
-
-  // Your bag dropdown
-  $('.link-your-bag').click(() => {
-    $('.nav-minicart').slideToggle();
-  });
-
-  // Closing dropdown on click outside of it
-  $('html').click(() => {
-    $('.nav-minicart').hide();
-  });
-  $('.list-item-bag, .nav-minicart').click((event) => {
-    event.stopPropagation();
   });
 });
 
