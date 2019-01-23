@@ -17,14 +17,6 @@ describe('Product thumbnail', () => {
         cy.wrap($thumbnail)
           .find('[data-test=product-thumbnail-sale-flag]')
           .should('exist');
-
-        cy.wrap($thumbnail)
-          .find('[data-test=product-thumbnail-price]')
-          .should('contain', '248,75 €');
-
-        cy.wrap($thumbnail)
-          .find('[data-test=product-thumbnail-discounted-price]')
-          .should('contain', '174,12 €');
       });
 
     cy.get('[data-test=product-thumbnail-name]')
@@ -34,14 +26,6 @@ describe('Product thumbnail', () => {
       .then(($thumbnail) => {
         cy.wrap($thumbnail)
           .find('[data-test=product-thumbnail-sale-flag]')
-          .should('not.exist');
-
-        cy.wrap($thumbnail)
-          .find('[data-test=product-thumbnail-price]')
-          .should('contain', '231,25 €');
-
-        cy.wrap($thumbnail)
-          .find('[data-test=product-thumbnail-discounted-price]')
           .should('not.exist');
       });
   });
