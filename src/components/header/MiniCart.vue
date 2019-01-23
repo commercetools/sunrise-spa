@@ -1,5 +1,6 @@
 <template>
-  <li v-on-clickaway="onClickAway"
+  <li @mouseleave="setCloseTimer"
+      @mouseenter="clearCloseTimer"
       class="list-item-bag">
     <button @click="show = !show"
             class="not-empty link-your-bag icon-hand-bag">
@@ -68,7 +69,6 @@
 <script>
 import Vue from 'vue';
 import gql from 'graphql-tag';
-import VueClickaway from 'vue-clickaway';
 import cartMixin from '@/mixins/cartMixin';
 import priceMixin from '@/mixins/priceMixin';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
@@ -77,6 +77,7 @@ export default {
   data: () => ({
     me: null,
     show: false,
+    closeTimer: null,
   }),
 
   computed: {
@@ -104,6 +105,16 @@ export default {
       ]);
     },
 
+    setCloseTimer() {
+      this.closeTimer = setTimeout(() => {
+        this.show = false;
+      }, 300);
+    },
+
+    clearCloseTimer() {
+      clearTimeout(this.closeTimer);
+    },
+
     applyCustomScrollbar() {
       $('.nav-minicart ul').mCustomScrollbar({
         theme: 'dark',
@@ -113,10 +124,6 @@ export default {
         },
       });
     },
-
-    onClickAway() {
-      this.show = false;
-    },
   },
 
   watch: {
@@ -125,7 +132,7 @@ export default {
     },
   },
 
-  mixins: [VueClickaway.mixin, cartMixin, priceMixin],
+  mixins: [cartMixin, priceMixin],
 
   apollo: {
     me: {
