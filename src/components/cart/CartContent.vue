@@ -48,6 +48,10 @@ export default {
     },
   },
 
+  data: () => ({
+    me: null,
+  }),
+
   methods: {
     removeLineItem(lineItemId) {
       return this.updateMyCart([

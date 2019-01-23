@@ -14,7 +14,7 @@
           <ul>
             <li v-for="lineItem in sortedLineItems"
                 :key="lineItem.id">
-              <form>
+              <div>
                 <router-link :to="{
                   name: 'product',
                   params: { productSlug: lineItem.productSlug, sku: lineItem.variant.sku }}"
@@ -31,13 +31,14 @@
                 <div class="details">
                   <p class="product-quantity">
                     {{ $t('quantity') }}
-                    <span>{{ lineItem.quantity }}x</span>
+                    <span>{{ lineItem.quantity }} x</span>
                   </p>
                   <p class="product-price">
                     {{ $t('price') }}
                     <span>{{ formatPrice(lineItem.totalPrice) }}</span>
                   </p>
-                  <button type="submit" class="delete">
+                  <button @click="removeLineItem(lineItem.id)"
+                          class="delete">
                       <span>
                         <img src="../../assets/img/delete-1.png"
                              class="cart-action-icon"
@@ -45,7 +46,7 @@
                       </span>
                   </button>
                 </div>
-              </form>
+              </div>
             </li>
           </ul>
           <div class="gradient"></div>
@@ -68,6 +69,7 @@
 import Vue from 'vue';
 import gql from 'graphql-tag';
 import VueClickaway from 'vue-clickaway';
+import cartMixin from '@/mixins/cartMixin';
 import priceMixin from '@/mixins/priceMixin';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
@@ -92,6 +94,16 @@ export default {
   },
 
   methods: {
+    removeLineItem(lineItemId) {
+      return this.updateMyCart([
+        {
+          removeLineItem: {
+            lineItemId,
+          },
+        },
+      ]);
+    },
+
     applyCustomScrollbar() {
       $('.nav-minicart ul').mCustomScrollbar({
         theme: 'dark',
@@ -113,7 +125,7 @@ export default {
     },
   },
 
-  mixins: [VueClickaway.mixin, priceMixin],
+  mixins: [VueClickaway.mixin, cartMixin, priceMixin],
 
   apollo: {
     me: {
@@ -122,6 +134,7 @@ export default {
           me {
             activeCart {
               id
+              version
               lineItems {
                 id
                 quantity
@@ -153,6 +166,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .details .product-quantity > span {
+    text-transform: lowercase;
+  }
+</style>
 
 <!-- eslint-disable -->
 <i18n>
