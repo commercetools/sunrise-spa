@@ -1,5 +1,5 @@
 <template>
-  <div v-if="price">
+  <div>
     <span v-if="!hasDiscount">
       <BaseMoney :money="originalPrice"/>
     </span>
