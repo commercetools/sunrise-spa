@@ -22,18 +22,14 @@
           </ValidationError>
         </li>
         <li>
-          <button data-test="add-to-cart-button"
-                  class="add-to-bag-btn">
+          <LoadingButton :buttonState="buttonState"
+                         data-test="add-to-cart-button"
+                         class="add-to-bag-btn">
             <img class="bag-thumb"
                  src="../../assets/img/hand-bag-2-black.png"
                  alt="$t('addToCart')">
-            <span v-if="loading">
-              {{ $t('main.messages.pleaseWait') }}
-            </span>
-            <span v-else>
-              {{ $t('addToCart') }}
-            </span>
-          </button>
+            {{ $t('addToCart') }}
+          </LoadingButton>
         </li>
       </ul>
     </div>
@@ -48,6 +44,7 @@ import cartMixin from '@/mixins/cartMixin';
 import priceMixin from '@/mixins/priceMixin';
 import ServerError from '../common/ServerError.vue';
 import ValidationError from '../common/ValidationError.vue';
+import LoadingButton from '../common/LoadingButton.vue';
 
 export default {
   props: {
@@ -58,6 +55,7 @@ export default {
   },
 
   components: {
+    LoadingButton,
     ValidationError,
     ServerError,
   },
@@ -65,7 +63,7 @@ export default {
   data: () => ({
     me: null,
     quantity: 1,
-    loading: false,
+    buttonState: null,
     serverError: null,
   }),
 
@@ -80,13 +78,15 @@ export default {
       this.$v.$touch();
       this.serverError = null;
       if (!this.$v.$invalid) {
-        this.loading = true;
+        this.buttonState = 'loading';
         await this.addLineItem()
+          .then(() => {
+            this.buttonState = 'success';
+          })
           .catch((error) => {
             this.serverError = error;
-            this.loading = false;
+            this.buttonState = null;
           });
-        this.loading = false;
       }
     },
 

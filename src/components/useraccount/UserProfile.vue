@@ -22,29 +22,32 @@
                 {{ $t('main.form.required') }}*
               </span>
           </div>
-          <EditProfileForm v-if="showEditForm"
-                           @close="showEditForm = false"/>
-          <div v-else
-               class="personal-details-edit-hide">
-            <div class="personal-details-box">
-              <div>
-                <span data-test="user-profile-name">{{ me.customer.firstName }} {{ me.customer.lastName}}</span>
-              </div>
-              <div data-test="user-profile-email">{{ me.customer.email }}</div>
-              <br>
-              <!--{{#if content.customerInfo.subscribed}}-->
-              <!--<div>{{ $t('subscribedToNewsletter') }}</div>-->
-              <!--{{/if}}-->
-              <div class="personal-details-box-edit">
-                <button @click="showEditForm = true"
-                        class="personal-details-edit-show-btn"
-                        data-test="edit-profile-form-show">
-                  <img src="../../assets/img/edit-1.png" alt="edit icon">
-                  {{ $t('main.form.edit') }}
-                </button>
+          <transition name="fade"
+                      mode="out-in">
+            <EditProfileForm v-if="showEditForm"
+                             @close="showEditForm = false"/>
+            <div v-else
+                 class="personal-details-edit-hide">
+              <div class="personal-details-box">
+                <div>
+                  <span data-test="user-profile-name">{{ me.customer.firstName }} {{ me.customer.lastName}}</span>
+                </div>
+                <div data-test="user-profile-email">{{ me.customer.email }}</div>
+                <br>
+                <!--{{#if content.customerInfo.subscribed}}-->
+                <!--<div>{{ $t('subscribedToNewsletter') }}</div>-->
+                <!--{{/if}}-->
+                <div class="personal-details-box-edit">
+                  <button @click="showEditForm = true"
+                          class="personal-details-edit-show-btn"
+                          data-test="edit-profile-form-show">
+                    <img src="../../assets/img/edit-1.png" alt="edit icon">
+                    {{ $t('main.form.edit') }}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          </transition>
         </div>
       </div>
     </div>

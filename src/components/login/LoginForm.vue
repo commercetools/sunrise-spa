@@ -51,16 +51,11 @@
             </div>
           </div>
         </div>
-        <button :disabled="loading"
-                class="login-box-sign-in-btn"
-                data-test="login-form-submit" >
-          <span v-if="loading">
-            {{ $t('main.messages.pleaseWait') }}
-          </span>
-          <span v-else>
-            {{ $t('signIn') }}
-          </span>
-        </button>
+        <LoadingButton :buttonState="buttonState"
+                       class="login-box-sign-in-btn"
+                       data-test="login-form-submit">
+          {{ $t('signIn') }}
+        </LoadingButton>
       </form>
     </div>
   </div>
@@ -72,14 +67,15 @@ import gql from 'graphql-tag';
 import { clientLogin } from '@/auth';
 import ServerError from '../common/ServerError.vue';
 import ValidationError from '../common/ValidationError.vue';
+import LoadingButton from '../common/LoadingButton.vue';
 
 export default {
-  components: { ServerError, ValidationError },
+  components: { ServerError, ValidationError, LoadingButton },
 
   data: () => ({
     email: null,
     password: null,
-    loading: false,
+    buttonState: null,
     serverError: null,
   }),
 
@@ -88,13 +84,13 @@ export default {
       this.$v.$touch();
       this.serverError = null;
       if (!this.$v.$invalid) {
-        this.loading = true;
+        this.buttonState = 'loading';
         await this.customerSignMeIn()
           .then(() => clientLogin(this.email, this.password))
           .then(() => this.$router.push({ name: 'user' }))
           .catch((error) => {
             this.serverError = error;
-            this.loading = false;
+            this.buttonState = null;
           });
       }
     },

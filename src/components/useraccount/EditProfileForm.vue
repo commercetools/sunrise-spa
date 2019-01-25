@@ -59,17 +59,13 @@
       <!-- </div> -->
       <div class="personal-details-edit-btn">
         <span>
-          <button :disabled="loading"
-                  type="submit"
-                  class="update-btn"
-                  data-test="edit-profile-form-submit">
-            <span v-if="loading">
-              {{ $t('main.messages.pleaseWait') }}
-            </span>
-            <span v-else>
-              {{ $t('updateBtn') }}
-            </span>
-          </button>
+          <LoadingButton :buttonState="buttonState"
+                         @reset="$emit('close')"
+                         type="submit"
+                         class="update-btn"
+                         data-test="edit-profile-form-submit">
+            {{ $t('updateBtn') }}
+          </LoadingButton>
           <button @click="$emit('close')"
                   type="button"
                   class="cancel-btn personal-details-edit-hide-btn"
@@ -88,9 +84,11 @@ import gql from 'graphql-tag';
 import customerMixin from '@/mixins/customerMixin';
 import ServerError from '../common/ServerError.vue';
 import ValidationError from '../common/ValidationError.vue';
+import LoadingButton from '../common/LoadingButton.vue';
 
 export default {
   components: {
+    LoadingButton,
     ValidationError,
     ServerError,
   },
@@ -100,7 +98,7 @@ export default {
     firstName: null,
     lastName: null,
     email: null,
-    loading: false,
+    buttonState: null,
     serverError: null,
   }),
 
@@ -118,13 +116,13 @@ export default {
       this.$v.$touch();
       this.serverError = null;
       if (!this.$v.$invalid && this.hasFormChanged) {
-        this.loading = true;
+        this.buttonState = 'loading';
         await this.updateCustomerProfile()
           .then(() => {
-            this.$emit('close');
+            this.buttonState = 'success';
           }).catch((error) => {
             this.serverError = error;
-            this.loading = false;
+            this.buttonState = null;
           });
       }
     },
