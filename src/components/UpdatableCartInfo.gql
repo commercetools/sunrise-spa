@@ -38,7 +38,7 @@ fragment UpdatableCartInfo on Cart {
   }
 }
 
-# import does not work https://github.com/apollographql/graphql-tag/issues/159
+# import does not work https://github.com/apollographql/graphql-tag/pull/105
 fragment DisplayableMoney on Money {
   centAmount
   currencyCode
