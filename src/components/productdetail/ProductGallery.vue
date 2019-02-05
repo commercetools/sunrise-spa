@@ -1,8 +1,9 @@
 <template>
   <ProductZoomer v-if="product"
-                 data-test="product-image"
                  :base-images="zoomerImages"
-                 :base-zoomer-options="zoomerOptions" />
+                 :base-zoomer-options="zoomerOptions"
+                 :key="productImages"
+                 data-test="product-image" />
 </template>
 
 <script>
@@ -92,5 +93,4 @@ export default {
     width: auto;
     margin: 2px;
   }
-
 </style>
