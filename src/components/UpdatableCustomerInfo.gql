@@ -1,7 +1,0 @@
-fragment UpdatableCustomerInfo on Customer {
-  id
-  version
-  email
-  firstName
-  lastName
-}

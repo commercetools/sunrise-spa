@@ -1,5 +1,4 @@
 import gql from 'graphql-tag';
-import UpdatableCustomerInfoFragment from '@/components/UpdatableCustomerInfo.gql';
 
 export default {
   methods: {
@@ -8,10 +7,13 @@ export default {
         mutation: gql`
           mutation updateMyCustomer($actions: [MyCustomerUpdateAction!]!, $version: Long!) {
             updateMyCustomer(version: $version, actions: $actions) {
-              ...UpdatableCustomerInfo
+              id
+              version
+              email
+              firstName
+              lastName
             }
-          }
-        ${UpdatableCustomerInfoFragment}`,
+          }`,
         variables: {
           version: this.me.customer.version,
           actions,

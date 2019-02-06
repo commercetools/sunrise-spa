@@ -39,7 +39,6 @@
 <script>
 import gql from 'graphql-tag';
 import { required, numeric, between } from 'vuelidate/lib/validators';
-import UpdatableCartInfoFragment from '@/components/UpdatableCartInfo.gql';
 import cartMixin from '@/mixins/cartMixin';
 import priceMixin from '@/mixins/priceMixin';
 import ServerError from '../common/ServerError.vue';
@@ -102,20 +101,9 @@ export default {
     },
 
     createCartWithLineItem(lineItem) {
-      return this.$apollo.mutate({
-        mutation: gql`
-          mutation createCartWithLineItem($draft: MyCartDraft!) {
-            createMyCart(draft: $draft) {
-              ...UpdatableCartInfo
-            }
-          }
-          ${UpdatableCartInfoFragment}`,
-        variables: {
-          draft: {
-            currency: this.currency,
-            lineItems: [lineItem],
-          },
-        },
+      return this.createMyCart({
+        currency: this.currency,
+        lineItems: [lineItem],
       });
     },
 

@@ -32,7 +32,7 @@
                 <div class="details">
                   <p class="product-quantity">
                     {{ $t('quantity') }}
-                    <span>{{ lineItem.quantity }} x</span>
+                    <span>{{ lineItem.quantity }}</span>
                   </p>
                   <p class="product-price">
                     {{ $t('price') }}
@@ -148,7 +148,6 @@ export default {
                 name(locale: $locale)
                 productSlug(locale: $locale)
                 variant {
-                  sku
                   images {
                     url
                   }
@@ -173,12 +172,6 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-  .details .product-quantity > span {
-    text-transform: lowercase;
-  }
-</style>
 
 <!-- eslint-disable -->
 <i18n>
