@@ -47,12 +47,12 @@
         </div>
         <div class="sm-pull-right quantity-spinner">
           <span @click="quantity -= 1"
-                class="input-number-decrement">–</span>
+                class="change-quantity-button input-number-decrement">–</span>
           <input v-model.trim.number="$v.quantity.$model"
                  type="text"
                  class="input-number"/>
           <span @click="quantity += 1"
-                class="input-number-increment">+</span>
+                class="change-quantity-button input-number-increment">+</span>
         </div>
       </div>
     </div>
@@ -156,6 +156,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .change-quantity-button {
+    margin: 1px;
+    border: 0;
+  }
+</style>
 
 <!-- eslint-disable -->
 <i18n>
