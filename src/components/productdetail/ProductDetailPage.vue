@@ -13,15 +13,15 @@
         </div>
       </div>
     </div>
-    <div class="pdp-page-review">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <p class="text-center text-uppercase may-like">
-              {{ $t('suggestions.title') }}
-            </p>
-          </div>
-        </div>
+    <!--<div class="pdp-page-review">-->
+      <!--<div class="container">-->
+        <!--<div class="row">-->
+          <!--<div class="col-sm-12">-->
+            <!--<p class="text-center text-uppercase may-like">-->
+              <!--{{ $t('suggestions.title') }}-->
+            <!--</p>-->
+          <!--</div>-->
+        <!--</div>-->
         <!-- <div class="row">
           {{#each content.suggestions.list}}
           <div class="col-xs-12 col-sm-6 col-md-3">
@@ -29,10 +29,10 @@
           </div>
           {{/each}}
       </div> -->
-        <hr class="hr">
+        <!--<hr class="hr">-->
         <!-- {{> catalog/pdp/reviews}} -->
-      </div>
-    </div>
+      <!--</div>-->
+    <!--</div>-->
   </div>
 </template>
 
