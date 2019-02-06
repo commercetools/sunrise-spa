@@ -30,6 +30,7 @@ const UpdatableCartInfoFragment = gql`
       name(locale: $locale)
       productSlug(locale: $locale)
       variant {
+        sku
         images {
           url
         }

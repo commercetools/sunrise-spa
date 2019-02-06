@@ -12,44 +12,46 @@
       <transition name="fade">
         <div v-show="show"
              class="nav-minicart">
-          <ul>
-            <li v-for="lineItem in sortedLineItems"
-                :key="lineItem.id">
-              <div>
-                <router-link :to="{
-                  name: 'product',
-                  params: { productSlug: lineItem.productSlug, sku: lineItem.variant.sku }}"
-                  class="img">
-                  <img :src="lineItem.variant.images[0].url"
-                       :alt="lineItem.name"
-                       class="img"/>
-                </router-link>
-                <router-link :to="{
-                  name: 'product',
-                  params: { productSlug: lineItem.productSlug, sku: lineItem.variant.sku }}">
-                  <p class="product-title">{{ lineItem.name }}</p>
-                </router-link>
-                <div class="details">
-                  <p class="product-quantity">
-                    {{ $t('quantity') }}
-                    <span>{{ lineItem.quantity }}</span>
-                  </p>
-                  <p class="product-price">
-                    {{ $t('price') }}
-                    <span>{{ formatPrice(lineItem.totalPrice) }}</span>
-                  </p>
-                  <button @click="removeLineItem(lineItem.id)"
-                          class="delete">
-                      <span>
-                        <img src="../../assets/img/delete-1.png"
-                             class="cart-action-icon"
-                             :alt="$t('delete')"/>
-                      </span>
-                  </button>
+          <VuePerfectScrollbar>
+            <ul>
+              <li v-for="lineItem in sortedLineItems"
+                  :key="lineItem.id">
+                <div>
+                  <router-link :to="{
+                    name: 'product',
+                    params: { productSlug: lineItem.productSlug, sku: lineItem.variant.sku }}"
+                    class="img">
+                    <img :src="lineItem.variant.images[0].url"
+                         :alt="lineItem.name"
+                         class="img"/>
+                  </router-link>
+                  <router-link :to="{
+                    name: 'product',
+                    params: { productSlug: lineItem.productSlug, sku: lineItem.variant.sku }}">
+                    <p class="product-title">{{ lineItem.name }}</p>
+                  </router-link>
+                  <div class="details">
+                    <p class="product-quantity">
+                      {{ $t('quantity') }}
+                      <span>{{ lineItem.quantity }}</span>
+                    </p>
+                    <p class="product-price">
+                      {{ $t('price') }}
+                      <span>{{ formatPrice(lineItem.totalPrice) }}</span>
+                    </p>
+                    <button @click="removeLineItem(lineItem.id)"
+                            class="delete">
+                        <span>
+                          <img src="../../assets/img/delete-1.png"
+                               class="cart-action-icon"
+                               :alt="$t('delete')"/>
+                        </span>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </li>
-          </ul>
+              </li>
+            </ul>
+          </VuePerfectScrollbar>
           <div class="gradient"></div>
           <p class="total-price">
             {{ $t('totalPrice', { totalPrice: formatPrice(me.activeCart.totalPrice) }) }}
@@ -69,11 +71,16 @@
 <script>
 import Vue from 'vue';
 import gql from 'graphql-tag';
+import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import cartMixin from '@/mixins/cartMixin';
 import priceMixin from '@/mixins/priceMixin';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {
+  components: {
+    VuePerfectScrollbar,
+  },
+
   data: () => ({
     me: null,
     show: false,
@@ -82,8 +89,11 @@ export default {
 
   computed: {
     sortedLineItems() {
-      const { lineItems } = this.me.activeCart;
-      return lineItems.reverse();
+      if (this.me && this.me.activeCart) {
+        const { lineItems } = this.me.activeCart;
+        return lineItems.reverse();
+      }
+      return null;
     },
 
     totalItems() {
@@ -105,30 +115,32 @@ export default {
       ]);
     },
 
-    setCloseTimer() {
+    setCloseTimer(timeout = 300) {
       this.closeTimer = setTimeout(() => {
         this.show = false;
-      }, 300);
+      }, timeout);
     },
 
     clearCloseTimer() {
       clearTimeout(this.closeTimer);
     },
-
-    applyCustomScrollbar() {
-      $('.nav-minicart ul').mCustomScrollbar({
-        theme: 'dark',
-        scrollInertia: 50,
-        advanced: {
-          updateOnContentResize: true,
-        },
-      });
-    },
   },
 
   watch: {
-    me() {
-      Vue.nextTick(() => this.applyCustomScrollbar());
+    sortedLineItems(newValue, oldValue) {
+      if (oldValue !== null) {
+        Vue.nextTick(() => {
+          this.clearCloseTimer();
+          this.show = true;
+          this.setCloseTimer(3000);
+        });
+      }
+    },
+
+    show(newValue, oldValue) {
+      if (newValue && !oldValue) {
+        Vue.nextTick(() => $('.nav-minicart section').scrollTop(0));
+      }
     },
   },
 
@@ -148,6 +160,7 @@ export default {
                 name(locale: $locale)
                 productSlug(locale: $locale)
                 variant {
+                  sku
                   images {
                     url
                   }

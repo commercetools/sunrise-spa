@@ -57,15 +57,15 @@ sizeGuideTable.prototype = {
 $(document).ready(() => {
   $(window).load(() => {
     // makes the scrollbar's design the same in all browsers
-    $('.order-summary-items').mCustomScrollbar({
-      theme: 'dark',
-      scrollInertia: 50,
-    });
-
-    $('.store-location-wrapper > .addresses').mCustomScrollbar({
-      theme: 'dark-thin',
-      scrollInertia: 50,
-    });
+    // $('.order-summary-items').mCustomScrollbar({
+    //   theme: 'dark',
+    //   scrollInertia: 50,
+    // });
+    //
+    // $('.store-location-wrapper > .addresses').mCustomScrollbar({
+    //   theme: 'dark-thin',
+    //   scrollInertia: 50,
+    // });
   });
 
   // "Select" elements becomes customized

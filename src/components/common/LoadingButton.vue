@@ -57,14 +57,18 @@ button {
   text-transform: uppercase;
   font-size: 16px;
   letter-spacing: 1px;
+  position: relative;
 
   &:hover {
    background: lighten(#FFBA27, 5%);
- }
+  }
+
+  @media screen and (max-width: 767px) {
+    margin-bottom: 10px;
+  }
 }
 
 .loading-animation, svg.check {
-  margin-right: 0.9em;
   margin-left: 0.5em;
   vertical-align: middle;
   width: 20px;
