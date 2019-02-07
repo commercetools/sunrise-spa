@@ -49,7 +49,8 @@ const UpdatableCartInfoFragment = gql`
         ...DisplayableMoney
       }
     }
-  }`;
+  }
+  ${DisplayableMoneyFragment}`;
 
 export default {
   methods: {
@@ -65,8 +66,7 @@ export default {
               ...UpdatableCartInfo
             }
           }
-          ${UpdatableCartInfoFragment}
-          ${DisplayableMoneyFragment}`,
+          ${UpdatableCartInfoFragment}`,
         variables: {
           actions,
           id: this.me.activeCart.id,
@@ -84,8 +84,7 @@ export default {
               ...UpdatableCartInfo
             }
           }
-          ${UpdatableCartInfoFragment}
-          ${DisplayableMoneyFragment}`,
+          ${UpdatableCartInfoFragment}`,
         variables: {
           draft,
           locale: this.$i18n.locale,
