@@ -182,7 +182,7 @@ export default {
 {
   "de": {
     "miniCart": "Warenkorb",
-    "viewBag": "Warenkorb ansehen",
+    "viewBag": "Warenkorb",
     "quantity": "Menge",
     "price": "Price",
     "totalPrice": "Gesamtpreis {totalPrice}",
