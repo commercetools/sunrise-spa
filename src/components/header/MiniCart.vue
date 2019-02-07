@@ -1,8 +1,8 @@
 <template>
-  <li @mouseleave="setCloseTimer"
-      @mouseenter="clearCloseTimer"
+  <li @mouseleave="close"
+      @mouseenter="open"
       class="list-item-bag">
-    <button @click="show = !show"
+    <button @click="toggle"
             class="not-empty link-your-bag icon-hand-bag">
       <span class="hidden-xs hidden-sm">{{ $t('miniCart') }}</span>
       <span class="cart-item-number">{{ totalItems }}</span>
@@ -83,17 +83,16 @@ export default {
 
   data: () => ({
     me: null,
-    show: false,
-    closeTimer: null,
   }),
 
   computed: {
+    show() {
+      return this.$store.state.miniCartOpen;
+    },
+
     sortedLineItems() {
-      if (this.me && this.me.activeCart) {
-        const { lineItems } = this.me.activeCart;
-        return lineItems.reverse();
-      }
-      return null;
+      const { lineItems } = this.me.activeCart;
+      return lineItems.reverse();
     },
 
     totalItems() {
@@ -115,28 +114,20 @@ export default {
       ]);
     },
 
-    setCloseTimer(timeout = 300) {
-      this.closeTimer = setTimeout(() => {
-        this.show = false;
-      }, timeout);
+    toggle() {
+      this.$store.dispatch('toggleMiniCart');
     },
 
-    clearCloseTimer() {
-      clearTimeout(this.closeTimer);
+    open() {
+      this.$store.dispatch('openMiniCart', 0);
+    },
+
+    close() {
+      this.$store.dispatch('closeMiniCart', 300);
     },
   },
 
   watch: {
-    sortedLineItems(newValue, oldValue) {
-      if (oldValue !== null) {
-        Vue.nextTick(() => {
-          this.clearCloseTimer();
-          this.show = true;
-          this.setCloseTimer(3000);
-        });
-      }
-    },
-
     show(newValue, oldValue) {
       if (newValue && !oldValue) {
         Vue.nextTick(() => $('.nav-minicart section').scrollTop(0));

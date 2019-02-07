@@ -68,7 +68,8 @@ export default {
 
   computed: {
     quantities() {
-      return [...Array(10).keys()].map(i => ({ id: i + 1, name: i + 1 }));
+      const maxQuantity = 10;
+      return [...Array(maxQuantity).keys()].map(i => ({ id: i + 1, name: i + 1 }));
     },
   },
 
@@ -81,6 +82,7 @@ export default {
         await this.addLineItem()
           .then(() => {
             this.buttonState = 'success';
+            this.$store.dispatch('openMiniCart');
           })
           .catch((error) => {
             this.serverError = error;
