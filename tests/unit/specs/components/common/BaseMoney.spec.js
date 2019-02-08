@@ -51,7 +51,7 @@ describe('BaseMoney.vue', () => {
     expect(wrapper.vm.amount).toBe(127.5);
   });
 
-  it.skip('calculates price amount with 0 fraction digits', () => {
+  it('calculates price amount with 0 fraction digits', () => {
     options.propsData.money.fractionDigits = 0;
     const wrapper = shallowMount(BaseMoney, options);
 
