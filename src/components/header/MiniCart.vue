@@ -3,11 +3,13 @@
       @mouseenter="open"
       class="list-item-bag">
     <button @click="toggle"
+            data-test="mini-cart-open-button"
             class="not-empty link-your-bag icon-hand-bag">
       <span class="hidden-xs hidden-sm">{{ $t('miniCart') }}</span>
       <span class="cart-item-number">{{ totalItems }}</span>
     </button>
     <div v-if="me && me.activeCart && totalItems"
+         data-test="mini-cart-content"
          class="col-xs-12">
       <transition name="fade">
         <div v-show="show"

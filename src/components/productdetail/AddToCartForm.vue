@@ -18,12 +18,13 @@
           <ValidationError :vuelidate="$v.quantity">
             <SelectBoxIt :options="quantities"
                          v-model.lazy.number="$v.quantity.$model"
+                         data-test="add-to-cart-form-quantity-dropdown"
                          class="bag-items"/>
           </ValidationError>
         </li>
         <li>
           <LoadingButton :buttonState="buttonState"
-                         data-test="add-to-cart-button"
+                         data-test="add-to-cart-form-button"
                          class="add-to-bag-btn">
             <img class="bag-thumb"
                  src="../../assets/img/hand-bag-2-black.png"
@@ -96,25 +97,30 @@ export default {
         sku: this.sku,
         quantity: this.quantity,
       };
-      if (this.me && this.me.activeCart) {
-        return this.updateCartWithLineItem(lineItem);
+      if (!this.me.activeCart) {
+        return this.createCart(lineItem);
       }
-      return this.createCartWithLineItem(lineItem);
-    },
-
-    createCartWithLineItem(lineItem) {
-      return this.createMyCart({
-        currency: this.currency,
-        lineItems: [lineItem],
+      return this.updateMyCart({
+        addLineItem: lineItem,
       });
     },
 
-    updateCartWithLineItem(lineItem) {
-      return this.updateMyCart([
-        {
-          addLineItem: lineItem,
+    createCart(lineItem) {
+      return this.$apollo.mutate({
+        mutation: gql`
+          mutation createMyCart($draft: MyCartDraft!) {
+            createMyCart(draft: $draft) {
+              id
+              version
+            }
+          }`,
+        variables: {
+          draft: {
+            currency: this.currency,
+            lineItems: [lineItem],
+          },
         },
-      ]);
+      });
     },
   },
 

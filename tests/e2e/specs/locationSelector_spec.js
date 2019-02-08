@@ -16,13 +16,12 @@ describe('Location selector', () => {
         .click()
         .should(() => {
           expect(localStorage.getItem('locale')).to.eq('en');
-        });
-
-      cy.get('[data-test=stores-link]').should('contain', 'Stores');
-      cy.get('span[data-test=location-selector-dropdown]')
+        })
         .should('exist')
         .trigger('mouseleave')
         .should('not.exist');
+
+      cy.get('[data-test=stores-link]').should('contain', 'Stores');
     });
   });
 });
