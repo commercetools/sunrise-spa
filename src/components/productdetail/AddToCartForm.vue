@@ -46,6 +46,16 @@ import ServerError from '../common/ServerError.vue';
 import ValidationError from '../common/ValidationError.vue';
 import LoadingButton from '../common/LoadingButton.vue';
 
+const query = gql`
+  query me {
+    me {
+      activeCart {
+        id
+        version
+      }
+    }
+  }`;
+
 export default {
   props: {
     sku: {
@@ -92,20 +102,19 @@ export default {
       }
     },
 
-    addLineItem() {
-      const lineItem = {
-        sku: this.sku,
-        quantity: this.quantity,
-      };
+    async addLineItem() {
       if (!this.me.activeCart) {
-        return this.createCart(lineItem);
+        await this.createCart();
       }
       return this.updateMyCart({
-        addLineItem: lineItem,
+        addLineItem: {
+          sku: this.sku,
+          quantity: this.quantity,
+        },
       });
     },
 
-    createCart(lineItem) {
+    createCart() {
       return this.$apollo.mutate({
         mutation: gql`
           mutation createMyCart($draft: MyCartDraft!) {
@@ -117,8 +126,12 @@ export default {
         variables: {
           draft: {
             currency: this.currency,
-            lineItems: [lineItem],
           },
+        },
+        update: (store, { data: { createMyCart } }) => {
+          const data = store.readQuery({ query });
+          data.me.activeCart = createMyCart;
+          store.writeQuery({ query, data });
         },
       });
     },
@@ -128,15 +141,7 @@ export default {
 
   apollo: {
     me: {
-      query: gql`
-        query me {
-          me {
-            activeCart {
-              id
-              version
-            }
-          }
-        }`,
+      query,
     },
   },
 
