@@ -32,13 +32,11 @@ describe('BasePrice.vue', () => {
     };
   });
 
-  Object.assign(BasePrice.computed, price);
-
   it('renders a vue instance', () => {
     expect(shallowMount(BasePrice, options).isVueInstance()).toBeTruthy();
   });
 
-  it('Obtains whether product has a discount', () => {
+  it('obtains whether product has a discount', () => {
     const wrapper = shallowMount(BasePrice, options);
     expect(wrapper.vm.hasDiscount).toBeFalsy();
 
@@ -50,11 +48,14 @@ describe('BasePrice.vue', () => {
     const wrapper = shallowMount(BasePrice, options);
     wrapper.setProps({ price: { ...discountedPrice } });
 
-    expect(wrapper.vm.discountedPrice).toBeTruthy();
+    const discounted = { ...discountedPrice.discounted.value };
+    expect(wrapper.vm.discountedPrice).toEqual(discounted);
   });
 
   it('obtains the original price', () => {
     const wrapper = shallowMount(BasePrice, options);
-    expect(wrapper.vm.originalPrice).toBeTruthy();
+
+    const original = { ...originalPrice.value };
+    expect(wrapper.vm.originalPrice).toEqual(original);
   });
 });
