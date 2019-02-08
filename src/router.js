@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 import Vue from 'vue';
 import Router from 'vue-router';
 import store from '@/store';
@@ -8,6 +9,7 @@ import PageLogin from '@/components/login/PageLogin.vue';
 import PageUserAccount from '@/components/useraccount/PageUserAccount.vue';
 import PageNotFound from '@/components/common/PageNotFound.vue';
 import PageProductDetail from '@/components/productdetail/PageProductDetail.vue';
+
 
 Vue.use(Router);
 

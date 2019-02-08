@@ -27,7 +27,7 @@ export default {
     ProductThumbnail,
   },
 
-  props: ['categorySlug'],
+  props: ['categorySlug', 'sort'],
 
   data: () => ({
     categories: null,
@@ -36,6 +36,14 @@ export default {
 
   computed: {
     category: vm => vm.categories.results[0],
+
+    passSorting() {
+      if (this.sort === 'newest') {
+        return 'lastModifiedAt desc';
+      } else if (this.sort === 'oldest') {
+        return 'lastModifiedAt asc';
+      } return null;
+    },
   },
 
   apollo: {
@@ -58,8 +66,8 @@ export default {
 
     products: {
       query: gql`
-        query products($locale: Locale!, $currency: Currency!, $where: String) {
-          products(limit: 20, where: $where, sort: "id asc") {
+        query products($locale: Locale!, $currency: Currency!, $where: String, $sort: [String!]) {
+          products(limit: 20, where: $where, sort: $sort) {
             results {
               id
               masterData {
@@ -97,9 +105,11 @@ export default {
           locale: this.$i18n.locale,
           currency: this.$i18n.numberFormats[this.$store.state.country].currency.currency,
           where: `masterData(current(categories(id="${this.category.id}")))`,
+          sort: this.passSorting,
         };
       },
       skip: vm => !vm.categories,
+      fetchPolicy: 'network-only',
     },
   },
 };

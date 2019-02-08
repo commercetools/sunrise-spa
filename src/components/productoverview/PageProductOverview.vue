@@ -57,6 +57,7 @@
               {{/if}}-->
               <div class="col-xs-4 hidden-xs text-left">
                 <div class="custom-select-wrapper">
+                  <ProductSorting />
                   <!--{{> catalog/pop/sort-selector sortSelector=content.sortSelector}}-->
                 </div>
               </div>
@@ -74,7 +75,7 @@
             </div>
           </form>
 
-          <ProductList :categorySlug="categorySlug" />
+          <ProductList :categorySlug="categorySlug" :sort="$route.query.sort"/>
 
           <div class="row">
             <div class="col-sm-9 col-sm-offset-3 col-xs-12 text-center custom-pagination">
@@ -93,14 +94,28 @@
 <script>
 import ProductList from './ProductList.vue';
 import Breadcrumb from '../common/Breadcrumb.vue';
+import ProductSorting from '../productoverview/ProductSorting.vue';
 
 export default {
   components: {
     ProductList,
     Breadcrumb,
+    ProductSorting,
   },
 
   props: ['categorySlug'],
+
+  computed: {
+    passSorting($route) {
+      console.log($route.query);
+      // if ($route.query.sort === 'newest'){
+      //   return 'lastModifiedAt desc'
+      // } else if ($route.query.sort === 'oldest'){
+      //   return 'lastModifiedAt asc'
+      // } else return null
+    },
+  },
+
 };
 </script>
 
