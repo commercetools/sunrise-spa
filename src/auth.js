@@ -12,6 +12,7 @@ try {
     store.dispatch('setAuthenticated', true);
   }
 } catch (error) {
+  // eslint-disable-next-line no-console
   console.error('Could not retrieve token from local storage', error);
 }
 
