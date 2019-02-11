@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <span data-test="product-original-price">
     {{ formattedMoney }}
   </span>
 </template>
