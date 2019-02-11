@@ -9,8 +9,7 @@
       <span class="cart-item-number">{{ totalItems }}</span>
     </button>
     <div v-if="me && me.activeCart && totalItems"
-         data-test="mini-cart-content"
-         class="col-xs-12">
+         data-test="mini-cart-content">
       <transition name="fade">
         <div v-show="show"
              class="nav-minicart">
