@@ -1,15 +1,18 @@
 <template>
-  <button :disabled="state !== null">
+  <button :disabled="state !== null"
+          :class="state">
     <slot></slot>
     <transition name="fade"
-                mode="out-in">
+                mode="in-out">
       <span v-if="state === 'loading'"
-            key="loading">
+            key="loading"
+            class="state-layer">
         <img src="../../assets/img/loading.svg"
              class="loading-animation"/>
       </span>
       <span v-else-if="state === 'success'"
-            key="success">
+            key="success"
+            class="state-layer">
         <svg xmlns="http://www.w3.org/2000/svg"
              class="check"
              viewBox="0 0 128 128">
@@ -63,16 +66,26 @@ button {
    background: lighten(#FFBA27, 5%);
   }
 
+  .state-layer, .loading-animation, svg.check {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: .5em;
+  }
+
+  &.loading .state-layer {
+    background-color: #FFBA27;
+  }
+
+  &.success .state-layer {
+    background-color: #3AB795;
+  }
+
   @media screen and (max-width: 767px) {
     margin-bottom: 10px;
   }
-}
-
-.loading-animation, svg.check {
-  margin-left: 0.5em;
-  vertical-align: middle;
-  width: 20px;
-  height: 20px;
 }
 
 svg.check {
@@ -103,5 +116,4 @@ svg.check {
     }
   }
 }
-
 </style>
