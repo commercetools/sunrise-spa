@@ -66,6 +66,10 @@ button {
    background: lighten(#FFBA27, 5%);
   }
 
+  .state-layer {
+    background-color: #FFBA27;
+  }
+
   .state-layer, .loading-animation, svg.check {
     position: absolute;
     top: 0;
@@ -75,12 +79,18 @@ button {
     padding: .5em;
   }
 
-  &.loading .state-layer {
-    background-color: #FFBA27;
-  }
+  &.success {
+    .state-layer {
+      background-color: #3AB795;
+    }
 
-  &.success .state-layer {
-    background-color: #3AB795;
+    .fade-enter, .fade-leave-to {
+      background-color: #FFBA27;
+    }
+
+    .fade-enter-to, .fade-leave {
+      background-color: #3AB795;
+    }
   }
 
   @media screen and (max-width: 767px) {
