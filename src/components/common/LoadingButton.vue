@@ -10,7 +10,10 @@
         <img src="../../assets/img/loading.svg"
              class="loading-animation"/>
       </span>
-      <span v-else-if="state === 'success'"
+    </transition>
+    <transition name="fade"
+                mode="in-out">
+      <span v-if="state === 'success'"
             key="success"
             class="state-layer">
         <svg xmlns="http://www.w3.org/2000/svg"
@@ -85,6 +88,7 @@ button {
     }
 
     .fade-enter, .fade-leave-to {
+      opacity: 1;
       background-color: #FFBA27;
     }
 
