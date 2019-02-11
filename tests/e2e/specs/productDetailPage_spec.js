@@ -15,6 +15,14 @@ describe('Product detail page', () => {
           .should('contain', 'M0E20000000E0WX');
 
         cy.wrap($product)
+          .find('[data-test=product-old-price]')
+          .contains(/\s*248,75\s€/);
+
+        cy.wrap($product)
+          .find('[data-test=product-new-price]')
+          .contains(/\s*174,12\s€/);
+
+        cy.wrap($product)
           .find('[data-test=product-attributes-accordion]')
           .click();
 
