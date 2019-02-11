@@ -20,11 +20,11 @@ describe('Product thumbnail', () => {
 
         cy.wrap($thumbnail)
           .find('[data-test=product-old-price]')
-          .contains(/\s*248,75\s€/);
+          .contains(/^\s*248,75\s€\s*$/);
 
         cy.wrap($thumbnail)
           .find('[data-test=product-new-price]')
-          .contains(/\s*174,12\s€/);
+          .contains(/^\s*174,12\s€\s*$/);
       });
 
     cy.get('[data-test=product-thumbnail-name]')
@@ -38,7 +38,7 @@ describe('Product thumbnail', () => {
 
         cy.wrap($thumbnail)
           .find('[data-test=product-original-price]')
-          .contains(/\s*231,25\s€/);
+          .contains(/\s*231,25\s€\s*$/);
 
         cy.wrap($thumbnail)
           .find('[data-test=product-new-price]')
