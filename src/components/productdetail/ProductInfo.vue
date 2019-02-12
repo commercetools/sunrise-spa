@@ -6,6 +6,7 @@
     </div>
     <div data-test="product-data"
          class="col-sm-6 product-description">
+
       <div class="row">
         <div class="col-sm-12">
             <h1 data-test="product-name"
@@ -31,20 +32,20 @@
           </p>
         </div>
       </div>
-
       <div class="row">
         <div v-if="hasPrice"
              class="col-sm-12">
           <p class="product-price">
             <BasePrice :price="matchingVariant.price"/>
           </p>
-
         </div>
       </div>
-      <!-- {{> catalog/add-to-cart}}
-      {{> catalog/add-to-wishlist-btn}}
-      {{> catalog/reserve-in-store-btn}} -->
+
+      <VariantSelector :sku="sku"/>
       <AddToCartButton/>
+
+      <!-- {{> catalog/add-to-wishlist-btn}}
+      {{> catalog/reserve-in-store-btn}} -->
       <div class="row">
         <div class="col-sm-12">
           <!-- {{> catalog/product-availability availability=product.availability}} -->
@@ -65,6 +66,7 @@ import SocialMediaLinks from './SocialMediaLinks.vue';
 import DetailsSection from './DetailsSection.vue';
 import AddToCartButton from './AddToCartButton.vue';
 import BasePrice from '../common/BasePrice.vue';
+import VariantSelector from './VariantSelector.vue';
 
 export default {
   components: {
@@ -73,6 +75,7 @@ export default {
     SocialMediaLinks,
     AddToCartButton,
     BasePrice,
+    VariantSelector,
   },
 
   props: {
