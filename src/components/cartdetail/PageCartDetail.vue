@@ -1,21 +1,23 @@
 <template>
-  <div class="cart-page">
-    <div v-if="me && me.activeCart"
-         class="container">
-      <div class="row">
-        <div class="col-sm-8 col-xs-12">
-          <div class="current-in-bag">
-            <span>
-              <img class="bag-icon-lg" src="../../assets/img/hand-bag-2-black.png" alt="bag icon">
-            </span>
-            <span class="text-uppercase your-bag-txt">{{ $t('yourBag') }}: </span>
-            <span class="items-total-txt">{{ $tc('itemsTotal', totalItems) }}</span>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <!--{{> checkout/start-checkout-link id="cart-checkoutnow-btn"}}-->
+  <div class="cart-page container">
+    <div class="row">
+      <div class="col-sm-8 col-xs-12">
+        <div class="current-in-bag">
+          <span>
+            <img class="bag-icon-lg" src="../../assets/img/hand-bag-2-black.png" alt="bag icon">
+          </span>
+          <span class="text-uppercase your-bag-txt">{{ $t('yourBag') }}: </span>
+          <span class="items-total-txt"
+                data-test="cart-total-items">
+            {{ $tc('itemsTotal', totalItems) }}
+          </span>
         </div>
       </div>
+      <div class="col-sm-4">
+        <!--{{> checkout/start-checkout-link id="cart-checkoutnow-btn"}}-->
+      </div>
+    </div>
+    <div v-if="me && me.activeCart">
       <div class="row">
         <div class="col-sm-12">
           <div class="cart-content">
@@ -44,8 +46,8 @@
 
 <script>
 import gql from 'graphql-tag';
-import CartContent from '@/components/cart/CartContent.vue';
-import PriceCalculation from '@/components/cart/PriceCalculation.vue';
+import CartContent from '@/components/cartdetail/CartContent.vue';
+import PriceCalculation from '@/components/cartdetail/PriceCalculation.vue';
 
 export default {
   components: { CartContent, PriceCalculation },
@@ -55,7 +57,12 @@ export default {
   }),
 
   computed: {
-    totalItems: vm => vm.me.activeCart.lineItems.reduce((acc, li) => acc + li.quantity, 0),
+    totalItems() {
+      if (this.me && this.me.activeCart) {
+        return this.me.activeCart.lineItems.reduce((acc, li) => acc + li.quantity, 0);
+      }
+      return 0;
+    },
   },
 
   apollo: {

@@ -8,7 +8,7 @@ import LoginPage from '@/components/login/LoginPage.vue';
 import MyAccountPage from '@/components/useraccount/UserAccountPage.vue';
 import NotFoundPage from '@/components/common/NotFoundPage.vue';
 import ProductDetailPage from '@/components/productdetail/ProductDetailPage.vue';
-import CartPage from '@/components/cart/CartPage.vue';
+import CartPage from '@/components/cartdetail/PageCartDetail.vue';
 
 Vue.use(Router);
 

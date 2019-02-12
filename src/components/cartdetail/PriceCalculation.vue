@@ -26,7 +26,9 @@
             </div>
             <div class="col-sm-2 col-xs-5 text-right">
               <div>
-                <span>{{ formatPrice(subtotal) }}</span>
+                <span data-test="cart-subtotal-price">
+                  {{ formatPrice(subtotal) }}
+                </span>
               </div>
               <div>
                 <!--<span class="order-discount">{{ cart.discount }}</span>-->
@@ -43,7 +45,8 @@
                 </span>
               </div>
               <div>
-                <span class="order-total">
+                <span data-test="cart-total-price"
+                      class="order-total">
                   {{ formatPrice(me.activeCart.totalPrice) }}
                 </span>
               </div>

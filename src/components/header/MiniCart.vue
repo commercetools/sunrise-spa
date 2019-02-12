@@ -27,11 +27,11 @@
                        :alt="lineItem.name"
                        class="img"/>
                 </router-link>
-                <router-link :to="{
-                  name: 'product',
-                  params: { productSlug: lineItem.productSlug, sku: lineItem.variant.sku }}">
-                  <p class="product-title"
-                     data-test="mini-cart-line-item-name">
+                <router-link data-test="mini-cart-line-item-link"
+                             :to="{
+                             name: 'product',
+                             params: { productSlug: lineItem.productSlug, sku: lineItem.variant.sku }}">
+                  <p class="product-title">
                     {{ lineItem.name }}
                   </p>
                 </router-link>

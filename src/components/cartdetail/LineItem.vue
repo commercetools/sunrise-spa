@@ -1,5 +1,6 @@
 <template>
-  <div class="row single-cart-item">
+  <div data-test="cart-line-item"
+       class="row single-cart-item">
     <div class="col-sm-1 col-xs-4 product-img-col">
       <img :src="image"
            :alt="lineItem.name"
@@ -7,13 +8,17 @@
     </div>
     <div class="col-sm-3 col-xs-8 product-info-text">
       <p class="cart-item-name">
-        <router-link :to="{
-          name: 'product',
-          params: { productSlug: lineItem.productSlug, sku: lineItem.variant.sku }}">
+        <router-link data-test="cart-line-item-link"
+                     :to="{
+                     name: 'product',
+                     params: { productSlug: lineItem.productSlug, sku: lineItem.variant.sku }}">
           {{ lineItem.name }}
         </router-link>
       </p>
-      <p class="grey-p">{{ lineItem.variant.sku }}</p>
+      <p class="grey-p"
+         data-test="cart-line-item-sku">
+        {{ lineItem.variant.sku }}
+      </p>
       <!--<p class="cart-attributes">-->
         <!--{{#each attributes}}-->
         <!--{{name}}-->
@@ -30,7 +35,8 @@
       <div class="col-sm-2 col-xs-12 cart-edit-delete">
         <div class="edit-section-options">
           <div class="edit-delete-section">
-            <button @click="removeLineItem">
+            <button @click="removeLineItem"
+                    data-test="cart-line-item-delete">
               <img src="../../assets/img/delete-1.png"
                    class="cart-action-icon"
                    alt="delete">
@@ -49,6 +55,7 @@
           <span @click="quantity -= 1"
                 class="change-quantity-button input-number-decrement">–</span>
           <input v-model.trim.number="$v.quantity.$model"
+                 data-test="cart-line-item-quantity"
                  type="text"
                  class="input-number"/>
           <span @click="quantity += 1"
@@ -59,7 +66,10 @@
     <div v-else
          class="col-sm-2 col-sm-offset-2 col-xs-12 text-center quantity-counter">
       <span class="visible-xs">{{ $t('quantity') }}:</span>
-      <span class="quantity-number">{{ lineItem.quantity }}</span>
+      <span data-test="cart-line-item-quantity"
+            class="quantity-number">
+        {{ lineItem.quantity }}
+      </span>
     </div>
 
     <div :class="editable ? 'col-xs-12 sm-pull-right' : 'col-xs-7'"
@@ -67,15 +77,15 @@
       <div class="text-right cart-item-price">
         <span class="visible-xs xs-price-title">{{ $t('price') }}</span>
         <span v-if="!hasDiscount"
-              data-test="line-item-original-price">
+              data-test="cart-line-item-price">
             {{ formatPrice(originalPrice) }}
         </span>
         <span v-else>
-          <span data-test="line-item-discounted-price"
+          <span data-test="cart-line-item-discounted-price"
                 class="discounted-price">
             {{ formatPrice(originalPrice) }}
           </span>
-          <span data-test="line-item-discount-price">
+          <span data-test="cart-line-item-price">
             {{ formatPrice(discountedPrice) }}
           </span>
         </span>
@@ -85,7 +95,9 @@
          class="col-sm-2">
       <div class="text-right cart-item-price">
         <span class="visible-xs xs-price-title">{{ $t('total') }}</span>
-        <span>{{ formatPrice(lineItem.totalPrice) }}</span>
+        <span data-test="cart-line-item-total-price">
+          {{ formatPrice(lineItem.totalPrice) }}
+        </span>
       </div>
     </div>
   </div>

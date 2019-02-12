@@ -17,41 +17,36 @@ describe('MiniCart', () => {
       .contains(/^\s*Cart\s*5\s*$/)
       .trigger('click');
 
-    cy.get('[data-test=mini-cart-content]')
-      .then(($content) => {
-        cy.wrap($content)
-          .find('[data-test=mini-cart-price]')
-          .contains(/^\s*Total\s+1.019,86\s€\s*$/);
+    cy.get('[data-test=mini-cart-price]')
+      .contains(/^\s*Total\s+1.019,86\s€\s*$/);
 
-        cy.wrap($content)
-          .find('[data-test=mini-cart-line-item]')
-          .should('have.length', 2)
-          .eq(0)
-          .then(($lineItem) => {
-            cy.wrap($lineItem)
-              .find('[data-test=mini-cart-line-item-name]')
-              .should('contain', 'Booties Lemare grey');
+    cy.get('[data-test=mini-cart-line-item]')
+      .should('have.length', 2)
+      .eq(0)
+      .then(($lineItem) => {
+        cy.wrap($lineItem)
+          .find('[data-test=mini-cart-line-item-link]')
+          .should('have.attr', 'href', '/product/lemare-booties-0778-grey/M0E20000000E0WX')
+          .should('contain', 'Booties Lemare grey');
 
-            cy.wrap($lineItem)
-              .find('[data-test=mini-cart-line-item-quantity]')
-              .should('contain', '3');
+        cy.wrap($lineItem)
+          .find('[data-test=mini-cart-line-item-quantity]')
+          .should('contain', '3');
 
-            cy.wrap($lineItem)
-              .find('[data-test=mini-cart-line-item-price]')
-              .contains(/^\s*522,36\s€\s*$/);
-          });
-
-        cy.wrap($content)
-          .find('[data-test=mini-cart-line-item-delete]')
-          .eq(1)
-          .click();
-        cy.get('[data-test=mini-cart-open-button]')
-          .contains(/^\s*Cart\s*3\s*$/)
-          .click();
-        cy.get('[data-test=mini-cart-content]')
-          .find('[data-test=mini-cart-line-item]')
-          .should('have.length', 1);
+        cy.wrap($lineItem)
+          .find('[data-test=mini-cart-line-item-price]')
+          .contains(/^\s*522,36\s€\s*$/);
       });
+
+    cy.get('[data-test=mini-cart-line-item-delete]')
+      .eq(1)
+      .click();
+    cy.get('[data-test=mini-cart-open-button]')
+      .contains(/^\s*Cart\s*3\s*$/)
+      .click();
+    cy.get('[data-test=mini-cart-content]')
+      .find('[data-test=mini-cart-line-item]')
+      .should('have.length', 1);
   });
 
   it('opens and closes mini-cart', () => {
