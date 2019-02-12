@@ -31,7 +31,7 @@ export default new Vuex.Store({
   actions: {
     setAuthenticated: ({ commit }, authenticated) => commit(SET_AUTHENTICATED, authenticated),
 
-    openMiniCart: ({ commit, state }, timeout = 3000) => {
+    openMiniCart: ({ commit, state }, timeout = 2000) => {
       clearMiniCartTimeout(state);
       commit(SET_MINI_CART_OPEN, true);
       if (timeout !== 0) {

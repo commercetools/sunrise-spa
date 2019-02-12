@@ -8,64 +8,73 @@
       <span class="hidden-xs hidden-sm">{{ $t('miniCart') }}</span>
       <span class="cart-item-number">{{ totalItems }}</span>
     </button>
-    <div v-if="me && me.activeCart && totalItems"
-         data-test="mini-cart-content">
-      <transition name="fade">
-        <div v-show="show"
-             class="nav-minicart">
-          <VuePerfectScrollbar>
-            <ul>
-              <li v-for="lineItem in sortedLineItems"
-                  :key="lineItem.id">
-                <div>
-                  <router-link :to="{
-                    name: 'product',
-                    params: { productSlug: lineItem.productSlug, sku: lineItem.variant.sku }}"
-                    class="img">
-                    <img :src="lineItem.variant.images[0].url"
-                         :alt="lineItem.name"
-                         class="img"/>
-                  </router-link>
-                  <router-link :to="{
-                    name: 'product',
-                    params: { productSlug: lineItem.productSlug, sku: lineItem.variant.sku }}">
-                    <p class="product-title">{{ lineItem.name }}</p>
-                  </router-link>
-                  <div class="details">
-                    <p class="product-quantity">
-                      {{ $t('quantity') }}
-                      <span>{{ lineItem.quantity }}</span>
-                    </p>
-                    <p class="product-price">
-                      {{ $t('price') }}
-                      <span>{{ formatPrice(lineItem.totalPrice) }}</span>
-                    </p>
-                    <button @click="removeLineItem(lineItem.id)"
-                            class="delete">
-                        <span>
-                          <img src="../../assets/img/delete-1.png"
-                               class="cart-action-icon"
-                               :alt="$t('delete')"/>
-                        </span>
-                    </button>
-                  </div>
+    <transition name="fade">
+      <div v-show="show"
+           v-if="me && me.activeCart && totalItems"
+           class="nav-minicart"
+           data-test="mini-cart-content">
+        <VuePerfectScrollbar>
+          <ul>
+            <li v-for="lineItem in sortedLineItems"
+                :key="lineItem.id"
+                data-test="mini-cart-line-item">
+              <div>
+                <router-link :to="{
+                  name: 'product',
+                  params: { productSlug: lineItem.productSlug, sku: lineItem.variant.sku }}"
+                  class="img">
+                  <img :src="lineItem.variant.images[0].url"
+                       :alt="lineItem.name"
+                       class="img"/>
+                </router-link>
+                <router-link :to="{
+                  name: 'product',
+                  params: { productSlug: lineItem.productSlug, sku: lineItem.variant.sku }}">
+                  <p class="product-title"
+                     data-test="mini-cart-line-item-name">
+                    {{ lineItem.name }}
+                  </p>
+                </router-link>
+                <div class="details">
+                  <p class="product-quantity">
+                    {{ $t('quantity') }}
+                    <span data-test="mini-cart-line-item-quantity">
+                      {{ lineItem.quantity }}
+                    </span>
+                  </p>
+                  <p class="product-price">
+                    {{ $t('price') }}
+                    <span data-test="mini-cart-line-item-price">
+                      {{ formatPrice(lineItem.totalPrice) }}
+                    </span>
+                  </p>
+                  <button @click="removeLineItem(lineItem.id)"
+                          data-test="mini-cart-line-item-delete"
+                          class="delete">
+                      <span>
+                        <img src="../../assets/img/delete-1.png"
+                             class="cart-action-icon"
+                             :alt="$t('delete')"/>
+                      </span>
+                  </button>
                 </div>
-              </li>
-            </ul>
-          </VuePerfectScrollbar>
-          <div class="gradient"></div>
-          <p class="total-price">
-            {{ $t('totalPrice', { totalPrice: formatPrice(me.activeCart.totalPrice) }) }}
-          </p>
-          <router-link :to="{ name: 'cart' }"
-                       class="btn-grey">
-            {{ $t('viewBag') }}
-          </router-link>
-          <router-link :to="{ name: 'cart' }"
-                       class="btn-yellow">{{ $t('checkout') }}</router-link>
-        </div>
-      </transition>
-    </div>
+              </div>
+            </li>
+          </ul>
+        </VuePerfectScrollbar>
+        <div class="gradient"></div>
+        <p class="total-price"
+           data-test="mini-cart-price">
+          {{ $t('totalPrice', { totalPrice: formatPrice(me.activeCart.totalPrice) }) }}
+        </p>
+        <router-link :to="{ name: 'cart' }"
+                     class="btn-grey">
+          {{ $t('viewBag') }}
+        </router-link>
+        <router-link :to="{ name: 'cart' }"
+                     class="btn-yellow">{{ $t('checkout') }}</router-link>
+      </div>
+    </transition>
   </li>
 </template>
 
