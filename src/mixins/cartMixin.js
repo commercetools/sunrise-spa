@@ -5,6 +5,15 @@ import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 // required any queried field to be fetched in order to update all components using carts, e.g. mini-cart
 
 export default {
+  computed: {
+    totalItems() {
+      if (this.me && this.me.activeCart) {
+        return this.me.activeCart.lineItems.reduce((acc, li) => acc + li.quantity, 0);
+      }
+      return 0;
+    },
+  },
+
   methods: {
     updateMyCart(actions) {
       return this.$apollo.mutate({

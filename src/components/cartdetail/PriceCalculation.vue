@@ -72,6 +72,10 @@ import priceMixin from '@/mixins/priceMixin';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {
+  data: () => ({
+    me: null,
+  }),
+
   computed: {
     subtotal() {
       const { currencyCode, fractionDigits } = this.me.activeCart.totalPrice;
@@ -83,9 +87,14 @@ export default {
     },
 
     taxes() {
-      const { currencyCode, fractionDigits } = this.cart.totalPrice;
+      const { currencyCode, fractionDigits } = this.me.activeCart.totalPrice;
+      const { taxedPrice } = this.me.activeCart;
+      let centAmount = 0;
+      if (taxedPrice) {
+        centAmount = taxedPrice.totalGross.centAmount - taxedPrice.totalNet.centAmount;
+      }
       return {
-        centAmount: this.me.activeCart.taxedPrice.totalGross.centAmount - this.cart.taxedPrice.totalNet.centAmount,
+        centAmount,
         currencyCode,
         fractionDigits,
       };

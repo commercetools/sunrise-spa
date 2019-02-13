@@ -46,6 +46,7 @@
 
 <script>
 import gql from 'graphql-tag';
+import cartMixin from '@/mixins/cartMixin';
 import CartContent from '@/components/cartdetail/CartContent.vue';
 import PriceCalculation from '@/components/cartdetail/PriceCalculation.vue';
 
@@ -56,14 +57,7 @@ export default {
     me: null,
   }),
 
-  computed: {
-    totalItems() {
-      if (this.me && this.me.activeCart) {
-        return this.me.activeCart.lineItems.reduce((acc, li) => acc + li.quantity, 0);
-      }
-      return 0;
-    },
-  },
+  mixins: [cartMixin],
 
   apollo: {
     me: {
