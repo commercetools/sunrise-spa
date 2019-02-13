@@ -1,29 +1,34 @@
 <template>
-<form v-if="product">
-  <!-- <form id="form-add-to-cart{{index}}" name="add-to-cart" method="post"
-             action="{{@root.meta._links.addToCart.href}}"> -->
-  <!-- <input type="hidden" name="csrfToken" value="{{@root.meta.csrfToken}}"/> -->
-  <!-- <input type="hidden" name="productId" value="{{product.productId}}"> -->
-  <!-- <input type="hidden" name="variantId" value="{{product.variantId}}"> -->
-  <!-- <input type="hidden" name="productSku" value="{{product.variant.sku}}"> -->
-  <!-- <input type="hidden" name="productSlug" value="{{product.slug}}"> -->
-
-  <div v-if="productVariants"
+  <div v-if="product"
        class="row select-row">
-    <SelectorAttributes :productVariants="productVariants" />
+    <ul class="list-inline">
+      <li v-for="variant in productVariants"
+          :key="variant.name">
+        <p class="text-uppercase">
+          {{ variant.name }}
+        </p>
+
+        <div>
+          <select class="select-product-detail">
+            <option>
+              {{ variant.value || variant.label }}
+            </option>
+          </select>
+        </div>
+        <!-- {{> common/required-error-message}} -->
+      </li>
+
+      <li class="size-guide-li">
+        <!-- {{> catalog/size-guide}} -->
+      </li>
+    </ul>
   </div>
-</form>
 </template>
 
 <script>
 import gql from 'graphql-tag';
-import SelectorAttributes from './SelectorAttributes.vue';
 
 export default {
-  components: {
-    SelectorAttributes,
-  },
-
   props: {
     sku: {
       type: String,
@@ -37,7 +42,8 @@ export default {
 
   computed: {
     productVariants() {
-      return this.product.masterData.current.variant.attributes;
+      return Object.values(this.product.masterData.current.variant.attributes)
+        .filter(attr => typeof attr === 'object');
     },
   },
 
