@@ -2,19 +2,6 @@ import { shallowMount } from '@vue/test-utils';
 import PriceCalculation from '@/components/cartdetail/PriceCalculation.vue';
 
 describe('PriceCalculation.vue', () => {
-  const taxedPrice = {
-    totalNet: {
-      currencyCode: 'EUR',
-      centAmount: 69790,
-      fractionDigits: 2,
-    },
-    totalGross: {
-      currencyCode: 'EUR',
-      centAmount: 83050,
-      fractionDigits: 2,
-    },
-  };
-
   const me = {
     activeCart: {
       lineItems: [],
@@ -48,7 +35,18 @@ describe('PriceCalculation.vue', () => {
       me: {
         activeCart: {
           ...me.activeCart,
-          taxedPrice,
+          taxedPrice: {
+            totalNet: {
+              currencyCode: 'EUR',
+              centAmount: 69790,
+              fractionDigits: 2,
+            },
+            totalGross: {
+              currencyCode: 'EUR',
+              centAmount: 83050,
+              fractionDigits: 2,
+            },
+          },
         },
       },
     });
