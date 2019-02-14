@@ -16,7 +16,7 @@
                 <span class="delivery-info-title">{{ $t('shipping') }}</span>
               </div>
               <hr class="total-divider">
-              <div v-if="me.activeCart.taxedPrice"
+              <div v-if="taxes"
                    class="text-right">
                 <span>{{ $t('salesTax') }}</span>
               </div>
@@ -40,7 +40,7 @@
               </div>
               <hr>
               <div>
-                <span v-if="me.activeCart.taxedPrice">
+                <span v-if="taxes">
                   {{ formatPrice(taxes) }}
                 </span>
               </div>
@@ -89,15 +89,14 @@ export default {
     taxes() {
       const { currencyCode, fractionDigits } = this.me.activeCart.totalPrice;
       const { taxedPrice } = this.me.activeCart;
-      let centAmount = 0;
       if (taxedPrice) {
-        centAmount = taxedPrice.totalGross.centAmount - taxedPrice.totalNet.centAmount;
+        return {
+          centAmount: taxedPrice.totalGross.centAmount - taxedPrice.totalNet.centAmount,
+          currencyCode,
+          fractionDigits,
+        };
       }
-      return {
-        centAmount,
-        currencyCode,
-        fractionDigits,
-      };
+      return null;
     },
   },
 
