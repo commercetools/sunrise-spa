@@ -167,9 +167,11 @@ export default {
 
   watch: {
     quantity(newValue, oldValue) {
-      this.$v.$touch();
-      if (newValue !== oldValue && !this.$v.$invalid) {
-        this.debouncedChangeQuantity();
+      if (oldValue !== null) {
+        this.$v.$touch();
+        if (newValue !== oldValue && !this.$v.$invalid) {
+          this.debouncedChangeQuantity();
+        }
       }
     },
   },
