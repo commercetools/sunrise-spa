@@ -62,15 +62,21 @@ describe('CartDetailPage', () => {
     cy.get('[data-test=cart-line-item-total-price]')
       .contains(/^\s*870,60\s€\s*$/);
 
-    cy.get('[data-test=cart-line-item-quantity]')
-      .parent()
-      .contains('+')
+    cy.get('[data-test=cart-line-item-quantity-inc]')
       .click()
       .click();
     cy.get('[data-test=cart-line-item-quantity]')
       .should('have.value', '7');
     cy.get('[data-test=cart-line-item-total-price]')
       .contains(/^\s*1.218,84\s€\s*$/);
+
+    cy.get('[data-test=cart-line-item-quantity-dec]')
+      .click();
+    cy.get('[data-test=cart-line-item-quantity]')
+      .should('have.value', '6');
+    cy.get('[data-test=cart-line-item-total-price]')
+      .contains(/^\s*1.044,72\s€\s*$/);
+
 
     cy.get('[data-test=cart-line-item-delete]').click();
     cy.get('[data-test=cart-line-item]').should('have.length', 0);

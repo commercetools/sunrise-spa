@@ -2,7 +2,7 @@
   <div data-test="cart-line-item"
        class="row single-cart-item">
     <div class="col-sm-1 col-xs-4 product-img-col">
-      <img :src="image"
+      <img :src="imageUrl"
            :alt="lineItem.name"
            class="img-responsive cart-item-img">
     </div>
@@ -53,12 +53,14 @@
         </div>
         <div class="sm-pull-right quantity-spinner">
           <span @click="quantity -= 1"
+                data-test="cart-line-item-quantity-dec"
                 class="change-quantity-button input-number-decrement">–</span>
           <input v-model.trim.number="$v.quantity.$model"
                  data-test="cart-line-item-quantity"
                  type="text"
                  class="input-number"/>
           <span @click="quantity += 1"
+                data-test="cart-line-item-quantity-inc"
                 class="change-quantity-button input-number-increment">+</span>
         </div>
       </div>
@@ -106,9 +108,11 @@
 <script>
 import debounce from 'lodash.debounce';
 import priceMixin from '@/mixins/priceMixin';
-import { required, minValue } from 'vuelidate/lib/validators';
+import { required, minValue, numeric } from 'vuelidate/lib/validators';
 
 export default {
+  mixins: [priceMixin],
+
   props: {
     lineItem: {
       type: Object,
@@ -124,28 +128,26 @@ export default {
     quantity: null,
   }),
 
-  created() {
-    this.quantity = this.lineItem.quantity;
-    this.debouncedChangeQuantity = debounce(this.changeLineItemQuantity, 500);
-  },
-
-  watch: {
-    quantity(newQuantity) {
-      this.$v.$touch();
-      if (!this.$v.$invalid && this.lineItem.quantity !== newQuantity) {
-        this.debouncedChangeQuantity();
-      }
-    },
-  },
-
   computed: {
-    hasDiscount: vm => vm.lineItem.price.discounted,
+    hasDiscount() {
+      return this.lineItem.price.discounted;
+    },
 
-    originalPrice: vm => vm.lineItem.price.value,
+    originalPrice() {
+      return this.lineItem.price.value;
+    },
 
-    discountedPrice: vm => vm.lineItem.price.discounted.value,
+    discountedPrice() {
+      return this.lineItem.price.discounted.value;
+    },
 
-    image: vm => vm.lineItem.variant.images[0].url,
+    imageUrl() {
+      const { images } = this.lineItem.variant;
+      if (Array.isArray(images) && images.length) {
+        return this.lineItem.variant.images[0].url;
+      }
+      return null;
+    },
   },
 
   methods: {
@@ -158,11 +160,24 @@ export default {
     },
   },
 
-  mixins: [priceMixin],
+  created() {
+    this.quantity = this.lineItem.quantity;
+    this.debouncedChangeQuantity = debounce(this.changeLineItemQuantity, 500);
+  },
+
+  watch: {
+    quantity(newValue, oldValue) {
+      this.$v.$touch();
+      if (newValue !== oldValue && !this.$v.$invalid) {
+        this.debouncedChangeQuantity();
+      }
+    },
+  },
 
   validations: {
     quantity: {
       required,
+      numeric,
       minValue: minValue(1),
     },
   },
