@@ -10,7 +10,7 @@
     </button>
     <transition name="fade">
       <div v-show="show"
-           v-if="me && me.activeCart && totalItems"
+           v-if="totalItems"
            class="nav-minicart"
            data-test="mini-cart-content">
         <VuePerfectScrollbar>
@@ -23,7 +23,7 @@
                   name: 'product',
                   params: { productSlug: lineItem.productSlug, sku: lineItem.variant.sku }}"
                   class="img">
-                  <img :src="lineItem.variant.images[0].url"
+                  <img :src="imageUrl"
                        :alt="lineItem.name"
                        class="img"/>
                 </router-link>
@@ -91,6 +91,8 @@ export default {
     VuePerfectScrollbar,
   },
 
+  mixins: [cartMixin, priceMixin],
+
   data: () => ({
     me: null,
   }),
@@ -101,19 +103,23 @@ export default {
     },
 
     sortedLineItems() {
-      const { lineItems } = this.me.activeCart;
-      return lineItems.reverse();
-    },
-
-    totalItems() {
       if (this.me && this.me.activeCart) {
-        return this.me.activeCart.lineItems.reduce((acc, li) => acc + li.quantity, 0);
+        const { lineItems } = this.me.activeCart;
+        return lineItems.reverse();
       }
-      return 0;
+      return [];
     },
   },
 
   methods: {
+    imageUrl(lineItem) {
+      const { images } = lineItem.variant;
+      if (Array.isArray(images) && images.length) {
+        return lineItem.variant.images[0].url;
+      }
+      return null;
+    },
+
     removeLineItem(lineItemId) {
       return this.updateMyCart([
         {
@@ -144,8 +150,6 @@ export default {
       }
     },
   },
-
-  mixins: [cartMixin, priceMixin],
 
   apollo: {
     me: {
