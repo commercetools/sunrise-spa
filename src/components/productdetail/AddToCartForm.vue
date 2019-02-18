@@ -75,12 +75,12 @@ export default {
     quantity: 1,
     buttonState: null,
     serverError: null,
+    maxQuantity: 10,
   }),
 
   computed: {
     quantities() {
-      const maxQuantity = 10;
-      return [...Array(maxQuantity).keys()].map(i => ({ id: i + 1, name: i + 1 }));
+      return [...Array(this.maxQuantity).keys()].map(i => ({ id: i + 1, name: i + 1 }));
     },
   },
 
@@ -145,12 +145,14 @@ export default {
     },
   },
 
-  validations: {
-    quantity: {
-      required,
-      numeric,
-      between: between(1, 10),
-    },
+  validations() {
+    return {
+      quantity: {
+        required,
+        numeric,
+        between: between(1, this.maxQuantity),
+      },
+    };
   },
 };
 </script>
