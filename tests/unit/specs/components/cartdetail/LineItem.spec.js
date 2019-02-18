@@ -39,35 +39,6 @@ describe('LineItem.vue', () => {
     expect(shallowMount(LineItem, options).isVueInstance()).toBeTruthy();
   });
 
-  it('returns the first available image', () => {
-    const wrapper = shallowMount(LineItem, options);
-    expect(wrapper.vm.imageUrl).toBeNull();
-
-    wrapper.setProps({
-      lineItem: {
-        ...lineItem,
-        variant: {
-          images: [],
-        },
-      },
-    });
-    expect(wrapper.vm.imageUrl).toBeNull();
-
-    wrapper.setProps({
-      lineItem: {
-        ...lineItem,
-        variant: {
-          images: [
-            { url: 'url1' },
-            { url: 'url2' },
-            { url: 'url3' },
-          ],
-        },
-      },
-    });
-    expect(wrapper.vm.imageUrl).toBe('url1');
-  });
-
   it('emits event on quantity changed', () => {
     options.propsData.editable = true;
     const wrapper = shallowMount(LineItem, options);
