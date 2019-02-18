@@ -9,6 +9,7 @@ describe('MiniCart.vue', () => {
   const lineItem = {
     quantity: 3,
     variant: {},
+    totalPrice: {},
   };
 
   let me;
@@ -75,6 +76,7 @@ describe('MiniCart.vue', () => {
       me: {
         activeCart: {
           lineItems: [lineItem, lineItem, lineItem],
+          totalPrice: {},
         },
       },
     });
@@ -94,6 +96,7 @@ describe('MiniCart.vue', () => {
       me: {
         activeCart: {
           lineItems: [lineItem, lineItem, lineItem],
+          totalPrice: {},
         },
       },
     });

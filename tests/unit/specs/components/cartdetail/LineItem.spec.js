@@ -23,6 +23,7 @@ describe('LineItem.vue', () => {
       quantity: 3,
       variant: {},
       price: {},
+      totalPrice: {},
     };
 
     options = {
@@ -36,21 +37,6 @@ describe('LineItem.vue', () => {
 
   it('renders a vue instance', () => {
     expect(shallowMount(LineItem, options).isVueInstance()).toBeTruthy();
-  });
-
-  it('detects it has discount', () => {
-    const wrapper = shallowMount(LineItem, options);
-    expect(wrapper.vm.hasDiscount).toBeFalsy();
-
-    wrapper.setProps({
-      lineItem: {
-        ...lineItem,
-        price: {
-          discounted: {},
-        },
-      },
-    });
-    expect(wrapper.vm.hasDiscount).toBeTruthy();
   });
 
   it('returns the first available image', () => {
