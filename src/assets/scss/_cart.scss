@@ -174,8 +174,7 @@
 .cart-item-price {
   font-size: 1.1em;
   font-weight: 900;
-  .discounted-price {
-    text-decoration: line-through;
+  .old-price {
     color: $silver-chalice;
     font-size: 1em;
     font-weight: 200;

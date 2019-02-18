@@ -20,22 +20,6 @@ describe('productMixin', () => {
   });
 
   describe('Given that a product with an empty matching variant exists', () => {
-    const originalPrice = {
-      value: {
-        centAmount: 1200,
-        fractionDigit: 2,
-      },
-    };
-
-    const discountedPrice = {
-      discounted: {
-        value: {
-          centAmount: 1000,
-          fractionDigits: 2,
-        },
-      },
-    };
-
     const product = {
       matchingVariant: {},
     };
@@ -45,26 +29,13 @@ describe('productMixin', () => {
     it('Obtains whether product has a Price', () => {
       expect(productMixin.computed.hasPrice()).toBeFalsy();
 
-      product.matchingVariant.price = { ...originalPrice };
+      product.matchingVariant.price = {
+        value: {
+          centAmount: 1200,
+          fractionDigit: 2,
+        },
+      };
       expect(productMixin.computed.hasPrice()).toBeTruthy();
-    });
-
-    it('Obtains whether product has a discount', () => {
-      product.matchingVariant.price = { ...originalPrice };
-      expect(productMixin.computed.hasDiscount()).toBeFalsy();
-
-      product.matchingVariant.price = { ...discountedPrice };
-      expect(productMixin.computed.hasDiscount()).toBeTruthy();
-    });
-
-    it('obtains the discounted price', () => {
-      product.matchingVariant.price = { ...discountedPrice };
-      expect(productMixin.computed.discountedPrice()).toBeTruthy();
-    });
-
-    it('obtains the original price', () => {
-      product.matchingVariant.price = { ...originalPrice };
-      expect(productMixin.computed.originalPrice()).toBeTruthy();
     });
   });
 });

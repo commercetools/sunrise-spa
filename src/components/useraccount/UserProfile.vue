@@ -4,7 +4,9 @@
     <div class="row">
       <div class="col-sm-3">
         <!--{{> myaccount/my-account-sidebar myPersonalDetailsTab=true}}-->
+        <SidebarMenu/>
       </div>
+
       <div id="my-account-desktop-content" class="col-sm-9">
         <div class="personal-details">
           <div class="personal-details-text-one">
@@ -57,9 +59,10 @@
 <script>
 import gql from 'graphql-tag';
 import EditProfileForm from './EditProfileForm.vue';
+import SidebarMenu from './SidebarMenu.vue';
 
 export default {
-  components: { EditProfileForm },
+  components: { EditProfileForm, SidebarMenu },
 
   data: () => ({
     me: null,

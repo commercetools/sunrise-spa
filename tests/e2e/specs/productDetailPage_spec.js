@@ -16,10 +16,11 @@ describe('Product detail page', () => {
 
         cy.wrap($product)
           .find('[data-test=product-old-price]')
-          .should('contain', '248,75 €');
+          .contains(/^\s*248,75\s€\s*$/);
+
         cy.wrap($product)
           .find('[data-test=product-new-price]')
-          .should('contain', '174,12 €');
+          .contains(/^\s*174,12\s€\s*$/);
 
         cy.wrap($product)
           .find('[data-test=product-attributes-accordion]')
@@ -29,7 +30,7 @@ describe('Product detail page', () => {
           .find('[data-test=product-attributes-list]')
           .should('have.length', 7)
           .eq(2)
-          .contains(/\s*size:\s+34\s*/);
+          .contains(/^\s*size:\s+34\s*$/);
       });
 
     cy.get('[data-test=product-gallery]')

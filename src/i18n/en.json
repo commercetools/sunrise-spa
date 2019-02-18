@@ -285,16 +285,6 @@
     }
   },
   "myAccount": {
-    "myAccountSidebar": {
-      "personalDetails": "Personal Details",
-      "addressBook": "Address Book",
-      "paymentDetails": "Payment Details",
-      "myOrders": "My Orders",
-      "returnsExchange": "Returns / Exchange",
-      "wishlist": "Wishlist",
-      "signOut": "Sign Out",
-      "changePassword": "Change password"
-    },
     "addressBook": {
       "title": "Address Book",
       "defaultAddresses": {

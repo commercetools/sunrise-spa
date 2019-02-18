@@ -2,13 +2,13 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import store from '@/store';
 import TheHeader from '@/components/header/TheHeader.vue';
-import HomePage from '@/components/home/HomePage.vue';
-import ProductOverviewPage from '@/components/productoverview/ProductOverviewPage.vue';
-import LoginPage from '@/components/login/LoginPage.vue';
-import MyAccountPage from '@/components/useraccount/UserAccountPage.vue';
-import NotFoundPage from '@/components/common/NotFoundPage.vue';
-import ProductDetailPage from '@/components/productdetail/ProductDetailPage.vue';
-import CartPage from '@/components/cartdetail/PageCartDetail.vue';
+import PageHome from '@/components/home/PageHome.vue';
+import PageProductOverview from '@/components/productoverview/PageProductOverview.vue';
+import PageLogin from '@/components/login/PageLogin.vue';
+import PageUserAccount from '@/components/useraccount/PageUserAccount.vue';
+import PageNotFound from '@/components/common/PageNotFound.vue';
+import PageProductDetail from '@/components/productdetail/PageProductDetail.vue';
+import PageCartDetail from '@/components/cartdetail/PageCartDetail.vue';
 
 Vue.use(Router);
 
@@ -21,7 +21,7 @@ const router = new Router({
     {
       path: '*',
       components: {
-        default: NotFoundPage,
+        default: PageNotFound,
         header: TheHeader,
       },
     },
@@ -29,7 +29,7 @@ const router = new Router({
       path: '/',
       name: 'home',
       components: {
-        default: HomePage,
+        default: PageHome,
         header: TheHeader,
       },
     },
@@ -41,7 +41,7 @@ const router = new Router({
       path: '/login',
       name: 'login',
       components: {
-        default: LoginPage,
+        default: PageLogin,
         header: TheHeader,
       },
     },
@@ -49,7 +49,7 @@ const router = new Router({
       path: '/products/:categorySlug',
       name: 'products',
       components: {
-        default: ProductOverviewPage,
+        default: PageProductOverview,
         header: TheHeader,
       },
       props: {
@@ -61,7 +61,7 @@ const router = new Router({
       path: '/user',
       name: 'user',
       components: {
-        default: MyAccountPage,
+        default: PageUserAccount,
         header: TheHeader,
       },
       meta: { requiresAuth },
@@ -70,7 +70,7 @@ const router = new Router({
       path: '/product/:productSlug/:sku',
       name: 'product',
       components: {
-        default: ProductDetailPage,
+        default: PageProductDetail,
         header: TheHeader,
       },
       props: {
@@ -82,7 +82,7 @@ const router = new Router({
       path: '/cart',
       name: 'cart',
       components: {
-        default: CartPage,
+        default: PageCartDetail,
         header: TheHeader,
       },
     },
