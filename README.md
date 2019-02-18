@@ -44,6 +44,15 @@ VUE_APP_CT_API_HOST=https://api.commercetools.co
 
 This will set up the necessary environment variables required to run SUNRISE. Feel free to choose any other approach that best suits your needs.
 
+## Development tips
+
+### Add any queried fields to the mutation
+When executing a mutation (e.g. to update the active cart), we receive as a response the updated resource, which Apollo then uses to update the cached data in Apollo store. It is thanks to this cache that all components are able to display the same information, even after mutations. 
+
+But when we under-fetch in the mutation and fail to update some cached fields we are displaying in a component, this component will not be updated at all with any new data. To avoid that, make sure to add any field you are querying in the mutation, found in the method `updateMyCart` in `/src/mixins/cartMixin.js`.
+
+Related issue: https://github.com/apollographql/apollo-client/issues/3267
+
 
 ## Run tests
 The project has unit and end-to-end tests covering each functionality. Unit tests will run out of the box, but end-to-end tests require some further configuration, explained in the section below.
