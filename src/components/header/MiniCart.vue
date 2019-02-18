@@ -23,7 +23,7 @@
                   name: 'product',
                   params: { productSlug: lineItem.productSlug, sku: lineItem.variant.sku }}"
                   class="img">
-                  <img :src="imageUrl(lineItem)"
+                  <img :src="displayedImageUrl(lineItem.variant)"
                        :alt="lineItem.name"
                        class="img"/>
                 </router-link>
@@ -85,6 +85,7 @@ import gql from 'graphql-tag';
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import cartMixin from '@/mixins/cartMixin';
 import priceMixin from '@/mixins/priceMixin';
+import productMixin from '@/mixins/productMixin';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 import BaseMoney from '../common/BaseMoney.vue';
 
@@ -94,7 +95,7 @@ export default {
     VuePerfectScrollbar,
   },
 
-  mixins: [cartMixin, priceMixin],
+  mixins: [cartMixin, priceMixin, productMixin],
 
   data: () => ({
     me: null,
@@ -115,14 +116,6 @@ export default {
   },
 
   methods: {
-    imageUrl(lineItem) {
-      const { images } = lineItem.variant;
-      if (Array.isArray(images) && images.length) {
-        return lineItem.variant.images[0].url;
-      }
-      return null;
-    },
-
     removeLineItem(lineItemId) {
       return this.updateMyCart([
         {

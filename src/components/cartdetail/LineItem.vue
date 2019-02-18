@@ -2,7 +2,7 @@
   <div data-test="cart-line-item"
        class="row single-cart-item">
     <div class="col-sm-1 col-xs-4 product-img-col">
-      <img :src="imageUrl"
+      <img :src="displayedImageUrl(lineItem.variant)"
            :alt="lineItem.name"
            class="img-responsive cart-item-img">
     </div>
@@ -96,6 +96,7 @@
 <script>
 import debounce from 'lodash.debounce';
 import priceMixin from '@/mixins/priceMixin';
+import productMixin from '@/mixins/productMixin';
 import { required, minValue, numeric } from 'vuelidate/lib/validators';
 import BaseMoney from '../common/BaseMoney.vue';
 import BasePrice from '../common/BasePrice.vue';
@@ -106,7 +107,7 @@ export default {
     BaseMoney,
   },
 
-  mixins: [priceMixin],
+  mixins: [priceMixin, productMixin],
 
   props: {
     lineItem: {
@@ -122,16 +123,6 @@ export default {
   data: () => ({
     quantity: null,
   }),
-
-  computed: {
-    imageUrl() {
-      const { images } = this.lineItem.variant;
-      if (Array.isArray(images) && images.length) {
-        return this.lineItem.variant.images[0].url;
-      }
-      return null;
-    },
-  },
 
   methods: {
     changeLineItemQuantity() {

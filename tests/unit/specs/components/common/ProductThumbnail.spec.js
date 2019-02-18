@@ -52,13 +52,6 @@ describe('ProductThumbnail.vue', () => {
     expect(wrapper.vm.hasImages).toBeFalsy();
   });
 
-  it('obtains the image to be displayed', () => {
-    options.propsData.product.masterData.current.masterVariant.images = [{ url: 'image1' }, { url: 'image2' }];
-    const wrapper = shallowMount(ProductThumbnail, options);
-
-    expect(wrapper.vm.displayedImage).toContain('image');
-  });
-
   it('obtains the product slug', () => {
     const slug = { foo: 'bar' };
     options.propsData.product.masterData.current.slug = slug;
