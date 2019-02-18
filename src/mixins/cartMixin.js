@@ -1,9 +1,6 @@
 import gql from 'graphql-tag';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
-// Issue with under-fetching on mutations https://github.com/apollographql/apollo-client/issues/3267
-// required any queried field to be fetched in order to update all components using carts, e.g. mini-cart
-
 export default {
   computed: {
     totalItems() {
@@ -15,6 +12,9 @@ export default {
   },
 
   methods: {
+    // Issue with under-fetching on mutations https://github.com/apollographql/apollo-client/issues/3267
+    // required any queried field to be fetched in order to update all components using carts, e.g. mini-cart
+
     updateMyCart(actions) {
       return this.$apollo.mutate({
         mutation: gql`
