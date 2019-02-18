@@ -27,7 +27,7 @@
             <div class="col-sm-2 col-xs-5 text-right">
               <div>
                 <span data-test="cart-subtotal-price">
-                  {{ formatPrice(subtotal) }}
+                  <BaseMoney :money="subtotal"/>
                 </span>
               </div>
               <div>
@@ -35,19 +35,19 @@
               </div>
               <div>
                 <span v-if="me.activeCart.shippingInfo">
-                  {{ formatPrice(me.activeCart.shippingInfo.price) }}
+                  <BaseMoney :money="me.activeCart.shippingInfo.price"/>
                 </span>
               </div>
               <hr>
               <div>
                 <span v-if="taxes">
-                  {{ formatPrice(taxes) }}
+                  <BaseMoney :money="taxes"/>
                 </span>
               </div>
               <div>
                 <span data-test="cart-total-price"
                       class="order-total">
-                  {{ formatPrice(me.activeCart.totalPrice) }}
+                  <BaseMoney :money="me.activeCart.totalPrice"/>
                 </span>
               </div>
             </div>
@@ -70,8 +70,13 @@
 import gql from 'graphql-tag';
 import priceMixin from '@/mixins/priceMixin';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
+import BaseMoney from '../common/BaseMoney.vue';
 
 export default {
+  components: {
+    BaseMoney,
+  },
+
   data: () => ({
     me: null,
   }),

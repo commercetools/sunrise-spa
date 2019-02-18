@@ -38,11 +38,11 @@ describe('CartDetailPage', () => {
           .should('have.value', '3');
 
         cy.wrap($lineItem)
-          .find('[data-test=cart-line-item-discounted-price]')
+          .find('[data-test=price-old-value]')
           .contains(/^\s*248,75\s€\s*$/);
 
         cy.wrap($lineItem)
-          .find('[data-test=cart-line-item-price]')
+          .find('[data-test=price-new-value]')
           .contains(/^\s*174,12\s€\s*$/);
 
         cy.wrap($lineItem)

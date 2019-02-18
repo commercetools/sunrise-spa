@@ -15,11 +15,11 @@ describe('Product detail page', () => {
           .should('contain', 'M0E20000000E0WX');
 
         cy.wrap($product)
-          .find('[data-test=product-old-price]')
+          .find('[data-test=price-old-value]')
           .contains(/^\s*248,75\s€\s*$/);
 
         cy.wrap($product)
-          .find('[data-test=product-new-price]')
+          .find('[data-test=price-new-value]')
           .contains(/^\s*174,12\s€\s*$/);
 
         cy.wrap($product)

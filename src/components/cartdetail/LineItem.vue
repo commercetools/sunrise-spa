@@ -78,19 +78,7 @@
          class="col-sm-2">
       <div class="text-right cart-item-price">
         <span class="visible-xs xs-price-title">{{ $t('price') }}</span>
-        <span v-if="!hasDiscount"
-              data-test="cart-line-item-price">
-            {{ formatPrice(originalPrice) }}
-        </span>
-        <span v-else>
-          <span data-test="cart-line-item-discounted-price"
-                class="discounted-price">
-            {{ formatPrice(originalPrice) }}
-          </span>
-          <span data-test="cart-line-item-price">
-            {{ formatPrice(discountedPrice) }}
-          </span>
-        </span>
+        <BasePrice :price="lineItem.price"/>
       </div>
     </div>
     <div :class="editable ? 'col-xs-12 sm-pull-right' : 'col-xs-5'"
@@ -98,7 +86,7 @@
       <div class="text-right cart-item-price">
         <span class="visible-xs xs-price-title">{{ $t('total') }}</span>
         <span data-test="cart-line-item-total-price">
-          {{ formatPrice(lineItem.totalPrice) }}
+          <BaseMoney :money="lineItem.totalPrice"/>
         </span>
       </div>
     </div>
@@ -109,8 +97,15 @@
 import debounce from 'lodash.debounce';
 import priceMixin from '@/mixins/priceMixin';
 import { required, minValue, numeric } from 'vuelidate/lib/validators';
+import BaseMoney from '../common/BaseMoney.vue';
+import BasePrice from '../common/BasePrice.vue';
 
 export default {
+  components: {
+    BasePrice,
+    BaseMoney,
+  },
+
   mixins: [priceMixin],
 
   props: {
@@ -129,18 +124,6 @@ export default {
   }),
 
   computed: {
-    hasDiscount() {
-      return this.lineItem.price.discounted;
-    },
-
-    originalPrice() {
-      return this.lineItem.price.value;
-    },
-
-    discountedPrice() {
-      return this.lineItem.price.discounted.value;
-    },
-
     imageUrl() {
       const { images } = this.lineItem.variant;
       if (Array.isArray(images) && images.length) {

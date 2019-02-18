@@ -23,7 +23,7 @@
                   name: 'product',
                   params: { productSlug: lineItem.productSlug, sku: lineItem.variant.sku }}"
                   class="img">
-                  <img :src="imageUrl"
+                  <img :src="imageUrl(lineItem)"
                        :alt="lineItem.name"
                        class="img"/>
                 </router-link>
@@ -45,7 +45,7 @@
                   <p class="product-price">
                     {{ $t('price') }}
                     <span data-test="mini-cart-line-item-price">
-                      {{ formatPrice(lineItem.totalPrice) }}
+                      <BaseMoney :money="lineItem.totalPrice"/>
                     </span>
                   </p>
                   <button @click="removeLineItem(lineItem.id)"
@@ -65,7 +65,8 @@
         <div class="gradient"></div>
         <p class="total-price"
            data-test="mini-cart-price">
-          {{ $t('totalPrice', { totalPrice: formatPrice(me.activeCart.totalPrice) }) }}
+          {{ $t('totalPrice') }}
+          <BaseMoney :money="me.activeCart.totalPrice"/>
         </p>
         <router-link :to="{ name: 'cart' }"
                      class="btn-grey">
@@ -85,9 +86,11 @@ import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import cartMixin from '@/mixins/cartMixin';
 import priceMixin from '@/mixins/priceMixin';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
+import BaseMoney from '../common/BaseMoney.vue';
 
 export default {
   components: {
+    BaseMoney,
     VuePerfectScrollbar,
   },
 
@@ -199,7 +202,7 @@ export default {
     "viewBag": "Warenkorb",
     "quantity": "Menge",
     "price": "Price",
-    "totalPrice": "Gesamtpreis {totalPrice}",
+    "totalPrice": "Gesamtpreis",
     "delete": "Löschen",
     "checkout": "Checkout"
   },
@@ -208,7 +211,7 @@ export default {
     "viewBag": "View Bag",
     "quantity": "quantity",
     "price": "Price",
-    "totalPrice": "Total {totalPrice}",
+    "totalPrice": "Total",
     "delete": "Delete",
     "checkout": "Checkout"
   }
