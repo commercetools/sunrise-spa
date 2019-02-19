@@ -56,6 +56,8 @@ sizeGuideTable.prototype = {
 
 $(document).ready(() => {
   $(window).load(() => {
+    // Custom scrollbar no longer exists as a dependency, but this functionality is not yet implemented
+    // It's commented out until the functionality is implemented, to keep it as a reference
     // makes the scrollbar's design the same in all browsers
     // $('.order-summary-items').mCustomScrollbar({
     //   theme: 'dark',
