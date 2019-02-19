@@ -41,10 +41,9 @@
 
         </div>
       </div>
-      <!-- {{> catalog/add-to-cart}}
-      {{> catalog/add-to-wishlist-btn}}
+      <AddToCartForm :sku="sku"/>
+      <!-- {{> catalog/add-to-wishlist-btn}}
       {{> catalog/reserve-in-store-btn}} -->
-      <AddToCartButton/>
       <div class="row">
         <div class="col-sm-12">
           <!-- {{> catalog/product-availability availability=product.availability}} -->
@@ -63,7 +62,7 @@ import productMixin from '@/mixins/productMixin';
 import ProductGallery from './ProductGallery.vue';
 import SocialMediaLinks from './SocialMediaLinks.vue';
 import DetailsSection from './DetailsSection.vue';
-import AddToCartButton from './AddToCartButton.vue';
+import AddToCartForm from './AddToCartForm.vue';
 import BasePrice from '../common/BasePrice.vue';
 
 export default {
@@ -71,7 +70,7 @@ export default {
     DetailsSection,
     ProductGallery,
     SocialMediaLinks,
-    AddToCartButton,
+    AddToCartForm,
     BasePrice,
   },
 

@@ -4,11 +4,13 @@ import store from '@/store';
 import config from '@/../sunrise.config';
 
 const tokenInfoStorageName = 'token';
+const isAuthenticatedStorageName = 'auth';
 let storedTokenInfo;
 
 try {
   storedTokenInfo = JSON.parse(localStorage.getItem(tokenInfoStorageName));
-  if (storedTokenInfo && storedTokenInfo.refresh_token) {
+  const isAuthenticated = localStorage.getItem(isAuthenticatedStorageName);
+  if (storedTokenInfo && isAuthenticated) {
     store.dispatch('setAuthenticated', true);
   }
 } catch (error) {
@@ -18,26 +20,39 @@ try {
 
 const tokenProvider = new TokenProvider({
   sdkAuth: new SdkAuth(config.ct.auth),
-  fetchTokenInfo: sdkAuth => sdkAuth.clientCredentialsFlow(),
+  fetchTokenInfo: sdkAuth => sdkAuth.anonymousFlow(),
   onTokenInfoChanged: tokenInfo => localStorage.setItem(tokenInfoStorageName, JSON.stringify(tokenInfo)),
 }, storedTokenInfo);
 
-export function clientLogout() {
-  localStorage.removeItem(tokenInfoStorageName);
-  tokenProvider.fetchTokenInfo = sdkAuth => sdkAuth.clientCredentialsFlow();
-  tokenProvider.invalidateTokenInfo();
-  return apolloProvider.defaultClient.clearStore()
-    .then(() => store.dispatch('setAuthenticated', false))
-    .catch((error) => {
-      // eslint-disable-next-line no-console
-      console.error('Error on cache reset', error);
-    });
+function cleanUpSession() {
+  localStorage.removeItem(isAuthenticatedStorageName);
+  return store.dispatch('setAuthenticated', false);
 }
 
 export function clientLogin(username, password) {
+  localStorage.removeItem(tokenInfoStorageName);
   tokenProvider.fetchTokenInfo = sdkAuth => sdkAuth.customerPasswordFlow({ username, password });
   tokenProvider.invalidateTokenInfo();
-  store.dispatch('setAuthenticated', true);
+  return apolloProvider.defaultClient.resetStore()
+    .then(() => {
+      localStorage.setItem(isAuthenticatedStorageName, true);
+      return store.dispatch('setAuthenticated', true);
+    })
+    .catch((error) => {
+      // eslint-disable-next-line no-console
+      console.error('Error on cache reset during login', error);
+      return cleanUpSession();
+    });
+}
+
+export function clientLogout(redirect) {
+  return cleanUpSession()
+    .then(() => redirect())
+    .then(() => apolloProvider.defaultClient.resetStore())
+    .catch((error) => {
+      // eslint-disable-next-line no-console
+      console.error('Error on cache reset during logout', error);
+    });
 }
 
 const buildAuthorizationHeader = () => tokenProvider.getTokenInfo()
@@ -47,6 +62,6 @@ export function getAuthToken() {
   return buildAuthorizationHeader().catch((error) => {
     // eslint-disable-next-line no-console
     console.warn('Could not connect to commercetools, cleaning up session...', error);
-    return clientLogout().then(() => buildAuthorizationHeader());
+    return cleanUpSession().then(() => buildAuthorizationHeader());
   });
 }

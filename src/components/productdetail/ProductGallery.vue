@@ -1,8 +1,9 @@
 <template>
   <ProductZoomer v-if="product"
-                 data-test="product-image"
                  :base-images="zoomerImages"
-                 :base-zoomer-options="zoomerOptions" />
+                 :base-zoomer-options="zoomerOptions"
+                 :key="product.masterData.current.variant.sku"
+                 data-test="product-image" />
 </template>
 
 <script>
@@ -63,6 +64,7 @@ export default {
             masterData {
               current {
                 variant(sku: $sku) {
+                  sku
                   images {
                     url
                   }
@@ -92,5 +94,4 @@ export default {
     width: auto;
     margin: 2px;
   }
-
 </style>

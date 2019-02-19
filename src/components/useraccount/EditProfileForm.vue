@@ -59,17 +59,13 @@
       <!-- </div> -->
       <div class="personal-details-edit-btn">
         <span>
-          <button :disabled="loading"
-                  type="submit"
-                  class="update-btn"
-                  data-test="edit-profile-form-submit">
-            <span v-if="loading">
-              {{ $t('main.messages.pleaseWait') }}
-            </span>
-            <span v-else>
-              {{ $t('updateBtn') }}
-            </span>
-          </button>
+          <LoadingButton :buttonState="buttonState"
+                         @reset="$emit('close')"
+                         type="submit"
+                         class="update-btn"
+                         data-test="edit-profile-form-submit">
+            {{ $t('updateBtn') }}
+          </LoadingButton>
           <button @click="$emit('close')"
                   type="button"
                   class="cancel-btn personal-details-edit-hide-btn"
@@ -85,27 +81,24 @@
 <script>
 import { required, email } from 'vuelidate/lib/validators';
 import gql from 'graphql-tag';
+import customerMixin from '@/mixins/customerMixin';
 import ServerError from '../common/ServerError.vue';
 import ValidationError from '../common/ValidationError.vue';
-
-const customerInfoFragment = gql`
-  fragment EditProfileCustomerInfo on Customer {
-    id
-    email
-    firstName
-    lastName
-    version
-  }`;
+import LoadingButton from '../common/LoadingButton.vue';
 
 export default {
-  components: { ValidationError, ServerError },
+  components: {
+    LoadingButton,
+    ValidationError,
+    ServerError,
+  },
 
   data: () => ({
     me: null,
     firstName: null,
     lastName: null,
     email: null,
-    loading: false,
+    buttonState: null,
     serverError: null,
   }),
 
@@ -123,35 +116,23 @@ export default {
       this.$v.$touch();
       this.serverError = null;
       if (!this.$v.$invalid && this.hasFormChanged) {
-        this.loading = true;
-        await this.updateMyCustomer()
+        this.buttonState = 'loading';
+        await this.updateCustomerProfile()
           .then(() => {
-            this.$emit('close');
+            this.buttonState = 'success';
           }).catch((error) => {
             this.serverError = error;
-            this.loading = false;
+            this.buttonState = null;
           });
       }
     },
 
-    updateMyCustomer() {
-      return this.$apollo.mutate({
-        mutation: gql`
-          mutation updateMyCustomer($actions: [MyCustomerUpdateAction!]!, $version: Long!) {
-            updateMyCustomer(version: $version, actions: $actions) {
-              ...EditProfileCustomerInfo
-            }
-          }
-          ${customerInfoFragment}`,
-        variables: {
-          version: this.me.customer.version,
-          actions: [
-            { changeEmail: { email: this.email } },
-            { setFirstName: { firstName: this.firstName } },
-            { setLastName: { lastName: this.lastName } },
-          ],
-        },
-      });
+    updateCustomerProfile() {
+      return this.updateMyCustomer([
+        { changeEmail: { email: this.email } },
+        { setFirstName: { firstName: this.firstName } },
+        { setLastName: { lastName: this.lastName } },
+      ]);
     },
 
     getErrorMessage({ code, field }) {
@@ -170,17 +151,22 @@ export default {
     },
   },
 
+  mixins: [customerMixin],
+
   apollo: {
     me: {
       query: gql`
         query me {
           me {
             customer {
-              ...EditProfileCustomerInfo
+              id
+              version
+              email
+              firstName
+              lastName
             }
           }
-        }
-        ${customerInfoFragment}`,
+        }`,
       skip: vm => !vm.$store.state.authenticated,
     },
   },

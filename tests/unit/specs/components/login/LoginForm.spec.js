@@ -60,7 +60,7 @@ describe('LoginForm.vue', () => {
     expect(wrapper.findAll(ValidationError).length).toBe(2);
   });
 
-  it('catches server errors', () => {
+  it('catches server errors', async () => {
     const wrapper = shallowMount(LoginForm, options);
     expect(wrapper.find(ServerError).props().error).toBeNull();
 
@@ -69,8 +69,7 @@ describe('LoginForm.vue', () => {
     });
     options.methods.customerSignMeIn.mockRejectedValue(error);
     fillForm(wrapper, credentials);
-    wrapper.vm.submit().then(() => {
-      expect(wrapper.find(ServerError).props().error).toEqual(error);
-    });
+    await wrapper.vm.submit();
+    expect(wrapper.find(ServerError).props().error).toEqual(error);
   });
 });

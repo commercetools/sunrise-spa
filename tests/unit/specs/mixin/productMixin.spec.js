@@ -38,5 +38,20 @@ describe('productMixin', () => {
       expect(productMixin.computed.hasPrice()).toBeTruthy();
     });
   });
-});
 
+  it('returns the first available image', () => {
+    expect(productMixin.methods.displayedImageUrl({})).toBeNull();
+
+    expect(productMixin.methods.displayedImageUrl({
+      images: [],
+    })).toBeNull();
+
+    expect(productMixin.methods.displayedImageUrl({
+      images: [
+        { url: 'url1' },
+        { url: 'url2' },
+        { url: 'url3' },
+      ],
+    })).toBe('url1');
+  });
+});

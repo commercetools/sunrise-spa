@@ -87,3 +87,14 @@ Cypress.Commands.add('deleteCustomer', ({ email }) => {
 
   return cy.wrap(clientPromise.then(client => deleteCustomer(client)));
 });
+
+Cypress.Commands.add('addLineItem', (url, quantity) => {
+  cy.visit(url);
+  cy.get('span[data-test=add-to-cart-form-quantity-dropdown]')
+    .click()
+    .parent()
+    .contains(`${quantity}`)
+    .click();
+  cy.get('[data-test=add-to-cart-form-button]').click();
+  cy.get('[data-test=mini-cart-content]').should('be.visible');
+});

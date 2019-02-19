@@ -19,11 +19,11 @@ describe('Product thumbnail', () => {
           .should('exist');
 
         cy.wrap($thumbnail)
-          .find('[data-test=product-old-price]')
+          .find('[data-test=price-old-value]')
           .contains(/^\s*248,75\s€\s*$/);
 
         cy.wrap($thumbnail)
-          .find('[data-test=product-new-price]')
+          .find('[data-test=price-new-value]')
           .contains(/^\s*174,12\s€\s*$/);
       });
 
@@ -41,7 +41,7 @@ describe('Product thumbnail', () => {
           .contains(/\s*231,25\s€\s*$/);
 
         cy.wrap($thumbnail)
-          .find('[data-test=product-new-price]')
+          .find('[data-test=price-new-value]')
           .should('not.exist');
       });
   });

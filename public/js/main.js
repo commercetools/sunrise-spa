@@ -56,16 +56,18 @@ sizeGuideTable.prototype = {
 
 $(document).ready(() => {
   $(window).load(() => {
+    // Custom scrollbar no longer exists as a dependency, but this functionality is not yet implemented
+    // It's commented out until the functionality is implemented, to keep it as a reference
     // makes the scrollbar's design the same in all browsers
-    $('.nav-minicart ul, .order-summary-items').mCustomScrollbar({
-      theme: 'dark',
-      scrollInertia: 50,
-    });
-
-    $('.store-location-wrapper > .addresses').mCustomScrollbar({
-      theme: 'dark-thin',
-      scrollInertia: 50,
-    });
+    // $('.order-summary-items').mCustomScrollbar({
+    //   theme: 'dark',
+    //   scrollInertia: 50,
+    // });
+    //
+    // $('.store-location-wrapper > .addresses').mCustomScrollbar({
+    //   theme: 'dark-thin',
+    //   scrollInertia: 50,
+    // });
   });
 
   // "Select" elements becomes customized
@@ -74,19 +76,6 @@ $(document).ready(() => {
   // Toggle search bar on mobile
   $('.search-toggle').click(() => {
     $('.search-box').slideToggle();
-  });
-
-  // Your bag dropdown
-  $('.link-your-bag').click(() => {
-    $('.nav-minicart').slideToggle();
-  });
-
-  // Closing dropdown on click outside of it
-  $('html').click(() => {
-    $('.nav-minicart').hide();
-  });
-  $('.list-item-bag, .nav-minicart').click((event) => {
-    event.stopPropagation();
   });
 });
 

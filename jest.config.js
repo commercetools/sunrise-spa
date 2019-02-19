@@ -8,6 +8,7 @@ module.exports = {
   transform: {
     '^.+\\.vue$': 'vue-jest',
     '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
+    '\\.(gql|graphql)$': 'jest-transform-graphql',
     '^.+\\.jsx?$': 'babel-jest',
   },
   moduleNameMapper: {

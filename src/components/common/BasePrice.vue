@@ -5,12 +5,12 @@
     </span>
 
     <span v-else>
-      <span data-test="product-old-price"
+      <span data-test="price-old-value"
             class="old-price">
         <BaseMoney :money="originalPrice"/>
       </span>
 
-      <span data-test="product-new-price"
+      <span data-test="price-new-value"
             class="new-price">
         <BaseMoney :money="discountedPrice"/>
       </span>

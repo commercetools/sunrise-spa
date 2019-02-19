@@ -8,6 +8,7 @@ import PageLogin from '@/components/login/PageLogin.vue';
 import PageUserAccount from '@/components/useraccount/PageUserAccount.vue';
 import PageNotFound from '@/components/common/PageNotFound.vue';
 import PageProductDetail from '@/components/productdetail/PageProductDetail.vue';
+import PageCartDetail from '@/components/cartdetail/PageCartDetail.vue';
 
 Vue.use(Router);
 
@@ -75,6 +76,14 @@ const router = new Router({
       props: {
         default: true,
         header: false,
+      },
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      components: {
+        default: PageCartDetail,
+        header: TheHeader,
       },
     },
   ],

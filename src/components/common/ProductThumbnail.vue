@@ -28,7 +28,7 @@
       <div v-if="hasImages"
            class="pop-product-image">
         <img class="img-lazy"
-             :src="displayedImage"
+             :src="displayedImageUrl(matchingVariant)"
              :alt="currentProduct.name"/>
       </div>
       <div class="pop-product-name">
@@ -119,10 +119,6 @@ export default {
 
     hasImages() {
       return Array.isArray(this.matchingVariant.images) && this.matchingVariant.images.length > 0;
-    },
-
-    displayedImage() {
-      return this.matchingVariant.images[0].url;
     },
 
     productSlug() {

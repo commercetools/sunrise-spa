@@ -237,8 +237,6 @@
     "discountTooltip": "Discount options additional information...",
     "discountPromoInfo": "PROMOTIONAL DISCOUNT INFO",
     "editMyCart": "Edit my shopping cart",
-    "itemsTotal": "__count__ item in total",
-    "itemsTotal_plural": "__count__ items in total",
     "needHelpCustomerService": "Need help? Customer Service",
     "orderDate": "Order Date",
     "orderDiscount": "Order Discount",
@@ -255,7 +253,6 @@
     "shippingMethod": "Shipping Method",
     "subtotal": "Subtotal",
     "total": "Total",
-    "yourBag": "Your Bag",
     "cartDetailPage": {
       "title": "Your Cart"
     },
