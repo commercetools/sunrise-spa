@@ -94,7 +94,7 @@
 <script>
 import ProductList from './ProductList.vue';
 import Breadcrumb from '../common/Breadcrumb.vue';
-import ProductSorting from '../productoverview/ProductSorting.vue';
+import ProductSorting from './ProductSorting.vue';
 
 export default {
   components: {

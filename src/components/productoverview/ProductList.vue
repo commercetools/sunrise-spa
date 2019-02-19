@@ -43,9 +43,9 @@ export default {
 
     passSorting() {
       if (this.sort === 'newest') {
-        return 'lastModifiedAt desc';
+        return 'createdAt desc';
       } else if (this.sort === 'oldest') {
-        return 'lastModifiedAt asc';
+        return 'createdAt asc';
       } return null;
     },
   },
