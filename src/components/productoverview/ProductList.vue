@@ -1,16 +1,16 @@
 <template>
   <div>
-    <div v-if="!products">
-      <img src="../../assets/img/spinner.gif"/>
+    <div v-if="isLoading">
+      <img data-test="spinner" src="../../assets/img/spinner.gif"/>
     </div>
-    <div v-else-if="!products.results.length">
+    <div v-else-if="products && !products.results.length">
       {{ $t('catalog.searchNotFound.notFound') }}
     </div>
     <transition name="fade">
-      <div v-if="products && products.results.length"
+      <div v-if="!isLoading && products && products.results.length"
            id="pop-product-list"
            class="row">
-        <ProductThumbnail v-for="product in products.results"
+        <ProductThumbnail data-test="product-list" v-for="product in products.results"
                           :key="product.id"
                           :product="product" />
       </div>
@@ -36,6 +36,10 @@ export default {
 
   computed: {
     category: vm => vm.categories.results[0],
+
+    isLoading: function() {
+      return this.$apollo.loading;
+    },
 
     passSorting() {
       if (this.sort === 'newest') {

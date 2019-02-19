@@ -7,7 +7,12 @@ describe('ProductList.vue', () => {
 
   beforeEach(() => {
     options = {
-      mocks: { $t: jest.fn() },
+      mocks: {
+        $t: jest.fn(),
+      },
+      computed: {
+        isLoading: jest.fn(),
+      },
     };
   });
 
@@ -22,6 +27,7 @@ describe('ProductList.vue', () => {
         results: [],
       },
     });
+    
     expect(wrapper.vm.category).toBeUndefined();
 
     wrapper.setData({

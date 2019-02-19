@@ -1,6 +1,6 @@
 <template>
-    <select name="sort" id="sort" v-model="sortBy" v-on:change="sort(sortBy)">
-        <option selected="selected" value="">--</option>
+    <select data-test="sorting-select" name="sort" id="sort" v-model="sortBy">
+        <option value="">--</option>
         <option value="newest">Newest</option>
         <option value="oldest">Oldest</option>
     </select>
@@ -15,12 +15,10 @@ export default {
     this.sortBy = this.$route.query.sort || '';
   },
 
-  methods: {
-    sort(sortBy) {
-      if (sortBy === 'newest') {
-        this.$router.replace({ name: 'products', query: { sort: 'newest' } });
-      } else if (sortBy === 'oldest') {
-        this.$router.replace({ name: 'products', query: { sort: 'oldest' } });
+  watch: {
+    sortBy(sortBy) {
+      if (sortBy.length > 0) {
+        this.$router.replace({ query: { sort: sortBy } });
       } else {
         this.$router.replace('');
       }
@@ -28,16 +26,3 @@ export default {
   },
 };
 </script>
-
-<i18n>
-{
-  "en": {
-    "priceDesc": "Price: Descending",
-    "priceAsc": "Price: Ascending"
-  },
-  "de": {
-    "priceDesc": "Preis absteigend",
-    "priceAsc": "Preis aufsteigend"
-  }
-}
-</i18n>

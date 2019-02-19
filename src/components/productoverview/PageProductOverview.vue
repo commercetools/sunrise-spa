@@ -75,7 +75,7 @@
             </div>
           </form>
 
-          <ProductList :categorySlug="categorySlug" :sort="$route.query.sort"/>
+          <ProductList :categorySlug="categorySlug" :sort="sort"/>
 
           <div class="row">
             <div class="col-sm-9 col-sm-offset-3 col-xs-12 text-center custom-pagination">
@@ -103,18 +103,7 @@ export default {
     ProductSorting,
   },
 
-  props: ['categorySlug'],
-
-  computed: {
-    passSorting($route) {
-      console.log($route.query);
-      // if ($route.query.sort === 'newest'){
-      //   return 'lastModifiedAt desc'
-      // } else if ($route.query.sort === 'oldest'){
-      //   return 'lastModifiedAt asc'
-      // } else return null
-    },
-  },
+  props: ['categorySlug', 'sort'],
 
 };
 </script>

@@ -54,7 +54,10 @@ const router = new Router({
         header: TheHeader,
       },
       props: {
-        default: true,
+        default: route => ({
+          ...route.params,
+          sort: route.query.sort,
+        }),
         header: false,
       },
     },
