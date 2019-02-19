@@ -7,17 +7,14 @@ export default {
     hasPrice() {
       return this.matchingVariant.price;
     },
+  },
 
-    hasDiscount() {
-      return this.matchingVariant.price.discounted;
-    },
-
-    discountedPrice() {
-      return this.matchingVariant.price.discounted.value;
-    },
-
-    originalPrice() {
-      return this.matchingVariant.price.value;
+  methods: {
+    displayedImageUrl(variant) {
+      if (Array.isArray(variant.images) && variant.images.length) {
+        return variant.images[0].url;
+      }
+      return null;
     },
   },
 };

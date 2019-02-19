@@ -93,8 +93,7 @@
   font-size: 2em;
 
   // @FIXME: Push this to a more general typography mixin-file
-  .discounted-price {
-    text-decoration: line-through;
+  .old-price {
     color: fade-out($silver-chalice, 0.4);
     font-size: 0.8em;
     font-weight: 200;
@@ -145,8 +144,8 @@
     vertical-align: top;
 
     .bag-items {
-      height: 52px;
-      line-height: 52px;
+      height: 43px;
+      line-height: 43px;
     }
   }
 }

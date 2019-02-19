@@ -46,14 +46,14 @@ export default {
 
   methods: {
     logout() {
-      clientLogout().then(() => this.$router.replace({ query: { logout: true } }));
+      clientLogout(() => this.$router.replace({ query: { logout: true } }));
     },
   },
 
   apollo: {
     me: {
       query: gql`
-        query me {
+        query loginButtonMe {
           me {
             customer {
               id

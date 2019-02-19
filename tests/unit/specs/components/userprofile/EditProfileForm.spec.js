@@ -108,7 +108,7 @@ describe('EditProfileForm.vue', () => {
     expect(wrapper.findAll(ValidationError).length).toBe(3);
   });
 
-  it('catches server errors', () => {
+  it('catches server errors', async () => {
     const wrapper = shallowMount(EditProfileForm, options);
     wrapper.setData({ me });
     expect(wrapper.find(ServerError).props().error).toBeNull();
@@ -118,8 +118,7 @@ describe('EditProfileForm.vue', () => {
     });
     options.methods.updateMyCustomer.mockRejectedValue(error);
     fillForm(wrapper, newUser);
-    wrapper.vm.submit().then(() => {
-      expect(wrapper.find(ServerError).props().error).toEqual(error);
-    });
+    await wrapper.vm.submit();
+    expect(wrapper.find(ServerError).props().error).toEqual(error);
   });
 });

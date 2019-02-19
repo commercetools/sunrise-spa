@@ -88,23 +88,14 @@
                  autocomplete="off"
                  type="checkbox"
                  data-test="signup-form-agreetoterms" />
-          <span>{{ $t('agreeTo') }} <a href="#">{{ $t('termsAndConditions') }}</a></span>
+          <span>{{ $t('agreeTo') }}</span>
         </ValidationError>
       </div>
-      <div class="signup-box-policy">
-        {{ $t('personalInfo') }}
-        <a href="#">{{ $t('privacyPolicy') }}</a>
-      </div>
-      <button :disabled="loading"
-              class="signup-register-btn"
-              data-test="signup-form-submit">
-        <span v-if="loading">
-            {{ $t('main.messages.pleaseWait') }}
-          </span>
-        <span v-else>
-            {{ $t('registerNow') }}
-        </span>
-      </button>
+      <LoadingButton :buttonState="buttonState"
+                     class="signup-register-btn"
+                     data-test="signup-form-submit">
+        {{ $t('registerNow') }}
+      </LoadingButton>
     </form>
   </div>
 </template>
@@ -115,9 +106,10 @@ import gql from 'graphql-tag';
 import { clientLogin } from '@/auth';
 import ServerError from '../common/ServerError.vue';
 import ValidationError from '../common/ValidationError.vue';
+import LoadingButton from '../common/LoadingButton.vue';
 
 export default {
-  components: { ServerError, ValidationError },
+  components: { ServerError, ValidationError, LoadingButton },
 
   data: () => ({
     firstName: null,
@@ -126,7 +118,7 @@ export default {
     password: null,
     repeatPassword: null,
     agreeToTerms: false,
-    loading: false,
+    buttonState: null,
     serverError: null,
   }),
 
@@ -135,13 +127,13 @@ export default {
       this.$v.$touch();
       this.serverError = null;
       if (!this.$v.$invalid) {
-        this.loading = true;
+        this.buttonState = 'loading';
         await this.customerSignMeUp()
           .then(() => clientLogin(this.email, this.password))
           .then(() => this.$router.push({ name: 'user' }))
           .catch((error) => {
             this.serverError = error;
-            this.loading = false;
+            this.buttonState = null;
           });
       }
     },
@@ -217,11 +209,8 @@ export default {
     "repeatPasswordError": "Passwords do not match",
     "pleaseAddMe": "Please add me to the",
     "newsletter": "SUNRISE Newsletter",
-    "agreeTo": "I agree to the",
-    "termsAndConditions": "Terms and Conditions",
+    "agreeTo": "I agree to the Terms and Conditions.",
     "agreeToTermsError": "You must agree to the terms",
-    "personalInfo": "Sunrise does not share or sell personal information. See",
-    "privacyPolicy": "Privacy Policy",
     "registerNow": "Register Now",
     "duplicatedEmail": "A customer with this email already exists"
   },
@@ -239,11 +228,8 @@ export default {
     "repeatPasswordError": "Passwörter stimmen nicht überein",
     "pleaseAddMe": "Anmeldung zum",
     "newsletter": "SUNRISE Newsletter",
-    "agreeTo": "Ich stimme den \"\" zu.",
-    "termsAndConditions": "AGB",
+    "agreeTo": "Ich stimme den AGB zu.",
     "agreeToTermsError": "Sie müssen den Bedingungen zustimmen",
-    "personalInfo": "Ihre persönliche Daten werden vertaulich behandelt.",
-    "privacyPolicy": "Datenschutz",
     "registerNow": "Jetzt registieren",
     "duplicatedEmail": "Ein Kunde mit dieser E-Mail existiert bereits"
   }

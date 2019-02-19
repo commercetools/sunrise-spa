@@ -1,16 +1,17 @@
 <template>
   <li v-if="languages.length"
+      @mouseleave="setCloseTimer"
+      @mouseenter="clearCloseTimer"
       data-test="location-selector"
       class="list-item-location clearfix">
-    <button @click="toggle = !toggle"
+    <button @click="show = !show"
             data-test="location-selector-open-button">
       <img class="pull-right"
            src="../../assets/img/globe-2.png"
            :alt="$t('main.header.location')">
     </button>
     <transition name="fade">
-      <div v-if="toggle"
-           v-on-clickaway="onClickAway"
+      <div v-if="show"
            class="location-dropdown">
         <!--{{#if location.language}}-->
         <span class="location-dropdown-label">
@@ -38,11 +39,10 @@
 </template>
 
 <script>
-import VueClickaway from 'vue-clickaway';
-
 export default {
   data: () => ({
-    toggle: false,
+    show: false,
+    closeTimer: null,
   }),
 
   computed: {
@@ -54,11 +54,15 @@ export default {
   },
 
   methods: {
-    onClickAway() {
-      this.toggle = false;
+    setCloseTimer() {
+      this.closeTimer = setTimeout(() => {
+        this.show = false;
+      }, 300);
+    },
+
+    clearCloseTimer() {
+      clearTimeout(this.closeTimer);
     },
   },
-
-  mixins: [VueClickaway.mixin],
 };
 </script>

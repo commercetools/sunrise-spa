@@ -28,7 +28,7 @@
       <div v-if="hasImages"
            class="pop-product-image">
         <img class="img-lazy"
-             :src="displayedImage"
+             :src="displayedImageUrl(matchingVariant)"
              :alt="currentProduct.name"/>
       </div>
       <div class="pop-product-name">
@@ -39,21 +39,8 @@
       </div>
       <div v-if="hasPrice"
            class="pop-item-price">
-        <div v-if="hasDiscount">
-          <span data-test="product-thumbnail-price"
-                class="strikethrough">
-            {{ formatPrice(originalPrice) }}
-          </span>
-          <span data-test="product-thumbnail-discounted-price"
-                class="pop-item-price-old">
-            {{ formatPrice(discountedPrice) }}
-          </span>
 
-        </div>
-        <span v-else
-              data-test="product-thumbnail-price">
-          {{ formatPrice(originalPrice) }}
-        </span>
+        <BasePrice :price="matchingVariant.price" />
       </div>
 
       <div class="pop-product-more-colors">
@@ -101,8 +88,13 @@
 <script>
 import priceMixin from '@/mixins/priceMixin';
 import productMixin from '@/mixins/productMixin';
+import BasePrice from '../common/BasePrice.vue';
 
 export default {
+  components: {
+    BasePrice,
+  },
+
   props: {
     product: {
       type: Object,
@@ -121,12 +113,12 @@ export default {
       return false;
     },
 
-    hasImages() {
-      return Array.isArray(this.matchingVariant.images) && this.matchingVariant.images.length > 0;
+    hasDiscount() {
+      return this.matchingVariant.price.discounted;
     },
 
-    displayedImage() {
-      return this.matchingVariant.images[0].url;
+    hasImages() {
+      return Array.isArray(this.matchingVariant.images) && this.matchingVariant.images.length > 0;
     },
 
     productSlug() {

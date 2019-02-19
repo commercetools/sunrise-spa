@@ -188,21 +188,6 @@
   }
 }
 .personal-details-edit-btn {
-  .update-btn {
-    text-transform: uppercase;
-    background: $my-sin;
-    padding: 10px 20px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    margin-right: 15px;
-    font-size: 16px;
-    &:hover {
-      background: lighten($my-sin, 5%);
-    }
-    @media screen and (max-width: 767px) {
-      margin-bottom: 10px;
-    }
-  }
   .cancel-btn {
     border: 2px solid $silver-chalice;
     color: $silver-chalice;

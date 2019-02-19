@@ -49,10 +49,7 @@
                 </a>
               </li>
 
-              <li class="list-item-bag">
-                <!--{{> common/mini-cart miniCart=header.miniCart}}-->
-              </li>
-
+              <MiniCart/>
               <LoginButton/>
               <LocationSelector/>
             </ul>
@@ -105,12 +102,14 @@
 import LocationSelector from './LocationSelector.vue';
 import CategoriesMenu from './CategoriesMenu.vue';
 import LoginButton from './LoginButton.vue';
+import MiniCart from './MiniCart.vue';
 
 export default {
   components: {
     LocationSelector,
     CategoriesMenu,
     LoginButton,
+    MiniCart,
   },
 };
 </script>

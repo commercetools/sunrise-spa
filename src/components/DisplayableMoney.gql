@@ -1,0 +1,5 @@
+fragment DisplayableMoney on Money {
+  centAmount
+  currencyCode
+  fractionDigits
+}

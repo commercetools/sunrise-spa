@@ -36,27 +36,14 @@
         <div v-if="hasPrice"
              class="col-sm-12">
           <p class="product-price">
-            <span v-if="!hasDiscount"
-                  data-test="product-original-price">
-              {{ formatPrice(originalPrice) }}
-            </span>
-            <span v-else>
-              <span data-test="product-old-price"
-                    class="discounted-price">
-                {{ formatPrice(originalPrice) }}
-              </span>
-              <span data-test="product-new-price">
-                {{ formatPrice(discountedPrice) }}
-              </span>
-            </span>
+            <BasePrice :price="matchingVariant.price"/>
           </p>
 
         </div>
       </div>
-      <!-- {{> catalog/add-to-cart}}
-      {{> catalog/add-to-wishlist-btn}}
+      <AddToCartForm :sku="sku"/>
+      <!-- {{> catalog/add-to-wishlist-btn}}
       {{> catalog/reserve-in-store-btn}} -->
-      <AddToCartButton/>
       <div class="row">
         <div class="col-sm-12">
           <!-- {{> catalog/product-availability availability=product.availability}} -->
@@ -75,14 +62,16 @@ import productMixin from '@/mixins/productMixin';
 import ProductGallery from './ProductGallery.vue';
 import SocialMediaLinks from './SocialMediaLinks.vue';
 import DetailsSection from './DetailsSection.vue';
-import AddToCartButton from './AddToCartButton.vue';
+import AddToCartForm from './AddToCartForm.vue';
+import BasePrice from '../common/BasePrice.vue';
 
 export default {
   components: {
     DetailsSection,
     ProductGallery,
     SocialMediaLinks,
-    AddToCartButton,
+    AddToCartForm,
+    BasePrice,
   },
 
   props: {
