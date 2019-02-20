@@ -42,12 +42,15 @@ export default {
       return this.$apollo.loading;
     },
 
-    passSorting() {
-      if (this.sort === 'newest') {
-        return 'createdAt desc';
-      } if (this.sort === 'oldest') {
-        return 'createdAt asc';
-      } return null;
+    sortParameter() {
+      switch (this.sort) {
+        case 'newest':
+          return 'createdAt desc';
+        case 'oldest':
+          return 'createdAt asc';
+        default:
+          return null;
+      }
     },
   },
 
@@ -110,11 +113,10 @@ export default {
           locale: this.$i18n.locale,
           currency: this.$i18n.numberFormats[this.$store.state.country].currency.currency,
           where: `masterData(current(categories(id="${this.category.id}")))`,
-          sort: this.passSorting,
+          sort: this.sortParameter,
         };
       },
       skip: vm => !vm.categories,
-      fetchPolicy: 'network-only',
     },
   },
 };
