@@ -10,7 +10,8 @@
       <div v-if="!isLoading && products && products.results.length"
            id="pop-product-list"
            class="row">
-        <ProductThumbnail data-test="product-list" v-for="product in products.results"
+        <ProductThumbnail v-for="product in products.results"
+                          data-test="product-list"
                           :key="product.id"
                           :product="product" />
       </div>
@@ -37,14 +38,14 @@ export default {
   computed: {
     category: vm => vm.categories.results[0],
 
-    isLoading: function() {
+    isLoading() {
       return this.$apollo.loading;
     },
 
     passSorting() {
       if (this.sort === 'newest') {
         return 'createdAt desc';
-      } else if (this.sort === 'oldest') {
+      } if (this.sort === 'oldest') {
         return 'createdAt asc';
       } return null;
     },

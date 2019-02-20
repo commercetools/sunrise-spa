@@ -18,6 +18,7 @@ describe('Product overview page', () => {
       .last()
       .find('[data-test=product-thumbnail-name]')
       .contains('Lace up shoes Tods dark blue');
+
     cy.get('[data-test=sorting-select]')
       .select('oldest');
     cy.get('[data-test=spinner]')
@@ -33,6 +34,8 @@ describe('Product overview page', () => {
       .last()
       .find('[data-test=product-thumbnail-name]')
       .contains('Shirt ”David” MU light blue');
+  });
+  it('Applies sorting settings from URL', () => {
     cy.visit('/products/men?sort=newest');
     cy.get('[data-test=product-list]', { timeout: 20000 })
       .first()

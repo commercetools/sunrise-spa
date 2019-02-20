@@ -1,5 +1,8 @@
 <template>
-    <select data-test="sorting-select" name="sort" id="sort" v-model="sortBy">
+    <select data-test="sorting-select"
+            name="sort"
+            id="sort"
+            v-model="sortBy">
         <option value="">--</option>
         <option value="newest">Newest</option>
         <option value="oldest">Oldest</option>
