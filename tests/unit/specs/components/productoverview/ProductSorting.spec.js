@@ -11,6 +11,9 @@ describe('ProductSorting.vue', () => {
 
   beforeEach(() => {
     options = {
+      mocks: {
+        $t: jest.fn(),
+      },
       router,
       localVue,
     };
@@ -31,5 +34,14 @@ describe('ProductSorting.vue', () => {
       sortBy: 'oldest',
     });
     expect(window.location.href).toContain('?sort=oldest');
+  });
+
+  it('does not affect other query params', () => {
+    const wrapper = shallowMount(ProductSorting, options);
+    router.replace({ query: { size: 'M', color: 'red' } });
+    wrapper.setData({
+      sortBy: 'newest',
+    });
+    expect(window.location.href).toContain('?size=M&color=red&sort=newest');
   });
 });
