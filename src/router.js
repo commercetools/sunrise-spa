@@ -1,4 +1,3 @@
-/* eslint-disable arrow-parens */
 import Vue from 'vue';
 import Router from 'vue-router';
 import store from '@/store';
@@ -55,10 +54,7 @@ const router = new Router({
         header: TheHeader,
       },
       props: {
-        default: route => ({
-          ...route.params,
-          sort: route.query.sort,
-        }),
+        default: true,
         header: false,
       },
     },
