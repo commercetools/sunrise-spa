@@ -27,7 +27,6 @@ describe('ProductList.vue', () => {
         results: [],
       },
     });
-    
     expect(wrapper.vm.category).toBeUndefined();
 
     wrapper.setData({

@@ -67,7 +67,6 @@ export default {
   },
 
   props: ['categorySlug'],
-
 };
 </script>
 

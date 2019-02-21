@@ -10,7 +10,6 @@ import PageNotFound from '@/components/common/PageNotFound.vue';
 import PageProductDetail from '@/components/productdetail/PageProductDetail.vue';
 import PageCartDetail from '@/components/cartdetail/PageCartDetail.vue';
 
-
 Vue.use(Router);
 
 const requiresAuth = true;
