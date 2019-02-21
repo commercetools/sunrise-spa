@@ -29,11 +29,11 @@ describe('ProductSorting.vue', () => {
     wrapper.setData({
       sortBy: 'newest',
     });
-    expect(window.location.href).toContain('?sort=newest');
+    expect(wrapper.vm.$route.query).toMatchObject({ sort: 'newest' });
     wrapper.setData({
       sortBy: 'oldest',
     });
-    expect(window.location.href).toContain('?sort=oldest');
+    expect(wrapper.vm.$route.query).toMatchObject({ sort: 'oldest' });
   });
 
   it('does not affect other query params', () => {
@@ -42,6 +42,6 @@ describe('ProductSorting.vue', () => {
     wrapper.setData({
       sortBy: 'newest',
     });
-    expect(window.location.href).toContain('?size=M&color=red&sort=newest');
+    expect(wrapper.vm.$route.query).toMatchObject({ size: 'M', color: 'red', sort: 'newest' });
   });
 });
