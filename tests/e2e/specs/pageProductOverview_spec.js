@@ -3,8 +3,11 @@ describe('Product overview page', () => {
     cy.visit('/products/men');
   });
   it('Changes sorting settings', () => {
-    cy.get('[data-test=sorting-select]')
-      .select('newest');
+    cy.get('span[data-test=sort-selector]')
+      .click()
+      .parent()
+      .contains('Newest')
+      .click();
     cy.url().should('include', '/products/men?sort=newest');
     cy.get('[data-test=spinner]')
       .should('exist');
@@ -19,8 +22,11 @@ describe('Product overview page', () => {
       .find('[data-test=product-thumbnail-name]')
       .contains('Lace up shoes Tods dark blue');
 
-    cy.get('[data-test=sorting-select]')
-      .select('oldest');
+    cy.get('span[data-test=sort-selector]')
+      .click()
+      .parent()
+      .contains('Oldest')
+      .click();
     cy.get('[data-test=spinner]')
       .should('exist');
     cy.get('[data-test=spinner]')

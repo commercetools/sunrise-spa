@@ -1,5 +1,39 @@
 <template>
   <div>
+    <form id="form-filter-products" name="filter-products" action="#">
+<!--        {{#if content.searchTerm}}
+            <input type="hidden" name="q" value="{{content.searchTerm}}"/>
+            {{/if}}-->
+
+            <div class="row item-list-pagination">
+<!--              {{#if content.searchResult}}
+              <div class="search-results-row">
+                {{> catalog/pop/search-result searchResult=content.searchResult}}
+              </div>
+              {{else}}
+              <div class="jumbotron-row">
+                {{> catalog/pop/jumbotron jumbotron=content.jumbotron}}
+              </div>
+              {{/if}}-->
+              <div class="col-xs-4 hidden-xs text-left">
+                <div class="custom-select-wrapper">
+                  <ProductSortSelector @changeSort="changeSort" />
+                  <!--{{> catalog/pop/sort-selector sortSelector=content.sortSelector}}-->
+                </div>
+              </div>
+              <div class="col-xs-4 hidden-xs text-center custom-pagination">
+                <ul class="page-numbers">
+                  <!--{{> common/pagination pagination=content.pagination}}-->
+                </ul>
+              </div>
+              <div class="col-xs-4 hidden-xs text-right">
+                <!--{{> catalog/pop/display-selector displaySelector=content.displaySelector}}-->
+              </div>
+            </div>
+            <div class="product-filter hidden-xs">
+              <!--{{> catalog/pop/filters-sidebar}}-->
+            </div>
+          </form>
     <div v-if="isLoading">
       <img data-test="spinner" src="../../assets/img/spinner.gif"/>
     </div>
@@ -22,17 +56,20 @@
 <script>
 import gql from 'graphql-tag';
 import ProductThumbnail from '../common/ProductThumbnail.vue';
+import ProductSortSelector from './ProductSortSelector.vue';
 
 export default {
   components: {
     ProductThumbnail,
+    ProductSortSelector,
   },
 
-  props: ['categorySlug', 'sort'],
+  props: ['categorySlug'],
 
   data: () => ({
     categories: null,
     products: null,
+    sort: null,
   }),
 
   computed: {
@@ -41,16 +78,11 @@ export default {
     isLoading() {
       return this.$apollo.loading;
     },
+  },
 
-    sortParameter() {
-      switch (this.sort) {
-        case 'newest':
-          return 'createdAt desc';
-        case 'oldest':
-          return 'createdAt asc';
-        default:
-          return null;
-      }
+  methods: {
+    changeSort(sort) {
+      this.sort = sort;
     },
   },
 
@@ -113,7 +145,7 @@ export default {
           locale: this.$i18n.locale,
           currency: this.$i18n.numberFormats[this.$store.state.country].currency.currency,
           where: `masterData(current(categories(id="${this.category.id}")))`,
-          sort: this.sortParameter,
+          sort: this.sort,
         };
       },
       skip: vm => !vm.categories,
