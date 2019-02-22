@@ -29,14 +29,13 @@ import createClient from './test-apollo';
 
 const clientPromise = createClient();
 
-Cypress.Commands.add('login', customer =>
-  cy.createCustomer(customer).then(() => {
-    cy.visit('/login');
-    cy.get('[data-test=login-button]').click();
-    cy.get('[data-test=login-form-email]').type(customer.email);
-    cy.get('[data-test=login-form-password]').type(customer.password);
-    cy.get('[data-test=login-form-submit]').click();
-  }));
+Cypress.Commands.add('login', customer => cy.createCustomer(customer).then(() => {
+  cy.visit('/login');
+  cy.get('[data-test=login-button]').click();
+  cy.get('[data-test=login-form-email]').type(customer.email);
+  cy.get('[data-test=login-form-password]').type(customer.password);
+  cy.get('[data-test=login-form-submit]').click();
+}));
 
 Cypress.Commands.add('createCustomer', (draft) => {
   const createCustomer = client => client.mutate({
