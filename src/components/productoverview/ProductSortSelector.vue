@@ -1,8 +1,11 @@
 <template>
-  <SelectBoxIt :options="sortOptions"
-               v-model="sort"
-               data-test="sort-selector"
-               class="select"/>
+  <div>
+    <label>{{ $t('sortBy') }}</label>
+    <SelectBoxIt :options="sortOptions"
+                 v-model="sort"
+                 data-test="sort-selector"
+                 class="sort-selector"/>
+  </div>
 </template>
 
 <script>
@@ -53,14 +56,34 @@ export default {
 };
 </script>
 
+<style scoped>
+label {
+  font-size: 0.9em;
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: normal;
+}
+
+.sort-selector {
+  background: #ffffff url("../../assets/img/arrow-67-filled.png") no-repeat 90% 50%;
+  background-size: 12px;
+  color: #333333;
+  padding-right: 10px;
+  border: 1px solid #D6D6D6;
+}
+</style>
+
 <i18n>
 {
   "en": {
+    "sortBy": "Sort by",
     "newest": "Newest",
     "oldest": "Oldest",
     "recommended": "Recommended"
   },
   "de": {
+    "sortBy": "Sortieren nach",
     "newest": "Neueste",
     "oldest": "Älteste",
     "recommended": "Empfohlen"
