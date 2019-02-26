@@ -7,7 +7,9 @@ describe('ProductList.vue', () => {
 
   beforeEach(() => {
     options = {
-      mocks: { $t: jest.fn() },
+      computed: {
+        isLoading: jest.fn(),
+      },
     };
   });
 

@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import Vue from 'vue';
+
 export default {
   name: 'SelectBoxIt',
   props: ['options', 'value'],
@@ -27,6 +29,10 @@ export default {
     value(value) {
       // update value
       $(this.$el).val(value).trigger('change');
+    },
+
+    options() {
+      Vue.nextTick(() => $(this.$el).data('selectBox-selectBoxIt').refresh());
     },
   },
 };
