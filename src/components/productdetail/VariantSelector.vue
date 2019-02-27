@@ -2,16 +2,24 @@
   <div v-if="product"
        class="row select-row">
     <ul class="list-inline">
-      <li v-for="variant in productVariants"
-          :key="variant.name">
+      <li v-for="attribute in productAttributes"
+          :key="attribute.name">
         <p class="text-uppercase">
-          {{ variant.name }}
+          <!-- {{ attribute }} -->
         </p>
 
         <div>
+            <select class="select-product-detail">
+            <option v-for="label in attributeLabel"
+                    :key="label.name">
+              {{ label }}
+            </option>
+          </select>
+
           <select class="select-product-detail">
-            <option>
-              {{ variant.value || variant.label }}
+            <option v-for="value in attributeSize"
+                    :key="value.name">
+              {{ value }}
             </option>
           </select>
         </div>
@@ -22,6 +30,7 @@
         <!-- {{> catalog/size-guide}} -->
       </li>
     </ul>
+    <pre>{{ product.masterData.current.allVariants }}</pre>
   </div>
 </template>
 
@@ -40,10 +49,29 @@ export default {
     product: null,
   }),
 
+  methods: {
+    assemble(acc, item) {
+      (acc.attributes[item.name] || (acc.attributes[item.name] = []))
+        .push(item.value || item.label);
+      return acc;
+    },
+  },
+
   computed: {
-    productVariants() {
-      return Object.values(this.product.masterData.current.variant.attributes)
-        .filter(attr => typeof attr === 'object');
+    productAttributes() {
+      return this.product.masterData.current.allVariants
+        .flatMap(variant => Object.values(variant.attributes))
+        .filter(attr => typeof attr === 'object')
+        .reduce(this.assemble, { attributes: {} });
+    },
+
+    attributeLabel() {
+      return this.productAttributes.attributes.color
+        .filter((elem, index, self) => index === self.indexOf(elem));
+    },
+
+    attributeSize() {
+      return this.productAttributes.attributes.size;
     },
   },
 
@@ -55,6 +83,22 @@ export default {
             id
             masterData {
               current {
+                allVariants {
+                  sku
+                  attributes {
+                    ...on mainProductType {
+                      size {
+                        value
+                        name
+                      }
+                       color {
+                        key
+                        label(locale: $locale)
+                        name
+                      }
+                    }
+                  }
+                }
                 variant(sku: $sku) {
                   attributes {
                     ...on mainProductType {
