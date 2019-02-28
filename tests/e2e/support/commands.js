@@ -29,14 +29,13 @@ import createClient from './test-apollo';
 
 const clientPromise = createClient();
 
-Cypress.Commands.add('login', customer =>
-  cy.createCustomer(customer).then(() => {
-    cy.visit('/login');
-    cy.get('[data-test=login-button]').click();
-    cy.get('[data-test=login-form-email]').type(customer.email);
-    cy.get('[data-test=login-form-password]').type(customer.password);
-    cy.get('[data-test=login-form-submit]').click();
-  }));
+Cypress.Commands.add('login', customer => cy.createCustomer(customer).then(() => {
+  cy.visit('/login');
+  cy.get('[data-test=login-button]').click();
+  cy.get('[data-test=login-form-email]').type(customer.email);
+  cy.get('[data-test=login-form-password]').type(customer.password);
+  cy.get('[data-test=login-form-submit]').click();
+}));
 
 Cypress.Commands.add('createCustomer', (draft) => {
   const createCustomer = client => client.mutate({
@@ -97,4 +96,44 @@ Cypress.Commands.add('addLineItem', (url, quantity) => {
     .click();
   cy.get('[data-test=add-to-cart-form-button]').click();
   cy.get('[data-test=mini-cart-content]').should('be.visible');
+});
+
+Cypress.Commands.add('createMyOrder', (draft) => {
+  const createNewOrder = client => client.query({
+    query: gql`
+      query queryCustomerByEmail($predicate: String) {
+        customers(limit: 1, where: $predicate) {
+          results {
+            id
+            version
+          }
+        }
+      }`,
+    variables: { predicate: `email = "${draft.customerEmail}"` },
+    fetchPolicy: 'network-only',
+  }).then(async (response) => {
+    const customer = response.data.customers.results[0];
+    return client.mutate({
+      mutation: gql`
+      mutation createMyCart($draft: CartDraft!){
+      createCart (draft: $draft) {
+        id, version
+      }
+  }`,
+      variables: { draft: { ...draft, customerId: customer.id } },
+    });
+  }).then((response) => {
+    const cart = response.data.createCart;
+    const orderNumber = function orderNumber() { return Math.floor(Math.random() * 10000).toString(); };
+    client.mutate({
+      mutation: gql`
+          mutation createOrder($draft: OrderCartCommand!){
+            createOrderFromCart(draft: $draft) {
+              id
+            }
+          }`,
+      variables: { draft: { id: cart.id, version: cart.version, orderNumber: orderNumber() } },
+    });
+  });
+  return cy.wrap(clientPromise.then(client => createNewOrder(client)));
 });

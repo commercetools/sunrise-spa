@@ -5,13 +5,10 @@
         <span class="my-account-title-text icon-user">{{ $t('title') }}</span>
       </div>
       <div class="row">
-        <div class="col-sm-9">
-          <div class="my-account-content">
-            <UserProfile/>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="my-account-banners">
+        <div class="my-account-content col-sm-12">
+            <UserProfile :showTab="showTab"/>
+            <div class="col-sm-3">
+          <div v-if="showTab.showPersonalDetails" class="my-account-banners">
             <div class="banner-one-wrapper hidden-xs">
               <div class="my-account-banner">
                 <div class="banner-title">
@@ -46,6 +43,7 @@
             </div>
           </div>
         </div>
+        </div>
       </div>
     </div>
   </div>
@@ -55,6 +53,7 @@
 import UserProfile from './UserProfile.vue';
 
 export default {
+  props: ['showTab'],
   name: 'UserAccount',
   components: { UserProfile },
 };

@@ -1,14 +1,26 @@
 <template>
   <div class="my-account-sidebar">
     <div id="my-account-mobile-content"
-          class="my-account-sidebar-items active">
-      <span>Personal Details</span>
+          class="my-account-sidebar-items"
+          :class="{ 'active': showTab.showPersonalDetails }">
+          <router-link to="/user">
+      <button>
+        {{ $t("personalDetails") }}
+      </button>
+      </router-link>
+    </div>
+    <div data-test="my-orders-button"
+         class="my-account-sidebar-items"
+         :class="{ 'active': showTab.showMyOrders }">
+         <router-link to="/user/orders">
+      <button>
+      {{ $t("myOrders") }}
+      </button>
+      </router-link>
     </div>
     <div class="my-account-sidebar-items">
       <button @click="logout">
-        <span>
-          {{ $t("signOut") }}
-        </span>
+        {{ $t("signOut") }}
       </button>
     </div>
   </div>
@@ -18,6 +30,8 @@
 import { clientLogout } from '@/auth';
 
 export default {
+  props: ['showTab'],
+
   methods: {
     logout() {
       clientLogout().then(() => this.$router.replace({ query: { logout: true } }));
