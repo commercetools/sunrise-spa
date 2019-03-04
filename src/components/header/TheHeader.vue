@@ -115,20 +115,15 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-  {
-    "en": {
-      "search": "Search",
-      "stores": "Stores",
-      "help": "Help",
-      "callUs": "Call us on +44 123 456 000"
-    },
-    "de": {
-      "search": "Suche",
-      "stores": "Filiale",
-      "help": "Hilfe",
-      "callUs": "Rufen Sie uns auf +44 123 456 000 an"
-    }
-  }
+en:
+  search: "Search"
+  stores: "Stores"
+  help: "Help"
+  callUs: "Call us on +44 123 456 000"
+de:
+  search: "Suche"
+  stores: "Filiale"
+  help: "Hilfe"
+  callUs: "Rufen Sie uns auf +44 123 456 000 an"
 </i18n>

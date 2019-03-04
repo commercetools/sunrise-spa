@@ -53,6 +53,7 @@
     "sass-loader": "^7.0.1",
     "selectboxit": "^3.8.2",
     "vue-cli-plugin-i18n": "^0.5.0",
+    "vue-cli-plugin-yaml": "^1.0.1",
     "vue-template-compiler": "^2.5.17"
   },
   "gitHooks": {

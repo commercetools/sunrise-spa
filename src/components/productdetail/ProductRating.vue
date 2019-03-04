@@ -37,36 +37,29 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-{
-  "en": {
-    "ratings": {
-      "text5": "5 stars",
-      "text4": "4 stars",
-      "text3": "3 stars",
-      "text2": "2 stars",
-      "text1": "1 star",
-      "description5": "Rocks!",
-      "description4": "Pretty good",
-      "description3": "Meh",
-      "description2": "Kinda bad",
-      "description1": "Sucks big time"
-    }
-  },
-  "de": {
-    "ratings": {
-      "text5": "5 Sterne",
-      "text4": "4 Sterne",
-      "text3": "3 Sterne",
-      "text2": "2 Sterne",
-      "text1": "1 Stern",
-      "description5": "Rocks!",
-      "description4": "Pretty good",
-      "description3": "Meh",
-      "description2": "Kinda bad",
-      "description1": "Sucks big time"
-    }
-  }
-}
+en:
+  ratings:
+    text5: "5 stars"
+    text4: "4 stars"
+    text3: "3 stars"
+    text2: "2 stars"
+    text1: "1 star"
+    description5: "Rocks!"
+    description4: "Pretty good"
+    description3: "Meh"
+    description2: "Kinda bad"
+    description1: "Sucks big time"
+de:
+  ratings:
+    text5: "5 Sterne"
+    text4: "4 Sterne"
+    text3: "3 Sterne"
+    text2: "2 Sterne"
+    text1: "1 Stern"
+    description5: "Rocks!"
+    description4: "Pretty good"
+    description3: "Meh"
+    description2: "Kinda bad"
+    description1: "Sucks big time"
 </i18n>

@@ -191,20 +191,15 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-{
-  "de": {
-    "productDetails": "Produktdetails",
-    "deliveryReturns": "Versand & Retoure",
-    "freeReturns": "Kostenlose Retoure.",
-    "moreDeliveryInfo": "Versandinformationen"
-  },
-  "en": {
-    "productDetails": "Product Details",
-    "deliveryReturns": "Delivery & Returns",
-    "freeReturns": "Free return for all orders.",
-    "moreDeliveryInfo": "Delivery information"
-  }
-}
+en:
+  productDetails: "Product Details"
+  deliveryReturns: "Delivery & Returns"
+  freeReturns: "Free return for all orders."
+  moreDeliveryInfo: "Delivery information"
+de:
+  productDetails: "Produktdetails"
+  deliveryReturns: "Versand & Retoure"
+  freeReturns: "Kostenlose Retoure."
+  moreDeliveryInfo: "Versandinformationen"
 </i18n>

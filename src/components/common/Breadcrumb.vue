@@ -71,14 +71,10 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-{
-  "en": {
-    "home": "Home"
-  },
-  "de": {
-    "home": "Home"
-  }
-}
+en:
+  home: "Home"
+
+de:
+  home: "Home"
 </i18n>
