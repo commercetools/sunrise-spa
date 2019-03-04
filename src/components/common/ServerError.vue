@@ -36,14 +36,9 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-{
-  "en": {
-    "networkError": "There was a error in the connection, please try again later"
-  },
-  "de": {
-    "networkError": "Bei der Verbindung ist ein Fehler aufgetreten, versuchen Sie es bitte später nochmals"
-  }
-}
+en:
+  networkError: "There was a error in the connection, please try again later"
+de:
+  networkError: "Bei der Verbindung ist ein Fehler aufgetreten, versuchen Sie es bitte später nochmals"
 </i18n>

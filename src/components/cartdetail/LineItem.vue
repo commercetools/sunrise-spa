@@ -167,20 +167,15 @@ export default {
   }
 </style>
 
-<!-- eslint-disable -->
 <i18n>
-{
-  "en": {
-    "delete": "Delete",
-    "quantity": "Quantity",
-    "price": "Price",
-    "total": "Total"
-  },
-  "de": {
-    "delete": "Löschen",
-    "quantity": "Menge",
-    "price": "Preis",
-    "total": "Gesamtpreis"
-  }
-}
+en:
+  delete: "Delete"
+  quantity: "Quantity"
+  price: "Price"
+  total: "Total"
+de:
+  delete: "Löschen"
+  quantity: "Menge"
+  price: "Preis"
+  total: "Gesamtpreis"
 </i18n>

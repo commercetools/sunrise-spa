@@ -34,14 +34,9 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-{
-  "en": {
-    "pageTitle": "Customer Sign In"
-  },
-  "de": {
-    "pageTitle": "Kundenanmeldung"
-  }
-}
+en:
+  pageTitle: "Customer Sign In"
+de:
+  pageTitle: "Kundenanmeldung"
 </i18n>

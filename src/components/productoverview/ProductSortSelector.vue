@@ -75,18 +75,14 @@ label {
 </style>
 
 <i18n>
-{
-  "en": {
-    "sortBy": "Sort by",
-    "newest": "Newest",
-    "oldest": "Oldest",
-    "recommended": "Recommended"
-  },
-  "de": {
-    "sortBy": "Sortieren nach",
-    "newest": "Neueste",
-    "oldest": "Älteste",
-    "recommended": "Empfohlen"
-  }
-}
+en:
+  sortBy: "Sort by"
+  newest: "Newest"
+  oldest: "Oldest"
+  recommended: "Recommended"
+de:
+  sortBy: "Sortieren nach"
+  newest: "Neueste"
+  oldest: "Älteste"
+  recommended: "Empfohlen"
 </i18n>

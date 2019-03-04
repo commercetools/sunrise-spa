@@ -186,28 +186,23 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-{
-  "en": {
-    "title": "Your Personal Details",
-    "updateBtn": "Update Details",
-    "cancelBtn": "Cancel",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "email": "Email Address",
-    "subscribeToNewsletter": "Please add me to the Sunrise Newsletter",
-    "duplicatedEmail": "A customer with this email already exists"
-  },
-  "de": {
-    "title": "Ihre Benutzerdaten",
-    "updateBtn": "Details aktualisieren",
-    "cancelBtn": "Abbrechen",
-    "firstName": "Vorname",
-    "lastName": "Nachname",
-    "email": "Email Adresse",
-    "subscribeToNewsletter": "Ich möchte den Sunrise Newsletter erhalten.",
-    "duplicatedEmail": "Ein Kunde mit dieser E-Mail existiert bereits"
-  }
-}
+en:
+  title: "Your Personal Details"
+  updateBtn: "Update Details"
+  cancelBtn: "Cancel"
+  firstName: "First Name"
+  lastName: "Last Name"
+  email: "Email Address"
+  subscribeToNewsletter: "Please add me to the Sunrise Newsletter"
+  duplicatedEmail: "A customer with this email already exists"
+de:
+  title: "Ihre Benutzerdaten"
+  updateBtn: "Details aktualisieren"
+  cancelBtn: "Abbrechen"
+  firstName: "Vorname"
+  lastName: "Nachname"
+  email: "Email Adresse"
+  subscribeToNewsletter: "Ich möchte den Sunrise Newsletter erhalten."
+  duplicatedEmail: "Ein Kunde mit dieser E-Mail existiert bereits"
 </i18n>

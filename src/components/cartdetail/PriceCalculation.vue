@@ -146,18 +146,14 @@ export default {
 </script>
 
 <i18n>
-{
-  "en": {
-    "subtotal": "Subtotal",
-    "shipping": "Shipping",
-    "salesTax": "Sales Tax",
-    "total": "Total"
-  },
-  "de": {
-    "subtotal": "Zwischensumme",
-    "shipping": "Versand",
-    "salesTax": "MwSt.",
-    "total": "Gesamtpreis"
-  }
-}
+en:
+  subtotal: "Subtotal"
+  shipping: "Shipping"
+  salesTax: "Sales Tax"
+  total: "Total"
+de:
+  subtotal: "Zwischensumme"
+  shipping: "Versand"
+  salesTax: "MwSt."
+  total: "Gesamtpreis"
 </i18n>

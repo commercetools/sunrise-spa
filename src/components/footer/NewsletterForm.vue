@@ -22,18 +22,13 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-{
-  "en": {
-    "joinNewsletter": "Join our newsletter",
-    "subscribe": "Subscribe",
-    "yourEmail": "Your email..."
-  },
-  "de": {
-    "joinNewsletter": "Newsletter abonnieren",
-    "subscribe": "Anmelden",
-    "yourEmail": "Ihre E-Mail-Adresse..."
-  }
-}
+en:
+  joinNewsletter: "Join our newsletter"
+  subscribe: "Subscribe"
+  yourEmail: "Your email..."
+de:
+  joinNewsletter: "Newsletter abonnieren"
+  subscribe: "Anmelden"
+  yourEmail: "Ihre E-Mail-Adresse..."
 </i18n>

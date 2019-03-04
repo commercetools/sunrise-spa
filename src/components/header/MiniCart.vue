@@ -187,26 +187,21 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-{
-  "de": {
-    "miniCart": "Warenkorb",
-    "viewBag": "Warenkorb",
-    "quantity": "Menge",
-    "price": "Price",
-    "totalPrice": "Gesamtpreis",
-    "delete": "Löschen",
-    "checkout": "Checkout"
-  },
-  "en": {
-    "miniCart": "Cart",
-    "viewBag": "View Bag",
-    "quantity": "quantity",
-    "price": "Price",
-    "totalPrice": "Total",
-    "delete": "Delete",
-    "checkout": "Checkout"
-  }
-}
+  de:
+    miniCart: "Warenkorb"
+    viewBag: "Warenkorb"
+    quantity: "Menge"
+    price: "Price"
+    totalPrice: "Gesamtpreis"
+    delete: "Löschen"
+    checkout: "Checkout"
+  en:
+    miniCart: "Cart"
+    viewBag: "View Bag"
+    quantity: "quantity"
+    price: "Price"
+    totalPrice: "Total"
+    delete: "Delete"
+    checkout: "Checkout"
 </i18n>

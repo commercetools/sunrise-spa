@@ -137,16 +137,11 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-{
-  "de": {
-    "showMore": "Mehr",
-    "showLess": "Weniger"
-  },
-  "en": {
-    "showMore": "Show more",
-    "showLess": "Show less"
-  }
-}
+de:
+  showMore: "Mehr"
+  showLess: "Weniger"
+en:
+  showMore: "Show more"
+  showLess: "Show less"
 </i18n>

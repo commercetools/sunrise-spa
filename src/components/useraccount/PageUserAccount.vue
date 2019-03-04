@@ -60,34 +60,25 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-{
-  "en": {
-    "title": "My Account",
-    "bannerOne": {
-      "title": "Your Sunrise",
-      "subtitle": "Make the great days happen",
-      "link": "Shop All"
-    },
-    "bannerTwo": {
-      "title": "Your Sunrise",
-      "subtitle": "Make the great days happen",
-      "link": "Shop All"
-    }
-  },
-  "de": {
-    "title": "Mein Konto",
-    "bannerOne": {
-      "title": "Dein Sunrise",
-      "subtitle": "Urlaub in der Sonne",
-      "link": "Alles bestellen"
-    },
-    "bannerTwo": {
-      "title": "Sunrise Shop",
-      "subtitle": "Neue Saison, neuer Style",
-      "link": "Alles bestellen"
-    }
-  }
-}
+en:
+  title: "My Account"
+  bannerOne:
+    title: "Your Sunrise"
+    subtitle: "Make the great days happen"
+    link: "Shop All"
+  bannerTwo:
+    title: "Your Sunrise"
+    subtitle: "Make the great days happen"
+    link: "Shop All"
+de:
+  title: "Mein Konto"
+  bannerOne:
+    title: "Dein Sunrise"
+    subtitle: "Urlaub in der Sonne"
+    link: "Alles bestellen"
+  bannerTwo:
+    title: "Sunrise Shop"
+    subtitle: "Neue Saison, neuer Style"
+    link: "Alles bestellen"
 </i18n>

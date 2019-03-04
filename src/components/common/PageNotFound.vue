@@ -20,18 +20,13 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-  {
-    "en": {
-      "title": "404",
-      "notFound": "Page Not Found",
-      "description": "The page you are looking for cannot be found."
-    },
-    "de": {
-      "title": "404",
-      "notFound": "Seite nicht gefunden",
-      "description": "Die angeforderte Seite konnte leider nicht gefunden werden."
-    }
-  }
+en:
+  title: "404"
+  notFound: "Page Not Found"
+  description: "The page you are looking for cannot be found."
+de:
+  title: "404"
+  notFound: "Seite nicht gefunden"
+  description: "Die angeforderte Seite konnte leider nicht gefunden werden."
 </i18n>

@@ -125,18 +125,14 @@ export default {
 </script>
 
 <i18n>
-{
-  "en": {
-    "description": "Description",
-    "quantity": "Quantity",
-    "price": "Price",
-    "total": "Total"
-  },
-  "de": {
-    "description": "Beschreibung",
-    "quantity": "Menge",
-    "price": "Preis",
-    "total": "Gesamtpreis"
-  }
-}
+en:
+  description: "Description"
+  quantity: "Quantity"
+  price: "Price"
+  total: "Total"
+de:
+  description: "Beschreibung"
+  quantity: "Menge"
+  price: "Preis"
+  total: "Gesamtpreis"
 </i18n>

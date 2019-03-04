@@ -59,18 +59,11 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-{
-  "en": {
-    "suggestions": {
-      "title": "You may also like"
-    }
-  },
-  "de": {
-    "suggestions": {
-      "title": "Das könnte Ihnen auch gefallen"
-    }
-  }
-}
+en:
+  suggestions:
+    title: "You may also like"
+de:
+  suggestions:
+    title: "Das könnte Ihnen auch gefallen"
 </i18n>
