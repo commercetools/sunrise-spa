@@ -34,29 +34,23 @@ export default {
   }
 </style>
 
-
-<!-- eslint-disable -->
 <i18n>
-{
-  "en": {
-    "personalDetails": "Personal Details",
-    "addressBook": "Address Book",
-    "paymentDetails": "Payment Details",
-    "myOrders": "My Orders",
-    "returnsExchange": "Returns / Exchange",
-    "wishlist": "Wishlist",
-    "signOut": "Sign Out",
-    "changePassword": "Change password"
-  },
-  "de": {
-    "personalDetails": "Meine Benutzerdaten",
-    "addressBook": "Adressbuch",
-    "paymentDetails": "Meine Zahlungdaten",
-    "myOrders": "Meine Bestellungen",
-    "returnsExchange": "Meine Retouren",
-    "wishlist": "Wunschliste",
-    "signOut": "Abmelden",
-    "changePassword": "Passwort ändern"
-  }
-}
+en:
+  personalDetails: "Personal Details"
+  addressBook: "Address Book"
+  paymentDetails: "Payment Details"
+  myOrders: "My Orders"
+  returnsExchange: "Returns / Exchange"
+  wishlist: "Wishlist"
+  signOut: "Sign Out"
+  changePassword: "Change password"
+de:
+  personalDetails: "Meine Benutzerdaten"
+  addressBook: "Adressbuch"
+  paymentDetails: "Meine Zahlungdaten"
+  myOrders: "Meine Bestellungen"
+  returnsExchange: "Meine Retouren"
+  wishlist: "Wunschliste"
+  signOut: "Abmelden"
+  changePassword: "Passwort ändern"
 </i18n>

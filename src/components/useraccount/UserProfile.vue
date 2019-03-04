@@ -89,20 +89,15 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-{
-  "en": {
-    "title": "Your Personal Details",
-    "welcomeBack": "Welcome back, {name}",
-    "welcomeDescription": "for an even better customer service please provide your customer number",
-    "subscribedToNewsletter": "Subscribed to weekly newsletter"
-  },
-  "de": {
-    "title": "Ihre Benutzerdaten",
-    "welcomeBack": "Willkommen zurück, {name}",
-    "welcomeDescription": "Für einen besseren Kundenservice geben Sie bitte Ihre Kundennummer an.",
-    "subscribedToNewsletter": "Subscribed to weekly newsletter"
-  }
-}
+en:
+  title: "Your Personal Details"
+  welcomeBack: "Welcome back, {name}"
+  welcomeDescription: "for an even better customer service please provide your customer number"
+  subscribedToNewsletter: "Subscribed to weekly newsletter"
+de:
+  title: "Ihre Benutzerdaten"
+  welcomeBack: "Willkommen zurück, {name}"
+  welcomeDescription: "Für einen besseren Kundenservice geben Sie bitte Ihre Kundennummer an."
+  subscribedToNewsletter: "Subscribed to weekly newsletter"
 </i18n>

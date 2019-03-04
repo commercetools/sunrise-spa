@@ -125,16 +125,11 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-{
-  "en": {
-    "more": "More",
-    "teaser": "Summer 2015 – What inspires you?"
-  },
-  "de": {
-    "more": "Mehr",
-    "teaser": "Sommer 2015 – Was ist Ihre Inspiration?"
-  }
-}
+en:
+  more: "More"
+  teaser: "Summer 2015 – What inspires you?"
+de:
+  more: "Mehr"
+  teaser: "Sommer 2015 – Was ist Ihre Inspiration?"
 </i18n>

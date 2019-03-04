@@ -90,52 +90,47 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-{
-  "en": {
-    "paySecure": "Pay securely with these payment methods",
-    "followUs": "Follow us",
-    "customerCare": "Customer Care",
-    "contactUs": "Contact Us",
-    "help": "Help",
-    "shipping": "Shipping",
-    "returns": "Returns",
-    "sizeGuide": "Size Guide",
-    "aboutUs": "About Us",
-    "ourStory": "Our Story",
-    "careers": "Careers",
-    "shortcuts": "Shortcuts",
-    "myAccount": "My Account",
-    "storeLocator": "Store Locator",
-    "giftCards": "Gift Cards",
-    "payment": "Payment",
-    "legalInfo": "© 2015 Sunrise",
-    "imprint": "Imprint",
-    "privacyPolicy": "Privacy policy",
-    "termsOfUse": "Terms of use"
-  },
-  "de": {
-    "paySecure": "Sicher zahlen",
-    "followUs": "Follow us",
-    "customerCare": "Kundenservice",
-    "contactUs": "Kontaktieren Sie uns",
-    "help": "Hilfe",
-    "shipping": "Versand",
-    "returns": "Retoure",
-    "sizeGuide": "Größentabelle",
-    "aboutUs": "Über uns",
-    "ourStory": "Unsere Geschichte",
-    "careers": "Karriere",
-    "shortcuts": "Shortcuts",
-    "myAccount": "Mein Konto",
-    "storeLocator": "Filiale suchen",
-    "giftCards": "Geschenkkarten",
-    "payment": "Zahlung",
-    "legalInfo": "© 2015 Sunrise",
-    "imprint": "Impressum",
-    "privacyPolicy": "Datenschutz",
-    "termsOfUse": "AGB"
-  }
-}
+en:
+  paySecure: "Pay securely with these payment methods"
+  followUs: "Follow us"
+  customerCare: "Customer Care"
+  contactUs: "Contact Us"
+  help: "Help"
+  shipping: "Shipping"
+  returns: "Returns"
+  sizeGuide: "Size Guide"
+  aboutUs: "About Us"
+  ourStory: "Our Story"
+  careers: "Careers"
+  shortcuts: "Shortcuts"
+  myAccount: "My Account"
+  storeLocator: "Store Locator"
+  giftCards: "Gift Cards"
+  payment: "Payment"
+  legalInfo: "© 2015 Sunrise"
+  imprint: "Imprint"
+  privacyPolicy: "Privacy policy"
+  termsOfUse: "Terms of use"
+de:
+  paySecure: "Sicher zahlen"
+  followUs: "Follow us"
+  customerCare: "Kundenservice"
+  contactUs: "Kontaktieren Sie uns"
+  help: "Hilfe"
+  shipping: "Versand"
+  returns: "Retoure"
+  sizeGuide: "Größentabelle"
+  aboutUs: "Über uns"
+  ourStory: "Unsere Geschichte"
+  careers: "Karriere"
+  shortcuts: "Shortcuts"
+  myAccount: "Mein Konto"
+  storeLocator: "Filiale suchen"
+  giftCards: "Geschenkkarten"
+  payment: "Zahlung"
+  legalInfo: "© 2015 Sunrise"
+  imprint: "Impressum"
+  privacyPolicy: "Datenschutz"
+  termsOfUse: "AGB"
 </i18n>
