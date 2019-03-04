@@ -200,52 +200,47 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-{
-  "en": {
-    "title": "New Customer Registration",
-    "required": "Required Fields",
-    "description": "Create an account to store your products, easy checkouts, customer discounts, benefits and more.",
-    "titleSelect": "Title",
-    "firstName": "First Name",
-    "secondName": "Second Name",
-    "email": "Email",
-    "confirmEmail": "Confirm Email",
-    "password": "Password",
-    "repeatPassword": "Confirm Password",
-    "repeatPasswordError": "Passwords do not match",
-    "pleaseAddMe": "Please add me to the",
-    "newsletter": "SUNRISE Newsletter",
-    "agreeTo": "I agree to the",
-    "termsAndConditions": "Terms and Conditions",
-    "agreeToTermsError": "You must agree to the terms",
-    "personalInfo": "Sunrise does not share or sell personal information. See",
-    "privacyPolicy": "Privacy Policy",
-    "registerNow": "Register Now",
-    "duplicatedEmail": "A customer with this email already exists"
-  },
-  "de": {
-    "title": "Neukunden Resigstrierung",
-    "required": "Pflichtfeld",
-    "description": "Konto einrichten, um das Shoppen noch einfacher zu machen.",
-    "titleSelect": "Titel",
-    "firstName": "Vorname",
-    "secondName": "Nachname",
-    "email": "E-Mail",
-    "confirmEmail": "E-Mail bestätigen",
-    "password": "Passwort",
-    "repeatPassword": "Passwort bestätigen",
-    "repeatPasswordError": "Passwörter stimmen nicht überein",
-    "pleaseAddMe": "Anmeldung zum",
-    "newsletter": "SUNRISE Newsletter",
-    "agreeTo": "Ich stimme den \"\" zu.",
-    "termsAndConditions": "AGB",
-    "agreeToTermsError": "Sie müssen den Bedingungen zustimmen",
-    "personalInfo": "Ihre persönliche Daten werden vertaulich behandelt.",
-    "privacyPolicy": "Datenschutz",
-    "registerNow": "Jetzt registieren",
-    "duplicatedEmail": "Ein Kunde mit dieser E-Mail existiert bereits"
-  }
-}
+en:
+  title: "New Customer Registration"
+  required: "Required Fields"
+  description: "Create an account to store your products easy checkouts customer discounts benefits and more."
+  titleSelect: "Title"
+  firstName: "First Name"
+  secondName: "Second Name"
+  email: "Email"
+  confirmEmail: "Confirm Email"
+  password: "Password"
+  repeatPassword: "Confirm Password"
+  repeatPasswordError: "Passwords do not match"
+  pleaseAddMe: "Please add me to the"
+  newsletter: "SUNRISE Newsletter"
+  agreeTo: "I agree to the"
+  termsAndConditions: "Terms and Conditions"
+  agreeToTermsError: "You must agree to the terms"
+  personalInfo: "Sunrise does not share or sell personal information. See"
+  privacyPolicy: "Privacy Policy"
+  registerNow: "Register Now"
+  duplicatedEmail: "A customer with this email already exists"
+de:
+  title: "Neukunden Resigstrierung"
+  required: "Pflichtfeld"
+  description: "Konto einrichten um das Shoppen noch einfacher zu machen."
+  titleSelect: "Titel"
+  firstName: "Vorname"
+  secondName: "Nachname"
+  email: "E-Mail"
+  confirmEmail: "E-Mail bestätigen"
+  password: "Passwort"
+  repeatPassword: "Passwort bestätigen"
+  repeatPasswordError: "Passwörter stimmen nicht überein"
+  pleaseAddMe: "Anmeldung zum"
+  newsletter: "SUNRISE Newsletter"
+  agreeTo: "Ich stimme den \"\" zu."
+  termsAndConditions: "AGB"
+  agreeToTermsError: "Sie müssen den Bedingungen zustimmen"
+  personalInfo: "Ihre persönliche Daten werden vertaulich behandelt."
+  privacyPolicy: "Datenschutz"
+  registerNow: "Jetzt registieren"
+  duplicatedEmail: "Ein Kunde mit dieser E-Mail existiert bereits"
 </i18n>
