@@ -6,11 +6,22 @@ describe('my orders', () => {
     password: 'p@ssword',
   };
 
-  const cartDraft = {
+  const cartDraft1 = {
     customerEmail: 'charlie.bucket+ci@commercetools.com',
     currency: 'EUR',
     lineItems: {
       sku: 'M0E20000000DPZ0',
+    },
+    shippingAddress: {
+      country: 'DE',
+    },
+  };
+
+  const cartDraft2 = {
+    customerEmail: 'charlie.bucket+ci@commercetools.com',
+    currency: 'EUR',
+    lineItems: {
+      sku: 'M0E20000000DLPH',
     },
     shippingAddress: {
       country: 'DE',
@@ -22,12 +33,16 @@ describe('my orders', () => {
   });
 
   it('shows my orders', () => {
-    cy.createMyOrder(cartDraft);
+    cy.createMyOrder(cartDraft1);
+    cy.createMyOrder(cartDraft2);
     cy.get('[data-test=my-orders-button]').click();
+    cy.reload();
     cy.url().should('include', '/user/orders');
-    cy.get('[data-test=total-price]')
+    cy.get('[data-test=order-date]')
       .should('exist');
     cy.get('[data-test=total-price]')
-      .should('exist');
+      .contains('368,75');
+    cy.get('[data-test=total-price]')
+      .contains('372,50');
   });
 });

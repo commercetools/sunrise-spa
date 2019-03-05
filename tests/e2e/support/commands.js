@@ -124,7 +124,7 @@ Cypress.Commands.add('createMyOrder', (draft) => {
     });
   }).then((response) => {
     const cart = response.data.createCart;
-    const orderNumber = function orderNumber() { return Math.floor(Math.random() * 10000).toString(); };
+    const orderNumber = function orderNumber() { return Math.floor(Math.random() * 100000).toString(); };
     client.mutate({
       mutation: gql`
           mutation createOrder($draft: OrderCartCommand!){
