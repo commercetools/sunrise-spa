@@ -6,43 +6,43 @@
       </div>
       <div class="row">
         <div class="my-account-content col-sm-12">
-            <UserProfile :showTab="showTab"/>
-            <div class="col-sm-3">
-          <div v-if="showTab.showPersonalDetails" class="my-account-banners">
-            <div class="banner-one-wrapper hidden-xs">
-              <div class="my-account-banner">
-                <div class="banner-title">
-                  {{ $t('bannerOne.title') }}
-                </div>
-                <hr class="banner-hr">
-                <div class="banner-subtitle">
-                  {{ $t('bannerOne.subtitle') }}
-                </div>
-                <div class="banner-btn-wrapper">
-                  <!--<a class="banner-btn" href="{{content.bannerOne.url}}">-->
+          <UserProfile :showTab="showTab"/>
+          <div class="col-sm-3">
+            <div v-if="showTab.showPersonalDetails" class="my-account-banners">
+              <div class="banner-one-wrapper hidden-xs">
+                <div class="my-account-banner">
+                  <div class="banner-title">
+                    {{ $t('bannerOne.title') }}
+                  </div>
+                  <hr class="banner-hr">
+                  <div class="banner-subtitle">
+                    {{ $t('bannerOne.subtitle') }}
+                  </div>
+                  <div class="banner-btn-wrapper">
+                    <!--<a class="banner-btn" href="{{content.bannerOne.url}}">-->
                     <!--{{ $t('bannerOne.link') }}-->
-                  <!--</a>-->
+                    <!--</a>-->
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="banner-two-wrapper">
-              <div class="my-account-banner image-banner">
-                <div class="banner-title">
-                  {{ $t('bannerTwo.title') }}
-                </div>
-                <hr class="banner-hr">
-                <div class="banner-subtitle">
-                  {{ $t('bannerTwo.subtitle') }}
-                </div>
-                <div class="banner-btn-wrapper">
-                  <!--<a class="banner-btn" href="{{content.bannerTwo.url}}">-->
+              <div class="banner-two-wrapper">
+                <div class="my-account-banner image-banner">
+                  <div class="banner-title">
+                    {{ $t('bannerTwo.title') }}
+                  </div>
+                  <hr class="banner-hr">
+                  <div class="banner-subtitle">
+                    {{ $t('bannerTwo.subtitle') }}
+                  </div>
+                  <div class="banner-btn-wrapper">
+                    <!--<a class="banner-btn" href="{{content.bannerTwo.url}}">-->
                     <!--{{ $t('bannerTwo.link') }}-->
-                  <!--</a>-->
+                    <!--</a>-->
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
       </div>
     </div>
