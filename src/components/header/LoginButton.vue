@@ -67,15 +67,6 @@ export default {
 };
 </script>
 
-<i18n>
-en:
-  signOut: "Log Out"
-  signIn: "Sign In"
-de:
-  signOut: "Log Out"
-  signIn: "Log In"
-</i18n>
-
 <style lang="scss">
   .list-item-user > .nav-list > .list-item-user {
     @media screen and (max-width: 767px) {
@@ -84,3 +75,12 @@ de:
     }
   }
 </style>
+
+<i18n>
+en:
+  signOut: "Log Out"
+  signIn: "Sign In"
+de:
+  signOut: "Log Out"
+  signIn: "Log In"
+</i18n>
