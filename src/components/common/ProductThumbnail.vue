@@ -88,7 +88,7 @@
 <script>
 import priceMixin from '@/mixins/priceMixin';
 import productMixin from '@/mixins/productMixin';
-import BasePrice from '../common/BasePrice.vue';
+import BasePrice from './BasePrice.vue';
 
 export default {
   components: {

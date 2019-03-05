@@ -98,13 +98,8 @@
 
 <script>
 import gql from 'graphql-tag';
-import DetailsSection from './DetailsSection.vue';
 
 export default {
-  components: {
-    DetailsSection,
-  },
-
   props: {
     sku: {
       type: String,

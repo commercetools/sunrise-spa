@@ -101,7 +101,9 @@
 </template>
 
 <script>
-import { required, email, minLength, sameAs } from 'vuelidate/lib/validators';
+import {
+  required, email, minLength, sameAs,
+} from 'vuelidate/lib/validators';
 import gql from 'graphql-tag';
 import { clientLogin } from '@/auth';
 import ServerError from '../common/ServerError.vue';
