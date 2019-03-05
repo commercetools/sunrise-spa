@@ -141,7 +141,7 @@ catalog:
     brand: "Marke"
   pagination:
     pageSeparator: "von"
-    next: "Nächste",
+    next: "Nächste"
     previous: "Zurück"
   displaySelector:
     title: "Artikel pro Seite"
