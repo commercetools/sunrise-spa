@@ -37,12 +37,23 @@ const numberFormats = {
   }
 };
 
+const dateTimeFormats = {
+  'en-US': {
+    short: {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    }
+  }
+};
+
 // Create VueI18n instance with options
 const i18n = new VueI18n({
   locale: findInitialLocale(),
   fallbackLocale,
   messages: loadMessages(),
   numberFormats,
+  dateTimeFormats,
 });
 
 i18n.vm.$watch('locale', (locale) => {

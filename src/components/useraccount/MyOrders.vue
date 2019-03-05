@@ -52,14 +52,17 @@
                       </div>
                     </div>
                   </div>
-                    <div v-for="order in me.orders.results" :key="order.id" class="my-orders-table-order">
+                    <div v-for="order in me.orders.results"
+                         :key="order.id"
+                         class="my-orders-table-order">
                       <div class="row">
                         <div class="col-sm-2 col-xs-4">
                           <span>{{ order.orderNumber || "-" }}</span>
                         </div>
                         <div data-test="order-date"
                              class="col-sm-2 hidden-xs">
-                          <span>{{ order.createdAt | formatDate }}</span>
+                          <!-- <span>{{ order.createdAt | formatDate }}</span> -->
+                          <p>{{ $d(new Date(order.createdAt), 'short', 'en-US') }}</p>
                         </div>
                         <div data-test="total-price"
                              class="col-sm-2 col-xs-4">
@@ -87,7 +90,6 @@
 
 <script>
 import gql from 'graphql-tag';
-import moment from 'moment';
 import BaseMoney from '../common/BaseMoney.vue';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
@@ -97,14 +99,6 @@ export default {
   data: () => ({
     me: null,
   }),
-
-  filters: {
-    formatDate(value) {
-      if (value) {
-        return moment(String(value)).format('MMM DD, YYYY');
-      } return null;
-    },
-  },
 
   apollo: {
     me: {
@@ -119,11 +113,6 @@ export default {
                   ...DisplayableMoney
                 }
                 createdAt
-                taxedPrice {
-                  totalGross {
-                    type
-                  }
-                }
                 shipmentState
                 paymentState
               }
