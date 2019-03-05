@@ -1,6 +1,6 @@
 <template>
-   <div v-if="me"
-        class="my-account-content">
+  <div v-if="me"
+       class="my-account-content">
     <div class="row">
       <div class="col-sm-3">
         <!--{{> myaccount/my-account-sidebar myPersonalDetailsTab=true}}-->
