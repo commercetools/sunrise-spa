@@ -8,7 +8,8 @@
         <div class="my-account-content col-sm-12">
           <UserProfile :showTab="showTab"/>
           <div class="col-sm-3">
-            <div v-if="showTab.showPersonalDetails" class="my-account-banners">
+            <div v-if="showTab.showPersonalDetails"
+                 class="my-account-banners">
               <div class="banner-one-wrapper hidden-xs">
                 <div class="my-account-banner">
                   <div class="banner-title">

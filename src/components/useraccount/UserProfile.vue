@@ -1,5 +1,6 @@
 <template>
-   <div :class="{ 'col-sm-9': showTab.showPersonalDetails, 'col-sm-12': showTab.showMyOrders }">
+   <div :class="{ 'col-sm-9': showTab.showPersonalDetails,
+                  'col-sm-12': showTab.showMyOrders }">
     <div class="row">
       <div class="col-sm-3">
         <!--{{> myaccount/my-account-sidebar myPersonalDetailsTab=true}}-->
