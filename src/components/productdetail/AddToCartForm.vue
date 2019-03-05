@@ -157,14 +157,9 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-{
-  "de": {
-    "addToCart": "In den Warenkorb"
-  },
-  "en": {
-    "addToCart": "Add to Bag"
-  }
-}
+de:
+  addToCart: "In den Warenkorb"
+en:
+  addToCart: "Add to Bag"
 </i18n>

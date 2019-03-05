@@ -7,7 +7,7 @@ Vue.use(VueI18n);
 const fallbackLocale = sunriseConfig.languages ? Object.keys(sunriseConfig.languages)[0] : 'en';
 
 function loadMessages() {
-  const locales = require.context('@/i18n', true, /[a-z0-9]+\.json$/i);
+  const locales = require.context('@/i18n', true, /[a-z0-9]+\.yaml$/i);
   const messages = {};
   locales.keys().forEach((key) => {
     const matched = key.match(/([a-z0-9]+)\./i);

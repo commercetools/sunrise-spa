@@ -79,18 +79,14 @@ export default {
 </script>
 
 <i18n>
-{
-  "en": {
-    "yourBag": "Your Bag",
-    "itemsTotal": "{n} item in total | {n} items in total",
-    "empty": "Your bag is empty",
-    "continueShopping": "Continue Shopping"
-  },
-  "de": {
-    "yourBag": "Ihr Einkaufswagen",
-    "itemsTotal": "{n} Artikel im Warenkorb",
-    "empty": "Ihr Einkaufswagen ist leer :(",
-    "continueShopping": "Weiter einkaufen"
-  }
-}
+en:
+  yourBag: "Your Bag"
+  itemsTotal: "{n} item in total | {n} items in total"
+  empty: "Your bag is empty"
+  continueShopping: "Continue Shopping"
+de:
+  yourBag: "Ihr Einkaufswagen"
+  itemsTotal: "{n} Artikel im Warenkorb"
+  empty: "Ihr Einkaufswagen ist leer :("
+  continueShopping: "Weiter einkaufen"
 </i18n>

@@ -134,20 +134,15 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-  {
-   "en": {
-      "sale": "Sale",
-      "new": "New",
-      "quickView": "Quick view",
-      "moreColors": "More colours"
-   },
-   "de": {
-      "sale": "Sale",
-      "new": "Neu",
-      "quickView": "Schnellansicht",
-      "moreColors": "Mehr Farben"
-   }
-  }
+en:
+  sale: "Sale"
+  new: "New"
+  quickView: "Quick view"
+  moreColors: "More colours"
+de:
+  sale: "Sale"
+  new: "Neu"
+  quickView: "Schnellansicht"
+  moreColors: "Mehr Farben"
 </i18n>

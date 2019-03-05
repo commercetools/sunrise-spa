@@ -44,8 +44,8 @@
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.2",
     "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0",
     "eslint-plugin-graphql": "^2.1.1",
+    "eslint-plugin-vue": "^5.0.0",
     "fibers": "^3.1.1",
     "jest-fetch-mock": "^1.6.6",
     "jest-junit": "^5.1.0",
@@ -59,6 +59,7 @@
     "sass-loader": "^7.1.0",
     "selectboxit": "^3.8.2",
     "vue-cli-plugin-i18n": "^0.5.0",
+    "vue-cli-plugin-yaml": "^1.0.1",
     "vue-template-compiler": "^2.5.21"
   },
   "gitHooks": {

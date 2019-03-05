@@ -49,22 +49,17 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-{
-  "en": {
-    "unknownValidation": "Invalid field",
-    "required": "Required field",
-    "email": "A valid email is required",
-    "minLength": "It should contain at least {min} characters"
-  },
-  "de": {
-    "unknownValidation": "Ungültiger Feldwert",
-    "required": "Pflichtfeld",
-    "email": "Eine gültige E-Mail ist erforderlich",
-    "minLength": "Es sollte mindestens {min} Zeichen enthalten"
-  }
-}
+en:
+  unknownValidation: "Invalid field"
+  required: "Required field"
+  email: "A valid email is required"
+  minLength: "It should contain at least {min} characters"
+de:
+  unknownValidation: "Ungültiger Feldwert"
+  required: "Pflichtfeld"
+  email: "Eine gültige E-Mail ist erforderlich"
+  minLength: "Es sollte mindestens {min} Zeichen enthalten"
 </i18n>
 
 <style lang="scss" scoped>

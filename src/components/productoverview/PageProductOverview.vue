@@ -70,16 +70,11 @@ export default {
 };
 </script>
 
-<!-- eslint-disable -->
 <i18n>
-{
-  "en": {
-    "pleaseWait": "Please wait...",
-    "open": "Filter"
-  },
-  "de": {
-    "pleaseWait": "Bitte warten...",
-    "open": "Filter öffnen"
-  }
-}
+en:
+  pleaseWait: "Please wait..."
+  open: "Filter"
+de:
+  pleaseWait: "Bitte warten..."
+  open: "Filter öffnen"
 </i18n>
