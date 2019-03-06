@@ -111,7 +111,7 @@ Cypress.Commands.add('createMyOrder', (draft) => {
       }`,
     variables: { predicate: `email = "${draft.customerEmail}"` },
     fetchPolicy: 'network-only',
-  }).then(async (response) => {
+  }).then((response) => {
     const customer = response.data.customers.results[0];
     return client.mutate({
       mutation: gql`
@@ -120,11 +120,16 @@ Cypress.Commands.add('createMyOrder', (draft) => {
         id, version
       }
   }`,
-      variables: { draft: { ...draft, customerId: customer.id } },
+      variables: {
+        draft: {
+          ...draft,
+          customerId: customer.id,
+        },
+      },
     });
   }).then((response) => {
     const cart = response.data.createCart;
-    const orderNumber = function orderNumber() { return Math.floor(Math.random() * 100000).toString(); };
+    const orderNumber = Math.floor(Math.random() * 100000).toString();
     client.mutate({
       mutation: gql`
           mutation createOrder($draft: OrderCartCommand!){
@@ -132,7 +137,13 @@ Cypress.Commands.add('createMyOrder', (draft) => {
               id
             }
           }`,
-      variables: { draft: { id: cart.id, version: cart.version, orderNumber: orderNumber() } },
+      variables: {
+        draft: {
+          id: cart.id,
+          version: cart.version,
+          orderNumber,
+        },
+      },
     });
   });
   return cy.wrap(clientPromise.then(client => createNewOrder(client)));
