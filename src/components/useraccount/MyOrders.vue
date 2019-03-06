@@ -1,7 +1,7 @@
 <template>
   <div class="col-sm-9">
     <div v-if="me"
-        class="my-orders col-sm-12">
+         class="my-orders col-sm-12">
       <div class="my-orders-content">
         <div class="row">
           <div class="col-sm-12">
@@ -44,19 +44,20 @@
             </div>
           </div>
         </div>
-        <div v-for="order in me.orders.results"
-            :key="order.id"
-            class="my-orders-table-order">
+        <div data-test="order-list"
+             v-for="order in me.orders.results"
+             :key="order.id"
+             class="my-orders-table-order">
           <div class="row">
             <div class="col-sm-2 col-xs-4">
               <span>{{ order.orderNumber || "-" }}</span>
             </div>
             <div data-test="order-date"
-                class="col-sm-2 hidden-xs">
+                 class="col-sm-2 hidden-xs">
               <p>{{ $d(new Date(order.createdAt), 'short', 'en-US') }}</p>
             </div>
             <div data-test="total-price"
-                class="col-sm-2 col-xs-4">
+                 class="col-sm-2 col-xs-4">
               <BaseMoney :money="order.totalPrice"/>
             </div>
             <div class="col-sm-2 hidden-xs">

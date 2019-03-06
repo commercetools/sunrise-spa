@@ -40,9 +40,12 @@ describe('my orders', () => {
     cy.url().should('include', '/user/orders');
     cy.get('[data-test=order-date]')
       .should('exist');
-    cy.get('[data-test=total-price]')
-      .contains('368,75');
-    cy.get('[data-test=total-price]')
-      .contains('372,50');
+    cy.get('[data-test=order-list]')
+      .should('have.length', 2)
+      .eq(0)
+      .contains(/^\s*368,75\s€\s*$/);
+    cy.get('[data-test=order-list]')
+      .eq(1)
+      .contains(/^\s*372,50\s€\s*$/);
   });
 });
