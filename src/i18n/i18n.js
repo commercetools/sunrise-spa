@@ -44,6 +44,14 @@ const dateTimeFormats = {
       month: 'short',
       day: 'numeric'
     }
+  },
+
+  'de-DE': {
+    short: {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    }
   }
 };
 

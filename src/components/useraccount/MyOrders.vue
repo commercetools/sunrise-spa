@@ -54,7 +54,7 @@
             </div>
             <div data-test="order-date"
                  class="col-sm-2 hidden-xs">
-              <p>{{ $d(new Date(order.createdAt), 'short', 'en-US') }}</p>
+              <BaseDate :date="order.createdAt"/>
             </div>
             <div data-test="total-price"
                  class="col-sm-2 col-xs-4">
@@ -83,10 +83,11 @@
 <script>
 import gql from 'graphql-tag';
 import BaseMoney from '../common/BaseMoney.vue';
+import BaseDate from '../common/BaseDate.vue';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {
-  components: { BaseMoney },
+  components: { BaseMoney, BaseDate },
 
   data: () => ({
     me: null,
