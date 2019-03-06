@@ -1,75 +1,77 @@
 <template>
-  <div v-if="me"
-       class="my-orders col-sm-9">
-    <div class="my-orders-content">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="my-orders-title hidden-xs">
-            <h4>{{ $t('myOrders')}}</h4>
-          </div>
-        </div>
-      </div>
-      <div class="my-orders-table-wrapper">
+  <div class="col-sm-9">
+    <div v-if="me"
+        class="my-orders col-sm-12">
+      <div class="my-orders-content">
         <div class="row">
-          <div class="col-sm-2 col-xs-4">
-            <div class="my-orders-table-titles">
-              <h5>{{ $t('orderNumber')}}</h5>
-            </div>
-          </div>
-          <div class="col-sm-2 hidden-xs">
-            <div class="my-orders-table-titles">
-              <h5>{{ $t('date')}}</h5>
-            </div>
-          </div>
-          <div class="col-sm-2 col-xs-4">
-            <div class="my-orders-table-titles">
-              <h5>{{ $t('total')}}</h5>
-            </div>
-          </div>
-          <div class="col-sm-2 hidden-xs">
-            <div class="my-orders-table-titles">
-              <h5>{{ $t('paymentStatus')}}</h5>
-            </div>
-          </div>
-          <div class="col-sm-2 hidden-xs">
-            <div class="my-orders-table-titles">
-              <h5>{{ $t('shipmentStatus')}}</h5>
-            </div>
-          </div>
-          <div class="col-sm-2 col-xs-4">
-            <div class="my-orders-table-titles">
-              &nbsp;
+          <div class="col-sm-12">
+            <div class="my-orders-title hidden-xs">
+              <h4>{{ $t('myOrders')}}</h4>
             </div>
           </div>
         </div>
-      </div>
-      <div v-for="order in me.orders.results"
-           :key="order.id"
-           class="my-orders-table-order">
-        <div class="row">
-          <div class="col-sm-2 col-xs-4">
-            <span>{{ order.orderNumber || "-" }}</span>
+        <div class="my-orders-table-wrapper">
+          <div class="row">
+            <div class="col-sm-2 col-xs-4">
+              <div class="my-orders-table-titles">
+                <h5>{{ $t('orderNumber')}}</h5>
+              </div>
+            </div>
+            <div class="col-sm-2 hidden-xs">
+              <div class="my-orders-table-titles">
+                <h5>{{ $t('date')}}</h5>
+              </div>
+            </div>
+            <div class="col-sm-2 col-xs-4">
+              <div class="my-orders-table-titles">
+                <h5>{{ $t('total')}}</h5>
+              </div>
+            </div>
+            <div class="col-sm-2 hidden-xs">
+              <div class="my-orders-table-titles">
+                <h5>{{ $t('paymentStatus')}}</h5>
+              </div>
+            </div>
+            <div class="col-sm-2 hidden-xs">
+              <div class="my-orders-table-titles">
+                <h5>{{ $t('shipmentStatus')}}</h5>
+              </div>
+            </div>
+            <div class="col-sm-2 col-xs-4">
+              <div class="my-orders-table-titles">
+                &nbsp;
+              </div>
+            </div>
           </div>
-          <div data-test="order-date"
-               class="col-sm-2 hidden-xs">
-            <p>{{ $d(new Date(order.createdAt), 'short', 'en-US') }}</p>
-          </div>
-          <div data-test="total-price"
-               class="col-sm-2 col-xs-4">
-            <BaseMoney :money="order.totalPrice"/>
-          </div>
-          <div class="col-sm-2 hidden-xs">
-            <span>{{ order.paymentState || "-" }}</span>
-          </div>
-          <div class="col-sm-2 hidden-xs">
-            <span>{{ order.shipmentState || "-" }}</span>
-          </div>
-          <div class="col-sm-2 col-xs-4 text-right">
-            <!--<form id="form-view-my-order{{@index}}" name="view-my-order"
-                              method="GET" action="{{showOrderUrl}}">
-                            <button type="submit"
-                              class="my-orders-view-order-btn">{{i18n "my-account:myOrders.view"}}</button>
-            </form>-->
+        </div>
+        <div v-for="order in me.orders.results"
+            :key="order.id"
+            class="my-orders-table-order">
+          <div class="row">
+            <div class="col-sm-2 col-xs-4">
+              <span>{{ order.orderNumber || "-" }}</span>
+            </div>
+            <div data-test="order-date"
+                class="col-sm-2 hidden-xs">
+              <p>{{ $d(new Date(order.createdAt), 'short', 'en-US') }}</p>
+            </div>
+            <div data-test="total-price"
+                class="col-sm-2 col-xs-4">
+              <BaseMoney :money="order.totalPrice"/>
+            </div>
+            <div class="col-sm-2 hidden-xs">
+              <span>{{ order.paymentState || "-" }}</span>
+            </div>
+            <div class="col-sm-2 hidden-xs">
+              <span>{{ order.shipmentState || "-" }}</span>
+            </div>
+            <div class="col-sm-2 col-xs-4 text-right">
+              <!--<form id="form-view-my-order{{@index}}" name="view-my-order"
+                                method="GET" action="{{showOrderUrl}}">
+                              <button type="submit"
+                                class="my-orders-view-order-btn">{{i18n "my-account:myOrders.view"}}</button>
+              </form>-->
+            </div>
           </div>
         </div>
       </div>

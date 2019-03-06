@@ -67,10 +67,7 @@ const router = new Router({
       meta: { requiresAuth },
       props: {
         default: {
-          showTab: {
-            showPersonalDetails: true,
-            showMyOrders: false,
-          },
+          showTab: 'PersonalDetails',
         },
       },
     },
@@ -84,10 +81,7 @@ const router = new Router({
       meta: { requiresAuth },
       props: {
         default: {
-          showTab: {
-            showPersonalDetails: false,
-            showMyOrders: true,
-          },
+          showTab: 'MyOrders',
         },
       },
     },

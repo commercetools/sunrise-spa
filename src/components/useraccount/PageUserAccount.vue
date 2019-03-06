@@ -6,10 +6,12 @@
       </div>
       <div class="row">
         <div class="my-account-content col-sm-12">
-          <UserProfile :showTab="showTab"/>
           <div class="col-sm-3">
-            <div v-if="showTab.showPersonalDetails"
-                 class="my-account-banners">
+            <SidebarMenu :showTab="showTab"/>
+          </div>
+          <component :is="showTab"></component>
+          <div v-if="showTab === 'PersonalDetails'" class="col-sm-3">
+            <div class="my-account-banners">
               <div class="banner-one-wrapper hidden-xs">
                 <div class="my-account-banner">
                   <div class="banner-title">
@@ -51,12 +53,14 @@
 </template>
 
 <script>
-import UserProfile from './UserProfile.vue';
+import SidebarMenu from './SidebarMenu.vue';
+import PersonalDetails from './PersonalDetails.vue';
+import MyOrders from './MyOrders.vue';
 
 export default {
   props: ['showTab'],
   name: 'UserAccount',
-  components: { UserProfile },
+  components: { SidebarMenu, PersonalDetails, MyOrders },
 };
 </script>
 
