@@ -7,15 +7,19 @@
 <script>
 export default {
   props: {
-    dateObj: {
-      type: Object,
+    date: {
+      type: String,
+      required: true,
+    },
+    format: {
+      type: String,
       required: true,
     },
   },
 
   computed: {
     formattedDate() {
-      return this.$d(new Date(this.dateObj.date), this.dateObj.format, this.$store.state.country);
+      return this.$d(new Date(this.date), this.format, this.$store.state.country);
     },
   },
 };

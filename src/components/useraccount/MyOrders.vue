@@ -56,7 +56,8 @@
             </div>
             <div data-test="order-date"
                  class="col-sm-2 hidden-xs">
-              <BaseDate :dateObj="{ date: order.createdAt, format: 'short' }"/>
+              <BaseDate :date="order.createdAt"
+                        :format="'short'"/>
             </div>
             <div data-test="total-price"
                  class="col-sm-2 col-xs-4">
