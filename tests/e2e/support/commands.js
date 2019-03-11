@@ -161,7 +161,6 @@ Cypress.Commands.add('deleteOrder', (orderNumber) => {
     fetchPolicy: 'network-only',
   }).then(async (response) => {
     const order = response.data.orders.results[0];
-    console.log(order);
     if (order) {
       await client.mutate({
         mutation: gql`
@@ -179,4 +178,41 @@ Cypress.Commands.add('deleteOrder', (orderNumber) => {
   });
 
   return cy.wrap(clientPromise.then(client => deleteOrder(client)));
+});
+
+Cypress.Commands.add('changeOrderStatus', (orderNumber) => {
+  const changeStatus = client => client.query({
+    query: gql`
+      query queryOrderByNumber($predicate: String) {
+        orders(limit: 1, where: $predicate) {
+          results {
+            version,
+            id
+          }
+        }
+      }`,
+    variables: { predicate: `orderNumber = "${orderNumber}"` },
+    fetchPolicy: 'network-only',
+  }).then((response) => {
+    const order = response.data.orders.results[0];
+    if (order) {
+      client.mutate({
+        mutation: gql`
+          mutation changeStatuses($version: Long!, $orderNumber: String){
+            updateOrder(version: $version, orderNumber: $orderNumber, actions:
+              [{changePaymentState:{paymentState: Pending}}
+              {changeShipmentState:{shipmentState: Shipped}}
+            ]) {
+            id
+          }
+        }`,
+        variables: {
+          version: order.version,
+          orderNumber,
+        },
+      }).catch(e => console.warn('Order might have been already deleted', e));
+    }
+  });
+
+  return cy.wrap(clientPromise.then(client => changeStatus(client)));
 });
