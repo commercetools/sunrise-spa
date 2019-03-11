@@ -9,11 +9,10 @@
         </button>
       </router-link>
     </div>
-    <div data-test="my-orders-button"
-         class="my-account-sidebar-items"
+    <div class="my-account-sidebar-items"
          :class="{ active: showTab === 'MyOrders' }">
       <router-link :to=" { name: 'orders' }">
-        <button>
+        <button data-test="my-orders-button">
           {{ $t("myOrders") }}
         </button>
       </router-link>
