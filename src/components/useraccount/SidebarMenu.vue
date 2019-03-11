@@ -3,7 +3,7 @@
     <div id="my-account-mobile-content"
          class="my-account-sidebar-items"
          :class="{ active: showTab === 'PersonalDetails' }">
-      <router-link :to=" { name: 'user' }">
+      <router-link :to="{ name: 'user' }">
         <button>
           {{ $t("personalDetails") }}
         </button>
@@ -11,7 +11,7 @@
     </div>
     <div class="my-account-sidebar-items"
          :class="{ active: showTab === 'MyOrders' }">
-      <router-link :to=" { name: 'orders' }">
+      <router-link :to="{ name: 'orders' }">
         <button data-test="my-orders-button">
           {{ $t("myOrders") }}
         </button>
