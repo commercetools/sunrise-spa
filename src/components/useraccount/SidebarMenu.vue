@@ -3,7 +3,7 @@
     <div id="my-account-mobile-content"
          class="my-account-sidebar-items"
          :class="{ active: showTab === 'PersonalDetails' }">
-      <router-link to="/user">
+      <router-link :to=" { name: 'user' }">
         <button>
           {{ $t("personalDetails") }}
         </button>
@@ -12,7 +12,7 @@
     <div data-test="my-orders-button"
          class="my-account-sidebar-items"
          :class="{ active: showTab === 'MyOrders' }">
-      <router-link to="/user/orders">
+      <router-link :to=" { name: 'orders' }">
         <button>
           {{ $t("myOrders") }}
         </button>
@@ -53,22 +53,22 @@ export default {
 </style>
 
 <i18n>
-  en:
-    personalDetails: "Personal Details"
-    addressBook: "Address Book"
-    paymentDetails: "Payment Details"
-    myOrders: "My Orders"
-    returnsExchange: "Returns / Exchange"
-    wishlist: "Wishlist"
-    signOut: "Sign Out"
-    changePassword: "Change password"
-  de:
-    personalDetails: "Meine Benutzerdaten"
-    addressBook: "Adressbuch"
-    paymentDetails: "Meine Zahlungdaten"
-    myOrders: "Meine Bestellungen"
-    returnsExchange: "Meine Retouren"
-    wishlist: "Wunschliste"
-    signOut: "Abmelden"
-    changePassword: "Passwort ändern"
+en:
+  personalDetails: "Personal Details"
+  addressBook: "Address Book"
+  paymentDetails: "Payment Details"
+  myOrders: "My Orders"
+  returnsExchange: "Returns / Exchange"
+  wishlist: "Wishlist"
+  signOut: "Sign Out"
+  changePassword: "Change password"
+de:
+  personalDetails: "Meine Benutzerdaten"
+  addressBook: "Adressbuch"
+  paymentDetails: "Meine Zahlungdaten"
+  myOrders: "Meine Bestellungen"
+  returnsExchange: "Meine Retouren"
+  wishlist: "Wunschliste"
+  signOut: "Abmelden"
+  changePassword: "Passwort ändern"
 </i18n>

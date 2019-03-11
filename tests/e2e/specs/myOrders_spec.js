@@ -6,6 +6,9 @@ describe('my orders', () => {
     password: 'p@ssword',
   };
 
+  const orderNumber1 = '1234';
+  const orderNumber2 = '4321';
+
   const cartDraft1 = {
     customerEmail: 'charlie.bucket+ci@commercetools.com',
     currency: 'EUR',
@@ -33,19 +36,24 @@ describe('my orders', () => {
   });
 
   it('shows my orders', () => {
-    cy.createMyOrder(cartDraft1);
-    cy.createMyOrder(cartDraft2);
+    cy.createMyOrder(cartDraft1, orderNumber1);
+    cy.createMyOrder(cartDraft2, orderNumber2);
     cy.get('[data-test=my-orders-button]').click();
     cy.reload();
     cy.url().should('include', '/user/orders');
-    cy.get('[data-test=order-date]')
-      .should('exist');
     cy.get('[data-test=order-list]')
       .should('have.length', 2)
       .eq(0)
-      .contains(/^\s*368,75\s€\s*$/);
-    cy.get('[data-test=order-list]')
-      .eq(1)
-      .contains(/^\s*372,50\s€\s*$/);
+      .then(($order) => {
+        cy.wrap($order)
+          .find('[data-test=total-price]')
+          .contains(/^\s*368,75\s€\s*$/);
+        cy.wrap($order)
+          .find('[data-test=order-date]')
+          .contains(/^\s*\d{1,2}\.*\s*[A-Za-zäÄöÖüÜß]+\s*\d{4}\s*$/);
+        cy.wrap($order)
+          .find('[data-test=order-number]')
+          .contains('1234');
+      });
   });
 });

@@ -44,17 +44,19 @@
             </div>
           </div>
         </div>
-        <div data-test="order-list"
-             v-for="order in me.orders.results"
+        <div v-for="order in me.orders.results"
              :key="order.id"
+             data-test="order-list"
              class="my-orders-table-order">
           <div class="row">
-            <div class="col-sm-2 col-xs-4">
-              <span>{{ order.orderNumber || "-" }}</span>
+            <div class="col-sm-2 col-xs-4" >
+              <span data-test="order-number">
+                {{ order.orderNumber || "-" }}
+                </span>
             </div>
             <div data-test="order-date"
                  class="col-sm-2 hidden-xs">
-              <BaseDate :date="order.createdAt"/>
+              <BaseDate :dateObj="{ date: order.createdAt, format: 'short' }"/>
             </div>
             <div data-test="total-price"
                  class="col-sm-2 col-xs-4">
@@ -119,18 +121,18 @@ export default {
 </script>
 
 <i18n>
-  en:
-    myOrders: "My Orders"
-    orderNumber: "Order Number"
-    date: "Date"
-    total: "Total"
-    paymentStatus: "Payment Status"
-    shipmentStatus: "Shipment Status"
-  de:
-    myOrders: "Meine Bestellungen"
-    orderNumber: "Bestellnummer"
-    date: "Datum"
-    total: "Gesamtpreis"
-    paymentStatus: "Zahlungsstatus"
-    shipmentStatus: "Versandstatus"
+en:
+  myOrders: "My Orders"
+  orderNumber: "Order Number"
+  date: "Date"
+  total: "Total"
+  paymentStatus: "Payment Status"
+  shipmentStatus: "Shipment Status"
+de:
+  myOrders: "Meine Bestellungen"
+  orderNumber: "Bestellnummer"
+  date: "Datum"
+  total: "Gesamtpreis"
+  paymentStatus: "Zahlungsstatus"
+  shipmentStatus: "Versandstatus"
 </i18n>
