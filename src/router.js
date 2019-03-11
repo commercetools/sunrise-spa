@@ -65,6 +65,25 @@ const router = new Router({
         header: TheHeader,
       },
       meta: { requiresAuth },
+      props: {
+        default: {
+          showTab: 'PersonalDetails',
+        },
+      },
+    },
+    {
+      path: '/user/orders',
+      name: 'orders',
+      components: {
+        default: PageUserAccount,
+        header: TheHeader,
+      },
+      meta: { requiresAuth },
+      props: {
+        default: {
+          showTab: 'MyOrders',
+        },
+      },
     },
     {
       path: '/product/:productSlug/:sku',

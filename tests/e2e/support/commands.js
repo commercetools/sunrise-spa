@@ -97,3 +97,86 @@ Cypress.Commands.add('addLineItem', (url, quantity) => {
   cy.get('[data-test=add-to-cart-form-button]').click();
   cy.get('[data-test=mini-cart-content]').should('be.visible');
 });
+
+Cypress.Commands.add('createMyOrder', (draft, orderNumber) => {
+  const createNewOrder = client => client.query({
+    query: gql`
+      query queryCustomerByEmail($predicate: String) {
+        customers(limit: 1, where: $predicate) {
+          results {
+            id
+            version
+          }
+        }
+      }`,
+    variables: { predicate: `email = "${draft.customerEmail}"` },
+    fetchPolicy: 'network-only',
+  }).then((response) => {
+    const customer = response.data.customers.results[0];
+    const cartDraft = Object.assign({}, draft, { customerId: customer.id });
+    return client.mutate({
+      mutation: gql`
+      mutation createMyCart($draft: CartDraft!){
+      createCart (draft: $draft) {
+        id, version
+      }
+  }`,
+      variables: {
+        draft: cartDraft,
+      },
+    });
+  }).then((response) => {
+    const cart = response.data.createCart;
+    client.mutate({
+      mutation: gql`
+          mutation createOrder($draft: OrderCartCommand!){
+            createOrderFromCart(draft: $draft) {
+              id
+            }
+          }`,
+      variables: {
+        draft: {
+          id: cart.id,
+          version: cart.version,
+          orderNumber,
+        },
+      },
+    });
+  });
+  return cy.deleteOrder(orderNumber).then(() => cy.wrap(clientPromise.then(client => createNewOrder(client))));
+});
+
+Cypress.Commands.add('deleteOrder', (orderNumber) => {
+  const deleteOrder = client => client.query({
+    query: gql`
+      query queryOrderByNumber($predicate: String) {
+        orders(limit: 1, where: $predicate) {
+          results {
+            version,
+            id
+          }
+        }
+      }`,
+    variables: { predicate: `orderNumber = "${orderNumber}"` },
+    fetchPolicy: 'network-only',
+  }).then(async (response) => {
+    const order = response.data.orders.results[0];
+    console.log(order);
+    if (order) {
+      await client.mutate({
+        mutation: gql`
+            mutation deleteOldOrder($id: String!, $version: Long!) {
+              deleteOrder(id: $id, version: $version) {
+                id
+              }
+            }`,
+        variables: {
+          id: order.id,
+          version: order.version,
+        },
+      }).catch(e => console.warn('Order might have been already deleted', e));
+    }
+  });
+
+  return cy.wrap(clientPromise.then(client => deleteOrder(client)));
+});
