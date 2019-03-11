@@ -38,6 +38,7 @@ describe('my orders', () => {
   it('shows my orders', () => {
     cy.createMyOrder(cartDraft1, orderNumber1);
     cy.createMyOrder(cartDraft2, orderNumber2);
+    cy.changeOrderStatus(orderNumber1);
     cy.get('[data-test=my-orders-button]').click();
     cy.reload();
     cy.url().should('include', '/user/orders');
@@ -54,6 +55,18 @@ describe('my orders', () => {
         cy.wrap($order)
           .find('[data-test=order-number]')
           .contains('1234');
+        cy.get('[data-test=location-selector-open-button]').click();
+        cy.get('span[data-test=location-selector-dropdown]')
+          .click()
+          .parent()
+          .contains('Deutsch')
+          .click();
+        cy.wrap($order)
+          .find('[data-test=shipment-state]')
+          .contains('Versandt');
+        cy.wrap($order)
+          .find('[data-test=payment-state]')
+          .contains('Anstehend');
       });
   });
 });

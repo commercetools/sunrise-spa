@@ -63,11 +63,13 @@
                  class="col-sm-2 col-xs-4">
               <BaseMoney :money="order.totalPrice"/>
             </div>
-            <div class="col-sm-2 hidden-xs">
-              <span>{{ order.paymentState || "-" }}</span>
+            <div class="col-sm-2 hidden-xs"
+                 data-test="payment-state">
+              <span>{{ $t('paymentState.' + order.paymentState )}}</span>
             </div>
-            <div class="col-sm-2 hidden-xs">
-              <span>{{ order.shipmentState || "-" }}</span>
+            <div class="col-sm-2 hidden-xs"
+                 data-test="shipment-state">
+              <span>{{ $t('shipmentState.' + order.shipmentState )}}</span>
             </div>
             <div class="col-sm-2 col-xs-4 text-right">
               <!--<form id="form-view-my-order{{@index}}" name="view-my-order"
@@ -129,6 +131,21 @@ en:
   total: "Total"
   paymentStatus: "Payment Status"
   shipmentStatus: "Shipment Status"
+  shipmentState:
+    Shipped: "Shipped"
+    Ready: "Ready"
+    Pending: "Pending"
+    Delayed: "Delayed"
+    Partial: "Partial"
+    Backorder: "Backorder"
+    null: "-"
+  paymentState:
+    BalanceDue: "Balance Due"
+    Failed: "Failed"
+    Pending: "Pending"
+    CreditOwed: "Credit Owed"
+    Paid: "Paid"
+    null: "-"
 de:
   myOrders: "Meine Bestellungen"
   orderNumber: "Bestellnummer"
@@ -136,4 +153,19 @@ de:
   total: "Gesamtpreis"
   paymentStatus: "Zahlungsstatus"
   shipmentStatus: "Versandstatus"
+  shipmentState:
+    Shipped: "Versandt"
+    Ready: "Bereit"
+    Pending: "Anstehend"
+    Delayed: "Verspätet"
+    Partial: "Teilweise"
+    Backorder: "Lieferrückstand"
+    null: "-"
+  paymentState:
+    BalanceDue: "Rechnungsbetrag"
+    Failed: "Fehlgeschlagen"
+    Pending: "Anstehend"
+    CreditOwed: "Kreditforderung"
+    Paid: "Bezahlt"
+    null: "-"
 </i18n>
