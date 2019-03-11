@@ -11,7 +11,7 @@
     </div>
     <div class="my-account-sidebar-items"
          :class="{ active: showTab === 'MyOrders' }">
-      <router-link :to=" { name: 'orders' }">
+      <router-link :to="{ name: 'orders' }">
         <button data-test="my-orders-button">
           {{ $t("myOrders") }}
         </button>
