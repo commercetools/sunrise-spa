@@ -100,9 +100,7 @@ export default {
 
   methods: {
     translateStatus(state) {
-      if (state) {
-        return this.$t(state);
-      } return '-';
+      return state ? this.$t(state) : '-';
     },
   },
 
