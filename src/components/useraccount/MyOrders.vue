@@ -65,11 +65,11 @@
             </div>
             <div class="col-sm-2 hidden-xs"
                  data-test="payment-state">
-              <span>{{ order.paymentState ? $t(order.paymentState) : '-' }}</span>
+              <span>{{ translateStatus(order.paymentState) }}</span>
             </div>
             <div class="col-sm-2 hidden-xs"
                  data-test="shipment-state">
-              <span>{{ order.shipmentState ? $t(order.shipmentState) : '-' }}</span>
+              <span>{{ translateStatus(order.shipmentState) }}</span>
             </div>
             <div class="col-sm-2 col-xs-4 text-right">
               <!--<form id="form-view-my-order{{@index}}" name="view-my-order"
@@ -97,6 +97,14 @@ export default {
   data: () => ({
     me: null,
   }),
+
+  methods: {
+    translateStatus(state) {
+      if (state) {
+        return this.$t(state);
+      } return '-';
+    },
+  },
 
   apollo: {
     me: {
