@@ -72,11 +72,11 @@
               <span>{{ translateStatus(order.shipmentState) }}</span>
             </div>
             <div class="col-sm-2 col-xs-4 text-right">
-              <!--<form id="form-view-my-order{{@index}}" name="view-my-order"
-                                method="GET" action="{{showOrderUrl}}">
-                              <button type="submit"
-                                class="my-orders-view-order-btn">{{i18n "my-account:myOrders.view"}}</button>
-              </form>-->
+              <router-link :to="{ name: 'order', params: { orderNumber: order.orderNumber } }">
+                <button class="my-orders-view-order-btn">
+                  {{ $t('view') }}
+                </button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -147,6 +147,7 @@ en:
   Failed: "Failed"
   CreditOwed: "Credit Owed"
   Paid: "Paid"
+  view: "View"
 de:
   myOrders: "Meine Bestellungen"
   orderNumber: "Bestellnummer"
@@ -164,4 +165,5 @@ de:
   Failed: "Fehlgeschlagen"
   CreditOwed: "Kreditforderung"
   Paid: "Bezahlt"
+  view: "Ansehen"
 </i18n>

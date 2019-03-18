@@ -86,6 +86,20 @@ const router = new Router({
       },
     },
     {
+      path: '/user/orders/:orderNumber',
+      name: 'order',
+      components: {
+        default: PageUserAccount,
+        header: TheHeader,
+      },
+      meta: { requiresAuth },
+      props: {
+        default: {
+          showTab: 'PageOrderDetails',
+        },
+      },
+    },
+    {
       path: '/product/:productSlug/:sku',
       name: 'product',
       components: {
