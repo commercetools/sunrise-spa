@@ -20,11 +20,14 @@
 import SidebarMenu from './SidebarMenu.vue';
 import PersonalDetails from './PersonalDetails.vue';
 import MyOrders from './MyOrders.vue';
+import PageOrderDetails from './orderdetail/PageOrderDetails.vue';
 
 export default {
-  props: ['showTab'],
+  props: ['showTab', 'orderNumber'],
   name: 'UserAccount',
-  components: { SidebarMenu, PersonalDetails, MyOrders },
+  components: {
+    SidebarMenu, PersonalDetails, MyOrders, PageOrderDetails,
+  },
 };
 </script>
 
