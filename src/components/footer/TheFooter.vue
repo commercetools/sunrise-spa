@@ -7,12 +7,7 @@
             <div class="footer-col">
               <ul>
                 <li class="footer-title hidden-xs">{{ $t("customerCare") }}</li>
-                <li>
-                  <a href="tel:0044123456000"
-                   class="link-hotline">
-                   {{ $t("callUs") }}
-                  </a>
-                </li>
+                <li><a href="#">{{ $t("contactUs") }}</a></li>
                 <li><a href="#">{{ $t("help") }}</a></li>
                 <li><a href="#">{{ $t("shipping") }}</a></li>
                 <li><a href="#">{{ $t("returns") }}</a></li>
@@ -117,7 +112,6 @@ en:
   imprint: "Imprint"
   privacyPolicy: "Privacy policy"
   termsOfUse: "Terms of use"
-  callUs: "Call us on +44 123 456 000"
 de:
   paySecure: "Sicher zahlen"
   followUs: "Follow us"
@@ -139,5 +133,4 @@ de:
   imprint: "Impressum"
   privacyPolicy: "Datenschutz"
   termsOfUse: "AGB"
-  callUs: "Rufen Sie uns auf +44 123 456 000 an"
 </i18n>
