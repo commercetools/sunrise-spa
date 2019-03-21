@@ -21,10 +21,11 @@
               {{ $t('date') }}
             </span>
             <span class="your-order-details-info">
-              {{ me.order.orderNumber }}
+              <span data-test="details-order-number">{{ me.order.orderNumber }}</span>
               <br>
               <BaseDate :date="me.order.createdAt"
-                        :format="'short'"/>
+                        :format="'short'"
+                        data-test="details-order-date"/>
             </span>
           </div>
           <button onclick="window.print()"

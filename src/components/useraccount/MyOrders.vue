@@ -73,7 +73,8 @@
             </div>
             <div class="col-sm-2 col-xs-4 text-right">
               <router-link :to="{ name: 'order', params: { orderNumber: order.orderNumber } }">
-                <button class="my-orders-view-order-btn">
+                <button class="my-orders-view-order-btn"
+                        data-test="view-order-btn">
                   {{ $t('view') }}
                 </button>
               </router-link>

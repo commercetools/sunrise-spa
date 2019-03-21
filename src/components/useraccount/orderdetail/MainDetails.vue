@@ -44,7 +44,9 @@
           <div class="my-orders-order-dark-box-title">{{ $t('shippingMethod') }}</div>
           <div>
             {{me.order.shippingInfo.shippingMethod.name}}
-            {{me.order.shippingInfo.shippingMethod.description}}
+            <span v-if="me.order.shippingInfo.shippingMethod.description">
+              - {{me.order.shippingInfo.shippingMethod.description}}
+            </span>
           </div>
         </div>
       </div>
@@ -52,8 +54,7 @@
         <div class="my-orders-order-dark-box">
           <div class="my-orders-order-dark-box-title">{{ $t('paymentDetails') }}</div>
           <span v-if="me.order.paymentInfo">
-            {{me.order.paymentInfo.payments.paymentMethodInfo.method}}
-            {{me.order.paymentInfo.createdAt}}
+            {{me.order.paymentInfo.payments[0].paymentMethodInfo.method}}
           </span>
         </div>
       </div>
@@ -125,7 +126,6 @@ export default {
                   paymentMethodInfo {
                     method
                   }
-                  createdAt
                 }
               }
             }
