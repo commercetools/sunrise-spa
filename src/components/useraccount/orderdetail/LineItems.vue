@@ -16,20 +16,19 @@
         </div>
       </div>
     </div>
-    <div v-for="item in me.order.lineItems" :key="item.id" class="order-detail-wrapper">
+    <div v-for="item in me.order.lineItems"
+         :key="item.id"
+         class="order-detail-wrapper"
+         data-test="order-line-items">
       <div class="row">
-        <div class="col-sm-1 col-xs-4 product-img-col">
-          <img
-            class="img-responsive cart-item-img"
-            :src="item.variant.images[0].url"
-            :alt="item.variant.images[0].label"
-          >
+        <div class="col-sm-2 col-xs-4">
+          <img class="img-responsive cart-item-img"
+               :src="item.variant.images[0].url"
+               :alt="item.variant.images[0].label">
         </div>
         <div class="col-sm-3 col-xs-8 product-info-text">
           <p class="cart-item-name">
-            <router-link
-              :to="{ name: 'product', params: { productSlug: item.productSlug, sku: item.variant.sku } }"
-            >
+            <router-link :to="{ name: 'product', params: { productSlug: item.productSlug, sku: item.variant.sku } }">
               <span>{{item.name}}</span>
             </router-link>
           </p>
@@ -39,12 +38,12 @@
             <span class="black-p">{{item.variant.attributes.size.value}}</span>
             <br>
             {{ $t('color') }}:
-            <span
-              class="black-p"
-            >{{item.variant.attributes.colorFreeDefinition.value}}</span>
+            <span class="black-p">
+              {{item.variant.attributes.colorFreeDefinition.value}}
+            </span>
           </p>
         </div>
-        <div class="col-sm-2 col-sm-offset-2 col-xs-12 text-center quantity-counter">
+        <div class="col-sm-1 col-sm-offset-2 col-xs-12 text-center quantity-counter">
           <span class="visible-xs">{{ $t('quantity') }}</span>
           <span class="quantity-number">{{item.quantity}}</span>
         </div>
@@ -52,10 +51,7 @@
         <div class="col-sm-2 col-xs-7">
           <div class="text-right cart-item-price">
             <span class="visible-xs xs-price-title">{{ $t('price') }}</span>
-            <!-- {{#if variant.priceOld}} -->
-            <!-- <span v-if="" class="discounted-price">{{variant.priceOld}}</span> -->
-            <!-- {{/if}} -->
-            <BaseMoney :money="item.price.value"/>
+            <BasePrice :price="item.price"/>
           </div>
         </div>
         <div class="col-sm-2 col-xs-5">
@@ -72,11 +68,12 @@
 <script>
 import gql from 'graphql-tag';
 import BaseMoney from '../../common/BaseMoney.vue';
+import BasePrice from '../../common/BasePrice.vue';
 import priceMixin from '@/mixins/priceMixin';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {
-  components: { BaseMoney },
+  components: { BaseMoney, BasePrice },
 
   data: () => ({
     me: null,
@@ -93,7 +90,7 @@ export default {
   apollo: {
     me: {
       query: gql`
-        query orderByOrderNumber($locale: Locale!, $orderNumber: String, $currency: Currency!) {
+        query orderByOrderNumber($locale: Locale!, $orderNumber: String) {
           me {
             order(orderNumber: $orderNumber) {
               lineItems {
@@ -101,13 +98,18 @@ export default {
                 quantity
                 name(locale: $locale)
                 productSlug(locale: $locale)
+                price{
+                    value {
+                      ...DisplayableMoney
+                    }
+                    discounted {
+                      value {
+                        ...DisplayableMoney
+                      }
+                    }
+                  }
                 totalPrice {
                   ...DisplayableMoney
-                }
-                price {
-                  value {
-                    ...DisplayableMoney
-                  }
                 }
                 variant {
                   images {
@@ -115,11 +117,6 @@ export default {
                     label
                   }
                   sku
-                  price(currency: $currency) {
-                    value {
-                      ...DisplayableMoney
-                    }
-                  }
                   attributes {
                     ... on mainProductType {
                       colorFreeDefinition {
@@ -139,7 +136,6 @@ export default {
       variables() {
         return {
           locale: this.$i18n.locale,
-          currency: this.currency,
           orderNumber: this.orderNumber,
         };
       },

@@ -1,14 +1,14 @@
 <template>
   <div v-if="me"
        class="my-orders-order-price-summary-wrapper">
-    <div v-if="me.order.discountCodes" class="text-right">
+    <!-- <div v-if="me.order.discountCodes.length > 0" class="text-right">
       <span class="my-orders-order-promocode-title">
-        <!-- {{i18n "my-account:myOrder.price.discountCode"}} -->
+        {{ $t('discountCode') }}:
       </span>
       <span class="my-orders-order-promocode">
-        <!-- {{content.order.discountCode}} -->
+        "{{me.order.discountCodes[0].discountCode.code}}"
       </span>
-    </div>
+    </div> -->
     <div class="text-right">
       <div class="row">
         <div class="col-sm-10 col-xs-7">
@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="col-sm-2 col-xs-5 text-right">
-          <div>
+          <div data-test="order-subtotal">
             <BaseMoney :money="subtotal"/>
           </div>
           <!-- <div v-if="me.order.discountCodes.discountCode.isActive">
@@ -44,7 +44,8 @@
           <div>
             <BaseMoney :money="me.order.taxedPrice.taxPortions[0].amount"/>
           </div>
-          <div class="order-total">
+          <div class="order-total"
+               data-test="order-total">
             <BaseMoney :money="me.order.totalPrice"/>
           </div>
         </div>
@@ -99,7 +100,6 @@ export default {
               discountCodes {
                 discountCode {
                   code
-                  isActive
                 }
               }
               taxedPrice {
