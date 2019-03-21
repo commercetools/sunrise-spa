@@ -69,7 +69,6 @@
 import gql from 'graphql-tag';
 import BaseMoney from '../../common/BaseMoney.vue';
 import BasePrice from '../../common/BasePrice.vue';
-import priceMixin from '@/mixins/priceMixin';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {
@@ -84,8 +83,6 @@ export default {
       return this.$route.params.orderNumber;
     },
   },
-
-  mixins: [priceMixin],
 
   apollo: {
     me: {
