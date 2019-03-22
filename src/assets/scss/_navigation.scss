@@ -103,7 +103,6 @@
 
   .list-item-store {
     float: left;
-
     .store-select {
       color: $white;
       padding: 10px 10px;
@@ -134,6 +133,9 @@
           margin-right: 3px;
         }
       }
+    }
+    @media screen and (max-width: 767px) {
+      display: none;
     }
   }
 
@@ -203,10 +205,18 @@
 
   .list-item-location {
     float: right;
-    display: none;
     img {
       height: 20px;
       margin-right: 10px;
+      &.pull-right{
+        @media screen and (max-width: 767px) {
+          float: none !important;
+        }
+      }
+      @media screen and (max-width: 767px){
+        height: 25px;
+        margin: 0; 
+      }
     }
     .location-dropdown {
       position: relative;

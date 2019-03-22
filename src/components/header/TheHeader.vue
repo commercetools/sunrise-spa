@@ -42,13 +42,6 @@
                 </a>
               </li>
 
-              <li class="list-item-call">
-                <a href="tel:0044123456000"
-                   class="link-hotline">
-                  {{ $t("callUs") }}
-                </a>
-              </li>
-
               <MiniCart/>
               <LoginButton/>
               <LocationSelector/>
@@ -119,10 +112,8 @@ en:
   search: "Search"
   stores: "Stores"
   help: "Help"
-  callUs: "Call us on +44 123 456 000"
 de:
   search: "Suche"
   stores: "Filiale"
   help: "Hilfe"
-  callUs: "Rufen Sie uns auf +44 123 456 000 an"
 </i18n>
