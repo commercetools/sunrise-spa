@@ -1,8 +1,7 @@
 <template>
-  <div v-if="me && me.activeCart">
+  <div v-if="prices">
     <div class="row">
       <div class="col-sm-12">
-        <div class="total-price-calc">
           <div class="row">
             <div class="col-sm-10 col-xs-7">
               <div class="text-right subtotal">
@@ -11,7 +10,7 @@
               <div class="text-right">
                 <!--<span class="order-discount">{{ $t('checkout.orderDiscount') }}</span>-->
               </div>
-              <div v-if="me.activeCart.shippingInfo"
+              <div v-if="prices.shippingInfo"
                    class="text-right delivery-info">
                 <span class="delivery-info-title">{{ $t('shipping') }}</span>
               </div>
@@ -34,8 +33,8 @@
                 <!--<span class="order-discount">{{ cart.discount }}</span>-->
               </div>
               <div>
-                <span v-if="me.activeCart.shippingInfo">
-                  <BaseMoney :money="me.activeCart.shippingInfo.price"/>
+                <span v-if="prices.shippingInfo">
+                  <BaseMoney :money="prices.shippingInfo.price"/>
                 </span>
               </div>
               <hr>
@@ -47,7 +46,7 @@
               <div>
                 <span data-test="cart-total-price"
                       class="order-total">
-                  <BaseMoney :money="me.activeCart.totalPrice"/>
+                  <BaseMoney :money="prices.totalPrice"/>
                 </span>
               </div>
             </div>
@@ -60,16 +59,12 @@
             <!--</div>-->
             <!--{{/if}}-->
           </div>
-        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import gql from 'graphql-tag';
-import priceMixin from '@/mixins/priceMixin';
-import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 import BaseMoney from '../common/BaseMoney.vue';
 
 export default {
@@ -77,23 +72,26 @@ export default {
     BaseMoney,
   },
 
-  data: () => ({
-    me: null,
-  }),
+  props: {
+    prices: {
+      type: Object,
+      required: true,
+    },
+  },
 
   computed: {
     subtotal() {
-      const { currencyCode, fractionDigits } = this.me.activeCart.totalPrice;
+      const { currencyCode, fractionDigits } = this.prices.totalPrice;
       return {
-        centAmount: this.me.activeCart.lineItems.reduce((acc, li) => acc + li.totalPrice.centAmount, 0),
+        centAmount: this.prices.lineItems.reduce((acc, li) => acc + li.totalPrice.centAmount, 0),
         currencyCode,
         fractionDigits,
       };
     },
 
     taxes() {
-      const { currencyCode, fractionDigits } = this.me.activeCart.totalPrice;
-      const { taxedPrice } = this.me.activeCart;
+      const { currencyCode, fractionDigits } = this.prices.totalPrice;
+      const { taxedPrice } = this.prices;
       if (taxedPrice) {
         return {
           centAmount: taxedPrice.totalGross.centAmount - taxedPrice.totalNet.centAmount,
@@ -102,44 +100,6 @@ export default {
         };
       }
       return null;
-    },
-  },
-
-  mixins: [priceMixin],
-
-  apollo: {
-    me: {
-      query: gql`
-        query me {
-          me {
-            activeCart {
-              id
-              lineItems {
-                id
-                totalPrice {
-                  ...DisplayableMoney
-                }
-              }
-              totalPrice {
-               ...DisplayableMoney
-              }
-              shippingInfo {
-                price {
-                  ...DisplayableMoney
-                }
-              }
-              taxedPrice {
-                totalGross {
-                  ...DisplayableMoney
-                }
-                totalNet {
-                  ...DisplayableMoney
-                }
-              }
-            }
-          }
-        }
-        ${DisplayableMoneyFragment}`,
     },
   },
 };
