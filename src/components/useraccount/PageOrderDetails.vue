@@ -2,7 +2,8 @@
   <div class="col-sm-9">
     <div v-if="me"
          class="my-orders col-sm-12">
-      <div class="my-orders-order-content">
+      <div v-if="me.order"
+           class="my-orders-order-content">
         <div class="row">
           <div class="col-sm-12">
             <div class="my-orders-title hidden-xs">
@@ -63,10 +64,10 @@
               class="order-detail-wrapper"
               data-test="order-line-items"/>
       </div>
+      <div v-else>
+        <h1 class="text-center">Order not found</h1>
+      </div>
     </div>
-    <!-- <div v-else>
-      <h1 class="text-center">Order <b>{{ orderNumber }}</b> not found</h1>
-    </div> -->
   </div>
 </template>
 
