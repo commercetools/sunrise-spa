@@ -60,8 +60,8 @@
         <LineItem v-for="lineItem in me.order.lineItems"
               :key="lineItem.id"
               :lineItem="lineItem"
-              class="order-detail-wrapper"/>
-        <div class="order-print-receipt-btn-wrapper"></div>
+              class="order-detail-wrapper"
+              data-test="order-line-items"/>
       </div>
     </div>
     <!-- <div v-else>
