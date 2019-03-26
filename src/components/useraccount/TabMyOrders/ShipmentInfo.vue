@@ -20,10 +20,10 @@
       <div class="col-sm-6">
         <div class="my-orders-order-dark-box">
           <div class="my-orders-order-dark-box-title">{{ $t('shippingMethod') }}</div>
-          <div>
-            {{ me.order.shippingInfo.shippingMethod.name }}
-            <span v-if=" me.order.shippingInfo.shippingMethod.description">
-              - {{ me.order.shippingInfo.shippingMethod.description }}
+          <div v-if="me.order.shippingInfo">
+            {{ shippingMethod.name }}
+            <span v-if=" shippingMethod.description">
+              - {{ shippingMethod.description }}
             </span>
           </div>
         </div>
@@ -57,6 +57,10 @@ export default {
   computed: {
     orderNumber() {
       return this.$route.params.orderNumber;
+    },
+
+    shippingMethod() {
+      return this.me.order.shippingInfo.shippingMethod;
     },
   },
 

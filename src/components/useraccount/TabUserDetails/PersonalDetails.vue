@@ -36,7 +36,7 @@
               <button @click="showEditForm = true"
                       class="personal-details-edit-show-btn"
                       data-test="edit-profile-form-show">
-                <img src="../../assets/img/edit-1.png" alt="edit icon">
+                <img src="../../../assets/img/edit-1.png" alt="edit icon">
                 {{ $t('main.form.edit') }}
               </button>
             </div>
