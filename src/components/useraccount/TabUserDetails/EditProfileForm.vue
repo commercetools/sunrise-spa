@@ -82,9 +82,9 @@
 import { required, email } from 'vuelidate/lib/validators';
 import gql from 'graphql-tag';
 import customerMixin from '@/mixins/customerMixin';
-import ServerError from '../common/ServerError.vue';
-import ValidationError from '../common/ValidationError.vue';
-import LoadingButton from '../common/LoadingButton.vue';
+import ServerError from '../../common/ServerError.vue';
+import ValidationError from '../../common/ValidationError.vue';
+import LoadingButton from '../../common/LoadingButton.vue';
 
 export default {
   components: {

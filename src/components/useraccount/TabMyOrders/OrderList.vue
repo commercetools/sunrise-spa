@@ -88,8 +88,8 @@
 
 <script>
 import gql from 'graphql-tag';
-import BaseMoney from '../common/BaseMoney.vue';
-import BaseDate from '../common/BaseDate.vue';
+import BaseMoney from '../../common/BaseMoney.vue';
+import BaseDate from '../../common/BaseDate.vue';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {

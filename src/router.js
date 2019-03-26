@@ -81,7 +81,7 @@ const router = new Router({
       meta: { requiresAuth },
       props: {
         default: {
-          showTab: 'MyOrders',
+          showTab: 'OrderList',
         },
       },
     },
@@ -95,7 +95,7 @@ const router = new Router({
       meta: { requiresAuth },
       props: {
         default: {
-          showTab: 'OrderDetails',
+          showTab: 'OrderDetail',
         },
       },
     },

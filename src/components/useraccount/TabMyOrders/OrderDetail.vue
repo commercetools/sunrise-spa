@@ -35,7 +35,7 @@
           </button>
         </div>
         <ShipmentInfo />
-        <PriceCalculation :cartLike="cartLike"
+        <PriceCalculation :cartLike="me.order"
                           class="my-orders-order-price-summary-wrapper"/>
         <div class="order-list-summary-titles-wrapper">
           <div class="row">
@@ -60,7 +60,7 @@
               data-test="order-line-items"/>
       </div>
       <div v-else>
-        <h1 class="text-center">Order not found</h1>
+        <h1 class="text-center">{{ $t('notFound') }}</h1>
       </div>
     </div>
   </div>
@@ -89,16 +89,6 @@ export default {
   computed: {
     orderNumber() {
       return this.$route.params.orderNumber;
-    },
-
-    cartLike() {
-      const obj = {
-        lineItems: this.me.order.lineItems,
-        shippingInfo: this.me.order.shippingInfo,
-        taxedPrice: this.me.order.taxedPrice,
-        totalPrice: this.me.order.totalPrice,
-      };
-      return obj;
     },
   },
 
@@ -195,6 +185,7 @@ en:
   quantity: "Quantity"
   price: "Price"
   total: "Total"
+  notFound: "Order not found"
 de:
   title: "Ihre Bestelldetails"
   myOrders: "Meine Bestellungen"
@@ -205,4 +196,5 @@ de:
   quantity: "Menge"
   price: "Preis"
   total: "Gesamtpreis"
+  notFound: "Bestellung nicht gefunden"
 </i18n>
