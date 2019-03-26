@@ -36,7 +36,7 @@ import gql from 'graphql-tag';
 import cartMixin from '@/mixins/cartMixin';
 import priceMixin from '@/mixins/priceMixin';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
-import LineItem from './LineItem.vue';
+import LineItem from '../common/LineItem.vue';
 
 export default {
   components: { LineItem },

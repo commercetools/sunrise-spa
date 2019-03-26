@@ -1,6 +1,6 @@
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import LineItem from '@/components/cartdetail/LineItem.vue';
+import LineItem from '@/components/common/LineItem.vue';
 
 jest.mock('lodash.debounce', () => jest.fn(fn => fn));
 

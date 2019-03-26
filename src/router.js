@@ -95,7 +95,7 @@ const router = new Router({
       meta: { requiresAuth },
       props: {
         default: {
-          showTab: 'PageOrderDetails',
+          showTab: 'OrderDetails',
         },
       },
     },
