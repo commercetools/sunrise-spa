@@ -73,7 +73,6 @@
         {{ lineItem.quantity }}
       </span>
     </div>
-
     <div :class="editable ? 'col-xs-12 sm-pull-right' : 'col-xs-7'"
          class="col-sm-2">
       <div class="text-right cart-item-price">
@@ -98,8 +97,8 @@ import debounce from 'lodash.debounce';
 import priceMixin from '@/mixins/priceMixin';
 import productMixin from '@/mixins/productMixin';
 import { required, minValue, numeric } from 'vuelidate/lib/validators';
-import BaseMoney from '../common/BaseMoney.vue';
-import BasePrice from '../common/BasePrice.vue';
+import BaseMoney from './BaseMoney.vue';
+import BasePrice from './BasePrice.vue';
 
 export default {
   components: {

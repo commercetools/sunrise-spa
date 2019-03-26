@@ -22,7 +22,7 @@
         <div class="col-sm-12">
           <div class="cart-content">
             <CartContent :editable="true"/>
-            <PriceCalculation :prices="prices"
+            <PriceCalculation :cartLike="me.activeCart"
                               class="total-price-calc"/>
           </div>
         </div>
@@ -49,7 +49,7 @@
 import gql from 'graphql-tag';
 import cartMixin from '@/mixins/cartMixin';
 import CartContent from '@/components/cartdetail/CartContent.vue';
-import PriceCalculation from '@/components/cartdetail/PriceCalculation.vue';
+import PriceCalculation from '@/components/common/PriceCalculation.vue';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {
@@ -60,18 +60,6 @@ export default {
   }),
 
   mixins: [cartMixin],
-
-  computed: {
-    prices() {
-      const obj = {
-        lineItems: this.me.activeCart.lineItems,
-        shippingInfo: this.me.activeCart.shippingInfo,
-        taxedPrice: this.me.activeCart.taxedPrice,
-        totalPrice: this.me.activeCart.totalPrice,
-      };
-      return obj;
-    },
-  },
 
   apollo: {
     me: {

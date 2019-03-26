@@ -1,8 +1,8 @@
 import { shallowMount } from '@vue/test-utils';
-import PriceCalculation from '@/components/cartdetail/PriceCalculation.vue';
+import PriceCalculation from '@/components/common/PriceCalculation.vue';
 
 describe('PriceCalculation.vue', () => {
-  const prices = {
+  const cartLike = {
     lineItems: [],
     totalPrice: {
       currencyCode: 'EUR',
@@ -17,7 +17,7 @@ describe('PriceCalculation.vue', () => {
     options = {
       methods: { formatPrice: jest.fn() },
       mocks: { $t: jest.fn() },
-      propsData: { prices },
+      propsData: { cartLike },
     };
   });
 
@@ -30,8 +30,8 @@ describe('PriceCalculation.vue', () => {
     expect(wrapper.vm.taxes).toBeNull();
 
     wrapper.setProps({
-      prices: {
-        ...prices,
+      cartLike: {
+        ...cartLike,
         taxedPrice: {
           totalNet: {
             currencyCode: 'EUR',
@@ -62,8 +62,8 @@ describe('PriceCalculation.vue', () => {
     });
 
     wrapper.setProps({
-      prices: {
-        ...prices,
+      cartLike: {
+        ...cartLike,
         lineItems: [
           { totalPrice: { centAmount: 11111 } },
           { totalPrice: { centAmount: 22222 } },

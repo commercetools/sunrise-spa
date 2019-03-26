@@ -34,13 +34,8 @@
             {{ $t('print') }}
           </button>
         </div>
-        <Addresses :shippingAddress="me.order.shippingAddress"
-                   :billingAddress="me.order.billingAddress"/>
-        <div class="row">
-          <Shipping :shippingMethod="me.order.shippingInfo.shippingMethod"/>
-          <Payment :paymentInfo="me.order.paymentInfo"/>
-        </div>
-        <PriceCalculation :prices="prices"
+        <ShipmentInfo />
+        <PriceCalculation :cartLike="cartLike"
                           class="my-orders-order-price-summary-wrapper"/>
         <div class="order-list-summary-titles-wrapper">
           <div class="row">
@@ -57,7 +52,7 @@
               <div class="text-right">{{ $t('total') }}</div>
             </div>
           </div>
-    </div>
+        </div>
         <LineItem v-for="lineItem in me.order.lineItems"
               :key="lineItem.id"
               :lineItem="lineItem"
@@ -73,20 +68,16 @@
 
 <script>
 import gql from 'graphql-tag';
-import BaseDate from '../common/BaseDate.vue';
-import Addresses from '../common/Addresses.vue';
-import Shipping from '../common/Shipping.vue';
-import Payment from '../common/Payment.vue';
-import PriceCalculation from '../cartdetail/PriceCalculation.vue';
-import LineItem from '../cartdetail/LineItem.vue';
+import ShipmentInfo from './ShipmentInfo.vue';
+import BaseDate from '../../common/BaseDate.vue';
+import PriceCalculation from '../../common/PriceCalculation.vue';
+import LineItem from '../../common/LineItem.vue';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {
   components: {
+    ShipmentInfo,
     BaseDate,
-    Addresses,
-    Shipping,
-    Payment,
     PriceCalculation,
     LineItem,
   },
@@ -100,7 +91,7 @@ export default {
       return this.$route.params.orderNumber;
     },
 
-    prices() {
+    cartLike() {
       const obj = {
         lineItems: this.me.order.lineItems,
         shippingInfo: this.me.order.shippingInfo,
@@ -117,46 +108,11 @@ export default {
         query orderByOrderNumber($orderNumber: String, $locale: Locale!) {
           me {
             order(orderNumber: $orderNumber) {
+              id
               version
               orderNumber
               createdAt
-              shippingAddress {
-                title
-                firstName
-                lastName
-                streetName
-                streetNumber
-                additionalStreetInfo
-                city
-                postalCode
-                region
-                country
-                contactInfo {
-                  phone
-                  email
-                }
-              }
-              billingAddress {
-                title
-                firstName
-                lastName
-                streetName
-                streetNumber
-                additionalStreetInfo
-                city
-                postalCode
-                region
-                country
-                contactInfo {
-                  phone
-                  email
-                }
-              }
               shippingInfo {
-                shippingMethod {
-                  name
-                  description
-                }
                 price {
                   ...DisplayableMoney
                 }
@@ -176,13 +132,6 @@ export default {
               }
               totalPrice {
                 ...DisplayableMoney
-              }
-              paymentInfo {
-                payments {
-                  paymentMethodInfo {
-                    method
-                  }
-                }
               }
               lineItems {
                 id
@@ -242,11 +191,18 @@ en:
   orderNumber: "Order Number"
   date: "Date"
   print: "Print receipt"
+  description: "Description"
+  quantity: "Quantity"
+  price: "Price"
+  total: "Total"
 de:
   title: "Ihre Bestelldetails"
   myOrders: "Meine Bestellungen"
   orderNumber: "Bestellnummer"
   date: "Datum"
-  total: "Gesamtpreis"
   print: "Beleg drucken"
+  description: "Beschreibung"
+  quantity: "Menge"
+  price: "Preis"
+  total: "Gesamtpreis"
 </i18n>

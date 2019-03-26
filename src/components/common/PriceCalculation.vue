@@ -1,5 +1,5 @@
 <template>
-  <div v-if="prices">
+  <div v-if="cartLike">
     <div class="row">
       <div class="col-sm-12">
           <div class="row">
@@ -10,7 +10,7 @@
               <div class="text-right">
                 <!--<span class="order-discount">{{ $t('checkout.orderDiscount') }}</span>-->
               </div>
-              <div v-if="prices.shippingInfo"
+              <div v-if="cartLike.shippingInfo"
                    class="text-right delivery-info">
                 <span class="delivery-info-title">{{ $t('shipping') }}</span>
               </div>
@@ -33,8 +33,8 @@
                 <!--<span class="order-discount">{{ cart.discount }}</span>-->
               </div>
               <div>
-                <span v-if="prices.shippingInfo">
-                  <BaseMoney :money="prices.shippingInfo.price"/>
+                <span v-if="cartLike.shippingInfo">
+                  <BaseMoney :money="cartLike.shippingInfo.price"/>
                 </span>
               </div>
               <hr>
@@ -46,7 +46,7 @@
               <div>
                 <span data-test="cart-total-price"
                       class="order-total">
-                  <BaseMoney :money="prices.totalPrice"/>
+                  <BaseMoney :money="cartLike.totalPrice"/>
                 </span>
               </div>
             </div>
@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import BaseMoney from '../common/BaseMoney.vue';
+import BaseMoney from './BaseMoney.vue';
 
 export default {
   components: {
@@ -73,7 +73,7 @@ export default {
   },
 
   props: {
-    prices: {
+    cartLike: {
       type: Object,
       required: true,
     },
@@ -81,17 +81,17 @@ export default {
 
   computed: {
     subtotal() {
-      const { currencyCode, fractionDigits } = this.prices.totalPrice;
+      const { currencyCode, fractionDigits } = this.cartLike.totalPrice;
       return {
-        centAmount: this.prices.lineItems.reduce((acc, li) => acc + li.totalPrice.centAmount, 0),
+        centAmount: this.cartLike.lineItems.reduce((acc, li) => acc + li.totalPrice.centAmount, 0),
         currencyCode,
         fractionDigits,
       };
     },
 
     taxes() {
-      const { currencyCode, fractionDigits } = this.prices.totalPrice;
-      const { taxedPrice } = this.prices;
+      const { currencyCode, fractionDigits } = this.cartLike.totalPrice;
+      const { taxedPrice } = this.cartLike;
       if (taxedPrice) {
         return {
           centAmount: taxedPrice.totalGross.centAmount - taxedPrice.totalNet.centAmount,
