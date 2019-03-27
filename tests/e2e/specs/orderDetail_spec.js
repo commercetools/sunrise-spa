@@ -57,11 +57,12 @@ describe('OrderDetailPage', () => {
 
   before(() => {
     cy.login(customer);
+    cy.createMyOrder(cartDraft, orderDraft);
   });
 
   it('shows order details', () => {
-    cy.createMyOrder(cartDraft, orderDraft);
     cy.get('[data-test=my-orders-button]').click();
+    cy.reload();
     cy.get('[data-test=view-order-btn]').click();
     cy.url().should('include', '/user/orders/12345');
     cy.get('[data-test=details-order-number]')
