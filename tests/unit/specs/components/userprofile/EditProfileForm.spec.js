@@ -1,7 +1,7 @@
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import { ApolloError } from 'apollo-client';
-import EditProfileForm from '@/components/useraccount/TabUserDetails/EditProfileForm.vue';
+import EditProfileForm from '@/components/useraccount/userdetail/EditProfileForm.vue';
 import ServerError from '@/components/common/ServerError.vue';
 import ValidationError from '@/components/common/ValidationError.vue';
 

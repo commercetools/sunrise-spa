@@ -147,16 +147,6 @@ export default {
                     label
                   }
                   sku
-                  attributes {
-                    ... on mainProductType {
-                      colorFreeDefinition {
-                        value(locale: $locale)
-                      }
-                      size {
-                        value
-                      }
-                    }
-                  }
                 }
               }
             }

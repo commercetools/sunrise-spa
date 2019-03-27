@@ -1,11 +1,11 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import OrderList from '@/components/useraccount/TabMyOrders/OrderList.vue';
+import TabOrderList from '@/components/useraccount/myorders/TabOrderList.vue';
 import VueI18n from 'vue-i18n';
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);
 
-describe('OrderList.vue', () => {
+describe('TabOrderList.vue', () => {
   let options;
 
   beforeEach(() => {
@@ -23,11 +23,11 @@ describe('OrderList.vue', () => {
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(OrderList, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(TabOrderList, options).isVueInstance()).toBeTruthy();
   });
 
   it('shows the right status in all cases', () => {
-    const wrapper = shallowMount(OrderList, options);
+    const wrapper = shallowMount(TabOrderList, options);
     expect(wrapper.vm.translateStatus('Ready')).toBe('Bereit');
     expect(wrapper.vm.translateStatus(null)).toBe('-');
     expect(wrapper.vm.translateStatus('DoesntExist')).toBe('DoesntExist');
