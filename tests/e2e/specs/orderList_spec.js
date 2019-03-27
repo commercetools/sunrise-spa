@@ -40,20 +40,13 @@ describe('my orders', () => {
 
   before(() => {
     cy.login(customer);
+    cy.createMyOrder(cartDraft1, orderDraft1);
+    cy.createMyOrder(cartDraft2, orderDraft2);
+    localStorage.setItem('locale', 'de');
   });
 
   it('shows my orders', () => {
-    cy.createMyOrder(cartDraft1, orderDraft1);
-    cy.createMyOrder(cartDraft2, orderDraft2);
     cy.get('[data-test=my-orders-button]').click();
-    cy.reload();
-    cy.get('[data-test=location-selector-open-button]').click();
-    cy.get('span[data-test=location-selector-dropdown]')
-      .click()
-      .parent()
-      .contains('Deutsch')
-      .click();
-    cy.url().should('include', '/user/orders');
     cy.get('[data-test=order-list]')
       .should('have.length', 2)
       .eq(0)
