@@ -17,13 +17,25 @@
         <!--{{> checkout/start-checkout-link id="cart-checkoutnow-btn"}}-->
       </div>
     </div>
-    <div v-if="me && me.activeCart">
+    <div v-if="notEmpty">
       <div class="row">
         <div class="col-sm-12">
           <div class="cart-content">
-            <CartContent :editable="true"/>
-            <PriceCalculation :cartLike="me.activeCart"
-                              class="total-price-calc"/>
+            <CartLikeSummary :cart-like="me.activeCart">
+              <template #editable="{ lineItem }">
+                <div>
+                  <div class="col-sm-2 col-xs-12 cart-edit-delete">
+                    <div class="edit-delete-section">
+                      <LineItemDeleteForm :line-item="lineItem"
+                                          @submit="removeLineItem"/>
+                    </div>
+                  </div>
+                </div>
+                <LineItemQuantityForm :line-item="lineItem"
+                                      @submit="changeLineItemQuantity"
+                                      class="col-sm-2 col-xs-12 clearfix sm-pull-right"/>
+              </template>
+            </CartLikeSummary>
           </div>
         </div>
       </div>
@@ -48,12 +60,17 @@
 <script>
 import gql from 'graphql-tag';
 import cartMixin from '@/mixins/cartMixin';
-import CartContent from '@/components/cartdetail/CartContent.vue';
-import PriceCalculation from '@/components/common/PriceCalculation.vue';
+import CartLikeSummary from '../common/CartLikeSummary.vue';
+import LineItemDeleteForm from './LineItemDeleteForm.vue';
+import LineItemQuantityForm from './LineItemQuantityForm.vue';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {
-  components: { CartContent, PriceCalculation },
+  components: {
+    LineItemQuantityForm,
+    LineItemDeleteForm,
+    CartLikeSummary,
+  },
 
   data: () => ({
     me: null,
@@ -61,18 +78,66 @@ export default {
 
   mixins: [cartMixin],
 
+  computed: {
+    notEmpty() {
+      return this.me && this.me.activeCart && this.me.activeCart.lineItems.length > 0;
+    },
+  },
+
+  methods: {
+    removeLineItem(lineItemId) {
+      return this.updateMyCart([
+        {
+          removeLineItem: {
+            lineItemId,
+          },
+        },
+      ]);
+    },
+
+    changeLineItemQuantity(lineItemId, quantity) {
+      return this.updateMyCart([
+        {
+          changeLineItemQuantity: {
+            lineItemId,
+            quantity,
+          },
+        },
+      ]);
+    },
+  },
+
   apollo: {
     me: {
       query: gql`
-        query me {
+        query me($locale: Locale!) {
           me {
             activeCart {
               id
+              version
               lineItems {
                 id
+                name(locale: $locale)
+                productSlug(locale: $locale)
                 quantity
+                price {
+                  value {
+                    ...DisplayableMoney
+                  }
+                  discounted {
+                    value {
+                      ...DisplayableMoney
+                    }
+                  }
+                }
                 totalPrice {
                   ...DisplayableMoney
+                }
+                variant {
+                  sku
+                  images {
+                    url
+                  }
                 }
               }
               totalPrice {
@@ -95,6 +160,11 @@ export default {
           }
         }
         ${DisplayableMoneyFragment}`,
+      variables() {
+        return {
+          locale: this.$i18n.locale,
+        };
+      },
     },
   },
 };

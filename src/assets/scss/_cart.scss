@@ -125,8 +125,12 @@
   height: 15px;
   margin-right: 0.5em;
 }
-.single-cart-item {
+
+.cart-content .single-cart-item {
   margin: 0 1em;
+}
+
+.single-cart-item {
   padding: 1em;
   border-bottom: 1px solid $alto;
 }
@@ -399,16 +403,10 @@
 }
 
 // MIN-WIDTH ------------------------------------------------------------------------------
-@media screen and (min-width: 991px) {
-  .single-cart-item {
-    height: 169px;
-    min-height: 169px;
-  }
-}
 @media screen and (min-width: 768px) {
   .single-cart-item {
-    min-height: 230px;
-    height: 230px;
+    min-height: 169px;
+    height: 169px;
     .cart-edit-delete {
       min-height: 100%;
       height: 100%;

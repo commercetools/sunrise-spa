@@ -19,22 +19,8 @@
                 :key="lineItem.id"
                 data-test="mini-cart-line-item">
               <div>
-                <router-link :to="{
-                  name: 'product',
-                  params: { productSlug: lineItem.productSlug, sku: lineItem.variant.sku }}"
-                  class="img">
-                  <img :src="displayedImageUrl(lineItem.variant)"
-                       :alt="lineItem.name"
-                       class="img"/>
-                </router-link>
-                <router-link data-test="mini-cart-line-item-link"
-                             :to="{
-                             name: 'product',
-                             params: { productSlug: lineItem.productSlug, sku: lineItem.variant.sku }}">
-                  <p class="product-title">
-                    {{ lineItem.name }}
-                  </p>
-                </router-link>
+                <LineItemInfo :line-item="lineItem"
+                              :extended="false" />
                 <div class="details">
                   <p class="product-quantity">
                     {{ $t('quantity') }}
@@ -48,15 +34,8 @@
                       <BaseMoney :money="lineItem.totalPrice"/>
                     </span>
                   </p>
-                  <button @click="removeLineItem(lineItem.id)"
-                          data-test="mini-cart-line-item-delete"
-                          class="delete">
-                      <span>
-                        <img src="../../assets/img/delete-1.png"
-                             class="cart-action-icon"
-                             :alt="$t('delete')"/>
-                      </span>
-                  </button>
+                  <LineItemDeleteForm :line-item="lineItem"
+                                      @submit="removeLineItem"/>
                 </div>
               </div>
             </li>
@@ -72,7 +51,7 @@
                      class="btn-grey">
           {{ $t('viewBag') }}
         </router-link>
-        <router-link :to="{ name: 'cart' }"
+        <router-link :to="{ name: 'checkout' }"
                      class="btn-yellow">{{ $t('checkout') }}</router-link>
       </div>
     </transition>
@@ -88,9 +67,13 @@ import priceMixin from '@/mixins/priceMixin';
 import productMixin from '@/mixins/productMixin';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 import BaseMoney from '../common/BaseMoney.vue';
+import LineItemInfo from '../common/LineItemInfo.vue';
+import LineItemDeleteForm from '../cartdetail/LineItemDeleteForm.vue';
 
 export default {
   components: {
+    LineItemDeleteForm,
+    LineItemInfo,
     BaseMoney,
     VuePerfectScrollbar,
   },
@@ -186,6 +169,12 @@ export default {
   },
 };
 </script>
+
+<style>
+.nav-minicart .delete-text {
+  display: none;
+}
+</style>
 
 <i18n>
   de:
