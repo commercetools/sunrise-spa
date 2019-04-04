@@ -9,6 +9,7 @@ import PageUserAccount from '@/components/useraccount/PageUserAccount.vue';
 import PageNotFound from '@/components/common/PageNotFound.vue';
 import PageProductDetail from '@/components/productdetail/PageProductDetail.vue';
 import PageCartDetail from '@/components/cartdetail/PageCartDetail.vue';
+import CheckoutAddress from '@/components/checkout/CheckoutAddress.vue';
 
 Vue.use(Router);
 
@@ -116,6 +117,14 @@ const router = new Router({
       name: 'cart',
       components: {
         default: PageCartDetail,
+        header: TheHeader,
+      },
+    },
+    {
+      path: '/checkout',
+      name: 'checkout',
+      components: {
+        default: CheckoutAddress,
         header: TheHeader,
       },
     },

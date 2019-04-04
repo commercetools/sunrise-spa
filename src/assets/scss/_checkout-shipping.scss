@@ -30,21 +30,24 @@
   div {
     display: inline;
   }
-}
-.step-number {
-  padding: 0.6em 1em;
-  color: $gray;
-  background: $white;
-  border-radius: 50%;
-  border: 1px solid $silver-chalice;
-  font-size: 1em;
-}
-.step-number-active {
-  background: $silver-chalice;
-  color: $white;
-}
-.step-title {
-  padding: 0 0.5em 0 0.2em;
+
+  .step-number {
+    padding: 0.6em 1em;
+    color: $gray;
+    background: $white;
+    border-radius: 50%;
+    border: 1px solid $silver-chalice;
+    font-size: 1em;
+  }
+
+  .step-title {
+    padding: 0 0.5em 0 0.2em;
+  }
+
+  .active .step-number {
+    background: $silver-chalice;
+    color: $white;
+  }
 }
 
 // Shipping information
@@ -307,11 +310,11 @@
   }
 }
 @media screen and (max-width: 470px) {
-	.step-title {
+  .step-title {
     padding-right: 0;
     margin-right: 2em;
   }
-  .step-title-active {
+  .active .step-title {
     border-bottom: 1px solid $ebony-clay;
   }
   .step-number {
