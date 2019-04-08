@@ -22,18 +22,13 @@
         <div class="col-sm-12">
           <div class="cart-content">
             <CartLikeSummary :cart-like="me.activeCart">
-              <template #editable="{ lineItem }">
-                <div>
-                  <div class="col-sm-2 col-xs-12 cart-edit-delete">
-                    <div class="edit-delete-section">
-                      <LineItemDeleteForm :line-item="lineItem"
-                                          @submit="removeLineItem"/>
-                    </div>
-                  </div>
-                </div>
+              <template #quantity-column="{ lineItem }">
+                <LineItemDeleteForm :line-item="lineItem"
+                                    @submit="removeLineItem"
+                                    class="col-sm-6 col-xs-12 cart-edit-delete"/>
                 <LineItemQuantityForm :line-item="lineItem"
                                       @submit="changeLineItemQuantity"
-                                      class="col-sm-2 col-xs-12 clearfix sm-pull-right"/>
+                                      class="col-sm-6 col-xs-12 clearfix sm-pull-right"/>
               </template>
             </CartLikeSummary>
           </div>

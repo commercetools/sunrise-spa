@@ -22,16 +22,18 @@
          class="row single-cart-item">
       <LineItemInfo :line-item="lineItem"
                     class="col-sm-4 col-xs-12"/>
-      <slot name="editable"
-            :lineItem="lineItem">
-        <div class="col-sm-2 col-sm-offset-2 col-xs-12 text-center quantity-counter">
-          <span class="visible-xs">{{ $t('quantity') }}:</span>
-          <span data-test="cart-line-item-quantity"
-                class="quantity-number">
+      <div class="col-sm-4 col-xs-12">
+        <slot name="quantity-column"
+              :lineItem="lineItem">
+          <div class="col-sm-6 col-sm-offset-6 col-xs-12 text-center quantity-counter">
+            <span class="visible-xs">{{ $t('quantity') }}:</span>
+            <span data-test="cart-line-item-quantity"
+                  class="quantity-number">
                 {{ lineItem.quantity }}
               </span>
-        </div>
-      </slot>
+          </div>
+        </slot>
+      </div>
       <div>
         <div class="col-sm-2 col-xs-12 sm-pull-right">
           <div class="text-right cart-item-price">

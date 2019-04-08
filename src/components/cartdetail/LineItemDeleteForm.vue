@@ -1,6 +1,7 @@
 <template>
   <button @click="submit"
-          data-test="cart-line-item-delete">
+          data-test="cart-line-item-delete"
+          class="edit-delete-section">
     <img src="../../assets/img/delete-1.png"
          class="cart-action-icon"
          :alt="$t('delete')">
