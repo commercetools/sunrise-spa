@@ -88,14 +88,6 @@ export default {
     show() {
       return this.$store.state.miniCartOpen;
     },
-
-    sortedLineItems() {
-      if (this.me && this.me.activeCart) {
-        const { lineItems } = this.me.activeCart;
-        return lineItems.reverse();
-      }
-      return [];
-    },
   },
 
   methods: {

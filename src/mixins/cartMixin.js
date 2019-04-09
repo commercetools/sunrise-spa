@@ -9,6 +9,13 @@ export default {
       }
       return 0;
     },
+
+    sortedLineItems() {
+      if (this.me && this.me.activeCart) {
+        return [...this.me.activeCart.lineItems].reverse();
+      }
+      return [];
+    },
   },
 
   methods: {

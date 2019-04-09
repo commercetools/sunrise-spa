@@ -53,7 +53,9 @@
 import CheckoutCart from './CheckoutCart.vue';
 
 export default {
-  components: { CheckoutCart },
+  components: {
+    CheckoutCart,
+  },
 };
 </script>
 

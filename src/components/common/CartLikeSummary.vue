@@ -29,8 +29,8 @@
             <span class="visible-xs">{{ $t('quantity') }}:</span>
             <span data-test="cart-line-item-quantity"
                   class="quantity-number">
-                {{ lineItem.quantity }}
-              </span>
+              {{ lineItem.quantity }}
+            </span>
           </div>
         </slot>
       </div>
@@ -45,19 +45,18 @@
           <div class="text-right cart-item-price">
             <span class="visible-xs xs-price-title">{{ $t('total') }}</span>
             <span data-test="cart-line-item-total-price">
-          <BaseMoney :money="lineItem.totalPrice"/>
-        </span>
+              <BaseMoney :money="lineItem.totalPrice"/>
+            </span>
           </div>
         </div>
       </div>
-      <!--{{> checkout/order-summary/discount-code-input}}-->
-      <!--{{> checkout/order-summary/discount-summary}}-->
-      <!--{{#if checkoutConfirmation}}-->
-      <!--{{> checkout/order-summary/confirmation-checkboxes}}-->
-      <!--{{/if}}-->
     </div>
-    <CartLikePriceDetail :cartLike="cartLike"
-                         class="total-price-calc"/>
+    <div class="row">
+      <div class="col-sm-12">
+        <CartLikePriceDetail :cartLike="cartLike"
+                             class="total-price-calc"/>
+      </div>
+    </div>
   </div>
 </template>
 

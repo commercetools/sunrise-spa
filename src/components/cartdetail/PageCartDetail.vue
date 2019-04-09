@@ -1,5 +1,6 @@
 <template>
-  <div class="cart-page container">
+  <div v-if="me"
+       class="cart-page container">
     <div class="row">
       <div class="col-sm-8 col-xs-12">
         <div class="current-in-bag">
@@ -25,10 +26,10 @@
               <template #quantity-column="{ lineItem }">
                 <LineItemDeleteForm :line-item="lineItem"
                                     @submit="removeLineItem"
-                                    class="col-sm-6 col-xs-12 cart-edit-delete"/>
+                                    class="col-sm-5 cart-edit-delete"/>
                 <LineItemQuantityForm :line-item="lineItem"
                                       @submit="changeLineItemQuantity"
-                                      class="col-sm-6 col-xs-12 clearfix sm-pull-right"/>
+                                      class="col-sm-7 clearfix sm-pull-right"/>
               </template>
             </CartLikeSummary>
           </div>
@@ -42,7 +43,12 @@
           </router-link>
         </div>
         <div class="col-sm-6">
-          <!--{{> checkout/start-checkout-link bottom=true}}-->
+          <div class="checkout-now checkout-now-bottom">
+            <router-link :to="{ name: 'checkout'}"
+                         class="pull-right text-uppercase checkout-now-btn">
+              {{ $t('startCheckout') }}
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -171,9 +177,11 @@ en:
   itemsTotal: "{n} item in total | {n} items in total"
   empty: "Your bag is empty"
   continueShopping: "Continue Shopping"
+  startCheckout: "Start Checkout"
 de:
   yourBag: "Ihr Einkaufswagen"
   itemsTotal: "{n} Artikel im Warenkorb"
   empty: "Ihr Einkaufswagen ist leer :("
   continueShopping: "Weiter einkaufen"
+  startCheckout: "Zur Kasse"
 </i18n>

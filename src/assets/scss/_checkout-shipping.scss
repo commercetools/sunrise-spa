@@ -177,16 +177,21 @@
   color: $ship-cove;
   padding-left: 0.5em;
 }
-.order {
+.checkout-order {
   background: lighten($alto, 10%);
   border: 1px solid $alto;
   margin: 1em;
   /**padding-top: 2em;*/
-}
-.order-summary-img {
-  padding: 0.5em;
-  img {
-    border: 1px solid $alto;
+
+  &> div {
+    margin: 1em;
+  }
+
+  .product-img-col {
+    padding: 0.5em;
+    img {
+      border: 1px solid $alto;
+    }
   }
 }
 .summary-item-info {
@@ -233,11 +238,12 @@
   color: $gray;
   padding-right: 1em;
 }
-.checkout-price-text,
-.checkout-price-digits {
-  margin-bottom: 1em;
-  font-size: 1.1em;
-  letter-spacing: 0.1em;
+.checkout-order {
+  .cart-like-price-detail {
+    margin-bottom: 1em;
+    font-size: 1.1em;
+    letter-spacing: 0.1em;
+  }
 }
 .checkout-total-price {
   border-bottom: 1px solid $alto;
@@ -257,7 +263,7 @@
   font-size: 0.9em;
   color: $gray;
   text-decoration: underline;
-  margin: 1em;
+  margin-top: 1em;
   letter-spacing: 0.05em;
 }
 .total-order-value {

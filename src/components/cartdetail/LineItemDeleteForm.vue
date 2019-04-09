@@ -25,3 +25,10 @@ export default {
   },
 };
 </script>
+
+<i18n>
+en:
+  delete: "Delete"
+de:
+  delete: "Löschen"
+</i18n>
