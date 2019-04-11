@@ -18,22 +18,22 @@
           </template>
         </ServerError>
         <div class="login-box-input">
-          <span>{{ $t('email') }}*</span><br>
-          <ValidationError :vuelidate="$v.email">
+          <BaseFormField :vuelidate="$v.email"
+                         :label="$t('email')">
             <input v-model.trim.lazy="$v.email.$model"
                    autocomplete="username"
                    type="email"
                    data-test="login-form-email" />
-          </ValidationError>
+          </BaseFormField>
         </div>
         <div class="login-box-input">
-          <span>{{ $t('password') }}*</span><br>
-          <ValidationError :vuelidate="$v.password">
+          <BaseFormField :vuelidate="$v.password"
+                         :label="$t('password')">
             <input v-model.trim.lazy="$v.password.$model"
                    autocomplete="current-password"
                    type="password"
                    data-test="login-form-password" />
-          </ValidationError>
+          </BaseFormField>
         </div>
         <div class="clearfix">
           <div class="pull-left">
@@ -66,11 +66,15 @@ import { required, email } from 'vuelidate/lib/validators';
 import gql from 'graphql-tag';
 import { clientLogin } from '@/auth';
 import ServerError from '../common/ServerError.vue';
-import ValidationError from '../common/ValidationError.vue';
 import LoadingButton from '../common/LoadingButton.vue';
+import BaseFormField from '../common/BaseFormField.vue';
 
 export default {
-  components: { ServerError, ValidationError, LoadingButton },
+  components: {
+    BaseFormField,
+    ServerError,
+    LoadingButton,
+  },
 
   data: () => ({
     email: null,

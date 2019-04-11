@@ -2,7 +2,7 @@
   <div class="my-account-sidebar">
     <div id="my-account-mobile-content"
          class="my-account-sidebar-items"
-         :class="{ active: showTab === 'TabPersonalDetails' }">
+         :class="{ active: isActiveTab('TabPersonalDetails') }">
       <router-link :to="{ name: 'user' }">
         <button>
           {{ $t("personalDetails") }}
@@ -10,7 +10,7 @@
       </router-link>
     </div>
     <div class="my-account-sidebar-items"
-         :class="{ active: showTab === 'TabOrderDetail' }">
+         :class="{ active: isActiveTab('TabOrderDetail') }">
       <router-link :to="{ name: 'orders' }">
         <button data-test="my-orders-button">
           {{ $t("myOrders") }}
@@ -38,6 +38,10 @@ export default {
           logout: true,
         },
       }));
+    },
+
+    isActiveTab(tab) {
+      return this.showTab === tab;
     },
   },
 };

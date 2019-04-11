@@ -15,12 +15,12 @@
     <div class="row">
       <ul class="product-actions-list list-inline">
         <li class="bag-items-li">
-          <ValidationError :vuelidate="$v.quantity">
+          <BaseFormField :vuelidate="$v.quantity">
             <SelectBoxIt :options="quantities"
                          v-model.lazy.number="$v.quantity.$model"
                          data-test="add-to-cart-form-quantity-dropdown"
                          class="bag-items"/>
-          </ValidationError>
+          </BaseFormField>
         </li>
         <li>
           <LoadingButton :buttonState="buttonState"
@@ -43,8 +43,8 @@ import { required, numeric, between } from 'vuelidate/lib/validators';
 import cartMixin from '@/mixins/cartMixin';
 import priceMixin from '@/mixins/priceMixin';
 import ServerError from '../common/ServerError.vue';
-import ValidationError from '../common/ValidationError.vue';
 import LoadingButton from '../common/LoadingButton.vue';
+import BaseFormField from '../common/BaseFormField.vue';
 
 const query = gql`
   query me {
@@ -65,8 +65,8 @@ export default {
   },
 
   components: {
+    BaseFormField,
     LoadingButton,
-    ValidationError,
     ServerError,
   },
 

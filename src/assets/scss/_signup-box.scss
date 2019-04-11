@@ -23,11 +23,9 @@
   padding: 20px 0 30px;
 }
 .signup-box-input {
-  margin-top: 10px;
   span {
     text-transform: uppercase;
     display: inline-block;
-    padding-bottom: 5px;
   }
   input {
     width: 100%;
@@ -47,6 +45,7 @@
 .signup-box-terms {
   margin-top: 5px;
   input {
+    float: left;
     margin-right: 5px;
   }
   a {

@@ -9,7 +9,7 @@ import PageUserAccount from '@/components/useraccount/PageUserAccount.vue';
 import PageNotFound from '@/components/common/PageNotFound.vue';
 import PageProductDetail from '@/components/productdetail/PageProductDetail.vue';
 import PageCartDetail from '@/components/cartdetail/PageCartDetail.vue';
-import CheckoutAddress from '@/components/checkout/CheckoutAddress.vue';
+import PageCheckout from '@/components/checkout/PageCheckout.vue';
 
 Vue.use(Router);
 
@@ -124,8 +124,13 @@ const router = new Router({
       path: '/checkout',
       name: 'checkout',
       components: {
-        default: CheckoutAddress,
+        default: PageCheckout,
         header: TheHeader,
+      },
+      props: {
+        default: {
+          showStep: 'StepAddressForm',
+        },
       },
     },
   ],

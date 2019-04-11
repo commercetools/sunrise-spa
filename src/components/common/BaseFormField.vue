@@ -1,5 +1,15 @@
 <template>
-<div :class="vuelidate.$error ? 'form-error': ''">
+<div class="form-field"
+     :class="{ 'form-error': vuelidate.$error, 'labelled': label }">
+  <span v-if="label"
+        class="field-label text-uppercase">
+    {{ label }}
+    <span v-if="required"
+          :title="$t('required')"
+          class="field-required">
+      *
+    </span>
+  </span>
   <slot></slot>
   <div v-if="vuelidate.$error"
        data-test="validation-error-list">
@@ -28,11 +38,18 @@ export default {
       type: Object,
       default() { return {}; },
     },
+    label: {
+      type: String,
+    },
   },
 
   computed: {
     validations() {
       return Object.keys(this.vuelidate.$params);
+    },
+
+    required() {
+      return this.vuelidate.$params.required;
     },
   },
 
@@ -48,19 +65,6 @@ export default {
   },
 };
 </script>
-
-<i18n>
-en:
-  unknownValidation: "Invalid field"
-  required: "Required field"
-  email: "A valid email is required"
-  minLength: "It should contain at least {min} characters"
-de:
-  unknownValidation: "Ungültiger Feldwert"
-  required: "Pflichtfeld"
-  email: "Eine gültige E-Mail ist erforderlich"
-  minLength: "Es sollte mindestens {min} Zeichen enthalten"
-</i18n>
 
 <style lang="scss" scoped>
 .form-error-bubble {
@@ -92,4 +96,26 @@ de:
 .form-error input:not([type=checkbox]) {
   border-color: rgba(206, 65, 65, 0.6);
 }
+
+.field-required {
+  color: #D54D4D;
+  cursor: default;
+}
+
+.form-field.labelled {
+  padding-top: 15px;
+}
 </style>
+
+<i18n>
+en:
+  unknownValidation: "Invalid field"
+  required: "Required field"
+  email: "A valid email is required"
+  minLength: "It should contain at least {min} characters"
+de:
+  unknownValidation: "Ungültiger Feldwert"
+  required: "Pflichtfeld"
+  email: "Eine gültige E-Mail ist erforderlich"
+  minLength: "Es sollte mindestens {min} Zeichen enthalten"
+</i18n>

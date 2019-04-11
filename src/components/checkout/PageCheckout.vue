@@ -36,10 +36,10 @@
           <div class="checkout">
             <div class="row">
               <div class="col-sm-7">
-                <!--{{> checkout/address-form addressForm=content.addressForm settings=content.addressFormSettings}}-->
+                <component :is="showStep"/>
               </div>
               <div class="col-sm-5">
-                <CheckoutCart/>
+                <CartOverview/>
               </div>
             </div>
           </div>
@@ -50,24 +50,28 @@
 </template>
 
 <script>
-import CheckoutCart from './CheckoutCart.vue';
+import CartOverview from './CartOverview.vue';
+import StepAddressForm from './StepAddressForm.vue';
 
 export default {
   components: {
-    CheckoutCart,
+    CartOverview,
+    StepAddressForm,
   },
+
+  props: ['showStep'],
 };
 </script>
 
 <i18n>
-  en:
-    securePayment: "Secure payment"
-    shipping: "Shipping"
-    payment: "Payment"
-    confirmation: "Confirmation"
-  de:
-    securePayment: "Sichere Bezahlung"
-    shipping: "Versand"
-    payment: "Zahlung"
-    confirmation: "Bestätigung"
+en:
+  securePayment: "Secure payment"
+  shipping: "Shipping"
+  payment: "Payment"
+  confirmation: "Confirmation"
+de:
+  securePayment: "Sichere Bezahlung"
+  shipping: "Versand"
+  payment: "Zahlung"
+  confirmation: "Bestätigung"
 </i18n>

@@ -11,25 +11,25 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="form-sections">
-            <span class="form-labels">{{ $t('firstName') }}*</span><br>
-            <ValidationError :vuelidate="$v.firstName">
+            <BaseFormField :vuelidate="$v.firstName"
+                           :label="$t('firstName')">
               <input v-model.trim.lazy="$v.firstName.$model"
                      autocomplete="fname"
                      type="text"
                      class="form-inputs"
                      data-test="edit-profile-form-firstname"/>
-            </ValidationError>
+            </BaseFormField>
           </div>
 
           <div class="form-sections">
-            <span class="form-labels">{{ $t('email') }}*</span><br>
-            <ValidationError :vuelidate="$v.email">
+            <BaseFormField :vuelidate="$v.email"
+                           :label="$t('email')">
               <input v-model.trim.lazy="$v.email.$model"
                      autocomplete="email"
                      type="email"
                      class="form-inputs"
                      data-test="edit-profile-form-email"/>
-            </ValidationError>
+            </BaseFormField>
             <br>
             <span class="form-notes"></span>
           </div>
@@ -37,14 +37,14 @@
         </div>
         <div class="col-sm-6">
           <div class="form-sections">
-            <span class="form-labels">{{ $t('lastName') }}*</span><br>
-            <ValidationError :vuelidate="$v.lastName">
+            <BaseFormField :vuelidate="$v.lastName"
+                           :label="$t('lastName')">
               <input v-model.trim.lazy="$v.lastName.$model"
                      autocomplete="lname"
                      type="text"
                      class="form-inputs"
                      data-test="edit-profile-form-lastname"/>
-            </ValidationError>
+            </BaseFormField>
           </div>
         </div>
       </div>
@@ -83,13 +83,13 @@ import { required, email } from 'vuelidate/lib/validators';
 import gql from 'graphql-tag';
 import customerMixin from '@/mixins/customerMixin';
 import ServerError from '../../common/ServerError.vue';
-import ValidationError from '../../common/ValidationError.vue';
 import LoadingButton from '../../common/LoadingButton.vue';
+import BaseFormField from '../../common/BaseFormField.vue';
 
 export default {
   components: {
+    BaseFormField,
     LoadingButton,
-    ValidationError,
     ServerError,
   },
 

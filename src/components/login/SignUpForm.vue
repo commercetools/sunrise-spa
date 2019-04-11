@@ -19,59 +19,59 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="signup-box-input">
-            <span>{{ $t('firstName') }}*</span><br>
-            <ValidationError :vuelidate="$v.firstName">
+            <BaseFormField :vuelidate="$v.firstName"
+                           :label="$t('firstName')">
               <input v-model.trim.lazy="$v.firstName.$model"
                      autocomplete="fname"
                      type="text"
                      data-test="signup-form-firstname" />
-            </ValidationError>
+            </BaseFormField>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="signup-box-input">
-            <span>{{ $t('secondName') }}*</span><br>
-            <ValidationError :vuelidate="$v.lastName">
+            <BaseFormField :vuelidate="$v.lastName"
+                           :label="$t('secondName')">
               <input v-model.trim.lazy="$v.lastName.$model"
                      autocomplete="lname"
                      type="text"
                      data-test="signup-form-lastname" >
-            </ValidationError>
+            </BaseFormField>
           </div>
         </div>
       </div>
       <hr class="signup-box-hr">
       <div class="signup-box-input">
-        <span>{{ $t('email') }}*</span><br>
-        <ValidationError :vuelidate="$v.email">
+        <BaseFormField :vuelidate="$v.email"
+                       :label="$t('email')">
           <input v-model.trim.lazy="$v.email.$model"
                  autocomplete="username"
                  type="email"
                  data-test="signup-form-email" />
-        </ValidationError>
+        </BaseFormField>
       </div>
       <div class="row">
         <div class="col-sm-6">
           <div class="signup-box-input">
-            <span>{{ $t('password') }}*</span><br/>
-            <ValidationError :vuelidate="$v.password">
+            <BaseFormField :vuelidate="$v.password"
+                           :label="$t('password')">
               <input v-model.trim.lazy="$v.password.$model"
                      autocomplete="off"
                      type="password"
                      data-test="signup-form-password" />
-            </ValidationError>
+            </BaseFormField>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="signup-box-input">
-            <span>{{ $t('repeatPassword') }}*</span><br>
-            <ValidationError :vuelidate="$v.repeatPassword"
-                             :customMessages="{ sameAsPassword: $t('repeatPasswordError') }">
+            <BaseFormField :vuelidate="$v.repeatPassword"
+                           :label="$t('repeatPassword')"
+                           :customMessages="{ sameAsPassword: $t('repeatPasswordError') }">
               <input v-model.trim.lazy="$v.repeatPassword.$model"
                      autocomplete="off"
                      type="password"
                      data-test="signup-form-repeatpassword" />
-            </ValidationError>
+            </BaseFormField>
           </div>
         </div>
       </div>
@@ -82,14 +82,14 @@
         <!--<span>{{ $t('pleaseAddMe') }} <a href="">{{ $t('newsletter') }}</a></span>-->
       <!--</div>-->
       <div class="signup-box-terms">
-        <ValidationError :vuelidate="$v.agreeToTerms"
-                         :customMessages="{ mustBeAgreed: $t('agreeToTermsError') }">
+        <BaseFormField :vuelidate="$v.agreeToTerms"
+                       :label="$t('agreeTo')"
+                       :customMessages="{ mustBeAgreed: $t('agreeToTermsError') }">
           <input v-model.trim.lazy="$v.agreeToTerms.$model"
                  autocomplete="off"
                  type="checkbox"
                  data-test="signup-form-agreetoterms" />
-          <span>{{ $t('agreeTo') }}</span>
-        </ValidationError>
+        </BaseFormField>
       </div>
       <LoadingButton :buttonState="buttonState"
                      class="signup-register-btn"
@@ -107,11 +107,15 @@ import {
 import gql from 'graphql-tag';
 import { clientLogin } from '@/auth';
 import ServerError from '../common/ServerError.vue';
-import ValidationError from '../common/ValidationError.vue';
 import LoadingButton from '../common/LoadingButton.vue';
+import BaseFormField from '../common/BaseFormField.vue';
 
 export default {
-  components: { ServerError, ValidationError, LoadingButton },
+  components: {
+    BaseFormField,
+    ServerError,
+    LoadingButton,
+  },
 
   data: () => ({
     firstName: null,
@@ -188,6 +192,7 @@ export default {
       sameAsPassword: sameAs('password'),
     },
     agreeToTerms: {
+      required,
       mustBeAgreed: sameAs(() => true),
     },
   },
@@ -209,7 +214,7 @@ en:
   repeatPasswordError: "Passwords do not match"
   pleaseAddMe: "Please add me to the"
   newsletter: "SUNRISE Newsletter"
-  agreeTo: "I agree to the Terms and Conditions."
+  agreeTo: "I agree to the Terms and Conditions"
   agreeToTermsError: "You must agree to the terms"
   registerNow: "Register Now"
   duplicatedEmail: "A customer with this email already exists"
@@ -227,7 +232,7 @@ de:
   repeatPasswordError: "Passwörter stimmen nicht überein"
   pleaseAddMe: "Anmeldung zum"
   newsletter: "SUNRISE Newsletter"
-  agreeTo: "Ich stimme den AGB zu."
+  agreeTo: "Ich stimme den AGB zu"
   agreeToTermsError: "Sie müssen den Bedingungen zustimmen"
   registerNow: "Jetzt registieren"
   duplicatedEmail: "Ein Kunde mit dieser E-Mail existiert bereits"

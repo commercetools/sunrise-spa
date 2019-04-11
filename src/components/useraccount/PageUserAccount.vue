@@ -9,7 +9,7 @@
           <div class="col-sm-3">
             <SidebarMenu :showTab="showTab"/>
           </div>
-          <component :is="showTab"></component>
+          <component :is="showTab"/>
         </div>
       </div>
     </div>
@@ -24,9 +24,12 @@ import OrderDetail from './myorders/OrderDetail.vue';
 
 export default {
   props: ['showTab'],
-  name: 'UserAccount',
+
   components: {
-    SidebarMenu, TabPersonalDetails, TabOrderList, OrderDetail,
+    SidebarMenu,
+    TabPersonalDetails,
+    TabOrderList,
+    OrderDetail,
   },
 };
 </script>

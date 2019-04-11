@@ -151,7 +151,6 @@ export default {
     price: "Price"
     total: "Total"
 
-    billingAddress: "Billing Address"
     completeMyOrder: "Complete My Order"
     continueCheckout: "Continue Checkout"
     needHelpCustomerService: "Need help? Customer Service"
@@ -161,14 +160,8 @@ export default {
     paymentInformation: "Payment Details"
     promoCodeApplied: "Promotional Code Applied"
     rememberMe: "Save my details to create my personal account at SUNRISE"
-    shippingAddress: "Shipping Address"
     shippingInformation: "Shipping Information"
     shippingMethod: "Shipping Method"
-    shippingPage:
-      title: "Secure Checkout - Shipping"
-      differentBillingAddressCheckboxLabel: "Use a different address for billing"
-      emailInfo: "We require your email address to send your shipping and order confirmation"
-      telNumberInfo: "Please provide your telephone number so the shipper can contact you during delivery"
     paymentPage:
       title: "Secure Checkout - Payment"
       cardName: "Name on credit card"
@@ -192,7 +185,6 @@ export default {
     price: "Preis"
     total: "Gesamtpreis"
 
-    billingAddress: "Zahlungsadresse"
     completeMyOrder: "Zahlungspflichtig bestellen"
     continueCheckout: "Weiter"
     needHelpCustomerService: "Brauchen Sie Hilfe? Kundenservice"
@@ -202,14 +194,8 @@ export default {
     paymentInformation: "Zahlungsdetails"
     promoCodeApplied: "Gutschein eingelöst"
     rememberMe: "Meine Daten speichern für einen Account"
-    shippingAddress: "Versandadresse"
     shippingInformation: "Versand Information"
     shippingMethod: "Versandart"
-    shippingPage:
-      title: "Sicherer Bestellprozess - Versand"
-      differentBillingAddressCheckboxLabel: "Abweichende Adresse als Rechnungsadresse verwenden."
-      emailInfo: "Bitte geben Sie Ihre E-Mail-Adresse an, damit wir Sie über den Status und Versand Ihrer Bestellung informieren können."
-      telNumberInfo: "Bitte geben Sie Ihre Telefonnummer an, damit unser Lieferant Sie über den Liefertermin informieren kann."
     paymentPage:
       title: "Sicherer Bestellprozess - Bezahlung"
       cardName: "Name auf der Kreditkarte"
