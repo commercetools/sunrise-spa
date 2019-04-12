@@ -56,23 +56,6 @@ export default {
 
 <style lang="scss" scoped>
 button {
-  margin-right: 15px;
-  font-weight: 900;
-  background: #FFBA27;
-  padding: 10px 20px;
-  text-transform: uppercase;
-  font-size: 16px;
-  letter-spacing: 1px;
-  position: relative;
-
-  &:hover {
-   background: lighten(#FFBA27, 5%);
-  }
-
-  .state-layer {
-    background-color: #FFBA27;
-  }
-
   .state-layer, .loading-animation, svg.check {
     position: absolute;
     top: 0;
@@ -89,7 +72,7 @@ button {
 
     .fade-enter, .fade-leave-to {
       opacity: 1;
-      background-color: #FFBA27;
+      background-color: inherit;
     }
 
     .fade-enter-to, .fade-leave {
