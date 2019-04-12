@@ -68,7 +68,7 @@ describe('OrderDetailPage', () => {
     cy.get('[data-test=details-order-number]')
       .contains('12345');
     cy.get('[data-test=details-order-date]')
-      .contains(/^\s*\d{1,2}\.*\s*[A-Za-zäÄöÖüÜß]+\s*\d{4}\s*$/);
+      .contains(/^\s*\d{1,2}\.*\s*[A-Za-zäÄöÖüÜß].+\s*\d{4}\s*$/);
     cy.get('[data-test=cart-subtotal-price]')
       .contains(/^\s*367,60\s€\s*$/);
     cy.get('[data-test=cart-total-price]')

@@ -194,6 +194,23 @@ export default {
 };
 </script>
 
+<style lang="scss" scoped>
+button {
+  margin-right: 15px;
+  font-weight: 900;
+  background: #FFBA27;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  font-size: 16px;
+  letter-spacing: 1px;
+  position: relative;
+
+  &:hover {
+   background: lighten(#FFBA27, 5%);
+  }
+}
+</style>
+
 <i18n>
 en:
   title: "New Customer Registration"
