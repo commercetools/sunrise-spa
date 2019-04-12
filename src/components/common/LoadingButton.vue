@@ -56,6 +56,9 @@ export default {
 
 <style lang="scss" scoped>
 button {
+  .state-layer {
+    background-color: inherit;
+  }
   .state-layer, .loading-animation, svg.check {
     position: absolute;
     top: 0;

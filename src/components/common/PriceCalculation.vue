@@ -114,18 +114,20 @@ export default {
     discount() {
       let relativeDiscount = null;
       let absoluteDiscount = null;
-      this.cartLike.discountCodes.forEach((e) => {
-        e.discountCode.cartDiscounts.forEach((code) => {
-          // eslint-disable-next-line
-          if (code.value.__typename === 'RelativeDiscountValue') {
-            relativeDiscount = code.value.permyriad * 0.01;
+      if (this.cartLike.discountCodes) {
+        this.cartLike.discountCodes.forEach((e) => {
+          e.discountCode.cartDiscounts.forEach((code) => {
             // eslint-disable-next-line
-          } else if (code.value.__typename === 'AbsoluteDiscountValue') {
-            // eslint-disable-next-line
-            absoluteDiscount = code.value.money[0];
-          }
+            if (code.value.__typename === 'RelativeDiscountValue') {
+              relativeDiscount = code.value.permyriad * 0.01;
+              // eslint-disable-next-line
+            } else if (code.value.__typename === 'AbsoluteDiscountValue') {
+              // eslint-disable-next-line
+              absoluteDiscount = code.value.money[0];
+            }
+          });
         });
-      });
+      }
       return { relativeDiscount, absoluteDiscount };
     },
   },
