@@ -7,8 +7,11 @@
               <div class="text-right subtotal">
                 <span class="subtotal-title">{{ $t('subtotal') }}</span>
               </div>
-              <div class="text-right">
-                <!--<span class="order-discount">{{ $t('checkout.orderDiscount') }}</span>-->
+              <div v-if="discount.relativeDiscount || discount.absoluteDiscount" class="text-right">
+                <span class="order-discount">{{ $t('discount') }}</span>
+              </div>
+              <div v-if="discount.relativeDiscount && discount.absoluteDiscount">
+                &nbsp;
               </div>
               <div v-if="cartLike.shippingInfo"
                    class="text-right delivery-info">
@@ -29,8 +32,14 @@
                   <BaseMoney :money="subtotal"/>
                 </span>
               </div>
-              <div>
-                <!--<span class="order-discount">{{ cart.discount }}</span>-->
+              <div class="order-discount"
+                   data-test="discount-value">
+                <div v-if="discount.relativeDiscount">
+                  - {{discount.relativeDiscount}} %
+                </div>
+                <div v-if="discount.absoluteDiscount">
+                  - <BaseMoney :money="discount.absoluteDiscount"/>
+                </div>
               </div>
               <div>
                 <span v-if="cartLike.shippingInfo">
@@ -101,6 +110,24 @@ export default {
       }
       return null;
     },
+
+    discount() {
+      let relativeDiscount = null;
+      let absoluteDiscount = null;
+      this.cartLike.discountCodes.forEach((e) => {
+        e.discountCode.cartDiscounts.forEach((code) => {
+          // eslint-disable-next-line
+          if (code.value.__typename === 'RelativeDiscountValue') {
+            relativeDiscount = code.value.permyriad * 0.01;
+            // eslint-disable-next-line
+          } else if (code.value.__typename === 'AbsoluteDiscountValue') {
+            // eslint-disable-next-line
+            absoluteDiscount = code.value.money[0];
+          }
+        });
+      });
+      return { relativeDiscount, absoluteDiscount };
+    },
   },
 };
 </script>
@@ -111,9 +138,11 @@ en:
   shipping: "Shipping"
   salesTax: "Sales Tax"
   total: "Total"
+  discount: "Discount"
 de:
   subtotal: "Zwischensumme"
   shipping: "Versand"
   salesTax: "MwSt."
   total: "Gesamtpreis"
+  discount: "Rabatt"
 </i18n>

@@ -22,6 +22,9 @@
         <div class="col-sm-12">
           <div class="cart-content">
             <CartContent :editable="true"/>
+            <DiscountCode :buttonState="buttonState"
+                          :serverError="serverError"
+                          @apply-code="submitCode"/>
             <PriceCalculation :cartLike="me.activeCart"
                               class="total-price-calc"/>
           </div>
@@ -50,14 +53,58 @@ import gql from 'graphql-tag';
 import cartMixin from '@/mixins/cartMixin';
 import CartContent from '@/components/cartdetail/CartContent.vue';
 import PriceCalculation from '@/components/common/PriceCalculation.vue';
+import DiscountCode from '@/components/common/DiscountCode.vue';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {
-  components: { CartContent, PriceCalculation },
+  components: {
+    CartContent,
+    PriceCalculation,
+    DiscountCode,
+  },
 
   data: () => ({
     me: null,
+    buttonState: null,
+    serverError: null,
   }),
+
+  methods: {
+    addDiscountCode(code) {
+      return this.$apollo.mutate({
+        mutation: gql`
+          mutation AddDiscountCode($id: String!, $version: Long!, $code: String!) {
+            updateMyCart(id: $id, version: $version, actions: {
+              addDiscountCode: {
+                code: $code
+              }
+            }){
+              id
+              version
+            }
+          }`,
+        variables: {
+          id: this.me.activeCart.id,
+          version: this.me.activeCart.version,
+          code,
+        },
+      });
+    },
+
+    submitCode(code) {
+      this.serverError = null;
+      this.buttonState = 'loading';
+      this.addDiscountCode(code)
+        .then(() => {
+          this.buttonState = 'success';
+          this.$apollo.queries.me.refetch();
+        })
+        .catch((error) => {
+          this.serverError = error;
+          this.buttonState = null;
+        });
+    },
+  },
 
   mixins: [cartMixin],
 
@@ -68,6 +115,7 @@ export default {
           me {
             activeCart {
               id
+              version
               lineItems {
                 id
                 quantity
@@ -89,6 +137,24 @@ export default {
                 }
                 totalNet {
                   ...DisplayableMoney
+                }
+              }
+              discountCodes {
+                discountCode {
+                  id
+                  code
+                  cartDiscounts{
+                    value{
+                      ... on RelativeDiscountValue{
+                        permyriad
+                      }
+                      ... on AbsoluteDiscountValue{
+                        money{
+                          ...DisplayableMoney
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
