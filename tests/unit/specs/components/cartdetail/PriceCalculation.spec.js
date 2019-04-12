@@ -9,6 +9,17 @@ describe('PriceCalculation.vue', () => {
       centAmount: 83050,
       fractionDigits: 2,
     },
+    discountCodes: [{
+      discountCode: {
+        code: 'CODE2019',
+        cartDiscounts: [{
+          value: {
+            __typename: 'RelativeDiscountValue',
+            permyriad: 500,
+          },
+        }],
+      },
+    }],
   };
 
   let options;
