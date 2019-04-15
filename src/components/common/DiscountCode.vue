@@ -1,7 +1,11 @@
 <template>
   <div class="row">
-    <div class="col-sm-offset-10 col-sm-2">
-      <ServerError :error="serverError"/>
+    <div class="col-sm-offset-9 col-sm-3">
+      <ServerError :error="serverError">
+        <template slot-scope="{ graphQLError }">
+          {{ getErrorMessage(graphQLError) }}
+        </template>
+      </ServerError>
     </div>
     <div class="col-sm-12">
       <form @submit.prevent="submit" class="text-right promotion-info">
@@ -11,7 +15,6 @@
                class="info-icon"
                alt="information icon">
         </span>
-        <!-- <input type="hidden" name="csrfToken" value="@root.meta.csrfToken"/> -->
         <input id="promo-code" type="text" name="code" v-model="code"
                data-test="discount-code-input">
         <LoadingButton :buttonState="buttonState"
@@ -40,6 +43,13 @@ export default {
     submit() {
       this.$emit('apply-code', this.code);
     },
+
+    getErrorMessage({ code }) {
+      if (code === 'DiscountCodeNonApplicable') {
+        return this.$t('nonApplicable');
+      }
+      return this.$t('unknownError');
+    },
   },
 };
 </script>
@@ -47,6 +57,8 @@ export default {
 <style lang="scss" scoped>
   button {
   background: none;
+  font-weight: 400;
+  font-size: 14px;
   text-transform: uppercase;
   border: 2px solid #D6D6D6;
   color: #ADADAD;
@@ -65,7 +77,9 @@ export default {
 en:
   promoInfo: "Promotional Discount Info"
   apply: "Apply"
+  nonApplicable: "This discount code is non applicable"
 de:
   promoInfo: "Werbe-Rabatt-Info"
   apply: "Anwenden"
+  nonApplicable: "Dieser Rabattcode ist nicht anwendbar"
 </i18n>
