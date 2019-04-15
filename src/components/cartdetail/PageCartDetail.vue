@@ -71,21 +71,8 @@ export default {
 
   methods: {
     addDiscountCode(code) {
-      return this.$apollo.mutate({
-        mutation: gql`
-          mutation AddDiscountCode($id: String!, $version: Long!, $code: String!) {
-            updateMyCart(id: $id, version: $version, actions: {
-              addDiscountCode: {
-                code: $code
-              }
-            }){
-              id
-              version
-            }
-          }`,
-        variables: {
-          id: this.me.activeCart.id,
-          version: this.me.activeCart.version,
+      return this.updateMyCart({
+        addDiscountCode: {
           code,
         },
       });

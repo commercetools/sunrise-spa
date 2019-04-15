@@ -67,6 +67,24 @@ export default {
                   ...DisplayableMoney
                 }
               }
+              discountCodes {
+                discountCode {
+                  id
+                  code
+                  cartDiscounts{
+                    value{
+                      ... on RelativeDiscountValue{
+                        permyriad
+                      }
+                      ... on AbsoluteDiscountValue{
+                        money{
+                          ...DisplayableMoney
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
           ${DisplayableMoneyFragment}`,

@@ -74,6 +74,7 @@
 </template>
 
 <script>
+/* eslint no-underscore-dangle: 0 */
 import BaseMoney from './BaseMoney.vue';
 
 export default {
@@ -117,12 +118,10 @@ export default {
       if (this.cartLike.discountCodes) {
         this.cartLike.discountCodes.forEach((e) => {
           e.discountCode.cartDiscounts.forEach((code) => {
-            // eslint-disable-next-line
             if (code.value.__typename === 'RelativeDiscountValue') {
               relativeDiscount = code.value.permyriad * 0.01;
-              // eslint-disable-next-line
             } else if (code.value.__typename === 'AbsoluteDiscountValue') {
-              // eslint-disable-next-line
+              /* eslint prefer-destructuring: ["error", {VariableDeclarator: {object: true}}] */
               absoluteDiscount = code.value.money[0];
             }
           });
