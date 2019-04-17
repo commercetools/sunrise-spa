@@ -1,7 +1,7 @@
 <template>
   <div v-if="me"
        class="personal-details-edit personal-details-edit-show">
-    <form @submit.prevent="submit"
+    <form @submit.prevent="submit(updateCustomerProfile)"
           id="form-edit-personal-details">
       <ServerError :error="serverError">
         <template slot-scope="{ graphQLError }">
@@ -11,9 +11,9 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="form-sections">
-            <BaseFormField :vuelidate="$v.firstName"
+            <BaseFormField :vuelidate="$v.me.customer.firstName"
                            :label="$t('firstName')">
-              <input v-model.trim.lazy="$v.firstName.$model"
+              <input v-model.trim="$v.me.customer.firstName.$model"
                      autocomplete="fname"
                      type="text"
                      class="form-inputs"
@@ -22,9 +22,9 @@
           </div>
 
           <div class="form-sections">
-            <BaseFormField :vuelidate="$v.email"
+            <BaseFormField :vuelidate="$v.me.customer.email"
                            :label="$t('email')">
-              <input v-model.trim.lazy="$v.email.$model"
+              <input v-model.trim="$v.me.customer.email.$model"
                      autocomplete="email"
                      type="email"
                      class="form-inputs"
@@ -37,9 +37,9 @@
         </div>
         <div class="col-sm-6">
           <div class="form-sections">
-            <BaseFormField :vuelidate="$v.lastName"
+            <BaseFormField :vuelidate="$v.me.customer.lastName"
                            :label="$t('lastName')">
-              <input v-model.trim.lazy="$v.lastName.$model"
+              <input v-model.trim="$v.me.customer.lastName.$model"
                      autocomplete="lname"
                      type="text"
                      class="form-inputs"
@@ -60,6 +60,7 @@
       <div class="personal-details-edit-btn">
         <span>
           <LoadingButton :buttonState="buttonState"
+                         :disabled="!$v.$anyDirty"
                          @reset="$emit('close')"
                          type="submit"
                          class="update-btn"
@@ -81,7 +82,8 @@
 <script>
 import { required, email } from 'vuelidate/lib/validators';
 import gql from 'graphql-tag';
-import customerMixin from '@/mixins/customerMixin';
+import formMixin from '../../../mixins/formMixin';
+import customerMixin from '../../../mixins/customerMixin';
 import ServerError from '../../common/ServerError.vue';
 import LoadingButton from '../../common/LoadingButton.vue';
 import BaseFormField from '../../common/BaseFormField.vue';
@@ -93,45 +95,18 @@ export default {
     ServerError,
   },
 
+  mixins: [customerMixin, formMixin],
+
   data: () => ({
     me: null,
-    firstName: null,
-    lastName: null,
-    email: null,
-    buttonState: null,
-    serverError: null,
   }),
 
-  computed: {
-    hasFormChanged() {
-      const hasEmailChanged = this.email !== this.me.customer.email;
-      const hasFirstNameChanged = this.firstName !== this.me.customer.firstName;
-      const hasLastNameChanged = this.lastName !== this.me.customer.lastName;
-      return hasEmailChanged || hasFirstNameChanged || hasLastNameChanged;
-    },
-  },
-
   methods: {
-    async submit() {
-      this.$v.$touch();
-      this.serverError = null;
-      if (!this.$v.$invalid && this.hasFormChanged) {
-        this.buttonState = 'loading';
-        await this.updateCustomerProfile()
-          .then(() => {
-            this.buttonState = 'success';
-          }).catch((error) => {
-            this.serverError = error;
-            this.buttonState = null;
-          });
-      }
-    },
-
     updateCustomerProfile() {
       return this.updateMyCustomer([
-        { changeEmail: { email: this.email } },
-        { setFirstName: { firstName: this.firstName } },
-        { setLastName: { lastName: this.lastName } },
+        { changeEmail: { email: this.me.customer.email } },
+        { setFirstName: { firstName: this.me.customer.firstName } },
+        { setLastName: { lastName: this.me.customer.lastName } },
       ]);
     },
 
@@ -142,16 +117,6 @@ export default {
       return this.$t('unknownError');
     },
   },
-
-  watch: {
-    me(value) {
-      this.firstName = value.customer.firstName;
-      this.lastName = value.customer.lastName;
-      this.email = value.customer.email;
-    },
-  },
-
-  mixins: [customerMixin],
 
   apollo: {
     me: {
@@ -172,15 +137,19 @@ export default {
   },
 
   validations: {
-    email: {
-      required,
-      email,
-    },
-    firstName: {
-      required,
-    },
-    lastName: {
-      required,
+    me: {
+      customer: {
+        email: {
+          required,
+          email,
+        },
+        firstName: {
+          required,
+        },
+        lastName: {
+          required,
+        },
+      },
     },
   },
 };

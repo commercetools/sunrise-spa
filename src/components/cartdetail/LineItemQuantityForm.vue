@@ -42,9 +42,9 @@ export default {
 
   watch: {
     quantity(newValue, oldValue) {
-      if (oldValue !== null) {
+      if (oldValue !== null && newValue !== oldValue) {
         this.$v.$touch();
-        if (newValue !== oldValue && !this.$v.$invalid) {
+        if (!this.$v.$invalid) {
           this.debouncedSubmit();
         }
       }

@@ -10,7 +10,7 @@
     </div>
     <hr class="signup-box-hr">
     <div class="signup-box-description">{{ $t('description') }}</div>
-    <form @submit.prevent="submit">
+    <form @submit.prevent="submit(customerSignMeUp)">
       <ServerError :error="serverError">
         <template slot-scope="{ graphQLError }">
           {{ getErrorMessage(graphQLError) }}
@@ -105,7 +105,8 @@ import {
   required, email, minLength, sameAs,
 } from 'vuelidate/lib/validators';
 import gql from 'graphql-tag';
-import { clientLogin } from '@/auth';
+import { clientLogin } from '../../auth';
+import formMixin from '../../mixins/formMixin';
 import ServerError from '../common/ServerError.vue';
 import LoadingButton from '../common/LoadingButton.vue';
 import BaseFormField from '../common/BaseFormField.vue';
@@ -117,33 +118,18 @@ export default {
     LoadingButton,
   },
 
+  mixins: [formMixin],
+
   data: () => ({
-    firstName: null,
-    lastName: null,
-    email: null,
-    password: null,
-    repeatPassword: null,
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    repeatPassword: '',
     agreeToTerms: false,
-    buttonState: null,
-    serverError: null,
   }),
 
   methods: {
-    async submit() {
-      this.$v.$touch();
-      this.serverError = null;
-      if (!this.$v.$invalid) {
-        this.buttonState = 'loading';
-        await this.customerSignMeUp()
-          .then(() => clientLogin(this.email, this.password))
-          .then(() => this.$router.push({ name: 'user' }))
-          .catch((error) => {
-            this.serverError = error;
-            this.buttonState = null;
-          });
-      }
-    },
-
     customerSignMeUp() {
       return this.$apollo.mutate({
         mutation: gql`
@@ -162,7 +148,8 @@ export default {
             lastName: this.lastName,
           },
         },
-      });
+      }).then(() => clientLogin(this.email, this.password))
+        .then(() => this.$router.push({ name: 'user' }));
     },
 
     getErrorMessage({ code, field }) {

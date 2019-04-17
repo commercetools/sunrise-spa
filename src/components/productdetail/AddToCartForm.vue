@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submit">
+  <form @submit.prevent="submit(addLineItem)">
     <ServerError :error="serverError"/>
     <div class="row select-row">
       <ul class="list-inline">
@@ -40,12 +40,14 @@
 <script>
 import gql from 'graphql-tag';
 import { required, numeric, between } from 'vuelidate/lib/validators';
-import cartMixin from '@/mixins/cartMixin';
-import priceMixin from '@/mixins/priceMixin';
+import cartMixin from '../../mixins/cartMixin';
+import priceMixin from '../../mixins/priceMixin';
+import formMixin from '../../mixins/formMixin';
 import ServerError from '../common/ServerError.vue';
 import LoadingButton from '../common/LoadingButton.vue';
 import BaseFormField from '../common/BaseFormField.vue';
 
+const MAX_QUANTITY = 10;
 const query = gql`
   query me {
     me {
@@ -70,38 +72,20 @@ export default {
     ServerError,
   },
 
+  mixins: [cartMixin, priceMixin, formMixin],
+
   data: () => ({
     me: null,
     quantity: 1,
-    buttonState: null,
-    serverError: null,
-    maxQuantity: 10,
   }),
 
   computed: {
     quantities() {
-      return [...Array(this.maxQuantity).keys()].map(i => ({ id: i + 1, name: i + 1 }));
+      return [...Array(MAX_QUANTITY).keys()].map(i => ({ id: i + 1, name: i + 1 }));
     },
   },
 
   methods: {
-    async submit() {
-      this.$v.$touch();
-      this.serverError = null;
-      if (!this.$v.$invalid) {
-        this.buttonState = 'loading';
-        await this.addLineItem()
-          .then(() => {
-            this.buttonState = 'success';
-            this.$store.dispatch('openMiniCart');
-          })
-          .catch((error) => {
-            this.serverError = error;
-            this.buttonState = null;
-          });
-      }
-    },
-
     async addLineItem() {
       if (!this.me.activeCart) {
         await this.createCart();
@@ -111,7 +95,7 @@ export default {
           sku: this.sku,
           quantity: this.quantity,
         },
-      });
+      }).then(() => this.$store.dispatch('openMiniCart'));
     },
 
     createCart() {
@@ -137,8 +121,6 @@ export default {
     },
   },
 
-  mixins: [cartMixin, priceMixin],
-
   apollo: {
     me: {
       query,
@@ -150,7 +132,7 @@ export default {
       quantity: {
         required,
         numeric,
-        between: between(1, this.maxQuantity),
+        between: between(1, MAX_QUANTITY),
       },
     };
   },
