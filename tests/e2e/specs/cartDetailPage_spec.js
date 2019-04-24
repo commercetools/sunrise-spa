@@ -103,9 +103,7 @@ describe('CartDetailPage', () => {
       .click();
     cy.get('[data-test=cart-total-price]')
       .contains(/^\s*188,81\s€\s*$/);
-    cy.get('[data-test=discount-value]')
-      .contains(/^\s*-\s5\s%\s*$/);
-    cy.get('[data-test=discount-value]')
-      .contains(/^\s*-\s*50,00\s€\s*$/);
+    cy.get('[data-test=discount-code-name]')
+      .contains('CODE2019');
   });
 });
