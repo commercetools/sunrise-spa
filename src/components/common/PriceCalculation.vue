@@ -7,12 +7,12 @@
               <div class="text-right subtotal">
                 <span class="subtotal-title">{{ $t('subtotal') }}</span>
               </div>
-              <div v-if="discount.relativeDiscount || discount.absoluteDiscount" class="text-right">
+              <!-- <div v-if="discount.relativeDiscount || discount.absoluteDiscount" class="text-right">
                 <span class="order-discount">{{ $t('discount') }}</span>
-              </div>
-              <div v-if="discount.relativeDiscount && discount.absoluteDiscount">
+              </div> -->
+              <!-- <div v-if="discount.relativeDiscount && discount.absoluteDiscount">
                 &nbsp;
-              </div>
+              </div> -->
               <div v-if="cartLike.shippingInfo"
                    class="text-right delivery-info">
                 <span class="delivery-info-title">{{ $t('shipping') }}</span>
@@ -32,7 +32,7 @@
                   <BaseMoney :money="subtotal"/>
                 </span>
               </div>
-              <div class="order-discount"
+              <!-- <div class="order-discount"
                    data-test="discount-value">
                 <div v-if="discount.relativeDiscount">
                   - {{discount.relativeDiscount}} %
@@ -40,7 +40,7 @@
                 <div v-if="discount.absoluteDiscount">
                   - <BaseMoney :money="discount.absoluteDiscount"/>
                 </div>
-              </div>
+              </div> -->
               <div>
                 <span v-if="cartLike.shippingInfo">
                   <BaseMoney :money="cartLike.shippingInfo.price"/>

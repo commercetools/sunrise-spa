@@ -71,6 +71,8 @@ export default {
                 discountCode {
                   id
                   code
+                  name(locale: $locale)
+                  description(locale: $locale)
                   cartDiscounts{
                     value{
                       ... on RelativeDiscountValue{

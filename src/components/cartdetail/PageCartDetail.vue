@@ -24,7 +24,9 @@
             <CartContent :editable="true"/>
             <DiscountCode :buttonState="buttonState"
                           :serverError="serverError"
-                          @apply-code="submitCode"/>
+                          :cartLike="me.activeCart"
+                          @apply-code="submitCode"
+                          @remove-code="removeCode"/>
             <PriceCalculation :cartLike="me.activeCart"
                               class="total-price-calc"/>
           </div>
@@ -78,13 +80,23 @@ export default {
       });
     },
 
+    removeCode(id) {
+      return this.updateMyCart([{
+        removeDiscountCode: {
+          discountCode: {
+            typeId: 'discount-code',
+            id,
+          },
+        },
+      }]);
+    },
+
     submitCode(code) {
       this.serverError = null;
       this.buttonState = 'loading';
       this.addDiscountCode(code)
         .then(() => {
           this.buttonState = 'success';
-          this.$apollo.queries.me.refetch();
         })
         .catch((error) => {
           this.serverError = error;
@@ -98,7 +110,7 @@ export default {
   apollo: {
     me: {
       query: gql`
-        query me {
+        query me($locale: Locale!){
           me {
             activeCart {
               id
@@ -130,6 +142,8 @@ export default {
                 discountCode {
                   id
                   code
+                  name(locale: $locale)
+                  description(locale: $locale)
                   cartDiscounts{
                     value{
                       ... on RelativeDiscountValue{
@@ -148,6 +162,11 @@ export default {
           }
         }
         ${DisplayableMoneyFragment}`,
+      variables() {
+        return {
+          locale: this.$i18n.locale,
+        };
+      },
     },
   },
 };
