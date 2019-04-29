@@ -22,12 +22,9 @@
         <div class="col-sm-12">
           <div class="cart-content">
             <CartContent :editable="true"/>
-            <DiscountCode :buttonState="buttonState"
-                          :serverError="serverError"
-                          :cartLike="me.activeCart"
-                          @apply-code="submitCode"
-                          @remove-code="removeCode"/>
+            <DiscountCode/>
             <PriceCalculation :cartLike="me.activeCart"
+                              @removeCode="removeDiscountCode"
                               class="total-price-calc"/>
           </div>
         </div>
@@ -67,20 +64,10 @@ export default {
 
   data: () => ({
     me: null,
-    buttonState: null,
-    serverError: null,
   }),
 
   methods: {
-    addDiscountCode(code) {
-      return this.updateMyCart({
-        addDiscountCode: {
-          code,
-        },
-      });
-    },
-
-    removeCode(id) {
+    removeDiscountCode(id) {
       return this.updateMyCart([{
         removeDiscountCode: {
           discountCode: {
@@ -89,19 +76,6 @@ export default {
           },
         },
       }]);
-    },
-
-    submitCode(code) {
-      this.serverError = null;
-      this.buttonState = 'loading';
-      this.addDiscountCode(code)
-        .then(() => {
-          this.buttonState = 'success';
-        })
-        .catch((error) => {
-          this.serverError = error;
-          this.buttonState = null;
-        });
     },
   },
 
@@ -143,19 +117,6 @@ export default {
                   id
                   code
                   name(locale: $locale)
-                  description(locale: $locale)
-                  cartDiscounts{
-                    value{
-                      ... on RelativeDiscountValue{
-                        permyriad
-                      }
-                      ... on AbsoluteDiscountValue{
-                        money{
-                          ...DisplayableMoney
-                        }
-                      }
-                    }
-                  }
                 }
               }
             }
