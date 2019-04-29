@@ -3,16 +3,38 @@
     <div class="row">
       <div class="col-sm-12">
           <div class="row">
+            <div v-if="cartLike.discountCodes && cartLike.discountCodes.length"
+                 class="row">
+              <div class="col-sm-12">
+                <div class="text-right col-sm-12"
+                    style="margin-bottom: 7px">
+                  Applied discounts:
+                </div>
+                <div v-for="discountInfo in cartLike.discountCodes"
+                    :key='discountInfo.discountCode.id'
+                    class="text-right col-sm-offset-6"
+                    data-test="discount-code-list">
+                  <div class="col-sm-8"
+                      data-test="discount-code-name"
+                      style="font-weight: bold">
+                    {{ discountInfo.discountCode.code }}
+                  </div>
+                  <div class="col-sm-3">{{ discountInfo.discountCode.name }}</div>
+                    <div class="col-sm-1"
+                        style="cursor: pointer"
+                        @click="removeDiscountCode(discountInfo.discountCode.id)"
+                        data-test="remove-discount-button">
+                      <img src="../../assets/img/delete-1.png"
+                          class="cart-action-icon">
+                    </div>
+                </div>
+              </div>
+            </div>
+            <hr v-if="cartLike.discountCodes && cartLike.discountCodes.length">
             <div class="col-sm-10 col-xs-7">
               <div class="text-right subtotal">
                 <span class="subtotal-title">{{ $t('subtotal') }}</span>
               </div>
-              <!-- <div v-if="discount.relativeDiscount || discount.absoluteDiscount" class="text-right">
-                <span class="order-discount">{{ $t('discount') }}</span>
-              </div> -->
-              <!-- <div v-if="discount.relativeDiscount && discount.absoluteDiscount">
-                &nbsp;
-              </div> -->
               <div v-if="cartLike.shippingInfo"
                    class="text-right delivery-info">
                 <span class="delivery-info-title">{{ $t('shipping') }}</span>
@@ -32,15 +54,6 @@
                   <BaseMoney :money="subtotal"/>
                 </span>
               </div>
-              <!-- <div class="order-discount"
-                   data-test="discount-value">
-                <div v-if="discount.relativeDiscount">
-                  - {{discount.relativeDiscount}} %
-                </div>
-                <div v-if="discount.absoluteDiscount">
-                  - <BaseMoney :money="discount.absoluteDiscount"/>
-                </div>
-              </div> -->
               <div>
                 <span v-if="cartLike.shippingInfo">
                   <BaseMoney :money="cartLike.shippingInfo.price"/>
@@ -111,23 +124,11 @@ export default {
       }
       return null;
     },
+  },
 
-    discount() {
-      let relativeDiscount = null;
-      let absoluteDiscount = null;
-      if (this.cartLike.discountCodes) {
-        this.cartLike.discountCodes.forEach((e) => {
-          e.discountCode.cartDiscounts.forEach((code) => {
-            if (code.value.__typename === 'RelativeDiscountValue') {
-              relativeDiscount = code.value.permyriad * 0.01;
-            } else if (code.value.__typename === 'AbsoluteDiscountValue') {
-              /* eslint prefer-destructuring: ["error", {VariableDeclarator: {object: true}}] */
-              absoluteDiscount = code.value.money[0];
-            }
-          });
-        });
-      }
-      return { relativeDiscount, absoluteDiscount };
+  methods: {
+    removeDiscountCode(id) {
+      this.$emit('removeCode', id);
     },
   },
 };

@@ -8,9 +8,10 @@
       </ServerError>
     </div>
     <div class="col-sm-12">
-      <form @submit.prevent="submit" class="text-right promotion-info">
+      <form @submit.prevent="submitDiscountCode"
+            class="text-right promotion-info">
         <span class="text-uppercase promo-info-text">
-          {{ $t('promoInfo') }}
+          {{ $t('code') }}
           <img src="../../assets/img/information.png"
                class="info-icon"
                alt="information icon">
@@ -22,63 +23,48 @@
                        data-test="apply-discount-code-button">
           {{ $t('apply') }}
         </LoadingButton>
-        <div v-if="cartLike.discountCodes.length > 0"
-             class="row"
-             style="margin-top: 15px">
-          <div class="col-sm-12">
-            <div class="text-right order-discount col-sm-offset-5">
-              <span class="col-sm-3"
-                    style="font-weight: bold">
-                Applied discounts:
-              </span>
-            </div>
-            <div v-for="discountInfo in cartLike.discountCodes"
-                :key='discountInfo.discountCode.id'
-                class="text-right order-discount col-sm-offset-7">
-              <div class="col-sm-3"
-                   data-test="discount-code-name">
-                {{ discountInfo.discountCode.code }}
-              </div>
-              <div class="col-sm-3">{{ discountInfo.discountCode.name }}</div>
-              <div class="col-sm-5">
-                ({{ discountInfo.discountCode.description }})
-              </div>
-              <div>
-                <div style="cursor: pointer"
-                    @click="removeDisountCode(discountInfo.discountCode.id)">
-                  <img src="../../assets/img/delete-1.png"
-                      class="cart-action-icon">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import gql from 'graphql-tag';
 import LoadingButton from './LoadingButton.vue';
 import ServerError from './ServerError.vue';
+import cartMixin from '@/mixins/cartMixin';
 
 export default {
   components: { LoadingButton, ServerError },
 
-  props: ['buttonState', 'serverError', 'cartLike'],
-
   data: () => ({
+    me: null,
     code: null,
+    buttonState: null,
+    serverError: null,
   }),
 
   methods: {
-    submit() {
-      this.$emit('apply-code', this.code);
-      this.code = null;
+    addDiscountCode() {
+      return this.updateMyCart({
+        addDiscountCode: {
+          code: this.code,
+        },
+      });
     },
 
-    removeDisountCode(id) {
-      this.$emit('remove-code', id);
+    submitDiscountCode() {
+      this.serverError = null;
+      this.buttonState = 'loading';
+      this.addDiscountCode()
+        .then(() => {
+          this.buttonState = 'success';
+          this.code = null;
+        })
+        .catch((error) => {
+          this.serverError = error;
+          this.buttonState = null;
+        });
     },
 
     getErrorMessage({ code }) {
@@ -86,6 +72,34 @@ export default {
         return this.$t('nonApplicable');
       }
       return this.$t('unknownError');
+    },
+  },
+
+  mixins: [cartMixin],
+
+  apollo: {
+    me: {
+      query: gql`
+        query me($locale: Locale!){
+          me {
+            activeCart {
+              id
+              version
+              discountCodes {
+                discountCode {
+                  id
+                  code
+                  name(locale: $locale)
+                }
+              }
+            }
+          }
+        }`,
+      variables() {
+        return {
+          locale: this.$i18n.locale,
+        };
+      },
     },
   },
 };
@@ -113,11 +127,11 @@ export default {
 
 <i18n>
 en:
-  promoInfo: "Promotional Discount Info"
+  code: "Discount code"
   apply: "Apply"
   nonApplicable: "This discount code is non applicable"
 de:
-  promoInfo: "Werbe-Rabatt-Info"
+  code: "Rabattcode"
   apply: "Anwenden"
   nonApplicable: "Dieser Rabattcode ist nicht anwendbar"
 </i18n>
