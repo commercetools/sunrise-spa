@@ -16,7 +16,10 @@
                class="info-icon"
                alt="information icon">
         </span>
-        <input id="promo-code" type="text" name="code" v-model="code"
+        <input id="promo-code"
+               type="text"
+               v-model="code"
+               required
                data-test="discount-code-input">
         <LoadingButton :buttonState="buttonState"
                        class="apply-button"
