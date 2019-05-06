@@ -22,9 +22,9 @@
         <div class="col-sm-12">
           <div class="cart-content">
             <CartContent :editable="true"/>
-            <DiscountCode/>
+            <AddDiscountCodeForm/>
             <PriceCalculation :cartLike="me.activeCart"
-                              @removeCode="removeDiscountCode"
+                              @removeDiscountCode="removeDiscountCode"
                               class="total-price-calc"/>
           </div>
         </div>
@@ -52,14 +52,14 @@ import gql from 'graphql-tag';
 import cartMixin from '@/mixins/cartMixin';
 import CartContent from '@/components/cartdetail/CartContent.vue';
 import PriceCalculation from '@/components/common/PriceCalculation.vue';
-import DiscountCode from '@/components/common/DiscountCode.vue';
+import AddDiscountCodeForm from '@/components/common/AddDiscountCodeForm.vue';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {
   components: {
     CartContent,
     PriceCalculation,
-    DiscountCode,
+    AddDiscountCodeForm,
   },
 
   data: () => ({

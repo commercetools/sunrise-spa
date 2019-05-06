@@ -3,34 +3,11 @@
     <div class="row">
       <div class="col-sm-12">
           <div class="row">
-            <div v-if="cartLike.discountCodes && cartLike.discountCodes.length"
-                 class="row">
-              <div class="col-sm-12">
-                <div class="text-right col-sm-12"
-                    style="margin-bottom: 7px">
-                  Applied discounts:
-                </div>
-                <div v-for="discountInfo in cartLike.discountCodes"
-                    :key='discountInfo.discountCode.id'
-                    class="text-right col-sm-offset-6"
-                    data-test="discount-code-list">
-                  <div class="col-sm-8"
-                      data-test="discount-code-name"
-                      style="font-weight: bold">
-                    {{ discountInfo.discountCode.code }}
-                  </div>
-                  <div class="col-sm-3">{{ discountInfo.discountCode.name }}</div>
-                    <div class="col-sm-1"
-                        style="cursor: pointer"
-                        @click="removeDiscountCode(discountInfo.discountCode.id)"
-                        data-test="remove-discount-button">
-                      <img src="../../assets/img/delete-1.png"
-                          class="cart-action-icon">
-                    </div>
-                </div>
-              </div>
-            </div>
-            <hr v-if="cartLike.discountCodes && cartLike.discountCodes.length">
+            <DiscountCodes v-if="discountCodesExist"
+                           :cartLike="cartLike"
+                           :editable="true"
+                           @removeDiscountCode="removeDiscountCode"/>
+            <hr v-if="discountCodesExist">
             <div class="col-sm-10 col-xs-7">
               <div class="text-right subtotal">
                 <span class="subtotal-title">{{ $t('subtotal') }}</span>
@@ -87,18 +64,25 @@
 </template>
 
 <script>
-/* eslint no-underscore-dangle: 0 */
 import BaseMoney from './BaseMoney.vue';
+import DiscountCodes from './DiscountCodes.vue';
 
 export default {
   components: {
     BaseMoney,
+    DiscountCodes,
   },
 
   props: {
     cartLike: {
       type: Object,
       required: true,
+    },
+  },
+
+  methods: {
+    removeDiscountCode(id) {
+      this.$emit('removeDiscountCode', id);
     },
   },
 
@@ -124,11 +108,9 @@ export default {
       }
       return null;
     },
-  },
 
-  methods: {
-    removeDiscountCode(id) {
-      this.$emit('removeCode', id);
+    discountCodesExist() {
+      return this.cartLike.discountCodes && this.cartLike.discountCodes.length;
     },
   },
 };
