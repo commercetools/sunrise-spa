@@ -4,9 +4,7 @@
       <div class="col-sm-12">
           <div class="row">
             <DiscountCodes v-if="discountCodesExist"
-                           :cartLike="cartLike"
-                           :editable="true"
-                           @removeDiscountCode="removeDiscountCode"/>
+                           :cartLike="cartLike"/>
             <hr v-if="discountCodesExist">
             <div class="col-sm-10 col-xs-7">
               <div class="text-right subtotal">
@@ -77,12 +75,6 @@ export default {
     cartLike: {
       type: Object,
       required: true,
-    },
-  },
-
-  methods: {
-    removeDiscountCode(id) {
-      this.$emit('removeDiscountCode', id);
     },
   },
 
