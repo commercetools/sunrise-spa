@@ -24,7 +24,6 @@
             <CartContent :editable="true"/>
             <AddDiscountCodeForm/>
             <PriceCalculation :cartLike="me.activeCart"
-                              @removeDiscountCode="removeDiscountCode"
                               class="total-price-calc"/>
           </div>
         </div>
@@ -65,19 +64,6 @@ export default {
   data: () => ({
     me: null,
   }),
-
-  methods: {
-    removeDiscountCode(id) {
-      return this.updateMyCart([{
-        removeDiscountCode: {
-          discountCode: {
-            typeId: 'discount-code',
-            id,
-          },
-        },
-      }]);
-    },
-  },
 
   mixins: [cartMixin],
 
