@@ -42,7 +42,7 @@ export default {
   apollo: {
     me: {
       query: gql`
-        query me($locale: Locale!){
+        query me {
           me {
             activeCart {
               id
@@ -50,11 +50,6 @@ export default {
             }
           }
         }`,
-      variables() {
-        return {
-          locale: this.$i18n.locale,
-        };
-      },
     },
   },
 };

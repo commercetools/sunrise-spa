@@ -15,7 +15,7 @@
             {{ discountInfo.discountCode.code }}
           </div>
           <div class="col-sm-3">{{ discountInfo.discountCode.name }}</div>
-          <RemoveDiscountCodeForm v-if="cartLike.__typename == 'Cart'"
+          <RemoveDiscountCodeForm v-if="isCart"
                                   :codeId='discountInfo.discountCode.id'/>
         </div>
       </div>
@@ -32,6 +32,12 @@ export default {
     cartLike: {
       type: Object,
       required: true,
+    },
+  },
+
+  computed: {
+    isCart() {
+      return this.cartLike.__typename === 'Cart';
     },
   },
 
