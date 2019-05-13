@@ -1,6 +1,5 @@
 <template>
-  <div v-if="editable"
-       id="deleteButton"
+  <div id="deleteButton"
        class="col-sm-1"
        @click="removeDiscountCode"
        data-test="remove-discount-button">
@@ -20,10 +19,6 @@ export default {
   }),
 
   props: {
-    editable: {
-      type: Boolean,
-      default: () => false,
-    },
     codeId: {
       type: String,
     },
@@ -52,13 +47,6 @@ export default {
             activeCart {
               id
               version
-              discountCodes {
-                discountCode {
-                  id
-                  code
-                  name(locale: $locale)
-                }
-              }
             }
           }
         }`,

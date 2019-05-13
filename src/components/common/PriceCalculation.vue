@@ -3,9 +3,10 @@
     <div class="row">
       <div class="col-sm-12">
           <div class="row">
-            <DiscountCodes v-if="discountCodesExist"
-                           :cartLike="cartLike"/>
-            <hr v-if="discountCodesExist">
+            <div v-if="discountCodesExist">
+              <DiscountCodes :cartLike="cartLike"/>
+              <hr>
+            </div>
             <div class="col-sm-10 col-xs-7">
               <div class="text-right subtotal">
                 <span class="subtotal-title">{{ $t('subtotal') }}</span>

@@ -16,11 +16,13 @@
                class="info-icon"
                alt="information icon">
         </span>
-        <input id="promo-code"
-               type="text"
-               v-model="code"
-               required
-               data-test="discount-code-input">
+        <ValidationError :vuelidate="$v.code"
+                         class="vuelidate">
+          <input v-model.trim.lazy="$v.code.$model"
+                 id="promo-code"
+                 type="text"
+                 data-test="discount-code-input"/>
+        </ValidationError>
         <LoadingButton :buttonState="buttonState"
                        class="apply-button"
                        data-test="apply-discount-code-button">
@@ -33,12 +35,14 @@
 
 <script>
 import gql from 'graphql-tag';
+import { required } from 'vuelidate/lib/validators';
 import LoadingButton from './LoadingButton.vue';
 import ServerError from './ServerError.vue';
 import cartMixin from '@/mixins/cartMixin';
+import ValidationError from './ValidationError.vue';
 
 export default {
-  components: { LoadingButton, ServerError },
+  components: { LoadingButton, ServerError, ValidationError },
 
   data: () => ({
     me: null,
@@ -58,16 +62,17 @@ export default {
 
     submitDiscountCode() {
       this.serverError = null;
-      this.buttonState = 'loading';
-      this.addDiscountCode()
-        .then(() => {
-          this.buttonState = 'success';
-          this.code = null;
-        })
-        .catch((error) => {
-          this.serverError = error;
-          this.buttonState = null;
-        });
+      if (!this.$v.$invalid) {
+        this.buttonState = 'loading';
+        this.addDiscountCode()
+          .then(() => {
+            this.buttonState = 'success';
+          })
+          .catch((error) => {
+            this.serverError = error;
+            this.buttonState = null;
+          });
+      }
     },
 
     getErrorMessage({ code }) {
@@ -105,11 +110,17 @@ export default {
       },
     },
   },
+
+  validations: {
+    code: {
+      required,
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-  .apply-button {
+.apply-button {
   background: none;
   font-weight: 400;
   font-size: 14px;
@@ -119,13 +130,16 @@ export default {
   margin-right: 0.5em;
   padding: 0.5em 1em;
   position: relative;
-  &:hover {
-    background: none;
-    color: #858585;
-    border: 2px solid #858585;
+    &:hover {
+      background: none;
+      color: #858585;
+      border: 2px solid #858585;
+    }
   }
-}
 
+.vuelidate {
+  display: inline-block
+}
 </style>
 
 <i18n>
