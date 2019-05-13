@@ -123,6 +123,13 @@ export default {
               totalPrice {
                 ...DisplayableMoney
               }
+              discountCodes {
+                discountCode {
+                  id
+                  code
+                  name(locale: $locale)
+                }
+              }
               lineItems {
                 id
                 quantity

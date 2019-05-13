@@ -12,12 +12,6 @@ describe('PriceCalculation.vue', () => {
     discountCodes: [{
       discountCode: {
         code: 'CODE2019',
-        cartDiscounts: [{
-          value: {
-            __typename: 'RelativeDiscountValue',
-            permyriad: 500,
-          },
-        }],
       },
     }],
   };

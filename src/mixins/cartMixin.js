@@ -71,20 +71,7 @@ export default {
                 discountCode {
                   id
                   code
-                  name(locale: $locale)
-                  description(locale: $locale)
-                  cartDiscounts{
-                    value{
-                      ... on RelativeDiscountValue{
-                        permyriad
-                      }
-                      ... on AbsoluteDiscountValue{
-                        money{
-                          ...DisplayableMoney
-                        }
-                      }
-                    }
-                  }
+                  name(locale: $locale)                  
                 }
               }
             }

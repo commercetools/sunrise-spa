@@ -15,18 +15,18 @@
             {{ discountInfo.discountCode.code }}
           </div>
           <div class="col-sm-3">{{ discountInfo.discountCode.name }}</div>
-          <RemoveDiscountCode :editable='true'
-                              :codeId='discountInfo.discountCode.id'/>
+          <RemoveDiscountCodeForm v-if="cartLike.__typename == 'Cart'"
+                                  :codeId='discountInfo.discountCode.id'/>
         </div>
       </div>
     </div>
 </template>
 
 <script>
-import RemoveDiscountCode from './RemoveDiscountCode.vue';
+import RemoveDiscountCodeForm from './RemoveDiscountCodeForm.vue';
 
 export default {
-  components: { RemoveDiscountCode },
+  components: { RemoveDiscountCodeForm },
 
   props: {
     cartLike: {
@@ -34,6 +34,7 @@ export default {
       required: true,
     },
   },
+
 };
 </script>
 
