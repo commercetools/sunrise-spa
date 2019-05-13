@@ -97,7 +97,6 @@ export default {
                 discountCode {
                   id
                   code
-                  name(locale: $locale)
                 }
               }
             }
