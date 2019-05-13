@@ -88,25 +88,14 @@ export default {
   apollo: {
     me: {
       query: gql`
-        query me($locale: Locale!){
+        query me {
           me {
             activeCart {
               id
               version
-              discountCodes {
-                discountCode {
-                  id
-                  code
-                }
-              }
             }
           }
         }`,
-      variables() {
-        return {
-          locale: this.$i18n.locale,
-        };
-      },
     },
   },
 
