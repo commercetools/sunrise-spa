@@ -25,6 +25,6 @@ en:
   linkLabel: "Shop collection"
 de:
   title: "Sommer Essentials"
-  subtitle: "Die wichtigsten Stücke des Sommer Trends 2019"
+  subtitle: "Die wichtigsten Stücke des Sommer Trends"
   linkLabel: "Jetzt bestellen"
 </i18n>
