@@ -24,13 +24,12 @@
       </div>
     </div>
 
-    <div class="container">
-      <!--{{> catalog/home/home-suggestions}}-->
+    <!-- <div class="container">
+      {{> catalog/home/home-suggestions}}
       <div class="home-viewall">
-        <!-- Home page -->
-        <!--{{> catalog/home/view-products-link}}-->
+        {{> catalog/home/view-products-link}}
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

@@ -63,15 +63,15 @@
 
 <i18n>
 en:
-  title1: "SUMMER FASHION 2019"
+  title1: "SUMMER FASHION"
   title2: "Trendy Sunglasses"
   title3: "Must to have it"
   subtitle2: "Accessories for the perfect summer"
   subtitle3: "Hot pieces for the summer"
   linkLabel: "Shop collection"
 de:
-  title1: "SOMMER MODE 2019"
-  title2: "Sonnenbrillen-Trends 2019"
+  title1: "SOMMER MODE"
+  title2: "Sonnenbrillen-Trends"
   title3: "Hauptsache überdimensional"
   subtitle2: "Unsere Fashion Must-Haves"
   subtitle3: "Trendy Sommer 2016 - Auffällige Sonnenbrillen"

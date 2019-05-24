@@ -21,7 +21,7 @@
 <i18n>
 en:
   title: "Unique style for every season"
-  subtitle: "Fashion styles 2019"
+  subtitle: "Fashion styles"
   linkLabel: "Shop collection"
 de:
   title: "Einzigartige Stücke für jede Saison"
