@@ -2,9 +2,9 @@
   <div class="col-sm-6 nopadding banner-right">
     <div class="aspect-ratio aspect-ratio--4to3">
       <picture>
-        <source srcset="../../assets/img/banners/leather2-4to3.jpg" media="(min-width: 1200px)">
-        <source srcset="../../assets/img/banners/leather2-4to3.jpg" media="(min-width: 768px)">
-        <img src="../../assets/img/banners/leather2-4to3.jpg" class="img-responsive">
+        <source :srcset="link" media="(min-width: 1200px)">
+        <source :srcset="link">
+        <img :src="link" class="img-responsive">
       </picture>
     </div>
 
@@ -17,6 +17,18 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    link() {
+      /* eslint-disable import/no-dynamic-require */
+      /* eslint-disable global-require */
+      return require(`../../assets/img/banners/${this.$i18n.locale}/leather-4to3.jpg`);
+    },
+  },
+};
+</script>
 
 <i18n>
 en:
