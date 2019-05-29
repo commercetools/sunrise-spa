@@ -45,6 +45,7 @@ describe('my orders', () => {
 
   it('shows my orders', () => {
     cy.createMyOrder(cartDraft1, orderDraft1);
+    cy.wait(500);
     cy.createMyOrder(cartDraft2, orderDraft2);
     cy.get('[data-test=my-orders-button]').click();
     cy.get('[data-test=order-list]')
