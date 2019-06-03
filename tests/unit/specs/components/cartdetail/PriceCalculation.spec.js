@@ -9,6 +9,11 @@ describe('PriceCalculation.vue', () => {
       centAmount: 83050,
       fractionDigits: 2,
     },
+    discountCodes: [{
+      discountCode: {
+        code: 'CODE2019',
+      },
+    }],
   };
 
   let options;

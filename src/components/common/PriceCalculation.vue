@@ -3,12 +3,13 @@
     <div class="row">
       <div class="col-sm-12">
           <div class="row">
+            <div v-if="discountCodesExist">
+              <DiscountCodes :cartLike="cartLike"/>
+              <hr>
+            </div>
             <div class="col-sm-10 col-xs-7">
               <div class="text-right subtotal">
                 <span class="subtotal-title">{{ $t('subtotal') }}</span>
-              </div>
-              <div class="text-right">
-                <!--<span class="order-discount">{{ $t('checkout.orderDiscount') }}</span>-->
               </div>
               <div v-if="cartLike.shippingInfo"
                    class="text-right delivery-info">
@@ -28,9 +29,6 @@
                 <span data-test="cart-subtotal-price">
                   <BaseMoney :money="subtotal"/>
                 </span>
-              </div>
-              <div>
-                <!--<span class="order-discount">{{ cart.discount }}</span>-->
               </div>
               <div>
                 <span v-if="cartLike.shippingInfo">
@@ -66,10 +64,12 @@
 
 <script>
 import BaseMoney from './BaseMoney.vue';
+import DiscountCodes from './DiscountCodes.vue';
 
 export default {
   components: {
     BaseMoney,
+    DiscountCodes,
   },
 
   props: {
@@ -101,6 +101,10 @@ export default {
       }
       return null;
     },
+
+    discountCodesExist() {
+      return this.cartLike.discountCodes && this.cartLike.discountCodes.length;
+    },
   },
 };
 </script>
@@ -111,9 +115,11 @@ en:
   shipping: "Shipping"
   salesTax: "Sales Tax"
   total: "Total"
+  discount: "Discount"
 de:
   subtotal: "Zwischensumme"
   shipping: "Versand"
   salesTax: "MwSt."
   total: "Gesamtpreis"
+  discount: "Rabatt"
 </i18n>

@@ -53,6 +53,7 @@ describe('OrderDetailPage', () => {
       quantity: 2,
     },
     ],
+    discountCodes: ['CODE2019'],
   };
 
   before(() => {
@@ -68,11 +69,11 @@ describe('OrderDetailPage', () => {
     cy.get('[data-test=details-order-number]')
       .contains('12345');
     cy.get('[data-test=details-order-date]')
-      .contains(/^\s*\d{1,2}\.*\s*[A-Za-zäÄöÖüÜß]+\s*\d{4}\s*$/);
+      .contains(/^\s*\d{1,2}\.*\s*[A-Za-zäÄöÖüÜß].+\s*\d{4}\s*$/);
     cy.get('[data-test=cart-subtotal-price]')
-      .contains(/^\s*367,60\s€\s*$/);
+      .contains(/^\s*349,21\s€\s*$/);
     cy.get('[data-test=cart-total-price]')
-      .contains(/^\s*367,60\s€\s*$/);
+      .contains(/^\s*349,21\s€\s*$/);
     cy.get('[data-test=order-line-items]')
       .should('have.length', 2)
       .eq(1)
@@ -84,5 +85,9 @@ describe('OrderDetailPage', () => {
           .find('[data-test=price-new-value]')
           .contains(/^\s*139,30\s€\s*$/);
       });
+    cy.get('[data-test=discount-code-name]')
+      .contains('CODE2019');
+    cy.get('[data-test=remove-discount-button]')
+      .should('not.exist');
   });
 });

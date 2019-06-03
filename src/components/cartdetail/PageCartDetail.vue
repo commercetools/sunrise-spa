@@ -22,6 +22,7 @@
         <div class="col-sm-12">
           <div class="cart-content">
             <CartContent :editable="true"/>
+            <AddDiscountCodeForm/>
             <PriceCalculation :cartLike="me.activeCart"
                               class="total-price-calc"/>
           </div>
@@ -50,10 +51,15 @@ import gql from 'graphql-tag';
 import cartMixin from '@/mixins/cartMixin';
 import CartContent from '@/components/cartdetail/CartContent.vue';
 import PriceCalculation from '@/components/common/PriceCalculation.vue';
+import AddDiscountCodeForm from '@/components/common/AddDiscountCodeForm.vue';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {
-  components: { CartContent, PriceCalculation },
+  components: {
+    CartContent,
+    PriceCalculation,
+    AddDiscountCodeForm,
+  },
 
   data: () => ({
     me: null,
@@ -64,10 +70,11 @@ export default {
   apollo: {
     me: {
       query: gql`
-        query me {
+        query me($locale: Locale!){
           me {
             activeCart {
               id
+              version
               lineItems {
                 id
                 quantity
@@ -91,10 +98,22 @@ export default {
                   ...DisplayableMoney
                 }
               }
+              discountCodes {
+                discountCode {
+                  id
+                  code
+                  name(locale: $locale)
+                }
+              }
             }
           }
         }
         ${DisplayableMoneyFragment}`,
+      variables() {
+        return {
+          locale: this.$i18n.locale,
+        };
+      },
     },
   },
 };
