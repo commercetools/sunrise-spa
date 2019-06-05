@@ -48,29 +48,13 @@ export default {
 
 <style lang="scss" scoped>
 .form-error-bubble {
+  font-size: 12px;
   position: absolute;
+  margin-top: -7px;
+  margin-left: 1px;
   z-index: 1000;
-  padding: 5px;
-  /*margin-top: 6px;*/
-  background: rgb(250, 226, 226);
-  border: 0px solid rgba(136, 136, 136, 0.747);
-  border-radius: 4px;
-  color: rgb(114, 36, 36);
-  box-shadow: 1px 1px 1px rgb(153, 153, 153);
-}
-
-.form-error-bubble:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border: 6px solid transparent;
-  border-bottom-color: rgb(250, 226, 226);
-  border-top: 0;
-  margin-left: -20px;
-  margin-top: -6px;
+  padding: 0;
+  color: rgb(206, 65, 65);
 }
 </style>
 
