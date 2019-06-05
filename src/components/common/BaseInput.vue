@@ -1,29 +1,29 @@
 <template>
-  <div class="form-field">
-    <label v-if="label"
-           class="field-label text-uppercase">
-      {{ label }}
-      <span v-if="required"
-            :title="$t('required')"
-            class="field-required">
-        *
-      </span>
+  <span :class="{ 'error': vuelidate.$error }"
+        class="form-field">
+    <BaseLabel v-if="label"
+               :vuelidate="vuelidate"
+               :label="label">
       <input v-model="model"
-             v-bind="$attrs"
-             :class="{ 'error': vuelidate.$error }"/>
-    </label>
+             v-bind="$attrs"/>
+    </BaseLabel>
+    <input v-else
+           v-model="model"
+           v-bind="$attrs"/>
     <ValidationError :vuelidate="vuelidate"
                      :customErrors="customErrors"/>
-  </div>
+  </span>
 </template>
 
 <script>
 import ValidationError from './ValidationError.vue';
+import BaseLabel from './BaseLabel.vue';
 
 export default {
   inheritAttrs: false,
 
   components: {
+    BaseLabel,
     ValidationError,
   },
 
@@ -53,32 +53,16 @@ export default {
         this.$emit('input', value);
       },
     },
-
-    required() {
-      return this.vuelidate.$params.required;
-    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-label {
-  padding-top: 15px;
+.form-field {
+  width: 100%;
 }
 
-.error {
+.error input {
   border-color: rgba(206, 65, 65, 0.6);
 }
-
-.field-required {
-  color: #D54D4D;
-  cursor: default;
-}
 </style>
-
-<i18n>
-en:
-  required: "Required field"
-de:
-  required: "Pflichtfeld"
-</i18n>

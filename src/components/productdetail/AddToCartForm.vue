@@ -95,7 +95,9 @@ export default {
 
   validations() {
     return {
-      quantity: { required, numeric, between: between(1, MAX_QUANTITY) },
+      form: {
+        quantity: { required, numeric, between: between(1, MAX_QUANTITY) },
+      },
     };
   },
 };

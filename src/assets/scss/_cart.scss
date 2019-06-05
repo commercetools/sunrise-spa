@@ -135,14 +135,14 @@
 }
 
 // Quantity counter / spinner
-.input-number {
+.input-number input {
   width: 40px;
   padding: 0 10px;
   vertical-align: top;
   text-align: center;
   outline: none;
 }
-.input-number,
+.input-number input,
 .input-number-decrement,
 .input-number-increment {
   border: 1px solid $alto;
@@ -278,7 +278,7 @@
   .cart-attributes {
     font-size: 0.9em;
   }
-  .input-number {
+  .input-number input {
     padding: 0;
     width: 22px;
   }
@@ -329,7 +329,7 @@
   .quantity-spinner {
     text-align: right;
   }
-  .input-number {
+  .input-number input {
     padding: 0 0.2em;
     width: 30px;
   }
@@ -366,7 +366,7 @@
   .sm-pull-right {
     float: right;
     .quantity-spinner {
-      .input-number {
+      .input-number input {
         margin: 0 3px;
       }
     }

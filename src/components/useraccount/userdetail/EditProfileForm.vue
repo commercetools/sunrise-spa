@@ -2,10 +2,6 @@
   <div v-if="me">
     <div class="personal-details-title">
       <span>{{ $t('title') }}</span>
-      <span v-if="showForm"
-            class="pull-right required-text personal-details-edit-show">
-        {{ $t('main.form.required') }}
-      </span>
     </div>
     <div class="personal-details-edit personal-details-edit-show">
       <transition name="fade"

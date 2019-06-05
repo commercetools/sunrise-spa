@@ -1,11 +1,5 @@
 <template>
-  <form>
-    <div class="shipping-info">
-      <span class="text-uppercase shipping-info-title">{{ $t('shippingInformation') }}</span>
-      <span class="pull-right required-fields">{{ $t('form.required') }} *</span>
-    </div>
-    <BaseAddressForm/>
-
+  <div></div>
     <!--<div class="row different-billing-row">-->
       <!--<div class="col-sm-12">-->
         <!--<div class="different-for-billing input-block">-->
@@ -63,34 +57,20 @@
       <!--</div>-->
     <!--</div>-->
     <!--{{> checkout/continue-checkout-button}}-->
-  </form>
 </template>
 
 <script>
-import BaseAddressForm from './BaseAddressForm.vue';
-
 export default {
-  components: {
-    BaseAddressForm,
-  },
 };
 </script>
 
-<style scoped>
-.address-form {
-  margin: 0.5em 1em;
-}
-</style>
-
 <i18n>
 en:
-  shippingInformation: "Shipping Information"
   shippingAddress: "Shipping Address"
   billingAddress: "Billing Address"
   title: "Secure Checkout - Shipping"
   differentBillingAddressCheckboxLabel: "Use a different address for billing"
 de:
-  shippingInformation: "Versand Information"
   billingAddress: "Zahlungsadresse"
   shippingAddress: "Versandadresse"
   title: "Sicherer Bestellprozess - Versand"

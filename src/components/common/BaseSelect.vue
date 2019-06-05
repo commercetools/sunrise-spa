@@ -1,31 +1,27 @@
 <template>
-  <div class="form-field">
-    <label v-if="label"
-           class="field-label text-uppercase">
-      {{ label }}
-      <span v-if="required"
-            :title="$t('required')"
-            class="field-required">
-        *
-      </span>
-      <SelectBoxIt :options="options"
-                   v-model="model"
-                   v-bind="$attrs"
-                   :class="{ 'error': vuelidate.$error }"/>
-    </label>
+  <span :class="{ 'error': vuelidate.$error }"
+        class="form-field">
+    <BaseLabel v-if="label"
+               :vuelidate="vuelidate"
+               :label="label"/>
+    <SelectBoxIt :options="options"
+                 v-model="model"
+                 v-bind="$attrs"/>
     <ValidationError :vuelidate="vuelidate"
                      :customErrors="customErrors"/>
-  </div>
+  </span>
 </template>
 
 <script>
 import ValidationError from './ValidationError.vue';
 import SelectBoxIt from './SelectBoxIt.vue';
+import BaseLabel from './BaseLabel.vue';
 
 export default {
   inheritAttrs: false,
 
   components: {
+    BaseLabel,
     SelectBoxIt,
     ValidationError,
   },
@@ -36,6 +32,10 @@ export default {
     },
     vuelidate: {
       type: Object,
+      required: true,
+    },
+    options: {
+      type: Array,
       required: true,
     },
     label: {
@@ -56,32 +56,12 @@ export default {
         this.$emit('input', value);
       },
     },
-
-    required() {
-      return this.vuelidate.$params.required;
-    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-label {
-  padding-top: 15px;
-}
-
-.error {
+.error select {
   border-color: rgba(206, 65, 65, 0.6);
 }
-
-.field-required {
-  color: #D54D4D;
-  cursor: default;
-}
 </style>
-
-<i18n>
-en:
-  required: "Required field"
-de:
-  required: "Pflichtfeld"
-</i18n>

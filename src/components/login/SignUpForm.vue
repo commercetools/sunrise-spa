@@ -4,9 +4,6 @@
       <div class="pull-left">
         <div class="signup-box-title">{{ $t('title') }}</div>
       </div>
-      <div class="pull-right">
-        <div class="signup-box-required">{{ $t('required') }}*</div>
-      </div>
     </div>
     <hr class="signup-box-hr">
     <div class="signup-box-description">{{ $t('description') }}</div>
@@ -171,7 +168,6 @@ export default {
 <i18n>
 en:
   title: "New Customer Registration"
-  required: "Required Fields"
   description: "Create an account to store your products, easy checkouts, customer discounts, benefits and more."
   titleSelect: "Title"
   firstName: "First Name"
@@ -189,7 +185,6 @@ en:
   duplicatedEmail: "A customer with this email already exists"
 de:
   title: "Neukunden Resigstrierung"
-  required: "Pflichtfeld"
   description: "Konto einrichten, um das Shoppen noch einfacher zu machen."
   titleSelect: "Titel"
   firstName: "Vorname"

@@ -4,9 +4,6 @@
       <div class="pull-left">
         <div class="login-box-title">{{ $t('title') }}</div>
       </div>
-      <div class="pull-right">
-        <div class="login-box-required">{{ $t('required') }}*</div>
-      </div>
     </div>
     <hr class="login-box-hr">
     <div class="login-box-description">{{ $t('description') }}</div>

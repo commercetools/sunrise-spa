@@ -51,12 +51,10 @@
 
 <script>
 import CartOverview from './CartOverview.vue';
-import StepAddressForm from './StepAddressForm.vue';
 
 export default {
   components: {
     CartOverview,
-    StepAddressForm,
   },
 
   props: ['showStep'],

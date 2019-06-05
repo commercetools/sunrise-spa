@@ -64,15 +64,13 @@ export default {
   },
 
   watch: {
-    form: {
-      quantity(newValue, oldValue) {
-        if (oldValue !== null && newValue !== oldValue) {
-          this.$v.$touch();
-          if (!this.$v.$invalid) {
-            this.debouncedSubmit();
-          }
+    'form.quantity': function triggerDebouncedSubmit(newValue, oldValue) {
+      if (oldValue !== null && newValue !== oldValue) {
+        this.$v.$touch();
+        if (!this.$v.$invalid) {
+          this.debouncedSubmit();
         }
-      },
+      }
     },
   },
 

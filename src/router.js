@@ -129,7 +129,7 @@ const router = new Router({
       },
       props: {
         default: {
-          showStep: 'StepAddressForm',
+          showStep: 'StepShippingAddressForm',
         },
       },
     },
