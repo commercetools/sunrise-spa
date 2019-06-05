@@ -1,15 +1,16 @@
 <template>
-  <span :class="{ 'error': vuelidate.$error }"
-        class="form-field">
+  <span class="form-field">
     <BaseLabel v-if="label"
                :vuelidate="vuelidate"
                :label="label">
       <input v-model="model"
-             v-bind="$attrs"/>
+             v-bind="$attrs"
+             :class="{ 'error': vuelidate.$error }"/>
     </BaseLabel>
     <input v-else
            v-model="model"
-           v-bind="$attrs"/>
+           v-bind="$attrs"
+           :class="{ 'error': vuelidate.$error }"/>
     <ValidationError :vuelidate="vuelidate"
                      :customErrors="customErrors"/>
   </span>
@@ -57,12 +58,12 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .form-field {
   width: 100%;
 }
 
-.error input {
+.error {
   border-color: rgba(206, 65, 65, 0.6);
 }
 </style>

@@ -51,7 +51,7 @@ export default {
   position: absolute;
   z-index: 1000;
   padding: 5px;
-  margin-top: 6px;
+  /*margin-top: 6px;*/
   background: rgb(250, 226, 226);
   border: 0px solid rgba(136, 136, 136, 0.747);
   border-radius: 4px;

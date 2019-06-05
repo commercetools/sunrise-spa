@@ -1,12 +1,12 @@
 <template>
-  <span :class="{ 'error': vuelidate.$error }"
-        class="form-field">
+  <span class="form-field">
     <BaseLabel v-if="label"
                :vuelidate="vuelidate"
                :label="label"/>
     <SelectBoxIt :options="options"
                  v-model="model"
-                 v-bind="$attrs"/>
+                 v-bind="$attrs"
+                 :class="{ 'error': vuelidate.$error }"/>
     <ValidationError :vuelidate="vuelidate"
                      :customErrors="customErrors"/>
   </span>
@@ -60,8 +60,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.error select {
+<style scoped>
+.error {
   border-color: rgba(206, 65, 65, 0.6);
 }
 </style>

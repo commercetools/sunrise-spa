@@ -32,8 +32,6 @@
                            autocomplete="email"
                            class="form-inputs"
                            data-test="edit-profile-form-email"/>
-                <br>
-                <span class="form-notes"></span>
               </div>
             </div>
             <div class="col-sm-6">
