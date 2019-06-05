@@ -24,11 +24,10 @@
           <div class="cart-content">
             <CartLikeSummary :cart-like="me.activeCart">
               <template #quantity-column="{ lineItem }">
-                <LineItemDeleteForm :line-item="lineItem"
-                                    @submit="removeLineItem"
+                <LineItemDeleteForm :lineItemId="lineItem.id"
                                     class="col-sm-5 cart-edit-delete"/>
-                <LineItemQuantityForm :line-item="lineItem"
-                                      @submit="changeLineItemQuantity"
+                <LineItemQuantityForm :lineItemId="lineItem.id"
+                                      :quantity="lineItem.quantity"
                                       class="col-sm-7 clearfix sm-pull-right"/>
               </template>
             </CartLikeSummary>
@@ -81,30 +80,7 @@ export default {
 
   computed: {
     notEmpty() {
-      return this.me && this.me.activeCart && this.me.activeCart.lineItems.length > 0;
-    },
-  },
-
-  methods: {
-    removeLineItem(lineItemId) {
-      return this.updateMyCart([
-        {
-          removeLineItem: {
-            lineItemId,
-          },
-        },
-      ]);
-    },
-
-    changeLineItemQuantity(lineItemId, quantity) {
-      return this.updateMyCart([
-        {
-          changeLineItemQuantity: {
-            lineItemId,
-            quantity,
-          },
-        },
-      ]);
+      return this.me?.activeCart?.lineItems.length > 0;
     },
   },
 
@@ -115,7 +91,6 @@ export default {
           me {
             activeCart {
               id
-              version
               lineItems {
                 id
                 name(locale: $locale)

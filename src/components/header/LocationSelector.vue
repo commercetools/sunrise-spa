@@ -17,8 +17,8 @@
         <span class="location-dropdown-label">
         {{ $t("main.header.language") }}
         </span>
-        <SelectBoxIt :options="languages"
-                     v-model="$i18n.locale"
+        <SelectBoxIt v-model="$i18n.locale"
+                     :options="languages"
                      id="language"
                      data-test="location-selector-dropdown"
                      class="select location-select"/>
@@ -39,7 +39,13 @@
 </template>
 
 <script>
+import SelectBoxIt from '../common/SelectBoxIt.vue';
+
 export default {
+  components: {
+    SelectBoxIt,
+  },
+
   data: () => ({
     show: false,
     closeTimer: null,

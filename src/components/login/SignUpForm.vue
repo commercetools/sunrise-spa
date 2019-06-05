@@ -11,67 +11,61 @@
     <hr class="signup-box-hr">
     <div class="signup-box-description">{{ $t('description') }}</div>
     <form @submit.prevent="submit(customerSignMeUp)">
-      <ServerError :error="serverError">
-        <template slot-scope="{ graphQLError }">
-          {{ getErrorMessage(graphQLError) }}
-        </template>
+      <ServerError :error="serverError"
+                   v-slot="{ graphQLError }">
+        {{ getErrorMessage(graphQLError) }}
       </ServerError>
       <div class="row">
         <div class="col-sm-6">
           <div class="signup-box-input">
-            <BaseFormField :vuelidate="$v.firstName"
-                           :label="$t('firstName')">
-              <input v-model.trim.lazy="$v.firstName.$model"
-                     autocomplete="fname"
-                     type="text"
-                     data-test="signup-form-firstname" />
-            </BaseFormField>
+            <BaseInput v-model="form.firstName"
+                       :vuelidate="$v.form.firstName"
+                       :label="$t('firstName')"
+                       type="text"
+                       autocomplete="fname"
+                       data-test="signup-form-firstname" />
           </div>
         </div>
         <div class="col-sm-6">
           <div class="signup-box-input">
-            <BaseFormField :vuelidate="$v.lastName"
-                           :label="$t('secondName')">
-              <input v-model.trim.lazy="$v.lastName.$model"
-                     autocomplete="lname"
-                     type="text"
-                     data-test="signup-form-lastname" >
-            </BaseFormField>
+            <BaseInput v-model="form.lastName"
+                       :vuelidate="$v.form.lastName"
+                       :label="$t('secondName')"
+                       type="text"
+                       autocomplete="lname"
+                       data-test="signup-form-lastname" />
           </div>
         </div>
       </div>
       <hr class="signup-box-hr">
       <div class="signup-box-input">
-        <BaseFormField :vuelidate="$v.email"
-                       :label="$t('email')">
-          <input v-model.trim.lazy="$v.email.$model"
-                 autocomplete="username"
-                 type="email"
-                 data-test="signup-form-email" />
-        </BaseFormField>
+        <BaseInput v-model="form.email"
+                   :vuelidate="$v.form.email"
+                   :label="$t('email')"
+                   type="email"
+                   autocomplete="username"
+                   data-test="signup-form-email" />
       </div>
       <div class="row">
         <div class="col-sm-6">
           <div class="signup-box-input">
-            <BaseFormField :vuelidate="$v.password"
-                           :label="$t('password')">
-              <input v-model.trim.lazy="$v.password.$model"
-                     autocomplete="off"
-                     type="password"
-                     data-test="signup-form-password" />
-            </BaseFormField>
+            <BaseInput v-model="form.password"
+                       :vuelidate="$v.form.password"
+                       :label="$t('password')"
+                       type="password"
+                       autocomplete="off"
+                       data-test="signup-form-password" />
           </div>
         </div>
         <div class="col-sm-6">
           <div class="signup-box-input">
-            <BaseFormField :vuelidate="$v.repeatPassword"
-                           :label="$t('repeatPassword')"
-                           :customMessages="{ sameAsPassword: $t('repeatPasswordError') }">
-              <input v-model.trim.lazy="$v.repeatPassword.$model"
-                     autocomplete="off"
-                     type="password"
-                     data-test="signup-form-repeatpassword" />
-            </BaseFormField>
+            <BaseInput v-model="form.repeatPassword"
+                       :vuelidate="$v.form.repeatPassword"
+                       :label="$t('repeatPassword')"
+                       :customErrors="{ sameAsPassword: $t('repeatPasswordError') }"
+                       type="password"
+                       autocomplete="off"
+                       data-test="signup-form-repeatpassword" />
           </div>
         </div>
       </div>
@@ -82,14 +76,13 @@
         <!--<span>{{ $t('pleaseAddMe') }} <a href="">{{ $t('newsletter') }}</a></span>-->
       <!--</div>-->
       <div class="signup-box-terms">
-        <BaseFormField :vuelidate="$v.agreeToTerms"
-                       :label="$t('agreeTo')"
-                       :customMessages="{ mustBeAgreed: $t('agreeToTermsError') }">
-          <input v-model.trim.lazy="$v.agreeToTerms.$model"
-                 autocomplete="off"
-                 type="checkbox"
-                 data-test="signup-form-agreetoterms" />
-        </BaseFormField>
+        <BaseInput v-model="form.agreeToTerms"
+                   :vuelidate="$v.form.agreeToTerms"
+                   :label="$t('agreeTo')"
+                   :customErrors="{ mustBeAgreed: $t('agreeToTermsError') }"
+                   type="checkbox"
+                   autocomplete="off"
+                   data-test="signup-form-agreetoterms" />
       </div>
       <LoadingButton :buttonState="buttonState"
                      class="signup-register-btn"
@@ -109,11 +102,11 @@ import { clientLogin } from '../../auth';
 import formMixin from '../../mixins/formMixin';
 import ServerError from '../common/ServerError.vue';
 import LoadingButton from '../common/LoadingButton.vue';
-import BaseFormField from '../common/BaseFormField.vue';
+import BaseInput from '../common/BaseInput.vue';
 
 export default {
   components: {
-    BaseFormField,
+    BaseInput,
     ServerError,
     LoadingButton,
   },
@@ -121,12 +114,14 @@ export default {
   mixins: [formMixin],
 
   data: () => ({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    repeatPassword: '',
-    agreeToTerms: false,
+    form: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      repeatPassword: '',
+      agreeToTerms: false,
+    },
   }),
 
   methods: {
@@ -142,13 +137,13 @@ export default {
           }`,
         variables: {
           draft: {
-            email: this.email,
-            password: this.password,
-            firstName: this.firstName,
-            lastName: this.lastName,
+            email: this.form.email,
+            password: this.form.password,
+            firstName: this.form.firstName,
+            lastName: this.form.lastName,
           },
         },
-      }).then(() => clientLogin(this.email, this.password))
+      }).then(() => clientLogin(this.form.email, this.form.password))
         .then(() => this.$router.push({ name: 'user' }));
     },
 
@@ -161,26 +156,13 @@ export default {
   },
 
   validations: {
-    firstName: {
-      required,
-    },
-    lastName: {
-      required,
-    },
-    email: {
-      required,
-      email,
-    },
-    password: {
-      required,
-      minLength: minLength(5),
-    },
-    repeatPassword: {
-      sameAsPassword: sameAs('password'),
-    },
-    agreeToTerms: {
-      required,
-      mustBeAgreed: sameAs(() => true),
+    form: {
+      firstName: { required },
+      lastName: { required },
+      email: { required, email },
+      password: { required, minLength: minLength(5) },
+      repeatPassword: { sameAsPassword: sameAs('password') },
+      agreeToTerms: { required, mustBeAgreed: sameAs(() => true) },
     },
   },
 };

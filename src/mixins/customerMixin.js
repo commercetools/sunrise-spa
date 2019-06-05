@@ -15,10 +15,25 @@ export default {
             }
           }`,
         variables: {
-          version: this.me.customer.version,
+          version: this.me?.customer?.version,
           actions,
         },
       });
+    },
+  },
+
+  apollo: {
+    me: {
+      query: gql`
+        query me {
+          me {
+            customer {
+              id
+              version
+            }
+          }
+        }`,
+      skip: vm => !vm.$store.state.authenticated,
     },
   },
 };

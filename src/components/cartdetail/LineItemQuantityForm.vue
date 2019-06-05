@@ -1,13 +1,14 @@
 <template>
   <div class="quantity-spinner">
-    <span @click="quantity -= 1"
+    <span @click="form.quantity -= 1"
           data-test="cart-line-item-quantity-dec"
           class="change-quantity-button input-number-decrement">–</span>
-    <input v-model.trim.number="$v.quantity.$model"
-           data-test="cart-line-item-quantity"
-           type="text"
-           class="input-number"/>
-    <span @click="quantity += 1"
+    <BaseInput v-model.number="form.quantity"
+               :vuelidate="$v.form.quantity"
+               type="text"
+               class="input-number"
+               data-test="cart-line-item-quantity" />
+    <span @click="form.quantity += 1"
           data-test="cart-line-item-quantity-inc"
           class="change-quantity-button input-number-increment">+</span>
   </div>
@@ -16,46 +17,68 @@
 <script>
 import debounce from 'lodash.debounce';
 import { required, minValue, numeric } from 'vuelidate/lib/validators';
+import BaseInput from '../common/BaseInput.vue';
+import cartMixin from '../../mixins/cartMixin';
+import formMixin from '../../mixins/formMixin';
 
 export default {
+  components: {
+    BaseInput,
+  },
+
+  mixins: [cartMixin, formMixin],
+
   props: {
-    lineItem: {
-      type: Object,
+    lineItemId: {
+      type: String,
+      required: true,
+    },
+    quantity: {
+      type: Number,
       required: true,
     },
   },
 
   data: () => ({
-    quantity: null,
+    form: {
+      quantity: 1,
+    },
   }),
 
   methods: {
-    submit() {
-      this.$emit('submit', this.lineItem.id, this.quantity);
+    changeLineItemQuantity() {
+      return this.updateMyCart([
+        {
+          changeLineItemQuantity: {
+            lineItemId: this.lineItemId,
+            quantity: this.form.quantity,
+          },
+        },
+      ]);
     },
   },
 
   created() {
-    this.quantity = this.lineItem.quantity;
-    this.debouncedSubmit = debounce(this.submit, 500);
+    this.form.quantity = this.quantity;
+    this.debouncedSubmit = debounce(() => this.submit(this.changeLineItemQuantity), 500);
   },
 
   watch: {
-    quantity(newValue, oldValue) {
-      if (oldValue !== null && newValue !== oldValue) {
-        this.$v.$touch();
-        if (!this.$v.$invalid) {
-          this.debouncedSubmit();
+    form: {
+      quantity(newValue, oldValue) {
+        if (oldValue !== null && newValue !== oldValue) {
+          this.$v.$touch();
+          if (!this.$v.$invalid) {
+            this.debouncedSubmit();
+          }
         }
-      }
+      },
     },
   },
 
   validations: {
-    quantity: {
-      required,
-      numeric,
-      minValue: minValue(1),
+    form: {
+      quantity: { required, numeric, minValue: minValue(1) },
     },
   },
 };

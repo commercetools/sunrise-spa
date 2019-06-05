@@ -141,7 +141,6 @@ export default {
 };
 </script>
 
-<!-- eslint-disable max-len -->
 <i18n>
   en:
     itemsTotal: "{n} item in total | {n} items in total"

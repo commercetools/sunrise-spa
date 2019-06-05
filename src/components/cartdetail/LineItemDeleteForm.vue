@@ -1,5 +1,5 @@
 <template>
-  <button @click="submit"
+  <button @click="submit(removeLineItem)"
           data-test="cart-line-item-delete"
           class="edit-delete-section">
     <img src="../../assets/img/delete-1.png"
@@ -10,19 +10,32 @@
 </template>
 
 <script>
+import cartMixin from '../../mixins/cartMixin';
+import formMixin from '../../mixins/formMixin';
+
 export default {
   props: {
-    lineItem: {
-      type: Object,
+    lineItemId: {
+      type: String,
       required: true,
     },
   },
 
+  mixins: [cartMixin, formMixin],
+
   methods: {
-    submit() {
-      this.$emit('submit', this.lineItem.id);
+    removeLineItem() {
+      return this.updateMyCart([
+        {
+          removeLineItem: {
+            lineItemId: this.lineItemId,
+          },
+        },
+      ]);
     },
   },
+
+  validations: {},
 };
 </script>
 

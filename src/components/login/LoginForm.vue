@@ -12,28 +12,25 @@
     <div class="login-box-description">{{ $t('description') }}</div>
     <div class="login-box-input-wrapper">
       <form @submit.prevent="submit(customerSignMeIn)">
-        <ServerError :error="serverError">
-          <template slot-scope="{ graphQLError }">
-            {{ getErrorMessage(graphQLError) }}
-          </template>
+        <ServerError :error="serverError"
+                     v-slot="{ graphQLError }">
+          {{ getErrorMessage(graphQLError) }}
         </ServerError>
         <div class="login-box-input">
-          <BaseFormField :vuelidate="$v.email"
-                         :label="$t('email')">
-            <input v-model.trim.lazy="$v.email.$model"
-                   autocomplete="username"
-                   type="email"
-                   data-test="login-form-email" />
-          </BaseFormField>
+          <BaseInput v-model="form.email"
+                     :vuelidate="$v.form.email"
+                     :label="$t('email')"
+                     type="email"
+                     autocomplete="username"
+                     data-test="login-form-email" />
         </div>
         <div class="login-box-input">
-          <BaseFormField :vuelidate="$v.password"
-                         :label="$t('password')">
-            <input v-model.trim.lazy="$v.password.$model"
-                   autocomplete="current-password"
-                   type="password"
-                   data-test="login-form-password" />
-          </BaseFormField>
+          <BaseInput v-model="form.password"
+                     :vuelidate="$v.form.password"
+                     :label="$t('password')"
+                     type="password"
+                     autocomplete="current-password"
+                     data-test="login-form-password" />
         </div>
         <div class="clearfix">
           <div class="pull-left">
@@ -68,11 +65,11 @@ import { clientLogin } from '../../auth';
 import formMixin from '../../mixins/formMixin';
 import ServerError from '../common/ServerError.vue';
 import LoadingButton from '../common/LoadingButton.vue';
-import BaseFormField from '../common/BaseFormField.vue';
+import BaseInput from '../common/BaseInput.vue';
 
 export default {
   components: {
-    BaseFormField,
+    BaseInput,
     ServerError,
     LoadingButton,
   },
@@ -80,8 +77,10 @@ export default {
   mixins: [formMixin],
 
   data: () => ({
-    email: '',
-    password: '',
+    form: {
+      email: '',
+      password: '',
+    },
   }),
 
   methods: {
@@ -97,11 +96,11 @@ export default {
           }`,
         variables: {
           draft: {
-            email: this.email,
-            password: this.password,
+            email: this.form.email,
+            password: this.form.password,
           },
         },
-      }).then(() => clientLogin(this.email, this.password))
+      }).then(() => clientLogin(this.form.email, this.form.password))
         .then(() => this.$router.push({ name: 'user' }));
     },
 
@@ -114,12 +113,9 @@ export default {
   },
 
   validations: {
-    email: {
-      required,
-      email,
-    },
-    password: {
-      required,
+    form: {
+      email: { required, email },
+      password: { required },
     },
   },
 };

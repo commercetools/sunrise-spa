@@ -1,81 +1,108 @@
 <template>
-  <div v-if="me"
-       class="personal-details-edit personal-details-edit-show">
-    <form @submit.prevent="submit(updateCustomerProfile)"
-          id="form-edit-personal-details">
-      <ServerError :error="serverError">
-        <template slot-scope="{ graphQLError }">
-          {{ getErrorMessage(graphQLError) }}
-        </template>
-      </ServerError>
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="form-sections">
-            <BaseFormField :vuelidate="$v.me.customer.firstName"
-                           :label="$t('firstName')">
-              <input v-model.trim="$v.me.customer.firstName.$model"
-                     autocomplete="fname"
-                     type="text"
-                     class="form-inputs"
-                     data-test="edit-profile-form-firstname"/>
-            </BaseFormField>
+  <div v-if="me">
+    <div class="personal-details-title">
+      <span>{{ $t('title') }}</span>
+      <span v-if="showForm"
+            class="pull-right required-text personal-details-edit-show">
+        {{ $t('main.form.required') }}
+      </span>
+    </div>
+    <div class="personal-details-edit personal-details-edit-show">
+      <transition name="fade"
+                  mode="out-in">
+        <form v-if="showForm"
+              @submit.prevent="submit(updateCustomerProfile)"
+              id="form-edit-personal-details">
+          <ServerError :error="serverError"
+                       v-slot="{ graphQLError }">
+              {{ getErrorMessage(graphQLError) }}
+          </ServerError>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-sections">
+                <BaseInput v-model="form.firstName"
+                           :vuelidate="$v.form.firstName"
+                           :label="$t('firstName')"
+                           type="text"
+                           autocomplete="fname"
+                           class="form-inputs"
+                           data-test="edit-profile-form-firstname"/>
+              </div>
+              <div class="form-sections">
+                <BaseInput v-model="form.email"
+                           :vuelidate="$v.form.email"
+                           :label="$t('email')"
+                           type="email"
+                           autocomplete="email"
+                           class="form-inputs"
+                           data-test="edit-profile-form-email"/>
+                <br>
+                <span class="form-notes"></span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-sections">
+                <BaseInput v-model="form.lastName"
+                           :vuelidate="$v.form.lastName"
+                           :label="$t('lastName')"
+                           type="text"
+                           autocomplete="lname"
+                           class="form-inputs"
+                           data-test="edit-profile-form-lastname"/>
+              </div>
+            </div>
           </div>
-
-          <div class="form-sections">
-            <BaseFormField :vuelidate="$v.me.customer.email"
-                           :label="$t('email')">
-              <input v-model.trim="$v.me.customer.email.$model"
-                     autocomplete="email"
-                     type="email"
-                     class="form-inputs"
-                     data-test="edit-profile-form-email"/>
-            </BaseFormField>
+          <hr class="light-grey-hr">
+          <!-- <div class="personal-details-newsletter"> -->
+            <!-- <span> -->
+              <!-- <input name="subscribeToNewsletter" -->
+                      <!-- type="checkbox" -->
+                      <!-- {{#if personalDetails.personalDetailsForm.subscribeToNewsletter}}checked{{/if}}/> -->
+              <!-- {{ $t('personalDetailsForm.subscribeToNewsletter') }} -->
+            <!-- </span> -->
+          <!-- </div> -->
+          <div class="personal-details-edit-btn">
+            <span>
+              <LoadingButton :buttonState="buttonState"
+                             :disabled="formIsClean"
+                             @reset="closeForm"
+                             type="submit"
+                             class="update-btn"
+                             data-test="edit-profile-form-submit">
+                {{ $t('updateBtn') }}
+              </LoadingButton>
+              <button @click="closeForm"
+                      type="button"
+                      class="cancel-btn personal-details-edit-hide-btn"
+                      data-test="edit-profile-form-cancel">
+                {{ $t('cancelBtn') }}
+              </button>
+            </span>
+          </div>
+        </form>
+        <div v-else
+             class="personal-details-edit-hide">
+          <div class="personal-details-box">
+            <div>
+              <span data-test="user-profile-name">{{ me.customer.firstName }} {{ me.customer.lastName }}</span>
+            </div>
+            <div data-test="user-profile-email">{{ me.customer.email }}</div>
             <br>
-            <span class="form-notes"></span>
-          </div>
-
-        </div>
-        <div class="col-sm-6">
-          <div class="form-sections">
-            <BaseFormField :vuelidate="$v.me.customer.lastName"
-                           :label="$t('lastName')">
-              <input v-model.trim="$v.me.customer.lastName.$model"
-                     autocomplete="lname"
-                     type="text"
-                     class="form-inputs"
-                     data-test="edit-profile-form-lastname"/>
-            </BaseFormField>
+            <!--{{#if content.customerInfo.subscribed}}-->
+            <!--<div>{{ $t('subscribedToNewsletter') }}</div>-->
+            <!--{{/if}}-->
+            <div class="personal-details-box-edit">
+              <button @click="openForm"
+                      class="personal-details-edit-show-btn"
+                      data-test="edit-profile-form-show">
+                <img src="../../../assets/img/edit-1.png" alt="edit icon">
+                {{ $t('editBtn') }}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-      <hr class="light-grey-hr">
-      <!-- <div class="personal-details-newsletter"> -->
-        <!-- <span> -->
-          <!-- <input name="subscribeToNewsletter" -->
-                  <!-- type="checkbox" -->
-                  <!-- {{#if personalDetails.personalDetailsForm.subscribeToNewsletter}}checked{{/if}}/> -->
-          <!-- {{ $t('personalDetailsForm.subscribeToNewsletter') }} -->
-        <!-- </span> -->
-      <!-- </div> -->
-      <div class="personal-details-edit-btn">
-        <span>
-          <LoadingButton :buttonState="buttonState"
-                         :disabled="!$v.$anyDirty"
-                         @reset="$emit('close')"
-                         type="submit"
-                         class="update-btn"
-                         data-test="edit-profile-form-submit">
-            {{ $t('updateBtn') }}
-          </LoadingButton>
-          <button @click="$emit('close')"
-                  type="button"
-                  class="cancel-btn personal-details-edit-hide-btn"
-                  data-test="edit-profile-form-cancel">
-            {{ $t('cancelBtn') }}
-          </button>
-        </span>
-      </div>
-    </form>
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -86,11 +113,11 @@ import formMixin from '../../../mixins/formMixin';
 import customerMixin from '../../../mixins/customerMixin';
 import ServerError from '../../common/ServerError.vue';
 import LoadingButton from '../../common/LoadingButton.vue';
-import BaseFormField from '../../common/BaseFormField.vue';
+import BaseInput from '../../common/BaseInput.vue';
 
 export default {
   components: {
-    BaseFormField,
+    BaseInput,
     LoadingButton,
     ServerError,
   },
@@ -99,14 +126,16 @@ export default {
 
   data: () => ({
     me: null,
+    form: {},
+    showForm: false,
   }),
 
   methods: {
     updateCustomerProfile() {
       return this.updateMyCustomer([
-        { changeEmail: { email: this.me.customer.email } },
-        { setFirstName: { firstName: this.me.customer.firstName } },
-        { setLastName: { lastName: this.me.customer.lastName } },
+        { changeEmail: { email: this.form.email } },
+        { setFirstName: { firstName: this.form.firstName } },
+        { setLastName: { lastName: this.form.lastName } },
       ]);
     },
 
@@ -115,6 +144,21 @@ export default {
         return this.$t('duplicatedEmail');
       }
       return this.$t('unknownError');
+    },
+
+    openForm() {
+      this.showForm = true;
+    },
+
+    closeForm() {
+      this.showForm = false;
+      this.$v.$reset();
+    },
+  },
+
+  watch: {
+    me(value) {
+      this.form = { ...value.customer };
     },
   },
 
@@ -137,19 +181,10 @@ export default {
   },
 
   validations: {
-    me: {
-      customer: {
-        email: {
-          required,
-          email,
-        },
-        firstName: {
-          required,
-        },
-        lastName: {
-          required,
-        },
-      },
+    form: {
+      email: { required, email },
+      firstName: { required },
+      lastName: { required },
     },
   },
 };
@@ -158,6 +193,7 @@ export default {
 <i18n>
 en:
   title: "Your Personal Details"
+  editBtn: "Edit"
   updateBtn: "Update Details"
   cancelBtn: "Cancel"
   firstName: "First Name"
@@ -167,6 +203,7 @@ en:
   duplicatedEmail: "A customer with this email already exists"
 de:
   title: "Ihre Benutzerdaten"
+  editBtn: "Bearbeiten"
   updateBtn: "Details aktualisieren"
   cancelBtn: "Abbrechen"
   firstName: "Vorname"

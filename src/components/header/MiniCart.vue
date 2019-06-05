@@ -34,8 +34,7 @@
                       <BaseMoney :money="lineItem.totalPrice"/>
                     </span>
                   </p>
-                  <LineItemDeleteForm :line-item="lineItem"
-                                      @submit="removeLineItem"/>
+                  <LineItemDeleteForm :lineItemId="lineItem.id"/>
                 </div>
               </div>
             </li>
@@ -91,16 +90,6 @@ export default {
   },
 
   methods: {
-    removeLineItem(lineItemId) {
-      return this.updateMyCart([
-        {
-          removeLineItem: {
-            lineItemId,
-          },
-        },
-      ]);
-    },
-
     toggle() {
       this.$store.dispatch('toggleMiniCart');
     },
@@ -129,7 +118,6 @@ export default {
           me {
             activeCart {
               id
-              version
               lineItems {
                 id
                 quantity

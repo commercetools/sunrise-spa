@@ -15,12 +15,11 @@
     <div class="row">
       <ul class="product-actions-list list-inline">
         <li class="bag-items-li">
-          <BaseFormField :vuelidate="$v.quantity">
-            <SelectBoxIt :options="quantities"
-                         v-model.lazy.number="$v.quantity.$model"
-                         data-test="add-to-cart-form-quantity-dropdown"
-                         class="bag-items"/>
-          </BaseFormField>
+          <BaseSelect v-model.number="form.quantity"
+                      :vuelidate="$v.form.quantity"
+                      :options="quantities"
+                      data-test="add-to-cart-form-quantity-dropdown"
+                      class="bag-items"/>
         </li>
         <li>
           <LoadingButton :buttonState="buttonState"
@@ -38,25 +37,15 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
 import { required, numeric, between } from 'vuelidate/lib/validators';
 import cartMixin from '../../mixins/cartMixin';
 import priceMixin from '../../mixins/priceMixin';
 import formMixin from '../../mixins/formMixin';
 import ServerError from '../common/ServerError.vue';
 import LoadingButton from '../common/LoadingButton.vue';
-import BaseFormField from '../common/BaseFormField.vue';
+import BaseSelect from '../common/BaseSelect.vue';
 
 const MAX_QUANTITY = 10;
-const query = gql`
-  query me {
-    me {
-      activeCart {
-        id
-        version
-      }
-    }
-  }`;
 
 export default {
   props: {
@@ -67,7 +56,7 @@ export default {
   },
 
   components: {
-    BaseFormField,
+    BaseSelect,
     LoadingButton,
     ServerError,
   },
@@ -75,8 +64,9 @@ export default {
   mixins: [cartMixin, priceMixin, formMixin],
 
   data: () => ({
-    me: null,
-    quantity: 1,
+    form: {
+      quantity: 1,
+    },
   }),
 
   computed: {
@@ -88,52 +78,24 @@ export default {
   methods: {
     async addLineItem() {
       if (!this.me.activeCart) {
-        await this.createCart();
+        await this.createMyCart({
+          draft: {
+            currency: this.currency,
+          },
+        });
       }
       return this.updateMyCart({
         addLineItem: {
           sku: this.sku,
-          quantity: this.quantity,
+          quantity: this.form.quantity,
         },
       }).then(() => this.$store.dispatch('openMiniCart'));
-    },
-
-    createCart() {
-      return this.$apollo.mutate({
-        mutation: gql`
-          mutation createMyCart($draft: MyCartDraft!) {
-            createMyCart(draft: $draft) {
-              id
-              version
-            }
-          }`,
-        variables: {
-          draft: {
-            currency: this.currency,
-          },
-        },
-        update: (store, { data: { createMyCart } }) => {
-          const data = store.readQuery({ query });
-          data.me.activeCart = createMyCart;
-          store.writeQuery({ query, data });
-        },
-      });
-    },
-  },
-
-  apollo: {
-    me: {
-      query,
     },
   },
 
   validations() {
     return {
-      quantity: {
-        required,
-        numeric,
-        between: between(1, MAX_QUANTITY),
-      },
+      quantity: { required, numeric, between: between(1, MAX_QUANTITY) },
     };
   },
 };

@@ -4,6 +4,12 @@ export default {
     serverError: null,
   }),
 
+  computed: {
+    formIsClean() {
+      return !this.$v.$anyDirty;
+    },
+  },
+
   methods: {
     async submit(onValid) {
       this.$v.$touch();
