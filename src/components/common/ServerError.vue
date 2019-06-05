@@ -1,6 +1,6 @@
 <template>
   <div v-if="error"
-       class="error">
+       class="server-error">
     <span v-if="isGraphQLError">
       <slot v-for="graphQLError in graphQLErrors"
             :graphQLError="graphQLError">
@@ -35,6 +35,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.server-error {
+  color: rgb(206, 65, 65);
+  font-weight: bold;
+}
+</style>
 
 <i18n>
 en:
