@@ -77,11 +77,9 @@ export default {
 
   methods: {
     async addLineItem() {
-      if (!this.me.activeCart) {
+      if (!this.cartExists) {
         await this.createMyCart({
-          draft: {
-            currency: this.currency,
-          },
+          currency: this.currency,
         });
       }
       return this.updateMyCart({

@@ -22,11 +22,11 @@ export default {
 
   computed: {
     isNetworkError() {
-      return this.error && this.error.networkError;
+      return this.error?.networkError;
     },
 
     isGraphQLError() {
-      return this.error && Array.isArray(this.error.graphQLErrors) && this.error.graphQLErrors.length;
+      return Array.isArray(this.error?.graphQLErrors) && this.error?.graphQLErrors.length;
     },
 
     graphQLErrors() {

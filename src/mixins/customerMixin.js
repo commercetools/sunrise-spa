@@ -1,8 +1,11 @@
 import gql from 'graphql-tag';
+import BASIC_CUSTOMER_QUERY from '../components/BasicCustomer.gql';
 
 export default {
   methods: {
     updateMyCustomer(actions) {
+      // Issue with under-fetching on mutations https://github.com/apollographql/apollo-client/issues/3267
+      // required any queried field to be fetched in order to update all components using customers
       return this.$apollo.mutate({
         mutation: gql`
           mutation updateMyCustomer($actions: [MyCustomerUpdateAction!]!, $version: Long!) {
@@ -15,7 +18,7 @@ export default {
             }
           }`,
         variables: {
-          version: this.me?.customer?.version,
+          version: this.me.customer?.version,
           actions,
         },
       });
@@ -23,17 +26,6 @@ export default {
   },
 
   apollo: {
-    me: {
-      query: gql`
-        query me {
-          me {
-            customer {
-              id
-              version
-            }
-          }
-        }`,
-      skip: vm => !vm.$store.state.authenticated,
-    },
+    me: BASIC_CUSTOMER_QUERY,
   },
 };

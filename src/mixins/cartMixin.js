@@ -1,17 +1,22 @@
 import gql from 'graphql-tag';
-import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
+import BASIC_CART_QUERY from '../components/BasicCart.gql';
+import DISPLAYABLE_MONEY_FRAGMENT from '../components/DisplayableMoney.gql';
 
 export default {
   computed: {
+    cartExists() {
+      return this.me?.activeCart;
+    },
+
     totalItems() {
-      if (this.me?.activeCart) {
+      if (this.cartExists) {
         return this.me.activeCart.lineItems.reduce((acc, li) => acc + li.quantity, 0);
       }
       return 0;
     },
 
     sortedLineItems() {
-      if (this.me?.activeCart) {
+      if (this.cartExists) {
         return [...this.me.activeCart.lineItems].reverse();
       }
       return [];
@@ -75,11 +80,11 @@ export default {
               }
             }
           }
-          ${DisplayableMoneyFragment}`,
+          ${DISPLAYABLE_MONEY_FRAGMENT}`,
         variables: {
           actions,
-          id: this.me?.activeCart?.id,
-          version: this.me?.activeCart?.version,
+          id: this.me.activeCart?.id,
+          version: this.me.activeCart?.version,
           locale: this.$i18n.locale,
         },
       });
@@ -88,7 +93,7 @@ export default {
     createMyCart(draft) {
       return this.$apollo.mutate({
         mutation: gql`
-          mutation createMyCart($draft: MyCartDraft!) {
+          mutation ($draft: MyCartDraft!) {
             createMyCart(draft: $draft) {
               id
               version
@@ -96,35 +101,15 @@ export default {
           }`,
         variables: { draft },
         update: (store, { data: { createMyCart } }) => {
-          const query = gql`
-            query me {
-              me {
-                activeCart {
-                  id
-                  version
-                }
-              }
-            }`;
-          const data = store.readQuery({ query });
+          const data = store.readQuery({ query: BASIC_CART_QUERY });
           data.me.activeCart = createMyCart;
-          store.writeQuery({ query, data });
+          store.writeQuery({ query: BASIC_CART_QUERY, data });
         },
       });
     },
   },
 
   apollo: {
-    me: {
-      query: gql`
-        query me {
-          me {
-            activeCart {
-              id
-              version
-            }
-          }
-        }`,
-      skip: vm => !vm.$store.state.authenticated,
-    },
+    me: BASIC_CART_QUERY,
   },
 };
