@@ -14,8 +14,8 @@
 
 <script>
 import ValidationError from './ValidationError.vue';
-import SelectBoxIt from './SelectBoxIt.vue';
-import BaseLabel from './BaseLabel.vue';
+import SelectBoxIt from '../SelectBoxIt.vue';
+import BaseLabel from '../BaseLabel.vue';
 
 export default {
   inheritAttrs: false,

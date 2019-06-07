@@ -45,13 +45,15 @@
           <!--<span class="order-discount">{{ cart.discount }}</span>-->
         </div>
         <div>
-          <span v-if="cartLike.shippingInfo">
+          <span v-if="cartLike.shippingInfo"
+                data-test="cart-shipping-price">
             <BaseMoney :money="cartLike.shippingInfo.price"/>
           </span>
         </div>
         <hr>
         <div>
-          <span v-if="taxes">
+          <span v-if="taxes"
+                data-test="cart-taxes-amount">>
             <BaseMoney :money="taxes"/>
           </span>
         </div>

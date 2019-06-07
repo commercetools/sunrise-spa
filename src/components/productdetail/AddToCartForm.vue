@@ -41,9 +41,9 @@ import { required, numeric, between } from 'vuelidate/lib/validators';
 import cartMixin from '../../mixins/cartMixin';
 import priceMixin from '../../mixins/priceMixin';
 import formMixin from '../../mixins/formMixin';
-import ServerError from '../common/ServerError.vue';
-import LoadingButton from '../common/LoadingButton.vue';
-import BaseSelect from '../common/BaseSelect.vue';
+import ServerError from '../common/form/ServerError.vue';
+import LoadingButton from '../common/form/LoadingButton.vue';
+import BaseSelect from '../common/form/BaseSelect.vue';
 
 const MAX_QUANTITY = 10;
 

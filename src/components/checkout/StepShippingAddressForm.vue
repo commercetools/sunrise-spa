@@ -98,9 +98,9 @@
 <script>
 import gql from 'graphql-tag';
 import { required, email } from 'vuelidate/lib/validators';
-import BaseInput from '../common/BaseInput.vue';
-import BaseSelect from '../common/BaseSelect.vue';
-import LoadingButton from '../common/LoadingButton.vue';
+import BaseInput from '../common/form/BaseInput.vue';
+import BaseSelect from '../common/form/BaseSelect.vue';
+import LoadingButton from '../common/form/LoadingButton.vue';
 
 export default {
   components: {

@@ -18,3 +18,10 @@ import './commands';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+// Required until Cypress supports fetch API
+// https://github.com/cypress-io/cypress/issues/95
+Cypress.on('window:before:load', (win) => {
+  // eslint-disable-next-line no-param-reassign
+  win.fetch = null;
+});

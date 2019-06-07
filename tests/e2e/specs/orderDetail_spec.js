@@ -1,5 +1,5 @@
 describe('OrderDetailPage', () => {
-  const customer = {
+  const customerDraft = {
     firstName: 'Charlie',
     lastName: 'Bucket',
     email: 'charlie.bucket+ci@commercetools.com',
@@ -43,7 +43,7 @@ describe('OrderDetailPage', () => {
       email: 'charlie.bucket+ci@commercetools.com',
     },
     shippingMethod: {
-      id: 'fe39f916-d4d7-4f99-9554-5949efeb2a0c',
+      key: 'express-EU',
     },
     lineItems: [{
       sku: 'M0E20000000EFWN',
@@ -56,8 +56,8 @@ describe('OrderDetailPage', () => {
   };
 
   before(() => {
-    cy.login(customer);
-    cy.createMyOrder(cartDraft, orderDraft);
+    cy.login(customerDraft);
+    cy.createOrder(cartDraft, orderDraft);
   });
 
   it('shows order details', () => {
@@ -71,9 +71,13 @@ describe('OrderDetailPage', () => {
       .contains(/^\s*\d{1,2}\.*\s*[A-Za-zäÄöÖüÜß]+\s*\d{4}\s*$/);
     cy.get('[data-test=cart-subtotal-price]')
       .contains(/^\s*367,60\s€\s*$/);
+    cy.get('[data-test=cart-shipping-price]')
+      .contains(/^\s*10,00\s€\s*$/);
+    cy.get('[data-test=cart-taxes-amount]')
+      .contains(/^\s*60,29\s€\s*$/);
     cy.get('[data-test=cart-total-price]')
-      .contains(/^\s*367,60\s€\s*$/);
-    cy.get('[data-test=order-line-items]')
+      .contains(/^\s*377,60\s€\s*$/);
+    cy.get('[data-test=cart-line-item]')
       .should('have.length', 2)
       .eq(1)
       .then(($item) => {

@@ -7,7 +7,7 @@
       <span v-if="state === 'loading'"
             key="loading"
             class="state-layer">
-        <img src="../../assets/img/loading.svg"
+        <img src="../../../assets/img/loading.svg"
              class="loading-animation"/>
       </span>
     </transition>

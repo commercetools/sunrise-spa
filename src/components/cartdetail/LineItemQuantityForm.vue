@@ -1,5 +1,6 @@
 <template>
-  <div class="quantity-spinner">
+  <div v-if="cartExists"
+       class="quantity-spinner">
     <span @click="form.quantity -= 1"
           data-test="cart-line-item-quantity-dec"
           class="change-quantity-button input-number-decrement">–</span>
@@ -17,7 +18,7 @@
 <script>
 import debounce from 'lodash.debounce';
 import { required, minValue, numeric } from 'vuelidate/lib/validators';
-import BaseInput from '../common/BaseInput.vue';
+import BaseInput from '../common/form/BaseInput.vue';
 import cartMixin from '../../mixins/cartMixin';
 import formMixin from '../../mixins/formMixin';
 

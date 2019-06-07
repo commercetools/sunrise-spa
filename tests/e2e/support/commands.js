@@ -24,8 +24,9 @@
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-import gql from 'graphql-tag';
 import createClient from './test-apollo';
+import * as query from './queries';
+import * as mutation from './mutations';
 
 const clientPromise = createClient();
 
@@ -37,55 +38,12 @@ Cypress.Commands.add('login', customer => cy.createCustomer(customer).then(() =>
   cy.get('[data-test=login-form-submit]').click();
 }));
 
-Cypress.Commands.add('createCustomer', (draft) => {
-  const createCustomer = client => client.mutate({
-    mutation: gql`
-        mutation createNewCustomer($draft: CustomerSignMeUpDraft!) {
-          customerSignMeUp(draft: $draft) {
-            customer {
-              id
-            }
-          }
-        }`,
-    variables: { draft },
-  });
+Cypress.Commands.add('createCustomer', draft => cy.wrap(clientPromise
+  .then(client => mutation.deleteCustomer(client, draft.email)
+    .then(() => mutation.createCustomer(client, draft)))));
 
-  return cy.deleteCustomer(draft).then(() => cy.wrap(clientPromise.then(client => createCustomer(client))));
-});
-
-Cypress.Commands.add('deleteCustomer', ({ email }) => {
-  const deleteCustomer = client => client.query({
-    query: gql`
-      query queryCustomerByEmail($predicate: String) {
-        customers(limit: 1, where: $predicate) {
-          results {
-            id
-            version
-          }
-        }
-      }`,
-    variables: { predicate: `email = "${email}"` },
-    fetchPolicy: 'network-only',
-  }).then(async (response) => {
-    const customer = response.data.customers.results[0];
-    if (customer) {
-      await client.mutate({
-        mutation: gql`
-            mutation deleteOldCustomer($id: String!, $version: Long!) {
-              deleteCustomer(id: $id, version: $version, personalDataErasure: true) {
-                id
-              }
-            }`,
-        variables: {
-          id: customer.id,
-          version: customer.version,
-        },
-      }).catch(e => console.warn('Customer might have been already deleted', e));
-    }
-  });
-
-  return cy.wrap(clientPromise.then(client => deleteCustomer(client)));
-});
+Cypress.Commands.add('deleteCustomer', ({ email }) => cy.wrap(clientPromise
+  .then(client => mutation.deleteCustomer(client, email))));
 
 Cypress.Commands.add('addLineItem', (url, quantity) => {
   cy.visit(url);
@@ -98,81 +56,13 @@ Cypress.Commands.add('addLineItem', (url, quantity) => {
   cy.get('[data-test=mini-cart-content]').should('be.visible');
 });
 
-Cypress.Commands.add('createMyOrder', (cartDraft, orderDraft) => {
-  const createNewOrder = client => client.query({
-    query: gql`
-      query queryCustomerByEmail($predicate: String) {
-        customers(limit: 1, where: $predicate) {
-          results {
-            id
-            version
-          }
-        }
-      }`,
-    variables: { predicate: `email = "${cartDraft.customerEmail}"` },
-    fetchPolicy: 'network-only',
-  }).then((response) => {
-    const customer = response.data.customers.results[0];
-    const draft = Object.assign({}, cartDraft, { customerId: customer.id });
-    return client.mutate({
-      mutation: gql`
-      mutation createMyCart($draft: CartDraft!){
-      createCart (draft: $draft) {
-        id, version
-      }
-  }`,
-      variables: {
-        draft,
-      },
-    });
-  }).then((response) => {
-    const cart = response.data.createCart;
-    const draft = Object.assign({}, orderDraft, { id: cart.id, version: cart.version });
-    client.mutate({
-      mutation: gql`
-          mutation createOrder($draft: OrderCartCommand!){
-            createOrderFromCart(draft: $draft) {
-              id
-            }
-          }`,
-      variables: {
-        draft,
-      },
-    });
-  });
-  return cy.deleteOrder(orderDraft).then(() => cy.wrap(clientPromise.then(client => createNewOrder(client))));
-});
-
-Cypress.Commands.add('deleteOrder', ({ orderNumber }) => {
-  const deleteOrder = client => client.query({
-    query: gql`
-      query queryOrderByNumber($predicate: String) {
-        orders(limit: 1, where: $predicate) {
-          results {
-            version,
-            id
-          }
-        }
-      }`,
-    variables: { predicate: `orderNumber = "${orderNumber}"` },
-    fetchPolicy: 'network-only',
-  }).then(async (response) => {
-    const order = response.data.orders.results[0];
-    if (order) {
-      await client.mutate({
-        mutation: gql`
-            mutation deleteOldOrder($id: String!, $version: Long!) {
-              deleteOrder(id: $id, version: $version) {
-                id
-              }
-            }`,
-        variables: {
-          id: order.id,
-          version: order.version,
-        },
-      }).catch(e => console.warn('Order might have been already deleted', e));
-    }
-  });
-
-  return cy.wrap(clientPromise.then(client => deleteOrder(client)));
-});
+Cypress.Commands.add('createOrder', (cartDraft, orderDraft) => cy.wrap(clientPromise
+  .then(client => mutation.deleteOrder(client, orderDraft.orderNumber)
+    .then(() => query.customerByEmail(client, cartDraft.customerEmail)
+      .then((customer) => {
+        const draft = Object.assign({}, cartDraft, { customerId: customer.id });
+        return mutation.createCart(client, draft);
+      }).then((cart) => {
+        const draft = Object.assign({}, orderDraft, { id: cart.id, version: cart.version });
+        return mutation.createOrder(client, draft);
+      })))));

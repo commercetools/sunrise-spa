@@ -105,9 +105,9 @@ import { required, email } from 'vuelidate/lib/validators';
 import gql from 'graphql-tag';
 import formMixin from '../../../mixins/formMixin';
 import customerMixin from '../../../mixins/customerMixin';
-import ServerError from '../../common/ServerError.vue';
-import LoadingButton from '../../common/LoadingButton.vue';
-import BaseInput from '../../common/BaseInput.vue';
+import ServerError from '../../common/form/ServerError.vue';
+import LoadingButton from '../../common/form/LoadingButton.vue';
+import BaseInput from '../../common/form/BaseInput.vue';
 
 export default {
   components: {

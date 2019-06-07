@@ -55,30 +55,42 @@ describe('CartDetailPage', () => {
     cy.addLineItem('/product/lemare-booties-0778-grey/M0E20000000E0WX', 3);
     cy.visit('/cart');
 
-    cy.get('[data-test=cart-line-item-quantity]')
-      .should('have.value', '3')
-      .clear()
-      .type('5');
-    cy.get('[data-test=cart-line-item-total-price]')
-      .contains(/^\s*870,60\s€\s*$/);
+    cy.get('[data-test=cart-line-item]')
+      .should('have.length', 1)
+      .then(($lineItem) => {
+        cy.wrap($lineItem)
+          .find('[data-test=cart-line-item-quantity]')
+          .should('have.value', '3')
+          .clear()
+          .type('5');
+        cy.wrap($lineItem)
+          .find('[data-test=cart-line-item-total-price]')
+          .contains(/^\s*870,60\s€\s*$/);
 
-    cy.get('[data-test=cart-line-item-quantity-inc]')
-      .click()
-      .click();
-    cy.get('[data-test=cart-line-item-quantity]')
-      .should('have.value', '7');
-    cy.get('[data-test=cart-line-item-total-price]')
-      .contains(/^\s*1.218,84\s€\s*$/);
+        cy.wrap($lineItem)
+          .find('[data-test=cart-line-item-quantity-inc]')
+          .click()
+          .click();
+        cy.wrap($lineItem)
+          .find('[data-test=cart-line-item-quantity]')
+          .should('have.value', '7');
+        cy.wrap($lineItem)
+          .find('[data-test=cart-line-item-total-price]')
+          .contains(/^\s*1.218,84\s€\s*$/);
 
-    cy.get('[data-test=cart-line-item-quantity-dec]')
-      .click();
-    cy.get('[data-test=cart-line-item-quantity]')
-      .should('have.value', '6');
-    cy.get('[data-test=cart-line-item-total-price]')
-      .contains(/^\s*1.044,72\s€\s*$/);
+        cy.wrap($lineItem)
+          .find('[data-test=cart-line-item-quantity-dec]')
+          .click();
+        cy.wrap($lineItem)
+          .find('[data-test=cart-line-item-quantity]')
+          .should('have.value', '6');
+        cy.wrap($lineItem)
+          .find('[data-test=cart-line-item-total-price]')
+          .contains(/^\s*1.044,72\s€\s*$/);
 
-
-    cy.get('[data-test=cart-line-item-delete]').click();
+        cy.wrap($lineItem)
+          .find('[data-test=cart-line-item-delete]').click();
+      });
     cy.get('[data-test=cart-line-item]').should('have.length', 0);
   });
 });

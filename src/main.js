@@ -1,4 +1,7 @@
 import Vue from 'vue';
+// Required until Cypress supports fetch API
+// https://github.com/cypress-io/cypress/issues/95
+import 'whatwg-fetch';
 import App from '@/App.vue';
 import Vuelidate from 'vuelidate';
 import router from '@/router';

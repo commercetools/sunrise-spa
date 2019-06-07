@@ -1,5 +1,6 @@
 <template>
-  <button @click="removeLineItem"
+  <button v-if="cartExists"
+          @click="removeLineItem"
           data-test="cart-line-item-delete"
           class="edit-delete-section">
     <img src="../../assets/img/delete-1.png"

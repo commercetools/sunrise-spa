@@ -24,13 +24,13 @@
                 <div class="details">
                   <p class="product-quantity">
                     {{ $t('quantity') }}
-                    <span data-test="mini-cart-line-item-quantity">
+                    <span data-test="cart-line-item-quantity">
                       {{ lineItem.quantity }}
                     </span>
                   </p>
                   <p class="product-price">
                     {{ $t('price') }}
-                    <span data-test="mini-cart-line-item-price">
+                    <span data-test="cart-line-item-price">
                       <BaseMoney :money="lineItem.totalPrice"/>
                     </span>
                   </p>
