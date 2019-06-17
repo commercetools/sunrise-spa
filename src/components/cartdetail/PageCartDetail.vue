@@ -18,7 +18,7 @@
         <!--{{> checkout/start-checkout-link id="cart-checkoutnow-btn"}}-->
       </div>
     </div>
-    <div v-if="notEmpty">
+    <div v-if="cartNotEmpty">
       <div class="row">
         <div class="col-sm-12">
           <div class="cart-content">
@@ -77,12 +77,6 @@ export default {
   }),
 
   mixins: [cartMixin],
-
-  computed: {
-    notEmpty() {
-      return this.me?.activeCart?.lineItems.length > 0;
-    },
-  },
 
   apollo: {
     me: {

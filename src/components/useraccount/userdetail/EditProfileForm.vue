@@ -141,18 +141,12 @@ export default {
     },
 
     openForm() {
+      this.form = { ...this.me.customer };
       this.showForm = true;
     },
 
     closeForm() {
       this.showForm = false;
-      this.$v.$reset();
-    },
-  },
-
-  watch: {
-    me(value) {
-      this.form = { ...value.customer };
     },
   },
 

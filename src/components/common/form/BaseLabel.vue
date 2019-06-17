@@ -1,10 +1,10 @@
 <template>
-  <label v-if="label"
-         class="field-label">
+  <label class="field-label">
     <span class="text">{{ label }}</span>
     <span v-if="required"
           :title="$t('required')"
-          class="field-required">
+          class="field-required"
+          data-test="form-label-required">
       *
     </span>
     <slot></slot>
@@ -20,12 +20,13 @@ export default {
     },
     label: {
       type: String,
+      required: true,
     },
   },
 
   computed: {
     required() {
-      return this.vuelidate.$params.required;
+      return this.vuelidate.$params?.required;
     },
   },
 };

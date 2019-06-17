@@ -2,21 +2,29 @@ import gql from 'graphql-tag';
 import BASIC_CART_QUERY from '../components/BasicCart.gql';
 import DISPLAYABLE_MONEY_FRAGMENT from '../components/DisplayableMoney.gql';
 
+function cartExists(vm) {
+  return vm.me?.activeCart;
+}
+
 export default {
   computed: {
     cartExists() {
-      return this.me?.activeCart;
+      return cartExists(this);
+    },
+
+    cartNotEmpty() {
+      return this.me?.activeCart?.lineItems.length > 0;
     },
 
     totalItems() {
-      if (this.cartExists) {
+      if (cartExists(this)) {
         return this.me.activeCart.lineItems.reduce((acc, li) => acc + li.quantity, 0);
       }
       return 0;
     },
 
     sortedLineItems() {
-      if (this.cartExists) {
+      if (cartExists(this)) {
         return [...this.me.activeCart.lineItems].reverse();
       }
       return [];

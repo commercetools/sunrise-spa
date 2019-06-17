@@ -42,7 +42,7 @@ export default {
 
   data: () => ({
     form: {
-      quantity: 1,
+      quantity: null,
     },
   }),
 

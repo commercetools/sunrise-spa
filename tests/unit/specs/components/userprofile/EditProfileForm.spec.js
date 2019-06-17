@@ -1,24 +1,9 @@
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import { ApolloError } from 'apollo-client';
 import EditProfileForm from '@/components/useraccount/userdetail/EditProfileForm.vue';
-import ServerError from '@/components/common/ServerError.vue';
-import ValidationError from '@/components/common/ValidationError.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuelidate);
-
-function setInputValue(input, value) {
-  input.setValue(value);
-  input.trigger('change');
-  input.trigger('blur');
-}
-
-function fillForm(wrapper, customer) {
-  setInputValue(wrapper.find('[data-test="edit-profile-form-firstname"]'), customer.firstName);
-  setInputValue(wrapper.find('[data-test="edit-profile-form-lastname"]'), customer.lastName);
-  setInputValue(wrapper.find('[data-test="edit-profile-form-email"]'), customer.email);
-}
 
 describe('EditProfileForm.vue', () => {
   const me = {
@@ -41,9 +26,6 @@ describe('EditProfileForm.vue', () => {
     options = {
       localVue,
       mocks: { $t: jest.fn() },
-      methods: {
-        updateMyCustomer: jest.fn(),
-      },
     };
   });
 
@@ -54,71 +36,22 @@ describe('EditProfileForm.vue', () => {
   it('displays current form values', () => {
     const wrapper = shallowMount(EditProfileForm, options);
     wrapper.setData({ me });
-    expect(wrapper.find('[data-test="edit-profile-form-firstname"]').element.value).toBe(me.customer.firstName);
-    expect(wrapper.find('[data-test="edit-profile-form-lastname"]').element.value).toBe(me.customer.lastName);
-    expect(wrapper.find('[data-test="edit-profile-form-email"]').element.value).toBe(me.customer.email);
+    wrapper.find('[data-test="edit-profile-form-show"]').trigger('click');
+    expect(wrapper.vm.form.firstName).toBe(me.customer.firstName);
+    expect(wrapper.vm.form.lastName).toBe(me.customer.lastName);
+    expect(wrapper.vm.form.email).toBe(me.customer.email);
   });
 
-  it('updates user info when one form field is valid', () => {
+  it('re-opens form with initially stored values', () => {
     const wrapper = shallowMount(EditProfileForm, options);
     wrapper.setData({ me });
-    setInputValue(wrapper.find('[data-test="edit-profile-form-firstname"]'), newUser.firstName);
-    wrapper.vm.submit();
-    expect(options.methods.updateMyCustomer).toHaveBeenCalled();
-  });
+    wrapper.find('[data-test="edit-profile-form-show"]').trigger('click');
+    wrapper.setData({ form: { ...newUser } });
 
-  it('updates user info when form is valid', () => {
-    const wrapper = shallowMount(EditProfileForm, options);
-    wrapper.setData({ me });
-    fillForm(wrapper, newUser);
-    wrapper.vm.submit();
-    expect(options.methods.updateMyCustomer).toHaveBeenCalled();
-  });
-
-  it('does not update customer info when form is invalid', () => {
-    const wrapper = shallowMount(EditProfileForm, options);
-    wrapper.setData({ me });
-    setInputValue(wrapper.find('[data-test="edit-profile-form-firstname"]'), '');
-    wrapper.vm.submit();
-    expect(options.methods.updateMyCustomer).not.toHaveBeenCalled();
-  });
-
-  it('does not update customer info when form has not changed', () => {
-    const wrapper = shallowMount(EditProfileForm, options);
-    wrapper.setData({ me });
-    wrapper.vm.submit();
-    expect(options.methods.updateMyCustomer).not.toHaveBeenCalled();
-  });
-
-  it('checks if any of form values have changed', () => {
-    const wrapper = shallowMount(EditProfileForm, options);
-    wrapper.setData({ me });
-    expect(wrapper.vm.hasFormChanged).toBeFalsy();
-
-    setInputValue(wrapper.find('[data-test="edit-profile-form-email"]'), newUser.email);
-    expect(wrapper.vm.hasFormChanged).toBeTruthy();
-
-    setInputValue(wrapper.find('[data-test="edit-profile-form-email"]'), me.customer.email);
-    expect(wrapper.vm.hasFormChanged).toBeFalsy();
-  });
-
-  it('shows form error', () => {
-    const wrapper = shallowMount(EditProfileForm, options);
-    wrapper.setData({ me });
-    expect(wrapper.findAll(ValidationError).length).toBe(3);
-  });
-
-  it('catches server errors', async () => {
-    const wrapper = shallowMount(EditProfileForm, options);
-    wrapper.setData({ me });
-    expect(wrapper.find(ServerError).props().error).toBeNull();
-
-    const error = new ApolloError({
-      graphQLErrors: [{ code: 'Error1' }, { code: 'Error2' }],
-    });
-    options.methods.updateMyCustomer.mockRejectedValue(error);
-    fillForm(wrapper, newUser);
-    await wrapper.vm.submit();
-    expect(wrapper.find(ServerError).props().error).toEqual(error);
+    wrapper.find('[data-test="edit-profile-form-cancel"]').trigger('click');
+    wrapper.find('[data-test="edit-profile-form-show"]').trigger('click');
+    expect(wrapper.vm.form.firstName).toBe(me.customer.firstName);
+    expect(wrapper.vm.form.lastName).toBe(me.customer.lastName);
+    expect(wrapper.vm.form.email).toBe(me.customer.email);
   });
 });
