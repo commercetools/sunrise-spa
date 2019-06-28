@@ -1,13 +1,8 @@
 <template>
   <div class="col-sm-6 nopadding banner-left">
     <div class="aspect-ratio aspect-ratio--4to3">
-      <picture>
-        <source srcset="../../assets/img/banners/shoes-4to3.jpg" media="(min-width: 1200px)">
-        <source srcset="../../assets/img/banners/shoes-4to3.jpg" media="(min-width: 768px)">
-        <img src="../../assets/img/banners/shoes-4to3.jpg" class="img-responsive">
-      </picture>
+      <BannerPicture :file="'shoes-4to3.jpg'"/>
     </div>
-
     <div class="banner-text">
       <h4 class="banner-title">{{ $t('title') }}</h4>
       <p class="banner-paragraph">{{ $t('subtitle') }}</p>
@@ -17,6 +12,14 @@
     </div>
   </div>
 </template>
+
+<script>
+import BannerPicture from './BannerPicture.vue';
+
+export default {
+  components: { BannerPicture },
+};
+</script>
 
 <i18n>
 en:

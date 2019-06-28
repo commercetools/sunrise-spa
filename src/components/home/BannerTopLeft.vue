@@ -1,11 +1,7 @@
 <template>
   <div class="col-sm-6 nopadding banner-left">
     <div class="aspect-ratio aspect-ratio--4to3">
-      <picture>
-        <source :srcset="link" media="(min-width: 1200px)">
-        <source :srcset="link">
-        <img :src="link" class="img-responsive">
-      </picture>
+      <BannerPicture :file="'woman-4to3.jpg'"/>
     </div>
 
     <div class="banner-text">
@@ -19,14 +15,10 @@
 </template>
 
 <script>
+import BannerPicture from './BannerPicture.vue';
+
 export default {
-  computed: {
-    link() {
-      /* eslint-disable import/no-dynamic-require */
-      /* eslint-disable global-require */
-      return require(`../../assets/img/banners/${this.$i18n.locale}/woman-4to3.jpg`);
-    },
-  },
+  components: { BannerPicture },
 };
 </script>
 
