@@ -3,11 +3,7 @@
     <div class="row">
       <div class="col-sm-6 nopadding">
         <div class="banner-xs-one">
-          <picture>
-            <source srcset="../../assets/img/banners/blue-bg-4to3.png" media="(min-width: 1200px)">
-            <source srcset="../../assets/img/banners/blue-bg-4to3.png" media="(min-width: 768px)">
-            <img src="../../assets/img/banners/blue-bg-4to3.png" class="img-responsive">
-          </picture>
+          <BannerPicture :file="'blue-bg-4to3.png'"/>
           <div class="banner-text">
             <h4 class="banner-title">
               <img src="../../assets/img/banners/sun-logo.png"/><br/><br/>
@@ -19,14 +15,7 @@
       <div class="col-sm-6 nopadding">
         <div class="banner-xs-two">
           <div class="aspect-ratio aspect-ratio--4to3">
-            <picture>
-              <source srcset="../../assets/img/banners/sunglass-4to3.jpg"
-                      media="(min-width: 1200px)">
-              <source srcset="../../assets/img/banners/sunglass-4to3.jpg"
-                      media="(min-width: 768px)">
-              <img src="../../assets/img/banners/sunglass-4to3.jpg"
-                   class="img-responsive">
-            </picture>
+            <BannerPicture :file="'sunglass-4to3.jpg'"/>
           </div>
           <div class="banner-text">
             <h4 class="banner-title">{{ $t('title2') }}</h4>
@@ -42,11 +31,7 @@
       <div class="col-sm-12 nopadding">
         <div class="banner-sm">
           <div class="aspect-ratio aspect-ratio--8to3">
-            <picture>
-              <source srcset="../../assets/img/banners/woman-8to3.jpg" media="(min-width: 1200px)">
-              <source srcset="../../assets/img/banners/woman-8to3.jpg" media="(min-width: 768px)">
-              <img src="../../assets/img/banners/woman-8to3.jpg" class="img-responsive">
-            </picture>
+            <BannerPicture :file="'woman-8to3.jpg'"/>
           </div>
           <div class="banner-text">
             <h4 class="banner-title">{{ $t('title3')}}</h4>
@@ -60,6 +45,14 @@
     </div>
   </div>
 </template>
+
+<script>
+import BannerPicture from './BannerPicture.vue';
+
+export default {
+  components: { BannerPicture },
+};
+</script>
 
 <i18n>
 en:
