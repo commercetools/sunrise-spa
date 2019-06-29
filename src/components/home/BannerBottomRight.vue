@@ -20,9 +20,10 @@
           <div class="banner-text">
             <h4 class="banner-title">{{ $t('title2') }}</h4>
             <p class="banner-paragraph">{{ $t('subtitle2') }}</p>
-            <a href="/products/accessories-men-sunglasses" class="btn banner-btn">
+            <router-link :to="{ name: 'products', params: { categorySlug: 'accessories-men-sunglasses' } }"
+                         class="btn banner-btn">
               {{ $t('linkLabel') }}
-            </a>
+            </router-link>
           </div>
         </div>
       </div>
@@ -36,9 +37,10 @@
           <div class="banner-text">
             <h4 class="banner-title">{{ $t('title3')}}</h4>
             <p class="banner-paragraph">{{ $t('subtitle3') }}</p>
-            <a href="/products/women-clothing-sunglasses" class="btn banner-btn">
+            <router-link :to="{ name: 'products', params: { categorySlug: 'women-clothing-sunglasses' } }"
+                         class="btn banner-btn">
               {{ $t('linkLabel') }}
-            </a>
+            </router-link>
           </div>
         </div>
       </div>
