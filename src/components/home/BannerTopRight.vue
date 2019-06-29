@@ -7,9 +7,10 @@
     <div class="banner-text">
       <h4 class="banner-title">{{ $t('title') }}</h4>
       <p class="banner-paragraph">{{ $t('subtitle') }}</p>
-      <a href="/products/women-bags" class="btn banner-btn">
+      <router-link :to="{ name: 'products', params: { categorySlug: 'women-bags' } }"
+                   class="btn banner-btn">
         {{ $t('linkLabel') }}
-      </a>
+      </router-link>
     </div>
   </div>
 </template>
