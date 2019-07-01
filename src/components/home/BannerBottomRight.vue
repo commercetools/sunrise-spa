@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-sm-6 nopadding">
         <div class="banner-xs-one">
-          <BannerPicture :file="'blue-bg-4to3.png'"/>
+          <BannerPicture :file="'bottom-right-top-left.png'"/>
           <div class="banner-text">
             <h4 class="banner-title">
               <img src="../../assets/img/banners/sun-logo.png"/><br/><br/>
@@ -15,7 +15,7 @@
       <div class="col-sm-6 nopadding">
         <div class="banner-xs-two">
           <div class="aspect-ratio aspect-ratio--4to3">
-            <BannerPicture :file="'sunglass-4to3.jpg'"/>
+            <BannerPicture :file="'bottom-right-top-right.jpg'"/>
           </div>
           <div class="banner-text">
             <h4 class="banner-title">{{ $t('title2') }}</h4>
@@ -32,7 +32,7 @@
       <div class="col-sm-12 nopadding">
         <div class="banner-sm">
           <div class="aspect-ratio aspect-ratio--8to3">
-            <BannerPicture :file="'woman-8to3.jpg'"/>
+            <BannerPicture :file="'bottom-right-bottom.jpg'"/>
           </div>
           <div class="banner-text">
             <h4 class="banner-title">{{ $t('title3')}}</h4>

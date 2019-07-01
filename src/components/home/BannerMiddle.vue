@@ -1,7 +1,7 @@
 <template>
   <div class="col-sm-12 nopadding">
     <div class="aspect-ratio aspect-ratio--8to3">
-      <BannerPicture :file="'man-8to3.jpg'"/>
+      <BannerPicture :file="'middle.jpg'"/>
     </div>
 
     <div class="banner-text">

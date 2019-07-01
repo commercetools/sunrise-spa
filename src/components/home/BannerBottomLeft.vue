@@ -1,7 +1,7 @@
 <template>
   <div class="col-sm-6 nopadding banner-left">
     <div class="aspect-ratio aspect-ratio--4to3">
-      <BannerPicture :file="'shoes-4to3.jpg'"/>
+      <BannerPicture :file="'bottom-left.jpg'"/>
     </div>
     <div class="banner-text">
       <h4 class="banner-title">{{ $t('title') }}</h4>
