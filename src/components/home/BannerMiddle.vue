@@ -37,7 +37,7 @@ en:
     Check out our must-to-have-it pieces."
   description2: "The weather is heating up, but you don’t have the right
     outfit yet. Thankfully, we are here to help you out. Spring break is upon us and it's
-    essential to migrate. So whether you're jetting off to Ibiza or Majorca for a party vacation
+    essential to migrate. So whether you're jetting off to Ibiza or Mallorca for a party vacation
     or getting away to greener pastures - here are the fashion pieces we'll be stashing in ourfavorite getaway bags."
   linkLabel: "Shop collection"
 de:
