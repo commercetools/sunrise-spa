@@ -56,7 +56,7 @@ describe('my orders', () => {
           .contains(/^\s*368,75\s€\s*$/);
         cy.wrap($order)
           .find('[data-test=order-date]')
-          .contains(/^\s*\d{1,2}\.*\s*[A-Za-zäÄöÖüÜß]+\s*\d{4}\s*$/);
+          .contains(/^\s*\d{1,2}\.*\s*[A-Za-zäÄöÖüÜß].+\s*\d{4}\s*$/);
         cy.wrap($order)
           .find('[data-test=order-number]')
           .contains('1234');

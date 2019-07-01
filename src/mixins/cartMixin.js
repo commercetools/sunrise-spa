@@ -86,6 +86,13 @@ export default {
                   ...DisplayableMoney
                 }
               }
+              discountCodes {
+                discountCode {
+                  id
+                  code
+                  name(locale: $locale)                  
+                }
+              }
             }
           }
           ${DISPLAYABLE_MONEY_FRAGMENT}`,

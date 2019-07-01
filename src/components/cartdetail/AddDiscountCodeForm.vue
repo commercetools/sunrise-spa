@@ -1,0 +1,109 @@
+<template>
+  <form @submit.prevent="submit(addDiscountCode)"
+        class="text-right promotion-info">
+    <div class="row">
+      <ServerError :error="serverError"
+                   v-slot="{ graphQLError }"
+                   class="server-error">
+        {{ getErrorMessage(graphQLError) }}
+      </ServerError>
+      <span class="text-uppercase promo-info-text">
+        {{ $t('code') }}
+        <img src="../../assets/img/information.png"
+             class="info-icon"
+             alt="information icon">
+      </span>
+      <BaseInput v-model="form.code"
+                 :vuelidate="$v.form.code"
+                 type="text"
+                 id="promo-code"
+                 class="vuelidate"
+                 data-test="discount-code-input"/>
+      <LoadingButton :buttonState="buttonState"
+                     class="apply-button"
+                     data-test="apply-discount-code-button">
+        {{ $t('apply') }}
+      </LoadingButton>
+    </div>
+  </form>
+</template>
+
+<script>
+import { required } from 'vuelidate/lib/validators';
+import LoadingButton from '../common/form/LoadingButton.vue';
+import ServerError from '../common/form/ServerError.vue';
+import BaseInput from '../common/form/BaseInput.vue';
+import cartMixin from '@/mixins/cartMixin';
+import formMixin from '@/mixins/formMixin';
+
+export default {
+  components: {
+    BaseInput,
+    LoadingButton,
+    ServerError,
+  },
+
+  data: () => ({
+    form: {
+      code: null,
+    },
+  }),
+
+  methods: {
+    addDiscountCode() {
+      return this.updateMyCart({
+        addDiscountCode: {
+          code: this.form.code,
+        },
+      });
+    },
+
+    getErrorMessage({ code }) {
+      if (code === 'DiscountCodeNonApplicable') {
+        return this.$t('nonApplicable');
+      }
+      return this.$t('unknownError');
+    },
+  },
+
+  mixins: [cartMixin, formMixin],
+
+  validations: {
+    form: {
+      code: { required },
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.apply-button {
+  background: none;
+  font-weight: normal;
+  font-size: 14px;
+  border: 2px solid #D6D6D6;
+  color: #ADADAD;
+  padding: 0.5em 1em;
+
+  &:hover {
+    background: none;
+    color: #858585;
+    border: 2px solid #858585;
+  }
+}
+
+.server-error {
+  margin: 1em;
+}
+</style>
+
+<i18n>
+en:
+  code: "Discount code"
+  apply: "Apply"
+  nonApplicable: "This discount code is non applicable"
+de:
+  code: "Rabattcode"
+  apply: "Anwenden"
+  nonApplicable: "Dieser Rabattcode ist nicht anwendbar"
+</i18n>

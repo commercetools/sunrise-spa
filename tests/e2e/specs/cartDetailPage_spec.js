@@ -93,4 +93,27 @@ describe('CartDetailPage', () => {
       });
     cy.get('[data-test=cart-line-item]').should('have.length', 0);
   });
+
+  it('applies and deletes discount codes', () => {
+    cy.addLineItem('/product/lemare-booties-0778-brown/M0E20000000E0XM', 1);
+    cy.visit('/cart');
+
+    cy.get('[data-test=cart-line-item-total-price]')
+      .contains(/^\s*248,75\s€\s*$/);
+
+    cy.get('[data-test=discount-code-input]')
+      .type('CODE2019');
+    cy.get('[data-test=apply-discount-code-button]')
+      .click();
+    cy.get('[data-test=cart-total-price]')
+      .contains(/^\s*236,31\s€\s*$/);
+
+    cy.get('[data-test=discount-code-name]')
+      .contains('CODE2019');
+    cy.get('[data-test=remove-discount-button]')
+      .click();
+
+    cy.get('[data-test=cart-line-item-total-price]')
+      .contains(/^\s*248,75\s€\s*$/);
+  });
 });

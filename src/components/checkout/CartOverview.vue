@@ -60,8 +60,8 @@ import BaseMoney from '../common/BaseMoney.vue';
 import productMixin from '../../mixins/productMixin';
 import cartMixin from '../../mixins/cartMixin';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
-import CartLikePriceDetail from '../common/CartLikePriceDetail.vue';
-import LineItemInfo from '../common/LineItemInfo.vue';
+import CartLikePriceDetail from '../common/cartlike/CartLikePriceDetail.vue';
+import LineItemInfo from '../common/cartlike/LineItemInfo.vue';
 
 export default {
   components: {
@@ -125,6 +125,13 @@ export default {
                 }
                 totalNet {
                   ...DisplayableMoney
+                }
+              }
+              discountCodes {
+                discountCode {
+                  id
+                  code
+                  name(locale: $locale)
                 }
               }
             }

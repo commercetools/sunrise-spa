@@ -2,25 +2,14 @@
   <div v-if="cartLike"
        class="cart-like-price-detail">
     <div class="row">
+      <div v-if="discountCodesExist"
+           class="col-sm-12">
+        <DiscountCodes :cartLike="cartLike"/>
+        <hr>
+      </div>
       <div class="col-sm-7 col-xs-7">
         <div class="text-right subtotal">
           <span class="subtotal-title">{{ $t('subtotal') }}</span>
-        </div>
-        <div class="text-right">
-          <!--<div class="row">-->
-          <!--<div class="col-lg-8 col-md-7 col-sm-7 col-xs-7">-->
-          <!--<div class="text-right checkout-promo-code">-->
-          <!--<span class="text-uppercase">{{ $t("checkout:promoCodeApplied") }}</span>-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--<div class="col-lg-4 col-md-5 col-sm-5 col-xs-5">-->
-          <!--<div class="text-right checkout-promo-code">-->
-          <!--&lt;!&ndash;{{#each content.cart.discountCodes}}&ndash;&gt;-->
-          <!--&lt;!&ndash;<span class="text-uppercase">{{name}}</span><br>&ndash;&gt;-->
-          <!--&lt;!&ndash;{{/each}}&ndash;&gt;-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--</div>-->
         </div>
         <div v-if="cartLike.shippingInfo"
              class="text-right delivery-info">
@@ -53,7 +42,7 @@
         <hr>
         <div>
           <span v-if="taxes"
-                data-test="cart-taxes-amount">>
+                data-test="cart-taxes-amount">
             <BaseMoney :money="taxes"/>
           </span>
         </div>
@@ -77,10 +66,12 @@
 </template>
 
 <script>
-import BaseMoney from './BaseMoney.vue';
+import BaseMoney from '../BaseMoney.vue';
+import DiscountCodes from './DiscountCodes.vue';
 
 export default {
   components: {
+    DiscountCodes,
     BaseMoney,
   },
 
@@ -113,6 +104,10 @@ export default {
       }
       return null;
     },
+
+    discountCodesExist() {
+      return this.cartLike.discountCodes?.length;
+    },
   },
 };
 </script>
@@ -123,9 +118,11 @@ en:
   shipping: "Shipping"
   salesTax: "Sales Tax"
   total: "Total"
+  discount: "Discount"
 de:
   subtotal: "Zwischensumme"
   shipping: "Versand"
   salesTax: "MwSt."
   total: "Gesamtpreis"
+  discount: "Rabatt"
 </i18n>

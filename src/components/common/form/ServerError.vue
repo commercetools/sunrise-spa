@@ -7,6 +7,7 @@
         {{ $t('unknownError') }}
       </slot>
     </span>
+    <span v-else-if="is400Error">{{ $t('badRequestError') }}</span>
     <span v-else-if="isNetworkError">{{ $t('networkError') }}</span>
     <span v-else>{{ $t('unknownError') }}</span>
   </div>
@@ -23,6 +24,10 @@ export default {
   computed: {
     isNetworkError() {
       return this.error?.networkError;
+    },
+
+    is400Error() {
+      return this.error?.networkError?.statusCode === 400;
     },
 
     isGraphQLError() {
@@ -45,7 +50,9 @@ export default {
 
 <i18n>
 en:
+  badRequestError: "There seems to be an issue with the request"
   networkError: "There was a error in the connection, please try again later"
 de:
+  badRequestError: "Es gibt ein Problem mit der Anfrage"
   networkError: "Bei der Verbindung ist ein Fehler aufgetreten, versuchen Sie es bitte später nochmals"
 </i18n>

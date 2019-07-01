@@ -53,6 +53,7 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
+        <slot name="before-pricing"></slot>
         <CartLikePriceDetail :cartLike="cartLike"
                              class="total-price-calc"/>
       </div>
@@ -63,8 +64,8 @@
 <script>
 import LineItemInfo from './LineItemInfo.vue';
 import CartLikePriceDetail from './CartLikePriceDetail.vue';
-import BasePrice from './BasePrice.vue';
-import BaseMoney from './BaseMoney.vue';
+import BasePrice from '../BasePrice.vue';
+import BaseMoney from '../BaseMoney.vue';
 
 export default {
   components: {

@@ -66,7 +66,7 @@ import priceMixin from '@/mixins/priceMixin';
 import productMixin from '@/mixins/productMixin';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 import BaseMoney from '../common/BaseMoney.vue';
-import LineItemInfo from '../common/LineItemInfo.vue';
+import LineItemInfo from '../common/cartlike/LineItemInfo.vue';
 import LineItemDeleteForm from '../cartdetail/LineItemDeleteForm.vue';
 
 export default {

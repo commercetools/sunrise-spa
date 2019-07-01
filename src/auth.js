@@ -25,6 +25,7 @@ const tokenProvider = new TokenProvider({
 }, storedTokenInfo);
 
 function cleanUpSession() {
+  localStorage.removeItem(tokenInfoStorageName);
   localStorage.removeItem(isAuthenticatedStorageName);
   return store.dispatch('setAuthenticated', false);
 }

@@ -30,6 +30,9 @@
                                       :quantity="lineItem.quantity"
                                       class="col-sm-7 clearfix sm-pull-right"/>
               </template>
+              <template #before-pricing>
+                <AddDiscountCodeForm/>
+              </template>
             </CartLikeSummary>
           </div>
         </div>
@@ -60,16 +63,18 @@
 <script>
 import gql from 'graphql-tag';
 import cartMixin from '@/mixins/cartMixin';
-import CartLikeSummary from '../common/CartLikeSummary.vue';
+import CartLikeSummary from '../common/cartlike/CartLikeSummary.vue';
 import LineItemDeleteForm from './LineItemDeleteForm.vue';
 import LineItemQuantityForm from './LineItemQuantityForm.vue';
+import AddDiscountCodeForm from './AddDiscountCodeForm.vue';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {
   components: {
+    CartLikeSummary,
     LineItemQuantityForm,
     LineItemDeleteForm,
-    CartLikeSummary,
+    AddDiscountCodeForm,
   },
 
   data: () => ({
@@ -124,6 +129,13 @@ export default {
                 }
                 totalNet {
                   ...DisplayableMoney
+                }
+              }
+              discountCodes {
+                discountCode {
+                  id
+                  code
+                  name(locale: $locale)
                 }
               }
             }

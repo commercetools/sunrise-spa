@@ -48,7 +48,7 @@
 import gql from 'graphql-tag';
 import ShipmentInfo from './ShipmentInfo.vue';
 import BaseDate from '../../common/BaseDate.vue';
-import CartLikeSummary from '../../common/CartLikeSummary.vue';
+import CartLikeSummary from '../../common/cartlike/CartLikeSummary.vue';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {
@@ -98,6 +98,13 @@ export default {
               }
               totalPrice {
                 ...DisplayableMoney
+              }
+              discountCodes {
+                discountCode {
+                  id
+                  code
+                  name(locale: $locale)
+                }
               }
               lineItems {
                 id

@@ -72,7 +72,9 @@ button {
   .state-layer {
     background-color: #FFBA27;
   }
-
+  .state-layer {
+    background-color: inherit;
+  }
   .state-layer, .loading-animation, svg.check {
     position: absolute;
     top: 0;
@@ -89,7 +91,7 @@ button {
 
     .fade-enter, .fade-leave-to {
       opacity: 1;
-      background-color: #FFBA27;
+      background-color: inherit;
     }
 
     .fade-enter-to, .fade-leave {

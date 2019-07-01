@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import SelectBoxIt from '../common/SelectBoxIt.vue';
+import SelectBoxIt from '../common/form/SelectBoxIt.vue';
 
 export default {
   components: {

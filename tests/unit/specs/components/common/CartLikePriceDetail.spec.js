@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import CartLikePriceDetail from '@/components/common/CartLikePriceDetail.vue';
+import CartLikePriceDetail from '@/components/common/cartlike/CartLikePriceDetail.vue';
 
 describe('CartLikePriceDetail.vue', () => {
   const cartLike = {
@@ -9,6 +9,11 @@ describe('CartLikePriceDetail.vue', () => {
       centAmount: 83050,
       fractionDigits: 2,
     },
+    discountCodes: [{
+      discountCode: {
+        code: 'CODE2019',
+      },
+    }],
   };
 
   let options;
