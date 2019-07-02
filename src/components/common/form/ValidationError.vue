@@ -1,17 +1,17 @@
 <template>
-  <div v-if="vuelidate.$error"
-       data-test="validation-error-list">
-    <div v-for="validation in validations"
-         :key="validation">
-      <div v-if="!vuelidate[validation]"
-           :validation="validation"
-           data-test="validation-error">
-        <div class="form-error-bubble">
+  <span v-if="vuelidate.$error"
+        data-test="validation-error-list">
+    <span v-for="validation in validations"
+          :key="validation">
+      <span v-if="!vuelidate[validation]"
+            :validation="validation"
+            data-test="validation-error">
+        <span class="form-error-message">
           {{ getErrorMessage(validation) }}
-        </div>
-      </div>
-    </div>
-  </div>
+        </span>
+      </span>
+    </span>
+  </span>
 </template>
 
 <script>
@@ -47,14 +47,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form-error-bubble {
+.form-error-message {
   font-size: 12px;
   position: absolute;
-  margin-top: -7px;
   margin-left: 1px;
   z-index: 1000;
   padding: 0;
   color: rgb(206, 65, 65);
+  left: 0;
+  bottom: -10px;
 }
 </style>
 

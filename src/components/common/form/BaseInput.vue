@@ -2,7 +2,8 @@
   <span class="form-field">
     <BaseLabel v-if="label"
                :vuelidate="vuelidate"
-               :label="label">
+               :label="label"
+               :type="$attrs.type">
       <input v-model="model"
              v-bind="$attrs"
              :class="{ 'error': vuelidate.$error }"/>
@@ -62,6 +63,15 @@ export default {
 <style scoped>
 .form-field {
   width: 100%;
+  position: relative;
+}
+
+input {
+  width: 100%;
+  border: 1px solid #D6D6D6;
+  border-radius: 1px;
+  padding: 0.5em;
+  margin-top: 0.2em;
 }
 
 .error {

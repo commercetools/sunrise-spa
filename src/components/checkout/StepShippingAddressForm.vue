@@ -11,8 +11,7 @@
                      :vuelidate="$v.form.firstName"
                      :label="$t('firstName')"
                      type="text"
-                     autocomplete="fname"
-                     class="checkout-input-field"/>
+                     autocomplete="fname"/>
         </div>
         <div class="col-sm-6">
           <BaseInput v-model="form.lastName"

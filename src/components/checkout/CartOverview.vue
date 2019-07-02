@@ -13,7 +13,7 @@
                :key="lineItem.id"
                class="order-summary-item">
             <LineItemInfo :line-item="lineItem"
-                          class="col-sm-12"/>
+                          class="line-item-info"/>
             <div class="order-item-price">
               <div class="row">
                 <div class="col-xs-4">
@@ -147,6 +147,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.line-item-info {
+  float: left;
+}
+</style>
 
 <i18n>
   en:

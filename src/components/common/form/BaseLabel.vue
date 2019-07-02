@@ -1,5 +1,6 @@
 <template>
   <label class="field-label">
+    <slot v-if="checkbox"></slot>
     <span class="text">{{ label }}</span>
     <span v-if="required"
           :title="$t('required')"
@@ -7,7 +8,7 @@
           data-test="form-label-required">
       *
     </span>
-    <slot></slot>
+    <slot v-if="!checkbox"></slot>
   </label>
 </template>
 
@@ -22,11 +23,18 @@ export default {
       type: String,
       required: true,
     },
+    type: {
+      type: String,
+    },
   },
 
   computed: {
     required() {
       return this.vuelidate.$params?.required;
+    },
+
+    checkbox() {
+      return this.type === 'checkbox';
     },
   },
 };
@@ -36,10 +44,12 @@ export default {
 label {
   width: 100%;
   padding-top: 15px;
+  position: relative;
 }
 
 label .text {
-  text-transform: uppercase
+  text-transform: uppercase;
+  font-weight: 400;
 }
 
 .field-required {

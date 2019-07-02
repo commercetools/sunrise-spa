@@ -112,6 +112,13 @@ export default {
 };
 </script>
 
+<style scoped>
+.cart-like-price-detail {
+  border-top: 1px solid #D6D6D6;
+  padding: 1em;
+}
+</style>
+
 <i18n>
 en:
   subtotal: "Subtotal"

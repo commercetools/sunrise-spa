@@ -70,6 +70,7 @@
 .cart-content {
   background: $white;
   border: 1px solid $alto;
+  padding: 0 1em;
 }
 .cart-items-title {
   margin: 1em 1em 0;
@@ -125,13 +126,13 @@
   margin-right: 0.5em;
 }
 
-.cart-content .single-cart-item {
-  margin: 0 1em;
-}
-
 .single-cart-item {
-  padding: 1em;
+  margin: 1em;
   border-bottom: 1px solid $alto;
+
+  &:last-child {
+    border-bottom: 0;
+  }
 }
 
 // Quantity counter / spinner
@@ -219,7 +220,7 @@
 
 // Total price section
 .total-price-calc {
-  margin: 1em;
+  padding: 1em;
   font-size: 1.1em;
   letter-spacing: 0.1em;
 }

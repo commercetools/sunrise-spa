@@ -1,26 +1,19 @@
 <template>
-  <form @submit.prevent="submit(addDiscountCode)"
-        class="text-right promotion-info">
-    <div class="row">
+  <form @submit.prevent="submit(addDiscountCode)">
+    <div class="text-right add-discount-code-form">
       <ServerError :error="serverError"
                    v-slot="{ graphQLError }"
                    class="server-error">
         {{ getErrorMessage(graphQLError) }}
       </ServerError>
-      <span class="text-uppercase promo-info-text">
-        {{ $t('code') }}
-        <img src="../../assets/img/information.png"
-             class="info-icon"
-             alt="information icon">
-      </span>
       <BaseInput v-model="form.code"
                  :vuelidate="$v.form.code"
+                 :label="$t('code')"
                  type="text"
                  id="promo-code"
-                 class="vuelidate"
                  data-test="discount-code-input"/>
       <LoadingButton :buttonState="buttonState"
-                     class="apply-button"
+                     class="submit-button"
                      data-test="apply-discount-code-button">
         {{ $t('apply') }}
       </LoadingButton>
@@ -76,24 +69,47 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.apply-button {
-  background: none;
-  font-weight: normal;
-  font-size: 14px;
-  border: 2px solid #D6D6D6;
-  color: #ADADAD;
-  padding: 0.5em 1em;
+<style lang="scss">
+.add-discount-code-form {
+  border-top: 1px solid #D6D6D6;
+  padding: 1em;
 
-  &:hover {
-    background: none;
-    color: #858585;
-    border: 2px solid #858585;
+  label {
+    display: inline;
+
+    .text {
+      color: #858585;
+      letter-spacing: 0.1em;
+      margin-right: 1em;
+    }
   }
-}
 
-.server-error {
-  margin: 1em;
+  .form-error-message {
+    display: none;
+  }
+
+  .field-required {
+    display: none;
+  }
+
+  .submit-button {
+    background: none;
+    font-weight: normal;
+    font-size: 14px;
+    border: 2px solid #D6D6D6;
+    color: #ADADAD;
+    padding: 0.5em 1em;
+
+    &:hover {
+      background: none;
+      color: #858585;
+      border: 2px solid #858585;
+    }
+  }
+
+  .server-error {
+    margin: 1em;
+  }
 }
 </style>
 

@@ -216,10 +216,15 @@
   color: $gray;
   padding-right: 1em;
 }
-.order-item-price {
+.order-summary-item {
   margin: 1em;
-  padding-bottom: 1em;
   border-bottom: 1px solid $alto;
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+.order-item-price {
+  padding-bottom: 1em;
 }
 .order-item-value {
   border-left: 1px solid $alto;
