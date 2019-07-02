@@ -108,7 +108,7 @@ export default {
   }
 
   .server-error {
-    margin: 1em;
+    margin: 0.5em 1em;
   }
 }
 </style>
