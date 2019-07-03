@@ -224,6 +224,7 @@
       padding-bottom: 10px;
       width: 180px;
       top: -2px;
+      text-align: left;
       .location-select {
         width: 120px;
         color: $white;
@@ -231,7 +232,11 @@
         background: transparent url("../img/arrow-67-white.png") no-repeat 90% 50%;
         background-size: 10px;
         margin: 10px;
-        text-transform: capitalize;
+        text-transform: uppercase;
+      }
+      li {
+        text-align: left;
+        width: 100%;
       }
     }
     li {
