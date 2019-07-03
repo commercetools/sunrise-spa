@@ -16,7 +16,7 @@
                           class="line-item-info"/>
             <div class="order-item-price">
               <div class="row">
-                <div class="col-xs-4">
+                <div class="col-xs-3">
                   <div class="text-right">
                     <span class="text-uppercase pricing-titles">{{ $t("quantity") }}</span>
                     <br>
@@ -30,7 +30,7 @@
                     <BasePrice :price="lineItem.price"/>
                   </div>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-5">
                   <div class="text-right order-item-value">
                     <span class="text-uppercase pricing-titles">{{ $t("total") }}</span>
                     <br>
