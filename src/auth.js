@@ -1,7 +1,7 @@
 import SdkAuth, { TokenProvider } from '@commercetools/sdk-auth';
-import apolloProvider from '@/apollo';
-import store from '@/store';
-import config from '@/../sunrise.config';
+import apolloProvider from './apollo';
+import store from './store';
+import config from '../sunrise.config';
 
 const tokenInfoStorageName = 'token';
 const isAuthenticatedStorageName = 'auth';
