@@ -48,6 +48,8 @@ export default {
         addDiscountCode: {
           code: this.form.code,
         },
+      }).then(() => {
+        this.form.code = null;
       });
     },
 
@@ -73,6 +75,10 @@ export default {
 .add-discount-code-form {
   border-top: 1px solid #D6D6D6;
   padding: 1em;
+
+  .form-field {
+    display: inline;
+  }
 
   label {
     display: inline;

@@ -10,7 +10,7 @@
                    :alt="$t('securePayment')">
             </span>
             <span class="text-uppercase secure-payment-title">
-              <!--{{ $t("shippingPage.title") }}-->
+              {{ $t("secureCheckout") }}
             </span>
           </div>
         </div>
@@ -18,7 +18,7 @@
           <div class="checkout-steps text-right">
             <div>
               <span class="step-number">1</span>
-              <span class="text-uppercase step-title}">{{ $t("shipping") }}</span>
+              <span class="text-uppercase step-title">{{ $t("shipping") }}</span>
             </div>
             <div>
               <span class="step-number">2</span>
@@ -65,13 +65,65 @@ export default {
 
 <i18n>
 en:
+  secureCheckout: "Secure Checkout"
   securePayment: "Secure payment"
   shipping: "Shipping"
   payment: "Payment"
   confirmation: "Confirmation"
+
+  completeMyOrder: "Complete My Order"
+  continueCheckout: "Continue Checkout"
+  needHelpCustomerService: "Need help? Customer Service"
+  orderDate: "Order Date"
+  orderDiscount: "Order Discount"
+  orderNumber: "Order Number"
+  paymentInformation: "Payment Details"
+  shippingInformation: "Shipping Information"
+  shippingMethod: "Shipping Method"
+  paymentPage:
+  cardName: "Name on credit card"
+  cardNumber: "Credit card number"
+  expiryDateTitle: "Expiry data"
+  paymentOptionsTitle: "Please provide one of the following payment options"
+  securityCode: "Security Code"
+  securityCodeTooltip: "normally you find it on the back of your card"
+  thankYouPage:
+  title: "Thank you for your order!"
+  emailSentToStart: "An email has been sent to"
+  emailSentToEnd: "as a copy of this confirmation purchase"
+  yourOrderDetails: "Your order details"
+  shippingAddress: "Shipping Address"
+  billingAddress: "Billing Address"
+  differentBillingAddressCheckboxLabel: "Use a different address for billing"
 de:
+  secureCheckout: "Sicherer Bestellprozess"
   securePayment: "Sichere Bezahlung"
   shipping: "Versand"
   payment: "Zahlung"
   confirmation: "Bestätigung"
+
+  completeMyOrder: "Zahlungspflichtig bestellen"
+  continueCheckout: "Weiter"
+  needHelpCustomerService: "Brauchen Sie Hilfe? Kundenservice"
+  orderDate: "Bestelldatum"
+  orderDiscount: "Bestelldiscount"
+  orderNumber: "Bestellnummer"
+  paymentInformation: "Zahlungsdetails"
+  shippingInformation: "Versand Information"
+  shippingMethod: "Versandart"
+  paymentPage:
+  cardName: "Name auf der Kreditkarte"
+  cardNumber: "Kreditkartennummer"
+  expiryDateTitle: "Gültig bis"
+  paymentOptionsTitle: "Bitte wählen Sie eine Zahlungsart aus"
+  securityCode: "Prüfnummer"
+  securityCodeTooltip: "Normalerweise befindet sich der Code auf der Rückseite."
+  thankYouPage:
+  title: "Vielen Dank für Ihre Bestellung!"
+  emailSentToStart: "Eine Email wurde versandt"
+  emailSentToEnd: "als Bestellbestätigung."
+  yourOrderDetails: "Ihre Bestelldetails"
+  billingAddress: "Zahlungsadresse"
+  shippingAddress: "Versandadresse"
+  differentBillingAddressCheckboxLabel: "Abweichende Adresse als Rechnungsadresse verwenden."
 </i18n>

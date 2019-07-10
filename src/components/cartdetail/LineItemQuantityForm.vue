@@ -83,9 +83,19 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss">
+.quantity-spinner {
   .change-quantity-button {
     margin: 1px;
     border: 0;
   }
+
+  .form-field {
+    display: inline;
+  }
+
+  .form-error-message {
+    display: none;
+  }
+}
 </style>

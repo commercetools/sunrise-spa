@@ -142,6 +142,7 @@ export default {
 
     openForm() {
       this.form = { ...this.me.customer };
+      delete this.form.__typename;
       this.showForm = true;
     },
 

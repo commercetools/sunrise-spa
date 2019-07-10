@@ -1,10 +1,14 @@
 <template>
-  <form @submit="submit(setShippingAddress)">
+  <form @submit.prevent="submit(setShippingAddress)">
     <div class="shipping-info">
       <span class="text-uppercase shipping-info-title">{{ $t('shippingInformation') }}</span>
-      <span class="pull-right required-fields">{{ $t('form.required') }} *</span>
     </div>
-    <div class="address-form">
+    <div class="address-form shipping-address-form">
+      <div class="row">
+        <div class="col-sm-12">
+          <ServerError :error="serverError"/>
+        </div>
+      </div>
       <div class="row">
         <div class="col-sm-6">
           <BaseInput v-model="form.firstName"
@@ -18,47 +22,40 @@
                      :vuelidate="$v.form.lastName"
                      :label="$t('lastName')"
                      type="text"
-                     autocomplete="lname"
-                     class="checkout-input-field"/>
+                     autocomplete="lname"/>
         </div>
         <div class="col-sm-12">
           <BaseInput v-model="form.streetName"
                      :vuelidate="$v.form.streetName"
                      :label="$t('streetName')"
                      type="text"
-                     autocomplete="shipping street-address"
-                     class="checkout-input-field"/>
+                     autocomplete="shipping street-address"/>
         </div>
         <div class="col-sm-12">
           <BaseInput v-model="form.additionalStreetInfo"
                      :vuelidate="$v.form.additionalStreetInfo"
                      :label="$t('additionalStreetInfo')"
-                     type="text"
-                     class="checkout-input-field"/>
-        </div>
-        <div class="col-sm-4">
-          <BaseInput v-model="form.city"
-                     :vuelidate="$v.form.city"
-                     :label="$t('city')"
-                     type="text"
-                     autocomplete="shipping locality"
-                     class="checkout-input-field"/>
+                     type="text"/>
         </div>
         <div class="col-sm-3">
           <BaseInput v-model="form.postalCode"
                      :vuelidate="$v.form.postalCode"
                      :label="$t('postalCode')"
                      type="text"
-                     autocomplete="shipping postal-code"
-                     class="checkout-input-field"/>
+                     autocomplete="shipping postal-code"/>
+        </div>
+        <div class="col-sm-4">
+          <BaseInput v-model="form.city"
+                     :vuelidate="$v.form.city"
+                     :label="$t('city')"
+                     type="text"
+                     autocomplete="shipping address-level2"/>
         </div>
         <div class="col-sm-5">
-          <div class="country input-block">
-            <BaseSelect v-model="form.country"
-                        :vuelidate="$v.form.country"
-                        :label="$t('country')"
-                        class="checkout-dropdown"/>
-          </div>
+          <BaseSelect v-model="form.country"
+                      :vuelidate="$v.form.country"
+                      :label="$t('country')"
+                      :options="countries"/>
         </div>
       </div>
       <hr>
@@ -68,23 +65,23 @@
                      :vuelidate="$v.form.phone"
                      :label="$t('phone')"
                      type="text"
-                     autocomplete="tel"
-                     class="checkout-input-field"/>
+                     autocomplete="tel"/>
         </div>
         <div class="col-sm-6">
           <BaseInput v-model="form.email"
                      :vuelidate="$v.form.email"
                      :label="$t('email')"
                      type="email"
-                     autocomplete="email"
-                     class="checkout-input-field"/>
+                     autocomplete="email"/>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <div>
-          <LoadingButton id="shipping-continue-checkout-btn-xs"
+          <LoadingButton :buttonState="buttonState"
+                         type="submit"
+                         id="shipping-continue-checkout-btn-xs"
                          class="btn text-uppercase checkout-checkout-btn">
             {{ $t('continue') }}
           </LoadingButton>
@@ -97,28 +94,36 @@
 <script>
 import gql from 'graphql-tag';
 import { required, email } from 'vuelidate/lib/validators';
+import formMixin from '../../mixins/formMixin';
+import cartMixin from '../../mixins/cartMixin';
 import BaseInput from '../common/form/BaseInput.vue';
 import BaseSelect from '../common/form/BaseSelect.vue';
 import LoadingButton from '../common/form/LoadingButton.vue';
+import ServerError from '../common/form/ServerError.vue';
 
 export default {
   components: {
+    ServerError,
     LoadingButton,
     BaseSelect,
     BaseInput,
   },
 
-  props: {
-    address: {
-      type: Object,
-      default: () => ({}),
-    },
-  },
+  mixins: [formMixin, cartMixin],
 
   data: () => ({
     me: null,
     form: {},
   }),
+
+  computed: {
+    countries() {
+      return [
+        { id: 'DE', name: 'Deutschland' },
+        { id: 'US', name: 'United States' },
+      ];
+    },
+  },
 
   methods: {
     setShippingAddress() {
@@ -129,8 +134,10 @@ export default {
   },
 
   watch: {
-    address(value) {
-      this.form = { ...value.activeCart.shippingAddress };
+    me(value) {
+      const { contactInfo, ...address } = value.activeCart.shippingAddress;
+      this.form = { ...contactInfo, ...address };
+      delete this.form.__typename;
     },
   },
 
@@ -147,11 +154,13 @@ export default {
                 lastName
                 streetName
                 additionalStreetInfo
-                city
                 postalCode
+                city
                 country
-                phone
-                email
+                contactInfo {
+                  phone
+                  email
+                }
               }
             }
           }
@@ -159,27 +168,28 @@ export default {
     },
   },
 
-  validations() {
-    return {
-      form: {
-        firstName: { required },
-        lastName: { required },
-        streetName: { required },
-        additionalStreetInfo: {},
-        city: { required },
-        postalCode: { required },
-        country: { required },
-        phone: {},
-        email: { required, email },
-      },
-    };
+  validations: {
+    form: {
+      firstName: { required },
+      lastName: { required },
+      streetName: { required },
+      additionalStreetInfo: {},
+      postalCode: { required },
+      city: { required },
+      country: { required },
+      phone: {},
+      email: { required, email },
+    },
   },
 };
 </script>
 
-<style scoped>
-.address-form {
+<style lang="scss">
+.shipping-address-form {
   margin: 0.5em 1em;
+  .selectboxit, .selectboxit-options {
+    width: 100% !important;
+  }
 }
 </style>
 

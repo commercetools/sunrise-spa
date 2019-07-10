@@ -17,10 +17,6 @@ export default {
     en: 'English',
     de: 'Deutsch',
   },
-  countries: {
-    DE: 'English',
-    US: 'United States',
-  },
   categories: {
     salesExternalId: '6',
   },

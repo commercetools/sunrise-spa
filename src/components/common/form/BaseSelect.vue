@@ -2,11 +2,18 @@
   <span class="form-field">
     <BaseLabel v-if="label"
                :vuelidate="vuelidate"
-               :label="label"/>
-    <SelectBoxIt :options="options"
+               :label="label">
+      <SelectBoxIt :options="options"
+                   v-model="model"
+                   v-bind="$attrs"
+                   :class="{ 'error': vuelidate.$error }"/>
+    </BaseLabel>
+    <SelectBoxIt v-else
+                 :options="options"
                  v-model="model"
                  v-bind="$attrs"
-                 :class="{ 'error': vuelidate.$error }"/>
+                 :class="{ 'error': vuelidate.$error }"
+                 class="select"/>
     <ValidationError :vuelidate="vuelidate"
                      :customErrors="customErrors"/>
   </span>
@@ -62,6 +69,9 @@ export default {
 </script>
 
 <style scoped>
+.select {
+  display: block;
+}
 .error {
   border-color: rgba(206, 65, 65, 0.6);
 }
