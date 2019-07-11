@@ -1,5 +1,6 @@
 <template>
-  <form @submit.prevent="submit(setShippingAddress)">
+  <form v-if="cartExists"
+        @submit.prevent="submit(setShippingAddress)">
     <div class="shipping-info">
       <span class="text-uppercase shipping-info-title">{{ $t('shippingInformation') }}</span>
     </div>
@@ -135,9 +136,11 @@ export default {
 
   watch: {
     me(value) {
-      const { contactInfo, ...address } = value.activeCart.shippingAddress;
-      this.form = { ...contactInfo, ...address };
-      delete this.form.__typename;
+      if (value?.activeCart?.shippingAddress) {
+        const { contactInfo, ...address } = value.activeCart.shippingAddress;
+        this.form = { ...contactInfo, ...address };
+        delete this.form.__typename;
+      }
     },
   },
 
