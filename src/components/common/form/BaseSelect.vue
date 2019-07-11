@@ -1,19 +1,17 @@
 <template>
-  <span class="form-field">
+  <span class="form-field base-select"
+        :class="{ 'error': vuelidate.$error }">
     <BaseLabel v-if="label"
                :vuelidate="vuelidate"
                :label="label">
       <SelectBoxIt :options="options"
                    v-model="model"
-                   v-bind="$attrs"
-                   :class="{ 'error': vuelidate.$error }"/>
+                   v-bind="$attrs"/>
     </BaseLabel>
     <SelectBoxIt v-else
                  :options="options"
                  v-model="model"
-                 v-bind="$attrs"
-                 :class="{ 'error': vuelidate.$error }"
-                 class="select"/>
+                 v-bind="$attrs"/>
     <ValidationError :vuelidate="vuelidate"
                      :customErrors="customErrors"/>
   </span>
@@ -68,11 +66,18 @@ export default {
 };
 </script>
 
-<style scoped>
-.select {
-  display: block;
-}
-.error {
-  border-color: rgba(206, 65, 65, 0.6);
+<style lang="scss">
+.form-field.base-select {
+  display: inline-block;
+  width: 100%;
+  position: relative;
+
+  .selectboxit {
+    display: block;
+  }
+
+  &.error .selectboxit {
+     border-color: rgba(206, 65, 65, 0.6) !important;
+   }
 }
 </style>
