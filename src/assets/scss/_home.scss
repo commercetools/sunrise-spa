@@ -10,12 +10,6 @@
 
 // Banner option one
 .home-banner-option-one {
-  .banner-left {
-    border-right: 1px solid $white;
-  }
-  .banner-right {
-    border-left: 1px solid $white;
-  }
   .banner-text {
     position: absolute;
     bottom: 0;
@@ -88,12 +82,6 @@
 
 // Banner option three
 .home-banner-option-three {
-  .banner-left {
-    border-right: 1px solid $white;
-  }
-  .banner-right {
-    border-left: 1px solid $white;
-  }
   .banner-text {
     position: absolute;
     bottom: 0;
@@ -120,7 +108,6 @@
   }
   .banner-xs-one {
     background: $ebony-clay;
-    border-right: 1px solid $white;
     .banner-text {
       position: absolute;
       top: 0;
@@ -141,7 +128,6 @@
     }
   }
   .banner-xs-two {
-    border-left: 1px solid $white;
     .banner-text {
       position: absolute;
       top: 0;
@@ -166,7 +152,6 @@
     }
   }
   .banner-sm {
-    border-top: 2px solid $white;
     .banner-text {
       position: absolute;
       bottom: 0;
@@ -244,15 +229,6 @@
 
 // Media Queries
 @media screen and (max-width: 767px) {
-  // Banner option one
-  .home-banner-option-one {
-    .banner-left {
-      border-right: none;
-    }
-    .banner-right {
-      border-left: none;
-    }
-  }
   // Banner option two
   .home-banner-option-two {
     .banner-text {
@@ -268,24 +244,6 @@
         margin-top: 0;
         font-size: 14px;
       }
-    }
-  }
-  // Banner option three
-  .home-banner-option-three {
-    .banner-left {
-      border-right: 0;
-    }
-    .banner-right {
-      border-left: 0;
-    }
-    .banner-sm {
-      border-top: 0;
-    }
-    .banner-xs-one {
-      border-right: 0;
-    }
-    .banner-xs-two {
-      border-left: 0;
     }
   }
   // View all products btn
