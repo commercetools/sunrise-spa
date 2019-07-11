@@ -56,6 +56,10 @@ Cypress.Commands.add('addLineItem', (url, quantity) => {
   cy.get('[data-test=mini-cart-content]').should('be.visible');
 });
 
+Cypress.Commands.add('addDiscountCode', (cartDiscountDraft, code) => cy.wrap(clientPromise
+  .then(client => mutation.deleteDiscountCode(client, code)
+    .then(() => mutation.createDiscountCode(client, cartDiscountDraft, code)))));
+
 Cypress.Commands.add('createOrder', (cartDraft, orderDraft) => cy.wrap(clientPromise
   .then(client => mutation.deleteOrder(client, orderDraft.orderNumber)
     .then(() => query.customerByEmail(client, cartDraft.customerEmail)

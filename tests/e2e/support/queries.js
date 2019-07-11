@@ -31,3 +31,23 @@ export function orderByNumber(client, orderNumber) {
     fetchPolicy: 'network-only',
   }).then(response => response.data.orders.results[0]);
 }
+
+export function discountCodeByCode(client, code) {
+  return client.query({
+    query: gql`
+      query queryDiscountCodeByCode($predicate: String) {
+        discountCodes(limit: 1, where: $predicate) {
+          results {
+            version,
+            id
+            cartDiscounts {
+              id
+              version
+            }
+          }
+        }
+      }`,
+    variables: { predicate: `code = "${code}"` },
+    fetchPolicy: 'network-only',
+  }).then(response => response.data.discountCodes.results[0]);
+}

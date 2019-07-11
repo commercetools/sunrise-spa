@@ -45,6 +45,68 @@ export function createOrder(client, draft) {
   }).then(response => response.data.createOrderFromCart);
 }
 
+export function createDiscountCode(client, cartDiscountDraft, code) {
+  return client.mutate({
+    mutation: gql`
+      mutation createNewCartDiscount($draft: CartDiscountDraft!) {
+        createCartDiscount(draft: $draft) {
+          id
+        }
+      }`,
+    variables: {
+      draft: cartDiscountDraft,
+    },
+  })
+    .then(response => response.data.createCartDiscount.id)
+    .then(id => client.mutate({
+      mutation: gql`
+      mutation createNewDiscountCode($id: String!, $code: String!) {
+        createDiscountCode(draft: {
+          code: $code,
+          cartDiscounts: {
+            typeId: "cart-discount",
+            id: $id
+          }
+        }) {
+          id
+        }
+      }`,
+      variables: { code, id },
+    })).then(response => response.data.createDiscountCode);
+}
+
+export function deleteDiscountCode(client, code) {
+  return query.discountCodeByCode(client, code)
+    .then(async (discountCode) => {
+      if (discountCode) {
+        await client.mutate({
+          mutation: gql`
+          mutation deleteDiscountCode($id: String!, $version: Long!) {
+            deleteDiscountCode(id: $id, version: $version) {
+              id
+            }
+          }`,
+          variables: {
+            id: discountCode.id,
+            version: discountCode.version,
+          },
+        }).catch(e => console.warn('Discount code might have already been deleted', e));
+        await discountCode.cartDiscounts.forEach(cartDiscount => client.mutate({
+          mutation: gql`
+              mutation deleteCartDiscount($id: String!, $version: Long!) {
+                deleteCartDiscount(id: $id, version: $version) {
+                  id
+                }
+              }`,
+          variables: {
+            id: cartDiscount.id,
+            version: cartDiscount.version,
+          },
+        }).catch(e => console.warn('Cart discount might have already been deleted', e)));
+      }
+    });
+}
+
 export function deleteOrder(client, orderNumber) {
   return query.orderByNumber(client, orderNumber)
     .then(async (order) => {
@@ -60,8 +122,7 @@ export function deleteOrder(client, orderNumber) {
             id: order.id,
             version: order.version,
           },
-        }).then(response => response.data.deleteOrder)
-          .catch(e => console.warn('Order might have already been deleted', e));
+        }).catch(e => console.warn('Order might have already been deleted', e));
       }
     });
 }
@@ -81,8 +142,7 @@ export function deleteCustomer(client, email) {
             id: customer.id,
             version: customer.version,
           },
-        }).then(response => response.data.deleteCustomer)
-          .catch(e => console.warn('Customer might have already been deleted', e));
+        }).catch(e => console.warn('Customer might have already been deleted', e));
       }
     });
 }

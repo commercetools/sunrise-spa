@@ -94,7 +94,21 @@ describe('CartDetailPage', () => {
     cy.get('[data-test=cart-line-item]').should('have.length', 0);
   });
 
+  const cartDiscount = {
+    value: {
+      relative: { permyriad: 5000 },
+    },
+    cartPredicate: '1=1',
+    sortOrder: Math.random().toString(),
+    name: { locale: 'en', value: '50% discount' },
+    requiresDiscountCode: true,
+    target: {
+      lineItems: { predicate: '1=1' },
+    },
+  };
+
   it('applies and deletes discount codes', () => {
+    cy.addDiscountCode(cartDiscount, 'SUNRISE_CI');
     cy.addLineItem('/product/lemare-booties-0778-brown/M0E20000000E0XM', 1);
     cy.visit('/cart');
 
@@ -102,18 +116,18 @@ describe('CartDetailPage', () => {
       .contains(/^\s*248,75\s€\s*$/);
 
     cy.get('[data-test=discount-code-input]')
-      .type('CODE2019');
+      .type('SUNRISE_CI');
     cy.get('[data-test=apply-discount-code-button]')
       .click();
     cy.get('[data-test=cart-total-price]')
-      .contains(/^\s*236,31\s€\s*$/);
+      .contains(/^\s*124,37\s€\s*$/);
 
     cy.get('[data-test=discount-code-name]')
-      .contains('CODE2019');
+      .contains('SUNRISE_CI');
     cy.get('[data-test=remove-discount-button]')
       .click();
 
     cy.get('[data-test=cart-line-item-total-price]')
-      .contains(/^\s*248,75\s€\s*$/);
+      .contains(/^\s*124,37\s€\s*$/);
   });
 });
