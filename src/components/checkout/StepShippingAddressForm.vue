@@ -1,6 +1,7 @@
 <template>
   <form v-if="cartExists"
-        @submit.prevent="submit(setShippingAddress)">
+        @submit.prevent="submit(setShippingAddress)"
+        id="checkout-shipping-address-form">
     <div class="shipping-info">
       <span class="text-uppercase shipping-info-title">{{ $t('shippingInformation') }}</span>
     </div>
@@ -188,8 +189,15 @@ export default {
 </script>
 
 <style lang="scss">
-.shipping-address-form {
+#checkout-shipping-address-form {
   margin: 0.5em 1em;
+
+  .selectboxit {
+    background: url('../../assets/img/arrow-67-filled.png') no-repeat 90% 50% #fff;
+    background-size: 12px;
+    border: 1px solid #D6D6D6;
+    border-radius: 1px;
+  }
   .selectboxit, .selectboxit-options {
     width: 100% !important;
   }
