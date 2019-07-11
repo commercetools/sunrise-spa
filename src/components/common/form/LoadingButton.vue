@@ -58,7 +58,7 @@ export default {
 button {
   margin-right: 15px;
   font-weight: 900;
-  background: #FFBA27;
+  background-color: #FFBA27;
   padding: 10px 20px;
   text-transform: uppercase;
   font-size: 16px;
@@ -66,7 +66,7 @@ button {
   position: relative;
 
   &:hover {
-   background: lighten(#FFBA27, 5%);
+   background-color: lighten(#FFBA27, 5%);
   }
 
   .state-layer {
