@@ -121,6 +121,7 @@ export default {
   computed: {
     countries() {
       return [
+        { id: null, name: this.$t('selectCountry') },
         { id: 'DE', name: 'Deutschland' },
         { id: 'US', name: 'United States' },
       ];
@@ -217,6 +218,7 @@ en:
   email: "Email"
   phone: "Phone"
   continue: "Continue"
+  selectCountry: "Select country"
 de:
   shippingInformation: "Versand Information"
   firstName: "Vorname"
@@ -229,4 +231,5 @@ de:
   email: "E-Mail-Adresse"
   phone: "Telefon"
   continue: "Weiter"
+  selectCountry: "Land auswählen"
 </i18n>
