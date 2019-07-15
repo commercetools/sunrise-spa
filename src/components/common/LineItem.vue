@@ -85,7 +85,7 @@
       <div class="text-right cart-item-price">
         <span class="visible-xs xs-price-title">{{ $t('total') }}</span>
         <span data-test="cart-line-item-total-price">
-          <BaseMoney :money="lineItem.totalPrice"/>
+          <BasePrice :price="lineItemTotal"/>
         </span>
       </div>
     </div>
@@ -97,13 +97,11 @@ import debounce from 'lodash.debounce';
 import priceMixin from '@/mixins/priceMixin';
 import productMixin from '@/mixins/productMixin';
 import { required, minValue, numeric } from 'vuelidate/lib/validators';
-import BaseMoney from './BaseMoney.vue';
 import BasePrice from './BasePrice.vue';
 
 export default {
   components: {
     BasePrice,
-    BaseMoney,
   },
 
   mixins: [priceMixin, productMixin],
@@ -136,6 +134,35 @@ export default {
   created() {
     this.quantity = this.lineItem.quantity;
     this.debouncedChangeQuantity = debounce(this.changeLineItemQuantity, 500);
+  },
+
+  computed: {
+    lineItemTotal() {
+      let price = {};
+      if (this.lineItem.discountedPricePerQuantity.length > 0) {
+        price = {
+          value: {
+            centAmount: (this.lineItem.price.discounted
+              ? this.lineItem.price.discounted.value.centAmount
+              : this.lineItem.price.value.centAmount) * this.lineItem.quantity,
+            currencyCode: this.lineItem.price.value.currencyCode,
+            fractionDigits: this.lineItem.price.value.fractionDigits,
+          },
+          discounted: {
+            value: {
+              ...this.lineItem.totalPrice,
+            },
+          },
+        };
+      } else {
+        price = {
+          value: {
+            ...this.lineItem.totalPrice,
+          },
+        };
+      }
+      return price;
+    },
   },
 
   watch: {
