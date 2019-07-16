@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 import BASIC_CART_QUERY from '../components/BasicCart.gql';
 import DISPLAYABLE_MONEY_FRAGMENT from '../components/DisplayableMoney.gql';
+import BASIC_ADDRESS_FRAGMENT from '../components/BaseAddress.gql';
 
 function cartExists(vm) {
   return vm.me?.activeCart;
@@ -93,9 +94,16 @@ export default {
                   name(locale: $locale)                  
                 }
               }
+              shippingAddress {
+                ...BaseAddress
+              }
+              billingAddress {
+                ...BaseAddress
+              }
             }
           }
-          ${DISPLAYABLE_MONEY_FRAGMENT}`,
+          ${DISPLAYABLE_MONEY_FRAGMENT}
+          ${BASIC_ADDRESS_FRAGMENT}`,
         variables: {
           actions,
           id: this.me.activeCart?.id,

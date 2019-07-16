@@ -7,8 +7,10 @@
     </div>
     <hr class="signup-box-hr">
     <div class="signup-box-description">{{ $t('description') }}</div>
-    <form @submit.prevent="submit(customerSignMeUp)">
-      <ServerError :error="serverError"
+    <BaseForm :vuelidate="$v"
+              :onSubmit="customerSignMeUp"
+              #default="{ error, state }">
+      <ServerError :error="error"
                    v-slot="{ graphQLError }">
         {{ getErrorMessage(graphQLError) }}
       </ServerError>
@@ -81,12 +83,12 @@
                    autocomplete="off"
                    data-test="signup-form-agreetoterms" />
       </div>
-      <LoadingButton :buttonState="buttonState"
+      <LoadingButton :state="state"
                      class="signup-register-btn"
                      data-test="signup-form-submit">
         {{ $t('registerNow') }}
       </LoadingButton>
-    </form>
+    </BaseForm>
   </div>
 </template>
 
@@ -96,19 +98,18 @@ import {
 } from 'vuelidate/lib/validators';
 import gql from 'graphql-tag';
 import { clientLogin } from '../../auth';
-import formMixin from '../../mixins/formMixin';
 import ServerError from '../common/form/ServerError.vue';
 import LoadingButton from '../common/form/LoadingButton.vue';
 import BaseInput from '../common/form/BaseInput.vue';
+import BaseForm from '../common/form/BaseForm.vue';
 
 export default {
   components: {
+    BaseForm,
     BaseInput,
     ServerError,
     LoadingButton,
   },
-
-  mixins: [formMixin],
 
   data: () => ({
     form: {

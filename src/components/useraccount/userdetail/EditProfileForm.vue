@@ -6,12 +6,14 @@
     <div class="personal-details-edit personal-details-edit-show">
       <transition name="fade"
                   mode="out-in">
-        <form v-if="showForm"
-              @submit.prevent="submit(updateCustomerProfile)"
-              id="form-edit-personal-details">
-          <ServerError :error="serverError"
-                       v-slot="{ graphQLError }">
-              {{ getErrorMessage(graphQLError) }}
+        <BaseForm v-if="showForm"
+                  :vuelidate="$v"
+                  :onSubmit="updateCustomerProfile"
+                  #default="{ error, state }"
+                  id="form-edit-personal-details">
+          <ServerError :error="error"
+                       #default="{ graphQLError }">
+            {{ getErrorMessage(graphQLError) }}
           </ServerError>
           <div class="row">
             <div class="col-sm-6">
@@ -57,8 +59,8 @@
           <!-- </div> -->
           <div class="personal-details-edit-btn">
             <span>
-              <LoadingButton :buttonState="buttonState"
-                             :disabled="formIsClean"
+              <LoadingButton :state="state"
+                             :disabled="!$v.$anyDirty"
                              @reset="closeForm"
                              type="submit"
                              class="update-btn"
@@ -73,7 +75,7 @@
               </button>
             </span>
           </div>
-        </form>
+        </BaseForm>
         <div v-else
              class="personal-details-edit-hide">
           <div class="personal-details-box">
@@ -103,20 +105,21 @@
 <script>
 import { required, email } from 'vuelidate/lib/validators';
 import gql from 'graphql-tag';
-import formMixin from '../../../mixins/formMixin';
 import customerMixin from '../../../mixins/customerMixin';
 import ServerError from '../../common/form/ServerError.vue';
 import LoadingButton from '../../common/form/LoadingButton.vue';
 import BaseInput from '../../common/form/BaseInput.vue';
+import BaseForm from '../../common/form/BaseForm.vue';
 
 export default {
   components: {
+    BaseForm,
     BaseInput,
     LoadingButton,
     ServerError,
   },
 
-  mixins: [customerMixin, formMixin],
+  mixins: [customerMixin],
 
   data: () => ({
     me: null,

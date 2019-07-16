@@ -36,7 +36,7 @@
           <div class="checkout">
             <div class="row">
               <div class="col-sm-7">
-                <component :is="showStep"/>
+                <router-view class="checkout-form-step"/>
               </div>
               <div class="col-sm-5">
                 <CartOverview/>
@@ -51,17 +51,31 @@
 
 <script>
 import CartOverview from './CartOverview.vue';
-import StepShippingAddressForm from './StepShippingAddressForm.vue';
 
 export default {
   components: {
     CartOverview,
-    StepShippingAddressForm,
   },
 
   props: ['showStep'],
 };
 </script>
+
+<style lang="scss">
+.checkout-form-step {
+  margin: 0.5em 1em;
+
+  .selectboxit {
+    background: url('../../assets/img/arrow-67-filled.png') no-repeat 90% 50% #fff;
+    background-size: 12px;
+    border: 1px solid #D6D6D6;
+    border-radius: 1px;
+  }
+  .selectboxit, .selectboxit-options {
+    width: 100% !important;
+  }
+}
+</style>
 
 <i18n>
 en:

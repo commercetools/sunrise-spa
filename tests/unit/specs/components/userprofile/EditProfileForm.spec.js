@@ -34,24 +34,29 @@ describe('EditProfileForm.vue', () => {
   });
 
   it('displays current form values', () => {
+    options.sync = false;
     const wrapper = shallowMount(EditProfileForm, options);
     wrapper.setData({ me });
-    wrapper.find('[data-test="edit-profile-form-show"]').trigger('click');
-    expect(wrapper.vm.form.firstName).toBe(me.customer.firstName);
-    expect(wrapper.vm.form.lastName).toBe(me.customer.lastName);
-    expect(wrapper.vm.form.email).toBe(me.customer.email);
+    expect(wrapper.vm.form).toEqual({});
+
+    wrapper.vm.openForm();
+    expect(wrapper.vm.form).toEqual(me.customer);
   });
 
   it('re-opens form with initially stored values', () => {
+    options.sync = false;
     const wrapper = shallowMount(EditProfileForm, options);
     wrapper.setData({ me });
-    wrapper.find('[data-test="edit-profile-form-show"]').trigger('click');
-    wrapper.setData({ form: { ...newUser } });
+    expect(wrapper.vm.form).toEqual({});
 
-    wrapper.find('[data-test="edit-profile-form-cancel"]').trigger('click');
-    wrapper.find('[data-test="edit-profile-form-show"]').trigger('click');
-    expect(wrapper.vm.form.firstName).toBe(me.customer.firstName);
-    expect(wrapper.vm.form.lastName).toBe(me.customer.lastName);
-    expect(wrapper.vm.form.email).toBe(me.customer.email);
+    wrapper.vm.openForm();
+    expect(wrapper.vm.form).toEqual(me.customer);
+
+    wrapper.setData({ form: { ...newUser } });
+    expect(wrapper.vm.form).toEqual(newUser);
+
+    wrapper.vm.closeForm();
+    wrapper.vm.openForm();
+    expect(wrapper.vm.form).toEqual(me.customer);
   });
 });

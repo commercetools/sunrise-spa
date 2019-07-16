@@ -10,6 +10,8 @@ import PageNotFound from '@/components/common/PageNotFound.vue';
 import PageProductDetail from '@/components/productdetail/PageProductDetail.vue';
 import PageCartDetail from '@/components/cartdetail/PageCartDetail.vue';
 import PageCheckout from '@/components/checkout/PageCheckout.vue';
+import StepShippingAddressForm from '@/components/checkout/StepShippingAddressForm.vue';
+import StepBillingAddressForm from '@/components/checkout/StepBillingAddressForm.vue';
 
 Vue.use(Router);
 
@@ -122,16 +124,18 @@ const router = new Router({
     },
     {
       path: '/checkout',
-      name: 'checkout',
       components: {
         default: PageCheckout,
         header: TheHeader,
       },
-      props: {
-        default: {
-          showStep: 'StepShippingAddressForm',
+      children: [
+        {
+          path: 'billing', name: 'checkout-billing', component: StepBillingAddressForm,
         },
-      },
+        {
+          path: 'shipping', alias: '', name: 'checkout', component: StepShippingAddressForm,
+        },
+      ],
     },
   ],
 });

@@ -17,7 +17,6 @@ export default {
   props: {
     vuelidate: {
       type: Object,
-      required: true,
     },
     label: {
       type: String,
@@ -30,7 +29,7 @@ export default {
 
   computed: {
     required() {
-      return this.vuelidate.$params?.required;
+      return this.vuelidate?.$params?.required;
     },
 
     checkbox() {

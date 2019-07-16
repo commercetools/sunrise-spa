@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="col-sm-3 product-img-col">
+    <div class="col-sm-3 col-xs-4 product-img-col">
       <router-link :to="productRoute(lineItem.productSlug, lineItem.variant.sku)"
                    class="img">
         <img :src="displayedImageUrl(lineItem.variant)"
@@ -8,7 +8,7 @@
              class="img-responsive img">
       </router-link>
     </div>
-    <div class="col-sm-8 product-info-text">
+    <div class="col-sm-8 col-xs-offset-1 col-xs-7 product-info-text">
       <p class="cart-item-name product-title">
         <router-link :to="productRoute(lineItem.productSlug, lineItem.variant.sku)"
                      data-test="cart-line-item-link">

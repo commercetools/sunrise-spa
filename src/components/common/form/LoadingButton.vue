@@ -1,10 +1,11 @@
 <template>
-  <button :disabled="state !== null"
-          :class="state">
+  <button type="submit"
+          :disabled="formState !== null"
+          :class="formState">
     <slot></slot>
     <transition name="fade"
                 mode="in-out">
-      <span v-if="state === 'loading'"
+      <span v-if="formState === 'loading'"
             key="loading"
             class="state-layer">
         <img src="../../../assets/img/loading.svg"
@@ -13,7 +14,7 @@
     </transition>
     <transition name="fade"
                 mode="in-out">
-      <span v-if="state === 'success'"
+      <span v-if="formState === 'success'"
             key="success"
             class="state-layer">
         <svg xmlns="http://www.w3.org/2000/svg"
@@ -30,22 +31,22 @@
 <script>
 export default {
   props: {
-    buttonState: {
+    state: {
       type: String,
       validator: value => ['success', 'loading'].includes(value),
     },
   },
 
   data: () => ({
-    state: null,
+    formState: null,
   }),
 
   watch: {
-    buttonState(newState) {
-      this.state = newState;
+    state(newState) {
+      this.formState = newState;
       if (newState === 'success') {
         setTimeout(() => {
-          this.state = null;
+          this.formState = null;
           this.$emit('reset');
         }, 2000);
       }

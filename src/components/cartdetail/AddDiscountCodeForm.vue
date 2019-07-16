@@ -1,7 +1,9 @@
 <template>
-  <form @submit.prevent="submit(addDiscountCode)">
+  <BaseForm :vuelidate="$v"
+            :onSubmit="addDiscountCode"
+            #default="{ error, state }">
     <div class="text-right add-discount-code-form">
-      <ServerError :error="serverError"
+      <ServerError :error="error"
                    v-slot="{ graphQLError }"
                    class="server-error">
         {{ getErrorMessage(graphQLError) }}
@@ -12,25 +14,26 @@
                  type="text"
                  id="promo-code"
                  data-test="discount-code-input"/>
-      <LoadingButton :buttonState="buttonState"
+      <LoadingButton :state="state"
                      class="submit-button"
                      data-test="apply-discount-code-button">
         {{ $t('apply') }}
       </LoadingButton>
     </div>
-  </form>
+  </BaseForm>
 </template>
 
 <script>
 import { required } from 'vuelidate/lib/validators';
 import LoadingButton from '../common/form/LoadingButton.vue';
 import ServerError from '../common/form/ServerError.vue';
+import BaseForm from '../common/form/BaseForm.vue';
 import BaseInput from '../common/form/BaseInput.vue';
 import cartMixin from '@/mixins/cartMixin';
-import formMixin from '@/mixins/formMixin';
 
 export default {
   components: {
+    BaseForm,
     BaseInput,
     LoadingButton,
     ServerError,
@@ -61,7 +64,7 @@ export default {
     },
   },
 
-  mixins: [cartMixin, formMixin],
+  mixins: [cartMixin],
 
   validations: {
     form: {

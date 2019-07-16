@@ -6,13 +6,14 @@
                :type="$attrs.type">
       <input v-model="model"
              v-bind="$attrs"
-             :class="{ 'error': vuelidate.$error }"/>
+             :class="errorClass"/>
     </BaseLabel>
     <input v-else
            v-model="model"
            v-bind="$attrs"
-           :class="{ 'error': vuelidate.$error }"/>
-    <ValidationError :vuelidate="vuelidate"
+           :class="errorClass"/>
+    <ValidationError v-if="vuelidate"
+                     :vuelidate="vuelidate"
                      :customErrors="customErrors"/>
   </span>
 </template>
@@ -36,7 +37,6 @@ export default {
     },
     vuelidate: {
       type: Object,
-      required: true,
     },
     label: {
       type: String,
@@ -47,12 +47,16 @@ export default {
   },
 
   computed: {
+    errorClass() {
+      return { error: this.vuelidate?.$error };
+    },
+
     model: {
       get() {
         return this.value;
       },
       set(value) {
-        this.vuelidate.$touch();
+        if (this.vuelidate) this.vuelidate.$touch();
         this.$emit('input', value);
       },
     },

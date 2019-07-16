@@ -8,8 +8,10 @@
     <hr class="login-box-hr">
     <div class="login-box-description">{{ $t('description') }}</div>
     <div class="login-box-input-wrapper">
-      <form @submit.prevent="submit(customerSignMeIn)">
-        <ServerError :error="serverError"
+      <BaseForm :vuelidate="$v"
+                :onSubmit="customerSignMeIn"
+                #default="{ error, state }">
+        <ServerError :error="error"
                      v-slot="{ graphQLError }">
           {{ getErrorMessage(graphQLError) }}
         </ServerError>
@@ -45,12 +47,12 @@
             </div>
           </div>
         </div>
-        <LoadingButton :buttonState="buttonState"
+        <LoadingButton :state="state"
                        class="login-box-sign-in-btn"
                        data-test="login-form-submit">
           {{ $t('signIn') }}
         </LoadingButton>
-      </form>
+      </BaseForm>
     </div>
   </div>
 </template>
@@ -59,19 +61,18 @@
 import { required, email } from 'vuelidate/lib/validators';
 import gql from 'graphql-tag';
 import { clientLogin } from '../../auth';
-import formMixin from '../../mixins/formMixin';
 import ServerError from '../common/form/ServerError.vue';
 import LoadingButton from '../common/form/LoadingButton.vue';
 import BaseInput from '../common/form/BaseInput.vue';
+import BaseForm from '../common/form/BaseForm.vue';
 
 export default {
   components: {
+    BaseForm,
     BaseInput,
     ServerError,
     LoadingButton,
   },
-
-  mixins: [formMixin],
 
   data: () => ({
     form: {

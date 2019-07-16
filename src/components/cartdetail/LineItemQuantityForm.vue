@@ -1,6 +1,11 @@
 <template>
-  <div v-if="cartExists"
-       class="quantity-spinner">
+  <BaseForm v-if="cartExists"
+            :vuelidate="$v"
+            :onSubmit="changeLineItemQuantity"
+            #default="{ error }"
+            ref="form"
+            class="quantity-spinner">
+    <ServerError :error="error"/>
     <span @click="form.quantity -= 1"
           data-test="cart-line-item-quantity-dec"
           class="change-quantity-button input-number-decrement">–</span>
@@ -12,7 +17,7 @@
     <span @click="form.quantity += 1"
           data-test="cart-line-item-quantity-inc"
           class="change-quantity-button input-number-increment">+</span>
-  </div>
+  </BaseForm>
 </template>
 
 <script>
@@ -20,14 +25,17 @@ import debounce from 'lodash.debounce';
 import { required, minValue, numeric } from 'vuelidate/lib/validators';
 import BaseInput from '../common/form/BaseInput.vue';
 import cartMixin from '../../mixins/cartMixin';
-import formMixin from '../../mixins/formMixin';
+import BaseForm from '../common/form/BaseForm.vue';
+import ServerError from '../common/form/ServerError.vue';
 
 export default {
   components: {
+    ServerError,
+    BaseForm,
     BaseInput,
   },
 
-  mixins: [cartMixin, formMixin],
+  mixins: [cartMixin],
 
   props: {
     lineItemId: {
@@ -61,7 +69,7 @@ export default {
 
   created() {
     this.form.quantity = this.quantity;
-    this.debouncedSubmit = debounce(() => this.submit(this.changeLineItemQuantity), 500);
+    this.debouncedSubmit = debounce(() => this.$refs.form.submit(), 500);
   },
 
   watch: {

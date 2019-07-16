@@ -146,19 +146,6 @@
 .shipping-method .shipping-method-radio {
   margin-right: 1em;
 }
-.checkout-checkout-btn {
-  width: 100%;
-  background: url("../img/arrow-66.png") no-repeat 95% 13px $my-sin;
-  background-size: 15px;
-  border: none;
-  margin: 1em 0;
-  padding: 0.5em 0;
-  font-size: 1.2em;
-  &:hover {
-    background: url("../img/arrow-66.png") no-repeat 95% 13px lighten($my-sin, 5%);
-    background-size: 15px;
-  }
-}
 
 // Order summary
 .order-summary {
