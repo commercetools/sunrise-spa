@@ -12,7 +12,7 @@
         </div>
       </div>
       <template v-if="sameAddress"
-                v-slot:fields>
+                #fields>
         <BaseAddress :address="shippingAddress"/>
       </template>
     </BaseAddressForm>
