@@ -23,6 +23,7 @@ describe('LineItem.vue', () => {
       quantity: 3,
       variant: {},
       price: {},
+      discountedPricePerQuantity: {},
       totalPrice: {},
     };
 
