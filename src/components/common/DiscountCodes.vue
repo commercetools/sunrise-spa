@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import RemoveDiscountCodeForm from './RemoveDiscountCodeForm.vue';
+import RemoveDiscountCodeForm from './cartlike/RemoveDiscountCodeForm.vue';
 
 export default {
   components: { RemoveDiscountCodeForm },

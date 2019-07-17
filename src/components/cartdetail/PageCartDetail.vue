@@ -51,7 +51,7 @@ import gql from 'graphql-tag';
 import cartMixin from '@/mixins/cartMixin';
 import CartContent from '@/components/cartdetail/CartContent.vue';
 import PriceCalculation from '@/components/common/PriceCalculation.vue';
-import AddDiscountCodeForm from '@/components/common/AddDiscountCodeForm.vue';
+import AddDiscountCodeForm from '@/components/cartdetail/AddDiscountCodeForm.vue';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {
