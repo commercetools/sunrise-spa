@@ -7,7 +7,7 @@
         {{ $t('unknownError') }}
       </slot>
     </span>
-    <span v-else-if="is400Error">{{ $t('badRequestError') }}</span>
+    <span v-else-if="isBadRequestError">{{ $t('badRequestError') }}</span>
     <span v-else-if="isNetworkError">{{ $t('networkError') }}</span>
     <span v-else>{{ $t('unknownError') }}</span>
   </div>
@@ -26,7 +26,7 @@ export default {
       return this.error?.networkError;
     },
 
-    is400Error() {
+    isBadRequestError() {
       return this.error?.networkError?.statusCode === 400;
     },
 
