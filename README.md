@@ -27,7 +27,7 @@ SUNRISE SPA comes with some read-only data set by default that you can use. But 
 Once you have created your commercetools project and populated it with data, follow the next steps to connect to it.
 
 ### 1. Create an API client for a SPA
-In the [Merchant Center](https://mc.commercetools.com/), go to the [New API Client](https://mc.commercetools.com/sunrise-spa-ci/settings/developer/api-clients/now) section (`Settings` > `Developer Settings` > `API Clients` > `Create New API Client`). Enter a descriptive name for your new API client and select the template `Mobile & single-page application client`. Once you have filled the form, submit it by clicking on `Create API Client`, you should now be able to see your project credentials. Don't close the window yet!
+In the [Merchant Center](https://mc.commercetools.com/), select your project and go to the [New API Client](https://mc.commercetools.com/sunrise-spa-ci/settings/developer/api-clients/now) section (`Settings` > `Developer Settings` > `API Clients` > `Create New API Client`). Enter a descriptive name for your new API client and select the template `Mobile & single-page application client`. Once you have filled the form, submit it by clicking on `Create API Client`, you should now be able to see your project credentials. Don't close the window yet!
 
 > **:warning: Always use an API client suited for single-page applications (SPA), as your credentials will be publicly accessible through the browser.**
 
