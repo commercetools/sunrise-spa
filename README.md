@@ -11,6 +11,8 @@ https://sunrise.netlify.com/
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/commercetools/sunrise-spa)
 
+In order to deploy SUNRISE SPA with a different commercetools project than the default, follow the instructions described in the section [How to use your project data](#how-to-use-your-project-data) to obtain your credentials and use them to configure your site in Netlify.
+
 ## Run it locally 
 
 Steps   | with [Yarn](https://yarnpkg.com/)  | with [NPM](https://www.npmjs.com/) |
@@ -20,12 +22,12 @@ Run     | `yarn serve`                       | `npm run serve`                  
 
 
 ## How to use your own project data
-SUNRISE comes with some read-only data set by default that you can use. But if you need to use a different set of data or to manage the project via [Merchant Center](https://mc.commercetools.com/), then you'll need to connect SUNRISE to your own commercetools project.
+SUNRISE SPA comes with some read-only data set by default that you can use. But if you need to use a different set of data or to manage the project via [Merchant Center](https://mc.commercetools.com/), then you'll need to connect SUNRISE SPA to your own commercetools project.
 
 Once you have created your commercetools project and populated it with data, follow the next steps to connect to it.
 
 ### 1. Create an API client for a SPA
-In the [Merchant Center](https://mc.commercetools.com/), go to the [New API Client](https://mc.commercetools.com/sunrise-spa-ci/settings/developer/api-clients/now) section (`Settings` > `Developer Settings` > `API Clients` > `Create New API Client`). Enter a descriptive name for your new API client and select the template `Mobile & single-page application client`. Once you have filled the form, submit it by clicking on `Create API Client`, you should now be able to see your project credentials. Don't close the window yet!
+In the [Merchant Center](https://mc.commercetools.com/), select your project and go to the [New API Client](https://mc.commercetools.com/sunrise-spa-ci/settings/developer/api-clients/now) section (`Settings` > `Developer Settings` > `API Clients` > `Create New API Client`). Enter a descriptive name for your new API client and select the template `Mobile & single-page application client`. Once you have filled the form, submit it by clicking on `Create API Client`, you should now be able to see your project credentials. Don't close the window yet!
 
 > **:warning: Always use an API client suited for single-page applications (SPA), as your credentials will be publicly accessible through the browser.**
 
