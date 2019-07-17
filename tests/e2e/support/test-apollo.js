@@ -1,5 +1,6 @@
 import SdkAuth from '@commercetools/sdk-auth';
 import { createApolloClient } from 'vue-cli-plugin-apollo/graphql-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 
 const projectKey = Cypress.env('VUE_APP_CT_PROJECT_KEY');
 const apiHost = Cypress.env('VUE_APP_CT_API_HOST') || 'https://api.commercetools.com';
@@ -18,5 +19,6 @@ export default async function createClient() {
   return createApolloClient({
     httpEndpoint: `${apiHost}/${projectKey}/graphql`,
     getAuth: () => `${tokenInfo.token_type} ${tokenInfo.access_token}`,
+    cache: new InMemoryCache(), // see: https://github.com/Akryum/vue-apollo/issues/631
   }).apolloClient;
 }
