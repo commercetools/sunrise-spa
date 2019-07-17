@@ -25,25 +25,16 @@ SUNRISE comes with some read-only data set by default that you can use. But if y
 Once you have created your commercetools project and populated it with data, follow the next steps to connect to it.
 
 ### 1. Create an API client for a SPA
-In the [Merchant Center](https://mc.commercetools.com/), select your project and go to `Settings`, then click on `Developer Settings` section. You should now find yourself in the `API Clients` tab. Click on the `Create New API Client` button to display a form. There, enter a descriptive name for your new API client and select the `Mobile & single-page application client` template. Once you have filled the form, submit it by clicking on `Create API Client`, you should now be able to see your project credentials.
+In the [Merchant Center](https://mc.commercetools.com/), go to the [New API Client](https://mc.commercetools.com/sunrise-spa-ci/settings/developer/api-clients/now) section (`Settings` > `Developer Settings` > `API Clients` > `Create New API Client`). Enter a descriptive name for your new API client and select the template `Mobile & single-page application client`. Once you have filled the form, submit it by clicking on `Create API Client`, you should now be able to see your project credentials. Don't close the window yet!
 
-### 2. Configure SUNRISE with your API client 
-Create the file `.env.local` (or any other [`.env` file](https://www.npmjs.com/package/dotenv#usage)) in the root folder of your project with the following content, replacing the data in the template (i.e. `<your project key>`) for your own:
-
-```shell
-VUE_APP_CT_PROJECT_KEY=<your project key>
-VUE_APP_CT_CLIENT_ID=<your client ID>
-VUE_APP_CT_CLIENT_SECRET=<your client secret>
-```
 > **:warning: Always use an API client suited for single-page applications (SPA), as your credentials will be publicly accessible through the browser.**
 
-Optionally, you can also use a different commercetools host, instead of the default `commercetools.com` (i.e. Europe). For example, to connect to our US hosts: 
-```shell
-VUE_APP_CT_AUTH_HOST=https://auth.commercetools.co
-VUE_APP_CT_API_HOST=https://api.commercetools.co
-```
+### 2. Configure SUNRISE with your API client
+Below the credentials, you should see a dropdown with different technologies: select `Sunrise SPA` and click on the download button. This will download a file named `.env.local` with your credentials, which you should place in the root folder of your SUNRISE SPA project.
 
-This will set up the necessary environment variables required to run SUNRISE. Feel free to choose any other approach that best suits your needs.
+> **:warning: Make sure the downloaded file is called exactly `.env.local`, as browsers may remove the initial dot and apply further modifications to the filename.**
+
+This will set up the necessary environment variables required to run SUNRISE SPA.
 
 ## Development tips
 
