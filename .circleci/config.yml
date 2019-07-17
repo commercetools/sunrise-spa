@@ -31,7 +31,7 @@ jobs:
 
       - run:
           name: Run E2E tests
-          command: yarn test:e2e --headless --record --reporter mocha-multi-reporters
+          command: yarn test:e2e --headless --reporter mocha-multi-reporters
       - store_artifacts:
           name: Store E2E videos
           path: tests/e2e/videos
