@@ -1,6 +1,6 @@
 <template>
   <div class="col-xs-12 col-sm-6 col-md-4">
-    <router-link :to="{ name: 'product', params: { productSlug, sku } }">
+    <router-link :to="productRoute(currentProduct.slug, matchingVariant.sku)">
       <div data-test="product-thumbnail"
            class="shop-item">
         <div v-if="hasPrice && hasDiscount"
@@ -60,11 +60,11 @@
         </div>
       </div>
       <div class="shop-item-overlay hidden-xs">
-        <button type="button"
-                class="quickview"
-                data-modal="quickview-modal">
-          {{ $t("quickView") }}
-        </button>
+        <!--<button type="button"-->
+                <!--class="quickview"-->
+                <!--data-modal="quickview-modal">-->
+          <!--{{ $t("quickView") }}-->
+        <!--</button>-->
          <!-- <form id="form-add-to-wishlist{{index}}"
                     method="post"
                     {{#if wishlist}}class="hidden"{{/if}}
@@ -119,14 +119,6 @@ export default {
 
     hasImages() {
       return Array.isArray(this.matchingVariant.images) && this.matchingVariant.images.length > 0;
-    },
-
-    productSlug() {
-      return this.currentProduct.slug;
-    },
-
-    sku() {
-      return this.matchingVariant.sku;
     },
   },
 
