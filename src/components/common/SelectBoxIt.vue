@@ -37,3 +37,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.selectboxit-container {
+  display: block;
+}
+</style>

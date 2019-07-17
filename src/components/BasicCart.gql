@@ -1,0 +1,8 @@
+{
+  me {
+    activeCart {
+      id
+      version
+    }
+  }
+}

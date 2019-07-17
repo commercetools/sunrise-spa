@@ -1,137 +1,138 @@
 <template>
-  <div v-if="me"
-       class="personal-details-edit personal-details-edit-show">
-    <form @submit.prevent="submit"
-          id="form-edit-personal-details">
-      <ServerError :error="serverError">
-        <template slot-scope="{ graphQLError }">
-          {{ getErrorMessage(graphQLError) }}
-        </template>
-      </ServerError>
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="form-sections">
-            <span class="form-labels">{{ $t('firstName') }}*</span><br>
-            <ValidationError :vuelidate="$v.firstName">
-              <input v-model.trim.lazy="$v.firstName.$model"
-                     autocomplete="fname"
-                     type="text"
-                     class="form-inputs"
-                     data-test="edit-profile-form-firstname"/>
-            </ValidationError>
+  <div v-if="me">
+    <div class="personal-details-title">
+      <span>{{ $t('title') }}</span>
+    </div>
+    <div class="personal-details-edit personal-details-edit-show">
+      <transition name="fade"
+                  mode="out-in">
+        <BaseForm v-if="showForm"
+                  :vuelidate="$v"
+                  :onSubmit="updateCustomerProfile"
+                  #default="{ error, state }"
+                  id="form-edit-personal-details">
+          <ServerError :error="error"
+                       #default="{ graphQLError }">
+            {{ getErrorMessage(graphQLError) }}
+          </ServerError>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-sections">
+                <BaseInput v-model="form.firstName"
+                           :vuelidate="$v.form.firstName"
+                           :label="$t('firstName')"
+                           type="text"
+                           autocomplete="fname"
+                           class="form-inputs"
+                           data-test="edit-profile-form-firstname"/>
+              </div>
+              <div class="form-sections">
+                <BaseInput v-model="form.email"
+                           :vuelidate="$v.form.email"
+                           :label="$t('email')"
+                           type="email"
+                           autocomplete="email"
+                           class="form-inputs"
+                           data-test="edit-profile-form-email"/>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-sections">
+                <BaseInput v-model="form.lastName"
+                           :vuelidate="$v.form.lastName"
+                           :label="$t('lastName')"
+                           type="text"
+                           autocomplete="lname"
+                           class="form-inputs"
+                           data-test="edit-profile-form-lastname"/>
+              </div>
+            </div>
           </div>
-
-          <div class="form-sections">
-            <span class="form-labels">{{ $t('email') }}*</span><br>
-            <ValidationError :vuelidate="$v.email">
-              <input v-model.trim.lazy="$v.email.$model"
-                     autocomplete="email"
-                     type="email"
-                     class="form-inputs"
-                     data-test="edit-profile-form-email"/>
-            </ValidationError>
-            <br>
-            <span class="form-notes"></span>
-          </div>
-
-        </div>
-        <div class="col-sm-6">
-          <div class="form-sections">
-            <span class="form-labels">{{ $t('lastName') }}*</span><br>
-            <ValidationError :vuelidate="$v.lastName">
-              <input v-model.trim.lazy="$v.lastName.$model"
-                     autocomplete="lname"
-                     type="text"
-                     class="form-inputs"
-                     data-test="edit-profile-form-lastname"/>
-            </ValidationError>
-          </div>
-        </div>
-      </div>
-      <hr class="light-grey-hr">
-      <!-- <div class="personal-details-newsletter"> -->
-        <!-- <span> -->
+          <hr class="light-grey-hr">
+          <!-- <div class="personal-details-newsletter"> -->
+          <!-- <span> -->
           <!-- <input name="subscribeToNewsletter" -->
-                  <!-- type="checkbox" -->
-                  <!-- {{#if personalDetails.personalDetailsForm.subscribeToNewsletter}}checked{{/if}}/> -->
+          <!-- type="checkbox" -->
+          <!-- {{#if personalDetails.personalDetailsForm.subscribeToNewsletter}}checked{{/if}}/> -->
           <!-- {{ $t('personalDetailsForm.subscribeToNewsletter') }} -->
-        <!-- </span> -->
-      <!-- </div> -->
-      <div class="personal-details-edit-btn">
-        <span>
-          <LoadingButton :buttonState="buttonState"
-                         @reset="$emit('close')"
-                         type="submit"
-                         class="update-btn"
-                         data-test="edit-profile-form-submit">
-            {{ $t('updateBtn') }}
-          </LoadingButton>
-          <button @click="$emit('close')"
-                  type="button"
-                  class="cancel-btn personal-details-edit-hide-btn"
-                  data-test="edit-profile-form-cancel">
-            {{ $t('cancelBtn') }}
-          </button>
-        </span>
-      </div>
-    </form>
+          <!-- </span> -->
+          <!-- </div> -->
+          <div class="personal-details-edit-btn">
+            <span>
+              <LoadingButton :state="state"
+                             :disabled="!$v.$anyDirty"
+                             @reset="closeForm"
+                             type="submit"
+                             class="update-btn"
+                             data-test="edit-profile-form-submit">
+                {{ $t('updateBtn') }}
+              </LoadingButton>
+              <button @click="closeForm"
+                      type="button"
+                      class="cancel-btn personal-details-edit-hide-btn"
+                      data-test="edit-profile-form-cancel">
+                {{ $t('cancelBtn') }}
+              </button>
+            </span>
+          </div>
+        </BaseForm>
+        <div v-else
+             class="personal-details-edit-hide">
+          <div class="personal-details-box">
+            <div>
+              <span data-test="user-profile-name">{{ me.customer.firstName }} {{ me.customer.lastName }}</span>
+            </div>
+            <div data-test="user-profile-email">{{ me.customer.email }}</div>
+            <br>
+            <!--{{#if content.customerInfo.subscribed}}-->
+            <!--<div>{{ $t('subscribedToNewsletter') }}</div>-->
+            <!--{{/if}}-->
+            <div class="personal-details-box-edit">
+              <button @click="openForm"
+                      class="personal-details-edit-show-btn"
+                      data-test="edit-profile-form-show">
+                <img src="../../../assets/img/edit-1.png" alt="edit icon">
+                {{ $t('editBtn') }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </transition>
+    </div>
   </div>
 </template>
 
 <script>
 import { required, email } from 'vuelidate/lib/validators';
 import gql from 'graphql-tag';
-import customerMixin from '@/mixins/customerMixin';
-import ServerError from '../../common/ServerError.vue';
-import ValidationError from '../../common/ValidationError.vue';
-import LoadingButton from '../../common/LoadingButton.vue';
+import customerMixin from '../../../mixins/customerMixin';
+import ServerError from '../../common/form/ServerError.vue';
+import LoadingButton from '../../common/form/LoadingButton.vue';
+import BaseInput from '../../common/form/BaseInput.vue';
+import BaseForm from '../../common/form/BaseForm.vue';
 
 export default {
   components: {
+    BaseForm,
+    BaseInput,
     LoadingButton,
-    ValidationError,
     ServerError,
   },
 
+  mixins: [customerMixin],
+
   data: () => ({
     me: null,
-    firstName: null,
-    lastName: null,
-    email: null,
-    buttonState: null,
-    serverError: null,
+    form: {},
+    showForm: false,
   }),
 
-  computed: {
-    hasFormChanged() {
-      const hasEmailChanged = this.email !== this.me.customer.email;
-      const hasFirstNameChanged = this.firstName !== this.me.customer.firstName;
-      const hasLastNameChanged = this.lastName !== this.me.customer.lastName;
-      return hasEmailChanged || hasFirstNameChanged || hasLastNameChanged;
-    },
-  },
-
   methods: {
-    async submit() {
-      this.$v.$touch();
-      this.serverError = null;
-      if (!this.$v.$invalid && this.hasFormChanged) {
-        this.buttonState = 'loading';
-        await this.updateCustomerProfile()
-          .then(() => {
-            this.buttonState = 'success';
-          }).catch((error) => {
-            this.serverError = error;
-            this.buttonState = null;
-          });
-      }
-    },
-
     updateCustomerProfile() {
       return this.updateMyCustomer([
-        { changeEmail: { email: this.email } },
-        { setFirstName: { firstName: this.firstName } },
-        { setLastName: { lastName: this.lastName } },
+        { changeEmail: { email: this.form.email } },
+        { setFirstName: { firstName: this.form.firstName } },
+        { setLastName: { lastName: this.form.lastName } },
       ]);
     },
 
@@ -141,17 +142,17 @@ export default {
       }
       return this.$t('unknownError');
     },
-  },
 
-  watch: {
-    me(value) {
-      this.firstName = value.customer.firstName;
-      this.lastName = value.customer.lastName;
-      this.email = value.customer.email;
+    openForm() {
+      this.form = { ...this.me.customer };
+      delete this.form.__typename;
+      this.showForm = true;
+    },
+
+    closeForm() {
+      this.showForm = false;
     },
   },
-
-  mixins: [customerMixin],
 
   apollo: {
     me: {
@@ -172,15 +173,10 @@ export default {
   },
 
   validations: {
-    email: {
-      required,
-      email,
-    },
-    firstName: {
-      required,
-    },
-    lastName: {
-      required,
+    form: {
+      email: { required, email },
+      firstName: { required },
+      lastName: { required },
     },
   },
 };
@@ -189,6 +185,7 @@ export default {
 <i18n>
 en:
   title: "Your Personal Details"
+  editBtn: "Edit"
   updateBtn: "Update Details"
   cancelBtn: "Cancel"
   firstName: "First Name"
@@ -198,6 +195,7 @@ en:
   duplicatedEmail: "A customer with this email already exists"
 de:
   title: "Ihre Benutzerdaten"
+  editBtn: "Bearbeiten"
   updateBtn: "Details aktualisieren"
   cancelBtn: "Abbrechen"
   firstName: "Vorname"
