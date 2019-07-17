@@ -11,6 +11,8 @@ https://sunrise.netlify.com/
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/commercetools/sunrise-spa)
 
+In order to deploy a SUNRISE SPA with a different commercetools project than the default, follow the instructions described in the section [How to use your project data](#how-to-use-your-project-data) to obtain your credentials and use them to configure your site in Netlify.
+
 ## Run it locally 
 
 Steps   | with [Yarn](https://yarnpkg.com/)  | with [NPM](https://www.npmjs.com/) |
@@ -20,7 +22,7 @@ Run     | `yarn serve`                       | `npm run serve`                  
 
 
 ## How to use your own project data
-SUNRISE comes with some read-only data set by default that you can use. But if you need to use a different set of data or to manage the project via [Merchant Center](https://mc.commercetools.com/), then you'll need to connect SUNRISE to your own commercetools project.
+SUNRISE SPA comes with some read-only data set by default that you can use. But if you need to use a different set of data or to manage the project via [Merchant Center](https://mc.commercetools.com/), then you'll need to connect SUNRISE SPA to your own commercetools project.
 
 Once you have created your commercetools project and populated it with data, follow the next steps to connect to it.
 
