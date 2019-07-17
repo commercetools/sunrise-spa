@@ -24,6 +24,7 @@ describe('ServerError.vue', () => {
           en: {
             unknownError: unknownErrorTranslation,
             networkError: networkErrorTranslation,
+            badRequestError: badRequestErrorTranslation,
           },
         },
       }),
