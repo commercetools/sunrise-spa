@@ -1,35 +1,17 @@
-// default commercetools project credentials
-const projectKey = process.env.VUE_APP_CT_PROJECT_KEY || 'sunrise-spa';
-const clientId = process.env.VUE_APP_CT_CLIENT_ID || 'Cie7e2JpX5Z0bUzzQUkhAuZh';
-const clientSecret = process.env.VUE_APP_CT_CLIENT_SECRET || 'QhgNoWJFjKjNSf3Z3MriUulzjGH74MEj';
-
-const authHost = process.env.VUE_APP_CT_AUTH_HOST || 'https://auth.commercetools.com';
-const apiHost = process.env.VUE_APP_CT_API_HOST || 'https://api.commercetools.com';
-
-function scopes() {
-  return ['create_anonymous_token',
-    'view_products',
-    'manage_my_orders',
-    'manage_my_payments',
-    'manage_my_profile',
-    'manage_my_shopping_lists']
-    .map(scope => `${scope}:${projectKey}`);
-}
-
 export default {
   ct: {
     auth: {
-      host: authHost,
-      projectKey,
+      host: process.env.VUE_APP_CT_AUTH_HOST || 'https://auth.sphere.io',
+      projectKey: process.env.VUE_APP_CT_PROJECT_KEY || 'sunrise-spa',
       credentials: {
-        clientId,
-        clientSecret,
+        clientId: process.env.VUE_APP_CT_CLIENT_ID || 'jFVHj0-tO-THQt9evnGTJ2fD',
+        clientSecret: process.env.VUE_APP_CT_CLIENT_SECRET || 'eUQgmtanysDpYxlOePOhcFklrwa5X8Sj',
       },
-      scopes: scopes(),
+      scopes: [process.env.VUE_APP_CT_SCOPE || 'manage_my_profile:sunrise-spa create_anonymous_token:sunrise-spa'
+      + ' manage_my_payments:sunrise-spa view_products:sunrise-spa manage_my_orders:sunrise-spa'
+      + ' manage_my_shopping_lists:sunrise-spa'],
     },
-    api: {
-      host: apiHost,
-    },
+    api: process.env.VUE_APP_CT_API_HOST || 'https://api.sphere.io',
   },
   languages: {
     en: 'English',
