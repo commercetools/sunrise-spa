@@ -11,7 +11,7 @@ https://sunrise.netlify.com/
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/commercetools/sunrise-spa)
 
-In order to deploy a SUNRISE SPA with a different commercetools project than the default, follow the instructions described in the section [How to use your project data](#how-to-use-your-project-data) to obtain your credentials and use them to configure your site in Netlify.
+In order to deploy SUNRISE SPA with a different commercetools project than the default, follow the instructions described in the section [How to use your project data](#how-to-use-your-project-data) to obtain your credentials and use them to configure your site in Netlify.
 
 ## Run it locally 
 
