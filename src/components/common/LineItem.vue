@@ -94,9 +94,9 @@
 
 <script>
 import debounce from 'lodash.debounce';
+import { required, minValue, numeric } from 'vuelidate/lib/validators';
 import priceMixin from '@/mixins/priceMixin';
 import productMixin from '@/mixins/productMixin';
-import { required, minValue, numeric } from 'vuelidate/lib/validators';
 import BaseMoney from './BaseMoney.vue';
 import BasePrice from './BasePrice.vue';
 

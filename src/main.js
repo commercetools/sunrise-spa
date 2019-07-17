@@ -1,14 +1,14 @@
 import Vue from 'vue';
+import Vuelidate from 'vuelidate';
+import ProductZoomer from 'vue-product-zoomer';
 import App from '@/App.vue';
 import SelectBoxIt from '@/components/common/SelectBoxIt.vue';
-import Vuelidate from 'vuelidate';
 import router from '@/router';
 import store from '@/store';
 import '@/registerServiceWorker';
 import apolloProvider from '@/apollo';
 import i18n from '@/i18n/i18n';
 import sunriseConfig from '@/../sunrise.config';
-import ProductZoomer from 'vue-product-zoomer';
 
 import '@/assets/scss/main.scss';
 

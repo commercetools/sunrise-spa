@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import VueApollo from 'vue-apollo';
+import { createApolloClient } from 'vue-cli-plugin-apollo/graphql-client';
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context';
 import { getAuthToken } from '@/auth';
-import { createApolloClient } from 'vue-cli-plugin-apollo/graphql-client';
 import config from '@/../sunrise.config';
 import introspectionQueryResultData from '@/../graphql-fragments.json';
 
