@@ -105,13 +105,15 @@ import {
   required, email, minLength, sameAs,
 } from 'vuelidate/lib/validators';
 import gql from 'graphql-tag';
-import { clientLogin } from '@/auth';
+import authMixin from '../../mixins/authMixin';
 import ServerError from '../common/ServerError.vue';
 import ValidationError from '../common/ValidationError.vue';
 import LoadingButton from '../common/LoadingButton.vue';
 
 export default {
   components: { ServerError, ValidationError, LoadingButton },
+
+  mixins: [authMixin],
 
   data: () => ({
     firstName: null,
@@ -131,7 +133,7 @@ export default {
       if (!this.$v.$invalid) {
         this.buttonState = 'loading';
         await this.customerSignMeUp()
-          .then(() => clientLogin(this.email, this.password))
+          .then(() => this.login(this.email, this.password))
           .then(() => this.$router.push({ name: 'user' }))
           .catch((error) => {
             this.serverError = error;
