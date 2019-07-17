@@ -1,3 +1,6 @@
+// Required until Cypress supports fetch API
+// https://github.com/cypress-io/cypress/issues/95
+import 'whatwg-fetch';
 import Vue from 'vue';
 import Vuelidate from 'vuelidate';
 import ProductZoomer from 'vue-product-zoomer';
