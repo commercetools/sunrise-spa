@@ -1,6 +1,6 @@
 import SdkAuth, { TokenProvider } from '@commercetools/sdk-auth';
-import store from '@/store';
-import config from '@/../sunrise.config';
+import store from './store';
+import config from '../sunrise.config';
 
 const tokenInfoStorageName = 'token';
 const isAuthenticatedStorageName = 'auth';
@@ -23,7 +23,8 @@ const tokenProvider = new TokenProvider({
   onTokenInfoChanged: tokenInfo => localStorage.setItem(tokenInfoStorageName, JSON.stringify(tokenInfo)),
 }, storedTokenInfo);
 
-function cleanUpSession() {
+export function cleanUpSession() {
+  tokenProvider.invalidateTokenInfo();
   localStorage.removeItem(tokenInfoStorageName);
   localStorage.removeItem(isAuthenticatedStorageName);
   return store.dispatch('setAuthenticated', false);
