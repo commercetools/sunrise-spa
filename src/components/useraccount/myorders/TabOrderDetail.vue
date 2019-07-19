@@ -28,21 +28,7 @@
           </button>
         </div>
         <ShipmentInfo />
-        <PriceCalculation :cartLike="me.order"
-                          class="my-orders-order-price-summary-wrapper"/>
-        <div class="order-list-summary-titles-wrapper">
-          <div class="row">
-            <div class="col-sm-6">{{ $t('description') }}</div>
-            <div class="col-sm-2">{{ $t('quantity') }}</div>
-            <div class="col-sm-2">{{ $t('price') }}</div>
-            <div class="col-sm-2">{{ $t('total') }}</div>
-          </div>
-        </div>
-        <LineItem v-for="lineItem in me.order.lineItems"
-              :key="lineItem.id"
-              :lineItem="lineItem"
-              class="order-detail-wrapper"
-              data-test="order-line-items"/>
+        <CartLikeSummary :cart-like="me.order"/>
       </div>
       <div v-else>
         <h1 class="text-center">{{ $t('notFound') }}</h1>
@@ -55,16 +41,14 @@
 import gql from 'graphql-tag';
 import ShipmentInfo from './ShipmentInfo.vue';
 import BaseDate from '../../common/BaseDate.vue';
-import PriceCalculation from '../../common/PriceCalculation.vue';
-import LineItem from '../../common/LineItem.vue';
+import CartLikeSummary from '../../common/cartlike/CartLikeSummary.vue';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {
   components: {
+    CartLikeSummary,
     ShipmentInfo,
     BaseDate,
-    PriceCalculation,
-    LineItem,
   },
 
   data: () => ({
