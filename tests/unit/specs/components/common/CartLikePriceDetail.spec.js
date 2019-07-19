@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
-import PriceCalculation from '@/components/common/PriceCalculation.vue';
+import CartLikePriceDetail from '@/components/common/cartlike/CartLikePriceDetail.vue';
 
-describe('PriceCalculation.vue', () => {
+describe('CartLikePriceDetail.vue', () => {
   const cartLike = {
     lineItems: [],
     totalPrice: {
@@ -27,11 +27,11 @@ describe('PriceCalculation.vue', () => {
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(PriceCalculation, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(CartLikePriceDetail, options).isVueInstance()).toBeTruthy();
   });
 
   it('calculates applied taxes', () => {
-    const wrapper = shallowMount(PriceCalculation, options);
+    const wrapper = shallowMount(CartLikePriceDetail, options);
     expect(wrapper.vm.taxes).toBeNull();
 
     wrapper.setProps({
@@ -59,7 +59,7 @@ describe('PriceCalculation.vue', () => {
   });
 
   it('calculates subtotal price', () => {
-    const wrapper = shallowMount(PriceCalculation, options);
+    const wrapper = shallowMount(CartLikePriceDetail, options);
     expect(wrapper.vm.subtotal).toEqual({
       centAmount: 0,
       currencyCode: 'EUR',

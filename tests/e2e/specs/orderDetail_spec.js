@@ -86,13 +86,13 @@ describe('OrderDetailPage', () => {
       .contains(/^\s*\d{1,2}\.*\s*[A-Za-zäÄöÖüÜß].+\s*\d{4}\s*$/);
     cy.get('[data-test=cart-subtotal-price]')
       .contains(/^\s*183,80\s€\s*$/);
-    // cy.get('[data-test=cart-shipping-price]')
-    //   .contains(/^\s*10,00\s€\s*$/);
-    // cy.get('[data-test=cart-taxes-amount]')
-    //   .contains(/^\s*30,95\s€\s*$/);
+    cy.get('[data-test=cart-shipping-price]')
+      .contains(/^\s*10,00\s€\s*$/);
+    cy.get('[data-test=cart-taxes-amount]')
+      .contains(/^\s*30,95\s€\s*$/);
     cy.get('[data-test=cart-total-price]')
       .contains(/^\s*193,80\s€\s*$/);
-    cy.get('[data-test=order-line-items]')
+    cy.get('[data-test=cart-line-item]')
       .should('have.length', 2)
       .eq(1)
       .then(($item) => {

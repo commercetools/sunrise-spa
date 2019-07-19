@@ -70,6 +70,7 @@
 .cart-content {
   background: $white;
   border: 1px solid $alto;
+  padding: 0 1em;
 }
 .cart-items-title {
   margin: 1em 1em 0;
@@ -108,16 +109,15 @@
   -khtml-user-select: none;
   -ms-user-select: none;
 }
-.edit-delete-section {
+.cart-edit-delete.edit-delete-section {
   padding: 0.5em 0;
   font-size: 12px;
 
   // Inline contextual rules
   @media screen and (min-width: 999px) {
-    width: 100%;
     text-align: center;
   }
-  button {
+  .delete-text {
     text-transform: uppercase;
   }
 }
@@ -125,21 +125,25 @@
   height: 15px;
   margin-right: 0.5em;
 }
+
 .single-cart-item {
-  margin: 0 1em;
-  padding: 1em;
+  margin: 1em;
   border-bottom: 1px solid $alto;
+
+  &:last-child {
+    border-bottom: 0;
+  }
 }
 
 // Quantity counter / spinner
-.input-number {
+.input-number input {
   width: 40px;
   padding: 0 10px;
   vertical-align: top;
   text-align: center;
   outline: none;
 }
-.input-number,
+.input-number input,
 .input-number-decrement,
 .input-number-increment {
   border: 1px solid $alto;
@@ -216,7 +220,7 @@
 
 // Total price section
 .total-price-calc {
-  margin: 1em;
+  padding: 1em;
   font-size: 1.1em;
   letter-spacing: 0.1em;
 }
@@ -275,7 +279,7 @@
   .cart-attributes {
     font-size: 0.9em;
   }
-  .input-number {
+  .input-number input {
     padding: 0;
     width: 22px;
   }
@@ -326,7 +330,7 @@
   .quantity-spinner {
     text-align: right;
   }
-  .input-number {
+  .input-number input {
     padding: 0 0.2em;
     width: 30px;
   }
@@ -363,7 +367,7 @@
   .sm-pull-right {
     float: right;
     .quantity-spinner {
-      .input-number {
+      .input-number input {
         margin: 0 3px;
       }
     }
@@ -399,16 +403,10 @@
 }
 
 // MIN-WIDTH ------------------------------------------------------------------------------
-@media screen and (min-width: 991px) {
-  .single-cart-item {
-    height: 169px;
-    min-height: 169px;
-  }
-}
 @media screen and (min-width: 768px) {
   .single-cart-item {
-    min-height: 230px;
-    height: 230px;
+    min-height: 169px;
+    height: 169px;
     .cart-edit-delete {
       min-height: 100%;
       height: 100%;
