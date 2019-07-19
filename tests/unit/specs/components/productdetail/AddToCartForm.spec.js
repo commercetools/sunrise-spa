@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import AddToCartForm from '@/components/productdetail/AddToCartForm.vue';
-import SelectBoxIt from '@/components/common/SelectBoxIt.vue';
+import SelectBoxIt from '@/components/common/form/SelectBoxIt.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuelidate);
