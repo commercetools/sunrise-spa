@@ -57,7 +57,7 @@
       <!--{{#if checkoutConfirmation}}-->
       <!--<div class="complete-order">-->
         <!--<button id="confirmation-completeorder-btn"-->
-                <!--class="btn complete-order-btn">{{ $t('checkout.completeMyOrder') }}</button>-->
+          <!--class="btn complete-order-btn">{{ $t('checkout.completeMyOrder') }}</button>-->
         <!--<br>-->
       <!--</div>-->
       <!--{{/if}}-->

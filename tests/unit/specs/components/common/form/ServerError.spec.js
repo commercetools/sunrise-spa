@@ -173,4 +173,16 @@ describe('ServerError.vue', () => {
     });
     expect(wrapper.text()).toBe(networkErrorTranslation);
   });
+
+  it('renders bad request error', () => {
+    const wrapper = shallowMount(ServerError, options);
+    expect(wrapper.text()).toBe('');
+
+    wrapper.setProps({
+      error: new ApolloError({
+        networkError: { statusCode: 400 },
+      }),
+    });
+    expect(wrapper.text()).toBe(badRequestErrorTranslation);
+  });
 });

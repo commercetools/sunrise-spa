@@ -10,7 +10,7 @@
                 variants=../product.variants identifiers=../product.variantIdentifiers}}-->
         <!--{{/each}}-->
         <!--<li class="size-guide-li">-->
-          <!--{{> catalog/size-guide}}-->
+        <!--{{> catalog/size-guide}}-->
         <!--</li>-->
       </ul>
     </div>

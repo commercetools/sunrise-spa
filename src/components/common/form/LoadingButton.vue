@@ -67,7 +67,7 @@ button {
   position: relative;
 
   &:hover {
-   background-color: lighten(#FFBA27, 5%);
+    background-color: lighten(#FFBA27, 5%);
   }
 
   .state-layer {

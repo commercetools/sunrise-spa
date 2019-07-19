@@ -77,7 +77,7 @@ export default {
   }
 
   &.error .selectboxit {
-     border-color: rgba(206, 65, 65, 0.6) !important;
-   }
+    border-color: rgba(206, 65, 65, 0.6) !important;
+  }
 }
 </style>

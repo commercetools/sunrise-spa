@@ -93,11 +93,11 @@ export function deleteDiscountCode(client, code) {
         }).catch(e => console.warn('Discount code might have already been deleted', e));
         await discountCode.cartDiscounts.forEach(cartDiscount => client.mutate({
           mutation: gql`
-              mutation deleteCartDiscount($id: String!, $version: Long!) {
-                deleteCartDiscount(id: $id, version: $version) {
-                  id
-                }
-              }`,
+          mutation deleteCartDiscount($id: String!, $version: Long!) {
+            deleteCartDiscount(id: $id, version: $version) {
+              id
+            }
+          }`,
           variables: {
             id: cartDiscount.id,
             version: cartDiscount.version,
@@ -113,11 +113,11 @@ export function deleteOrder(client, orderNumber) {
       if (order) {
         await client.mutate({
           mutation: gql`
-            mutation deleteOrder($id: String!, $version: Long!) {
-              deleteOrder(id: $id, version: $version) {
-                id
-              }
-            }`,
+          mutation deleteOrder($id: String!, $version: Long!) {
+            deleteOrder(id: $id, version: $version) {
+              id
+            }
+          }`,
           variables: {
             id: order.id,
             version: order.version,
@@ -133,11 +133,11 @@ export function deleteCustomer(client, email) {
       if (customer) {
         await client.mutate({
           mutation: gql`
-            mutation deleteCustomer($id: String!, $version: Long!) {
-              deleteCustomer(id: $id, version: $version, personalDataErasure: true) {
-                id
-              }
-            }`,
+          mutation deleteCustomer($id: String!, $version: Long!) {
+            deleteCustomer(id: $id, version: $version, personalDataErasure: true) {
+              id
+            }
+          }`,
           variables: {
             id: customer.id,
             version: customer.version,

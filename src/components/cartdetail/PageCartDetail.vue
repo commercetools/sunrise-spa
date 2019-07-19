@@ -40,7 +40,7 @@
       <div class="row bottom-cart-btns">
         <div class="col-sm-6">
           <router-link to="/"
-             class="text-uppercase continue-shopping-btn">
+                       class="text-uppercase continue-shopping-btn">
             {{ $t('continueShopping') }}
           </router-link>
         </div>

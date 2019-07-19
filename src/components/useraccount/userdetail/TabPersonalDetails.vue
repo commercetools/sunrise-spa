@@ -10,7 +10,7 @@
         <br>
         <span class="customer-number">{{ me.customer.customerNumber }}</span>
       </div>
-      <EditProfileForm />
+      <EditProfileForm/>
     </div>
     <div class="col-sm-3">
       <div class="my-account-banners">

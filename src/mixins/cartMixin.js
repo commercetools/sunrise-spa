@@ -91,7 +91,7 @@ export default {
                 discountCode {
                   id
                   code
-                  name(locale: $locale)                  
+                  name(locale: $locale)
                 }
               }
               shippingAddress {

@@ -70,9 +70,9 @@
       </div>
       <hr class="signup-box-hr">
       <!--<div class="signup-box-newsletter">-->
-        <!--<input type="checkbox" name="joinNewsletter" value="true" -->
-               <!--{{#if form.subscribeToNewsletter}}checked{{/if}}>-->
-        <!--<span>{{ $t('pleaseAddMe') }} <a href="">{{ $t('newsletter') }}</a></span>-->
+      <!--<input type="checkbox" name="joinNewsletter" value="true" -->
+      <!--{{#if form.subscribeToNewsletter}}checked{{/if}}>-->
+      <!--<span>{{ $t('pleaseAddMe') }} <a href="">{{ $t('newsletter') }}</a></span>-->
       <!--</div>-->
       <div class="signup-box-terms">
         <BaseInput v-model="form.agreeToTerms"
@@ -97,7 +97,7 @@ import {
   required, email, minLength, sameAs,
 } from 'vuelidate/lib/validators';
 import gql from 'graphql-tag';
-import { clientLogin } from '../../auth';
+import authMixin from '../../mixins/authMixin';
 import ServerError from '../common/form/ServerError.vue';
 import LoadingButton from '../common/form/LoadingButton.vue';
 import BaseInput from '../common/form/BaseInput.vue';
@@ -110,6 +110,8 @@ export default {
     ServerError,
     LoadingButton,
   },
+
+  mixins: [authMixin],
 
   data: () => ({
     form: {
@@ -141,7 +143,7 @@ export default {
             lastName: this.form.lastName,
           },
         },
-      }).then(() => clientLogin(this.form.email, this.form.password))
+      }).then(() => this.login(this.form.email, this.form.password))
         .then(() => this.$router.push({ name: 'user' }));
     },
 

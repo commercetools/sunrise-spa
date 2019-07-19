@@ -1,5 +1,4 @@
 import SdkAuth, { TokenProvider } from '@commercetools/sdk-auth';
-import apolloProvider from './apollo';
 import store from './store';
 import config from '../sunrise.config';
 
@@ -31,11 +30,11 @@ export function cleanUpSession() {
   return store.dispatch('setAuthenticated', false);
 }
 
-export function clientLogin(username, password) {
+export function clientLogin(apolloClient, credentials) {
   localStorage.removeItem(tokenInfoStorageName);
-  tokenProvider.fetchTokenInfo = sdkAuth => sdkAuth.customerPasswordFlow({ username, password });
+  tokenProvider.fetchTokenInfo = sdkAuth => sdkAuth.customerPasswordFlow(credentials);
   tokenProvider.invalidateTokenInfo();
-  return apolloProvider.defaultClient.resetStore()
+  return apolloClient.resetStore()
     .then(() => {
       localStorage.setItem(isAuthenticatedStorageName, true);
       return store.dispatch('setAuthenticated', true);
@@ -47,10 +46,10 @@ export function clientLogin(username, password) {
     });
 }
 
-export function clientLogout(redirect) {
+export function clientLogout(apolloClient, redirect) {
   return cleanUpSession()
     .then(() => redirect())
-    .then(() => apolloProvider.defaultClient.resetStore())
+    .then(() => apolloClient.resetStore())
     .catch((error) => {
       // eslint-disable-next-line no-console
       console.error('Error on cache reset during logout', error);

@@ -26,24 +26,12 @@
 </template>
 
 <script>
-import { clientLogout } from '@/auth';
+import authMixin from '../../mixins/authMixin';
 
 export default {
   props: ['showTab'],
 
-  methods: {
-    logout() {
-      clientLogout().then(() => this.$router.replace({
-        query: {
-          logout: true,
-        },
-      }));
-    },
-
-    isActiveTab(tab) {
-      return this.showTab === tab;
-    },
-  },
+  mixins: [authMixin],
 };
 </script>
 

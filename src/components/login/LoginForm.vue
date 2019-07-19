@@ -60,7 +60,7 @@
 <script>
 import { required, email } from 'vuelidate/lib/validators';
 import gql from 'graphql-tag';
-import { clientLogin } from '../../auth';
+import authMixin from '../../mixins/authMixin';
 import ServerError from '../common/form/ServerError.vue';
 import LoadingButton from '../common/form/LoadingButton.vue';
 import BaseInput from '../common/form/BaseInput.vue';
@@ -73,6 +73,8 @@ export default {
     ServerError,
     LoadingButton,
   },
+
+  mixins: [authMixin],
 
   data: () => ({
     form: {
@@ -98,7 +100,7 @@ export default {
             password: this.form.password,
           },
         },
-      }).then(() => clientLogin(this.form.email, this.form.password))
+      }).then(() => this.login(this.form.email, this.form.password))
         .then(() => this.$router.push({ name: 'user' }));
     },
 
