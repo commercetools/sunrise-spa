@@ -19,6 +19,7 @@
 
 <script>
 import ValidationError from './ValidationError.vue';
+import SelectBoxIt from './SelectBoxIt.vue';
 import BaseLabel from './BaseLabel.vue';
 
 export default {
@@ -26,6 +27,7 @@ export default {
 
   components: {
     BaseLabel,
+    SelectBoxIt,
     ValidationError,
   },
 
