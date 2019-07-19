@@ -66,7 +66,7 @@ describe('ServerError.vue', () => {
         networkError: { message: 'Some error', statusCode: 400 },
       }),
     });
-    expect(wrapper.vm.is400Error).toBeTruthy();
+    expect(wrapper.vm.isBadRequestError).toBeTruthy();
   });
 
   it('detects GraphQL errors', () => {

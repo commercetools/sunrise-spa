@@ -32,6 +32,12 @@ export default {
   props: ['showTab'],
 
   mixins: [authMixin],
+
+  methods: {
+    isActiveTab(tab) {
+      return this.showTab === tab;
+    },
+  },
 };
 </script>
 
