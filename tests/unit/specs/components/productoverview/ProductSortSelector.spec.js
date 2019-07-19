@@ -1,8 +1,8 @@
 import Vue from 'vue';
+import VueRouter from 'vue-router';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import ProductSortSelector from '@/components/productoverview/ProductSortSelector.vue';
-import VueRouter from 'vue-router';
-import SelectBoxIt from '@/components/common/SelectBoxIt.vue';
+import SelectBoxIt from '@/components/common/form/SelectBoxIt.vue';
 
 Vue.component('SelectBoxIt', SelectBoxIt);
 const localVue = createLocalVue();
