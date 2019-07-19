@@ -17,11 +17,11 @@ describe('Login', () => {
 
   it('logs in', () => {
     cy.login(customer);
-    cy.location('pathname').should('eq', '/user');
+    cy.location('pathname').should('eq', '/user/account');
     checkCustomerIsLoggedIn();
 
     cy.reload();
-    cy.location('pathname').should('eq', '/user');
+    cy.location('pathname').should('eq', '/user/account');
     checkCustomerIsLoggedIn();
 
     cy.get('[data-test=logout-button]').click();
