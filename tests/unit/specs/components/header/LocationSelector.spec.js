@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { shallowMount } from '@vue/test-utils';
 import LocationSelector from '@/components/header/LocationSelector.vue';
-import SelectBoxIt from '@/components/common/SelectBoxIt.vue';
+import SelectBoxIt from '@/components/common/form/SelectBoxIt.vue';
 
 Vue.component('SelectBoxIt', SelectBoxIt);
 
