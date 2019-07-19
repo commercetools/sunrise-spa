@@ -9,7 +9,13 @@
 </template>
 
 <script>
+import SelectBoxIt from '../common/form/SelectBoxIt.vue';
+
 export default {
+  components: {
+    SelectBoxIt,
+  },
+
   data: () => ({
     sort: null,
   }),
