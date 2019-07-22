@@ -86,7 +86,7 @@ en:
     subtitle: "Make the great days happen"
     link: "Shop All"
 de:
-  welcomeBack: "Willkommen zurück, {name}"
+  welcomeBack: "Hallo, {name}"
   customerNumber: "Kundennummer"
   subscribedToNewsletter: "Subscribed to weekly newsletter"
   bannerOne:
