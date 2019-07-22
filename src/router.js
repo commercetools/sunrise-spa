@@ -1,17 +1,18 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import store from '@/store';
-import TheHeader from '@/components/header/TheHeader.vue';
-import PageHome from '@/components/home/PageHome.vue';
-import PageProductOverview from '@/components/productoverview/PageProductOverview.vue';
-import PageLogin from '@/components/login/PageLogin.vue';
-import PageUserAccount from '@/components/useraccount/PageUserAccount.vue';
-import PageNotFound from '@/components/common/PageNotFound.vue';
-import PageProductDetail from '@/components/productdetail/PageProductDetail.vue';
-import PageCartDetail from '@/components/cartdetail/PageCartDetail.vue';
-import TabPersonalDetails from '@/components/useraccount/userdetail/TabPersonalDetails.vue';
-import TabOrderList from '@/components/useraccount/myorders/TabOrderList.vue';
-import TabOrderDetail from '@/components/useraccount/myorders/TabOrderDetail.vue';
+import store from './store';
+import TheHeader from './components/header/TheHeader.vue';
+import TheFooter from './components/footer/TheFooter.vue';
+import PageHome from './components/home/PageHome.vue';
+import PageProductOverview from './components/productoverview/PageProductOverview.vue';
+import PageLogin from './components/login/PageLogin.vue';
+import PageUserAccount from './components/useraccount/PageUserAccount.vue';
+import PageNotFound from './components/common/PageNotFound.vue';
+import PageProductDetail from './components/productdetail/PageProductDetail.vue';
+import PageCartDetail from './components/cartdetail/PageCartDetail.vue';
+import TabPersonalDetails from './components/useraccount/userdetail/TabPersonalDetails.vue';
+import TabOrderList from './components/useraccount/myorders/TabOrderList.vue';
+import TabOrderDetail from './components/useraccount/myorders/TabOrderDetail.vue';
 
 Vue.use(Router);
 
@@ -26,6 +27,7 @@ const router = new Router({
       components: {
         default: PageNotFound,
         header: TheHeader,
+        footer: TheFooter,
       },
     },
     {
@@ -34,6 +36,7 @@ const router = new Router({
       components: {
         default: PageHome,
         header: TheHeader,
+        footer: TheFooter,
       },
     },
     {
@@ -46,6 +49,7 @@ const router = new Router({
       components: {
         default: PageLogin,
         header: TheHeader,
+        footer: TheFooter,
       },
     },
     {
@@ -54,10 +58,12 @@ const router = new Router({
       components: {
         default: PageProductOverview,
         header: TheHeader,
+        footer: TheFooter,
       },
       props: {
         default: true,
         header: false,
+        footer: false,
       },
     },
     {
@@ -66,6 +72,7 @@ const router = new Router({
       components: {
         default: PageUserAccount,
         header: TheHeader,
+        footer: TheFooter,
       },
       children: [
         {
@@ -85,10 +92,12 @@ const router = new Router({
       components: {
         default: PageProductDetail,
         header: TheHeader,
+        footer: TheFooter,
       },
       props: {
         default: true,
         header: false,
+        footer: false,
       },
     },
     {
@@ -97,6 +106,7 @@ const router = new Router({
       components: {
         default: PageCartDetail,
         header: TheHeader,
+        footer: TheFooter,
       },
     },
   ],
