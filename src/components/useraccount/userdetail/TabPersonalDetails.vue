@@ -74,7 +74,7 @@ export default {
 
 <i18n>
 en:
-  welcomeBack: "Welcome back, {name}"
+  welcomeBack: "Hello, {name}"
   customerNumber: "Customer number"
   subscribedToNewsletter: "Subscribed to weekly newsletter"
   bannerOne:
