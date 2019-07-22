@@ -6,18 +6,7 @@
     <router-view/>
     <!--{{> common/wishlist wishlist=content.wishlist}}-->
     <footer>
-      <TheFooter/>
+      <router-view name="footer"/>
     </footer>
   </div>
 </template>
-
-<script>
-import TheFooter from '@/components/footer/TheFooter.vue';
-
-export default {
-  name: 'app',
-  components: {
-    TheFooter,
-  },
-};
-</script>
