@@ -4,36 +4,32 @@
       <div class="pull-left">
         <div class="login-box-title">{{ $t('title') }}</div>
       </div>
-      <div class="pull-right">
-        <div class="login-box-required">{{ $t('required') }}*</div>
-      </div>
     </div>
     <hr class="login-box-hr">
     <div class="login-box-description">{{ $t('description') }}</div>
     <div class="login-box-input-wrapper">
-      <form @submit.prevent="submit">
-        <ServerError :error="serverError">
-          <template slot-scope="{ graphQLError }">
-            {{ getErrorMessage(graphQLError) }}
-          </template>
+      <BaseForm :vuelidate="$v"
+                :onSubmit="customerSignMeIn"
+                #default="{ error, state }">
+        <ServerError :error="error"
+                     v-slot="{ graphQLError }">
+          {{ getErrorMessage(graphQLError) }}
         </ServerError>
         <div class="login-box-input">
-          <span>{{ $t('email') }}*</span><br>
-          <ValidationError :vuelidate="$v.email">
-            <input v-model.trim.lazy="$v.email.$model"
-                   autocomplete="username"
-                   type="email"
-                   data-test="login-form-email" />
-          </ValidationError>
+          <BaseInput v-model="form.email"
+                     :vuelidate="$v.form.email"
+                     :label="$t('email')"
+                     type="email"
+                     autocomplete="username"
+                     data-test="login-form-email" />
         </div>
         <div class="login-box-input">
-          <span>{{ $t('password') }}*</span><br>
-          <ValidationError :vuelidate="$v.password">
-            <input v-model.trim.lazy="$v.password.$model"
-                   autocomplete="current-password"
-                   type="password"
-                   data-test="login-form-password" />
-          </ValidationError>
+          <BaseInput v-model="form.password"
+                     :vuelidate="$v.form.password"
+                     :label="$t('password')"
+                     type="password"
+                     autocomplete="current-password"
+                     data-test="login-form-password" />
         </div>
         <div class="clearfix">
           <div class="pull-left">
@@ -51,12 +47,12 @@
             </div>
           </div>
         </div>
-        <LoadingButton :buttonState="buttonState"
+        <LoadingButton :state="state"
                        class="login-box-sign-in-btn"
                        data-test="login-form-submit">
           {{ $t('signIn') }}
         </LoadingButton>
-      </form>
+      </BaseForm>
     </div>
   </div>
 </template>
@@ -64,37 +60,30 @@
 <script>
 import { required, email } from 'vuelidate/lib/validators';
 import gql from 'graphql-tag';
-import { clientLogin } from '@/auth';
-import ServerError from '../common/ServerError.vue';
-import ValidationError from '../common/ValidationError.vue';
-import LoadingButton from '../common/LoadingButton.vue';
+import authMixin from '../../mixins/authMixin';
+import ServerError from '../common/form/ServerError.vue';
+import LoadingButton from '../common/form/LoadingButton.vue';
+import BaseInput from '../common/form/BaseInput.vue';
+import BaseForm from '../common/form/BaseForm.vue';
 
 export default {
-  components: { ServerError, ValidationError, LoadingButton },
+  components: {
+    BaseForm,
+    BaseInput,
+    ServerError,
+    LoadingButton,
+  },
+
+  mixins: [authMixin],
 
   data: () => ({
-    email: null,
-    password: null,
-    buttonState: null,
-    serverError: null,
+    form: {
+      email: '',
+      password: '',
+    },
   }),
 
   methods: {
-    async submit() {
-      this.$v.$touch();
-      this.serverError = null;
-      if (!this.$v.$invalid) {
-        this.buttonState = 'loading';
-        await this.customerSignMeIn()
-          .then(() => clientLogin(this.email, this.password))
-          .then(() => this.$router.push({ name: 'user' }))
-          .catch((error) => {
-            this.serverError = error;
-            this.buttonState = null;
-          });
-      }
-    },
-
     customerSignMeIn() {
       return this.$apollo.mutate({
         mutation: gql`
@@ -107,11 +96,12 @@ export default {
           }`,
         variables: {
           draft: {
-            email: this.email,
-            password: this.password,
+            email: this.form.email,
+            password: this.form.password,
           },
         },
-      });
+      }).then(() => this.login(this.form.email, this.form.password))
+        .then(() => this.$router.push({ name: 'user' }));
     },
 
     getErrorMessage({ code }) {
@@ -123,12 +113,9 @@ export default {
   },
 
   validations: {
-    email: {
-      required,
-      email,
-    },
-    password: {
-      required,
+    form: {
+      email: { required, email },
+      password: { required },
     },
   },
 };

@@ -1,5 +1,6 @@
 <template>
-  <div class="cart-page container">
+  <div v-if="me"
+       class="cart-page container">
     <div class="row">
       <div class="col-sm-8 col-xs-12">
         <div class="current-in-bag">
@@ -17,26 +18,39 @@
         <!--{{> checkout/start-checkout-link id="cart-checkoutnow-btn"}}-->
       </div>
     </div>
-    <div v-if="me && me.activeCart">
+    <div v-if="cartNotEmpty">
       <div class="row">
         <div class="col-sm-12">
           <div class="cart-content">
-            <CartContent :editable="true"/>
-            <AddDiscountCodeForm/>
-            <PriceCalculation :cartLike="me.activeCart"
-                              class="total-price-calc"/>
+            <CartLikeSummary :cart-like="me.activeCart">
+              <template #quantity-column="{ lineItem }">
+                <LineItemDeleteForm :lineItemId="lineItem.id"
+                                    class="col-sm-5 cart-edit-delete"/>
+                <LineItemQuantityForm :lineItemId="lineItem.id"
+                                      :quantity="lineItem.quantity"
+                                      class="col-sm-7 clearfix sm-pull-right"/>
+              </template>
+              <template #before-pricing>
+                <AddDiscountCodeForm/>
+              </template>
+            </CartLikeSummary>
           </div>
         </div>
       </div>
       <div class="row bottom-cart-btns">
         <div class="col-sm-6">
           <router-link to="/"
-             class="text-uppercase continue-shopping-btn">
+                       class="text-uppercase continue-shopping-btn">
             {{ $t('continueShopping') }}
           </router-link>
         </div>
         <div class="col-sm-6">
-          <!--{{> checkout/start-checkout-link bottom=true}}-->
+          <div class="checkout-now checkout-now-bottom">
+            <router-link :to="{ name: 'checkout'}"
+                         class="pull-right text-uppercase checkout-now-btn">
+              {{ $t('startCheckout') }}
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -49,15 +63,17 @@
 <script>
 import gql from 'graphql-tag';
 import cartMixin from '@/mixins/cartMixin';
-import CartContent from '@/components/cartdetail/CartContent.vue';
-import PriceCalculation from '@/components/common/PriceCalculation.vue';
-import AddDiscountCodeForm from '@/components/common/AddDiscountCodeForm.vue';
+import CartLikeSummary from '../common/cartlike/CartLikeSummary.vue';
+import LineItemDeleteForm from './LineItemDeleteForm.vue';
+import LineItemQuantityForm from './LineItemQuantityForm.vue';
+import AddDiscountCodeForm from './AddDiscountCodeForm.vue';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {
   components: {
-    CartContent,
-    PriceCalculation,
+    CartLikeSummary,
+    LineItemQuantityForm,
+    LineItemDeleteForm,
     AddDiscountCodeForm,
   },
 
@@ -70,16 +86,36 @@ export default {
   apollo: {
     me: {
       query: gql`
-        query me($locale: Locale!){
+        query me($locale: Locale!) {
           me {
             activeCart {
               id
-              version
               lineItems {
                 id
+                name(locale: $locale)
+                productSlug(locale: $locale)
                 quantity
+                price {
+                  value {
+                    ...DisplayableMoney
+                  }
+                  discounted {
+                    value {
+                      ...DisplayableMoney
+                    }
+                  }
+                }
+                discountedPricePerQuantity {
+                  quantity
+                }
                 totalPrice {
                   ...DisplayableMoney
+                }
+                variant {
+                  sku
+                  images {
+                    url
+                  }
                 }
               }
               totalPrice {
@@ -125,9 +161,11 @@ en:
   itemsTotal: "{n} item in total | {n} items in total"
   empty: "Your bag is empty"
   continueShopping: "Continue Shopping"
+  startCheckout: "Start Checkout"
 de:
   yourBag: "Ihr Einkaufswagen"
   itemsTotal: "{n} Artikel im Warenkorb"
   empty: "Ihr Einkaufswagen ist leer :("
   continueShopping: "Weiter einkaufen"
+  startCheckout: "Zur Kasse"
 </i18n>

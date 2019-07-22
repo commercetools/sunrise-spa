@@ -33,21 +33,17 @@
 
 <script>
 import gql from 'graphql-tag';
-import { clientLogout } from '@/auth';
+import authMixin from '../../mixins/authMixin';
 
 export default {
+  mixins: [authMixin],
+
   data: () => ({
     me: null,
   }),
 
   computed: {
     showLoggedIn: vm => vm.$store.state.authenticated && vm.me,
-  },
-
-  methods: {
-    logout() {
-      clientLogout(() => this.$router.replace({ query: { logout: true } }));
-    },
   },
 
   apollo: {

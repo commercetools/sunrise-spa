@@ -1,6 +1,6 @@
 import VueI18n from 'vue-i18n';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import ValidationError from '@/components/common/ValidationError.vue';
+import ValidationError from '@/components/common/form/ValidationError.vue';
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);
@@ -62,9 +62,9 @@ describe('ValidationError.vue', () => {
     expect(wrapper.vm.getErrorMessage('required')).toEqual(requiredTranslation);
 
     wrapper.setProps({
-      customMessages: { required: 'custom message' },
+      customErrors: { required: 'custom error' },
     });
-    expect(wrapper.vm.getErrorMessage('required')).toEqual('custom message');
+    expect(wrapper.vm.getErrorMessage('required')).toEqual('custom error');
   });
 
   it('returns unknown validation when no translation available', () => {
@@ -92,19 +92,13 @@ describe('ValidationError.vue', () => {
   });
 
   it('does not render errors if no error flag', () => {
-    options.slots = {
-      default: '<input data-test="validation-error-test-input"></input>',
-    };
     const wrapper = shallowMount(ValidationError, options);
-
     wrapper.setProps({
       vuelidate: {
         $error: false,
         $params: {},
       },
     });
-    expect(wrapper.find('div.form-error').exists()).toBe(false);
-    expect(wrapper.find('input').exists()).toBe(true);
     expect(wrapper.find('[data-test="validation-error-list"]').exists()).toBe(false);
 
     wrapper.setProps({
@@ -113,8 +107,6 @@ describe('ValidationError.vue', () => {
         $params: {},
       },
     });
-    expect(wrapper.find('div.form-error').exists()).toBe(true);
-    expect(wrapper.find('input').exists()).toBe(true);
     expect(wrapper.find('[data-test="validation-error-list"]').exists()).toBe(true);
   });
 
@@ -128,15 +120,15 @@ describe('ValidationError.vue', () => {
         $params: {
           required: { type: 'required' },
           email: { type: 'email' },
-          custom: { type: 'custom error' },
+          custom: { type: 'custom' },
         },
       },
-      customMessages: { custom: 'custom message' },
+      customErrors: { custom: 'custom error' },
     });
     const errors = wrapper.findAll('[data-test="validation-error"]');
     expect(errors.length).toBe(3);
     expect(errors.at(0).text()).toBe(requiredTranslation);
     expect(errors.at(1).text()).toBe(unknownValidationTranslation);
-    expect(errors.at(2).text()).toBe('custom message');
+    expect(errors.at(2).text()).toBe('custom error');
   });
 });

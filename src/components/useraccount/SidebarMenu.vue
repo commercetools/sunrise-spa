@@ -1,20 +1,15 @@
 <template>
-  <div class="my-account-sidebar">
+  <div>
     <div id="my-account-mobile-content"
-         class="my-account-sidebar-items"
-         :class="{ active: showTab === 'TabPersonalDetails' }">
+         class="my-account-sidebar-items">
       <router-link :to="{ name: 'user' }">
-        <button>
-          {{ $t("personalDetails") }}
-        </button>
+        {{ $t("personalDetails") }}
       </router-link>
     </div>
-    <div class="my-account-sidebar-items"
-         :class="{ active: showTab === 'TabOrderDetail' }">
-      <router-link :to="{ name: 'orders' }">
-        <button data-test="my-orders-button">
+    <div class="my-account-sidebar-items">
+      <router-link :to="{ name: 'orders' }"
+                   data-test="my-orders-button">
           {{ $t("myOrders") }}
-        </button>
       </router-link>
     </div>
     <div class="my-account-sidebar-items">
@@ -26,30 +21,12 @@
 </template>
 
 <script>
-import { clientLogout } from '@/auth';
+import authMixin from '../../mixins/authMixin';
 
 export default {
-  props: ['showTab'],
-
-  methods: {
-    logout() {
-      clientLogout().then(() => this.$router.replace({
-        query: {
-          logout: true,
-        },
-      }));
-    },
-  },
+  mixins: [authMixin],
 };
 </script>
-
-
-<style lang="scss" scoped>
-  .my-account-sidebar-items button {
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-</style>
 
 <i18n>
 en:

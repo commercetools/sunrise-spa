@@ -1,5 +1,18 @@
 describe('OrderDetailPage', () => {
-  const customer = {
+  const cartDiscount = {
+    value: {
+      relative: { permyriad: 5000 },
+    },
+    cartPredicate: '1=1',
+    sortOrder: Math.random().toString(),
+    name: { locale: 'en', value: '50% discount' },
+    requiresDiscountCode: true,
+    target: {
+      lineItems: { predicate: '1=1' },
+    },
+  };
+
+  const customerDraft = {
     firstName: 'Charlie',
     lastName: 'Bucket',
     email: 'charlie.bucket+ci@commercetools.com',
@@ -43,7 +56,7 @@ describe('OrderDetailPage', () => {
       email: 'charlie.bucket+ci@commercetools.com',
     },
     shippingMethod: {
-      id: 'fe39f916-d4d7-4f99-9554-5949efeb2a0c',
+      key: 'express-EU',
     },
     lineItems: [{
       sku: 'M0E20000000EFWN',
@@ -53,12 +66,13 @@ describe('OrderDetailPage', () => {
       quantity: 2,
     },
     ],
-    discountCodes: ['CODE2019'],
+    discountCodes: ['SUNRISE_CI'],
   };
 
   before(() => {
-    cy.login(customer);
-    cy.createMyOrder(cartDraft, orderDraft);
+    cy.addDiscountCode(cartDiscount, 'SUNRISE_CI');
+    cy.login(customerDraft);
+    cy.createOrder(cartDraft, orderDraft);
   });
 
   it('shows order details', () => {
@@ -71,10 +85,14 @@ describe('OrderDetailPage', () => {
     cy.get('[data-test=details-order-date]')
       .contains(/^\s*\d{1,2}\.*\s*[A-Za-zäÄöÖüÜß].+\s*\d{4}\s*$/);
     cy.get('[data-test=cart-subtotal-price]')
-      .contains(/^\s*349,21\s€\s*$/);
+      .contains(/^\s*183,80\s€\s*$/);
+    cy.get('[data-test=cart-shipping-price]')
+      .contains(/^\s*10,00\s€\s*$/);
+    cy.get('[data-test=cart-taxes-amount]')
+      .contains(/^\s*30,95\s€\s*$/);
     cy.get('[data-test=cart-total-price]')
-      .contains(/^\s*349,21\s€\s*$/);
-    cy.get('[data-test=order-line-items]')
+      .contains(/^\s*193,80\s€\s*$/);
+    cy.get('[data-test=cart-line-item]')
       .should('have.length', 2)
       .eq(1)
       .then(($item) => {
@@ -86,7 +104,7 @@ describe('OrderDetailPage', () => {
           .contains(/^\s*139,30\s€\s*$/);
       });
     cy.get('[data-test=discount-code-name]')
-      .contains('CODE2019');
+      .contains('SUNRISE_CI');
     cy.get('[data-test=remove-discount-button]')
       .should('not.exist');
   });

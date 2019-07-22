@@ -25,20 +25,20 @@ describe('MiniCart', () => {
       .eq(0)
       .then(($lineItem) => {
         cy.wrap($lineItem)
-          .find('[data-test=mini-cart-line-item-link]')
+          .find('[data-test=cart-line-item-link]')
           .should('have.attr', 'href', '/product/lemare-booties-0778-grey/M0E20000000E0WX')
           .should('contain', 'Booties Lemare grey');
 
         cy.wrap($lineItem)
-          .find('[data-test=mini-cart-line-item-quantity]')
+          .find('[data-test=cart-line-item-quantity]')
           .should('contain', '3');
 
         cy.wrap($lineItem)
-          .find('[data-test=mini-cart-line-item-price]')
+          .find('[data-test=cart-line-item-price]')
           .contains(/^\s*522,36\s€\s*$/);
       });
 
-    cy.get('[data-test=mini-cart-line-item-delete]')
+    cy.get('[data-test=cart-line-item-delete]')
       .eq(1)
       .click();
     cy.get('[data-test=mini-cart-open-button]')

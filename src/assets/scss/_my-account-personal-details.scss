@@ -22,27 +22,42 @@
 
 // My account box
 .my-account-content {
+  display: flex;
+  flex-wrap: wrap;
   background: $white;
   border: 1px solid $alto;
-  padding: 20px;
+  > div {
+    padding: 0;
+  }
+  .checkout-form-step {
+    padding: 30px;
+  }
 }
 
 // Sidebar
 .my-account-sidebar {
+  padding: 0;
+  background: $wild-sand;
   .my-account-sidebar-items {
-    padding: 10px;
-    border-top: 1px solid $alto;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    &:last-child {
-      border-bottom: 1px solid $alto;
+    a, button {
+      width: 100%;
+      text-align: left;
+      color: $gray;
+      display: block;
+      padding: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-left: 4px solid transparent;
+      &:hover {
+        border-left-color: $alto;
+        color: $mine-shaft;
+      }
     }
-    &:hover {
-      background: $wild-sand;
+    a.router-link-active {
+      color: $mine-shaft;
+      background: $white;
+      border-left-color: $my-sin;
     }
-  }
-  .active {
-    background: $wild-sand;
   }
 }
 
@@ -119,7 +134,6 @@
   background: $wild-sand;
   margin-top: 15px;
   padding: 15px 10px;
-  color: $gray;
   position: relative;
 }
 .personal-details-box-edit {
@@ -163,16 +177,16 @@
   text-transform: uppercase;
   font-size: 12px;
 }
-.form-inputs {
+.form-inputs input {
   width: 100%;
   border: 1px solid #D6D6D6;
   border-radius: 1px;
   padding: 0.5em;
   margin-top: 0.2em;
 }
-.form-sections {
-  padding-top: 15px;;
-}
+//.form-sections {
+//  padding-top: 15px;;
+//}
 .form-notes {
   font-size: 12px;
   color: $gray;

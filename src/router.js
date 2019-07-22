@@ -9,6 +9,9 @@ import PageUserAccount from '@/components/useraccount/PageUserAccount.vue';
 import PageNotFound from '@/components/common/PageNotFound.vue';
 import PageProductDetail from '@/components/productdetail/PageProductDetail.vue';
 import PageCartDetail from '@/components/cartdetail/PageCartDetail.vue';
+import TabPersonalDetails from '@/components/useraccount/userdetail/TabPersonalDetails.vue';
+import TabOrderList from '@/components/useraccount/myorders/TabOrderList.vue';
+import TabOrderDetail from '@/components/useraccount/myorders/TabOrderDetail.vue';
 
 Vue.use(Router);
 
@@ -59,45 +62,22 @@ const router = new Router({
     },
     {
       path: '/user',
-      name: 'user',
+      meta: { requiresAuth },
       components: {
         default: PageUserAccount,
         header: TheHeader,
       },
-      meta: { requiresAuth },
-      props: {
-        default: {
-          showTab: 'TabPersonalDetails',
+      children: [
+        {
+          path: 'orders', name: 'orders', component: TabOrderList,
         },
-      },
-    },
-    {
-      path: '/user/orders',
-      name: 'orders',
-      components: {
-        default: PageUserAccount,
-        header: TheHeader,
-      },
-      meta: { requiresAuth },
-      props: {
-        default: {
-          showTab: 'TabOrderList',
+        {
+          path: 'orders/:orderNumber', name: 'order', component: TabOrderDetail,
         },
-      },
-    },
-    {
-      path: '/user/orders/:orderNumber',
-      name: 'order',
-      components: {
-        default: PageUserAccount,
-        header: TheHeader,
-      },
-      meta: { requiresAuth },
-      props: {
-        default: {
-          showTab: 'OrderDetail',
+        {
+          path: 'account', alias: '', name: 'user', component: TabPersonalDetails,
         },
-      },
+      ],
     },
     {
       path: '/product/:productSlug/:sku',

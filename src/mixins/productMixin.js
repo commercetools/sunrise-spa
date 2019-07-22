@@ -16,5 +16,12 @@ export default {
       }
       return null;
     },
+
+    productRoute(productSlug, sku) {
+      return {
+        name: 'product',
+        params: { productSlug, sku },
+      };
+    },
   },
 };

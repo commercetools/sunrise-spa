@@ -1,7 +1,7 @@
 import VueI18n from 'vue-i18n';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import { ApolloError } from 'apollo-client';
-import ServerError from '@/components/common/ServerError.vue';
+import ServerError from '@/components/common/form/ServerError.vue';
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);
@@ -11,6 +11,7 @@ describe('ServerError.vue', () => {
   const graphQLError2 = { code: 'ErrorB' };
   const unknownErrorTranslation = 'unknown error';
   const networkErrorTranslation = 'network error';
+  const badRequestErrorTranslation = 'bad request error';
 
   let options;
 
@@ -23,6 +24,7 @@ describe('ServerError.vue', () => {
           en: {
             unknownError: unknownErrorTranslation,
             networkError: networkErrorTranslation,
+            badRequestError: badRequestErrorTranslation,
           },
         },
       }),
@@ -139,5 +141,17 @@ describe('ServerError.vue', () => {
       }),
     });
     expect(wrapper.text()).toBe(networkErrorTranslation);
+  });
+
+  it('renders bad request error', () => {
+    const wrapper = shallowMount(ServerError, options);
+    expect(wrapper.text()).toBe('');
+
+    wrapper.setProps({
+      error: new ApolloError({
+        networkError: { statusCode: 400 },
+      }),
+    });
+    expect(wrapper.text()).toBe(badRequestErrorTranslation);
   });
 });
