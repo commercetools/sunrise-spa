@@ -17,11 +17,6 @@
   </div>
 </template>
 
-<script>
-export default {
-};
-</script>
-
 <i18n>
 en:
   joinNewsletter: "Join our newsletter"
