@@ -1,9 +1,13 @@
 <template>
   <div id="app">
-    <router-view name="header"/>
+    <header>
+      <router-view name="header"/>
+    </header>
     <router-view/>
     <!--{{> common/wishlist wishlist=content.wishlist}}-->
-    <TheFooter/>
+    <footer>
+      <TheFooter/>
+    </footer>
   </div>
 </template>
 
