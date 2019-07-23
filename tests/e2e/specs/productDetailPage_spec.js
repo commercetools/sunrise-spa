@@ -79,7 +79,7 @@ describe('Product detail page', () => {
     cy.createProduct(draft);
   });
 
-  it.skip('displays a single product details', () => {
+  it('displays a single product details', () => {
     cy.get('[data-test=product-data]', { timeout: 20000 })
       .then(($product) => {
         cy.wrap($product)
@@ -104,7 +104,7 @@ describe('Product detail page', () => {
 
         cy.wrap($product)
           .find('[data-test=product-attributes-list]')
-          .should('have.length', 6)
+          .should('have.length', 7)
           .eq(2)
           .contains(/^\s*size:\s+34\s*$/);
       });
