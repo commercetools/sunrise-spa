@@ -6,7 +6,7 @@
       </div>
       <div class="row my-account-content">
         <SidebarMenu class="col-sm-3 col-md-2 col-xs-12 my-account-sidebar"/>
-        <router-view class="col-sm-9 col-md-10 col-xs-12 checkout-form-step"/>
+        <router-view class="col-sm-9 col-md-10 col-xs-12 my-account-tab"/>
       </div>
     </div>
   </div>
