@@ -188,7 +188,6 @@ checkout:
   discountPromoInfo: "Rabatte"
   editMyCart: "Warenkorb bearbeiten"
   itemsTotal: "__count__ Artikel im Warenkorb"
-  needHelpCustomerService: "Brauchen Sie Hilfe? Kundenservice"
   orderDate: "Bestelldatum"
   orderDiscount: "Bestelldiscount"
   orderNumber: "Bestellnummer"

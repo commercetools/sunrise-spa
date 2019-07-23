@@ -4,13 +4,6 @@
          class="my-orders col-sm-12">
       <div v-if="me.order"
            class="my-orders-order-content">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="my-orders-title hidden-xs">
-              <h4>{{ $t('myOrders')}}</h4>
-            </div>
-          </div>
-        </div>
         <div class="your-order-details-wrapper">
           <div class="your-order-details-title">
             <h5>{{ $t('title')}}</h5>
@@ -150,7 +143,6 @@ export default {
 <i18n>
 en:
   title: "Your order details"
-  myOrders: "My Orders"
   orderNumber: "Order Number"
   date: "Date"
   print: "Print receipt"
@@ -161,7 +153,6 @@ en:
   notFound: "Order not found"
 de:
   title: "Ihre Bestelldetails"
-  myOrders: "Meine Bestellungen"
   orderNumber: "Bestellnummer"
   date: "Datum"
   print: "Beleg drucken"

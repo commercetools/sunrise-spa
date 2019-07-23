@@ -186,7 +186,6 @@ checkout:
   editMyCart: "Edit my shopping cart"
   itemsTotal: "__count__ item in total"
   itemsTotal_plural: "__count__ items in total"
-  needHelpCustomerService: "Need help? Customer Service"
   orderDate: "Order Date"
   orderDiscount: "Order Discount"
   orderNumber: "Order Number"
