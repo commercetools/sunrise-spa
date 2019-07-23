@@ -1,0 +1,65 @@
+import { shallowMount } from '@vue/test-utils';
+import CartLikeSummary from '@/components/common/cartlike/CartLikeSummary.vue';
+
+describe('CartLikeSummary.vue', () => {
+  const cartLike = {
+    lineItems: [],
+    totalPrice: {
+      currencyCode: 'EUR',
+      centAmount: 18625,
+      fractionDigits: 2,
+    },
+    discountCodes: [{
+      discountCode: {
+        code: 'SUNRISE_CI',
+      },
+    }],
+  };
+
+  let options;
+
+  beforeEach(() => {
+    options = {
+      methods: { formatPrice: jest.fn() },
+      mocks: { $t: jest.fn() },
+      propsData: { cartLike },
+    };
+  });
+
+  it('renders a vue instance', () => {
+    expect(shallowMount(CartLikeSummary, options).isVueInstance()).toBeTruthy();
+  });
+
+  it('transforms the totalPrice for BasePrice', () => {
+    const lineItem = {
+      price: {
+        value: {
+          currencyCode: 'EUR',
+          centAmount: 37250,
+          fractionDigits: 2,
+        },
+      },
+      quantity: 1,
+      totalPrice: {
+        currencyCode: 'EUR',
+        centAmount: 18625,
+        fractionDigits: 2,
+      },
+    };
+    const wrapper = shallowMount(CartLikeSummary, options);
+    expect(wrapper.vm.totalPrice(lineItem)).toEqual({
+      discounted: {
+        value: {
+          centAmount: 18625,
+          currencyCode: 'EUR',
+          fractionDigits: 2,
+        },
+      },
+      value: {
+        centAmount: 37250,
+        currencyCode: 'EUR',
+        fractionDigits: 2,
+      },
+    });
+  });
+});
