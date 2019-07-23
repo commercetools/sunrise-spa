@@ -1,7 +1,7 @@
 <template>
   <div class="navbar navbar-fixed-top">
     <div class="header">
-      <header class="container">
+      <div class="container">
         <div class="row">
           <div class="col-xs-12">
             <ul class="nav-list">
@@ -48,14 +48,17 @@
             </ul>
           </div>
         </div>
-      </header>
+      </div>
     </div>
 
     <div id="navigation" class="container">
       <div class="row logo-search">
         <div class="col-sm-8">
-          <router-link to="/" class="brand-logo">
-            <img class="img-responsive" src="../../assets/img/logo.svg" alt="SUNRISE"/>
+          <router-link to="/"
+                       class="brand-logo">
+            <img src="../../assets/img/logo.svg"
+                 alt="SUNRISE"
+                 class="img-responsive"/>
           </router-link>
         </div>
         <div class="col-sm-4">
