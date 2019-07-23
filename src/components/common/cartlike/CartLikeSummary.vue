@@ -84,28 +84,14 @@ export default {
 
   methods: {
     totalPrice(lineItem) {
-      let price = {};
-      if (lineItem.discountedPricePerQuantity.length > 0) {
-        price = {
-          value: {
-            centAmount: (lineItem.price.discounted
-              ? lineItem.price.discounted.value.centAmount
-              : lineItem.price.value.centAmount) * lineItem.quantity,
-            currencyCode: lineItem.price.value.currencyCode,
-            fractionDigits: lineItem.price.value.fractionDigits,
-          },
-          discounted: {
-            value: {
-              ...lineItem.totalPrice,
-            },
-          },
-        };
-      } else {
-        price = {
-          value: {
-            ...lineItem.totalPrice,
-          },
-        };
+      const { centAmount: unitCentAmount, ...unitPrice } = lineItem.price.discounted?.value || lineItem.price.value;
+      const originalPrice = {
+        ...unitPrice,
+        centAmount: unitCentAmount * lineItem.quantity,
+      };
+      const price = { value: { ...originalPrice } };
+      if (originalPrice.centAmount !== lineItem.totalPrice.centAmount) {
+        price.discounted = { value: { ...lineItem.totalPrice } };
       }
       return price;
     },

@@ -105,9 +105,6 @@ export default {
                     }
                   }
                 }
-                discountedPricePerQuantity {
-                  quantity
-                }
                 totalPrice {
                   ...DisplayableMoney
                 }
