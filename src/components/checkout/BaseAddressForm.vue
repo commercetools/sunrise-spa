@@ -3,9 +3,6 @@
             :onSubmit="submit"
             #default="{ error, state }"
             class="checkout-address-form">
-    <div class="shipping-info">
-      <span class="text-uppercase shipping-info-title">{{ title }}</span>
-    </div>
     <div class="address-form shipping-address-form">
       <div class="row">
         <div class="col-sm-12">
@@ -106,7 +103,6 @@ export default {
 
   props: {
     address: Object,
-    title: String,
     onSubmit: Function,
   },
 

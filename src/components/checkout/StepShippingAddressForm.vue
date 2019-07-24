@@ -1,9 +1,12 @@
 <template>
-  <BaseAddressForm v-if="cartExists"
-                   :address="shippingAddress"
-                   :title="$t('shippingInformation')"
-                   :onSubmit="setShippingAddress"
-                   @back="goToCart"/>
+  <div v-if="cartExists">
+    <div class="shipping-info">
+      <span class="text-uppercase shipping-info-title">{{ $t('shippingInformation') }}</span>
+    </div>
+    <BaseAddressForm :address="shippingAddress"
+                     :onSubmit="setShippingAddress"
+                     @back="goToCart"/>
+  </div>
 </template>
 
 <script>

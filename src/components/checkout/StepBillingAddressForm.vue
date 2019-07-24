@@ -1,21 +1,32 @@
 <template>
   <div v-if="cartExists">
-    <BaseAddressForm :address="billingAddress"
-                     :title="$t('billingInformation')"
-                     :onSubmit="handleSubmit"
-                     @back="goToShipping">
+    <div class="shipping-info">
+      <span class="text-uppercase shipping-info-title">{{ $t('billingInformation') }}</span>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <BaseInput v-model="sameAddress"
+                   :label="$t('sameAddress')"
+                   type="checkbox"/>
+      </div>
+    </div>
+    <BaseForm v-if="sameAddress"
+              :vuelidate="$v"
+              :onSubmit="unsetBillingAddress"
+              #default="{ error, state }"
+              class="checkout-address-form">
       <div class="row">
         <div class="col-sm-12">
-          <BaseInput v-model="sameAddress"
-                     :label="$t('sameAddress')"
-                     type="checkbox"/>
+          <ServerError :error="error"/>
         </div>
       </div>
-      <template v-if="sameAddress"
-                #fields>
-        <BaseAddress :address="shippingAddress"/>
-      </template>
-    </BaseAddressForm>
+      <CheckoutNavigation :state="state"
+                          @back="goToShipping"/>
+    </BaseForm>
+    <BaseAddressForm v-else
+                     :address="billingAddress"
+                     :onSubmit="setBillingAddress"
+                     @back="goToShipping"/>
   </div>
 </template>
 
@@ -25,12 +36,16 @@ import { required } from 'vuelidate/lib/validators';
 import BASE_ADDRESS_FRAGMENT from '../BaseAddress.gql';
 import cartMixin from '../../mixins/cartMixin';
 import BaseInput from '../common/form/BaseInput.vue';
+import BaseForm from '../common/form/BaseForm.vue';
 import BaseAddressForm from './BaseAddressForm.vue';
-import BaseAddress from '../common/BaseAddress.vue';
+import ServerError from '../common/form/ServerError.vue';
+import CheckoutNavigation from './CheckoutNavigation.vue';
 
 export default {
   components: {
-    BaseAddress,
+    CheckoutNavigation,
+    ServerError,
+    BaseForm,
     BaseAddressForm,
     BaseInput,
   },
@@ -44,29 +59,29 @@ export default {
 
   computed: {
     billingAddress() {
-      return this.me?.activeCart?.billingAddress || this.shippingAddress;
-    },
-
-    shippingAddress() {
-      return this.me?.activeCart?.shippingAddress;
+      return this.me?.activeCart?.billingAddress;
     },
   },
 
   methods: {
-    handleSubmit(diffAddress) {
-      const address = this.sameAddress ? null : diffAddress;
-      return this.setBillingAddress(address)
-        .then(() => this.$router.push({ name: 'checkout-shipping' }));
+    unsetBillingAddress() {
+      return this.setBillingAddress(null);
     },
 
     setBillingAddress(address) {
       return this.updateMyCart([
         { setBillingAddress: { address } },
-      ]);
+      ]).then(() => this.$router.push({ name: 'checkout-shipping' }));
     },
 
     goToShipping() {
       this.$router.push({ name: 'checkout' });
+    },
+  },
+
+  watch: {
+    me(value) {
+      this.sameAddress = !value.activeCart?.billingAddress;
     },
   },
 
@@ -79,9 +94,6 @@ export default {
               id
               version
               billingAddress {
-                ...BaseAddress
-              }
-              shippingAddress {
                 ...BaseAddress
               }
             }
