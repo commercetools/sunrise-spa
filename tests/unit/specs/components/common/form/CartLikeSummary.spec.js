@@ -17,6 +17,7 @@ describe('CartLikeSummary.vue', () => {
   };
 
   let options;
+  let lineItem;
 
   beforeEach(() => {
     options = {
@@ -30,8 +31,8 @@ describe('CartLikeSummary.vue', () => {
     expect(shallowMount(CartLikeSummary, options).isVueInstance()).toBeTruthy();
   });
 
-  it('transforms the totalPrice for BasePrice', () => {
-    const lineItem = {
+  it('transforms the totalPrice with a cart discount', () => {
+    lineItem = {
       price: {
         value: {
           currencyCode: 'EUR',
@@ -57,6 +58,70 @@ describe('CartLikeSummary.vue', () => {
       },
       value: {
         centAmount: 37250,
+        currencyCode: 'EUR',
+        fractionDigits: 2,
+      },
+    });
+  });
+  it('transforms the totalPrice with a product discount', () => {
+    lineItem = {
+      price: {
+        discounted: {
+          value: {
+            currencyCode: 'EUR',
+            centAmount: 17412,
+            fractionDigits: 2,
+          },
+        },
+        value: {
+          currencyCode: 'EUR',
+          centAmount: 24875,
+          fractionDigits: 2,
+        },
+      },
+      quantity: 1,
+      totalPrice: {
+        currencyCode: 'EUR',
+        centAmount: 8706,
+        fractionDigits: 2,
+      },
+    };
+    const wrapper = shallowMount(CartLikeSummary, options);
+    expect(wrapper.vm.totalPrice(lineItem)).toEqual({
+      discounted: {
+        value: {
+          centAmount: 8706,
+          currencyCode: 'EUR',
+          fractionDigits: 2,
+        },
+      },
+      value: {
+        centAmount: 17412,
+        currencyCode: 'EUR',
+        fractionDigits: 2,
+      },
+    });
+  });
+  it('transforms the totalPrice without discounts', () => {
+    lineItem = {
+      price: {
+        value: {
+          currencyCode: 'EUR',
+          centAmount: 46250,
+          fractionDigits: 2,
+        },
+      },
+      quantity: 1,
+      totalPrice: {
+        currencyCode: 'EUR',
+        centAmount: 46250,
+        fractionDigits: 2,
+      },
+    };
+    const wrapper = shallowMount(CartLikeSummary, options);
+    expect(wrapper.vm.totalPrice(lineItem)).toEqual({
+      value: {
+        centAmount: 46250,
         currencyCode: 'EUR',
         fractionDigits: 2,
       },
