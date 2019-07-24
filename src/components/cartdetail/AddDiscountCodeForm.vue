@@ -93,7 +93,7 @@ export default {
     }
   }
 
-  .form-error-message {
+  .validation-wrapper {
     display: none;
   }
 
