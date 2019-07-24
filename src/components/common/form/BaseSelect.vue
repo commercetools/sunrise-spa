@@ -1,24 +1,17 @@
 <template>
   <span class="form-field base-select"
         :class="{ 'error': vuelidate.$error }">
-    <BaseLabel v-if="label"
-               :vuelidate="vuelidate"
-               :label="label">
+    <BaseLabel :vuelidate="vuelidate"
+               :label="label"
+               :customErrors="customErrors">
       <SelectBoxIt :options="options"
                    v-model="model"
                    v-bind="$attrs"/>
     </BaseLabel>
-    <SelectBoxIt v-else
-                 :options="options"
-                 v-model="model"
-                 v-bind="$attrs"/>
-    <ValidationError :vuelidate="vuelidate"
-                     :customErrors="customErrors"/>
   </span>
 </template>
 
 <script>
-import ValidationError from './ValidationError.vue';
 import SelectBoxIt from './SelectBoxIt.vue';
 import BaseLabel from './BaseLabel.vue';
 
@@ -28,7 +21,6 @@ export default {
   components: {
     BaseLabel,
     SelectBoxIt,
-    ValidationError,
   },
 
   props: {

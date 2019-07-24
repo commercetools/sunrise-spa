@@ -1,34 +1,20 @@
 <template>
-  <span class="form-field">
-    <BaseLabel v-if="label"
-               :vuelidate="vuelidate"
-               :label="label"
-               :type="$attrs.type">
-      <input v-model="model"
-             v-bind="$attrs"
-             :class="errorClass"/>
-    </BaseLabel>
-    <input v-else
-           v-model="model"
+  <BaseLabel :vuelidate="vuelidate"
+             :label="label"
+             :customErrors="customErrors">
+    <input v-model="model"
            v-bind="$attrs"
-           :class="errorClass"/>
-    <ValidationError v-if="vuelidate"
-                     :vuelidate="vuelidate"
-                     :customErrors="customErrors"/>
-  </span>
+           :class="{ 'error': vuelidate.$error }"/>
+  </BaseLabel>
 </template>
 
 <script>
-import ValidationError from './ValidationError.vue';
 import BaseLabel from './BaseLabel.vue';
 
 export default {
   inheritAttrs: false,
 
-  components: {
-    BaseLabel,
-    ValidationError,
-  },
+  components: { BaseLabel },
 
   props: {
     value: {
@@ -47,10 +33,6 @@ export default {
   },
 
   computed: {
-    errorClass() {
-      return { error: this.vuelidate?.$error };
-    },
-
     model: {
       get() {
         return this.value;
@@ -65,18 +47,19 @@ export default {
 </script>
 
 <style scoped>
-.form-field {
-  width: 100%;
-  position: relative;
-  display: inline-block;
-}
-
 input {
   width: 100%;
   border: 1px solid #D6D6D6;
   border-radius: 1px;
   padding: 0.5em;
   margin-top: 0.2em;
+}
+
+input[type=checkbox] {
+  float: left;
+  width: auto;
+  margin-top: 0.3em;
+  margin-right: 10px;
 }
 
 .error {
