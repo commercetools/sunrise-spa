@@ -73,3 +73,12 @@ export default {
   }
 }
 </style>
+
+<i18n>
+en:
+  continue: "Continue"
+  back: "Back"
+de:
+  continue: "Weiter"
+  back: "Zurück"
+</i18n>

@@ -126,7 +126,6 @@ export default {
 
   methods: {
     submit() {
-      console.log(this.form);
       return this.onSubmit(this.form);
     },
 

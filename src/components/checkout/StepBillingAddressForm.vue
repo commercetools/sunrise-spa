@@ -44,7 +44,7 @@ export default {
 
   computed: {
     billingAddress() {
-      return this.me?.activeCart?.billingAddress;
+      return this.me?.activeCart?.billingAddress || this.shippingAddress;
     },
 
     shippingAddress() {
@@ -56,7 +56,7 @@ export default {
     handleSubmit(diffAddress) {
       const address = this.sameAddress ? null : diffAddress;
       return this.setBillingAddress(address)
-        .then(() => this.$router.push({ name: 'cart' })); // change to next step
+        .then(() => this.$router.push({ name: 'checkout-shipping' }));
     },
 
     setBillingAddress(address) {

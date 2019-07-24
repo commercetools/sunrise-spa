@@ -14,9 +14,9 @@
       <slot/>
     </label>
     <slot v-else/>
-    <span class="validation-wrapper">
-      <ValidationError v-if="vuelidate"
-                       :vuelidate="vuelidate"
+    <span v-if="vuelidate"
+          class="validation-wrapper">
+      <ValidationError :vuelidate="vuelidate"
                        :customErrors="customErrors"
                        class="validation-error"/>
     </span>
@@ -76,7 +76,7 @@ label .field-label-text {
   margin-left: 1px;
   z-index: 1000;
   left: 0;
-  bottom: -10px;
+  bottom: -12px;
 }
 </style>
 

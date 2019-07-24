@@ -100,6 +100,11 @@ export default {
               billingAddress {
                 ...BaseAddress
               }
+              shippingInfo {
+                shippingMethodRef {
+                  id
+                }
+              }
             }
           }
           ${DISPLAYABLE_MONEY_FRAGMENT}

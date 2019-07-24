@@ -1,6 +1,6 @@
 <template>
   <span class="form-field base-select"
-        :class="{ 'error': vuelidate.$error }">
+        :class="errorClass">
     <BaseLabel :vuelidate="vuelidate"
                :label="label"
                :customErrors="customErrors">
@@ -30,7 +30,6 @@ export default {
     },
     vuelidate: {
       type: Object,
-      required: true,
     },
     options: {
       type: Array,
@@ -45,6 +44,10 @@ export default {
   },
 
   computed: {
+    errorClass() {
+      return { error: this.vuelidate?.$error };
+    },
+
     model: {
       get() {
         return this.value;

@@ -4,7 +4,7 @@
              :customErrors="customErrors">
     <input v-model="model"
            v-bind="$attrs"
-           :class="{ 'error': vuelidate.$error }"/>
+           :class="errorClass"/>
   </BaseLabel>
 </template>
 
@@ -33,6 +33,10 @@ export default {
   },
 
   computed: {
+    errorClass() {
+      return { error: this.vuelidate?.$error };
+    },
+
     model: {
       get() {
         return this.value;

@@ -16,6 +16,7 @@ import TabOrderDetail from './components/useraccount/myorders/TabOrderDetail.vue
 import PageCheckout from './components/checkout/PageCheckout.vue';
 import StepShippingAddressForm from './components/checkout/StepShippingAddressForm.vue';
 import StepBillingAddressForm from './components/checkout/StepBillingAddressForm.vue';
+import StepShippingMethodForm from './components/checkout/StepShippingMethodForm.vue';
 
 Vue.use(Router);
 
@@ -120,10 +121,13 @@ const router = new Router({
       },
       children: [
         {
+          path: 'shipping', name: 'checkout-shipping', component: StepShippingMethodForm,
+        },
+        {
           path: 'billing', name: 'checkout-billing', component: StepBillingAddressForm,
         },
         {
-          path: 'shipping', alias: '', name: 'checkout', component: StepShippingAddressForm,
+          path: 'address', alias: '', name: 'checkout', component: StepShippingAddressForm,
         },
       ],
     },
