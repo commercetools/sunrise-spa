@@ -17,6 +17,7 @@ import PageCheckout from './components/checkout/PageCheckout.vue';
 import StepShippingAddressForm from './components/checkout/StepShippingAddressForm.vue';
 import StepBillingAddressForm from './components/checkout/StepBillingAddressForm.vue';
 import StepShippingMethodForm from './components/checkout/StepShippingMethodForm.vue';
+import StepPaymentMethodForm from './components/checkout/StepPaymentMethodForm.vue';
 
 Vue.use(Router);
 
@@ -121,10 +122,13 @@ const router = new Router({
       },
       children: [
         {
-          path: 'shipping', name: 'checkout-shipping', component: StepShippingMethodForm,
+          path: 'payment', name: 'checkout-payment-method', component: StepPaymentMethodForm,
         },
         {
-          path: 'billing', name: 'checkout-billing', component: StepBillingAddressForm,
+          path: 'shipping', name: 'checkout-shipping-method', component: StepShippingMethodForm,
+        },
+        {
+          path: 'billing', name: 'checkout-billing-address', component: StepBillingAddressForm,
         },
         {
           path: 'address', alias: '', name: 'checkout', component: StepShippingAddressForm,

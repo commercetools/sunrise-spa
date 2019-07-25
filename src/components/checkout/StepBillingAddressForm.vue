@@ -1,7 +1,7 @@
 <template>
   <div v-if="cartExists">
-    <div class="shipping-info">
-      <span class="text-uppercase shipping-info-title">{{ $t('billingInformation') }}</span>
+    <div class="checkout-step-title">
+      <span>{{ $t('billingInformation') }}</span>
     </div>
     <div class="row">
       <div class="col-sm-12">
@@ -71,7 +71,7 @@ export default {
     setBillingAddress(address) {
       return this.updateMyCart([
         { setBillingAddress: { address } },
-      ]).then(() => this.$router.push({ name: 'checkout-shipping' }));
+      ]).then(() => this.$router.push({ name: 'checkout-shipping-method' }));
     },
 
     goToShipping() {

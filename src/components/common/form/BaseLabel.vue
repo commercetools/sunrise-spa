@@ -35,7 +35,6 @@ export default {
     },
     label: {
       type: String,
-      required: true,
     },
     customErrors: {
       type: Object,
@@ -76,7 +75,7 @@ label .field-label-text {
   margin-left: 1px;
   z-index: 1000;
   left: 0;
-  bottom: -12px;
+  bottom: -14px;
 }
 </style>
 

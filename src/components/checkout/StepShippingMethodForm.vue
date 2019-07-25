@@ -3,29 +3,28 @@
     <BaseForm :vuelidate="$v"
               :onSubmit="setShippingMethod"
               #default="{ error, state }">
-      <div class="shipping-info">
-        <span class="text-uppercase shipping-method-title">{{ $t('shippingMethod') }}</span>
+      <div class="checkout-step-title">
+        <span>{{ $t('shippingMethod') }}</span>
       </div>
       <div class="row">
         <div class="col-sm-12">
           <ServerError :error="error"/>
         </div>
       </div>
-      <BaseLabel :label="''"
-                 :vuelidate="$v.form.shippingMethodId">
+      <BaseLabel :vuelidate="$v.form.shippingMethod">
         <BaseRadio v-for="shippingMethod in shippingMethodsByLocation"
-                   v-model="form.shippingMethodId"
+                   v-model="form.shippingMethod"
                    :value="shippingMethod.id"
                    :key="shippingMethod.id"
-                   class="shipping-method-option">
-          <span class="shipping-name">
+                   class="checkout-form-option">
+          <span class="option-name">
             {{ shippingMethod.name }}
-            <span class="shipping-description">
+            <span class="option-description">
               {{ shippingMethod.description }}
             </span>
           </span>
           <BaseMoney :money="price(shippingMethod)"
-                     class="shipping-price"/>
+                     class="option-price"/>
         </BaseRadio>
       </BaseLabel>
       <CheckoutNavigation :state="state"
@@ -60,7 +59,7 @@ export default {
 
   data: () => ({
     form: {
-      shippingMethodId: null,
+      shippingMethod: null,
     },
   }),
 
@@ -77,26 +76,26 @@ export default {
           setShippingMethod: {
             shippingMethod: {
               typeId: 'shipping-method',
-              id: this.form.shippingMethodId,
+              id: this.form.shippingMethod,
             },
           },
         },
-      ]).then(() => this.$router.push({ name: 'cart' }));
+      ]).then(() => this.$router.push({ name: 'checkout-payment-method' }));
     },
 
     goToBilling() {
-      this.$router.push({ name: 'checkout-billing' });
+      this.$router.push({ name: 'checkout-billing-address' });
     },
   },
 
   watch: {
     me(value) {
-      this.form.shippingMethodId = value?.activeCart?.shippingInfo?.shippingMethodRef?.id;
+      this.form.shippingMethod = value?.activeCart?.shippingInfo?.shippingMethodRef?.id;
     },
 
     shippingMethodsByLocation(value) {
-      if (!this.form.shippingMethodId) {
-        this.form.shippingMethodId = value.find(shippingMethod => shippingMethod.isDefault)?.id || value[0]?.id;
+      if (!this.form.shippingMethod) {
+        this.form.shippingMethod = value.find(shippingMethod => shippingMethod.isDefault)?.id || value[0]?.id;
       }
     },
   },
@@ -158,33 +157,11 @@ export default {
 
   validations: {
     form: {
-      shippingMethodId: { required },
+      shippingMethod: { required },
     },
   },
 };
 </script>
-
-<style scoped>
-.shipping-method-option {
-  padding: 1.5em;
-  margin: 2px 0;
-}
-
-.shipping-name {
-  text-transform: uppercase;
-  font-weight: 400;
-}
-
-.shipping-description {
-  text-transform: none;
-  padding-left: 1em;
-}
-
-.shipping-price {
-  text-align: right;
-  float: right;
-}
-</style>
 
 <i18n>
 en:

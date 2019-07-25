@@ -74,6 +74,42 @@ export default {
   .selectboxit, .selectboxit-options {
     width: 100% !important;
   }
+
+  .checkout-step-title {
+    margin: 1em 0;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #D6D6D6;
+
+    span {
+      text-transform: uppercase;
+      font-size: 1.1em;
+      letter-spacing: 0.1em;
+      padding-bottom: 1em;
+      margin: 15px 0 20px;
+    }
+  }
+
+  .checkout-form-option {
+    background: lighten(#D6D6D6, 10%);
+    border-radius: 2px;
+    padding: 1.5em;
+    margin: 0.1em 0;
+
+    .option-name {
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .option-description {
+      text-transform: none;
+      padding-left: 1em;
+    }
+
+    .option-price {
+      text-align: right;
+      float: right;
+    }
+  }
 }
 </style>
 

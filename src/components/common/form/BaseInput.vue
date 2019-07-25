@@ -21,15 +21,9 @@ export default {
       type: [String, Number, Boolean],
       default: null,
     },
-    vuelidate: {
-      type: Object,
-    },
-    label: {
-      type: String,
-    },
-    customErrors: {
-      type: Object,
-    },
+    vuelidate: Object,
+    label: String,
+    customErrors: Object,
   },
 
   computed: {

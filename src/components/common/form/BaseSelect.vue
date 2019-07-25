@@ -28,19 +28,13 @@ export default {
       type: [String, Number, Boolean],
       default: null,
     },
-    vuelidate: {
-      type: Object,
-    },
+    vuelidate: Object,
     options: {
       type: Array,
       required: true,
     },
-    label: {
-      type: String,
-    },
-    customErrors: {
-      type: Object,
-    },
+    label: String,
+    customErrors: Object,
   },
 
   computed: {

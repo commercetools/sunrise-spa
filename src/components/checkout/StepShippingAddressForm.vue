@@ -1,7 +1,7 @@
 <template>
   <div v-if="cartExists">
-    <div class="shipping-info">
-      <span class="text-uppercase shipping-info-title">{{ $t('shippingInformation') }}</span>
+    <div class="checkout-step-title">
+      <span>{{ $t('shippingInformation') }}</span>
     </div>
     <BaseAddressForm :address="shippingAddress"
                      :onSubmit="setShippingAddress"
@@ -36,7 +36,7 @@ export default {
     setShippingAddress(address) {
       return this.updateMyCart([
         { setShippingAddress: { address } },
-      ]).then(() => this.$router.push({ name: 'checkout-billing' }));
+      ]).then(() => this.$router.push({ name: 'checkout-billing-address' }));
     },
 
     goToCart() {

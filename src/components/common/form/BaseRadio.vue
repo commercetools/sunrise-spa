@@ -14,9 +14,7 @@ export default {
   inheritAttrs: false,
 
   props: {
-    value: {
-      type: String,
-    },
+    value: String,
     modelValue: {
       default: '',
     },
