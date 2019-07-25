@@ -14,10 +14,12 @@ import TabPersonalDetails from './components/useraccount/userdetail/TabPersonalD
 import TabOrderList from './components/useraccount/myorders/TabOrderList.vue';
 import TabOrderDetail from './components/useraccount/myorders/TabOrderDetail.vue';
 import PageCheckout from './components/checkout/PageCheckout.vue';
+import StepWithOverview from './components/checkout/StepWithOverview.vue';
 import StepShippingAddressForm from './components/checkout/StepShippingAddressForm.vue';
 import StepBillingAddressForm from './components/checkout/StepBillingAddressForm.vue';
 import StepShippingMethodForm from './components/checkout/StepShippingMethodForm.vue';
 import StepPaymentMethodForm from './components/checkout/StepPaymentMethodForm.vue';
+import StepPlaceOrderForm from './components/checkout/StepPlaceOrderForm.vue';
 
 Vue.use(Router);
 
@@ -122,16 +124,25 @@ const router = new Router({
       },
       children: [
         {
-          path: 'payment', name: 'checkout-payment-method', component: StepPaymentMethodForm,
+          path: '',
+          component: StepWithOverview,
+          children: [
+            {
+              path: 'payment', name: 'checkout-payment-method', component: StepPaymentMethodForm,
+            },
+            {
+              path: 'shipping', name: 'checkout-shipping-method', component: StepShippingMethodForm,
+            },
+            {
+              path: 'billing', name: 'checkout-billing-address', component: StepBillingAddressForm,
+            },
+            {
+              path: 'address', alias: '', name: 'checkout', component: StepShippingAddressForm,
+            },
+          ],
         },
         {
-          path: 'shipping', name: 'checkout-shipping-method', component: StepShippingMethodForm,
-        },
-        {
-          path: 'billing', name: 'checkout-billing-address', component: StepBillingAddressForm,
-        },
-        {
-          path: 'address', alias: '', name: 'checkout', component: StepShippingAddressForm,
+          path: 'order', name: 'checkout-order', component: StepPlaceOrderForm,
         },
       ],
     },

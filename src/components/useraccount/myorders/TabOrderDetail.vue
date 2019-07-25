@@ -27,8 +27,8 @@
             {{ $t('print') }}
           </button>
         </div>
-        <ShipmentInfo />
-        <CartLikeSummary :cart-like="me.order"/>
+        <CartLikeOrderDetail :cart-like="me.order" />
+        <CartLikeContentSummary :cart-like="me.order"/>
       </div>
       <div v-else>
         <h1 class="text-center">{{ $t('notFound') }}</h1>
@@ -39,27 +39,22 @@
 
 <script>
 import gql from 'graphql-tag';
-import ShipmentInfo from './ShipmentInfo.vue';
 import BaseDate from '../../common/BaseDate.vue';
-import CartLikeSummary from '../../common/cartlike/CartLikeSummary.vue';
-import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
+import CartLikeOrderDetail from '../../common/cartlike/CartLikeOrderDetail.vue';
+import CartLikeContentSummary from '../../common/cartlike/CartLikeContentSummary.vue';
+import DISPLAYABLE_MONEY_FRAGMENT from '../../DisplayableMoney.gql';
+import BASE_ADDRESS_FRAGMENT from '../../BaseAddress.gql';
 
 export default {
   components: {
-    CartLikeSummary,
-    ShipmentInfo,
+    CartLikeOrderDetail,
+    CartLikeContentSummary,
     BaseDate,
   },
 
   data: () => ({
     me: null,
   }),
-
-  computed: {
-    orderNumber() {
-      return this.$route.params.orderNumber;
-    },
-  },
 
   apollo: {
     me: {
@@ -71,9 +66,26 @@ export default {
               version
               orderNumber
               createdAt
+              shippingAddress {
+                ...BaseAddress
+              }
+              billingAddress {
+                ...BaseAddress
+              }
               shippingInfo {
                 price {
                   ...DisplayableMoney
+                }
+                shippingMethod {
+                  name
+                  description
+                }
+              }
+              paymentInfo {
+                payments {
+                  paymentMethodInfo {
+                    method
+                  }
                 }
               }
               taxedPrice {
@@ -128,10 +140,11 @@ export default {
             }
           }
         }
-        ${DisplayableMoneyFragment}`,
+        ${DISPLAYABLE_MONEY_FRAGMENT}
+        ${BASE_ADDRESS_FRAGMENT}`,
       variables() {
         return {
-          orderNumber: this.orderNumber,
+          orderNumber: this.$route.params.orderNumber,
           locale: this.$i18n.locale,
         };
       },

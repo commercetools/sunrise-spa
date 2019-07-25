@@ -42,7 +42,8 @@
           </div>
         </div>
       </VuePerfectScrollbar>
-      <CartLikePriceDetail :cart-like="me.activeCart"/>
+      <CartLikePriceDetail :cart-like="me.activeCart"
+                           :editable="true"/>
       <div class="row">
         <span class="text-uppercase pull-right edit-quantity-order">
           <router-link :to="{ name: 'cart' }">{{ $t("editMyCart") }}</router-link>

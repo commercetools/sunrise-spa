@@ -1,7 +1,8 @@
 <template>
   <button type="submit"
           :disabled="formState !== null"
-          :class="formState">
+          :class="formState"
+          class="loading-button">
     <slot></slot>
     <transition name="fade"
                 mode="in-out">
@@ -57,7 +58,6 @@ export default {
 
 <style lang="scss" scoped>
 button {
-  margin-right: 15px;
   font-weight: 900;
   background-color: #FFBA27;
   padding: 10px 20px;

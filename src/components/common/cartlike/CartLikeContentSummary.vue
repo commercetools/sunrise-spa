@@ -24,16 +24,21 @@
         <LineItemInfo :line-item="lineItem"
                       class="col-sm-4 col-xs-12"/>
         <div class="col-sm-4 col-xs-12">
-          <slot name="quantity-column"
-                :lineItem="lineItem">
-            <div class="col-sm-6 col-sm-offset-6 col-xs-12 text-center quantity-counter">
-              <span class="visible-xs">{{ $t('quantity') }}:</span>
-              <span data-test="cart-line-item-quantity"
-                    class="quantity-number">
-                {{ lineItem.quantity }}
-              </span>
-            </div>
-          </slot>
+          <div v-if="editable">
+            <LineItemDeleteForm :lineItemId="lineItem.id"
+                                class="col-sm-5 cart-edit-delete"/>
+            <LineItemQuantityForm :lineItemId="lineItem.id"
+                                  :quantity="lineItem.quantity"
+                                  class="col-sm-7 clearfix sm-pull-right"/>
+          </div>
+          <div v-else
+               class="col-sm-6 col-sm-offset-6 col-xs-12 text-center quantity-counter">
+            <span class="visible-xs">{{ $t('quantity') }}:</span>
+            <span data-test="cart-line-item-quantity"
+                  class="quantity-number">
+              {{ lineItem.quantity }}
+            </span>
+          </div>
         </div>
         <div>
           <div class="col-sm-2 col-xs-12 sm-pull-right">
@@ -53,10 +58,11 @@
         </div>
       </div>
     </div>
+    <slot/>
     <div class="row">
       <div class="col-sm-12">
-        <slot name="before-pricing"></slot>
         <CartLikePriceDetail :cartLike="cartLike"
+                             :editable="editable"
                              class="total-price-calc"/>
       </div>
     </div>
@@ -68,9 +74,13 @@ import LineItemInfo from './LineItemInfo.vue';
 import CartLikePriceDetail from './CartLikePriceDetail.vue';
 import BasePrice from '../BasePrice.vue';
 import BaseMoney from '../BaseMoney.vue';
+import LineItemQuantityForm from '../../cartdetail/LineItemQuantityForm.vue';
+import LineItemDeleteForm from '../../cartdetail/LineItemDeleteForm.vue';
 
 export default {
   components: {
+    LineItemDeleteForm,
+    LineItemQuantityForm,
     BaseMoney,
     BasePrice,
     CartLikePriceDetail,
@@ -81,6 +91,10 @@ export default {
     cartLike: {
       type: Object,
       required: true,
+    },
+    editable: {
+      type: Boolean,
+      default: false,
     },
   },
 };

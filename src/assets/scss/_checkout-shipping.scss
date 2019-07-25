@@ -51,10 +51,9 @@
 }
 
 // Shipping information
-.checkout {
+.checkout-content {
   background: $white;
   border: 1px solid $alto;
-  margin-bottom: 2em;
 }
 .shipping-info {
   margin: 1em 0;
@@ -149,7 +148,7 @@
 
 // Order summary
 .order-summary {
-  margin: 1em;
+  margin: 1em 0;
 }
 .order-summary-title {
   font-size: 1.1em;
@@ -167,7 +166,6 @@
 .checkout-order {
   background: lighten($alto, 10%);
   border: 1px solid $alto;
-  margin: 1em;
   /**padding-top: 2em;*/
 
   &> div {

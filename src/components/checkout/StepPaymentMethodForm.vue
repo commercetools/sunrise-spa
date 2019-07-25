@@ -61,7 +61,7 @@ export default {
 
   data: () => ({
     form: {
-      paymentMethod: null,
+      paymentMethod: 'card',
     },
   }),
 
@@ -78,7 +78,7 @@ export default {
       //     },
       //   },
       // ]).then(() => this.$router.push({ name: 'checkout-confirmation' }));
-      return this.$router.push({ name: 'cart' });
+      return this.$router.push({ name: 'checkout-order' });
     },
 
     goToShippingMethod() {

@@ -7,9 +7,7 @@
     </div>
     <div>{{ address.streetName }} {{ address.streetNumber }}</div>
     <div>{{ address.additionalStreetInfo }}</div>
-    <div>{{ address.city }}</div>
-    <div>{{ address.postalCode }} {{ address.region }}</div>
-    <div>{{ address.country }}</div>
+    <div>{{ address.postalCode }}, {{ address.city }} ({{ address.country }})</div>
     <br>
     <div>{{ address.contactInfo.phone }}</div>
     <div>{{ address.contactInfo.email }}</div>

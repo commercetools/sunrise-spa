@@ -14,26 +14,15 @@
           </span>
         </div>
       </div>
-      <div class="col-sm-4">
-        <!--{{> checkout/start-checkout-link id="cart-checkoutnow-btn"}}-->
-      </div>
     </div>
     <div v-if="cartNotEmpty">
       <div class="row">
         <div class="col-sm-12">
           <div class="cart-content">
-            <CartLikeSummary :cart-like="me.activeCart">
-              <template #quantity-column="{ lineItem }">
-                <LineItemDeleteForm :lineItemId="lineItem.id"
-                                    class="col-sm-5 cart-edit-delete"/>
-                <LineItemQuantityForm :lineItemId="lineItem.id"
-                                      :quantity="lineItem.quantity"
-                                      class="col-sm-7 clearfix sm-pull-right"/>
-              </template>
-              <template #before-pricing>
-                <AddDiscountCodeForm/>
-              </template>
-            </CartLikeSummary>
+            <CartLikeContentSummary :cart-like="me.activeCart"
+                                    :editable="true">
+              <AddDiscountCodeForm/>
+            </CartLikeContentSummary>
           </div>
         </div>
       </div>
@@ -63,17 +52,13 @@
 <script>
 import gql from 'graphql-tag';
 import cartMixin from '@/mixins/cartMixin';
-import CartLikeSummary from '../common/cartlike/CartLikeSummary.vue';
-import LineItemDeleteForm from './LineItemDeleteForm.vue';
-import LineItemQuantityForm from './LineItemQuantityForm.vue';
+import CartLikeContentSummary from '../common/cartlike/CartLikeContentSummary.vue';
 import AddDiscountCodeForm from './AddDiscountCodeForm.vue';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {
   components: {
-    CartLikeSummary,
-    LineItemQuantityForm,
-    LineItemDeleteForm,
+    CartLikeContentSummary,
     AddDiscountCodeForm,
   },
 

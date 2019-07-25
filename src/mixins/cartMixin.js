@@ -135,6 +135,26 @@ export default {
         },
       });
     },
+
+    createMyOrder({ id, version }) {
+      return this.$apollo.mutate({
+        mutation: gql`
+          mutation ($id: String!, $version: Long!) {
+            createMyOrderFromCart(draft: {
+              id: $id,
+              version: $version
+            }) {
+              id
+            }
+          }`,
+        variables: { id, version },
+        update: (store) => {
+          const data = store.readQuery({ query: BASIC_CART_QUERY });
+          data.me.activeCart = null;
+          store.writeQuery({ query: BASIC_CART_QUERY, data });
+        },
+      });
+    },
   },
 
   apollo: {
