@@ -2,7 +2,9 @@
   <div>
     <div v-if="order">
       <div class="row thank-you">
-        <div class="col-sm-12">{{ $t('thankYou') }}</div>
+        <div class="col-sm-12">
+          {{ $t('thankYou') }}
+        </div>
       </div>
       <div class="checkout-step-title">
         <span>{{ $t('yourOrder') }}</span>
@@ -95,13 +97,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .thank-you {
+  text-transform: uppercase;
+  font-weight: bold;
   background: #FFBA27;
   padding: 2em;
   font-size: 16px;
   margin: 1em 0 2em;
-  font-weight: bold;
 }
 </style>
 
@@ -110,10 +113,12 @@ en:
   confirmOrder: "Confirm your order"
   completeMyOrder: "Complete My Order"
   thankYou: "Thank you for your order!"
-  yourOrder: "Your order"
+  yourOrder: "Your order details"
+  continueShopping: "Continue shopping"
 de:
   completeMyOrder: "Zahlungspflichtig bestellen"
   confirmOrder: "Bestätige Ihre Bestellung"
   thankYou: "Vielen Dank für Ihre Bestellung!"
-  yourOrder: "Ihre Bestellung"
+  yourOrder: "Ihre Bestelldetails"
+  continueShopping: "Weiter einkaufen"
 </i18n>
