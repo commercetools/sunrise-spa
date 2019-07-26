@@ -14,15 +14,15 @@
     </div>
     <div class="col-md-6">
       <div class="checkout-steps text-right">
-        <div :class="activeClass(1)">
+        <div :class="isActive(step, 1)">
           <span class="step-number">1</span>
           <span class="text-uppercase step-title">{{ $t("shipping") }}</span>
         </div>
-        <div :class="activeClass(2)">
+        <div :class="isActive(step, 2)">
           <span class="step-number">2</span>
           <span class="text-uppercase step-title">{{ $t("payment") }}</span>
         </div>
-        <div :class="activeClass(3)">
+        <div :class="isActive(step, 3)">
           <span class="step-number">3</span>
           <span class="text-uppercase step-title">{{ $t("confirmation") }}</span>
         </div>
@@ -33,12 +33,19 @@
 
 <script>
 export default {
-  props: { step: Number },
+  computed: {
+    step() {
+      switch (this.$route.name) {
+        case 'checkout-payment-method': return 2;
+        case 'checkout-order': return 3;
+        default: return 1;
+      }
+    },
+  },
 
   methods: {
-    activeClass(step) {
-      console.log(this.$router.currentRoute);
-      return { active: this.step === step };
+    isActive(current, step) {
+      return { active: current === step };
     },
   },
 };

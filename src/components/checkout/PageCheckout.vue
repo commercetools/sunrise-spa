@@ -1,7 +1,7 @@
 <template>
   <div id="checkout">
     <div class="container">
-      <CheckoutTitle :step="1"/>
+      <CheckoutTitle/>
       <div class="row">
         <div class="col-sm-12">
           <div class="checkout-content">
@@ -25,6 +25,8 @@ export default {
 
 <style lang="scss">
 #checkout {
+  margin-bottom: 70px;
+
   .checkout-content {
     padding: 1em 2em 2em;
   }
@@ -76,26 +78,3 @@ export default {
   }
 }
 </style>
-
-<i18n>
-en:
-  orderDate: "Order Date"
-  orderDiscount: "Order Discount"
-  orderNumber: "Order Number"
-  shippingInformation: "Shipping Information"
-  thankYouPage:
-  title: "Thank you for your order!"
-  emailSentToStart: "An email has been sent to"
-  emailSentToEnd: "as a copy of this confirmation purchase"
-  yourOrderDetails: "Your order details"
-de:
-  orderDate: "Bestelldatum"
-  orderDiscount: "Bestelldiscount"
-  orderNumber: "Bestellnummer"
-  shippingInformation: "Versand Information"
-  thankYouPage:
-  title: "Vielen Dank für Ihre Bestellung!"
-  emailSentToStart: "Eine Email wurde versandt"
-  emailSentToEnd: "als Bestellbestätigung."
-  yourOrderDetails: "Ihre Bestelldetails"
-</i18n>
