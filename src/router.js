@@ -3,6 +3,8 @@ import Router from 'vue-router';
 import store from './store';
 import TheHeader from './components/header/TheHeader.vue';
 import TheFooter from './components/footer/TheFooter.vue';
+import TheCheckoutHeader from './components/header/TheCheckoutHeader.vue';
+import TheCheckoutFooter from './components/footer/TheCheckoutFooter.vue';
 import PageHome from './components/home/PageHome.vue';
 import PageProductOverview from './components/productoverview/PageProductOverview.vue';
 import PageLogin from './components/login/PageLogin.vue';
@@ -120,7 +122,8 @@ const router = new Router({
       path: '/checkout',
       components: {
         default: PageCheckout,
-        header: TheHeader,
+        header: TheCheckoutHeader,
+        footer: TheCheckoutFooter,
       },
       children: [
         {
