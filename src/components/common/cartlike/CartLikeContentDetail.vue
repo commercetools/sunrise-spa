@@ -58,20 +58,11 @@
         </div>
       </div>
     </div>
-    <slot/>
-    <div class="row">
-      <div class="col-sm-12">
-        <CartLikePriceDetail :cartLike="cartLike"
-                             :editable="editable"
-                             class="total-price-calc"/>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
 import LineItemInfo from './LineItemInfo.vue';
-import CartLikePriceDetail from './CartLikePriceDetail.vue';
 import BasePrice from '../BasePrice.vue';
 import BaseMoney from '../BaseMoney.vue';
 import LineItemQuantityForm from '../../cartdetail/LineItemQuantityForm.vue';
@@ -83,7 +74,6 @@ export default {
     LineItemQuantityForm,
     BaseMoney,
     BasePrice,
-    CartLikePriceDetail,
     LineItemInfo,
   },
 

@@ -13,7 +13,7 @@
 import gql from 'graphql-tag';
 import cartMixin from '../../mixins/cartMixin';
 import BaseAddressForm from './BaseAddressForm.vue';
-import BASE_ADDRESS_FRAGMENT from '../BaseAddress.gql';
+import ADDRESS_FRAGMENT from '../Address.gql';
 
 export default {
   components: {
@@ -53,12 +53,12 @@ export default {
               id
               version
               shippingAddress {
-                ...BaseAddress
+                ...AddressFields
               }
             }
           }
         }
-        ${BASE_ADDRESS_FRAGMENT}`,
+        ${ADDRESS_FRAGMENT}`,
     },
   },
 };

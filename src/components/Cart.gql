@@ -1,0 +1,63 @@
+fragment CartFields on Cart {
+  id
+  version
+  lineItems {
+    id
+    name(locale: $locale)
+    productSlug(locale: $locale)
+    quantity
+    price {
+      value {
+        ...MoneyFields
+      }
+      discounted {
+        value {
+          ...MoneyFields
+        }
+      }
+    }
+    totalPrice {
+      ...MoneyFields
+    }
+    variant {
+      sku
+      images {
+        url
+      }
+    }
+  }
+  totalPrice {
+    ...MoneyFields
+  }
+  shippingInfo {
+    shippingMethod {
+      id
+      name
+      description
+    }
+    price {
+      ...MoneyFields
+    }
+  }
+  taxedPrice {
+    totalGross {
+      ...MoneyFields
+    }
+    totalNet {
+      ...MoneyFields
+    }
+  }
+  discountCodes {
+    discountCode {
+      id
+      code
+      name(locale: $locale)
+    }
+  }
+  shippingAddress {
+    ...AddressFields
+  }
+  billingAddress {
+    ...AddressFields
+  }
+}

@@ -19,10 +19,12 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="cart-content">
-            <CartLikeContentSummary :cart-like="me.activeCart"
-                                    :editable="true">
-              <AddDiscountCodeForm/>
-            </CartLikeContentSummary>
+            <CartLikeContentDetail :cartLike="me.activeCart"
+                                   :editable="true"/>
+            <AddDiscountCodeForm/>
+            <CartLikePriceDetail :cartLike="me.activeCart"
+                                 :editable="true"
+                                 class="total-price-calc"/>
           </div>
         </div>
       </div>
@@ -51,14 +53,18 @@
 
 <script>
 import gql from 'graphql-tag';
-import cartMixin from '@/mixins/cartMixin';
-import CartLikeContentSummary from '../common/cartlike/CartLikeContentSummary.vue';
+import cartMixin from '../../mixins/cartMixin';
+import CartLikeContentDetail from '../common/cartlike/CartLikeContentDetail.vue';
+import CartLikePriceDetail from '../common/cartlike/CartLikePriceDetail.vue';
 import AddDiscountCodeForm from './AddDiscountCodeForm.vue';
-import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
+import CART_FRAGMENT from '../Cart.gql';
+import ADDRESS_FRAGMENT from '../Address.gql';
+import MONEY_FRAGMENT from '../Money.gql';
 
 export default {
   components: {
-    CartLikeContentSummary,
+    CartLikeContentDetail,
+    CartLikePriceDetail,
     AddDiscountCodeForm,
   },
 
@@ -74,59 +80,13 @@ export default {
         query me($locale: Locale!) {
           me {
             activeCart {
-              id
-              lineItems {
-                id
-                name(locale: $locale)
-                productSlug(locale: $locale)
-                quantity
-                price {
-                  value {
-                    ...DisplayableMoney
-                  }
-                  discounted {
-                    value {
-                      ...DisplayableMoney
-                    }
-                  }
-                }
-                totalPrice {
-                  ...DisplayableMoney
-                }
-                variant {
-                  sku
-                  images {
-                    url
-                  }
-                }
-              }
-              totalPrice {
-               ...DisplayableMoney
-              }
-              shippingInfo {
-                price {
-                  ...DisplayableMoney
-                }
-              }
-              taxedPrice {
-                totalGross {
-                  ...DisplayableMoney
-                }
-                totalNet {
-                  ...DisplayableMoney
-                }
-              }
-              discountCodes {
-                discountCode {
-                  id
-                  code
-                  name(locale: $locale)
-                }
-              }
+              ...CartFields
             }
           }
         }
-        ${DisplayableMoneyFragment}`,
+        ${CART_FRAGMENT}
+        ${MONEY_FRAGMENT}
+        ${ADDRESS_FRAGMENT}`,
       variables() {
         return {
           locale: this.$i18n.locale,

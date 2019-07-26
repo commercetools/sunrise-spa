@@ -36,7 +36,6 @@
 <script>
 import gql from 'graphql-tag';
 import { required } from 'vuelidate/lib/validators';
-import DISPLAYABLE_MONEY_FRAGMENT from '../DisplayableMoney.gql';
 import cartMixin from '../../mixins/cartMixin';
 import BaseRadio from '../common/form/BaseRadio.vue';
 import BaseMoney from '../common/BaseMoney.vue';
@@ -44,6 +43,7 @@ import BaseForm from '../common/form/BaseForm.vue';
 import BaseLabel from '../common/form/BaseLabel.vue';
 import ServerError from '../common/form/ServerError.vue';
 import CheckoutNavigation from './CheckoutNavigation.vue';
+import MONEY_FRAGMENT from '../Money.gql';
 
 export default {
   components: {
@@ -65,9 +65,19 @@ export default {
 
   methods: {
     price(shippingMethod) {
+      const shippingRate = this.matchingShippingRate(shippingMethod);
+      return this.isFree(shippingRate) ? null : shippingRate.price;
+    },
+
+    matchingShippingRate(shippingMethod) {
       return shippingMethod.zoneRates
         .map(zoneRate => zoneRate.shippingRates
-          .find(shippingRate => shippingRate.isMatching))[0]?.price;
+          .find(shippingRate => shippingRate.isMatching))[0];
+    },
+
+    isFree(shippingRate) {
+      const totalPrice = this.me.activeCart.totalPrice.centAmount;
+      return totalPrice > shippingRate.freeAbove?.centAmount;
     },
 
     setShippingMethod() {
@@ -90,7 +100,7 @@ export default {
 
   watch: {
     me(value) {
-      this.form.shippingMethod = value?.activeCart?.shippingInfo?.shippingMethodRef?.id;
+      this.form.shippingMethod = value?.activeCart?.shippingInfo?.shippingMethod?.id;
     },
 
     shippingMethodsByLocation(value) {
@@ -109,7 +119,7 @@ export default {
               id
               version
               shippingInfo {
-                shippingMethodRef {
+                shippingMethod {
                   id
                 }
               }
@@ -118,6 +128,7 @@ export default {
                 state
               }
               totalPrice {
+                centAmount
                 currencyCode
               }
             }
@@ -135,14 +146,17 @@ export default {
             zoneRates {
               shippingRates {
                 isMatching
+                freeAbove {
+                  centAmount
+                }
                 price {
-                  ...DisplayableMoney
+                  ...MoneyFields
                 }
               }
             }
           }
         }
-        ${DISPLAYABLE_MONEY_FRAGMENT}`,
+        ${MONEY_FRAGMENT}`,
       variables() {
         return {
           currency: this.me.activeCart.totalPrice.currencyCode,

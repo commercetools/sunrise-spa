@@ -78,7 +78,7 @@ export default {
       //     },
       //   },
       // ]).then(() => this.$router.push({ name: 'checkout-confirmation' }));
-      return this.$router.push({ name: 'checkout-order' });
+      return Promise.resolve(this.$router.push({ name: 'checkout-order' }));
     },
 
     goToShippingMethod() {

@@ -33,13 +33,13 @@
 <script>
 import gql from 'graphql-tag';
 import { required } from 'vuelidate/lib/validators';
-import BASE_ADDRESS_FRAGMENT from '../BaseAddress.gql';
 import cartMixin from '../../mixins/cartMixin';
 import BaseInput from '../common/form/BaseInput.vue';
 import BaseForm from '../common/form/BaseForm.vue';
 import BaseAddressForm from './BaseAddressForm.vue';
 import ServerError from '../common/form/ServerError.vue';
 import CheckoutNavigation from './CheckoutNavigation.vue';
+import ADDRESS_FRAGMENT from '../Address.gql';
 
 export default {
   components: {
@@ -94,12 +94,12 @@ export default {
               id
               version
               billingAddress {
-                ...BaseAddress
+                ...AddressFields
               }
             }
           }
         }
-        ${BASE_ADDRESS_FRAGMENT}`,
+        ${ADDRESS_FRAGMENT}`,
     },
   },
 

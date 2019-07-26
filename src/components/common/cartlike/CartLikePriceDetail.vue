@@ -7,7 +7,7 @@
                      :editable="editable"
                      class="col-sm-12"/>
     </div>
-    <hr>
+    <hr v-if="discountCodesExist">
     <div class="row">
       <div class="col-sm-7 subtotal">
         <span class="subtotal-title">{{ $t('subtotal') }}</span>

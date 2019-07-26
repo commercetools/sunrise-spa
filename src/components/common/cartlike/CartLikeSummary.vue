@@ -65,16 +65,26 @@
               {{ payment.paymentMethodInfo.method }}
             </span>
           </div>
+          <span v-else>-</span>
         </div>
       </div>
     </div>
+    <CartLikeContentDetail :cartLike="cartLike"/>
+    <CartLikePriceDetail :cartLike="cartLike"
+                         class="total-price-calc"/>
   </div>
 </template>
 <script>
 import BaseAddress from '../BaseAddress.vue';
+import CartLikePriceDetail from './CartLikePriceDetail.vue';
+import CartLikeContentDetail from './CartLikeContentDetail.vue';
 
 export default {
-  components: { BaseAddress },
+  components: {
+    CartLikeContentDetail,
+    CartLikePriceDetail,
+    BaseAddress,
+  },
 
   props: {
     cartLike: {

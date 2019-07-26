@@ -81,7 +81,7 @@
 import gql from 'graphql-tag';
 import BaseMoney from '../../common/BaseMoney.vue';
 import BaseDate from '../../common/BaseDate.vue';
-import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
+import MONEY_FRAGMENT from '../../Money.gql';
 
 export default {
   components: { BaseMoney, BaseDate },
@@ -106,7 +106,7 @@ export default {
                 id
                 orderNumber
                 totalPrice {
-                  ...DisplayableMoney
+                  ...MoneyFields
                 }
                 createdAt
                 shipmentState
@@ -115,7 +115,7 @@ export default {
             }
           }
         },
-        ${DisplayableMoneyFragment}`,
+        ${MONEY_FRAGMENT}`,
     },
   },
 };

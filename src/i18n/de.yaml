@@ -222,11 +222,6 @@ checkout:
     securityCodeTooltip: "Normalerweise befindet sich der Code auf der Rückseite."
   confirmationPage:
     title: "Sicherer Bestellprozess - Versand"
-  thankYouPage:
-    title: "Vielen Dank für Ihre Bestellung!"
-    emailSentToStart: "Eine Email wurde versandt"
-    emailSentToEnd: "als Bestellbestätigung."
-    yourOrderDetails: "Ihre Bestelldetails"
 myAccount:
   addressBook:
     title: "Addressbuch"

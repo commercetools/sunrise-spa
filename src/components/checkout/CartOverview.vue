@@ -60,9 +60,11 @@ import BasePrice from '../common/BasePrice.vue';
 import BaseMoney from '../common/BaseMoney.vue';
 import productMixin from '../../mixins/productMixin';
 import cartMixin from '../../mixins/cartMixin';
-import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 import CartLikePriceDetail from '../common/cartlike/CartLikePriceDetail.vue';
 import LineItemInfo from '../common/cartlike/LineItemInfo.vue';
+import CART_FRAGMENT from '../Cart.gql';
+import MONEY_FRAGMENT from '../Money.gql';
+import ADDRESS_FRAGMENT from '../Address.gql';
 
 export default {
   components: {
@@ -85,60 +87,13 @@ export default {
         query me($locale: Locale!) {
           me {
             activeCart {
-              id
-              version
-              lineItems {
-                id
-                quantity
-                name(locale: $locale)
-                productSlug(locale: $locale)
-                variant {
-                  sku
-                  images {
-                    url
-                  }
-                }
-                price {
-                  value {
-                    ...DisplayableMoney
-                  }
-                  discounted {
-                    value {
-                      ...DisplayableMoney
-                    }
-                  }
-                }
-                totalPrice {
-                  ...DisplayableMoney
-                }
-              }
-              totalPrice {
-                ...DisplayableMoney
-              }
-              shippingInfo {
-                price {
-                  ...DisplayableMoney
-                }
-              }
-              taxedPrice {
-                totalGross {
-                  ...DisplayableMoney
-                }
-                totalNet {
-                  ...DisplayableMoney
-                }
-              }
-              discountCodes {
-                discountCode {
-                  id
-                  code
-                  name(locale: $locale)
-                }
-              }
+              ...CartFields
             }
           }
         }
-        ${DisplayableMoneyFragment}`,
+        ${CART_FRAGMENT}
+        ${MONEY_FRAGMENT}
+        ${ADDRESS_FRAGMENT}`,
       variables() {
         return {
           locale: this.$i18n.locale,

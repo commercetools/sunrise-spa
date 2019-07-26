@@ -1,4 +1,4 @@
-fragment DisplayableMoney on Money {
+fragment MoneyFields on Money {
   centAmount
   currencyCode
   fractionDigits

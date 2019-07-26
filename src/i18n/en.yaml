@@ -220,11 +220,6 @@ checkout:
     securityCodeTooltip: "normally you find it on the back of your card"
   confirmationPage:
     title: "Secure Checkout - Confirmation"
-  thankYouPage:
-    title: "Thank you for your order!"
-    emailSentToStart: "An email has been sent to"
-    emailSentToEnd: "as a copy of this confirmation purchase"
-    yourOrderDetails: "Your order details"
 myAccount:
   addressBook:
     title: "Address Book"

@@ -61,13 +61,13 @@
 import Vue from 'vue';
 import gql from 'graphql-tag';
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
-import cartMixin from '@/mixins/cartMixin';
-import priceMixin from '@/mixins/priceMixin';
-import productMixin from '@/mixins/productMixin';
-import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
+import cartMixin from '../../mixins/cartMixin';
+import priceMixin from '../../mixins/priceMixin';
+import productMixin from '../../mixins/productMixin';
 import BaseMoney from '../common/BaseMoney.vue';
 import LineItemInfo from '../common/cartlike/LineItemInfo.vue';
 import LineItemDeleteForm from '../cartdetail/LineItemDeleteForm.vue';
+import MONEY_FRAGMENT from '../Money.gql';
 
 export default {
   components: {
@@ -130,16 +130,16 @@ export default {
                   }
                 }
                 totalPrice {
-                  ...DisplayableMoney
+                  ...MoneyFields
                 }
               }
               totalPrice {
-                ...DisplayableMoney
+                ...MoneyFields
               }
             }
           }
         }
-        ${DisplayableMoneyFragment}`,
+        ${MONEY_FRAGMENT}`,
       variables() {
         return {
           locale: this.$i18n.locale,
