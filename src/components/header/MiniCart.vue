@@ -47,10 +47,12 @@
           <BaseMoney :money="me.activeCart.totalPrice"/>
         </p>
         <router-link :to="{ name: 'cart' }"
+                     @click.native="toggle"
                      class="btn-grey">
           {{ $t('viewBag') }}
         </router-link>
         <router-link :to="{ name: 'checkout' }"
+                     @click.native="toggle"
                      class="btn-yellow">{{ $t('checkout') }}</router-link>
       </div>
     </transition>
