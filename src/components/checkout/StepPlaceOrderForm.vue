@@ -66,6 +66,7 @@ export default {
     createOrder() {
       return this.createMyOrder().then((result) => {
         this.order = result.data.createMyOrderFromCart;
+        window.scrollTo(0, 0);
       });
     },
   },
