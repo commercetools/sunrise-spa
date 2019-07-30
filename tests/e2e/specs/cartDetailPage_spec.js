@@ -128,6 +128,6 @@ describe('CartDetailPage', () => {
       .click();
 
     cy.get('[data-test=cart-line-item-total-price]')
-      .contains(/^\s*124,37\s€\s*$/);
+      .contains(/^\s*248,75\s€\s*$/);
   });
 });
