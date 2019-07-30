@@ -1,22 +1,22 @@
 describe('Product detail page', () => {
   const draft = {
-    key: 'tshirt-for-testing',
+    key: 't-shirt-for-testing',
     name: [{
       locale: 'en',
       value: 'T-shirt for testing',
     }],
     slug: [{
       locale: 'en',
-      value: 't-shirt-for-testing',
+      value: 't-shirt-testing',
     }],
     productType: {
       key: 'main',
     },
     masterVariant: {
-      sku: 'sku-black-34',
+      sku: 'sku-34-black',
       attributes: [{
         name: 'baseId',
-        value: '"126"',
+        value: '"123"',
       },
       {
         name: 'color',
@@ -28,7 +28,7 @@ describe('Product detail page', () => {
       }],
     },
     variants: [{
-      sku: 'sku-black-36',
+      sku: 'sku-36-black',
       attributes: [{
         name: 'baseId',
         value: '"463"',
@@ -43,7 +43,7 @@ describe('Product detail page', () => {
       }],
     },
     {
-      sku: 'sku-grey-30',
+      sku: 'sku-30-grey',
       attributes: [{
         name: 'baseId',
         value: '"437"',
@@ -58,7 +58,7 @@ describe('Product detail page', () => {
       }],
     },
     {
-      sku: 'sku-grey-32',
+      sku: 'sku-32-grey',
       attributes: [{
         name: 'baseId',
         value: '"343"',
@@ -104,7 +104,7 @@ describe('Product detail page', () => {
 
         cy.wrap($product)
           .find('[data-test=product-attributes-list]')
-          .should('have.length', 7)
+          .should('have.length', 6)
           .eq(2)
           .contains(/^\s*size:\s+34\s*$/);
       });
@@ -115,12 +115,12 @@ describe('Product detail page', () => {
   });
 
   it('changes product attributes and sku', () => {
-    cy.visit('/product/t-shirt-for-testing/sku-black-34');
+    cy.visit('/product/t-shirt-testing/sku-34-black');
     cy.get('[data-test=product-data]', { timeout: 20000 })
       .then(($product) => {
         cy.wrap($product)
           .find('[data-test=product-sku]')
-          .should('contain', 'sku-black-34');
+          .should('contain', 'sku-34-black');
 
         cy.wrap($product)
           .find('[data-test=attribute-select-color]')
@@ -128,7 +128,7 @@ describe('Product detail page', () => {
 
         cy.wrap($product)
           .find('[data-test=product-sku]')
-          .should('contain', 'sku-grey-30');
+          .should('contain', 'sku-30-grey');
 
         cy.wrap($product)
           .find('[data-test=attribute-select-size]')
@@ -136,7 +136,7 @@ describe('Product detail page', () => {
 
         cy.wrap($product)
           .find('[data-test=product-sku]')
-          .should('contain', 'sku-grey-32');
+          .should('contain', 'sku-32-grey');
 
         cy.wrap($product)
           .find('[data-test=attribute-select-size]')
@@ -144,7 +144,7 @@ describe('Product detail page', () => {
 
         cy.wrap($product)
           .find('[data-test=product-sku]')
-          .should('contain', 'sku-black-36');
+          .should('contain', 'sku-36-black');
       });
   });
 });
