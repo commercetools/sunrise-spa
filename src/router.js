@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import gql from 'graphql-tag';
 import store from './store';
+import apollo from './apollo';
 import TheHeader from './components/header/TheHeader.vue';
 import TheFooter from './components/footer/TheFooter.vue';
 import TheCheckoutHeader from './components/header/TheCheckoutHeader.vue';
@@ -26,6 +28,7 @@ import StepPlaceOrderForm from './components/checkout/StepPlaceOrderForm.vue';
 Vue.use(Router);
 
 const requiresAuth = true;
+const requiresCart = true;
 
 const router = new Router({
   mode: 'history',
@@ -121,6 +124,7 @@ const router = new Router({
     },
     {
       path: '/checkout',
+      meta: { requiresCart },
       components: {
         default: PageCheckout,
         header: TheCheckoutHeader,
@@ -153,14 +157,24 @@ const router = new Router({
   ],
 });
 
-const authGuard = async (to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const routeRequiresAuth = to.matched.some(record => record.meta.requiresAuth);
   if (routeRequiresAuth && !store.state.authenticated) {
     next({ name: 'login' });
   } else {
     next();
   }
-};
-router.beforeEach(authGuard);
+});
+
+router.beforeEach(async (to, from, next) => {
+  const routeRequiresCart = to.matched.some(record => record.meta.requiresCart);
+  if (routeRequiresCart) {
+    const hasCart = await apollo.defaultClient
+      .query({ query: gql`{ me { activeCart { id } } }` })
+      .then(result => !!result.data.me.activeCart);
+    if (!hasCart) next('/');
+  }
+  next();
+});
 
 export default router;

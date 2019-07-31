@@ -71,6 +71,18 @@ export default {
     },
   },
 
+  watch: {
+    me(value) {
+      if (value.activeCart) {
+        if (!value.activeCart.shippingAddress) {
+          this.$router.push({ name: 'checkout' });
+        } else if (!value.activeCart.shippingInfo) {
+          this.$router.push({ name: 'checkout-shipping-method' });
+        }
+      }
+    },
+  },
+
   apollo: {
     me: {
       query: gql`
