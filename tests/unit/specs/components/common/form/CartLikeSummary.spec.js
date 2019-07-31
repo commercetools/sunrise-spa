@@ -40,10 +40,10 @@ describe('CartLikeSummary.vue', () => {
           fractionDigits: 2,
         },
       },
-      quantity: 1,
+      quantity: 2,
       totalPrice: {
         currencyCode: 'EUR',
-        centAmount: 18625,
+        centAmount: 37250,
         fractionDigits: 2,
       },
     };
@@ -51,13 +51,13 @@ describe('CartLikeSummary.vue', () => {
     expect(wrapper.vm.totalPrice(lineItem)).toEqual({
       discounted: {
         value: {
-          centAmount: 18625,
+          centAmount: 37250,
           currencyCode: 'EUR',
           fractionDigits: 2,
         },
       },
       value: {
-        centAmount: 37250,
+        centAmount: 74500,
         currencyCode: 'EUR',
         fractionDigits: 2,
       },
@@ -79,10 +79,10 @@ describe('CartLikeSummary.vue', () => {
           fractionDigits: 2,
         },
       },
-      quantity: 1,
+      quantity: 3,
       totalPrice: {
         currencyCode: 'EUR',
-        centAmount: 8706,
+        centAmount: 26118,
         fractionDigits: 2,
       },
     };
@@ -90,13 +90,13 @@ describe('CartLikeSummary.vue', () => {
     expect(wrapper.vm.totalPrice(lineItem)).toEqual({
       discounted: {
         value: {
-          centAmount: 8706,
+          centAmount: 26118,
           currencyCode: 'EUR',
           fractionDigits: 2,
         },
       },
       value: {
-        centAmount: 17412,
+        centAmount: 52236,
         currencyCode: 'EUR',
         fractionDigits: 2,
       },
