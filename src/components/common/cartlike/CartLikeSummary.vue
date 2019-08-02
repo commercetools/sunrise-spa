@@ -46,7 +46,7 @@
             <div class="text-right cart-item-price">
               <span class="visible-xs xs-price-title">{{ $t('total') }}</span>
               <span data-test="cart-line-item-total-price">
-                <BaseMoney :money="lineItem.totalPrice"/>
+                <BasePrice :price="totalPrice(lineItem)"/>
               </span>
             </div>
           </div>
@@ -67,11 +67,9 @@
 import LineItemInfo from './LineItemInfo.vue';
 import CartLikePriceDetail from './CartLikePriceDetail.vue';
 import BasePrice from '../BasePrice.vue';
-import BaseMoney from '../BaseMoney.vue';
 
 export default {
   components: {
-    BaseMoney,
     BasePrice,
     CartLikePriceDetail,
     LineItemInfo,
@@ -81,6 +79,21 @@ export default {
     cartLike: {
       type: Object,
       required: true,
+    },
+  },
+
+  methods: {
+    totalPrice(lineItem) {
+      const { centAmount: unitCentAmount, ...unitPrice } = lineItem.price.discounted?.value || lineItem.price.value;
+      const originalPrice = {
+        ...unitPrice,
+        centAmount: unitCentAmount * lineItem.quantity,
+      };
+      const price = { value: { ...originalPrice } };
+      if (originalPrice.centAmount !== lineItem.totalPrice.centAmount) {
+        price.discounted = { value: { ...lineItem.totalPrice } };
+      }
+      return price;
     },
   },
 };
