@@ -41,7 +41,6 @@
 <script>
 import { required, numeric, between } from 'vuelidate/lib/validators';
 import cartMixin from '../../mixins/cartMixin';
-import priceMixin from '../../mixins/priceMixin';
 import ServerError from '../common/form/ServerError.vue';
 import LoadingButton from '../common/form/LoadingButton.vue';
 import BaseSelect from '../common/form/BaseSelect.vue';
@@ -64,7 +63,7 @@ export default {
     ServerError,
   },
 
-  mixins: [cartMixin, priceMixin],
+  mixins: [cartMixin],
 
   data: () => ({
     form: {
@@ -82,7 +81,9 @@ export default {
     async addLineItem() {
       if (!this.cartExists) {
         await this.createMyCart({
-          currency: this.currency,
+          currency: this.$store.state.currency,
+          country: this.$store.state.country,
+          shippingAddress: { country: this.$store.state.country },
         });
       }
       return this.updateMyCart({

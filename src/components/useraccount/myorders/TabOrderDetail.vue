@@ -70,7 +70,7 @@ export default {
       variables() {
         return {
           orderNumber: this.$route.params.orderNumber,
-          locale: this.$i18n.locale,
+          locale: this.$store.state.locale,
         };
       },
     },

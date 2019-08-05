@@ -93,6 +93,11 @@ import CheckoutNavigation from './CheckoutNavigation.vue';
 import BaseForm from '../common/form/BaseForm.vue';
 
 export default {
+  props: {
+    address: Object,
+    onSubmit: Function,
+  },
+
   components: {
     BaseForm,
     CheckoutNavigation,
@@ -101,22 +106,15 @@ export default {
     BaseSelect,
   },
 
-  props: {
-    address: Object,
-    onSubmit: Function,
-  },
-
   data: () => ({
     form: {},
   }),
 
   computed: {
     countries() {
-      return [
-        { id: null, name: this.$t('selectCountry') },
-        { id: 'DE', name: 'Deutschland' },
-        { id: 'US', name: 'United States' },
-      ];
+      const configCountries = this.$sunrise.countries;
+      const countries = configCountries ? Object.entries(configCountries) : [];
+      return countries.map(([id, name]) => ({ id, name }));
     },
   },
 

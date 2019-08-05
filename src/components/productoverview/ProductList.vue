@@ -59,12 +59,12 @@ import ProductThumbnail from '../common/ProductThumbnail.vue';
 import ProductSortSelector from './ProductSortSelector.vue';
 
 export default {
+  props: ['categorySlug'],
+
   components: {
     ProductThumbnail,
     ProductSortSelector,
   },
-
-  props: ['categorySlug'],
 
   data: () => ({
     categories: null,
@@ -98,7 +98,7 @@ export default {
         }`,
       variables() {
         return {
-          where: `slug(${this.$i18n.locale}="${this.categorySlug}")`,
+          where: `slug(${this.$store.state.locale}="${this.categorySlug}")`,
         };
       },
       skip: vm => !vm.categorySlug,
@@ -142,8 +142,8 @@ export default {
         }`,
       variables() {
         return {
-          locale: this.$i18n.locale,
-          currency: this.$i18n.numberFormats[this.$store.state.country].currency.currency,
+          locale: this.$store.state.locale,
+          currency: this.$store.state.currency,
           where: `masterData(current(categories(id="${this.category.id}")))`,
           sort: this.sort,
         };

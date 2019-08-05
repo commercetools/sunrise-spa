@@ -89,7 +89,7 @@ export default {
         ${ADDRESS_FRAGMENT}`,
       variables() {
         return {
-          locale: this.$i18n.locale,
+          locale: this.$store.state.locale,
         };
       },
     },

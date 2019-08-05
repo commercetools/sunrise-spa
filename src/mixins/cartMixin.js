@@ -52,12 +52,12 @@ export default {
           actions,
           id: this.me.activeCart?.id,
           version: this.me.activeCart?.version,
-          locale: this.$i18n.locale,
+          locale: this.$store.state.locale,
         },
       });
     },
 
-    createMyCart(draft) {
+    createMyaCart(draft) {
       return this.$apollo.mutate({
         mutation: gql`
           mutation ($draft: MyCartDraft!) {
@@ -89,7 +89,7 @@ export default {
         variables: {
           id: this.me.activeCart?.id,
           version: this.me.activeCart?.version,
-          locale: this.$i18n.locale,
+          locale: this.$store.state.locale,
         },
         update: (store) => {
           const data = store.readQuery({ query: BASIC_CART_QUERY });

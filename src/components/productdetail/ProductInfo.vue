@@ -57,8 +57,7 @@
 
 <script>
 import gql from 'graphql-tag';
-import priceMixin from '@/mixins/priceMixin';
-import productMixin from '@/mixins/productMixin';
+import productMixin from '../../mixins/productMixin';
 import ProductGallery from './ProductGallery.vue';
 import SocialMediaLinks from './SocialMediaLinks.vue';
 import DetailsSection from './DetailsSection.vue';
@@ -66,6 +65,13 @@ import AddToCartForm from './AddToCartForm.vue';
 import BasePrice from '../common/BasePrice.vue';
 
 export default {
+  props: {
+    sku: {
+      type: String,
+      required: true,
+    },
+  },
+
   components: {
     DetailsSection,
     ProductGallery,
@@ -74,12 +80,7 @@ export default {
     BasePrice,
   },
 
-  props: {
-    sku: {
-      type: String,
-      required: true,
-    },
-  },
+  mixins: [productMixin],
 
   data: () => ({
     product: null,
@@ -90,8 +91,6 @@ export default {
       return this.currentProduct.variant || {};
     },
   },
-
-  mixins: [priceMixin, productMixin],
 
   apollo: {
     product: {
@@ -126,8 +125,8 @@ export default {
         }`,
       variables() {
         return {
-          locale: this.$i18n.locale,
-          currency: this.currency,
+          locale: this.$store.state.locale,
+          currency: this.$store.state.currency,
           sku: this.sku,
         };
       },
