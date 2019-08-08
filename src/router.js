@@ -13,6 +13,7 @@ import PageCartDetail from './components/cartdetail/PageCartDetail.vue';
 import TabPersonalDetails from './components/useraccount/userdetail/TabPersonalDetails.vue';
 import TabOrderList from './components/useraccount/myorders/TabOrderList.vue';
 import TabOrderDetail from './components/useraccount/myorders/TabOrderDetail.vue';
+import TabChangePassword from './components/useraccount/changepassword/TabChangePassword.vue';
 
 Vue.use(Router);
 
@@ -83,6 +84,9 @@ const router = new Router({
         },
         {
           path: 'account', alias: '', name: 'user', component: TabPersonalDetails,
+        },
+        {
+          path: 'changepassword', alias: '', name: 'changepassword', component: TabChangePassword,
         },
       ],
     },
