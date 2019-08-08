@@ -14,7 +14,7 @@
     </div>
         <div class="my-account-sidebar-items">
       <router-link :to="{ name: 'changepassword' }"
-                   data-test="my-orders-button">
+                   data-test="change-password-button">
           {{ $t("changePassword") }}
       </router-link>
     </div>
