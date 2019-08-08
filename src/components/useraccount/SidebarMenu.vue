@@ -12,6 +12,12 @@
           {{ $t("myOrders") }}
       </router-link>
     </div>
+        <div class="my-account-sidebar-items">
+      <router-link :to="{ name: 'changepassword' }"
+                   data-test="my-orders-button">
+          {{ $t("changePassword") }}
+      </router-link>
+    </div>
     <div class="my-account-sidebar-items">
       <button @click="logout">
         {{ $t("signOut") }}
