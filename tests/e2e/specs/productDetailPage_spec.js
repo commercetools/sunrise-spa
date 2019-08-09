@@ -76,7 +76,7 @@ describe('Product detail page', () => {
 
   before(() => {
     cy.visit('/product/lemare-booties-0778-grey/M0E20000000E0WX');
-    cy.createProduct(draft);
+    cy.addProduct(draft);
   });
 
   it('displays a single product details', () => {

@@ -107,51 +107,6 @@ Cypress.Commands.add('deleteOrder', ({ orderNumber }) => {
   return cy.wrap(clientPromise.then(client => deleteOrder(client)));
 });
 
-Cypress.Commands.add('createProduct', (draft) => {
-  console.log(draft);
-  const createNewProduct = client => client.mutate({
-    mutation: gql`
-      mutation createNewProduct($draft: ProductDraft!){
-        createProduct (draft: $draft) {
-        id
-        version
-      }
-  }`,
-    variables: {
-      draft,
-    },
-  });
-  return cy.deleteProduct(draft).then(() => cy.wrap(clientPromise.then(client => createNewProduct(client))));
-});
-
-Cypress.Commands.add('deleteProduct', ({ key }) => {
-  const deleteProduct = client => client.query({
-    query: gql`
-      query queryProductByKey($key: String!) {
-        product(key: $key) {
-            version,
-            id
-        }
-      }`,
-    variables: { key },
-    fetchPolicy: 'network-only',
-  }).then(async (response) => {
-    const { product } = response.data;
-    if (product) {
-      await client.mutate({
-        mutation: gql`
-            mutation deleteProduct($id: String!, $version: Long!) {
-              deleteProduct(id: $id, version: $version) {
-                id
-              }
-            }`,
-        variables: {
-          id: product.id,
-          version: product.version,
-        },
-      }).catch(e => console.warn('Product might have been already deleted', e));
-    }
-  });
-
-  return cy.wrap(clientPromise.then(client => deleteProduct(client)));
-});
+Cypress.Commands.add('addProduct', draft => cy.wrap(clientPromise
+  .then(client => mutation.deleteProduct(client, draft.key)
+    .then(() => mutation.createProduct(client, draft)))));
