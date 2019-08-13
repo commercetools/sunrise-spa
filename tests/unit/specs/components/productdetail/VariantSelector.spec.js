@@ -10,10 +10,6 @@ describe('VariantSelector.vue', () => {
   let options;
   let product;
 
-  const sku = {
-    sku: 'sku-black-34',
-  };
-
   beforeEach(() => {
     product = {
       masterData: {
@@ -55,7 +51,9 @@ describe('VariantSelector.vue', () => {
     options = {
       router,
       localVue,
-      propsData: sku,
+      propsData: {
+        sku: 'sku-black-34',
+      },
     };
   });
 
