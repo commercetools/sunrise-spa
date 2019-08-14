@@ -5,6 +5,7 @@ jobs:
     docker:
       # the Docker image with Cypress dependencies
       - image: cypress/base:10
+      - image: circleci/node:11.15.0
         environment:
           JEST_JUNIT_OUTPUT: test-results/unit/output.xml
 
