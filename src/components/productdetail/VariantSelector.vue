@@ -23,6 +23,7 @@
 
 <script>
 import gql from 'graphql-tag';
+import flatMap from 'lodash.flatmap';
 import AttributeSelect from './AttributeSelect.vue';
 
 export default {
@@ -67,9 +68,9 @@ export default {
 
   computed: {
     attributes() {
-      return this.product.masterData.current.allVariants
-        .flatMap(variant => Object.values(variant.attributes))
-        .filter(attr => typeof attr === 'object')
+      const { allVariants } = this.product.masterData.current;
+      return flatMap(allVariants, variant => Object.values(variant.attributes)
+        .filter(attr => typeof attr === 'object'))
         .reduce(this.groupValuesByAttribute, {});
     },
 

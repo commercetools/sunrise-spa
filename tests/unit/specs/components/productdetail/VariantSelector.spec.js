@@ -7,10 +7,13 @@ localVue.use(VueRouter);
 const router = new VueRouter();
 
 describe('VariantSelector.vue', () => {
+  let mockedFlatMap;
   let options;
   let product;
 
   beforeEach(() => {
+    mockedFlatMap = jest.fn();
+
     product = {
       masterData: {
         current: {
@@ -27,7 +30,7 @@ describe('VariantSelector.vue', () => {
                   value: '34',
                 },
               },
-              sku: 'sku-black-34',
+              sku: 'sku-34-black',
             },
             {
               attributes: {
@@ -41,7 +44,7 @@ describe('VariantSelector.vue', () => {
                   value: '30',
                 },
               },
-              sku: 'sku-grey-30',
+              sku: 'sku-30-grey',
             },
           ],
         },
@@ -52,8 +55,9 @@ describe('VariantSelector.vue', () => {
       router,
       localVue,
       propsData: {
-        sku: 'sku-black-34',
+        sku: 'sku-34-black',
       },
+      methods: { flatMap: mockedFlatMap },
     };
   });
 
@@ -64,14 +68,14 @@ describe('VariantSelector.vue', () => {
   it('updates sku in url according to selected variants', () => {
     const wrapper = shallowMount(VariantSelector, options);
     router.push(wrapper.vm.sku);
-    expect(wrapper.vm.$route.path).toEqual('/sku-black-34');
+    expect(wrapper.vm.$route.path).toEqual('/sku-34-black');
 
     wrapper.setProps({
-      sku: 'sku-black-36',
+      sku: 'sku-36-black',
     });
-    expect(wrapper.props().sku).toBe('sku-black-36');
+    expect(wrapper.props().sku).toBe('sku-36-black');
     router.push(wrapper.vm.sku);
-    expect(wrapper.vm.$route.path).toEqual('/sku-black-36');
+    expect(wrapper.vm.$route.path).toEqual('/sku-36-black');
   });
 
   it('groups values by their attributes', () => {
@@ -87,13 +91,13 @@ describe('VariantSelector.vue', () => {
   it('watches on the selected value', () => {
     const wrapper = shallowMount(VariantSelector, options);
     wrapper.setData({ product });
-    expect(wrapper.vm.selected).toEqual({ sku: 'sku-black-34', color: 'black', size: '34' });
+    expect(wrapper.vm.selected).toEqual({ sku: 'sku-34-black', color: 'black', size: '34' });
   });
 
   it('obtains variant combinations', () => {
     const combi = [
-      { sku: 'sku-black-34', color: 'black', size: '34' },
-      { sku: 'sku-grey-30', color: 'grey', size: '30' },
+      { sku: 'sku-34-black', color: 'black', size: '34' },
+      { sku: 'sku-30-grey', color: 'grey', size: '30' },
     ];
     const wrapper = shallowMount(VariantSelector, options);
     expect(wrapper.vm.variantCombinations).toEqual([]);
