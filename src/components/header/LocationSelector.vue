@@ -8,21 +8,21 @@
             data-test="location-selector-open-button">
       <img class="pull-right"
            src="../../assets/img/globe-2.png"
-           :alt="$t('main.header.location')">
+           :alt="$t('location')">
     </button>
     <transition name="fade">
       <div v-if="show"
            class="location-dropdown">
-        <!--{{#if location.language}}-->
-        <span class="location-dropdown-label">
-        {{ $t("main.header.language") }}
-        </span>
-        <SelectBoxIt v-model="$i18n.locale"
-                     :options="languages"
-                     id="language"
-                     data-test="location-selector-dropdown"
-                     class="select location-select"/>
-        <!--{{/if}}-->
+        <div v-if="languages.length">
+          <span class="location-dropdown-label">
+            {{ $t('language') }}
+          </span>
+          <SelectBoxIt v-model="language"
+                       :options="languages"
+                       id="language"
+                       data-test="location-selector-dropdown"
+                       class="select location-select"/>
+        </div>
         <!--{{#if location.country}}-->
         <!--<form id="form-select-country" action="{{@root.meta._links.selectCountry.href}}" method="POST">-->
         <!--<input type="hidden" name="csrfToken" value="{{@root.meta.csrfToken}}"/>-->
@@ -52,6 +52,15 @@ export default {
   }),
 
   computed: {
+    language: {
+      get() {
+        return this.$store.state.locale;
+      },
+      set(value) {
+        this.$store.dispatch('setLocale', value);
+      },
+    },
+
     languages() {
       const configLangs = this.$sunrise.languages;
       const langs = configLangs ? Object.entries(configLangs) : [];
@@ -72,3 +81,14 @@ export default {
   },
 };
 </script>
+
+<i18n>
+en:
+  location: "Location"
+  language: "Language"
+  country: "Country"
+de:
+  location: "Ort"
+  language: "Sprache"
+  country: "Land"
+</i18n>
