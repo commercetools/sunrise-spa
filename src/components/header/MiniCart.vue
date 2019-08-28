@@ -62,7 +62,6 @@ import Vue from 'vue';
 import gql from 'graphql-tag';
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import cartMixin from '@/mixins/cartMixin';
-import priceMixin from '@/mixins/priceMixin';
 import productMixin from '@/mixins/productMixin';
 import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 import BaseMoney from '../common/BaseMoney.vue';
@@ -77,7 +76,7 @@ export default {
     VuePerfectScrollbar,
   },
 
-  mixins: [cartMixin, priceMixin, productMixin],
+  mixins: [cartMixin, productMixin],
 
   data: () => ({
     me: null,
@@ -142,7 +141,7 @@ export default {
         ${DisplayableMoneyFragment}`,
       variables() {
         return {
-          locale: this.$i18n.locale,
+          locale: this.$store.state.locale,
         };
       },
     },

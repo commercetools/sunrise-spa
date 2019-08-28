@@ -14,7 +14,7 @@ export default {
     src() {
       try {
         // eslint-disable-next-line import/no-dynamic-require, global-require
-        return require(`@/assets/img/banners/${this.$i18n.locale}/${this.file}`);
+        return require(`@/assets/img/banners/${this.$store.state.locale}/${this.file}`);
       } catch (e) {
         // eslint-disable-next-line import/no-dynamic-require, global-require
         return require(`@/assets/img/banners/${this.file}`);

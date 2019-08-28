@@ -57,7 +57,6 @@
 
 <script>
 import gql from 'graphql-tag';
-import priceMixin from '@/mixins/priceMixin';
 import productMixin from '@/mixins/productMixin';
 import ProductGallery from './ProductGallery.vue';
 import SocialMediaLinks from './SocialMediaLinks.vue';
@@ -91,7 +90,7 @@ export default {
     },
   },
 
-  mixins: [priceMixin, productMixin],
+  mixins: [productMixin],
 
   apollo: {
     product: {
@@ -126,8 +125,8 @@ export default {
         }`,
       variables() {
         return {
-          locale: this.$i18n.locale,
-          currency: this.currency,
+          locale: this.$store.state.locale,
+          currency: this.$store.state.currency,
           sku: this.sku,
         };
       },

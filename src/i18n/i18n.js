@@ -1,10 +1,9 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
+import store, { fallbackLocale } from '../store';
 import sunriseConfig from '../../sunrise.config';
 
 Vue.use(VueI18n);
-
-const fallbackLocale = sunriseConfig.languages ? Object.keys(sunriseConfig.languages)[0] : 'en';
 
 function loadMessages() {
   const locales = require.context('@/i18n', true, /[a-z0-9]+\.yaml$/i);
@@ -19,54 +18,17 @@ function loadMessages() {
   return messages;
 }
 
-function findInitialLocale() {
-  const storedLocale = localStorage.getItem('locale');
-  return storedLocale || fallbackLocale;
-}
-
-const numberFormats = {
-  'en-US': {
-    currency: {
-      style: 'currency', currency: 'USD'
-    }
-  },
-  'de-DE': {
-    currency: {
-      style: 'currency', currency: 'EUR', currencyDisplay: 'symbol'
-    }
-  }
-};
-
-const dateTimeFormats = {
-  'en-US': {
-    short: {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    }
-  },
-
-  'de-DE': {
-    short: {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    }
-  }
-};
-
-// Create VueI18n instance with options
 const i18n = new VueI18n({
-  locale: findInitialLocale(),
+  locale: store.state.locale,
   fallbackLocale,
   messages: loadMessages(),
-  numberFormats,
-  dateTimeFormats,
+  numberFormats: sunriseConfig.formats.number,
+  dateTimeFormats: sunriseConfig.formats.datetime,
 });
 
-i18n.vm.$watch('locale', (locale) => {
-  document.documentElement.lang = locale;
-  localStorage.setItem('locale', locale);
+store.watch((state) => state.locale, (value) => {
+  i18n.locale = value;
+  document.documentElement.lang = value;
 });
 
 export default i18n;

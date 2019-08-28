@@ -108,7 +108,7 @@ export default {
           actions,
           id: this.me.activeCart?.id,
           version: this.me.activeCart?.version,
-          locale: this.$i18n.locale,
+          locale: this.$store.state.locale,
         },
       });
     },

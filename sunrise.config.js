@@ -17,6 +17,43 @@ export default {
     en: 'English',
     de: 'Deutsch',
   },
+  countries: {
+    DE: 'Deutschland',
+    US: 'United States',
+  },
+  formats: {
+    number: {
+      DE: {
+        currency: {
+          style: 'currency',
+          currency: 'EUR',
+          currencyDisplay: 'symbol',
+        },
+      },
+      US: {
+        currency: {
+          style: 'currency',
+          currency: 'USD',
+        },
+      },
+    },
+    datetime: {
+      US: {
+        short: {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        },
+      },
+      DE: {
+        short: {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        },
+      },
+    },
+  },
   categories: {
     salesExternalId: '6',
   },

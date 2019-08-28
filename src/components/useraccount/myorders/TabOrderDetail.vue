@@ -132,7 +132,7 @@ export default {
       variables() {
         return {
           orderNumber: this.orderNumber,
-          locale: this.$i18n.locale,
+          locale: this.$store.state.locale,
         };
       },
     },
