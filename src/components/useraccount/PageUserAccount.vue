@@ -4,13 +4,9 @@
       <div class="my-account-title">
         <span class="my-account-title-text icon-user">{{ $t('title') }}</span>
       </div>
-      <div class="row">
-        <div class="my-account-content col-sm-12">
-          <div class="col-sm-3">
-            <SidebarMenu :showTab="showTab"/>
-          </div>
-          <component :is="showTab"></component>
-        </div>
+      <div class="row my-account-content">
+        <SidebarMenu class="col-sm-3 col-md-2 col-xs-12 my-account-sidebar"/>
+        <router-view class="col-sm-9 col-md-10 col-xs-12 checkout-form-step"/>
       </div>
     </div>
   </div>
@@ -18,15 +14,10 @@
 
 <script>
 import SidebarMenu from './SidebarMenu.vue';
-import TabPersonalDetails from './userdetail/TabPersonalDetails.vue';
-import TabOrderList from './myorders/TabOrderList.vue';
-import OrderDetail from './myorders/OrderDetail.vue';
 
 export default {
-  props: ['showTab'],
-  name: 'UserAccount',
   components: {
-    SidebarMenu, TabPersonalDetails, TabOrderList, OrderDetail,
+    SidebarMenu,
   },
 };
 </script>
