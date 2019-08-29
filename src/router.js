@@ -86,7 +86,7 @@ const router = new Router({
           path: 'account', alias: '', name: 'user', component: TabPersonalDetails,
         },
         {
-          path: 'changepassword', alias: '', name: 'changepassword', component: TabChangePassword,
+          path: 'changepassword', name: 'changepassword', component: TabChangePassword,
         },
       ],
     },
