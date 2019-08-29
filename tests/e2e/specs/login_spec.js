@@ -6,23 +6,14 @@ describe('Login', () => {
     password: 'p@ssword',
   };
 
-  function checkCustomerIsLoggedIn() {
-    cy.get('[data-test=user-profile-name]').should('contain', `${customer.firstName} ${customer.lastName}`);
-    cy.get('[data-test=user-profile-email]').should('contain', customer.email);
-
-    cy.get('[data-test=login-button]').should('not.exist');
-    cy.get('[data-test=logout-button]').should('exist');
-    cy.get('[data-test=login-info-name]').should('contain', customer.firstName);
-  }
-
   it('logs in', () => {
     cy.login(customer);
     cy.location('pathname').should('eq', '/user/account');
-    checkCustomerIsLoggedIn();
+    cy.checkCustomerIsLoggedIn(customer);
 
     cy.reload();
     cy.location('pathname').should('eq', '/user/account');
-    checkCustomerIsLoggedIn();
+    cy.checkCustomerIsLoggedIn(customer);
 
     cy.get('[data-test=logout-button]').click();
     cy.location('pathname').should('eq', '/login');
@@ -42,6 +33,6 @@ describe('Login', () => {
     cy.get('[data-test=signup-form-agreetoterms]').check();
     cy.get('[data-test=signup-form-submit]').click();
 
-    checkCustomerIsLoggedIn();
+    cy.checkCustomerIsLoggedIn(customer);
   });
 });
