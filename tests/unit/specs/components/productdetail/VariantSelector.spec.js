@@ -7,13 +7,10 @@ localVue.use(VueRouter);
 const router = new VueRouter();
 
 describe('VariantSelector.vue', () => {
-  let mockedFlatMap;
   let options;
   let product;
 
   beforeEach(() => {
-    mockedFlatMap = jest.fn();
-
     product = {
       masterData: {
         current: {
@@ -57,7 +54,6 @@ describe('VariantSelector.vue', () => {
       propsData: {
         sku: 'sku-34-black',
       },
-      methods: { flatMap: mockedFlatMap },
     };
   });
 

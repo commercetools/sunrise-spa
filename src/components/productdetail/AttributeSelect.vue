@@ -18,14 +18,6 @@ import isEqual from 'lodash.isequal';
 
 export default {
   props: {
-    product: {
-      type: Object,
-      required: true,
-    },
-    sku: {
-      type: String,
-      required: true,
-    },
     name: {
       type: String,
       required: true,

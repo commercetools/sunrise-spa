@@ -78,11 +78,11 @@ export default {
       if (this.product) {
         return this.product.masterData.current.allVariants
           .map((variant) => {
+            const attrs = variant.attributes;
             const combi = { sku: variant.sku };
-            Object.keys(variant.attributes).forEach((key) => {
-              if (key !== '__typename') {
-                combi[key] = variant.attributes[key].label || variant.attributes[key].value;
-              }
+            delete attrs.__typename;
+            Object.keys(attrs).forEach((key) => {
+              combi[key] = variant.attributes[key].label || variant.attributes[key].value;
             });
             return combi;
           });
