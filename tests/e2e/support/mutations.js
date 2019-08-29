@@ -90,7 +90,7 @@ export function createProduct(client, draft) {
   }).then(response => response.data.createProduct);
 }
 
-export function updateProduct(client, product) {
+export function updateProduct(client, { id, version, actions }) {
   return client.mutate({
     mutation: gql`
       mutation updateProduct($id: String, $version: Long!, $actions: [ProductUpdateAction!]!){
@@ -100,9 +100,9 @@ export function updateProduct(client, product) {
       }
   }`,
     variables: {
-      id: product.id,
-      version: product.version,
-      actions: product.actions,
+      id,
+      version,
+      actions,
     },
   }).then(response => response.data.updateProduct);
 }

@@ -24,7 +24,6 @@
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-import gql from 'graphql-tag';
 import createClient from './test-apollo';
 import * as query from './queries';
 import * as mutation from './mutations';
@@ -71,41 +70,6 @@ Cypress.Commands.add('createOrder', (cartDraft, orderDraft) => cy.wrap(clientPro
         const draft = Object.assign({}, orderDraft, { id: cart.id, version: cart.version });
         return mutation.createOrder(client, draft);
       })))));
-
-
-Cypress.Commands.add('deleteOrder', ({ orderNumber }) => {
-  const deleteOrder = client => client.query({
-    query: gql`
-      query queryOrderByNumber($predicate: String) {
-        orders(limit: 1, where: $predicate) {
-          results {
-            version,
-            id
-          }
-        }
-      }`,
-    variables: { predicate: `orderNumber = "${orderNumber}"` },
-    fetchPolicy: 'network-only',
-  }).then(async (response) => {
-    const order = response.data.orders.results[0];
-    if (order) {
-      await client.mutate({
-        mutation: gql`
-            mutation deleteOldOrder($id: String!, $version: Long!) {
-              deleteOrder(id: $id, version: $version) {
-                id
-              }
-            }`,
-        variables: {
-          id: order.id,
-          version: order.version,
-        },
-      }).catch(e => console.warn('Order might have been already deleted', e));
-    }
-  });
-
-  return cy.wrap(clientPromise.then(client => deleteOrder(client)));
-});
 
 Cypress.Commands.add('addProduct', draft => cy.wrap(clientPromise
   .then(client => mutation.deleteProduct(client, draft.key)
