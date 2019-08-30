@@ -39,8 +39,9 @@ describe('my orders', () => {
   };
 
   before(() => {
+    cy.visit('/');
+    cy.changeLanguage('Deutsch');
     cy.login(customer);
-    localStorage.setItem('locale', 'de');
   });
 
   it('shows my orders', () => {
