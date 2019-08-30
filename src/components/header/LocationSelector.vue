@@ -1,10 +1,10 @@
 <template>
   <li v-if="languages.length"
-      @mouseleave="setCloseTimer"
-      @mouseenter="clearCloseTimer"
+      @mouseleave="open"
+      @mouseenter="close"
       data-test="location-selector"
       class="list-item-location clearfix">
-    <button @click="show = !show"
+    <button @click="toggle"
             data-test="location-selector-open-button">
       <img class="pull-right"
            src="../../assets/img/globe-2.png"
@@ -21,7 +21,8 @@
                        :options="languages"
                        id="language"
                        data-test="location-selector-dropdown"
-                       class="select location-select"/>
+                       class="select location-select"
+                       @input="toggle"/>
         </div>
         <!--{{#if location.country}}-->
         <!--<form id="form-select-country" action="{{@root.meta._links.selectCountry.href}}" method="POST">-->
@@ -69,13 +70,17 @@ export default {
   },
 
   methods: {
-    setCloseTimer() {
+    toggle() {
+      this.show = !this.show;
+    },
+
+    open() {
       this.closeTimer = setTimeout(() => {
         this.show = false;
       }, 300);
     },
 
-    clearCloseTimer() {
+    close() {
       clearTimeout(this.closeTimer);
     },
   },
