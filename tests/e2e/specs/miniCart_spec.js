@@ -18,7 +18,7 @@ describe('MiniCart', () => {
       .trigger('click');
 
     cy.get('[data-test=mini-cart-price]')
-      .contains(/^\s*Total\s+1.019,86\s€\s*$/);
+      .contains(/^\s*Total\s+815,90\s€\s*$/);
 
     cy.get('[data-test=mini-cart-line-item]')
       .should('have.length', 2)
@@ -35,7 +35,7 @@ describe('MiniCart', () => {
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-price]')
-          .contains(/^\s*522,36\s€\s*$/);
+          .contains(/^\s*417,90\s€\s*$/);
       });
 
     cy.get('[data-test=cart-line-item-delete]')
