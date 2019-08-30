@@ -1,6 +1,5 @@
 import gql from 'graphql-tag';
 import BASIC_CUSTOMER_QUERY from '../components/BasicCustomer.gql';
-import { clientLogin } from '../auth';
 
 export default {
   methods: {
@@ -40,11 +39,7 @@ export default {
           currentPassword,
           newPassword,
         },
-      })
-        .then((response) => {
-          clientLogin(this.$apolloProvider.defaultClient,
-            { username: response.data.customerChangeMyPassword.email, password: newPassword });
-        });
+      });
     },
   },
 
