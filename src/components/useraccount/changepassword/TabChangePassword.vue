@@ -71,6 +71,7 @@
 import { required, sameAs } from 'vuelidate/lib/validators';
 import gql from 'graphql-tag';
 import customerMixin from '../../../mixins/customerMixin';
+import authMixin from '../../../mixins/authMixin';
 import ServerError from '../../common/form/ServerError.vue';
 import LoadingButton from '../../common/form/LoadingButton.vue';
 import BaseInput from '../../common/form/BaseInput.vue';
@@ -85,7 +86,7 @@ export default {
     ServerError,
   },
 
-  mixins: [customerMixin],
+  mixins: [customerMixin, authMixin],
 
   data: () => ({
     me: null,
@@ -96,6 +97,7 @@ export default {
     updateCustomerPassword() {
       return this.updateMyCustomerPassword(this.form.currentPassword, this.form.newPassword)
         .then(() => {
+          this.login(this.me.customer.email, this.form.newPassword);
           this.form = {};
           this.$v.$reset();
         });
@@ -117,6 +119,7 @@ export default {
             customer {
               id
               version
+              email
             }
           }
         }`,

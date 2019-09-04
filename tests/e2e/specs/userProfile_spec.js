@@ -38,9 +38,9 @@ describe('user profile', () => {
 
   it('changes password', () => {
     cy.get('[data-test=change-password-button]').click();
-    cy.get('[data-test=change-password-form-currentpassword]').clear().type(oldCustomer.password);
-    cy.get('[data-test=change-password-form-newpassword]').clear().type(newCustomer.password);
-    cy.get('[data-test=change-password-form-newpasswordconfirm]').clear().type(newCustomer.password);
+    cy.get('[data-test=change-password-form-currentpassword]').type(oldCustomer.password);
+    cy.get('[data-test=change-password-form-newpassword]').type(newCustomer.password);
+    cy.get('[data-test=change-password-form-newpasswordconfirm]').type(newCustomer.password);
 
     cy.get('[data-test=logout-button]').click();
     cy.login(newCustomer);
