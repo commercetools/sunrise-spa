@@ -1,10 +1,10 @@
 <template>
   <li v-if="languages.length || countries.length"
-      @mouseleave="setCloseTimer"
-      @mouseenter="clearCloseTimer"
+      @mouseleave="open"
+      @mouseenter="close"
       data-test="location-selector"
       class="list-item-location clearfix">
-    <button @click="show = !show"
+    <button @click="toggle"
             data-test="location-selector-open-button">
       <img class="pull-right"
            src="../../assets/img/globe-2.png"
@@ -20,8 +20,9 @@
           <SelectBoxIt v-model="language"
                        :options="languages"
                        id="language"
-                       data-test="location-selector-dropdown"
-                       class="select location-select"/>
+                       data-test="language-selector-dropdown"
+                       class="select location-select"
+                       @input="toggle"/>
         </div>
         <div v-if="countries.length">
           <span class="location-dropdown-label">
@@ -30,8 +31,9 @@
           <SelectBoxIt v-model="country"
                        :options="countries"
                        id="country-select"
-                       data-test="location-selector-dropdown"
-                       class="select location-select"/>
+                       data-test="country-selector-dropdown"
+                       class="select location-select"
+                       @input="toggle"/>
         </div>
       </div>
     </transition>
@@ -60,7 +62,6 @@ export default {
         this.$store.dispatch('setCountry', value);
       },
     },
-
     language: {
       get() {
         return this.$store.state.locale;
@@ -84,13 +85,17 @@ export default {
   },
 
   methods: {
-    setCloseTimer() {
+    toggle() {
+      this.show = !this.show;
+    },
+
+    open() {
       this.closeTimer = setTimeout(() => {
         this.show = false;
       }, 300);
     },
 
-    clearCloseTimer() {
+    close() {
       clearTimeout(this.closeTimer);
     },
   },

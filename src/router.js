@@ -17,6 +17,7 @@ import PageCartDetail from './components/cartdetail/PageCartDetail.vue';
 import TabPersonalDetails from './components/useraccount/userdetail/TabPersonalDetails.vue';
 import TabOrderList from './components/useraccount/myorders/TabOrderList.vue';
 import TabOrderDetail from './components/useraccount/myorders/TabOrderDetail.vue';
+import TabChangePassword from './components/useraccount/changepassword/TabChangePassword.vue';
 import PageCheckout from './components/checkout/PageCheckout.vue';
 import StepWithOverview from './components/checkout/StepWithOverview.vue';
 import StepShippingAddressForm from './components/checkout/StepShippingAddressForm.vue';
@@ -96,6 +97,9 @@ const router = new Router({
         },
         {
           path: 'account', alias: '', name: 'user', component: TabPersonalDetails,
+        },
+        {
+          path: 'changepassword', name: 'changepassword', component: TabChangePassword,
         },
       ],
     },

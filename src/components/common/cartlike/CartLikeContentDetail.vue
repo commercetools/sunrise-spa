@@ -51,11 +51,11 @@
             <div class="text-right cart-item-price">
               <span class="visible-xs xs-price-title">{{ $t('total') }}</span>
               <span data-test="cart-line-item-total-price">
-                <BaseMoney :money="lineItem.totalPrice"/>
+                <BasePrice :price="totalPrice(lineItem)"/>
               </span>
             </div>
           </div>
-        </div>
+         </div>
       </div>
     </div>
   </div>
@@ -64,7 +64,6 @@
 <script>
 import LineItemInfo from './LineItemInfo.vue';
 import BasePrice from '../BasePrice.vue';
-import BaseMoney from '../BaseMoney.vue';
 import LineItemQuantityForm from '../../cartdetail/LineItemQuantityForm.vue';
 import LineItemDeleteForm from '../../cartdetail/LineItemDeleteForm.vue';
 
@@ -72,7 +71,6 @@ export default {
   components: {
     LineItemDeleteForm,
     LineItemQuantityForm,
-    BaseMoney,
     BasePrice,
     LineItemInfo,
   },
@@ -85,6 +83,21 @@ export default {
     editable: {
       type: Boolean,
       default: false,
+    },
+  },
+
+  methods: {
+    totalPrice(lineItem) {
+      const { centAmount: unitCentAmount, ...unitPrice } = lineItem.price.discounted?.value || lineItem.price.value;
+      const originalPrice = {
+        ...unitPrice,
+        centAmount: unitCentAmount * lineItem.quantity,
+      };
+      const price = { value: { ...originalPrice } };
+      if (originalPrice.centAmount !== lineItem.totalPrice.centAmount) {
+        price.discounted = { value: { ...lineItem.totalPrice } };
+      }
+      return price;
     },
   },
 };

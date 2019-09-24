@@ -23,6 +23,24 @@ export default {
         },
       });
     },
+
+    updateMyCustomerPassword(currentPassword, newPassword) {
+      return this.$apollo.mutate({
+        mutation: gql`
+          mutation changePassword($version: Long!, $currentPassword: String!, $newPassword: String!) {
+            customerChangeMyPassword(version: $version, currentPassword: $currentPassword, newPassword: $newPassword) {
+              id
+              version
+              email
+            }
+          }`,
+        variables: {
+          version: this.me.customer?.version,
+          currentPassword,
+          newPassword,
+        },
+      });
+    },
   },
 
   apollo: {
