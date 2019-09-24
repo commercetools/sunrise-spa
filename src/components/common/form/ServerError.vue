@@ -38,6 +38,12 @@ export default {
       return this.isGraphQLError ? this.error.graphQLErrors : [];
     },
   },
+
+  watch: {
+    error(value) {
+      if (value && !this.isGraphQLError) console.error(value);
+    },
+  },
 };
 </script>
 
