@@ -57,7 +57,7 @@ export default {
       });
     },
 
-    createMyaCart(draft) {
+    createMyCart(draft) {
       return this.$apollo.mutate({
         mutation: gql`
           mutation ($draft: MyCartDraft!) {
