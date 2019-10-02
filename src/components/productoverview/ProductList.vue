@@ -98,7 +98,7 @@ export default {
         }`,
       variables() {
         return {
-          where: `slug(${this.$i18n.locale}="${this.categorySlug}")`,
+          where: `slug(${this.$store.state.locale}="${this.categorySlug}")`,
         };
       },
       skip: vm => !vm.categorySlug,
@@ -142,7 +142,7 @@ export default {
         }`,
       variables() {
         return {
-          locale: this.$i18n.locale,
+          locale: this.$store.state.locale,
           currency: this.$i18n.numberFormats[this.$store.state.country].currency.currency,
           where: `masterData(current(categories(id="${this.category.id}")))`,
           sort: this.sort,

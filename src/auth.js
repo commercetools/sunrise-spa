@@ -2,48 +2,29 @@ import SdkAuth, { TokenProvider } from '@commercetools/sdk-auth';
 import store from './store';
 import config from '../sunrise.config';
 
-const tokenInfoStorageName = 'token';
-const isAuthenticatedStorageName = 'auth';
-let storedTokenInfo;
-
-try {
-  storedTokenInfo = JSON.parse(localStorage.getItem(tokenInfoStorageName));
-  const isAuthenticated = localStorage.getItem(isAuthenticatedStorageName);
-  if (storedTokenInfo && isAuthenticated) {
-    store.dispatch('setAuthenticated', true);
-  }
-} catch (error) {
-  // eslint-disable-next-line no-console
-  console.error('Could not retrieve token from local storage', error);
-}
-
 const tokenProvider = new TokenProvider({
   sdkAuth: new SdkAuth(config.ct.auth),
   fetchTokenInfo: sdkAuth => sdkAuth.anonymousFlow(),
-  onTokenInfoChanged: tokenInfo => localStorage.setItem(tokenInfoStorageName, JSON.stringify(tokenInfo)),
-}, storedTokenInfo);
+  onTokenInfoChanged: tokenInfo => store.dispatch('setTokenInfo', tokenInfo),
+}, store.state.tokenInfo);
 
 export function cleanUpSession() {
   tokenProvider.invalidateTokenInfo();
-  localStorage.removeItem(tokenInfoStorageName);
-  localStorage.removeItem(isAuthenticatedStorageName);
-  return store.dispatch('setAuthenticated', false);
+  return store.dispatch('clearAuthentication');
 }
 
 export function clientLogin(apolloClient, credentials) {
-  localStorage.removeItem(tokenInfoStorageName);
-  tokenProvider.fetchTokenInfo = sdkAuth => sdkAuth.customerPasswordFlow(credentials);
-  tokenProvider.invalidateTokenInfo();
-  return apolloClient.resetStore()
-    .then(() => {
-      localStorage.setItem(isAuthenticatedStorageName, true);
-      return store.dispatch('setAuthenticated', true);
-    })
-    .catch((error) => {
-      // eslint-disable-next-line no-console
-      console.error('Error on cache reset during login', error);
-      return cleanUpSession();
-    });
+  return store.dispatch('clearAuthentication').then(() => {
+    tokenProvider.fetchTokenInfo = sdkAuth => sdkAuth.customerPasswordFlow(credentials);
+    tokenProvider.invalidateTokenInfo();
+    return apolloClient.resetStore()
+      .then(() => store.dispatch('setAuthenticated', true))
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.error('Error on cache reset during login', error);
+        return cleanUpSession();
+      });
+  });
 }
 
 export function clientLogout(apolloClient, redirect) {

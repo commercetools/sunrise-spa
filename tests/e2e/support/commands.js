@@ -47,6 +47,15 @@ Cypress.Commands.add('checkCustomerIsLoggedIn', (customer) => {
   cy.get('[data-test=login-info-name]').should('contain', customer.firstName);
 });
 
+Cypress.Commands.add('changeLanguage', (language) => {
+  cy.get('[data-test=location-selector-open-button]').click();
+  cy.get('span[data-test=location-selector-dropdown]')
+    .click()
+    .parent()
+    .contains(language)
+    .click();
+});
+
 Cypress.Commands.add('createCustomer', draft => cy.wrap(clientPromise
   .then(client => mutation.deleteCustomer(client, draft.email)
     .then(() => mutation.createCustomer(client, draft)))));

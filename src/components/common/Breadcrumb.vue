@@ -61,8 +61,8 @@ export default {
         }`,
       variables() {
         return {
-          locale: this.$i18n.locale,
-          where: `slug(${this.$i18n.locale}="${this.categorySlug}")`,
+          locale: this.$store.state.locale,
+          where: `slug(${this.$store.state.locale}="${this.categorySlug}")`,
         };
       },
       skip: vm => !vm.categorySlug,

@@ -86,21 +86,22 @@
 </template>
 
 <script>
-import priceMixin from '@/mixins/priceMixin';
 import productMixin from '@/mixins/productMixin';
 import BasePrice from './BasePrice.vue';
 
 export default {
-  components: {
-    BasePrice,
-  },
-
   props: {
     product: {
       type: Object,
       required: true,
     },
   },
+
+  components: {
+    BasePrice,
+  },
+
+  mixins: [productMixin],
 
   computed: {
     matchingVariant() {
@@ -121,8 +122,6 @@ export default {
       return Array.isArray(this.matchingVariant.images) && this.matchingVariant.images.length > 0;
     },
   },
-
-  mixins: [priceMixin, productMixin],
 };
 </script>
 
