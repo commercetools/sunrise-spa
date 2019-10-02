@@ -13,7 +13,6 @@
                          :values="values"
                          :sku="sku"
                          :name="name"
-                         @updateCombi="updateSku"
                          :selected="selected"
                          :variantCombinations="variantCombinations" />
       </li>
@@ -38,25 +37,9 @@ export default {
 
   data: () => ({
     product: null,
-    selected: {},
   }),
 
-  watch: {
-    variantCombinations(value) {
-      value.forEach((variant) => {
-        if (variant.sku === this.sku) {
-          Object.assign(this.selected, variant);
-        }
-      });
-    },
-  },
-
   methods: {
-    updateSku(selectedValues) {
-      Object.assign(this.selected, selectedValues);
-      this.$router.push({ path: selectedValues.sku });
-    },
-
     groupValuesByAttribute(acc, currentItem) {
       if (!acc[currentItem.name]) {
         acc[currentItem.name] = [];
@@ -74,20 +57,22 @@ export default {
         .reduce(this.groupValuesByAttribute, {});
     },
 
+    selected() {
+      return this.variantCombinations
+        .find(variant => variant.sku === this.sku);
+    },
+
     variantCombinations() {
-      if (this.product) {
-        return this.product.masterData.current.allVariants
-          .map((variant) => {
-            const attrs = variant.attributes;
-            const combi = { sku: variant.sku };
-            delete attrs.__typename;
-            Object.keys(attrs).forEach((key) => {
-              combi[key] = variant.attributes[key].label || variant.attributes[key].value;
-            });
-            return combi;
+      return this.product.masterData.current.allVariants
+        .map((variant) => {
+          const attrs = variant.attributes;
+          const combi = { sku: variant.sku };
+          delete attrs.__typename;
+          Object.keys(attrs).forEach((key) => {
+            combi[key] = variant.attributes[key].label || variant.attributes[key].value;
           });
-      }
-      return [];
+          return combi;
+        });
     },
   },
 

@@ -1,7 +1,6 @@
 <template>
   <div>
-    <select v-model="selected[name]"
-            @change="updateSelectedCombi"
+    <select v-model="selectedValue"
             class="select-product-detail"
             :data-test="`attribute-select-${this.name}`">
       <option v-for="value in distinctValues"
@@ -40,19 +39,31 @@ export default {
     distinctValues() {
       return new Set(this.values);
     },
+
+    selectedValue: {
+      get() {
+        return this.selected[this.name];
+      },
+      set(value) {
+        const selected = { ...this.selected };
+        selected[this.name] = value;
+        const selectedCombi = this.findExactSelectedCombi(selected) || this.findFallbackSelectedCombi(selected);
+        this.$router.push({ path: selectedCombi.sku });
+      },
+    },
   },
 
   methods: {
-    updateSelectedCombi() {
-      this.$emit('updateCombi', this.findExactSelectedCombi() || this.findFallbackSelectedCombi());
+    findExactSelectedCombi(selected) {
+      const { sku: selectedSku, ...selectedAttributes } = selected;
+      return this.variantCombinations.find((combi) => {
+        const { sku: combiSku, ...combiAttributes } = combi;
+        return isEqual(combiAttributes, selectedAttributes);
+      });
     },
 
-    findExactSelectedCombi() {
-      return this.variantCombinations.find(combi => isEqual(combi, this.selected));
-    },
-
-    findFallbackSelectedCombi() {
-      return this.variantCombinations.find(combi => this.selected[this.name] === combi[this.name]);
+    findFallbackSelectedCombi(selected) {
+      return this.variantCombinations.find(combi => selected[this.name] === combi[this.name]);
     },
   },
 };
