@@ -61,19 +61,6 @@ describe('VariantSelector.vue', () => {
     expect(shallowMount(VariantSelector, options).isVueInstance()).toBeTruthy();
   });
 
-  it('updates sku in url according to selected variants', () => {
-    const wrapper = shallowMount(VariantSelector, options);
-    router.push(wrapper.vm.sku);
-    expect(wrapper.vm.$route.path).toEqual('/sku-34-black');
-
-    wrapper.setProps({
-      sku: 'sku-36-black',
-    });
-    expect(wrapper.props().sku).toBe('sku-36-black');
-    router.push(wrapper.vm.sku);
-    expect(wrapper.vm.$route.path).toEqual('/sku-36-black');
-  });
-
   it('groups values by their attributes', () => {
     const attrs = {
       color: ['black', 'grey'],
@@ -84,7 +71,7 @@ describe('VariantSelector.vue', () => {
     expect(wrapper.vm.attributes).toEqual(attrs);
   });
 
-  it('watches on the selected value', () => {
+  it('calculates the selected value', () => {
     const wrapper = shallowMount(VariantSelector, options);
     wrapper.setData({ product });
     expect(wrapper.vm.selected).toEqual({ sku: 'sku-34-black', color: 'black', size: '34' });
@@ -96,8 +83,6 @@ describe('VariantSelector.vue', () => {
       { sku: 'sku-30-grey', color: 'grey', size: '30' },
     ];
     const wrapper = shallowMount(VariantSelector, options);
-    expect(wrapper.vm.variantCombinations).toEqual([]);
-
     wrapper.setData({ product });
     expect(wrapper.vm.variantCombinations).toEqual(combi);
   });

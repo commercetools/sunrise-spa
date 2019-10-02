@@ -45,15 +45,19 @@ export default {
         return this.selected[this.name];
       },
       set(value) {
-        const selected = { ...this.selected };
-        selected[this.name] = value;
-        const selectedCombi = this.findExactSelectedCombi(selected) || this.findFallbackSelectedCombi(selected);
-        this.$router.push({ path: selectedCombi.sku });
+        const selectedSku = this.findSelectedSku(value);
+        this.$router.push({ path: selectedSku });
       },
     },
   },
 
   methods: {
+    findSelectedSku(value) {
+      const selected = { ...this.selected };
+      selected[this.name] = value;
+      return (this.findExactSelectedCombi(selected) || this.findFallbackSelectedCombi(selected)).sku;
+    },
+
     findExactSelectedCombi(selected) {
       const { sku: selectedSku, ...selectedAttributes } = selected;
       return this.variantCombinations.find((combi) => {
