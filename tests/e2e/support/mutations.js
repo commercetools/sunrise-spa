@@ -75,6 +75,38 @@ export function createDiscountCode(client, cartDiscountDraft, code) {
     })).then(response => response.data.createDiscountCode);
 }
 
+export function createProduct(client, draft) {
+  return client.mutate({
+    mutation: gql`
+      mutation createNewProduct($draft: ProductDraft!){
+        createProduct (draft: $draft) {
+        id
+        version
+      }
+  }`,
+    variables: {
+      draft,
+    },
+  }).then(response => response.data.createProduct);
+}
+
+export function updateProduct(client, { id, version, actions }) {
+  return client.mutate({
+    mutation: gql`
+      mutation updateProduct($id: String, $version: Long!, $actions: [ProductUpdateAction!]!){
+        updateProduct (id: $id, version: $version, actions: $actions) {
+        id
+        version
+      }
+  }`,
+    variables: {
+      id,
+      version,
+      actions,
+    },
+  }).then(response => response.data.updateProduct);
+}
+
 export function deleteDiscountCode(client, code) {
   return query.discountCodeByCode(client, code)
     .then(async (discountCode) => {
@@ -143,6 +175,32 @@ export function deleteCustomer(client, email) {
             version: customer.version,
           },
         }).catch(e => console.warn('Customer might have already been deleted', e));
+      }
+    });
+}
+
+export function deleteProduct(client, key) {
+  return query.productByKey(client, key)
+    .then(async (product) => {
+      if (product) {
+        await updateProduct(client, {
+          id: product.id,
+          version: product.version,
+          actions: [{ unpublish: { dummy: '' } }],
+        }).then(async (unpublishedProduct) => {
+          await client.mutate({
+            mutation: gql`
+            mutation deleteProduct($id: String!, $version: Long!) {
+            deleteProduct(id: $id, version: $version,) {
+              id
+            }
+          }`,
+            variables: {
+              id: unpublishedProduct.id,
+              version: unpublishedProduct.version,
+            },
+          }).catch(e => console.warn('Product might have already been deleted', e));
+        });
       }
     });
 }

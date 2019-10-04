@@ -88,3 +88,7 @@ Cypress.Commands.add('createOrder', (cartDraft, orderDraft) => cy.wrap(clientPro
         const draft = Object.assign({}, orderDraft, { id: cart.id, version: cart.version });
         return mutation.createOrder(client, draft);
       })))));
+
+Cypress.Commands.add('addProduct', draft => cy.wrap(clientPromise
+  .then(client => mutation.deleteProduct(client, draft.key)
+    .then(() => mutation.createProduct(client, draft)))));

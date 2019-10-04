@@ -51,3 +51,17 @@ export function discountCodeByCode(client, code) {
     fetchPolicy: 'network-only',
   }).then(response => response.data.discountCodes.results[0]);
 }
+
+export function productByKey(client, key) {
+  return client.query({
+    query: gql`
+      query queryProductByKey($key: String!) {
+        product(key: $key) {
+            version,
+            id
+        }
+      }`,
+    variables: { key },
+    fetchPolicy: 'network-only',
+  }).then(response => response.data.product);
+}
