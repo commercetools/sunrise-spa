@@ -56,7 +56,8 @@
     </div>
     <div v-else
          class="empty-results-container">
-      <span class="empty-results">
+      <span class="empty-results"
+            data-test="empty-cart">
       {{ $t('empty') }}
       </span>
     </div>
