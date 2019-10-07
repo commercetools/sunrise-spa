@@ -54,15 +54,16 @@
   margin: 0 15px;
 }
 
-.empty-results {
-  padding: 50px;
+.empty-results-container {
+  padding: 100px;
   text-align: center;
 }
 
-.no-results-found {
+.empty-results {
   color: $ebony-clay;
   font-size: 20px;
   word-spacing: 0.1em;
+  text-transform: lowercase;
 }
 
 #pop-product-list {

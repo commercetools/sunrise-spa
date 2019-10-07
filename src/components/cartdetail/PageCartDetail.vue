@@ -55,8 +55,8 @@
       </div>
     </div>
     <div v-else
-         class="empty-results">
-      <span class="empty-bag">
+         class="empty-results-container">
+      <span class="empty-results">
       {{ $t('empty') }}
       </span>
     </div>
