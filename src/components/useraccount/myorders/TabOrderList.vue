@@ -77,7 +77,7 @@
     </div>
 
     <div v-else
-         class="empty-results">
+         class="empty-results-container">
       <span class="empty-order-list">
         {{ $t('emptyOrders') }}
       </span>
