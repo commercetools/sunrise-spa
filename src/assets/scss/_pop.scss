@@ -54,6 +54,17 @@
   margin: 0 15px;
 }
 
+.empty-product-list {
+  padding: 50px;
+  text-align: center;
+}
+
+.no-results-found {
+  color: $ebony-clay;
+  font-size: 20px;
+  word-spacing: 0.1em;
+}
+
 #pop-product-list {
 
   @media screen and (min-width: 767px) {

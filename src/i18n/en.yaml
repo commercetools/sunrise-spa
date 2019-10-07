@@ -180,14 +180,15 @@ catalog:
     title: "Remove"
   contactUs:
     title: "Contact Us"
-  searchNotFound:
-    title: "Search Results"
-    notFound: "Not Found"
-    keyword: "zero"
-    description: "Search was unable to find any results for \"Batman\", you may have typed your word incorrectly, or are being too specific. Try using a broader search phrase or try one of our most popular search phrases."
-  popularSearchPhrases:
-    title: "Popular Search Phrases"
-    suggestionsTitle: "Popular Products"
+  noSearchResult:
+    searchNotFound:
+      title: "Search Results"
+      notFound: "No Results Found."
+      keyword: "zero"
+      description: "Search was unable to find any results for \"Batman\", you may have typed your word incorrectly, or are being too specific. Try using a broader search phrase or try one of our most popular search phrases."
+    popularSearchPhrases:
+      title: "Popular Search Phrases"
+      suggestionsTitle: "Popular Products"
 checkout:
   addToNewsletter: "Please add me to the"
   agreeToTermsHtml: "I agree to the <a id=\"confirmation-termsandconditions-link\" href=\"__url__\"> <span class=\"terms-link\">Terms and Conditions</span></a>"
