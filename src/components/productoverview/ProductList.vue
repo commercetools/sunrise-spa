@@ -15,7 +15,8 @@
           {{> catalog/pop/jumbotron jumbotron=content.jumbotron}}
         </div>
         {{/if}}-->
-        <div class="col-xs-4 hidden-xs text-left">
+        <div v-if="products && products.results.length"
+             class="col-xs-4 hidden-xs text-left">
           <div class="custom-select-wrapper">
             <ProductSortSelector @changeSort="changeSort" />
             <!--{{> catalog/pop/sort-selector sortSelector=content.sortSelector}}-->
