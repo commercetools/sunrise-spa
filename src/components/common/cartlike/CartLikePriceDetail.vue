@@ -35,7 +35,8 @@
       <div class="col-sm-7">
         <span>{{ $t('salesTax') }}</span>
       </div>
-      <div class="col-sm-5 cart-taxes-amount">
+      <div data-test="cart-taxes-amount"
+           class="col-sm-5">
         <BaseMoney :money="taxes"/>
       </div>
     </div>
