@@ -4,6 +4,12 @@ describe('MiniCart', () => {
     cy.visit('/');
   });
 
+  it('links to shopping cart', () => {
+    cy.get('[data-test=mini-cart-open-button]')
+      .click()
+      .should('have.attr', 'href', '/cart');
+  });
+
   it('displays content of cart', () => {
     cy.get('[data-test=mini-cart-open-button]', { timeout: 20000 })
       .contains(/^\s*Cart\s*0\s*$/);
@@ -62,11 +68,5 @@ describe('MiniCart', () => {
     cy.get('[data-test=mini-cart-content]').should('be.visible');
     cy.get('[data-test=mini-cart-open-button]').trigger('mouseleave');
     cy.get('[data-test=mini-cart-content]').should('not.be.visible');
-  });
-
-  it('links to shopping cart', () => {
-    cy.get('[data-test=mini-cart-open-button]')
-      .click()
-      .should('have.attr', 'href', '/cart');
   });
 });
