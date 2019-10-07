@@ -39,7 +39,7 @@
       <img data-test="spinner" src="../../assets/img/spinner.gif"/>
     </div>
     <div v-else-if="products && !products.results.length"
-         class="empty-product-list">
+         class="empty-results">
       <span class="no-results-found">
         {{ $t('catalog.noSearchResult.searchNotFound.notFound') }}
       </span>
