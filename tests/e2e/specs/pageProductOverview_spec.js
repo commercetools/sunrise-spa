@@ -1,9 +1,6 @@
 describe('Product overview page', () => {
-  before(() => {
-    cy.visit('/products/men');
-  });
-
   it('Changes sorting settings', () => {
+    cy.visit('/products/men');
     cy.get('span[data-test=sort-selector]')
       .click()
       .parent()
@@ -44,7 +41,10 @@ describe('Product overview page', () => {
   });
 
   it('Applies sorting settings from URL', () => {
+    cy.visit('/products/men');
     cy.visit('/products/men?sort=newest');
+    cy.get('[data-test=spinner]')
+      .should('not.exist');
     cy.get('[data-test=product-list]', { timeout: 20000 })
       .first()
       .find('[data-test=product-thumbnail-name]')
@@ -53,5 +53,13 @@ describe('Product overview page', () => {
       .last()
       .find('[data-test=product-thumbnail-name]')
       .contains('Lace up shoes Tods dark blue');
+  });
+
+  it('Displays a message when the product list is empty', () => {
+    cy.visit('/products/accessories');
+    cy.get('span[data-test=sort-selector]')
+      .should('not.exist');
+    cy.get('[data-test=empty-results]')
+      .contains('No Results Found.');
   });
 });

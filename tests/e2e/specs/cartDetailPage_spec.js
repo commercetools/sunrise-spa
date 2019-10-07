@@ -3,10 +3,13 @@ describe('CartDetailPage', () => {
     cy.visit('/cart');
   });
 
-  it('displays content of cart', () => {
+  it('displays a message when cart is empty', () => {
+    cy.visit('/cart');
     cy.get('[data-test=empty-cart]')
       .contains('Your bag is empty!');
+  });
 
+  it('displays content of cart', () => {
     cy.addLineItem('/product/lemare-booties-0778-brown/M0E20000000E0XM', 2);
     cy.addLineItem('/product/lemare-booties-0778-grey/M0E20000000E0WX', 3);
     cy.visit('/cart');
