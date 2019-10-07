@@ -37,8 +37,11 @@
     <div v-if="isLoading">
       <img data-test="spinner" src="../../assets/img/spinner.gif"/>
     </div>
-    <div v-else-if="products && !products.results.length">
-      {{ $t('catalog.searchNotFound.notFound') }}
+    <div v-else-if="products && !products.results.length"
+         class="empty-product-list">
+      <span class="no-results-found">
+        {{ $t('catalog.noSearchResult.searchNotFound.notFound') }}
+      </span>
     </div>
     <transition name="fade">
       <div v-if="!isLoading && products && products.results.length"
