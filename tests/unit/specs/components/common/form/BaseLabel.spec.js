@@ -9,7 +9,6 @@ describe('BaseLabel.vue', () => {
       mocks: { $t: jest.fn() },
       propsData: {
         vuelidate: {},
-        label: 'Some Label',
       },
     };
   });
@@ -33,6 +32,18 @@ describe('BaseLabel.vue', () => {
       },
     });
     expect(wrapper.vm.required).toBeTruthy();
+    expect(wrapper.find('[data-test="form-label-required"]').exists()).toBeFalsy();
+
+    wrapper.setProps({ label: 'Some label' });
+    expect(wrapper.vm.required).toBeTruthy();
     expect(wrapper.find('[data-test="form-label-required"]').exists()).toBeTruthy();
+  });
+
+  it('displays label text if it exists', () => {
+    const wrapper = shallowMount(BaseLabel, options);
+    expect(wrapper.find('[data-test="form-label-text"]').exists()).toBeFalsy();
+
+    wrapper.setProps({ label: 'Some label' });
+    expect(wrapper.find('[data-test="form-label-text"]').text()).toBe('Some label');
   });
 });

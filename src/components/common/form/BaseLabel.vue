@@ -2,7 +2,8 @@
   <span>
     <label v-if="label"
            class="field-label">
-      <span class="field-label-text">
+      <span class="field-label-text"
+            data-test="form-label-text">
         {{ label }}
         <span v-if="required"
               :title="$t('required')"
