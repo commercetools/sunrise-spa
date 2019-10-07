@@ -33,18 +33,16 @@
                role="tabpanel"
                aria-labelledby="headingProductDetails">
             <div class="panel-body panel-body-pdp">
-              <ul v-if="productAttributes"
-                  class="product-features-list">
+              <ul class="product-features-list">
                 <li v-for="attribute in productAttributes"
                     data-test="product-attributes-list"
                     :key="attribute.name">
-                      <span v-if="attribute.name"
-                            class="attribute-name">
-                        {{ attribute.name }}:
-                      </span>
+                  <span class="attribute-name">
+                    {{ attribute.name }}:
+                  </span>
                   <span>
-                        {{ attribute.label || attribute.value }}
-                      </span>
+                    {{ attribute.label || attribute.value }}
+                  </span>
                 </li>
               </ul>
             </div>
@@ -113,7 +111,9 @@ export default {
 
   computed: {
     productAttributes() {
-      return this.product.masterData.current.variant.attributes;
+      const { attributes } = this.product.masterData.current.variant;
+      delete attributes.__typename;
+      return Object.values(attributes).filter(attribute => attribute);
     },
   },
 
