@@ -41,8 +41,9 @@ describe('Product overview page', () => {
   });
 
   it('Applies sorting settings from URL', () => {
-    cy.visit('/products/men');
     cy.visit('/products/men?sort=newest');
+    cy.get('[data-test=spinner]')
+      .should('exist');
     cy.get('[data-test=spinner]')
       .should('not.exist');
     cy.get('[data-test=product-list]', { timeout: 20000 })
