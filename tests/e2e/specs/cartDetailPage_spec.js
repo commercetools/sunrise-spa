@@ -4,7 +4,6 @@ describe('CartDetailPage', () => {
   });
 
   it('displays a message when cart is empty', () => {
-    cy.visit('/cart');
     cy.get('[data-test=empty-cart]')
       .contains('Your bag is empty!');
   });
