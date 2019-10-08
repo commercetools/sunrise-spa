@@ -16,7 +16,7 @@
         </div>
         {{/if}}-->
         <div class="col-xs-4 hidden-xs text-left">
-          <div v-if="!isLoading && products && products.results.length"
+          <div v-if="products && products.results.length"
                class="custom-select-wrapper">
             <ProductSortSelector @changeSort="changeSort" />
             <!--{{> catalog/pop/sort-selector sortSelector=content.sortSelector}}-->
