@@ -43,11 +43,19 @@
 
 // All navigation components
 
+@media screen and (max-width: 767px) {
+  .nav-list {
+    li {
+      display: block;
+    }
+  }    
+}
+
 .nav-list {
   margin: 0;
   padding: 0;
   text-transform: uppercase;
-  letter-spacing: .125rem;
+  letter-spacing: .125rem;  
 
   li {
     color: $white;
@@ -204,6 +212,7 @@
 
   .list-item-location {
     float: right;
+    display: inline;
     img {
       height: 20px;
       margin-right: 10px;
@@ -308,6 +317,7 @@
     float: right;
     border: none;
     position: relative;
+    display: block;
 
     @media screen and (min-width: 768px) {
       border-right: solid 1px #404953;
@@ -387,6 +397,7 @@
     }
   }
 }
+
 
 // Sunrise logo and searchbox
 
