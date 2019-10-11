@@ -51,26 +51,25 @@
 
   li {
     color: $white;
-    display: inline-block;
+    display: inline-flex;
     width: 20%;
     height: 50px;
     text-align: center;
     border-right: solid 1px #404953;
 
-    @media screen and (min-width: 768px) {
-      width: inherit;
-      text-align: left;
-    }
-
+  @media screen and (min-width: 768px) {
+    width: inherit;
+    text-align: left;
+  }
+  
     > a,
     > button {
-      display: inline-block;
+      display: -webkit-box;
       text-transform: uppercase;
       letter-spacing: .125rem;
       width: 100%;
       height: 100%;
     }
-
   }
 
   .list-item-nav-toggle {
