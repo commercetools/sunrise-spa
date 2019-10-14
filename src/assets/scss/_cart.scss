@@ -257,6 +257,24 @@
     background-size: 15px;
   }
 }
+
+.empty-cart-continue-shopping-btn {
+  background: url("../img/arrow-66.png") no-repeat 95% 13px $my-sin;
+  background-size: 15px;
+  border: none;
+  color: $mine-shaft;
+  padding: 0.5em 2em;
+  font-size: 1.2em;
+  text-align: center;
+  display: inline-block;
+  margin-top: 20px;
+
+  &:hover {
+    background: url("../img/arrow-66.png") no-repeat 95% 13px lighten($my-sin, 5%);
+    background-size: 15px;
+  }
+}
+
 .bottom-cart-btns {
   padding: 2em 0;
 }

@@ -56,10 +56,17 @@
     </div>
     <div v-else
          class="empty-results-container">
-      <span class="empty-results"
-            data-test="empty-cart">
-      {{ $t('empty') }}
-      </span>
+      <div class="empty-results">
+        <span
+              data-test="empty-cart">
+          {{ $t('empty') }}
+        </span>
+      </div>
+      <div class="empty-cart-continue-shopping-btn">
+        <router-link to="/">
+          {{ $t('shopNow') }}
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -162,11 +169,13 @@ en:
   itemsTotal: "{n} item in total | {n} items in total"
   empty: "Your bag is empty!"
   continueShopping: "Continue Shopping"
+  shopNow: "Shop now"
   startCheckout: "Start Checkout"
 de:
   yourBag: "Ihr Einkaufswagen"
   itemsTotal: "{n} Artikel im Warenkorb"
   empty: "Ihr Einkaufswagen ist leer!"
   continueShopping: "Weiter einkaufen"
+  shopNow: "Jetzt einkaufen"
   startCheckout: "Zur Kasse"
 </i18n>
