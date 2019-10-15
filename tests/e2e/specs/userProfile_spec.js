@@ -11,7 +11,7 @@ describe('user profile', () => {
     cy.login(customer);
   });
 
-  it.skip('updates customer info', () => {
+  it('updates customer info', () => {
     const firstName = `new-${customer.firstName}`;
     const lastName = `new-${customer.lastName}`;
     const email = `new-${customer.email}`;
