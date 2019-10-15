@@ -46,7 +46,7 @@ describe('my orders', () => {
     cy.changeLanguage('Deutsch');
     cy.createOrder(cartDraft1, orderDraft1);
     cy.createOrder(cartDraft2, orderDraft2);
-    cy.get('[data-test=my-orders-button]').click();
+    cy.get('[data-test=my-orders-button]', { timeout: 20000 }).click();
     cy.get('[data-test=order-list]')
       .should('have.length', 2)
       .eq(0)
