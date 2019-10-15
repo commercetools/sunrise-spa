@@ -18,7 +18,7 @@ describe('MiniCart', () => {
       .contains(/^\s*Cart\s*2\s*$/);
 
     cy.addLineItem('/product/lemare-booties-0778-grey/M0E20000000E0WX', 3);
-    cy.get('[data-test=mini-cart-open-button]')
+    cy.get('[data-test=mini-cart-open-button]', { timeout: 20000 })
       .contains(/^\s*Cart\s*5\s*$/)
       .trigger('mouseenter');
 
