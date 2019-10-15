@@ -260,13 +260,19 @@
     display: none;
   }
 }
+.dropdown-megamenu .navbar-nav {
+  margin: 0;
+  display: flex;
+}
+
+@media screen and (max-width: 768px) {
+  .dropdown-megamenu .navbar-nav {
+    margin: 0;
+    display: block;
+  } 
+}
 
 .dropdown-megamenu {
-
-  .navbar-nav {
-    margin: 0;
-  }
-
   .ui-accordion .ui-accordion-header {
     outline: none;
   }
