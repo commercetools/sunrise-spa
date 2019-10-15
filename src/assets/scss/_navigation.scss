@@ -65,14 +65,11 @@
     text-align: center;
     border-right: solid 1px #404953;
 
-  @media screen and (min-width: 768px) {
-    width: inherit;
-    text-align: left;
-  }
     @media screen and (min-width: 768px) {
       width: inherit;
       text-align: left;
     }
+
     > a,
     > button {
       display: -webkit-box;
