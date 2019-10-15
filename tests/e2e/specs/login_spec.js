@@ -7,6 +7,7 @@ describe('Login', () => {
   };
 
   it('logs in', () => {
+    cy.createCustomer(customer);
     cy.login(customer);
     cy.location('pathname').should('eq', '/user/account');
     cy.checkCustomerIsLoggedIn(customer);

@@ -16,6 +16,7 @@
                 mode="in-out">
       <span v-if="formState === 'success'"
             key="success"
+            data-test="success-state-layer"
             class="state-layer">
         <svg xmlns="http://www.w3.org/2000/svg"
              class="check"

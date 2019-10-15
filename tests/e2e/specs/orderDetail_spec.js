@@ -71,6 +71,7 @@ describe('OrderDetailPage', () => {
 
   before(() => {
     cy.addDiscountCode(cartDiscount, 'SUNRISE_CI');
+    cy.createCustomer(customerDraft);
     cy.login(customerDraft);
     cy.createOrder(cartDraft, orderDraft);
   });

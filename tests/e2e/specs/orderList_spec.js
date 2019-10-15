@@ -39,6 +39,7 @@ describe('my orders', () => {
 
   beforeEach(() => {
     cy.visit('/');
+    cy.createCustomer(customer);
     cy.login(customer);
   });
 

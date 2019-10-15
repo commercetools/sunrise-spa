@@ -1,49 +1,65 @@
 describe('user profile', () => {
-  const oldCustomer = {
+  const customer = {
     firstName: 'Charlie',
     lastName: 'Bucket',
     email: 'charlie.bucket+ci@commercetools.com',
     password: 'p@ssword',
   };
 
-  const newCustomer = {
-    firstName: `new-${oldCustomer.firstName}`,
-    lastName: `new-${oldCustomer.lastName}`,
-    email: `new-${oldCustomer.email}`,
-    password: `new-${oldCustomer.password}`,
-  };
-
-  before(() => {
-    cy.deleteCustomer(newCustomer);
-    cy.login(oldCustomer);
+  beforeEach(() => {
+    cy.createCustomer(customer);
+    cy.login(customer);
   });
 
-  it('updates customer info', () => {
-    cy.get('[data-test=edit-profile-form-show]').click();
+  it.skip('updates customer info', () => {
+    const firstName = `new-${customer.firstName}`;
+    const lastName = `new-${customer.lastName}`;
+    const email = `new-${customer.email}`;
 
-    cy.get('input[data-test=edit-profile-form-firstname]').clear().type(newCustomer.firstName);
-    cy.get('input[data-test=edit-profile-form-lastname]').clear().type(newCustomer.lastName);
-    cy.get('input[data-test=edit-profile-form-email]').clear().type(newCustomer.email);
+    cy.deleteCustomer({ email });
+
+    cy.get('[data-test=edit-profile-form-show]', { timeout: 10000 }).click();
+
+    cy.get('input[data-test=edit-profile-form-firstname]')
+      .clear()
+      .type(firstName);
+    cy.get('input[data-test=edit-profile-form-lastname]')
+      .clear()
+      .type(lastName);
+    cy.get('input[data-test=edit-profile-form-email]')
+      .clear()
+      .type(email);
 
     cy.get('[data-test=edit-profile-form-submit]').click();
 
-    cy.get('[data-test=user-profile-name]').should('contain', `${newCustomer.firstName} ${newCustomer.lastName}`);
-    cy.get('[data-test=user-profile-email]').should('contain', newCustomer.email);
+    cy.get('[data-test=user-profile-name]', { timeout: 10000 })
+      .should('contain', `${firstName} ${lastName}`);
+    cy.get('[data-test=user-profile-email]')
+      .should('contain', email);
 
     cy.get('[data-test=edit-profile-form-show]').click();
-    cy.get('[data-test=user-profile-email]').should('not.contain', newCustomer.email);
+    cy.get('input[data-test=edit-profile-form-email]')
+      .should('have.value', email);
     cy.get('[data-test=edit-profile-form-cancel]').click();
-    cy.get('[data-test=user-profile-email]').should('contain', newCustomer.email);
+    cy.get('[data-test=user-profile-email]')
+      .should('contain', email);
   });
 
   it('changes password', () => {
-    cy.get('[data-test=change-password-button]').click();
-    cy.get('[data-test=change-password-form-currentpassword]').type(oldCustomer.password);
-    cy.get('[data-test=change-password-form-newpassword]').type(newCustomer.password);
-    cy.get('[data-test=change-password-form-newpasswordconfirm]').type(newCustomer.password);
+    const password = `new-${customer.password}`;
+    const customerNewPassword = { ...customer, password };
+
+    cy.get('[data-test=change-password-button]', { timeout: 10000 }).click();
+    cy.get('[data-test=change-password-form-currentpassword]').type(customer.password);
+    cy.get('[data-test=change-password-form-newpassword]').type(password);
+    cy.get('[data-test=change-password-form-newpasswordconfirm]').type(password);
+
+    cy.get('[data-test="edit-profile-form-submit"]').click();
+    cy.get('[data-test="success-state-layer"]')
+      .should('have.class', 'state-layer fade-enter-active');
 
     cy.get('[data-test=logout-button]').click();
-    cy.login(newCustomer);
-    cy.checkCustomerIsLoggedIn(newCustomer);
+    cy.login(customerNewPassword);
+    cy.checkCustomerIsLoggedIn(customerNewPassword);
   });
 });
