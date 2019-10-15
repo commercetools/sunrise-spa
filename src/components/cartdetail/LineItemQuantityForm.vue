@@ -66,6 +66,16 @@ export default {
       ]);
     },
 
+    removeLineItem() {
+      return this.updateMyCart([
+        {
+          removeLineItem: {
+            lineItemId: this.lineItemId,
+          },
+        },
+      ]);
+    },
+
     increment() {
       this.form.quantity += 1;
     },
@@ -73,13 +83,19 @@ export default {
     decrement() {
       if (this.form.quantity > 1) {
         this.form.quantity -= 1;
+      } else {
+        this.removeLineItem();
       }
     },
   },
 
   created() {
     this.form.quantity = this.quantity;
-    this.debouncedSubmit = debounce(() => this.$refs.form.submit(), 500);
+    this.debouncedSubmit = debounce(() => {
+      if (this.$refs.form) {
+        this.$refs.form.submit();
+      }
+    }, 500);
   },
 
   watch: {
