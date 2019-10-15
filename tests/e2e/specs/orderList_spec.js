@@ -43,7 +43,6 @@ describe('my orders', () => {
   });
 
   it('shows my orders', () => {
-    cy.changeLanguage('Deutsch');
     cy.createOrder(cartDraft1, orderDraft1);
     cy.createOrder(cartDraft2, orderDraft2);
     cy.get('[data-test=my-orders-button]', { timeout: 20000 }).click();
@@ -60,6 +59,7 @@ describe('my orders', () => {
         cy.wrap($order)
           .find('[data-test=order-number]')
           .contains('1234');
+        cy.changeLanguage('Deutsch');
         cy.wrap($order)
           .find('[data-test=shipment-state]')
           .contains('Versandt');
