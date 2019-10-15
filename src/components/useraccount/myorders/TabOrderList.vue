@@ -1,7 +1,8 @@
 <template>
   <div v-if="me"
        class="my-orders">
-    <div class="my-orders-content">
+    <div v-if="me.orders.results.length"
+        class="my-orders-content">
       <div class="my-orders-table-wrapper">
         <div class="row">
           <div class="col-md-2 col-sm-3 col-xs-4">
@@ -74,6 +75,14 @@
         </div>
       </div>
     </div>
+
+    <div v-else
+         data-test="empty-order-list"
+         class="empty-results-container">
+      <span class="empty-order-list">
+        {{ $t('emptyOrders') }}
+      </span>
+    </div>
   </div>
 </template>
 
@@ -139,6 +148,7 @@ en:
   CreditOwed: "Credit Owed"
   Paid: "Paid"
   view: "View"
+  emptyOrders: "You have not placed any orders yet!"
 de:
   orderNumber: "Best.-Nr."
   date: "Datum"
@@ -156,4 +166,5 @@ de:
   CreditOwed: "Kreditforderung"
   Paid: "Bezahlt"
   view: "Ansehen"
+  emptyOrders: "Sie haben noch keine Bestellungen aufgegeben!"
 </i18n>

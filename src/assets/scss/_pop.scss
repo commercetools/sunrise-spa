@@ -32,7 +32,7 @@
     }
   }
 }
-#pop-page {
+#form-filter-products {
   text-transform: uppercase;
 }
 .mobile-filter-row {
@@ -52,6 +52,17 @@
 }
 .jumbotron {
   margin: 0 15px;
+}
+
+.empty-results-container {
+  padding: 50px;
+  text-align: center;
+}
+
+.empty-results {
+  color: $ebony-clay;
+  font-size: 20px;
+  word-spacing: 0.1em;
 }
 
 #pop-product-list {
