@@ -38,7 +38,7 @@ describe('user profile', () => {
       .should('contain', email);
 
     cy.get('[data-test=edit-profile-form-show]').click();
-    cy.get('input[data-test=edit-profile-form-email]')
+    cy.get('[data-test=edit-profile-form-email]')
       .should('have.value', email);
     cy.get('[data-test=edit-profile-form-cancel]').click();
     cy.get('[data-test=user-profile-email]')
@@ -54,8 +54,8 @@ describe('user profile', () => {
     cy.get('[data-test=change-password-form-newpassword]').type(password);
     cy.get('[data-test=change-password-form-newpasswordconfirm]').type(password);
 
-    cy.get('[data-test="edit-profile-form-submit"]').click();
-    cy.get('[data-test="success-state-layer"]')
+    cy.get('[data-test=edit-profile-form-submit]').click();
+    cy.get('[data-test=success-state-layer]')
       .should('have.class', 'state-layer fade-enter-active');
 
     cy.get('[data-test=logout-button]').click();

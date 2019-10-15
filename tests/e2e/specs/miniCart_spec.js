@@ -60,8 +60,8 @@ describe('MiniCart', () => {
 
     cy.addLineItem('/product/lemare-booties-0778-brown/M0E20000000E0XM', 2);
     cy.get('[data-test=mini-cart-content]')
-      .should('be.visible')
-      .wait(3000)
+      .should('be.visible');
+    cy.wait(3000)
       .should('not.be.visible');
 
     cy.get('[data-test=mini-cart-open-button]').trigger('mouseenter');

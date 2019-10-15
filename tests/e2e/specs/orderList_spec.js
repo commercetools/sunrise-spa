@@ -47,7 +47,7 @@ describe('my orders', () => {
     cy.createOrder(cartDraft1, orderDraft1);
     cy.createOrder(cartDraft2, orderDraft2);
     cy.get('[data-test=my-orders-button]', { timeout: 20000 }).click();
-    cy.get('[data-test=order-list]', { timeout: 10000 })
+    cy.get('[data-test=order-list]')
       .should('have.length', 2)
       .eq(0)
       .then(($order) => {
