@@ -39,11 +39,11 @@ describe('my orders', () => {
 
   beforeEach(() => {
     cy.visit('/');
-    cy.changeLanguage('English');
     cy.login(customer);
   });
 
   it('shows my orders', () => {
+    cy.changeLanguage('Deutsch');
     cy.createOrder(cartDraft1, orderDraft1);
     cy.createOrder(cartDraft2, orderDraft2);
     cy.get('[data-test=my-orders-button]').click();
@@ -62,10 +62,10 @@ describe('my orders', () => {
           .contains('1234');
         cy.wrap($order)
           .find('[data-test=shipment-state]')
-          .contains('Shipped');
+          .contains('Versandt');
         cy.wrap($order)
           .find('[data-test=payment-state]')
-          .contains('Pending');
+          .contains('Anstehend');
       });
   });
 
