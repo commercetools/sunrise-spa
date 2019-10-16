@@ -98,6 +98,18 @@ describe('CartDetailPage', () => {
     cy.get('[data-test=cart-line-item]').should('have.length', 0);
   });
 
+  it('removes line item when quantity is decreased to less than 1', () => {
+    cy.addLineItem('/product/lemare-booties-0778-grey/M0E20000000E0WX', 1);
+    cy.visit('/cart');
+
+    cy.get('[data-test=cart-line-item]')
+      .should('have.length', 1);
+
+    cy.get('[data-test=cart-line-item-quantity-dec]')
+      .click();
+    cy.get('[data-test=cart-line-item]').should('have.length', 0);
+  });
+
   const cartDiscount = {
     value: {
       relative: { permyriad: 5000 },
