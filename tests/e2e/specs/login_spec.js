@@ -9,15 +9,15 @@ describe('Login', () => {
   it('logs in', () => {
     cy.createCustomer(customer);
     cy.login(customer);
-    cy.location('pathname').should('eq', '/user/account');
+    cy.location('pathname').should('eq', '/user/account', { timeout: 20000 });
     cy.checkCustomerIsLoggedIn(customer);
 
     cy.reload();
-    cy.location('pathname').should('eq', '/user/account');
+    cy.location('pathname').should('eq', '/user/account', { timeout: 20000 });
     cy.checkCustomerIsLoggedIn(customer);
 
     cy.get('[data-test=logout-button]').click();
-    cy.location('pathname').should('eq', '/login');
+    cy.location('pathname').should('eq', '/login', { timeout: 20000 });
     cy.get('[data-test=login-button]').should('exist');
     cy.get('[data-test=logout-button]').should('not.exist');
     cy.get('[data-test=login-info-name]').should('not.exist');
@@ -32,7 +32,7 @@ describe('Login', () => {
     cy.get('[data-test=signup-form-password]').type(customer.password);
     cy.get('[data-test=signup-form-repeatpassword]').type(customer.password);
     cy.get('[data-test=signup-form-agreetoterms]').check();
-    cy.get('[data-test=signup-form-submit]', { timeout: 10000 }).click();
+    cy.get('[data-test=signup-form-submit]', { timeout: 20000 }).click();
 
     cy.checkCustomerIsLoggedIn(customer);
   });

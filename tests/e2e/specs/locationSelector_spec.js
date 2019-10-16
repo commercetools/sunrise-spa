@@ -6,12 +6,14 @@ describe('Location selector', () => {
   it('changes text to selected language', () => {
     cy.changeLanguage('Deutsch');
 
-    cy.get('[data-test=product-name]').should('contain', 'Stiefeletten Lemare grau');
-    cy.get('[data-test=stores-link]').should('contain', 'Filiale');
+    cy.get('[data-test=product-name]')
+      .should('contain', 'Stiefeletten Lemare grau', { timeout: 20000 });
+    cy.get('[data-test=stores-link]')
+      .should('contain', 'Filiale');
 
     cy.changeLanguage('English');
-
-    cy.get('[data-test=product-name]').should('contain', 'Booties Lemare grey');
+    cy.get('[data-test=product-name]')
+      .should('contain', 'Booties Lemare grey', { timeout: 20000 });
     cy.get('[data-test=stores-link]').should('contain', 'Stores');
   });
 

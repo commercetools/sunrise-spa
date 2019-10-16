@@ -27,7 +27,7 @@ describe('Product thumbnail', () => {
           .contains(/^\s*174,12\s€\s*$/);
       });
 
-    cy.get('[data-test=product-thumbnail-name]')
+    cy.get('[data-test=product-thumbnail-name]', { timeout: 20000 })
       .contains('Booties Lemare black')
       .parentsUntil('[data-test=product-thumbnail]')
       .parent()
