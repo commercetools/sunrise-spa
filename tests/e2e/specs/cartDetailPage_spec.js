@@ -121,7 +121,7 @@ describe('CartDetailPage', () => {
 
     cy.get('[data-test=discount-code-input]')
       .type('SUNRISE_CI');
-    cy.get('[data-test=apply-discount-code-button]')
+    cy.get('[data-test=apply-discount-code-button]', { timeout: 10000 })
       .click();
     cy.get('[data-test=cart-total-price]')
       .contains(/^\s*99,50\s€\s*$/);
