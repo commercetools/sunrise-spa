@@ -70,7 +70,7 @@
     </div>
 
     <div v-else
-         class="cart-loading-spinner">
+         class="loading-spinner">
       <img data-test="spinner" src="../../assets/img/spinner.gif"/>
     </div>
   </div>

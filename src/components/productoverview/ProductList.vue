@@ -16,7 +16,7 @@
         </div>
         {{/if}}-->
         <div class="col-xs-4 hidden-xs text-left">
-          <div v-if="products && products.results.length"
+          <div v-if="!isLoading && products && products.results.length"
                class="custom-select-wrapper">
             <ProductSortSelector @changeSort="changeSort" />
             <!--{{> catalog/pop/sort-selector sortSelector=content.sortSelector}}-->
@@ -35,10 +35,11 @@
         <!--{{> catalog/pop/filters-sidebar}}-->
       </div>
     </form>
-    <div v-if="isLoading">
+    <div v-if="isLoading"
+         class="loading-spinner">
       <img data-test="spinner" src="../../assets/img/spinner.gif"/>
     </div>
-    <div v-else-if="products && !products.results.length">
+    <div v-else-if="!isLoading && products && !products.results.length">
       <div class="empty-results-container">
         <span class="empty-results"
               data-test="empty-results">

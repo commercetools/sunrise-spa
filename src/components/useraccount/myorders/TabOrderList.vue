@@ -85,7 +85,7 @@
     </div>
 
     <div v-else
-        class="order-list-spinner">
+        class="loading-spinner">
       <img data-test="spinner" src="../../../assets/img/spinner.gif"/>
     </div>
   </div>
