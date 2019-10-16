@@ -7,12 +7,12 @@ describe('my orders', () => {
   };
   const orderDraft1 = {
     orderNumber: '1234',
-    paymentState: 'Pending',
-    shipmentState: 'Shipped',
   };
 
   const orderDraft2 = {
     orderNumber: '4321',
+    paymentState: 'Pending',
+    shipmentState: 'Shipped',
   };
 
   const cartDraft1 = {
@@ -46,21 +46,21 @@ describe('my orders', () => {
   it('shows my orders', () => {
     cy.createOrder(cartDraft1, orderDraft1);
     cy.createOrder(cartDraft2, orderDraft2);
+    cy.changeLanguage('Deutsch');
     cy.get('[data-test=my-orders-button]', { timeout: 20000 }).click();
     cy.get('[data-test=order-list]')
       .should('have.length', 2)
-      .eq(0)
+      .eq(1)
       .then(($order) => {
         cy.wrap($order)
           .find('[data-test=total-price]')
-          .contains(/^\s*368,75\s€\s*$/);
+          .contains(/^\s*372,50\s€\s*$/);
         cy.wrap($order)
           .find('[data-test=order-date]')
           .contains(/^\s*\d{1,2}\.*\s*[A-Za-zäÄöÖüÜß].+\s*\d{4}\s*$/);
         cy.wrap($order)
           .find('[data-test=order-number]')
-          .contains('1234');
-        cy.changeLanguage('Deutsch');
+          .contains('4321');
         cy.wrap($order)
           .find('[data-test=shipment-state]')
           .contains('Versandt');
