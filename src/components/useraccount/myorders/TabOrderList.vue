@@ -1,7 +1,7 @@
 <template>
   <div v-if="me"
        class="my-orders">
-    <div v-if="me.orders.results.length"
+    <div v-if="!isLoading && me.orders.results.length"
         class="my-orders-content">
       <div class="my-orders-table-wrapper">
         <div class="row">
@@ -76,12 +76,17 @@
       </div>
     </div>
 
-    <div v-else
+    <div v-else-if="!isLoading && !me.orders.results.length"
          data-test="empty-order-list"
          class="empty-results-container">
       <span class="empty-order-list">
         {{ $t('emptyOrders') }}
       </span>
+    </div>
+
+    <div v-else
+        class="order-list-spinner">
+      <img data-test="spinner" src="../../../assets/img/spinner.gif"/>
     </div>
   </div>
 </template>
@@ -98,6 +103,12 @@ export default {
   data: () => ({
     me: null,
   }),
+
+  computed: {
+    isLoading() {
+      return this.$apollo.loading;
+    },
+  },
 
   methods: {
     translateStatus(state) {

@@ -8,7 +8,7 @@
         <!--{{> checkout/start-checkout-link id="cart-checkoutnow-btn"}}-->
       </div>
     </div>
-    <div v-if="cartNotEmpty">
+    <div v-if="!isLoading && cartNotEmpty">
       <div class="row">
         <div class="col-sm-12">
           <div class="current-in-bag">
@@ -54,11 +54,11 @@
         </div>
       </div>
     </div>
-    <div v-else
+
+    <div v-else-if="!isLoading && !cartNotEmpty"
          class="empty-results-container">
       <div class="empty-results">
-        <span
-              data-test="empty-cart">
+        <span data-test="empty-cart">
           {{ $t('empty') }}
         </span>
       </div>
@@ -67,6 +67,11 @@
           {{ $t('shopNow') }}
         </router-link>
       </div>
+    </div>
+
+    <div v-else
+         class="cart-loading-spinner">
+      <img data-test="spinner" src="../../assets/img/spinner.gif"/>
     </div>
   </div>
 </template>
@@ -91,6 +96,12 @@ export default {
   data: () => ({
     me: null,
   }),
+
+  computed: {
+    isLoading() {
+      return this.$apollo.loading;
+    },
+  },
 
   mixins: [cartMixin],
 
