@@ -144,7 +144,7 @@ export default {
       delete this.form.__typename;
     }
     if (!this.form.country) {
-      this.form = { ...this.form, country: this.countries[0].id };
+      this.form = { ...this.form, country: this.countries[0]?.id };
     }
   },
 

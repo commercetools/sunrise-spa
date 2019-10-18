@@ -63,6 +63,7 @@ export default {
   mixins: [cartMixin],
 
   data: () => ({
+    me: null,
     form: {
       shippingMethod: null,
     },
