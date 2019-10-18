@@ -5,7 +5,6 @@ describe('my orders', () => {
     email: 'charlie.bucket+ci@commercetools.com',
     password: 'p@ssword',
   };
-
   const orderDraft1 = {
     orderNumber: '1234',
     paymentState: 'Pending',
@@ -38,19 +37,18 @@ describe('my orders', () => {
     },
   };
 
-  before(() => {
+  beforeEach(() => {
     cy.visit('/');
-    cy.changeLanguage('Deutsch');
     cy.login(customer);
   });
 
   it('shows my orders', () => {
     cy.createOrder(cartDraft1, orderDraft1);
     cy.createOrder(cartDraft2, orderDraft2);
-    cy.get('[data-test=my-orders-button]').click();
+    cy.get('[data-test=my-orders-button]', { timeout: 20000 }).click();
     cy.get('[data-test=order-list]')
       .should('have.length', 2)
-      .eq(0)
+      .eq(1)
       .then(($order) => {
         cy.wrap($order)
           .find('[data-test=total-price]')
@@ -61,6 +59,7 @@ describe('my orders', () => {
         cy.wrap($order)
           .find('[data-test=order-number]')
           .contains('1234');
+        cy.changeLanguage('Deutsch');
         cy.wrap($order)
           .find('[data-test=shipment-state]')
           .contains('Versandt');
@@ -68,5 +67,13 @@ describe('my orders', () => {
           .find('[data-test=payment-state]')
           .contains('Anstehend');
       });
+  });
+
+  it('displays an empty order list message when no orders have been placed', () => {
+    cy.get('[data-test=my-orders-button]').click();
+    cy.get('[data-test=order-list]')
+      .should('have.length', 0);
+    cy.get('[data-test=empty-order-list]')
+      .contains('You have not placed any orders yet!');
   });
 });

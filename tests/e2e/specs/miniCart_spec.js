@@ -3,6 +3,11 @@ describe('MiniCart', () => {
     localStorage.removeItem('auth');
     cy.visit('/');
   });
+  it('links to shopping cart', () => {
+    cy.get('[data-test=mini-cart-open-button]')
+      .click()
+      .should('have.attr', 'href', '/cart');
+  });
 
   it('displays content of cart', () => {
     cy.get('[data-test=mini-cart-open-button]', { timeout: 20000 })
@@ -15,7 +20,7 @@ describe('MiniCart', () => {
     cy.addLineItem('/product/lemare-booties-0778-grey/M0E20000000E0WX', 3);
     cy.get('[data-test=mini-cart-open-button]')
       .contains(/^\s*Cart\s*5\s*$/)
-      .trigger('click');
+      .trigger('mouseenter');
 
     cy.get('[data-test=mini-cart-price]')
       .contains(/^\s*Total\s+815,90\s€\s*$/);
@@ -50,8 +55,6 @@ describe('MiniCart', () => {
   });
 
   it('opens and closes mini-cart', () => {
-    cy.get('[data-test=mini-cart-open-button]', { timeout: 20000 }).trigger('click');
-    cy.get('[data-test=mini-cart-content]').should('not.be.visible');
     cy.get('[data-test=mini-cart-open-button]').trigger('mouseenter');
     cy.get('[data-test=mini-cart-content]').should('not.be.visible');
 
@@ -64,11 +67,6 @@ describe('MiniCart', () => {
     cy.get('[data-test=mini-cart-open-button]').trigger('mouseenter');
     cy.get('[data-test=mini-cart-content]').should('be.visible');
     cy.get('[data-test=mini-cart-open-button]').trigger('mouseleave');
-    cy.get('[data-test=mini-cart-content]').should('not.be.visible');
-
-    cy.get('[data-test=mini-cart-open-button]').trigger('click');
-    cy.get('[data-test=mini-cart-content]').should('be.visible');
-    cy.get('[data-test=mini-cart-open-button]').trigger('click');
     cy.get('[data-test=mini-cart-content]').should('not.be.visible');
   });
 });

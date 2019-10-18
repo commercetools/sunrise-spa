@@ -26,6 +26,9 @@
 .current-in-bag {
   padding: 1.5em 0;
 }
+.empty-bag {
+  font-size: 30px;
+}
 .bag-icon-lg {
   height: 30px;
   margin-bottom: 1em;
@@ -235,6 +238,9 @@
   font-weight: 900;
 }
 
+.empty-order-list {
+  font-size: 1.2em;
+}
 // Back to shopping and checkout now buttons
 .continue-shopping-btn {
   background: url("../img/arrow-67-black.png") no-repeat 5% 13px transparent;
@@ -251,6 +257,24 @@
     background-size: 15px;
   }
 }
+
+.empty-cart-continue-shopping-btn {
+  background: url("../img/arrow-66.png") no-repeat 95% 13px $my-sin;
+  background-size: 15px;
+  border: none;
+  color: $mine-shaft;
+  padding: 0.5em 2em;
+  font-size: 1.2em;
+  text-align: center;
+  display: inline-block;
+  margin-top: 20px;
+
+  &:hover {
+    background: url("../img/arrow-66.png") no-repeat 95% 13px lighten($my-sin, 5%);
+    background-size: 15px;
+  }
+}
+
 .bottom-cart-btns {
   padding: 2em 0;
 }

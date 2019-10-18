@@ -33,12 +33,14 @@ export default {
   methods: {
     changeSortParameter(value) {
       const query = { ...this.$route.query };
-      if (value) {
-        query.sort = value;
-      } else {
-        delete query.sort;
+      if (query.sort !== value) {
+        if (value) {
+          query.sort = value;
+        } else {
+          delete query.sort;
+        }
+        this.$router.replace({ query });
       }
-      this.$router.replace({ query });
     },
   },
 

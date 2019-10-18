@@ -2,12 +2,12 @@
   <li @mouseleave="close"
       @mouseenter="open"
       class="list-item-bag">
-    <button @click="toggle"
-            data-test="mini-cart-open-button"
-            class="not-empty link-your-bag icon-hand-bag">
+    <router-link :to=" { name: 'cart' }"
+                 data-test="mini-cart-open-button"
+                 class="not-empty link-your-bag icon-hand-bag">
       <span class="hidden-xs hidden-sm">{{ $t('miniCart') }}</span>
       <span class="cart-item-number">{{ totalItems }}</span>
-    </button>
+    </router-link>
     <transition name="fade">
       <div v-show="show"
            v-if="totalItems"
@@ -91,10 +91,6 @@ export default {
   },
 
   methods: {
-    toggle() {
-      this.$store.dispatch('toggleMiniCart');
-    },
-
     open() {
       this.$store.dispatch('openMiniCart', 0);
     },

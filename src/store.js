@@ -82,8 +82,6 @@ export default new Vuex.Store({
         commit(SET_MINI_CART_OPEN, false);
       }
     },
-
-    toggleMiniCart: ({ commit, state }) => commit(SET_MINI_CART_OPEN, !state.miniCartOpen),
   },
 
   mutations: {

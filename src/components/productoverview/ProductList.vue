@@ -16,7 +16,8 @@
         </div>
         {{/if}}-->
         <div class="col-xs-4 hidden-xs text-left">
-          <div class="custom-select-wrapper">
+          <div v-if="products && products.results.length"
+               class="custom-select-wrapper">
             <ProductSortSelector @changeSort="changeSort" />
             <!--{{> catalog/pop/sort-selector sortSelector=content.sortSelector}}-->
           </div>
@@ -38,7 +39,12 @@
       <img data-test="spinner" src="../../assets/img/spinner.gif"/>
     </div>
     <div v-else-if="products && !products.results.length">
-      {{ $t('catalog.searchNotFound.notFound') }}
+      <div class="empty-results-container">
+        <span class="empty-results"
+              data-test="empty-results">
+          {{ $t('catalog.noSearchResult.searchNotFound.notFound') }}
+        </span>
+      </div>
     </div>
     <transition name="fade">
       <div v-if="!isLoading && products && products.results.length"

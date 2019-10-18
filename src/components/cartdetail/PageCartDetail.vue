@@ -3,21 +3,21 @@
        class="cart-page container">
     <div class="row">
       <div class="col-sm-8 col-xs-12">
-        <div class="current-in-bag">
-          <span>
-            <img class="bag-icon-lg" src="../../assets/img/hand-bag-2-black.png" alt="bag icon">
-          </span>
-          <span class="text-uppercase your-bag-txt">{{ $t('yourBag') }}: </span>
-          <span class="items-total-txt"
-                data-test="cart-total-items">
-            {{ $tc('itemsTotal', totalItems) }}
-          </span>
-        </div>
       </div>
     </div>
     <div v-if="cartNotEmpty">
       <div class="row">
         <div class="col-sm-12">
+          <div class="current-in-bag">
+            <span>
+              <img class="bag-icon-lg" src="../../assets/img/hand-bag-2-black.png" alt="bag icon">
+            </span>
+            <span class="text-uppercase your-bag-txt">{{ $t('yourBag') }}: </span>
+            <span class="items-total-txt"
+                  data-test="cart-total-items">
+              {{ $tc('itemsTotal', totalItems) }}
+            </span>
+          </div>
           <div class="cart-content">
             <CartLikeContentDetail :cartLike="me.activeCart"
                                    :editable="true"/>
@@ -45,8 +45,19 @@
         </div>
       </div>
     </div>
-    <div v-else>
-      {{ $t('empty') }}
+    <div v-else
+         class="empty-results-container">
+      <div class="empty-results">
+        <span
+              data-test="empty-cart">
+          {{ $t('empty') }}
+        </span>
+      </div>
+      <div class="empty-cart-continue-shopping-btn">
+        <router-link to="/">
+          {{ $t('shopNow') }}
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -101,13 +112,15 @@ export default {
 en:
   yourBag: "Your Bag"
   itemsTotal: "{n} item in total | {n} items in total"
-  empty: "Your bag is empty"
+  empty: "Your bag is empty!"
   continueShopping: "Continue Shopping"
+  shopNow: "Shop now"
   startCheckout: "Start Checkout"
 de:
   yourBag: "Ihr Einkaufswagen"
   itemsTotal: "{n} Artikel im Warenkorb"
-  empty: "Ihr Einkaufswagen ist leer :("
+  empty: "Ihr Einkaufswagen ist leer!"
   continueShopping: "Weiter einkaufen"
+  shopNow: "Jetzt einkaufen"
   startCheckout: "Zur Kasse"
 </i18n>
