@@ -17,47 +17,54 @@
                        :vuelidate="$v.form.firstName"
                        :label="$t('firstName')"
                        type="text"
-                       autocomplete="fname"/>
+                       autocomplete="fname"
+                       data-test="address-form-firstName"/>
           </div>
           <div class="col-sm-6">
             <BaseInput v-model="form.lastName"
                        :vuelidate="$v.form.lastName"
                        :label="$t('lastName')"
                        type="text"
-                       autocomplete="lname"/>
+                       autocomplete="lname"
+                       data-test="address-form-lastName"/>
           </div>
           <div class="col-sm-12">
             <BaseInput v-model="form.streetName"
                        :vuelidate="$v.form.streetName"
                        :label="$t('streetName')"
                        type="text"
-                       autocomplete="street-address"/>
+                       autocomplete="street-address"
+                       data-test="address-form-streetName"/>
           </div>
           <div class="col-sm-12">
             <BaseInput v-model="form.additionalStreetInfo"
                        :vuelidate="$v.form.additionalStreetInfo"
                        :label="$t('additionalStreetInfo')"
-                       type="text"/>
+                       type="text"
+                       data-test="address-form-additionalStreetInfo"/>
           </div>
           <div class="col-sm-3">
             <BaseInput v-model="form.postalCode"
                        :vuelidate="$v.form.postalCode"
                        :label="$t('postalCode')"
                        type="text"
-                       autocomplete="postal-code"/>
+                       autocomplete="postal-code"
+                       data-test="address-form-postalCode"/>
           </div>
           <div class="col-sm-4">
             <BaseInput v-model="form.city"
                        :vuelidate="$v.form.city"
                        :label="$t('city')"
                        type="text"
-                       autocomplete="address-level2"/>
+                       autocomplete="address-level2"
+                       data-test="address-form-city"/>
           </div>
           <div class="col-sm-5">
             <BaseSelect v-model="form.country"
                         :vuelidate="$v.form.country"
                         :label="$t('country')"
-                        :options="countries"/>
+                        :options="countries"
+                        data-test="address-form-country"/>
           </div>
         </div>
         <hr>
@@ -67,14 +74,16 @@
                        :vuelidate="$v.form.phone"
                        :label="$t('phone')"
                        type="text"
-                       autocomplete="tel"/>
+                       autocomplete="tel"
+                       data-test="address-form-phone"/>
           </div>
           <div class="col-sm-6">
             <BaseInput v-model="form.email"
                        :vuelidate="$v.form.email"
                        :label="$t('email')"
                        type="email"
-                       autocomplete="email"/>
+                       autocomplete="email"
+                       data-test="address-form-email"/>
           </div>
         </div>
       </slot>
@@ -133,6 +142,9 @@ export default {
       const { contactInfo, ...address } = this.address;
       this.form = { ...contactInfo, ...address };
       delete this.form.__typename;
+    }
+    if (!this.form.country) {
+      this.form = { ...this.form, country: this.countries[0].id };
     }
   },
 

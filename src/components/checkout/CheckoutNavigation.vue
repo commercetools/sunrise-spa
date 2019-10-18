@@ -13,7 +13,8 @@
       <div>
         <LoadingButton :state="state"
                        id="shipping-continue-checkout-btn-xs"
-                       class="btn text-uppercase next-button">
+                       class="btn text-uppercase next-button"
+                       data-test="continue-checkout-button">
           {{ $t('continue') }}
         </LoadingButton>
       </div>

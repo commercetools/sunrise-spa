@@ -7,7 +7,8 @@
       <div class="col-sm-12">
         <BaseInput v-model="sameAddress"
                    :label="$t('sameAddress')"
-                   type="checkbox"/>
+                   type="checkbox"
+                   data-test="checkout-form-same-as-shipping"/>
       </div>
     </div>
     <BaseForm v-if="sameAddress"

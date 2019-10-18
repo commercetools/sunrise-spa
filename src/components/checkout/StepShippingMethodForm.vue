@@ -11,20 +11,25 @@
           <ServerError :error="error"/>
         </div>
       </div>
-      <BaseLabel :vuelidate="$v.form.shippingMethod">
+      <BaseLabel :vuelidate="$v.form.shippingMethod"
+                 data-test="checkout-form-shipping-methods">
         <BaseRadio v-for="shippingMethod in shippingMethodsByLocation"
                    v-model="form.shippingMethod"
                    :value="shippingMethod.id"
                    :key="shippingMethod.id"
                    class="checkout-form-option">
           <span class="option-name">
-            {{ shippingMethod.name }}
-            <span class="option-description">
+            <span data-test="checkout-form-shipping-method-name">
+              {{ shippingMethod.name }}
+            </span>
+            <span class="option-description"
+                  data-test="checkout-form-shipping-method-description">
               {{ shippingMethod.description }}
             </span>
           </span>
           <BaseMoney :money="price(shippingMethod)"
-                     class="option-price"/>
+                     class="option-price"
+                     data-test="checkout-form-shipping-method-price"/>
         </BaseRadio>
       </BaseLabel>
       <CheckoutNavigation :state="state"
@@ -70,9 +75,14 @@ export default {
     },
 
     matchingShippingRate(shippingMethod) {
+      return this.matchingZoneRate(shippingMethod).shippingRates
+        .find(shippingRate => shippingRate.isMatching);
+    },
+
+    matchingZoneRate(shippingMethod) {
       return shippingMethod.zoneRates
-        .map(zoneRate => zoneRate.shippingRates
-          .find(shippingRate => shippingRate.isMatching))[0];
+        .find(zoneRate => zoneRate.shippingRates
+          .some(shippingRate => shippingRate.isMatching));
     },
 
     isFree(shippingRate) {

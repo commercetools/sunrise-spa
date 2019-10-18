@@ -11,7 +11,8 @@
           <ServerError :error="error"/>
         </div>
       </div>
-      <BaseLabel :vuelidate="$v.form.paymentMethod">
+      <BaseLabel :vuelidate="$v.form.paymentMethod"
+                 data-test="checkout-form-payment-methods">
         <BaseRadio v-model="form.paymentMethod"
                    value="card"
                    class="checkout-form-option">

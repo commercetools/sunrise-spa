@@ -38,7 +38,8 @@
         <div class="col-sm-6">
           <div class="checkout-now checkout-now-bottom">
             <router-link :to="{ name: 'checkout'}"
-                         class="pull-right text-uppercase checkout-now-btn">
+                         class="pull-right text-uppercase checkout-now-btn"
+                         data-test="checkout-button">
               {{ $t('startCheckout') }}
             </router-link>
           </div>
