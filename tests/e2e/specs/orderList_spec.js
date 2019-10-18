@@ -48,7 +48,7 @@ describe('my orders', () => {
     cy.get('[data-test=my-orders-button]', { timeout: 20000 }).click();
     cy.get('[data-test=order-list]')
       .should('have.length', 2)
-      .eq(0)
+      .eq(1)
       .then(($order) => {
         cy.wrap($order)
           .find('[data-test=total-price]')
