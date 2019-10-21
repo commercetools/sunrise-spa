@@ -121,7 +121,7 @@ export default {
       query: gql`
         query MyOrders {
           me {
-            orders {
+            orders(sort: "createdAt desc") {
               results {
                 id
                 orderNumber

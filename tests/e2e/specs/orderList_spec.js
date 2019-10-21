@@ -49,7 +49,7 @@ describe('my orders', () => {
     cy.changeLanguage('Deutsch');
     cy.get('[data-test=my-orders-button]', { timeout: 20000 }).click();
     cy.get('[data-test=order-list]')
-      .should('have.length', 2, { timeout: 20000 })
+      .should('have.length', 2)
       .eq(1)
       .then(($order) => {
         cy.wrap($order)
