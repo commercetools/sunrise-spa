@@ -39,13 +39,13 @@ describe('my orders', () => {
 
   beforeEach(() => {
     cy.visit('/');
+    cy.createCustomer(customer);
     cy.login(customer);
   });
 
   it('shows my orders', () => {
     cy.createOrder(cartDraft1, orderDraft1);
     cy.createOrder(cartDraft2, orderDraft2);
-    cy.changeLanguage('Deutsch');
     cy.get('[data-test=my-orders-button]', { timeout: 20000 }).click();
     cy.get('[data-test=order-list]')
       .should('have.length', 2)
@@ -60,6 +60,7 @@ describe('my orders', () => {
         cy.wrap($order)
           .find('[data-test=order-number]')
           .contains('1234');
+        cy.changeLanguage('Deutsch');
         cy.wrap($order)
           .find('[data-test=shipment-state]')
           .contains('Versandt');
@@ -72,8 +73,8 @@ describe('my orders', () => {
   it('displays an empty order list message when no orders have been placed', () => {
     cy.get('[data-test=my-orders-button]', { timeout: 20000 }).click();
     cy.get('[data-test=order-list]')
-      .should('have.length', 0);
-    cy.get('[data-test=empty-order-list]', { timeout: 20000 })
+      .should('have.length', 0, { timeout: 20000 });
+    cy.get('[data-test=empty-order-list]')
       .contains('You have not placed any orders yet!');
   });
 });
