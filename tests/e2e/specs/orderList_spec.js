@@ -7,12 +7,12 @@ describe('my orders', () => {
   };
   const orderDraft1 = {
     orderNumber: '1234',
+    paymentState: 'Pending',
+    shipmentState: 'Shipped',
   };
 
   const orderDraft2 = {
     orderNumber: '4321',
-    paymentState: 'Pending',
-    shipmentState: 'Shipped',
   };
 
   const cartDraft1 = {
@@ -39,7 +39,6 @@ describe('my orders', () => {
 
   beforeEach(() => {
     cy.visit('/');
-    cy.createCustomer(customer);
     cy.login(customer);
   });
 
@@ -54,13 +53,13 @@ describe('my orders', () => {
       .then(($order) => {
         cy.wrap($order)
           .find('[data-test=total-price]')
-          .contains(/^\s*372,50\s€\s*$/);
+          .contains(/^\s*368,75\s€\s*$/);
         cy.wrap($order)
           .find('[data-test=order-date]')
           .contains(/^\s*\d{1,2}\.*\s*[A-Za-zäÄöÖüÜß].+\s*\d{4}\s*$/);
         cy.wrap($order)
           .find('[data-test=order-number]')
-          .contains('4321');
+          .contains('1234');
         cy.wrap($order)
           .find('[data-test=shipment-state]')
           .contains('Versandt');
