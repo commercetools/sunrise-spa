@@ -72,8 +72,8 @@ describe('my orders', () => {
   it('displays an empty order list message when no orders have been placed', () => {
     cy.get('[data-test=my-orders-button]', { timeout: 20000 }).click();
     cy.get('[data-test=order-list]')
-      .should('have.length', 0, { timeout: 20000 });
-    cy.get('[data-test=empty-order-list]')
+      .should('have.length', 0);
+    cy.get('[data-test=empty-order-list]', { timeout: 20000 })
       .contains('You have not placed any orders yet!');
   });
 });
