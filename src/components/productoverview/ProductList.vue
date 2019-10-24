@@ -22,9 +22,14 @@
             <!--{{> catalog/pop/sort-selector sortSelector=content.sortSelector}}-->
           </div>
         </div>
-        <div class="col-xs-4 hidden-xs text-center custom-pagination">
-          <ul class="page-numbers">
+        <div v-if="products && products.results.length"
+             class="text-center">
+          <ul class="pagination-steps">
             <!--{{> common/pagination pagination=content.pagination}}-->
+            <Pagination :products="products"
+                        :limit="limit"
+                        :offset="offset"
+                        @page-changed="updateOffset"/>
           </ul>
         </div>
         <div class="col-xs-4 hidden-xs text-right">
@@ -63,11 +68,13 @@
 import gql from 'graphql-tag';
 import ProductThumbnail from '../common/ProductThumbnail.vue';
 import ProductSortSelector from './ProductSortSelector.vue';
+import Pagination from './Pagination.vue';
 
 export default {
   components: {
     ProductThumbnail,
     ProductSortSelector,
+    Pagination,
   },
 
   props: ['categorySlug'],
@@ -76,6 +83,7 @@ export default {
     categories: null,
     products: null,
     sort: null,
+    offset: 0,
   }),
 
   computed: {
@@ -89,6 +97,9 @@ export default {
   methods: {
     changeSort(sort) {
       this.sort = sort;
+    },
+    updateOffset(pageNumber) {
+      this.offset = (pageNumber - 1) * 75;
     },
   },
 
@@ -112,8 +123,9 @@ export default {
 
     products: {
       query: gql`
-        query products($locale: Locale!, $currency: Currency!, $where: String, $sort: [String!]) {
-          products(limit: 20, where: $where, sort: $sort) {
+        query products($offset: Int!, $locale: Locale!, $currency: Currency!, $where: String, $sort: [String!]) {
+          products(offset: $offset, limit: 75, where: $where, sort: $sort) {
+            offset
             results {
               id
               masterData {
@@ -152,6 +164,7 @@ export default {
           currency: this.$i18n.numberFormats[this.$store.state.country].currency.currency,
           where: `masterData(current(categories(id="${this.category.id}")))`,
           sort: this.sort,
+          offset: this.offset,
         };
       },
       skip: vm => !vm.categories,
