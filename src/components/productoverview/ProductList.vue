@@ -27,7 +27,6 @@
           <ul class="pagination-steps">
             <!--{{> common/pagination pagination=content.pagination}}-->
             <Pagination :products="products"
-                        :limit="limit"
                         :offset="offset"
                         @page-changed="updateOffset"/>
           </ul>

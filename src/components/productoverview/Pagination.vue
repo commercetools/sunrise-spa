@@ -18,10 +18,6 @@ export default {
       type: Object,
       required: true,
     },
-    limit: {
-      type: Number,
-      required: true,
-    },
     offset: {
       type: Number,
       required: true,
