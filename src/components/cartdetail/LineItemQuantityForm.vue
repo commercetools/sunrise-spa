@@ -6,7 +6,7 @@
             ref="form"
             class="quantity-spinner">
     <ServerError :error="error"/>
-    <span @click="form.quantity -= 1"
+    <span @click="decrement"
           data-test="cart-line-item-quantity-dec"
           class="change-quantity-button input-number-decrement">–</span>
     <BaseInput v-model.number="form.quantity"
@@ -14,7 +14,7 @@
                type="text"
                class="input-number"
                data-test="cart-line-item-quantity" />
-    <span @click="form.quantity += 1"
+    <span @click="increment"
           data-test="cart-line-item-quantity-inc"
           class="change-quantity-button input-number-increment">+</span>
   </BaseForm>
@@ -65,11 +65,37 @@ export default {
         },
       ]);
     },
+
+    removeLineItem() {
+      return this.updateMyCart([
+        {
+          removeLineItem: {
+            lineItemId: this.lineItemId,
+          },
+        },
+      ]);
+    },
+
+    increment() {
+      this.form.quantity += 1;
+    },
+
+    decrement() {
+      if (this.form.quantity > 1) {
+        this.form.quantity -= 1;
+      } else {
+        this.removeLineItem();
+      }
+    },
   },
 
   created() {
     this.form.quantity = this.quantity;
-    this.debouncedSubmit = debounce(() => this.$refs.form.submit(), 500);
+    this.debouncedSubmit = debounce(() => {
+      if (this.$refs.form) {
+        this.$refs.form.submit();
+      }
+    }, 500);
   },
 
   watch: {
