@@ -8,7 +8,11 @@
         <!--{{> checkout/start-checkout-link id="cart-checkoutnow-btn"}}-->
       </div>
     </div>
-    <div v-if="!isLoading && cartNotEmpty">
+    <div v-if="isLoading"
+         class="loading-spinner">
+      <img data-test="spinner" src="../../assets/img/spinner.gif"/>
+    </div>
+    <div v-else-if="!isLoading && cartNotEmpty">
       <div class="row">
         <div class="col-sm-12">
           <div class="current-in-bag">
@@ -54,12 +58,13 @@
         </div>
       </div>
     </div>
-
-    <div v-else-if="!isLoading && !cartNotEmpty"
+    <div v-else
          class="empty-results-container">
       <div class="empty-results">
         <span data-test="empty-cart">
           {{ $t('empty') }}
+                        {{isLoading}}
+
         </span>
       </div>
       <div class="empty-cart-continue-shopping-btn">
@@ -67,11 +72,6 @@
           {{ $t('shopNow') }}
         </router-link>
       </div>
-    </div>
-
-    <div v-else
-         class="loading-spinner">
-      <img data-test="spinner" src="../../assets/img/spinner.gif"/>
     </div>
   </div>
 </template>
@@ -99,7 +99,7 @@ export default {
 
   computed: {
     isLoading() {
-      return this.$apollo.loading;
+      return this.$apollo.queries.me.loading;
     },
   },
 

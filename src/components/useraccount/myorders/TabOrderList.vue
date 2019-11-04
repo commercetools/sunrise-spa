@@ -1,7 +1,12 @@
 <template>
   <div v-if="me"
        class="my-orders">
-    <div v-if="!isLoading && me.orders.results.length"
+    <div v-if="isLoading"
+         class="loading-spinner">
+      <img data-test="spinner" src="../../../assets/img/spinner.gif"/>
+    </div>
+
+    <div v-else-if="!isLoading && me.orders.results.length"
         class="my-orders-content">
       <div class="my-orders-table-wrapper">
         <div class="row">
@@ -76,7 +81,7 @@
       </div>
     </div>
 
-    <div v-else-if="!isLoading && !me.orders.results.length"
+    <div v-else
          data-test="empty-order-list"
          class="empty-results-container">
       <span class="empty-order-list">
@@ -84,10 +89,6 @@
       </span>
     </div>
 
-    <div v-else
-        class="loading-spinner">
-      <img data-test="spinner" src="../../../assets/img/spinner.gif"/>
-    </div>
   </div>
 </template>
 

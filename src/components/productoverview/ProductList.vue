@@ -6,7 +6,7 @@
       {{/if}}-->
 
       <div class="row item-list-pagination">
-<!--    {{#if content.searchResult}}
+        <!--    {{#if content.searchResult}}
         <div class="search-results-row">
           {{> catalog/pop/search-result searchResult=content.searchResult}}
         </div>
@@ -22,6 +22,7 @@
             <!--{{> catalog/pop/sort-selector sortSelector=content.sortSelector}}-->
           </div>
         </div>
+
         <div class="col-xs-4 hidden-xs text-center custom-pagination">
           <ul class="page-numbers">
             <!--{{> common/pagination pagination=content.pagination}}-->
@@ -35,21 +36,15 @@
         <!--{{> catalog/pop/filters-sidebar}}-->
       </div>
     </form>
+
     <div v-if="isLoading"
          class="loading-spinner">
       <img data-test="spinner" src="../../assets/img/spinner.gif"/>
     </div>
-    <div v-else-if="!isLoading && products && !products.results.length">
-      <div class="empty-results-container">
-        <span class="empty-results"
-              data-test="empty-results">
-          {{ $t('catalog.noSearchResult.searchNotFound.notFound') }}
-        </span>
-      </div>
-    </div>
-    <transition name="fade">
-      <div v-if="!isLoading && products && products.results.length"
-           id="pop-product-list"
+
+    <transition v-else-if="!isLoading && products && products.results.length"
+                name="fade">
+      <div id="pop-product-list"
            class="row">
         <ProductThumbnail v-for="product in products.results"
                           data-test="product-list"
@@ -57,6 +52,15 @@
                           :product="product" />
       </div>
     </transition>
+
+    <div v-else>
+      <div class="empty-results-container">
+        <span class="empty-results"
+              data-test="empty-results">
+          {{ $t('catalog.noSearchResult.searchNotFound.notFound') }}
+        </span>
+      </div>
+    </div>
   </div>
 </template>
 
