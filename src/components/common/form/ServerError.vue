@@ -38,20 +38,14 @@ export default {
       return this.isGraphQLError ? this.error.graphQLErrors : [];
     },
   },
-
-  watch: {
-    error(value) {
-      if (value && !this.isGraphQLError) console.error(value);
-    },
-  },
 };
 </script>
 
 <style scoped>
-.server-error {
-  color: rgb(206, 65, 65);
-  font-weight: bold;
-}
+  .server-error {
+    color: rgb(206, 65, 65);
+    font-weight: bold;
+  }
 </style>
 
 <i18n>
