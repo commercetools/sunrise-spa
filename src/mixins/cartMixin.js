@@ -1,7 +1,9 @@
 import gql from 'graphql-tag';
-import BASIC_CART_QUERY from '../components/BasicCart.gql';
-import DISPLAYABLE_MONEY_FRAGMENT from '../components/DisplayableMoney.gql';
-import BASIC_ADDRESS_FRAGMENT from '../components/BaseAddress.gql';
+import BASIC_CART_QUERY from './BasicCart.gql';
+import CART_FRAGMENT from '../components/Cart.gql';
+import ORDER_FRAGMENT from '../components/Order.gql';
+import MONEY_FRAGMENT from '../components/Money.gql';
+import ADDRESS_FRAGMENT from '../components/Address.gql';
 
 function cartExists(vm) {
   return vm.me?.activeCart;
@@ -38,72 +40,14 @@ export default {
       // required any queried field to be fetched in order to update all components using carts, e.g. mini-cart
       return this.$apollo.mutate({
         mutation: gql`
-          mutation updateMyCart(
-          $actions: [MyCartUpdateAction!]!,
-          $id: String!,
-          $version: Long!,
-          $locale: Locale!) {
+          mutation updateMyCart($id: String!, $version: Long!, $actions: [MyCartUpdateAction!]!, $locale: Locale!) {
             updateMyCart(id: $id, version: $version, actions: $actions) {
-              id
-              version
-              totalPrice {
-                ...DisplayableMoney
-              }
-              shippingInfo {
-                price {
-                  ...DisplayableMoney
-                }
-              }
-              taxedPrice {
-                totalGross {
-                  ...DisplayableMoney
-                }
-                totalNet {
-                  ...DisplayableMoney
-                }
-              }
-              lineItems {
-                id
-                quantity
-                name(locale: $locale)
-                productSlug(locale: $locale)
-                variant {
-                  sku
-                  images {
-                    url
-                  }
-                }
-                price {
-                  value {
-                    ...DisplayableMoney
-                  }
-                  discounted {
-                    value {
-                      ...DisplayableMoney
-                    }
-                  }
-                }
-                totalPrice {
-                  ...DisplayableMoney
-                }
-              }
-              discountCodes {
-                discountCode {
-                  id
-                  code
-                  name(locale: $locale)
-                }
-              }
-              shippingAddress {
-                ...BaseAddress
-              }
-              billingAddress {
-                ...BaseAddress
-              }
+              ...CartFields
             }
           }
-        ${DISPLAYABLE_MONEY_FRAGMENT}
-        ${BASIC_ADDRESS_FRAGMENT}`,
+          ${CART_FRAGMENT}
+          ${MONEY_FRAGMENT}
+          ${ADDRESS_FRAGMENT}`,
         variables: {
           actions,
           id: this.me.activeCart?.id,
@@ -126,6 +70,30 @@ export default {
         update: (store, { data: { createMyCart } }) => {
           const data = store.readQuery({ query: BASIC_CART_QUERY });
           data.me.activeCart = createMyCart;
+          store.writeQuery({ query: BASIC_CART_QUERY, data });
+        },
+      });
+    },
+
+    createMyOrder() {
+      return this.$apollo.mutate({
+        mutation: gql`
+          mutation ($id: String!, $version: Long!, $locale: Locale!) {
+            createMyOrderFromCart(draft: { id: $id, version: $version }) {
+              ...OrderFields
+            }
+          }
+          ${ORDER_FRAGMENT}
+          ${MONEY_FRAGMENT}
+          ${ADDRESS_FRAGMENT}`,
+        variables: {
+          id: this.me.activeCart?.id,
+          version: this.me.activeCart?.version,
+          locale: this.$store.state.locale,
+        },
+        update: (store) => {
+          const data = store.readQuery({ query: BASIC_CART_QUERY });
+          data.me.activeCart = null;
           store.writeQuery({ query: BASIC_CART_QUERY, data });
         },
       });

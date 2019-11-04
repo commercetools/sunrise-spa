@@ -1,17 +1,19 @@
 <template>
-  <div class="row text-right">
-    <div class="applied-discounts col-sm-12">
-      {{ $t('appliedDiscounts') }}:
+  <div>
+    <div class="row text-right">
+      <div class="applied-discounts col-sm-12">
+        {{ $t('appliedDiscounts') }}:
+      </div>
     </div>
     <div v-for="discountInfo in cartLike.discountCodes"
          :key='discountInfo.discountCode.id'
-         class="row"
+         class="row text-right"
          data-test="discount-code-list">
       <div class="col-sm-12"
            data-test="discount-code-name">
         <span class="discount-code">{{ discountInfo.discountCode.code }}</span>
         <span v-if="discountInfo.discountCode.name"> ({{ discountInfo.discountCode.name }})</span>
-        <RemoveDiscountCodeForm v-if="isCart"
+        <RemoveDiscountCodeForm v-if="editable"
                                 :codeId='discountInfo.discountCode.id'/>
       </div>
     </div>
@@ -29,24 +31,22 @@ export default {
       type: Object,
       required: true,
     },
-  },
-
-  computed: {
-    isCart() {
-      return this.cartLike.__typename === 'Cart';
+    editable: {
+      type: Boolean,
+      default: false,
     },
   },
 };
 </script>
 
 <style scoped>
-  .applied-discounts {
-    margin-bottom: 1em;
-  }
+.applied-discounts {
+  margin-bottom: 1em;
+}
 
-  .discount-code {
-    font-weight: bold
-  }
+.discount-code {
+  font-weight: bold
+}
 </style>
 
 <i18n>

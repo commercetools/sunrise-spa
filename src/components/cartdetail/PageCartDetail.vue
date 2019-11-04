@@ -4,9 +4,6 @@
     <div class="row">
       <div class="col-sm-8 col-xs-12">
       </div>
-      <div class="col-sm-4">
-        <!--{{> checkout/start-checkout-link id="cart-checkoutnow-btn"}}-->
-      </div>
     </div>
     <div v-if="cartNotEmpty">
       <div class="row">
@@ -22,18 +19,12 @@
             </span>
           </div>
           <div class="cart-content">
-            <CartLikeSummary :cart-like="me.activeCart">
-              <template #quantity-column="{ lineItem }">
-                <LineItemDeleteForm :lineItemId="lineItem.id"
-                                    class="col-sm-5 cart-edit-delete"/>
-                <LineItemQuantityForm :lineItemId="lineItem.id"
-                                      :quantity="lineItem.quantity"
-                                      class="col-sm-7 clearfix sm-pull-right"/>
-              </template>
-              <template #before-pricing>
-                <AddDiscountCodeForm/>
-              </template>
-            </CartLikeSummary>
+            <CartLikeContentDetail :cartLike="me.activeCart"
+                                   :editable="true"/>
+            <AddDiscountCodeForm/>
+            <CartLikePriceDetail :cartLike="me.activeCart"
+                                 :editable="true"
+                                 class="total-price-calc"/>
           </div>
         </div>
       </div>
@@ -47,7 +38,8 @@
         <div class="col-sm-6">
           <div class="checkout-now checkout-now-bottom">
             <router-link :to="{ name: 'checkout'}"
-                         class="pull-right text-uppercase checkout-now-btn">
+                         class="pull-right text-uppercase checkout-now-btn"
+                         data-test="checkout-button">
               {{ $t('startCheckout') }}
             </router-link>
           </div>
@@ -73,18 +65,18 @@
 
 <script>
 import gql from 'graphql-tag';
-import cartMixin from '@/mixins/cartMixin';
-import CartLikeSummary from '../common/cartlike/CartLikeSummary.vue';
-import LineItemDeleteForm from './LineItemDeleteForm.vue';
-import LineItemQuantityForm from './LineItemQuantityForm.vue';
+import cartMixin from '../../mixins/cartMixin';
+import CartLikeContentDetail from '../common/cartlike/CartLikeContentDetail.vue';
+import CartLikePriceDetail from '../common/cartlike/CartLikePriceDetail.vue';
 import AddDiscountCodeForm from './AddDiscountCodeForm.vue';
-import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
+import CART_FRAGMENT from '../Cart.gql';
+import ADDRESS_FRAGMENT from '../Address.gql';
+import MONEY_FRAGMENT from '../Money.gql';
 
 export default {
   components: {
-    CartLikeSummary,
-    LineItemQuantityForm,
-    LineItemDeleteForm,
+    CartLikeContentDetail,
+    CartLikePriceDetail,
     AddDiscountCodeForm,
   },
 
@@ -100,59 +92,13 @@ export default {
         query me($locale: Locale!) {
           me {
             activeCart {
-              id
-              lineItems {
-                id
-                name(locale: $locale)
-                productSlug(locale: $locale)
-                quantity
-                price {
-                  value {
-                    ...DisplayableMoney
-                  }
-                  discounted {
-                    value {
-                      ...DisplayableMoney
-                    }
-                  }
-                }
-                totalPrice {
-                  ...DisplayableMoney
-                }
-                variant {
-                  sku
-                  images {
-                    url
-                  }
-                }
-              }
-              totalPrice {
-               ...DisplayableMoney
-              }
-              shippingInfo {
-                price {
-                  ...DisplayableMoney
-                }
-              }
-              taxedPrice {
-                totalGross {
-                  ...DisplayableMoney
-                }
-                totalNet {
-                  ...DisplayableMoney
-                }
-              }
-              discountCodes {
-                discountCode {
-                  id
-                  code
-                  name(locale: $locale)
-                }
-              }
+              ...CartFields
             }
           }
         }
-        ${DisplayableMoneyFragment}`,
+        ${CART_FRAGMENT}
+        ${MONEY_FRAGMENT}
+        ${ADDRESS_FRAGMENT}`,
       variables() {
         return {
           locale: this.$store.state.locale,

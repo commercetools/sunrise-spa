@@ -1,4 +1,4 @@
-fragment BaseAddress on Address {
+fragment AddressFields on Address {
   firstName
   lastName
   streetName
