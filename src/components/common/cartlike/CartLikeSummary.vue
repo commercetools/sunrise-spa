@@ -12,7 +12,8 @@
               {{ $t('edit') }}
             </router-link>
           </div>
-          <BaseAddress :address="shippingAddress"/>
+          <BaseAddress :address="shippingAddress"
+                       data-test="summary-shipping-address"/>
         </div>
       </div>
       <div class="col-sm-6">
@@ -26,7 +27,8 @@
               {{ $t('edit') }}
             </router-link>
           </div>
-          <BaseAddress :address="billingAddress"/>
+          <BaseAddress :address="billingAddress"
+                       data-test="summary-billing-address"/>
         </div>
       </div>
     </div>
@@ -42,7 +44,8 @@
               {{ $t('edit') }}
             </router-link>
           </div>
-          <div v-if="shippingMethod">
+          <div v-if="shippingMethod"
+               data-test="summary-shipping-method">
             {{ shippingMethod.name }}
             <span v-if="shippingMethod.description">- {{ shippingMethod.description }}</span>
           </div>
@@ -59,7 +62,8 @@
               {{ $t('edit') }}
             </router-link>
           </div>
-          <div v-if="payments">
+          <div v-if="payments"
+               data-test="summary-payment-method">
             <span v-for="payment in payments"
                   :key="payment.id">
               {{ payment.paymentMethodInfo.method }}

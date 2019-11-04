@@ -1,16 +1,14 @@
 <template>
   <div>
-    <div>
-      {{ address.title }}
-      {{ address.firstName }}
-      {{ address.lastName }}
+    <div data-test="address-name">
+      {{ address.title }} {{ address.firstName }} {{ address.lastName }}
     </div>
-    <div>{{ address.streetName }} {{ address.streetNumber }}</div>
-    <div>{{ address.additionalStreetInfo }}</div>
-    <div>{{ address.postalCode }}, {{ address.city }} ({{ address.country }})</div>
+    <div data-test="address-street">{{ address.streetName }} {{ address.streetNumber }}</div>
+    <div data-test="address-street-info">{{ address.additionalStreetInfo }}</div>
+    <div data-test="address-city">{{ address.postalCode }}, {{ address.city }} ({{ address.country }})</div>
     <br>
-    <div>{{ address.contactInfo.phone }}</div>
-    <div>{{ address.contactInfo.email }}</div>
+    <div data-test="address-phone">{{ address.contactInfo.phone }}</div>
+    <div data-test="address-email">{{ address.contactInfo.email }}</div>
   </div>
 </template>
 

@@ -2,7 +2,8 @@
   <div>
     <div v-if="order">
       <div class="row thank-you">
-        <div class="col-sm-12">
+        <div class="col-sm-12"
+             data-test="checkout-form-success">
           {{ $t('thankYou') }}
         </div>
       </div>
@@ -27,7 +28,8 @@
                        :editable="true" />
       <div class="complete-order">
         <LoadingButton :state="state"
-                       class="complete-order-btn">
+                       class="complete-order-btn"
+                       data-test="checkout-form-submit">
           {{ $t('completeMyOrder') }}
         </LoadingButton>
       </div>
