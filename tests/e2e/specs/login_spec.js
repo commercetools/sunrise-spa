@@ -32,7 +32,7 @@ describe('Login', () => {
     cy.get('[data-test=signup-form-password]').type(customer.password);
     cy.get('[data-test=signup-form-repeatpassword]').type(customer.password);
     cy.get('[data-test=signup-form-agreetoterms]').check();
-    cy.get('[data-test=signup-form-submit]', { timeout: 20000 }).click();
+    cy.get('[data-test=signup-form-submit]').click();
 
     cy.checkCustomerIsLoggedIn(customer);
   });

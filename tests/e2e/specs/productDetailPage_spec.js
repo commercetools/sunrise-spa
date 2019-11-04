@@ -76,11 +76,11 @@ describe('Product detail page', () => {
 
   it('displays a single product details', () => {
     cy.visit('/product/lemare-booties-0778-grey/M0E20000000E0WX');
-    cy.get('[data-test=product-data]', { timeout: 20000 })
+    cy.get('[data-test=product-data]')
       .then(($product) => {
         cy.wrap($product)
           .find('[data-test=product-name]')
-          .should('contain', 'Booties Lemare grey', { timeout: 20000 });
+          .should('contain', 'Booties Lemare grey');
 
         cy.wrap($product)
           .find('[data-test=product-sku]')
@@ -102,7 +102,7 @@ describe('Product detail page', () => {
           .find('[data-test=product-attributes-list]')
           .should('have.length', 6)
           .eq(2)
-          .contains(/^\s*size:\s+34\s*$/, { timeout: 20000 });
+          .contains(/^\s*size:\s+34\s*$/);
       });
 
     cy.get('[data-test=product-gallery]')
@@ -113,11 +113,11 @@ describe('Product detail page', () => {
   it('changes product attributes and sku', () => {
     cy.addProduct(draft);
     cy.visit('/product/t-shirt-testing/sku-34-black');
-    cy.get('[data-test=product-data]', { timeout: 20000 })
+    cy.get('[data-test=product-data]')
       .then(($product) => {
         cy.wrap($product)
           .find('[data-test=product-sku]')
-          .should('contain', 'sku-34-black', { timeout: 20000 });
+          .should('contain', 'sku-34-black');
 
         cy.wrap($product)
           .find('[data-test=attribute-select-color]')
@@ -125,7 +125,7 @@ describe('Product detail page', () => {
 
         cy.wrap($product)
           .find('[data-test=product-sku]')
-          .should('contain', 'sku-30-grey', { timeout: 20000 });
+          .should('contain', 'sku-30-grey');
 
         cy.wrap($product)
           .find('[data-test=attribute-select-size]')
@@ -133,7 +133,7 @@ describe('Product detail page', () => {
 
         cy.wrap($product)
           .find('[data-test=product-sku]')
-          .should('contain', 'sku-32-grey', { timeout: 20000 });
+          .should('contain', 'sku-32-grey');
 
         cy.wrap($product)
           .find('[data-test=attribute-select-size]')
@@ -141,7 +141,7 @@ describe('Product detail page', () => {
 
         cy.wrap($product)
           .find('[data-test=product-sku]')
-          .should('contain', 'sku-36-black', { timeout: 20000 });
+          .should('contain', 'sku-36-black');
       });
   });
 });

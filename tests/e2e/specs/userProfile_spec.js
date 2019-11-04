@@ -18,7 +18,7 @@ describe('user profile', () => {
 
     cy.deleteCustomer({ email });
 
-    cy.get('[data-test=edit-profile-form-show]', { timeout: 10000 }).click();
+    cy.get('[data-test=edit-profile-form-show]').click();
 
     cy.get('input[data-test=edit-profile-form-firstname]')
       .clear()
@@ -32,8 +32,8 @@ describe('user profile', () => {
 
     cy.get('[data-test=edit-profile-form-submit]').click();
 
-    cy.get('[data-test=user-profile-name]', { timeout: 10000 })
-      .should('contain', `${firstName} ${lastName}`);
+    cy.get('[data-test=user-profile-name]')
+      .should('contain', `${firstName} ${lastName}`, { timeout: 10000 });
     cy.get('[data-test=user-profile-email]')
       .should('contain', email);
 
@@ -54,11 +54,11 @@ describe('user profile', () => {
     cy.get('[data-test=change-password-form-newpassword]').type(password);
     cy.get('[data-test=change-password-form-newpasswordconfirm]').type(password);
 
-    cy.get('[data-test=edit-profile-form-submit]', { timeout: 10000 }).click();
+    cy.get('[data-test=edit-profile-form-submit]').click();
     cy.get('[data-test=success-state-layer]')
       .should('have.class', 'state-layer fade-enter-active');
 
-    cy.get('[data-test=logout-button]', { timeout: 10000 }).click();
+    cy.get('[data-test=logout-button]').click();
     cy.login(customerNewPassword);
     cy.checkCustomerIsLoggedIn(customerNewPassword);
   });

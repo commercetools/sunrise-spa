@@ -82,7 +82,7 @@ describe('OrderDetailPage', () => {
     cy.get('[data-test=view-order-btn]').click();
     cy.url().should('include', '/user/orders/12345');
     cy.get('[data-test=details-order-number]')
-      .contains('12345', { timeout: 20000 });
+      .contains('12345');
     cy.get('[data-test=details-order-date]')
       .contains(/^\s*\d{1,2}\.*\s*[A-Za-zäÄöÖüÜß].+\s*\d{4}\s*$/);
     cy.get('[data-test=cart-subtotal-price]')
@@ -94,7 +94,7 @@ describe('OrderDetailPage', () => {
     cy.get('[data-test=cart-total-price]')
       .contains(/^\s*193,80\s€\s*$/);
     cy.get('[data-test=cart-line-item]')
-      .should('have.length', 2, { timeout: 20000 })
+      .should('have.length', 2)
       .eq(1)
       .then(($item) => {
         cy.wrap($item)

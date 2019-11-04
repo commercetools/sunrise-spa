@@ -30,10 +30,10 @@ describe('Product overview page', () => {
     cy.get('[data-test=spinner]')
       .should('not.exist');
     cy.url().should('include', '/products/men?sort=oldest');
-    cy.get('[data-test=product-list]')
+    cy.get('[data-test=product-list]', { timeout: 20000 })
       .first()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Lace up shoes Tods dark blue', { timeout: 20000 });
+      .contains('Lace up shoes Tods dark blue');
     cy.get('[data-test=product-list]')
       .last()
       .find('[data-test=product-thumbnail-name]')
@@ -46,10 +46,10 @@ describe('Product overview page', () => {
       .should('exist');
     cy.get('[data-test=spinner]')
       .should('not.exist');
-    cy.get('[data-test=product-list]')
+    cy.get('[data-test=product-list]', { timeout: 20000 })
       .first()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Shirt ”David” MU light blue', { timeout: 20000 });
+      .contains('Shirt ”David” MU light blue');
     cy.get('[data-test=product-list]')
       .last()
       .find('[data-test=product-thumbnail-name]')
