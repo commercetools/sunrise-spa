@@ -7,7 +7,8 @@
             {{ $t('shippingAddress') }}
             <router-link v-if="editable"
                          :to="{ name: 'checkout' }"
-                         class="checkout-summary-edit-icon pull-right">
+                         class="checkout-summary-edit-icon pull-right"
+                         data-test="summary-shipping-address-edit">
               <img src="../../../assets/img/edit-1.png" class="checkout-summary-edit-icon"/>
               {{ $t('edit') }}
             </router-link>
@@ -22,7 +23,8 @@
             {{ $t('billingAddress') }}
             <router-link v-if="editable"
                          :to="{ name: 'checkout-billing-address' }"
-                         class="checkout-summary-edit-icon pull-right">
+                         class="checkout-summary-edit-icon pull-right"
+                         data-test="summary-billing-address-edit">
               <img src="../../../assets/img/edit-1.png" class="checkout-summary-edit-icon"/>
               {{ $t('edit') }}
             </router-link>
@@ -39,7 +41,8 @@
             {{ $t('shippingMethod') }}
             <router-link v-if="editable"
                          :to="{ name: 'checkout-shipping-method' }"
-                         class="checkout-summary-edit-icon pull-right">
+                         class="checkout-summary-edit-icon pull-right"
+                         data-test="summary-shipping-method-edit">
               <img src="../../../assets/img/edit-1.png" class="checkout-summary-edit-icon"/>
               {{ $t('edit') }}
             </router-link>
@@ -57,7 +60,8 @@
             {{ $t('paymentDetails') }}
             <router-link v-if="editable"
                          :to="{ name: 'checkout-payment-method' }"
-                         class="checkout-summary-edit-icon pull-right">
+                         class="checkout-summary-edit-icon pull-right"
+                         data-test="summary-payment-method-edit">
               <img src="../../../assets/img/edit-1.png" class="checkout-summary-edit-icon"/>
               {{ $t('edit') }}
             </router-link>

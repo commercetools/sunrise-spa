@@ -4,7 +4,8 @@
       <div>
         <button @click="goBack"
                 type="button"
-                class="btn-grey text-uppercase back-button">
+                class="btn-grey text-uppercase back-button"
+                data-test="back-checkout-button">
           {{ $t('back') }}
         </button>
       </div>

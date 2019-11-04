@@ -91,7 +91,7 @@ describe('CheckoutPage', () => {
       });
   }
 
-  it('displays content of cart', () => {
+  it('allows to place an order', () => {
     cy.addLineItem('/product/lemare-booties-0778-brown/M0E20000000E0XM', 2);
     cy.addLineItem('/product/lemare-booties-0778-grey/M0E20000000E0WX', 3);
     cy.visit('/cart');
@@ -107,20 +107,9 @@ describe('CheckoutPage', () => {
     cy.get('[data-test=address-form-email]').type('charlie.bucket@commercetools.com');
 
     cy.get('[data-test=continue-checkout-button]').click();
-
-    cy.get('[data-test=checkout-form-same-as-shipping]').uncheck();
-
-    cy.get('[data-test=address-form-firstName]').type('Willy');
-    cy.get('[data-test=address-form-lastName]').type('Wonka');
-    cy.get('[data-test=address-form-streetName]').type('Cherry Street');
-    cy.get('[data-test=address-form-additionalStreetInfo]').type('Chocolate Factory');
-    cy.get('[data-test=address-form-postalCode]').type('12345');
-    cy.get('[data-test=address-form-city]').type('Little Town');
-    cy.get('[data-test=address-form-phone]').type('555-44-22-11');
-    cy.get('[data-test=address-form-email]').type('willy.wonka@commercetools.com');
+    cy.get('[data-test=checkout-form-same-as-shipping]').should('exist');
 
     cy.get('[data-test=continue-checkout-button]').click();
-
     cy.get('[data-test=checkout-form-shipping-methods]')
       .find('label')
       .should('have.length', 2)
@@ -142,6 +131,52 @@ describe('CheckoutPage', () => {
           .find('input[type=radio]')
           .check();
       });
+
+    cy.get('[data-test=continue-checkout-button]').click();
+    cy.get('[data-test=checkout-form-payment-methods]')
+      .find('label')
+      .should('have.length', 2);
+
+    cy.get('[data-test=continue-checkout-button]').click();
+    cy.get('[data-test=summary-billing-address]')
+      .then(($address) => {
+        cy.wrap($address)
+          .find('[data-test=address-name]')
+          .should('contain', 'Charlie Bucket');
+        cy.wrap($address)
+          .find('[data-test=address-street]')
+          .should('contain', 'Nowhere str.');
+        cy.wrap($address)
+          .find('[data-test=address-street-info]')
+          .should('contain', 'Crocked house');
+        cy.wrap($address)
+          .find('[data-test=address-city]')
+          .should('contain', '54321, Little Town (DE)');
+        cy.wrap($address)
+          .find('[data-test=address-phone]')
+          .should('contain', 'None');
+        cy.wrap($address)
+          .find('[data-test=address-email]')
+          .should('contain', 'charlie.bucket@commercetools.com');
+      });
+
+    cy.get('[data-test=summary-billing-address-edit]').click();
+    cy.get('[data-test=checkout-form-same-as-shipping]').uncheck();
+
+    cy.get('[data-test=address-form-firstName]').type('Willy');
+    cy.get('[data-test=address-form-lastName]').type('Wonka');
+    cy.get('[data-test=address-form-streetName]').type('Cherry Street');
+    cy.get('[data-test=address-form-additionalStreetInfo]').type('Chocolate Factory');
+    cy.get('[data-test=address-form-postalCode]').type('12345');
+    cy.get('[data-test=address-form-city]').type('Little Town');
+    cy.get('[data-test=address-form-phone]').type('555-44-22-11');
+    cy.get('[data-test=address-form-email]').type('willy.wonka@commercetools.com');
+
+    cy.get('[data-test=continue-checkout-button]').click();
+
+    cy.get('[data-test=checkout-form-shipping-methods]')
+      .find('label')
+      .should('have.length', 2);
 
     cy.get('[data-test=continue-checkout-button]').click();
 
