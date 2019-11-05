@@ -1,7 +1,9 @@
 <template>
   <div>
-    <form id="form-filter-products" name="filter-products" action="#">
-<!--  {{#if content.searchTerm}}
+    <form v-if="!isLoading && products && products.results.length"
+          id="form-filter-products"
+          name="filter-products" action="#">
+      <!--  {{#if content.searchTerm}}
         <input type="hidden" name="q" value="{{content.searchTerm}}"/>
       {{/if}}-->
 
@@ -37,23 +39,12 @@
       </div>
     </form>
 
-    <div v-if="isLoading"
+    <div v-else-if="isLoading"
          class="loading-spinner">
       <img data-test="spinner" src="../../assets/img/spinner.gif"/>
     </div>
 
-    <transition v-else-if="!isLoading && products && products.results.length"
-                name="fade">
-      <div id="pop-product-list"
-           class="row">
-        <ProductThumbnail v-for="product in products.results"
-                          data-test="product-list"
-                          :key="product.id"
-                          :product="product" />
-      </div>
-    </transition>
-
-    <div v-else>
+    <div v-else-if="!isLoading && products && !products.results.length">
       <div class="empty-results-container">
         <span class="empty-results"
               data-test="empty-results">
@@ -61,6 +52,17 @@
         </span>
       </div>
     </div>
+
+    <transition name="fade">
+      <div v-if="!isLoading && products && products.results.length"
+           id="pop-product-list"
+           class="row">
+        <ProductThumbnail v-for="product in products.results"
+                          data-test="product-list"
+                          :key="product.id"
+                          :product="product" />
+      </div>
+    </transition>
   </div>
 </template>
 
