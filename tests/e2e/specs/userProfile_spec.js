@@ -55,8 +55,8 @@ describe('user profile', () => {
     cy.get('[data-test=change-password-form-newpasswordconfirm]').type(password);
 
     cy.get('[data-test=edit-profile-form-submit]').click();
-    cy.get('[data-test=success-state-layer]')
-      .should('have.class', 'state-layer fade-enter-active');
+    cy.get('[data-test=success-state-success]')
+      .should('exist');
 
     cy.get('[data-test=logout-button]').click();
     cy.login(customerNewPassword);
