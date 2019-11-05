@@ -99,7 +99,7 @@ export default {
 
   computed: {
     isLoading() {
-      return this.$apollo.queries.me.loading;
+      return this.$apollo.loading;
     },
   },
 
