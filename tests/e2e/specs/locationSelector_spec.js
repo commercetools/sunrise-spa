@@ -7,13 +7,13 @@ describe('Location selector', () => {
     cy.changeLanguage('Deutsch');
 
     cy.get('[data-test=product-name]')
-      .should('contain', 'Stiefeletten Lemare grau', { timeout: 20000 });
+      .should('contain', 'Stiefeletten Lemare grau', { timeout: Cypress.config('graphqlTimeout') });
     cy.get('[data-test=stores-link]')
       .should('contain', 'Filiale');
 
     cy.changeLanguage('English');
     cy.get('[data-test=product-name]')
-      .should('contain', 'Booties Lemare grey', { timeout: 20000 });
+      .should('contain', 'Booties Lemare grey', { timeout: Cypress.config('graphqlTimeout') });
     cy.get('[data-test=stores-link]').should('contain', 'Stores');
   });
 

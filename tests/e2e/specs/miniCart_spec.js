@@ -7,20 +7,20 @@ describe('MiniCart', () => {
   it('links to shopping cart', () => {
     cy.get('[data-test=mini-cart-open-button]')
       .click()
-      .should('have.attr', 'href', '/cart', { timeout: 20000 });
+      .should('have.attr', 'href', '/cart', { timeout: Cypress.config('graphqlTimeout') });
   });
 
   it('displays content of cart', () => {
     cy.get('[data-test=mini-cart-open-button]')
-      .contains(/^\s*Cart\s*0\s*$/, { timeout: 20000 });
+      .contains(/^\s*Cart\s*0\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
     cy.addLineItem('/product/lemare-booties-0778-brown/M0E20000000E0XM', 2);
     cy.get('[data-test=mini-cart-open-button]')
-      .contains(/^\s*Cart\s*2\s*$/, { timeout: 20000 });
+      .contains(/^\s*Cart\s*2\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
     cy.addLineItem('/product/lemare-booties-0778-grey/M0E20000000E0WX', 3);
     cy.get('[data-test=mini-cart-open-button]')
-      .contains(/^\s*Cart\s*5\s*$/, { timeout: 20000 })
+      .contains(/^\s*Cart\s*5\s*$/, { timeout: Cypress.config('graphqlTimeout') })
       .trigger('mouseenter');
 
     cy.get('[data-test=mini-cart-price]')
@@ -48,7 +48,7 @@ describe('MiniCart', () => {
       .eq(1)
       .click();
     cy.get('[data-test=mini-cart-open-button]')
-      .contains(/^\s*Cart\s*3\s*$/, { timeout: 20000 })
+      .contains(/^\s*Cart\s*3\s*$/, { timeout: Cypress.config('graphqlTimeout') })
       .click();
     cy.get('[data-test=mini-cart-content]')
       .find('[data-test=mini-cart-line-item]')
@@ -60,7 +60,7 @@ describe('MiniCart', () => {
     cy.get('[data-test=mini-cart-content]').should('not.be.visible');
 
     cy.addLineItem('/product/lemare-booties-0778-brown/M0E20000000E0XM', 2);
-    cy.get('[data-test=mini-cart-content]', { timeout: 20000 })
+    cy.get('[data-test=mini-cart-content]', { timeout: Cypress.config('graphqlTimeout') })
       .should('be.visible');
     cy.wait(3000)
       .should('not.be.visible');

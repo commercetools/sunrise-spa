@@ -46,7 +46,7 @@ describe('my orders', () => {
   it('shows my orders', () => {
     cy.createOrder(cartDraft1, orderDraft1);
     cy.createOrder(cartDraft2, orderDraft2);
-    cy.get('[data-test=my-orders-button]', { timeout: 20000 }).click();
+    cy.get('[data-test=my-orders-button]', { timeout: Cypress.config('graphqlTimeout') }).click();
     cy.get('[data-test=order-list]')
       .should('have.length', 2)
       .eq(1)
@@ -71,9 +71,9 @@ describe('my orders', () => {
   });
 
   it('displays an empty order list message when no orders have been placed', () => {
-    cy.get('[data-test=my-orders-button]', { timeout: 20000 }).click();
+    cy.get('[data-test=my-orders-button]', { timeout: Cypress.config('graphqlTimeout') }).click();
     cy.get('[data-test=order-list]')
-      .should('have.length', 0, { timeout: 20000 });
+      .should('have.length', 0, { timeout: Cypress.config('graphqlTimeout') });
     cy.get('[data-test=empty-order-list]')
       .contains('You have not placed any orders yet!');
   });

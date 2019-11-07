@@ -9,15 +9,15 @@ describe('Login', () => {
   it('logs in', () => {
     cy.createCustomer(customer);
     cy.login(customer);
-    cy.location('pathname').should('eq', '/user/account', { timeout: 20000 });
+    cy.location('pathname').should('eq', '/user/account', { timeout: Cypress.config('graphqlTimeout') });
     cy.checkCustomerIsLoggedIn(customer);
 
     cy.reload();
-    cy.location('pathname').should('eq', '/user/account', { timeout: 20000 });
+    cy.location('pathname').should('eq', '/user/account', { timeout: Cypress.config('graphqlTimeout') });
     cy.checkCustomerIsLoggedIn(customer);
 
     cy.get('[data-test=logout-button]').click();
-    cy.location('pathname').should('eq', '/login', { timeout: 20000 });
+    cy.location('pathname').should('eq', '/login', { timeout: Cypress.config('graphqlTimeout') });
     cy.get('[data-test=login-button]').should('exist');
     cy.get('[data-test=logout-button]').should('not.exist');
     cy.get('[data-test=login-info-name]').should('not.exist');

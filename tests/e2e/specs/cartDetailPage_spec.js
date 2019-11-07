@@ -12,8 +12,8 @@ describe('CartDetailPage', () => {
     cy.addLineItem('/product/lemare-booties-0778-brown/M0E20000000E0XM', 2);
     cy.addLineItem('/product/lemare-booties-0778-grey/M0E20000000E0WX', 3);
     cy.visit('/cart');
-    cy.get('[data-test=cart-total-items]', { timeout: 20000 })
-      .contains(/^\s*5 items in total\s*$/, { timeout: 20000 });
+    cy.get('[data-test=cart-total-items]', { timeout: Cypress.config('graphqlTimeout') })
+      .contains(/^\s*5 items in total\s*$/);
 
     cy.get('[data-test=cart-total-price]')
       .contains(/^\s*815,90\s€\s*$/);
@@ -59,7 +59,7 @@ describe('CartDetailPage', () => {
     cy.addLineItem('/product/lemare-booties-0778-grey/M0E20000000E0WX', 3);
     cy.visit('/cart');
 
-    cy.get('[data-test=cart-line-item]', { timeout: 20000 })
+    cy.get('[data-test=cart-line-item]', { timeout: Cypress.config('graphqlTimeout') })
       .should('have.length', 1)
       .then(($lineItem) => {
         cy.wrap($lineItem)
@@ -69,7 +69,7 @@ describe('CartDetailPage', () => {
           .type('5');
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-total-price]')
-          .contains(/^\s*696,50\s€\s*$/, { timeout: 20000 });
+          .contains(/^\s*696,50\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-quantity-inc]')
@@ -80,7 +80,7 @@ describe('CartDetailPage', () => {
           .should('have.value', '7');
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-total-price]')
-          .contains(/^\s*975,10\s€\s*$/, { timeout: 20000 });
+          .contains(/^\s*975,10\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-quantity-dec]')
@@ -90,13 +90,13 @@ describe('CartDetailPage', () => {
           .should('have.value', '6');
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-total-price]')
-          .contains(/^\s*835,80\s€\s*$/, { timeout: 20000 });
+          .contains(/^\s*835,80\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-delete]').click();
       });
     cy.get('[data-test=cart-line-item]')
-      .should('have.length', 0, { timeout: 20000 });
+      .should('have.length', 0, { timeout: Cypress.config('graphqlTimeout') });
   });
 
   const cartDiscount = {
@@ -118,14 +118,14 @@ describe('CartDetailPage', () => {
     cy.visit('/cart');
 
     cy.get('[data-test=cart-line-item-total-price]')
-      .contains(/^\s*199,00\s€\s*$/, { timeout: 20000 });
+      .contains(/^\s*199,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
     cy.get('[data-test=discount-code-input]')
       .type('SUNRISE_CI');
     cy.get('[data-test=apply-discount-code-button]')
       .click();
     cy.get('[data-test=cart-total-price]')
-      .contains(/^\s*99,50\s€\s*$/, { timeout: 20000 });
+      .contains(/^\s*99,50\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
     cy.get('[data-test=discount-code-name]')
       .contains('SUNRISE_CI');
@@ -133,6 +133,6 @@ describe('CartDetailPage', () => {
       .click();
 
     cy.get('[data-test=cart-line-item-total-price]')
-      .contains(/^\s*199,00\s€\s*$/, { timeout: 20000 });
+      .contains(/^\s*199,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
   });
 });
