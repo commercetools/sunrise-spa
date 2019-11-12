@@ -12,7 +12,22 @@
          class="loading-spinner">
       <img data-test="spinner" src="../../assets/img/spinner.gif"/>
     </div>
-    <div v-else-if="!isLoading && cartNotEmpty">
+
+    <div v-else-if="!cartNotEmpty"
+         class="empty-results-container">
+      <div class="empty-results">
+        <span data-test="empty-cart">
+          {{ $t('empty') }}
+        </span>
+      </div>
+      <div class="empty-cart-continue-shopping-btn">
+        <router-link to="/">
+          {{ $t('shopNow') }}
+        </router-link>
+      </div>
+    </div>
+
+    <div v-else>
       <div class="row">
         <div class="col-sm-12">
           <div class="current-in-bag">
@@ -56,21 +71,6 @@
             </router-link>
           </div>
         </div>
-      </div>
-    </div>
-    <div v-else
-         class="empty-results-container">
-      <div class="empty-results">
-        <span data-test="empty-cart">
-          {{ $t('empty') }}
-                        {{isLoading}}
-
-        </span>
-      </div>
-      <div class="empty-cart-continue-shopping-btn">
-        <router-link to="/">
-          {{ $t('shopNow') }}
-        </router-link>
       </div>
     </div>
   </div>

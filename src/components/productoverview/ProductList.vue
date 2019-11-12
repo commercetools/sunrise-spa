@@ -1,6 +1,20 @@
 <template>
   <div>
-    <form v-if="!isLoading && products && products.results.length"
+    <div v-if="isLoading"
+         class="loading-spinner">
+      <img data-test="spinner" src="../../assets/img/spinner.gif"/>
+    </div>
+
+    <div v-else-if="products && !products.results.length">
+      <div class="empty-results-container">
+        <span class="empty-results"
+              data-test="empty-results">
+          {{ $t('catalog.noSearchResult.searchNotFound.notFound') }}
+        </span>
+      </div>
+    </div>
+
+    <form v-else
           id="form-filter-products"
           name="filter-products" action="#">
       <!--  {{#if content.searchTerm}}
@@ -38,20 +52,6 @@
         <!--{{> catalog/pop/filters-sidebar}}-->
       </div>
     </form>
-
-    <div v-else-if="isLoading"
-         class="loading-spinner">
-      <img data-test="spinner" src="../../assets/img/spinner.gif"/>
-    </div>
-
-    <div v-else-if="!isLoading && products && !products.results.length">
-      <div class="empty-results-container">
-        <span class="empty-results"
-              data-test="empty-results">
-          {{ $t('catalog.noSearchResult.searchNotFound.notFound') }}
-        </span>
-      </div>
-    </div>
 
     <transition name="fade">
       <div v-if="!isLoading && products && products.results.length"

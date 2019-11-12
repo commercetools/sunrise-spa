@@ -6,7 +6,15 @@
       <img data-test="spinner" src="../../../assets/img/spinner.gif"/>
     </div>
 
-    <div v-else-if="!isLoading && me.orders.results.length"
+    <div v-else-if="!me.orders.results.length"
+         data-test="empty-order-list"
+         class="empty-results-container">
+      <span class="empty-order-list">
+        {{ $t('emptyOrders') }}
+      </span>
+    </div>
+
+    <div v-else
         class="my-orders-content">
       <div class="my-orders-table-wrapper">
         <div class="row">
@@ -80,15 +88,6 @@
         </div>
       </div>
     </div>
-
-    <div v-else
-         data-test="empty-order-list"
-         class="empty-results-container">
-      <span class="empty-order-list">
-        {{ $t('emptyOrders') }}
-      </span>
-    </div>
-
   </div>
 </template>
 
