@@ -2,7 +2,6 @@ import Vue from 'vue';
 // Required until Cypress supports fetch API
 // https://github.com/cypress-io/cypress/issues/95
 import 'whatwg-fetch';
-import VuePaginate from 'vue-paginate';
 import Vuelidate from 'vuelidate';
 import ProductZoomer from 'vue-product-zoomer';
 import App from './App.vue';
@@ -16,7 +15,6 @@ import './assets/scss/main.scss';
 
 Vue.config.productionTip = false;
 
-Vue.use(VuePaginate);
 Vue.use(ProductZoomer);
 Vue.use(Vuelidate);
 

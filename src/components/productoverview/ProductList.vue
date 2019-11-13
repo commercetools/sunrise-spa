@@ -27,8 +27,11 @@
           <ul class="pagination-steps">
             <!--{{> common/pagination pagination=content.pagination}}-->
             <Pagination :products="products"
+                        @pagechanged="onPageChange"
                         :offset="offset"
-                        @page-changed="updateOffset"/>
+                        :totalProducts="totalProducts"
+                        :current-page="currentPage"
+                        :limit="limit" />
           </ul>
         </div>
         <div class="col-xs-4 hidden-xs text-right">
@@ -82,11 +85,18 @@ export default {
     categories: null,
     products: null,
     sort: null,
+    currentPage: 0,
     offset: 0,
+    limit: 15,
   }),
 
   computed: {
     category: vm => vm.categories.results[0],
+
+    totalProducts() {
+      console.log(this.products.total);
+      return this.products.total;
+    },
 
     isLoading() {
       return this.$apollo.loading;
@@ -97,8 +107,9 @@ export default {
     changeSort(sort) {
       this.sort = sort;
     },
-    updateOffset(pageNumber) {
-      this.offset = (pageNumber - 1) * 75;
+
+    onPageChange(page) {
+      this.offset = (this.currentPage = page) * this.limit;
     },
   },
 
@@ -122,9 +133,12 @@ export default {
 
     products: {
       query: gql`
-        query products($offset: Int!, $locale: Locale!, $currency: Currency!, $where: String, $sort: [String!]) {
-          products(offset: $offset, limit: 75, where: $where, sort: $sort) {
+        query products($offset: Int!, $limit: Int!, $locale: Locale!, 
+                       $currency: Currency!,
+                       $where: String, $sort: [String!]) {
+          products(offset: $offset, limit: $limit, where: $where, sort: $sort) {
             offset
+            total
             results {
               id
               masterData {
@@ -164,6 +178,7 @@ export default {
           where: `masterData(current(categories(id="${this.category.id}")))`,
           sort: this.sort,
           offset: this.offset,
+          limit: this.limit,
         };
       },
       skip: vm => !vm.categories,
