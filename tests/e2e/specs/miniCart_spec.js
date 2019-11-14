@@ -7,7 +7,7 @@ describe('MiniCart', () => {
   it('links to shopping cart', () => {
     cy.get('[data-test=mini-cart-open-button]')
       .click()
-      .should('have.attr', 'href', '/cart', { timeout: Cypress.config('graphqlTimeout') });
+      .should('have.attr', 'href', '/cart');
   });
 
   it('displays content of cart', () => {
