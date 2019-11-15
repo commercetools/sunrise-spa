@@ -53,7 +53,7 @@
     </div>
 
     <transition name="fade">
-      <div v-if="!isLoading && products && products.results.length"
+      <div v-if="!isLoading && products.results.length"
             id="pop-product-list"
             class="row">
         <ProductThumbnail v-for="product in products.results"
