@@ -1,67 +1,67 @@
 <template>
-  <div>
-  <div v-if="isLoading"
-        class="loading-spinner">
-    <img data-test="spinner" src="../../assets/img/spinner.gif"/>
-  </div>
+  <div v-if="products">
+    <div v-if="isLoading"
+         class="loading-spinner">
+        <img data-test="spinner" src="../../assets/img/spinner.gif"/>
+    </div>
 
-  <form v-else-if="products && products.results.length"
-        id="form-filter-products"
-        name="filter-products" action="#">
-      <!--  {{#if content.searchTerm}}
-        <input type="hidden" name="q" value="{{content.searchTerm}}"/>
-      {{/if}}-->
+    <form v-if="products.results.length"
+          id="form-filter-products"
+          name="filter-products" action="#">
+        <!--  {{#if content.searchTerm}}
+          <input type="hidden" name="q" value="{{content.searchTerm}}"/>
+        {{/if}}-->
 
-    <div class="row item-list-pagination">
-      <!--    {{#if content.searchResult}}
-      <div class="search-results-row">
-        {{> catalog/pop/search-result searchResult=content.searchResult}}
-      </div>
-      {{else}}
-      <div class="jumbotron-row">
-        {{> catalog/pop/jumbotron jumbotron=content.jumbotron}}
-      </div>
-      {{/if}}-->
-      <div class="col-xs-4 hidden-xs text-left">
-        <div class="custom-select-wrapper">
-          <ProductSortSelector @changeSort="changeSort" />
-          <!--{{> catalog/pop/sort-selector sortSelector=content.sortSelector}}-->
+      <div class="row item-list-pagination">
+        <!--    {{#if content.searchResult}}
+        <div class="search-results-row">
+          {{> catalog/pop/search-result searchResult=content.searchResult}}
+        </div>
+        {{else}}
+        <div class="jumbotron-row">
+          {{> catalog/pop/jumbotron jumbotron=content.jumbotron}}
+        </div>
+        {{/if}}-->
+        <div class="col-xs-4 hidden-xs text-left">
+          <div class="custom-select-wrapper">
+            <ProductSortSelector @changeSort="changeSort" />
+            <!--{{> catalog/pop/sort-selector sortSelector=content.sortSelector}}-->
+          </div>
+        </div>
+
+        <div class="col-xs-4 hidden-xs text-center custom-pagination">
+          <ul class="page-numbers">
+            <!--{{> common/pagination pagination=content.pagination}}-->
+          </ul>
+        </div>
+        <div class="col-xs-4 hidden-xs text-right">
+          <!--{{> catalog/pop/display-selector displaySelector=content.displaySelector}}-->
         </div>
       </div>
-
-      <div class="col-xs-4 hidden-xs text-center custom-pagination">
-        <ul class="page-numbers">
-          <!--{{> common/pagination pagination=content.pagination}}-->
-        </ul>
+      <div class="product-filter hidden-xs">
+        <!--{{> catalog/pop/filters-sidebar}}-->
       </div>
-      <div class="col-xs-4 hidden-xs text-right">
-        <!--{{> catalog/pop/display-selector displaySelector=content.displaySelector}}-->
+    </form>
+
+    <div v-else>
+      <div class="empty-results-container">
+        <span class="empty-results"
+              data-test="empty-results">
+          {{ $t('catalog.noSearchResult.searchNotFound.notFound') }}
+        </span>
       </div>
     </div>
-    <div class="product-filter hidden-xs">
-      <!--{{> catalog/pop/filters-sidebar}}-->
-    </div>
-  </form>
 
-  <div v-else>
-    <div class="empty-results-container">
-      <span class="empty-results"
-            data-test="empty-results">
-        {{ $t('catalog.noSearchResult.searchNotFound.notFound') }}
-      </span>
-    </div>
-  </div>
-
-  <transition name="fade">
-    <div v-if="!isLoading && products && products.results.length"
-          id="pop-product-list"
-          class="row">
-      <ProductThumbnail v-for="product in products.results"
-                        data-test="product-list"
-                        :key="product.id"
-                        :product="product" />
-    </div>
-  </transition>
+    <transition name="fade">
+      <div v-if="!isLoading && products && products.results.length"
+            id="pop-product-list"
+            class="row">
+        <ProductThumbnail v-for="product in products.results"
+                          data-test="product-list"
+                          :key="product.id"
+                          :product="product" />
+      </div>
+    </transition>
   </div>
 </template>
 
