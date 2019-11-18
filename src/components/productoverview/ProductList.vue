@@ -1,12 +1,12 @@
 <template>
   <div>
     <form id="form-filter-products" name="filter-products" action="#">
-<!--  {{#if content.searchTerm}}
+      <!--  {{#if content.searchTerm}}
         <input type="hidden" name="q" value="{{content.searchTerm}}"/>
       {{/if}}-->
 
       <div class="row item-list-pagination">
-<!--    {{#if content.searchResult}}
+        <!--    {{#if content.searchResult}}
         <div class="search-results-row">
           {{> catalog/pop/search-result searchResult=content.searchResult}}
         </div>
@@ -17,22 +17,19 @@
         {{/if}}-->
         <div class="col-xs-4 hidden-xs text-left">
           <div v-if="products && products.results.length"
-               class="custom-select-wrapper">
+                class="custom-select-wrapper">
             <ProductSortSelector @changeSort="changeSort" />
             <!--{{> catalog/pop/sort-selector sortSelector=content.sortSelector}}-->
           </div>
         </div>
         <div v-if="products && products.results.length"
-             class="text-center">
-          <ul class="pagination-steps">
-            <!--{{> common/pagination pagination=content.pagination}}-->
-            <Pagination :products="products"
-                        @pagechanged="onPageChange"
-                        :offset="offset"
-                        :totalProducts="totalProducts"
-                        :current-page="currentPage"
-                        :limit="limit" />
-          </ul>
+              class="col-xs-4 hidden-xs text-center custom-pagination">
+          <Pagination :products="products"
+                      :offset="offset"
+                      :limit="limit"
+                      :totalProducts="totalProducts"
+                      :current-page="currentPage"
+                      @pagechanged="onPageChange" />
         </div>
         <div class="col-xs-4 hidden-xs text-right">
           <!--{{> catalog/pop/display-selector displaySelector=content.displaySelector}}-->
@@ -63,10 +60,13 @@
                           :product="product" />
       </div>
     </transition>
+    <go-top v-if="products && products.results.length >= limit / 2"
+            :size="40" :bottom="50"></go-top>
   </div>
 </template>
 
 <script>
+import GoTop from '@inotom/vue-go-top';
 import gql from 'graphql-tag';
 import ProductThumbnail from '../common/ProductThumbnail.vue';
 import ProductSortSelector from './ProductSortSelector.vue';
@@ -77,6 +77,7 @@ export default {
     ProductThumbnail,
     ProductSortSelector,
     Pagination,
+    GoTop,
   },
 
   props: ['categorySlug'],
@@ -94,7 +95,6 @@ export default {
     category: vm => vm.categories.results[0],
 
     totalProducts() {
-      console.log(this.products.total);
       return this.products.total;
     },
 

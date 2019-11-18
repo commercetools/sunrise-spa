@@ -34,33 +34,26 @@
   }
 }
 
-.pagination-steps {
-  padding-left: 0;
-  margin: 0.3em 0 0;
-  letter-spacing: 0.1em;
-  color: $gray;
-  height: 30px;
-  a {
-    font-size: 10px;
-    transition: background-color .3s;
-    margin: 0 10px;
-    border: 1px solid $gray;
-    padding: 7px;
-    cursor: pointer;
+.pagination {
+  margin: 0;
+  background-color: white;
+  border: solid 0.5px $alto;
+  border-radius: 0;
+  text-align: center;
+  button[disabled] {
+    // cursor: not-allowed;
+    color: gray;
   }
-  li {
-    display: inline-block;
-    font-size: 12px;
-    color: $gray;
-    a:hover,
-    a:focus {
-      color: $my-sin;
-      border: 1px solid $my-sin; 
-    }
+  
+}
+
+.pagination-item {
+  font-size: 18px;
+  width: 50px;
+  &:hover {
+    color: $my-sin;
   }
-  li.disabled a {
-    color: #ccc;
-    border: 1px solid #ccc; /* Gray */
-    cursor: no-drop;
-  }
+}
+.prev-step {
+  border-right: solid 0.5px $alto;
 }

@@ -893,6 +893,14 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
+"@inotom/vue-go-top@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@inotom/vue-go-top/-/vue-go-top-1.1.0.tgz#ef155c5d92bfa3233400fba6f96ec170d1a97039"
+  integrity sha512-H3Bhk4NmlPmfMsSBR32QXT0ItdxT1CdxJmOPn+NZhnHVv3gOgmsnDDL1bndYAcf3EYcbcH/+1rQy+DcAc4b1zQ==
+  dependencies:
+    sweet-scroll "3.0.1"
+    throttle-debounce "2.0.1"
+
 "@intervolga/optimize-cssnano-plugin@^1.0.5":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@intervolga/optimize-cssnano-plugin/-/optimize-cssnano-plugin-1.0.6.tgz#be7c7846128b88f6a9b1d1261a0ad06eb5c0fdf8"
@@ -11779,6 +11787,11 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
+sweet-scroll@3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/sweet-scroll/-/sweet-scroll-3.0.1.tgz#6472a9b97915550c3213970d1a33c7cec8657328"
+  integrity sha512-jjBkRZ22ojwwYRtraRL5IlR9LHaa+GmhXMnz1TaqeCL5xdiMCZ86fNBilbF3WHz9sab2ihmCX3BiIZI6FmpAPg==
+
 symbol-observable@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.0.1.tgz#8340fc4702c3122df5d22288f88283f513d3fdd4"
@@ -11918,6 +11931,11 @@ throat@^4.0.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/throat/-/throat-4.1.0.tgz#89037cbc92c56ab18926e6ba4cbb200e15672a6a"
   integrity sha1-iQN8vJLFarGJJua6TLsgDhVnKmo=
+
+throttle-debounce@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/throttle-debounce/-/throttle-debounce-2.0.1.tgz#7307ddd6cd9acadb349132fbf6c18d78c88a5e62"
+  integrity sha512-Sr6jZBlWShsAaSXKyNXyNicOrJW/KtkDqIEwHt4wYwWA2wa/q67Luhqoujg48V8hTk60wB56tYrJJn6jc2R7VA==
 
 throttle-debounce@^2.1.0:
   version "2.1.0"

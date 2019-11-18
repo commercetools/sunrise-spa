@@ -1,20 +1,20 @@
 <template>
-  <ul class="pagination">
-    <li class="pagination-item">
+  <ul v-if="pageCount > 1"
+      class="pagination">
+    <li class="pagination-item prev-step">
       <button type="button"
               @click="onClickPreviousPage"
               :disabled="isInFirstPage"
               aria-label="Go to previous page">
-        Previous
+        &#8249;
       </button>
     </li>
-
-    <li class="pagination-item">
+    <li class="pagination-item next-step">
       <button type="button"
               @click="onClickNextPage"
               :disabled="isInLastPage"
               aria-label="Go to next page">
-        Next
+        &#8250;
       </button>
     </li>
   </ul>
@@ -44,21 +44,17 @@ export default {
     },
   },
 
-  data: () => ({
-  }),
-
   computed: {
+    pageCount() {
+      const productListLength = this.totalProducts;
+      const pageLimit = this.limit;
+      return Math.ceil(productListLength / pageLimit);
+    },
     isInFirstPage() {
       return this.currentPage === 0;
     },
     isInLastPage() {
       return this.currentPage >= this.pageCount - 1;
-    },
-
-    pageCount() {
-      const productListLength = this.totalProducts;
-      const pageLimit = this.limit;
-      return Math.ceil(productListLength / pageLimit);
     },
   },
 
