@@ -7,15 +7,13 @@
 .item-list-pagination {
   margin-bottom: 20px;
   width: 75%;
-  float: right;
+  // float: right;
 
   /* Overwrite selectboxit library */
   .selectboxit-container span, .selectboxit-container .selectboxit-options a {
     height: 30px;
     line-height: 30px;
   }
-
-
   select.select {
     height: 30px;
     padding: 0 30px 0 10px;
@@ -34,22 +32,26 @@
   }
 }
 
+.custom-pagination {
+  text-align: center;
+}
+
 .pagination {
   margin: 0;
   background-color: white;
   border: solid 0.5px $alto;
   border-radius: 0;
+  min-width: 55px;
   text-align: center;
   button[disabled] {
-    // cursor: not-allowed;
     color: $bombay;
   }
   
 }
 
 .pagination-item {
-  font-size: 18px;
-  width: 50px;
+  font-size: 20px;
+  font-weight: 500;
   &:hover {
     color: $my-sin;
   }

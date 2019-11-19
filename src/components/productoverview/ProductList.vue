@@ -23,7 +23,7 @@
           </div>
         </div>
         <div v-if="products && products.results.length"
-              class="col-xs-4 hidden-xs text-center custom-pagination">
+             class="custom-pagination">
           <Pagination :products="products"
                       :offset="offset"
                       :limit="limit"
@@ -61,7 +61,7 @@
       </div>
     </transition>
     <go-top v-if="products && products.results.length >= limit / 2"
-            :size="40" :bottom="50"></go-top>
+            :size="50" :bottom="50"></go-top>
   </div>
 </template>
 
