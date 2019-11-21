@@ -1,16 +1,17 @@
 <template>
-  <div v-if="products">
+  <div>
     <div v-if="isLoading"
          class="loading-spinner">
-        <img data-test="spinner" src="../../assets/img/spinner.gif"/>
+      <img data-test="spinner" src="../../assets/img/spinner.gif"/>
     </div>
 
+  <div v-else-if="categories && products">
     <form v-if="products.results.length"
           id="form-filter-products"
           name="filter-products" action="#">
-        <!--  {{#if content.searchTerm}}
-          <input type="hidden" name="q" value="{{content.searchTerm}}"/>
-        {{/if}}-->
+      <!--  {{#if content.searchTerm}}
+        <input type="hidden" name="q" value="{{content.searchTerm}}"/>
+      {{/if}}-->
 
       <div class="row item-list-pagination">
         <!--    {{#if content.searchResult}}
@@ -41,28 +42,34 @@
       <div class="product-filter hidden-xs">
         <!--{{> catalog/pop/filters-sidebar}}-->
       </div>
-    </form>
 
-    <div v-else>
-      <div class="empty-results-container">
-        <span class="empty-results"
-              data-test="empty-results">
-          {{ $t('catalog.noSearchResult.searchNotFound.notFound') }}
-        </span>
-      </div>
-    </div>
-
-    <transition name="fade">
-      <div v-if="!isLoading && products.results.length"
-            id="pop-product-list"
-            class="row">
+      <div id="pop-product-list"
+          class="row">
         <ProductThumbnail v-for="product in products.results"
                           data-test="product-list"
                           :key="product.id"
                           :product="product" />
       </div>
-    </transition>
+    </form>
+      <div v-else>
+        <div class="empty-results-container">
+          <span class="empty-results"
+                data-test="empty-results">
+            {{ $t('catalog.noSearchResult.searchNotFound.notFound') }}
+          </span>
+        </div>
+      </div>
   </div>
+
+  <div v-else>
+    <div class="empty-results-container">
+      <span class="empty-results"
+              data-test="category-not-found">
+        {{ $t('catalog.noSearchResult.searchNotFound.categoryNotFound') }}
+      </span>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
@@ -85,7 +92,9 @@ export default {
   }),
 
   computed: {
-    category: vm => vm.categories.results[0],
+    category() {
+      return this.categories.results[0];
+    },
 
     isLoading() {
       return this.$apollo.loading;
@@ -160,7 +169,7 @@ export default {
           sort: this.sort,
         };
       },
-      skip: vm => !vm.categories,
+      skip: vm => !vm.categories || !vm.category,
     },
   },
 };

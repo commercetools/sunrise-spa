@@ -56,11 +56,16 @@ describe('Product overview page', () => {
       .contains('Lace up shoes Tods dark blue');
   });
 
-  it('Displays a message when the product list is empty', () => {
+  it('Displays a message when an error occurs', () => {
     cy.visit('/products/accessories');
     cy.get('[data-test=empty-results]')
-      .contains('No Results Found.');
+      .contains('No Results Found');
+
     cy.get('span[data-test=sort-selector]')
       .should('not.exist');
+
+    cy.visit('/products/unvalidCategory');
+    cy.get('[data-test=category-not-found]')
+      .contains('Category Not Found');
   });
 });
