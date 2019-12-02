@@ -1,19 +1,15 @@
 <template>
-  <div v-if="me"
-       class="cart-page container">
-    <div class="row">
-      <div class="col-sm-8 col-xs-12">
-      </div>
-      <div class="col-sm-4">
-        <!--{{> checkout/start-checkout-link id="cart-checkoutnow-btn"}}-->
-      </div>
-    </div>
-    <div v-if="isLoading"
-         class="loading-spinner">
-      <img data-test="spinner" src="../../assets/img/spinner.gif"/>
-    </div>
+  <div class="cart-page container">
+    <LoadingSpinner v-if="isLoading"/>
 
     <div v-else-if="cartNotEmpty">
+      <div class="row">
+        <div class="col-sm-8 col-xs-12">
+        </div>
+        <div class="col-sm-4">
+          <!--{{> checkout/start-checkout-link id="cart-checkoutnow-btn"}}-->
+        </div>
+      </div>
       <div class="row">
         <div class="col-sm-12">
           <div class="current-in-bag">
@@ -79,6 +75,7 @@
 <script>
 import gql from 'graphql-tag';
 import cartMixin from '@/mixins/cartMixin';
+import LoadingSpinner from '../common/LoadingSpinner.vue';
 import CartLikeSummary from '../common/cartlike/CartLikeSummary.vue';
 import LineItemDeleteForm from './LineItemDeleteForm.vue';
 import LineItemQuantityForm from './LineItemQuantityForm.vue';
@@ -87,6 +84,7 @@ import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
 
 export default {
   components: {
+    LoadingSpinner,
     CartLikeSummary,
     LineItemQuantityForm,
     LineItemDeleteForm,
