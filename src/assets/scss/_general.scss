@@ -174,11 +174,12 @@ button {
 }
 
 .img-lazy {
-  background: white url('../img/spinner.gif') no-repeat 50% 50%;
+  background: white url('../img/loading.svg') no-repeat 50% 50%;
   color: $white;
   display: block;
   // image's height
   height: 300px;
+  width: 100%;
 }
 
 .img-lazy-error {

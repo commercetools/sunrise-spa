@@ -2,6 +2,7 @@
   "baseUrl": "http://localhost:8080",
   "pluginsFile": "tests/e2e/plugins/index.js",
   "projectId": "gfk5oj",
+  "graphqlTimeout": 10000,
   "reporterOptions": {
     "reporterEnabled": "spec, mocha-junit-reporter",
     "mochaJunitReporterReporterOptions": {

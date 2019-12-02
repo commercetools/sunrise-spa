@@ -1,11 +1,15 @@
 <template>
-  <div v-if="me"
-       class="cart-page container">
-    <div class="row">
-      <div class="col-sm-8 col-xs-12">
+  <div class="cart-page container">
+    <LoadingSpinner v-if="isLoading"/>
+
+    <div v-else-if="cartNotEmpty">
+      <div class="row">
+        <div class="col-sm-8 col-xs-12">
+        </div>
+        <div class="col-sm-4">
+          <!--{{> checkout/start-checkout-link id="cart-checkoutnow-btn"}}-->
+        </div>
       </div>
-    </div>
-    <div v-if="cartNotEmpty">
       <div class="row">
         <div class="col-sm-12">
           <div class="current-in-bag">
@@ -46,11 +50,11 @@
         </div>
       </div>
     </div>
+
     <div v-else
          class="empty-results-container">
       <div class="empty-results">
-        <span
-              data-test="empty-cart">
+        <span data-test="empty-cart">
           {{ $t('empty') }}
         </span>
       </div>
@@ -66,6 +70,7 @@
 <script>
 import gql from 'graphql-tag';
 import cartMixin from '../../mixins/cartMixin';
+import LoadingSpinner from '../common/LoadingSpinner.vue';
 import CartLikeContentDetail from '../common/cartlike/CartLikeContentDetail.vue';
 import CartLikePriceDetail from '../common/cartlike/CartLikePriceDetail.vue';
 import AddDiscountCodeForm from './AddDiscountCodeForm.vue';
@@ -75,6 +80,7 @@ import MONEY_FRAGMENT from '../Money.gql';
 
 export default {
   components: {
+    LoadingSpinner,
     CartLikeContentDetail,
     CartLikePriceDetail,
     AddDiscountCodeForm,
@@ -83,6 +89,12 @@ export default {
   data: () => ({
     me: null,
   }),
+
+  computed: {
+    isLoading() {
+      return this.$apollo.loading;
+    },
+  },
 
   mixins: [cartMixin],
 
