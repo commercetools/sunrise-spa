@@ -4,7 +4,7 @@ describe('Breadcrumb', () => {
   });
 
   it('links to each category of the breadcrumb', () => {
-    cy.get('[data-test=breadcrumb-home-link]', { timeout: 20000 })
+    cy.get('[data-test=breadcrumb-home-link]', { timeout: Cypress.config('graphqlTimeout') })
       .should('contain', 'Home')
       .should('have.attr', 'href', '/')
       .should('not.have.class', 'active');

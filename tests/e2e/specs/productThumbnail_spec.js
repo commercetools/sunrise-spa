@@ -4,7 +4,7 @@ describe('Product thumbnail', () => {
   });
 
   it('displays product information', () => {
-    cy.get('[data-test=product-thumbnail-name]', { timeout: 20000 })
+    cy.get('[data-test=product-thumbnail-name]', { timeout: Cypress.config('graphqlTimeout') })
       .contains('Booties Lemare grey')
       .parentsUntil('[data-test=product-thumbnail]')
       .parent()
