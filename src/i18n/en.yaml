@@ -164,7 +164,8 @@ catalog:
   noSearchResult:
     searchNotFound:
       title: "Search Results"
-      notFound: "No Results Found."
+      notFound: "No Results Found"
+      categoryNotFound: "Category Not Found"
       keyword: "zero"
       description: "Search was unable to find any results for \"Batman\", you may have typed your word incorrectly, or are being too specific. Try using a broader search phrase or try one of our most popular search phrases."
     popularSearchPhrases:

@@ -1,8 +1,9 @@
 <template>
-  <div v-if="me"
-       class="my-orders">
-    <div v-if="me.orders.results.length"
-        class="my-orders-content">
+  <div class="my-orders">
+    <LoadingSpinner v-if="isLoading"/>
+
+    <div v-else-if="orderListNotEmpty"
+         class="my-orders-content">
       <div class="my-orders-table-wrapper">
         <div class="row">
           <div class="col-md-2 col-sm-3 col-xs-4">
@@ -90,14 +91,25 @@
 import gql from 'graphql-tag';
 import BaseMoney from '../../common/BaseMoney.vue';
 import BaseDate from '../../common/BaseDate.vue';
+import LoadingSpinner from '../../common/LoadingSpinner.vue';
 import MONEY_FRAGMENT from '../../Money.gql';
 
 export default {
-  components: { BaseMoney, BaseDate },
+  components: { BaseMoney, BaseDate, LoadingSpinner },
 
   data: () => ({
     me: null,
   }),
+
+  computed: {
+    isLoading() {
+      return this.$apollo.loading;
+    },
+
+    orderListNotEmpty() {
+      return this.me?.orders?.results.length > 0;
+    },
+  },
 
   methods: {
     translateStatus(state) {

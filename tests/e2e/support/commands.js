@@ -30,13 +30,13 @@ import * as mutation from './mutations';
 
 const clientPromise = createClient();
 
-Cypress.Commands.add('login', customer => cy.createCustomer(customer).then(() => {
+Cypress.Commands.add('login', (customer) => {
   cy.visit('/login');
   cy.get('[data-test=login-button]').click();
   cy.get('[data-test=login-form-email]').type(customer.email);
   cy.get('[data-test=login-form-password]').type(customer.password);
   cy.get('[data-test=login-form-submit]').click();
-}));
+});
 
 Cypress.Commands.add('checkCustomerIsLoggedIn', (customer) => {
   cy.get('[data-test=user-profile-name]').should('contain', `${customer.firstName} ${customer.lastName}`);

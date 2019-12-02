@@ -11,6 +11,9 @@ describe('TabOrderList.vue', () => {
   beforeEach(() => {
     options = {
       localVue,
+      computed: {
+        isLoading: jest.fn(),
+      },
       i18n: new VueI18n({
         locale: 'de',
         messages: {

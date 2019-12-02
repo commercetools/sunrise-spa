@@ -74,13 +74,9 @@ describe('Product detail page', () => {
     }],
   };
 
-  before(() => {
-    cy.visit('/product/lemare-booties-0778-grey/M0E20000000E0WX');
-    cy.addProduct(draft);
-  });
-
   it('displays a single product details', () => {
-    cy.get('[data-test=product-data]', { timeout: 20000 })
+    cy.visit('/product/lemare-booties-0778-grey/M0E20000000E0WX');
+    cy.get('[data-test=product-data]')
       .then(($product) => {
         cy.wrap($product)
           .find('[data-test=product-name]')
@@ -115,8 +111,9 @@ describe('Product detail page', () => {
   });
 
   it('changes product attributes and sku', () => {
+    cy.addProduct(draft);
     cy.visit('/product/t-shirt-testing/sku-34-black');
-    cy.get('[data-test=product-data]', { timeout: 20000 })
+    cy.get('[data-test=product-data]')
       .then(($product) => {
         cy.wrap($product)
           .find('[data-test=product-sku]')

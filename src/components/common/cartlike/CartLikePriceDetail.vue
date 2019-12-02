@@ -106,11 +106,11 @@ export default {
 </script>
 
 <style scoped>
-.cart-like-price-detail {
-  border-top: 1px solid #D6D6D6;
-  padding: 1em 0;
-  text-align: right;
-}
+  .cart-like-price-detail {
+    border-top: 1px solid #D6D6D6;
+    padding: 1em 0;
+    text-align: right;
+  }
 </style>
 
 <i18n>
