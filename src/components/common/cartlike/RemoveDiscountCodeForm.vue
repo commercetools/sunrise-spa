@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import cartMixin from '@/mixins/cartMixin';
+import cartMixin from '../../../mixins/cartMixin';
 
 export default {
   props: {
