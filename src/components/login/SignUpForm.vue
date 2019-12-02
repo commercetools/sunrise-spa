@@ -16,56 +16,50 @@
       </ServerError>
       <div class="row">
         <div class="col-sm-6">
-          <div class="signup-box-input">
-            <BaseInput v-model="form.firstName"
-                       :vuelidate="$v.form.firstName"
-                       :label="$t('firstName')"
-                       type="text"
-                       autocomplete="fname"
-                       data-test="signup-form-firstname" />
-          </div>
+          <BaseInput v-model="form.firstName"
+                     :vuelidate="$v.form.firstName"
+                     :label="$t('firstName')"
+                     type="text"
+                     autocomplete="fname"
+                     data-test="signup-form-firstname" />
         </div>
         <div class="col-sm-6">
-          <div class="signup-box-input">
-            <BaseInput v-model="form.lastName"
-                       :vuelidate="$v.form.lastName"
-                       :label="$t('secondName')"
-                       type="text"
-                       autocomplete="lname"
-                       data-test="signup-form-lastname" />
-          </div>
+          <BaseInput v-model="form.lastName"
+                     :vuelidate="$v.form.lastName"
+                     :label="$t('secondName')"
+                     type="text"
+                     autocomplete="lname"
+                     data-test="signup-form-lastname" />
         </div>
       </div>
       <hr class="signup-box-hr">
-      <div class="signup-box-input">
-        <BaseInput v-model="form.email"
-                   :vuelidate="$v.form.email"
-                   :label="$t('email')"
-                   type="email"
-                   autocomplete="username"
-                   data-test="signup-form-email" />
+      <div class="row">
+        <div class="col-sm-12">
+          <BaseInput v-model="form.email"
+                     :vuelidate="$v.form.email"
+                     :label="$t('email')"
+                     type="email"
+                     autocomplete="username"
+                     data-test="signup-form-email" />
+        </div>
       </div>
       <div class="row">
         <div class="col-sm-6">
-          <div class="signup-box-input">
-            <BaseInput v-model="form.password"
-                       :vuelidate="$v.form.password"
-                       :label="$t('password')"
-                       type="password"
-                       autocomplete="off"
-                       data-test="signup-form-password" />
-          </div>
+          <BaseInput v-model="form.password"
+                     :vuelidate="$v.form.password"
+                     :label="$t('password')"
+                     type="password"
+                     autocomplete="off"
+                     data-test="signup-form-password" />
         </div>
         <div class="col-sm-6">
-          <div class="signup-box-input">
-            <BaseInput v-model="form.repeatPassword"
-                       :vuelidate="$v.form.repeatPassword"
-                       :label="$t('repeatPassword')"
-                       :customErrors="{ sameAsPassword: $t('repeatPasswordError') }"
-                       type="password"
-                       autocomplete="off"
-                       data-test="signup-form-repeatpassword" />
-          </div>
+          <BaseInput v-model="form.repeatPassword"
+                     :vuelidate="$v.form.repeatPassword"
+                     :label="$t('repeatPassword')"
+                     :customErrors="{ sameAsPassword: $t('repeatPasswordError') }"
+                     type="password"
+                     autocomplete="off"
+                     data-test="signup-form-repeatpassword" />
         </div>
       </div>
       <hr class="signup-box-hr">
@@ -74,14 +68,16 @@
       <!--{{#if form.subscribeToNewsletter}}checked{{/if}}>-->
       <!--<span>{{ $t('pleaseAddMe') }} <a href="">{{ $t('newsletter') }}</a></span>-->
       <!--</div>-->
-      <div class="signup-box-terms">
-        <BaseInput v-model="form.agreeToTerms"
-                   :vuelidate="$v.form.agreeToTerms"
-                   :label="$t('agreeTo')"
-                   :customErrors="{ mustBeAgreed: $t('agreeToTermsError') }"
-                   type="checkbox"
-                   autocomplete="off"
-                   data-test="signup-form-agreetoterms" />
+      <div class="row">
+        <div class="col-sm-12">
+          <BaseInput v-model="form.agreeToTerms"
+                     :vuelidate="$v.form.agreeToTerms"
+                     :label="$t('agreeTo')"
+                     :customErrors="{ mustBeAgreed: $t('agreeToTermsError') }"
+                     type="checkbox"
+                     autocomplete="off"
+                     data-test="signup-form-agreetoterms" />
+        </div>
       </div>
       <LoadingButton :state="state"
                      class="signup-register-btn"
@@ -169,15 +165,15 @@ export default {
 </script>
 
 <style lang="scss">
-.signup-box-terms {
-  input {
-    width: auto;
-    margin-top: 0.3em;
+  .signup-box-terms {
+    input {
+      width: auto;
+      margin-top: 0.3em;
+    }
+    .form-error-message {
+      bottom: -15px;
+    }
   }
-  .form-error-message {
-    bottom: -15px;
-  }
-}
 </style>
 
 <i18n>

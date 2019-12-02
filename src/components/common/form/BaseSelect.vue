@@ -1,24 +1,17 @@
 <template>
   <span class="form-field base-select"
-        :class="{ 'error': vuelidate.$error }">
-    <BaseLabel v-if="label"
-               :vuelidate="vuelidate"
-               :label="label">
+        :class="errorClass">
+    <BaseLabel :vuelidate="vuelidate"
+               :label="label"
+               :customErrors="customErrors">
       <SelectBoxIt :options="options"
                    v-model="model"
                    v-bind="$attrs"/>
     </BaseLabel>
-    <SelectBoxIt v-else
-                 :options="options"
-                 v-model="model"
-                 v-bind="$attrs"/>
-    <ValidationError :vuelidate="vuelidate"
-                     :customErrors="customErrors"/>
   </span>
 </template>
 
 <script>
-import ValidationError from './ValidationError.vue';
 import SelectBoxIt from './SelectBoxIt.vue';
 import BaseLabel from './BaseLabel.vue';
 
@@ -28,7 +21,6 @@ export default {
   components: {
     BaseLabel,
     SelectBoxIt,
-    ValidationError,
   },
 
   props: {
@@ -36,23 +28,20 @@ export default {
       type: [String, Number, Boolean],
       default: null,
     },
-    vuelidate: {
-      type: Object,
-      required: true,
-    },
+    vuelidate: Object,
     options: {
       type: Array,
       required: true,
     },
-    label: {
-      type: String,
-    },
-    customErrors: {
-      type: Object,
-    },
+    label: String,
+    customErrors: Object,
   },
 
   computed: {
+    errorClass() {
+      return { error: this.vuelidate?.$error };
+    },
+
     model: {
       get() {
         return this.value;
@@ -67,17 +56,17 @@ export default {
 </script>
 
 <style lang="scss">
-.form-field.base-select {
-  display: inline-block;
-  width: 100%;
-  position: relative;
+  .form-field.base-select {
+    display: inline-block;
+    width: 100%;
+    position: relative;
 
-  .selectboxit {
-    display: block;
-  }
+    .selectboxit {
+      display: block;
+    }
 
-  &.error .selectboxit {
-    border-color: rgba(206, 65, 65, 0.6) !important;
+    &.error .selectboxit {
+      border-color: rgba(206, 65, 65, 0.6) !important;
+    }
   }
-}
 </style>
