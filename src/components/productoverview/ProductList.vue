@@ -41,27 +41,27 @@
         </div>
 
         <div id="pop-product-list"
-            class="row">
+             class="row">
           <ProductThumbnail v-for="product in products.results"
                             data-test="product-list"
                             :key="product.id"
                             :product="product" />
         </div>
       </form>
-        <div v-else>
-          <div class="empty-results-container">
+      <div v-else>
+        <div class="empty-results-container">
             <span class="empty-results"
                   data-test="empty-results">
               {{ $t('catalog.noSearchResult.searchNotFound.notFound') }}
             </span>
-          </div>
         </div>
+      </div>
     </div>
 
     <div v-else>
       <div class="empty-results-container">
         <span class="empty-results"
-                data-test="category-not-found">
+              data-test="category-not-found">
           {{ $t('catalog.noSearchResult.searchNotFound.categoryNotFound') }}
         </span>
       </div>
@@ -76,13 +76,13 @@ import ProductThumbnail from '../common/ProductThumbnail.vue';
 import ProductSortSelector from './ProductSortSelector.vue';
 
 export default {
+  props: ['categorySlug'],
+
   components: {
     LoadingSpinner,
     ProductThumbnail,
     ProductSortSelector,
   },
-
-  props: ['categorySlug'],
 
   data: () => ({
     categories: null,
@@ -163,7 +163,7 @@ export default {
       variables() {
         return {
           locale: this.$store.state.locale,
-          currency: this.$i18n.numberFormats[this.$store.state.country].currency.currency,
+          currency: this.$store.state.currency,
           where: `masterData(current(categories(id="${this.category.id}")))`,
           sort: this.sort,
         };

@@ -8,12 +8,12 @@
          class="col-sm-6 product-description">
       <div class="row">
         <div class="col-sm-12">
-            <h1 data-test="product-name"
-                class="text-uppercase pdp-product-title">
-              {{ currentProduct.name }}
-            </h1>
-            <span data-test="product-sku"
-                  class="grey-p quickview-sku">
+          <h1 data-test="product-name"
+              class="text-uppercase pdp-product-title">
+            {{ currentProduct.name }}
+          </h1>
+          <span data-test="product-sku"
+                class="grey-p quickview-sku">
               {{ sku }}
             </span>
         </div>
@@ -58,7 +58,7 @@
 
 <script>
 import gql from 'graphql-tag';
-import productMixin from '@/mixins/productMixin';
+import productMixin from '../../mixins/productMixin';
 import ProductGallery from './ProductGallery.vue';
 import SocialMediaLinks from './SocialMediaLinks.vue';
 import DetailsSection from './DetailsSection.vue';
@@ -67,6 +67,13 @@ import BasePrice from '../common/BasePrice.vue';
 import VariantSelector from './VariantSelector.vue';
 
 export default {
+  props: {
+    sku: {
+      type: String,
+      required: true,
+    },
+  },
+
   components: {
     DetailsSection,
     ProductGallery,
@@ -76,12 +83,7 @@ export default {
     VariantSelector,
   },
 
-  props: {
-    sku: {
-      type: String,
-      required: true,
-    },
-  },
+  mixins: [productMixin],
 
   data: () => ({
     product: null,
@@ -92,8 +94,6 @@ export default {
       return this.currentProduct.variant || {};
     },
   },
-
-  mixins: [productMixin],
 
   apollo: {
     product: {

@@ -17,35 +17,30 @@
           </ServerError>
           <div class="row">
             <div class="col-sm-6">
-              <div class="form-sections">
-                <BaseInput v-model="form.firstName"
-                           :vuelidate="$v.form.firstName"
-                           :label="$t('firstName')"
-                           type="text"
-                           autocomplete="fname"
-                           class="form-inputs"
-                           data-test="edit-profile-form-firstname"/>
-              </div>
-              <div class="form-sections">
-                <BaseInput v-model="form.email"
-                           :vuelidate="$v.form.email"
-                           :label="$t('email')"
-                           type="email"
-                           autocomplete="email"
-                           class="form-inputs"
-                           data-test="edit-profile-form-email"/>
-              </div>
+              <BaseInput v-model="form.firstName"
+                         :vuelidate="$v.form.firstName"
+                         :label="$t('firstName')"
+                         type="text"
+                         autocomplete="fname"
+                         data-test="edit-profile-form-firstname"/>
             </div>
             <div class="col-sm-6">
-              <div class="form-sections">
-                <BaseInput v-model="form.lastName"
-                           :vuelidate="$v.form.lastName"
-                           :label="$t('lastName')"
-                           type="text"
-                           autocomplete="lname"
-                           class="form-inputs"
-                           data-test="edit-profile-form-lastname"/>
-              </div>
+              <BaseInput v-model="form.lastName"
+                         :vuelidate="$v.form.lastName"
+                         :label="$t('lastName')"
+                         type="text"
+                         autocomplete="lname"
+                         data-test="edit-profile-form-lastname"/>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <BaseInput v-model="form.email"
+                         :vuelidate="$v.form.email"
+                         :label="$t('email')"
+                         type="email"
+                         autocomplete="email"
+                         data-test="edit-profile-form-email"/>
             </div>
           </div>
           <hr class="light-grey-hr">
@@ -168,7 +163,6 @@ export default {
             }
           }
         }`,
-      skip: vm => !vm.$store.state.authenticated,
     },
   },
 

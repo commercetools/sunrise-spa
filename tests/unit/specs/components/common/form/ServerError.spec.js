@@ -50,6 +50,25 @@ describe('ServerError.vue', () => {
     expect(wrapper.vm.isNetworkError).toBeTruthy();
   });
 
+
+  it('detects 400 errors', () => {
+    const wrapper = shallowMount(ServerError, options);
+    expect(wrapper.vm.is400Error).toBeFalsy();
+
+    wrapper.setProps({ error: new ApolloError({}) });
+    expect(wrapper.vm.is400Error).toBeFalsy();
+
+    wrapper.setProps({ error: new ApolloError({ networkError: {} }) });
+    expect(wrapper.vm.is400Error).toBeFalsy();
+
+    wrapper.setProps({
+      error: new ApolloError({
+        networkError: { message: 'Some error', statusCode: 400 },
+      }),
+    });
+    expect(wrapper.vm.isBadRequestError).toBeTruthy();
+  });
+
   it('detects GraphQL errors', () => {
     const wrapper = shallowMount(ServerError, options);
     expect(wrapper.vm.isGraphQLError).toBeFalsy();
@@ -129,6 +148,18 @@ describe('ServerError.vue', () => {
       error: new Error('some error'),
     });
     expect(wrapper.text()).toBe(unknownErrorTranslation);
+  });
+
+  it('renders 400 error', () => {
+    const wrapper = shallowMount(ServerError, options);
+    expect(wrapper.text()).toBe('');
+
+    wrapper.setProps({
+      error: new ApolloError({
+        networkError: { message: 'Some error', statusCode: 400 },
+      }),
+    });
+    expect(wrapper.text()).toBe(badRequestErrorTranslation);
   });
 
   it('renders network error', () => {
