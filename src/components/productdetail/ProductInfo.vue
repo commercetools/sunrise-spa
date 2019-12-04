@@ -8,12 +8,12 @@
          class="col-sm-6 product-description">
       <div class="row">
         <div class="col-sm-12">
-            <h1 data-test="product-name"
-                class="text-uppercase pdp-product-title">
-              {{ currentProduct.name }}
-            </h1>
-            <span data-test="product-sku"
-                  class="grey-p quickview-sku">
+          <h1 data-test="product-name"
+              class="text-uppercase pdp-product-title">
+            {{ currentProduct.name }}
+          </h1>
+          <span data-test="product-sku"
+                class="grey-p quickview-sku">
               {{ sku }}
             </span>
         </div>

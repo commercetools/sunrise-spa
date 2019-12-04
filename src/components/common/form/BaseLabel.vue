@@ -51,33 +51,33 @@ export default {
 </script>
 
 <style scoped>
-label {
-  width: 100%;
-  padding-top: 15px;
-}
+  label {
+    width: 100%;
+    padding-top: 15px;
+  }
 
-label .field-label-text {
-  text-transform: uppercase;
-  font-weight: 400;
-}
+  label .field-label-text {
+    text-transform: uppercase;
+    font-weight: 400;
+  }
 
-.field-required {
-  color: #D54D4D;
-  cursor: default;
-}
+  .field-required {
+    color: #D54D4D;
+    cursor: default;
+  }
 
-.validation-wrapper {
-  display: block;
-  position: relative;
-}
+  .validation-wrapper {
+    display: block;
+    position: relative;
+  }
 
-.validation-error {
-  position: absolute;
-  margin-left: 1px;
-  z-index: 1000;
-  left: 0;
-  bottom: -14px;
-}
+  .validation-error {
+    position: absolute;
+    margin-left: 1px;
+    z-index: 1000;
+    left: 0;
+    bottom: -14px;
+  }
 </style>
 
 <i18n>

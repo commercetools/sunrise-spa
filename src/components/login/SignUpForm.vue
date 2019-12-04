@@ -165,15 +165,15 @@ export default {
 </script>
 
 <style lang="scss">
-.signup-box-terms {
-  input {
-    width: auto;
-    margin-top: 0.3em;
+  .signup-box-terms {
+    input {
+      width: auto;
+      margin-top: 0.3em;
+    }
+    .form-error-message {
+      bottom: -15px;
+    }
   }
-  .form-error-message {
-    bottom: -15px;
-  }
-}
 </style>
 
 <i18n>

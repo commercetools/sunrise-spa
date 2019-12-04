@@ -56,17 +56,17 @@ export default {
 </script>
 
 <style lang="scss">
-.form-field.base-select {
-  display: inline-block;
-  width: 100%;
-  position: relative;
+  .form-field.base-select {
+    display: inline-block;
+    width: 100%;
+    position: relative;
 
-  .selectboxit {
-    display: block;
-  }
+    .selectboxit {
+      display: block;
+    }
 
-  &.error .selectboxit {
-    border-color: rgba(206, 65, 65, 0.6) !important;
+    &.error .selectboxit {
+      border-color: rgba(206, 65, 65, 0.6) !important;
+    }
   }
-}
 </style>
