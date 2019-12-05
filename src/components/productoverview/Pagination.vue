@@ -1,20 +1,27 @@
 <template>
-  <ul v-if="pageCount > 1"
+  <ul data-test="pagination"
       class="pagination">
-    <li class="pagination-item prev-step">
+    <li class="pagination-item"
+        data-test="paginate-prev">
       <button type="button"
-              @click="onClickPreviousPage"
+              class="icon-prev"
+              @click="previousPage"
               :disabled="isInFirstPage"
               aria-label="Go to previous page">
-        &#8249;
       </button>
     </li>
-    <li class="pagination-item next-step">
+
+    <span>
+      {{ $t('page') }} {{page}} {{ $t('of') }} {{totalPages}}
+    </span>
+
+    <li class="pagination-item"
+        data-test="paginate-next">
       <button type="button"
-              @click="onClickNextPage"
+              class="icon-next"
+              @click="nextPage"
               :disabled="isInLastPage"
               aria-label="Go to next page">
-        &#8250;
       </button>
     </li>
   </ul>
@@ -37,34 +44,46 @@ export default {
     },
     totalProducts: {
       type: Number,
+      required: true,
     },
-    currentPage: {
+    page: {
       type: Number,
       required: true,
     },
   },
 
   computed: {
-    pageCount() {
+    totalPages() {
       const productListLength = this.totalProducts;
       const pageLimit = this.limit;
       return Math.ceil(productListLength / pageLimit);
     },
+
     isInFirstPage() {
-      return this.currentPage === 0;
+      return this.page === 1;
     },
+
     isInLastPage() {
-      return this.currentPage >= this.pageCount - 1;
+      return this.page > this.totalPages - 1;
     },
   },
 
   methods: {
-    onClickPreviousPage() {
-      this.$emit('pagechanged', this.currentPage - 1);
+    nextPage() {
+      this.$emit('pagechanged', this.page + 1);
     },
-    onClickNextPage() {
-      this.$emit('pagechanged', this.currentPage + 1);
+    previousPage() {
+      this.$emit('pagechanged', this.page - 1);
     },
   },
 };
 </script>
+
+<i18n>
+  en:
+    page: "Page"
+    of: "of"
+  de:
+    page: "Seite"
+    of: "von"
+</i18n>

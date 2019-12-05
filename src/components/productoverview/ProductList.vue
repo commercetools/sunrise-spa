@@ -28,8 +28,8 @@
                       :offset="offset"
                       :limit="limit"
                       :totalProducts="totalProducts"
-                      :current-page="currentPage"
-                      @pagechanged="onPageChange" />
+                      :page="page"
+                      @pagechanged="changePage" />
         </div>
         <div class="col-xs-4 hidden-xs text-right">
           <!--{{> catalog/pop/display-selector displaySelector=content.displaySelector}}-->
@@ -60,7 +60,8 @@
                           :product="product" />
       </div>
     </transition>
-    <go-top v-if="products && products.results.length >= limit / 2"
+    <go-top v-if="hasManyProducts"
+            data-test="go-top-button"
             :size="50" :bottom="50"></go-top>
   </div>
 </template>
@@ -80,19 +81,21 @@ export default {
     GoTop,
   },
 
-  props: ['categorySlug'],
+  props: ['categorySlug', 'page'],
 
   data: () => ({
     categories: null,
     products: null,
     sort: null,
-    currentPage: 0,
-    offset: 0,
     limit: 75,
   }),
 
   computed: {
     category: vm => vm.categories.results[0],
+
+    offset() {
+      return (this.page - 1) * this.limit;
+    },
 
     totalProducts() {
       return this.products.total;
@@ -108,8 +111,12 @@ export default {
       this.sort = sort;
     },
 
-    onPageChange(page) {
-      this.offset = (this.currentPage = page) * this.limit;
+    hasManyProducts() {
+      return this.products?.results.length >= this.limit / 2;
+    },
+
+    changePage(page) {
+      this.$router.push({ name: 'products', params: { page } });
     },
   },
 

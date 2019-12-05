@@ -40,7 +40,8 @@
           </div>
           <!-- End mobile version -->
 
-          <ProductList :categorySlug="categorySlug" />
+          <ProductList :categorySlug="categorySlug"
+                       :page="page" />
         </div>
       </div>
     </div>
@@ -56,7 +57,13 @@ export default {
     ProductList,
     Breadcrumb,
   },
-  props: ['categorySlug'],
+  props: {
+    categorySlug: String,
+    page: {
+      type: Number,
+      default: 1,
+    },
+  },
 };
 </script>
 

@@ -7,7 +7,6 @@
 .item-list-pagination {
   margin-bottom: 20px;
   width: 75%;
-  // float: right;
 
   /* Overwrite selectboxit library */
   .selectboxit-container span, .selectboxit-container .selectboxit-options a {
@@ -38,24 +37,18 @@
 
 .pagination {
   margin: 0;
-  background-color: white;
-  border: solid 0.5px $alto;
   border-radius: 0;
   min-width: 55px;
   text-align: center;
-  button[disabled] {
-    color: $bombay;
-  }
-  
 }
 
 .pagination-item {
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 18px;
+  vertical-align: middle;
   &:hover {
-    color: $my-sin;
+    color: $my-sin;  
   }
-}
-.prev-step {
-  border-right: solid 0.5px $alto;
+  button[disabled] {
+    color: $bombay;
+  }
 }
