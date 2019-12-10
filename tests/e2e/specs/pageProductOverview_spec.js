@@ -67,7 +67,7 @@ describe('Product overview page', () => {
   it('Paginates back and forth through product list', () => {
     cy.visit('/products/women-clothing-dresses');
     cy.get('[data-test=product-list]', { timeout: 20000 });
-    cy.get('[data-test=pagination]', { timeout: 20000 })
+    cy.get('[data-test=pagination]')
       .find('[data-test=total-pages]')
       .contains('Page 1 of 2')
       .parent()
