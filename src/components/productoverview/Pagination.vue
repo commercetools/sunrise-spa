@@ -5,13 +5,15 @@
         data-test="paginate-prev">
       <button type="button"
               class="icon-prev"
+              data-test="previousPageLink"
               @click="previousPage"
               :disabled="isInFirstPage"
               aria-label="Go to previous page">
       </button>
     </li>
 
-    <span>
+    <span class="total-pages"
+          data-test="total-pages">
       {{ $t('page') }} {{page}} {{ $t('of') }} {{totalPages}}
     </span>
 
@@ -19,6 +21,7 @@
         data-test="paginate-next">
       <button type="button"
               class="icon-next"
+              data-test="nextPageLink"
               @click="nextPage"
               :disabled="isInLastPage"
               aria-label="Go to next page">
@@ -29,28 +32,7 @@
 
 <script>
 export default {
-  props: {
-    products: {
-      type: Object,
-      required: true,
-    },
-    offset: {
-      type: Number,
-      required: true,
-    },
-    limit: {
-      type: Number,
-      required: true,
-    },
-    totalProducts: {
-      type: Number,
-      required: true,
-    },
-    page: {
-      type: Number,
-      required: true,
-    },
-  },
+  props: ['products', 'offset', 'limit', 'totalProducts', 'page'],
 
   computed: {
     totalPages() {

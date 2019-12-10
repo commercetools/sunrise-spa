@@ -63,4 +63,32 @@ describe('Product overview page', () => {
     cy.get('[data-test=empty-results]')
       .contains('No Results Found.');
   });
+
+  it('Paginates back and forth through product list', () => {
+    cy.visit('/products/women-clothing-dresses');
+    cy.get('[data-test=product-list]', { timeout: 20000 });
+    cy.get('[data-test=pagination]', { timeout: 20000 })
+      .find('[data-test=total-pages]')
+      .contains('Page 1 of 2')
+      .parent()
+      .find('[data-test=previousPageLink]')
+      .should('be.disabled');
+
+    cy.get('[data-test=pagination]')
+      .find('[data-test=nextPageLink]')
+      .click();
+
+    cy.url().should('include', '/products/women-clothing-dresses/2');
+    cy.get('[data-test=pagination]')
+      .find('[data-test=total-pages]')
+      .contains('Page 2 of 2')
+      .parent()
+      .find('[data-test=nextPageLink]')
+      .should('be.disabled');
+
+    cy.get('[data-test=pagination]')
+      .find('[data-test=previousPageLink]')
+      .click();
+    cy.url().should('include', '/products/women-clothing-dresses/1');
+  });
 });
