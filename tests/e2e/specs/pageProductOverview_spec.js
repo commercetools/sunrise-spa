@@ -90,5 +90,8 @@ describe('Product overview page', () => {
       .find('[data-test=previousPageLink]')
       .click();
     cy.url().should('include', '/products/women-clothing-dresses/1');
+    cy.get('[data-test=pagination]')
+      .find('[data-test=total-pages]')
+      .contains('Page 1 of 2');
   });
 });
