@@ -3,7 +3,7 @@ describe('CheckoutPage', () => {
     cy.visit('/');
   });
 
-  function shouldShowCorrectCartLike() {
+  function shouldAllowToPlaceOrders() {
     cy.get('[data-test=summary-shipping-address]')
       .then(($address) => {
         cy.wrap($address)
