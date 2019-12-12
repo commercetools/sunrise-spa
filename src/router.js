@@ -64,7 +64,7 @@ const router = new Router({
       props: {
         default: route => ({
           categorySlug: route.params.categorySlug,
-          page: +route.params.page,
+          page: +route.params.page <= 0 ? 1 : +route.params.page,
         }),
         header: false,
         footer: false,
