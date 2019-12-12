@@ -2,14 +2,14 @@
   <div class="row">
     <div class="col-md-6">
       <div class="secure-payment">
-            <span>
-              <img src="../../assets/img/credit-card-lock.png"
-                   class="secure-payment-icon"
-                   :alt="$t('securePayment')">
-            </span>
+        <span>
+          <img src="../../assets/img/credit-card-lock.png"
+               class="secure-payment-icon"
+               :alt="$t('securePayment')">
+        </span>
         <span class="text-uppercase secure-payment-title">
-              {{ $t("secureCheckout") }}
-            </span>
+          {{ $t("secureCheckout") }}
+        </span>
       </div>
     </div>
     <div class="col-md-6">
