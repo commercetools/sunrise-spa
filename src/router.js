@@ -62,7 +62,10 @@ const router = new Router({
         footer: TheFooter,
       },
       props: {
-        default: true,
+        default: route => ({
+          categorySlug: route.params.categorySlug,
+          page: +route.params.page,
+        }),
         header: false,
         footer: false,
       },
