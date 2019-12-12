@@ -23,7 +23,10 @@ describe('AddToCartForm.vue', () => {
       mocks: { $t: jest.fn() },
       store: new Vuex.Store({ actions }),
       propsData: { sku: 'some-sku' },
-      computed: { currency: () => 'EUR' },
+      computed: {
+        currency: () => 'EUR',
+        isLoading: jest.fn(),
+      },
       methods: {
         createMyCart: jest.fn(() => Promise.resolve({})),
         updateMyCart: jest.fn(() => Promise.resolve({})),
