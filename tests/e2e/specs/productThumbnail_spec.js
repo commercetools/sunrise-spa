@@ -1,6 +1,6 @@
 describe('Product thumbnail', () => {
   before(() => {
-    cy.visit('/products/women-shoes-ankle-boots/');
+    cy.visit('/products/women-shoes-ankle-boots/1');
   });
 
   it('displays product information', () => {

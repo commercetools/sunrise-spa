@@ -1,12 +1,12 @@
 describe('Product overview page', () => {
   it('Changes sorting settings', () => {
-    cy.visit('/products/men');
+    cy.visit('/products/men/1');
     cy.get('span[data-test=sort-selector]', { timeout: Cypress.config('graphqlTimeout') })
       .click()
       .parent()
       .contains('Newest')
       .click();
-    cy.url().should('include', '/products/men?sort=newest');
+    cy.url().should('include', '/products/men/1?sort=newest');
     cy.get('[data-test=spinner]')
       .should('exist');
     cy.get('[data-test=spinner]')
@@ -29,7 +29,7 @@ describe('Product overview page', () => {
       .should('exist');
     cy.get('[data-test=spinner]')
       .should('not.exist');
-    cy.url().should('include', '/products/men?sort=oldest');
+    cy.url().should('include', '/products/men/1?sort=oldest');
     cy.get('[data-test=product-list]')
       .first()
       .find('[data-test=product-thumbnail-name]')
@@ -41,7 +41,7 @@ describe('Product overview page', () => {
   });
 
   it('Applies sorting settings from URL', () => {
-    cy.visit('/products/men?sort=newest');
+    cy.visit('/products/men/1?sort=newest');
     cy.get('[data-test=spinner]')
       .should('exist');
     cy.get('[data-test=spinner]')
@@ -57,7 +57,7 @@ describe('Product overview page', () => {
   });
 
   it('Displays a message when an error occurs', () => {
-    cy.visit('/products/accessories');
+    cy.visit('/products/accessories/1');
     cy.get('[data-test=empty-results]')
       .contains('No Results Found');
 
@@ -70,8 +70,8 @@ describe('Product overview page', () => {
   });
 
   it('Paginates back and forth through product list', () => {
-    cy.visit('/products/women-clothing-dresses');
-    cy.get('[data-test=product-list]', { timeout: 20000 });
+    cy.visit('/products/women-clothing-dresses/1');
+    cy.get('[data-test=product-list]', { timeout: Cypress.config('graphqlTimeout') });
     cy.get('[data-test=pagination]')
       .find('[data-test=total-pages]')
       .contains('Page 1 of 2')

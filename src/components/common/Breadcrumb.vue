@@ -10,14 +10,14 @@
       </li>
       <li v-for="ancestor in category.ancestors"
           :key="ancestor.id">
-        <router-link :to="{ name: 'products', params: { categorySlug: ancestor.slug } }"
+        <router-link :to="{ name: 'products', params: { categorySlug: ancestor.slug, page: 1 } }"
                      data-test="breadcrumb-ancestor-link">
           {{ ancestor.name }}
         </router-link>
       </li>
 
       <li class="active">
-        <router-link :to="{ name: 'products', params: { categorySlug: category.slug } }"
+        <router-link :to="{ name: 'products', params: { categorySlug: category.slug, page: 1 } }"
                      data-test="breadcrumb-category-link"
                      class="active">
           {{ category.name }}

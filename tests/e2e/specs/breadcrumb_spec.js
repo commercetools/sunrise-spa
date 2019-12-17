@@ -1,6 +1,6 @@
 describe('Breadcrumb', () => {
   before(() => {
-    cy.visit('/products/women-shoes-ankle-boots/');
+    cy.visit('/products/women-shoes-ankle-boots/1');
   });
 
   it('links to each category of the breadcrumb', () => {
@@ -12,13 +12,13 @@ describe('Breadcrumb', () => {
     cy.get('[data-test=breadcrumb-ancestor-link]')
       .eq(0)
       .should('contain', 'Women')
-      .should('have.attr', 'href', '/products/women')
+      .should('have.attr', 'href', '/products/women/1')
       .should('not.have.class', 'active');
 
     cy.get('[data-test=breadcrumb-ancestor-link]')
       .eq(1)
       .should('contain', 'Shoes')
-      .should('have.attr', 'href', '/products/women-shoes')
+      .should('have.attr', 'href', '/products/women-shoes/1')
       .should('not.have.class', 'active');
 
     cy.get('[data-test=breadcrumb-ancestor-link]')
@@ -27,7 +27,7 @@ describe('Breadcrumb', () => {
 
     cy.get('[data-test=breadcrumb-category-link]')
       .should('contain', 'Ankle boots')
-      .should('have.attr', 'href', '/products/women-shoes-ankle-boots')
+      .should('have.attr', 'href', '/products/women-shoes-ankle-boots/1')
       .should('have.class', 'active');
   });
 });
