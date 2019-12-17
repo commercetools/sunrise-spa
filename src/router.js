@@ -54,7 +54,7 @@ const router = new Router({
       },
     },
     {
-      path: '/products/:categorySlug/:page?',
+      path: '/products/:categorySlug/:page',
       name: 'products',
       components: {
         default: PageProductOverview,
