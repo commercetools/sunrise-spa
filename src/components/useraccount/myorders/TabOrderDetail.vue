@@ -27,8 +27,7 @@
             {{ $t('print') }}
           </button>
         </div>
-        <ShipmentInfo />
-        <CartLikeSummary :cart-like="me.order"/>
+        <CartLikeSummary :cart-like="me.order" />
       </div>
       <div v-else>
         <h1 class="text-center">{{ $t('notFound') }}</h1>
@@ -39,15 +38,15 @@
 
 <script>
 import gql from 'graphql-tag';
-import ShipmentInfo from './ShipmentInfo.vue';
 import BaseDate from '../../common/BaseDate.vue';
 import CartLikeSummary from '../../common/cartlike/CartLikeSummary.vue';
-import DisplayableMoneyFragment from '@/components/DisplayableMoney.gql';
+import ORDER_FRAGMENT from '../../Order.gql';
+import ADDRESS_FRAGMENT from '../../Address.gql';
+import MONEY_FRAGMENT from '../../Money.gql';
 
 export default {
   components: {
     CartLikeSummary,
-    ShipmentInfo,
     BaseDate,
   },
 
@@ -55,83 +54,22 @@ export default {
     me: null,
   }),
 
-  computed: {
-    orderNumber() {
-      return this.$route.params.orderNumber;
-    },
-  },
-
   apollo: {
     me: {
       query: gql`
         query orderByOrderNumber($orderNumber: String, $locale: Locale!) {
           me {
             order(orderNumber: $orderNumber) {
-              id
-              version
-              orderNumber
-              createdAt
-              shippingInfo {
-                price {
-                  ...DisplayableMoney
-                }
-              }
-              taxedPrice {
-                totalGross {
-                  ...DisplayableMoney
-                }
-                totalNet {
-                  ...DisplayableMoney
-                }
-                taxPortions {
-                  amount {
-                    ...DisplayableMoney
-                  }
-                }
-              }
-              totalPrice {
-                ...DisplayableMoney
-              }
-              discountCodes {
-                discountCode {
-                  id
-                  code
-                  name(locale: $locale)
-                }
-              }
-              lineItems {
-                id
-                quantity
-                name(locale: $locale)
-                productSlug(locale: $locale)
-                price{
-                    value {
-                      ...DisplayableMoney
-                    }
-                    discounted {
-                      value {
-                        ...DisplayableMoney
-                      }
-                    }
-                  }
-                totalPrice {
-                  ...DisplayableMoney
-                }
-                variant {
-                  images {
-                    url
-                    label
-                  }
-                  sku
-                }
-              }
+              ...OrderFields
             }
           }
         }
-        ${DisplayableMoneyFragment}`,
+        ${ORDER_FRAGMENT}
+        ${MONEY_FRAGMENT}
+        ${ADDRESS_FRAGMENT}`,
       variables() {
         return {
-          orderNumber: this.orderNumber,
+          orderNumber: this.$route.params.orderNumber,
           locale: this.$store.state.locale,
         };
       },

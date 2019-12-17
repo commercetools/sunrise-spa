@@ -1,29 +1,44 @@
 <template>
-  <label class="field-label">
-    <slot v-if="checkbox"></slot>
-    <span class="text">{{ label }}</span>
-    <span v-if="required"
-          :title="$t('required')"
-          class="field-required"
-          data-test="form-label-required">
-      *
+  <span>
+    <label v-if="label"
+           class="field-label">
+      <span class="field-label-text"
+            data-test="form-label-text">
+        {{ label }}
+        <span v-if="required"
+              :title="$t('required')"
+              class="field-required"
+              data-test="form-label-required">
+          *
+        </span>
+      </span>
+      <slot/>
+    </label>
+    <slot v-else/>
+    <span v-if="vuelidate"
+          class="validation-wrapper">
+      <ValidationError :vuelidate="vuelidate"
+                       :customErrors="customErrors"
+                       class="validation-error"/>
     </span>
-    <slot v-if="!checkbox"></slot>
-  </label>
+  </span>
 </template>
 
 <script>
+import ValidationError from './ValidationError.vue';
+
 export default {
+  components: { ValidationError },
+
   props: {
     vuelidate: {
       type: Object,
     },
     label: {
       type: String,
-      required: true,
     },
-    type: {
-      type: String,
+    customErrors: {
+      type: Object,
     },
   },
 
@@ -31,30 +46,38 @@ export default {
     required() {
       return this.vuelidate?.$params?.required;
     },
-
-    checkbox() {
-      return this.type === 'checkbox';
-    },
   },
 };
 </script>
 
 <style scoped>
-label {
-  width: 100%;
-  padding-top: 15px;
-  position: relative;
-}
+  label {
+    width: 100%;
+    padding-top: 15px;
+  }
 
-label .text {
-  text-transform: uppercase;
-  font-weight: 400;
-}
+  label .field-label-text {
+    text-transform: uppercase;
+    font-weight: 400;
+  }
 
-.field-required {
-  color: #D54D4D;
-  cursor: default;
-}
+  .field-required {
+    color: #D54D4D;
+    cursor: default;
+  }
+
+  .validation-wrapper {
+    display: block;
+    position: relative;
+  }
+
+  .validation-error {
+    position: absolute;
+    margin-left: 1px;
+    z-index: 1000;
+    left: 0;
+    bottom: -14px;
+  }
 </style>
 
 <i18n>

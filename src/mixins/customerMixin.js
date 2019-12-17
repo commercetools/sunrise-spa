@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import BASIC_CUSTOMER_QUERY from '../components/BasicCustomer.gql';
+import BASIC_CUSTOMER_QUERY from './BasicCustomer.gql';
 
 export default {
   methods: {

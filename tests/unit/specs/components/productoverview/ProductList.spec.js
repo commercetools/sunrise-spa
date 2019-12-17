@@ -7,6 +7,9 @@ describe('ProductList.vue', () => {
 
   beforeEach(() => {
     options = {
+      mocks: {
+        $t: jest.fn(),
+      },
       computed: {
         isLoading: jest.fn(),
       },
@@ -37,6 +40,20 @@ describe('ProductList.vue', () => {
   it('calls ProductThumbnail for each obtained product', () => {
     const wrapper = shallowMount(ProductList, options);
     wrapper.setData({
+      categories: {
+        results: [{ id: 'category-id-1' }],
+      },
+      products: {
+        results: [],
+      },
+    });
+
+    expect(wrapper.vm.ProductThumbnail).toBeUndefined();
+
+    wrapper.setData({
+      categories: {
+        results: [{ id: 'category-id-1' }],
+      },
       products: {
         results: [
           { id: 'product-id-1' },

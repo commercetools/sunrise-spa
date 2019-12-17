@@ -1,66 +1,55 @@
 <template>
   <div v-if="cartLike"
        class="cart-like-price-detail">
+    <div v-if="discountCodesExist"
+         class="row">
+      <DiscountCodes :cartLike="cartLike"
+                     :editable="editable"
+                     class="col-sm-12"/>
+    </div>
+    <hr v-if="discountCodesExist">
     <div class="row">
-      <div v-if="discountCodesExist"
-           class="col-sm-12">
-        <DiscountCodes :cartLike="cartLike"/>
-        <hr>
+      <div class="col-sm-7 subtotal">
+        <span class="subtotal-title">{{ $t('subtotal') }}</span>
       </div>
-      <div class="col-sm-7 col-xs-7">
-        <div class="text-right subtotal">
-          <span class="subtotal-title">{{ $t('subtotal') }}</span>
-        </div>
-        <div v-if="cartLike.shippingInfo"
-             class="text-right delivery-info">
-          <span class="delivery-info-title">{{ $t('shipping') }}</span>
-        </div>
-        <hr class="total-divider">
-        <div v-if="taxes"
-             class="text-right">
-          <span>{{ $t('salesTax') }}</span>
-        </div>
-        <div class="text-right">
-          <span class="order-total">{{ $t('total') }}</span>
-        </div>
+      <div class="col-sm-5">
+        <span data-test="cart-subtotal-price">
+          <BaseMoney :money="subtotal"/>
+        </span>
       </div>
-      <div class="col-sm-5 col-xs-5 text-right">
-        <div>
-          <span data-test="cart-subtotal-price">
-            <BaseMoney :money="subtotal"/>
-          </span>
-        </div>
-        <div>
-          <!--<span class="order-discount">{{ cart.discount }}</span>-->
-        </div>
-        <div>
-          <span v-if="cartLike.shippingInfo"
-                data-test="cart-shipping-price">
-            <BaseMoney :money="cartLike.shippingInfo.price"/>
-          </span>
-        </div>
-        <hr>
-        <div>
-          <span v-if="taxes"
-                data-test="cart-taxes-amount">
-            <BaseMoney :money="taxes"/>
-          </span>
-        </div>
-        <div>
-          <span data-test="cart-total-price"
-                class="order-total">
-            <BaseMoney :money="cartLike.totalPrice"/>
-          </span>
-        </div>
+    </div>
+    <div v-if="cartLike.shippingInfo"
+         class="row">
+      <div class="col-sm-7 delivery-info">
+        <span class="delivery-info-title">{{ $t('shipping') }}</span>
       </div>
-
-      <!--{{#if checkoutConfirmation}}-->
-      <!--<div class="complete-order">-->
-      <!--<button id="confirmation-completeorder-btn"-->
-      <!--class="btn complete-order-btn">{{ $t('checkout.completeMyOrder') }}</button>-->
-      <!--<br>-->
-      <!--</div>-->
-      <!--{{/if}}-->
+      <div class="col-sm-5">
+        <span data-test="cart-shipping-price">
+          <BaseMoney :money="cartLike.shippingInfo.price"/>
+        </span>
+      </div>
+    </div>
+    <hr class="total-divider">
+    <div v-if="taxes"
+         class="row">
+      <div class="col-sm-7">
+        <span>{{ $t('salesTax') }}</span>
+      </div>
+      <div data-test="cart-taxes-amount"
+           class="col-sm-5">
+        <BaseMoney :money="taxes"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-7">
+        <span class="order-total">{{ $t('total') }}</span>
+      </div>
+      <div class="col-sm-5">
+        <span data-test="cart-total-price"
+              class="order-total">
+          <BaseMoney :money="cartLike.totalPrice"/>
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -79,6 +68,10 @@ export default {
     cartLike: {
       type: Object,
       required: true,
+    },
+    editable: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -115,7 +108,8 @@ export default {
 <style scoped>
   .cart-like-price-detail {
     border-top: 1px solid #D6D6D6;
-    padding: 1em;
+    padding: 1em 0;
+    text-align: right;
   }
 </style>
 

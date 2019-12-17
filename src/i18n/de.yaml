@@ -185,7 +185,8 @@ catalog:
   noSearchResult:
     searchNotFound:
       title: "Suchergebnisse"
-      notFound: "Keine Ergebnisse Gefunden."
+      notFound: "Keine Ergebnisse Gefunden"
+      categoryNotFound: "Kategorie nicht gefunden"
       keyword: null
       description: "Es gab leider keine Treffer für Ihre Suche nach \"xxxxx\". Prüfe die Schreibweise oder suche nach einem Synonym."
     popularSearchPhrases:

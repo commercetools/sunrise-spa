@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
-import CartLikeSummary from '@/components/common/cartlike/CartLikeSummary.vue';
+import CartLikeContentDetail from '@/components/common/cartlike/CartLikeContentDetail.vue';
 
-describe('CartLikeSummary.vue', () => {
+describe('CartLikeContentDetail.vue', () => {
   const cartLike = {
     lineItems: [],
     totalPrice: {
@@ -28,7 +28,7 @@ describe('CartLikeSummary.vue', () => {
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(CartLikeSummary, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(CartLikeContentDetail, options).isVueInstance()).toBeTruthy();
   });
 
   it('transforms the totalPrice with a cart discount', () => {
@@ -47,7 +47,7 @@ describe('CartLikeSummary.vue', () => {
         fractionDigits: 2,
       },
     };
-    const wrapper = shallowMount(CartLikeSummary, options);
+    const wrapper = shallowMount(CartLikeContentDetail, options);
     expect(wrapper.vm.totalPrice(lineItem)).toEqual({
       discounted: {
         value: {
@@ -86,7 +86,7 @@ describe('CartLikeSummary.vue', () => {
         fractionDigits: 2,
       },
     };
-    const wrapper = shallowMount(CartLikeSummary, options);
+    const wrapper = shallowMount(CartLikeContentDetail, options);
     expect(wrapper.vm.totalPrice(lineItem)).toEqual({
       discounted: {
         value: {
@@ -118,7 +118,7 @@ describe('CartLikeSummary.vue', () => {
         fractionDigits: 2,
       },
     };
-    const wrapper = shallowMount(CartLikeSummary, options);
+    const wrapper = shallowMount(CartLikeContentDetail, options);
     expect(wrapper.vm.totalPrice(lineItem)).toEqual({
       value: {
         centAmount: 46250,

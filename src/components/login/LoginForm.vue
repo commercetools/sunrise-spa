@@ -11,25 +11,33 @@
       <BaseForm :vuelidate="$v"
                 :onSubmit="customerSignMeIn"
                 #default="{ error, state }">
-        <ServerError :error="error"
-                     v-slot="{ graphQLError }">
-          {{ getErrorMessage(graphQLError) }}
-        </ServerError>
-        <div class="login-box-input">
-          <BaseInput v-model="form.email"
-                     :vuelidate="$v.form.email"
-                     :label="$t('email')"
-                     type="email"
-                     autocomplete="username"
-                     data-test="login-form-email" />
+        <div class="row">
+          <div class="col-sm-12">
+            <ServerError :error="error"
+                         v-slot="{ graphQLError }">
+              {{ getErrorMessage(graphQLError) }}
+            </ServerError>
+          </div>
         </div>
-        <div class="login-box-input">
-          <BaseInput v-model="form.password"
-                     :vuelidate="$v.form.password"
-                     :label="$t('password')"
-                     type="password"
-                     autocomplete="current-password"
-                     data-test="login-form-password" />
+        <div class="row">
+          <div class="col-sm-12">
+            <BaseInput v-model="form.email"
+                       :vuelidate="$v.form.email"
+                       :label="$t('email')"
+                       type="email"
+                       autocomplete="username"
+                       data-test="login-form-email" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <BaseInput v-model="form.password"
+                       :vuelidate="$v.form.password"
+                       :label="$t('password')"
+                       type="password"
+                       autocomplete="current-password"
+                       data-test="login-form-password" />
+          </div>
         </div>
         <div class="clearfix">
           <div class="pull-left">

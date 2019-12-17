@@ -1,87 +1,97 @@
 <template>
   <div>
-    <form id="form-filter-products" name="filter-products" action="#">
-      <!--  {{#if content.searchTerm}}
-        <input type="hidden" name="q" value="{{content.searchTerm}}"/>
-      {{/if}}-->
+    <LoadingSpinner v-if="isLoading"/>
 
-      <div class="row item-list-pagination">
-        <!--    {{#if content.searchResult}}
-        <div class="search-results-row">
-          {{> catalog/pop/search-result searchResult=content.searchResult}}
-        </div>
-        {{else}}
-        <div class="jumbotron-row">
-          {{> catalog/pop/jumbotron jumbotron=content.jumbotron}}
-        </div>
+    <div v-else-if="categories && products">
+      <form v-if="products.results.length"
+            id="form-filter-products"
+            name="filter-products" action="#">
+        <!--  {{#if content.searchTerm}}
+          <input type="hidden" name="q" value="{{content.searchTerm}}"/>
         {{/if}}-->
-        <div class="col-xs-4 hidden-xs text-left">
-          <div v-if="products && products.results.length"
-                class="custom-select-wrapper">
-            <ProductSortSelector @changeSort="changeSort" />
-            <!--{{> catalog/pop/sort-selector sortSelector=content.sortSelector}}-->
+
+        <div class="row item-list-pagination">
+          <!--    {{#if content.searchResult}}
+          <div class="search-results-row">
+            {{> catalog/pop/search-result searchResult=content.searchResult}}
+          </div>
+          {{else}}
+          <div class="jumbotron-row">
+            {{> catalog/pop/jumbotron jumbotron=content.jumbotron}}
+          </div>
+          {{/if}}-->
+          <div class="col-xs-4 hidden-xs text-left">
+            <div class="custom-select-wrapper">
+              <ProductSortSelector @changeSort="changeSort" />
+              <!--{{> catalog/pop/sort-selector sortSelector=content.sortSelector}}-->
+            </div>
+          </div>
+          <div class="custom-pagination">
+            <Pagination :products="products"
+                        :offset="offset"
+                        :limit="limit"
+                        :totalProducts="totalProducts"
+                        :page="page"
+                        @pagechanged="changePage" />
+          </div>
+          <div class="col-xs-4 hidden-xs text-right">
+            <!--{{> catalog/pop/display-selector displaySelector=content.displaySelector}}-->
           </div>
         </div>
-        <div v-if="products && products.results.length"
-             class="custom-pagination">
-          <Pagination :products="products"
-                      :offset="offset"
-                      :limit="limit"
-                      :totalProducts="totalProducts"
-                      :page="page"
-                      @pagechanged="changePage" />
+        <div class="product-filter hidden-xs">
+          <!--{{> catalog/pop/filters-sidebar}}-->
         </div>
-        <div class="col-xs-4 hidden-xs text-right">
-          <!--{{> catalog/pop/display-selector displaySelector=content.displaySelector}}-->
+
+        <div id="pop-product-list"
+             class="row">
+          <ProductThumbnail v-for="product in products.results"
+                            data-test="product-list"
+                            :key="product.id"
+                            :product="product" />
+        </div>
+      </form>
+      <div v-else>
+        <div class="empty-results-container">
+            <span class="empty-results"
+                  data-test="empty-results">
+              {{ $t('catalog.noSearchResult.searchNotFound.notFound') }}
+            </span>
         </div>
       </div>
-      <div class="product-filter hidden-xs">
-        <!--{{> catalog/pop/filters-sidebar}}-->
-      </div>
-    </form>
-    <div v-if="isLoading">
-      <img data-test="spinner" src="../../assets/img/spinner.gif"/>
     </div>
-    <div v-else-if="products && !products.results.length">
+
+    <div v-else>
       <div class="empty-results-container">
         <span class="empty-results"
-              data-test="empty-results">
-          {{ $t('catalog.noSearchResult.searchNotFound.notFound') }}
+              data-test="category-not-found">
+          {{ $t('catalog.noSearchResult.searchNotFound.categoryNotFound') }}
         </span>
       </div>
     </div>
-    <transition name="fade">
-      <div v-if="!isLoading && products && products.results.length"
-           id="pop-product-list"
-           class="row">
-        <ProductThumbnail v-for="product in products.results"
-                          data-test="product-list"
-                          :key="product.id"
-                          :product="product" />
-      </div>
-    </transition>
     <go-top v-if="hasManyProducts"
-            data-test="go-top-button"
-            :size="50" :bottom="50"></go-top>
+        data-test="go-top-button"
+        :size="50" :bottom="50"></go-top>
   </div>
 </template>
 
 <script>
 import GoTop from '@inotom/vue-go-top';
 import gql from 'graphql-tag';
+import LoadingSpinner from '../common/LoadingSpinner.vue';
 import ProductThumbnail from '../common/ProductThumbnail.vue';
 import ProductSortSelector from './ProductSortSelector.vue';
 import Pagination from './Pagination.vue';
 
 export default {
+  props: ['categorySlug', 'page'],
+
   components: {
+    LoadingSpinner,
     ProductThumbnail,
     ProductSortSelector,
     Pagination,
     GoTop,
   },
-
-  props: ['categorySlug', 'page'],
 
   data: () => ({
     categories: null,
@@ -91,7 +101,9 @@ export default {
   }),
 
   computed: {
-    category: vm => vm.categories.results[0],
+    category() {
+      return this.categories.results[0];
+    },
 
     offset() {
       return (this.page - 1) * this.limit;
@@ -181,14 +193,14 @@ export default {
       variables() {
         return {
           locale: this.$store.state.locale,
-          currency: this.$i18n.numberFormats[this.$store.state.country].currency.currency,
+          currency: this.$store.state.currency,
           where: `masterData(current(categories(id="${this.category.id}")))`,
           sort: this.sort,
           offset: this.offset,
           limit: this.limit,
         };
       },
-      skip: vm => !vm.categories,
+      skip: vm => !vm.categories || !vm.category,
     },
   },
 };
