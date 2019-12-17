@@ -30,31 +30,33 @@
   div {
     display: inline;
   }
-}
-.step-number {
-  padding: 0.6em 1em;
-  color: $gray;
-  background: $white;
-  border-radius: 50%;
-  border: 1px solid $silver-chalice;
-  font-size: 1em;
-}
-.step-number-active {
-  background: $silver-chalice;
-  color: $white;
-}
-.step-title {
-  padding: 0 0.5em 0 0.2em;
+
+  .step-number {
+    padding: 0.6em 1em;
+    color: $gray;
+    background: $white;
+    border-radius: 50%;
+    border: 1px solid $silver-chalice;
+    font-size: 1em;
+  }
+
+  .step-title {
+    padding: 0 1em 0 0.5em;
+  }
+
+  .active .step-number {
+    background: $silver-chalice;
+    color: $white;
+  }
 }
 
 // Shipping information
-.checkout {
+.checkout-content {
   background: $white;
   border: 1px solid $alto;
-  margin-bottom: 2em;
 }
 .shipping-info {
-  margin: 1em;
+  margin: 1em 0;
   padding-bottom: 1em;
   border-bottom: 1px solid $alto;
 }
@@ -143,23 +145,10 @@
 .shipping-method .shipping-method-radio {
   margin-right: 1em;
 }
-.checkout-checkout-btn {
-  width: 100%;
-  background: url("../img/arrow-66.png") no-repeat 95% 13px $my-sin;
-  background-size: 15px;
-  border: none;
-  margin: 1em;
-  padding: 0.5em 0;
-  font-size: 1.2em;
-  &:hover {
-    background: url("../img/arrow-66.png") no-repeat 95% 13px lighten($my-sin, 5%);
-    background-size: 15px;
-  }
-}
 
 // Order summary
 .order-summary {
-  margin: 1em;
+  margin: 1em 0;
 }
 .order-summary-title {
   font-size: 1.1em;
@@ -174,16 +163,20 @@
   color: $ship-cove;
   padding-left: 0.5em;
 }
-.order {
+.checkout-order {
   background: lighten($alto, 10%);
   border: 1px solid $alto;
-  margin: 1em;
   /**padding-top: 2em;*/
-}
-.order-summary-img {
-  padding: 0.5em;
-  img {
-    border: 1px solid $alto;
+
+  &> div {
+    margin: 1em;
+  }
+
+  .product-img-col {
+    padding-bottom: 1em;
+    img {
+      border: 1px solid $alto;
+    }
   }
 }
 .summary-item-info {
@@ -208,10 +201,15 @@
   color: $gray;
   padding-right: 1em;
 }
-.order-item-price {
+.order-summary-item {
   margin: 1em;
-  padding-bottom: 1em;
   border-bottom: 1px solid $alto;
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+.order-item-price {
+  padding-bottom: 1em;
 }
 .order-item-value {
   border-left: 1px solid $alto;
@@ -230,11 +228,12 @@
   color: $gray;
   padding-right: 1em;
 }
-.checkout-price-text,
-.checkout-price-digits {
-  margin-bottom: 1em;
-  font-size: 1.1em;
-  letter-spacing: 0.1em;
+.checkout-order {
+  .cart-like-price-detail {
+    margin-bottom: 1em;
+    font-size: 1.1em;
+    letter-spacing: 0.1em;
+  }
 }
 .checkout-total-price {
   border-bottom: 1px solid $alto;
@@ -254,7 +253,7 @@
   font-size: 0.9em;
   color: $gray;
   text-decoration: underline;
-  margin: 1em;
+  margin-top: 1em;
   letter-spacing: 0.05em;
 }
 .total-order-value {
@@ -307,11 +306,11 @@
   }
 }
 @media screen and (max-width: 470px) {
-	.step-title {
+  .step-title {
     padding-right: 0;
     margin-right: 2em;
   }
-  .step-title-active {
+  .active .step-title {
     border-bottom: 1px solid $ebony-clay;
   }
   .step-number {

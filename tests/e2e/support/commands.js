@@ -49,10 +49,19 @@ Cypress.Commands.add('checkCustomerIsLoggedIn', (customer) => {
 
 Cypress.Commands.add('changeLanguage', (language) => {
   cy.get('[data-test=location-selector-open-button]').click();
-  cy.get('span[data-test=location-selector-dropdown]')
+  cy.get('span[data-test=language-selector-dropdown]')
     .click()
     .parent()
     .contains(language)
+    .click();
+});
+
+Cypress.Commands.add('changeCountry', (country) => {
+  cy.get('[data-test=location-selector-open-button]').click();
+  cy.get('span[data-test=country-selector-dropdown]')
+    .click()
+    .parent()
+    .contains(country)
     .click();
 });
 

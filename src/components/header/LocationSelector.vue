@@ -1,5 +1,5 @@
 <template>
-  <li v-if="languages.length"
+  <li v-if="languages.length || countries.length"
       @mouseleave="open"
       @mouseenter="close"
       data-test="location-selector"
@@ -20,20 +20,21 @@
           <SelectBoxIt v-model="language"
                        :options="languages"
                        id="language"
-                       data-test="location-selector-dropdown"
+                       data-test="language-selector-dropdown"
                        class="select location-select"
                        @input="toggle"/>
         </div>
-        <!--{{#if location.country}}-->
-        <!--<form id="form-select-country" action="{{@root.meta._links.selectCountry.href}}" method="POST">-->
-        <!--<input type="hidden" name="csrfToken" value="{{@root.meta.csrfToken}}"/>-->
-        <!--<span class="location-dropdown-label">{{i18n "main:header.country"}}</span>-->
-        <!--<select name="country" id="country-select" class="select location-select">-->
-        <!--{{#each location.country}}-->
-        <!--<option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>-->
-        <!--{{/each}}-->
-        <!--</select>-->
-        <!--{{/if}}-->
+        <div v-if="countries.length">
+          <span class="location-dropdown-label">
+            {{ $t('country') }}
+          </span>
+          <SelectBoxIt v-model="country"
+                       :options="countries"
+                       id="country-select"
+                       data-test="country-selector-dropdown"
+                       class="select location-select"
+                       @input="toggle"/>
+        </div>
       </div>
     </transition>
   </li>
@@ -53,6 +54,14 @@ export default {
   }),
 
   computed: {
+    country: {
+      get() {
+        return this.$store.state.country;
+      },
+      set(value) {
+        this.$store.dispatch('setCountry', value);
+      },
+    },
     language: {
       get() {
         return this.$store.state.locale;
@@ -66,6 +75,12 @@ export default {
       const configLangs = this.$sunrise.languages;
       const langs = configLangs ? Object.entries(configLangs) : [];
       return langs.map(([id, name]) => ({ id, name }));
+    },
+
+    countries() {
+      const configCountries = this.$sunrise.countries;
+      const countries = configCountries ? Object.entries(configCountries) : [];
+      return countries.map(([id, name]) => ({ id, name }));
     },
   },
 

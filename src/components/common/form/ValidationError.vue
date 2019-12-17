@@ -6,7 +6,7 @@
       <span v-if="!vuelidate[validation]"
             :validation="validation"
             data-test="validation-error">
-        <span class="form-error-message">
+        <span class="message">
           {{ getErrorMessage(validation) }}
         </span>
       </span>
@@ -46,16 +46,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.form-error-message {
+<style scoped>
+.message {
   font-size: 12px;
-  position: absolute;
-  margin-left: 1px;
-  z-index: 1000;
-  padding: 0;
   color: rgb(206, 65, 65);
-  left: 0;
-  bottom: -10px;
 }
 </style>
 

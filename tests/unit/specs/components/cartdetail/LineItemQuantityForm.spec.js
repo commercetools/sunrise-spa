@@ -15,7 +15,6 @@ describe('LineItemQuantityForm.vue', () => {
     options = {
       localVue,
       propsData: { lineItemId: 'li-id', quantity: 3 },
-      computed: { cartExists: () => true },
       methods: { debouncedSubmit: mockedDebounced },
     };
   });

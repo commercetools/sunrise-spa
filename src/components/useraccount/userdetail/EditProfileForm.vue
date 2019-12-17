@@ -45,12 +45,12 @@
           </div>
           <hr class="light-grey-hr">
           <!-- <div class="personal-details-newsletter"> -->
-          <!-- <span> -->
-          <!-- <input name="subscribeToNewsletter" -->
-          <!-- type="checkbox" -->
-          <!-- {{#if personalDetails.personalDetailsForm.subscribeToNewsletter}}checked{{/if}}/> -->
-          <!-- {{ $t('personalDetailsForm.subscribeToNewsletter') }} -->
-          <!-- </span> -->
+            <!-- <span> -->
+              <!-- <input name="subscribeToNewsletter" -->
+                      <!-- type="checkbox" -->
+                      <!-- {{#if personalDetails.personalDetailsForm.subscribeToNewsletter}}checked{{/if}}/> -->
+              <!-- {{ $t('personalDetailsForm.subscribeToNewsletter') }} -->
+            <!-- </span> -->
           <!-- </div> -->
           <div class="personal-details-edit-btn">
             <span>
