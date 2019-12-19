@@ -12,7 +12,7 @@
       </h4>
       <p class="banner-subtitle">{{ $t('subtitle') }}</p>
       <p class="hidden-xs hidden-sm">{{ $t('description1') }}<br/><br/>{{ $t('description2') }}</p>
-      <router-link :to="{ name: 'products', params: { categorySlug: 'men-clothing-shirts', page: 1 } }"
+      <router-link :to="{ name: 'products', params: { categorySlug: 'men-clothing-shirts' } }"
                    class="btn banner-btn">
         {{ $t('linkLabel') }}
       </router-link>

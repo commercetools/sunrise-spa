@@ -8,7 +8,7 @@
           @mouseleave="hoverOffCategory()"
           data-test="category-1st-level"
           class="dropdown menu-large">
-        <router-link :to="{ name: 'products', params: { categorySlug: category1stLevel.slug, page } }"
+        <router-link :to="{ name: 'products', params: { categorySlug: category1stLevel.slug } }"
                      @click.native="clickOnCategory()"
                      data-test="category-1st-level-link"
                      :class="{ 'icon-ribbon sale': isSale(category1stLevel) }"
@@ -25,7 +25,7 @@
               <div v-for="category2ndLevel in category1stLevel.children"
                    :key="category2ndLevel.id">
                 <h3>
-                  <router-link :to="{ name: 'products', params: { categorySlug: category2ndLevel.slug, page } }"
+                  <router-link :to="{ name: 'products', params: { categorySlug: category2ndLevel.slug } }"
                                @click.native="clickOnCategory()"
                                data-test="category-2nd-level-link">
                     {{ category2ndLevel.name }}
@@ -34,7 +34,7 @@
                 <ul>
                   <li v-for="category3rdLevel in category2ndLevel.children"
                       :key="category3rdLevel.id">
-                    <router-link :to="{ name: 'products', params: { categorySlug: category3rdLevel.slug, page } }"
+                    <router-link :to="{ name: 'products', params: { categorySlug: category3rdLevel.slug } }"
                                  @click.native="clickOnCategory()"
                                  data-test="category-3rd-level-link">
                       {{ category3rdLevel.name }}
@@ -63,7 +63,6 @@ export default {
     categories: null,
     openCategoryMenu: '',
     someCategoryWasClicked: false,
-    page: 1,
   }),
 
   methods: {
