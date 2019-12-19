@@ -72,30 +72,29 @@ describe('Product overview page', () => {
   it('Paginates back and forth through product list', () => {
     cy.visit('/products/women-clothing-dresses');
     cy.get('[data-test=product-list]', { timeout: Cypress.config('graphqlTimeout') });
-    cy.get('[data-test=pagination]')
+    cy.get('[data-test=custom-pagination-top]')
       .find('[data-test=total-pages]')
       .contains('Page 1 of 2')
       .parent()
-      .find('[data-test=previousPageLink]')
+      .find('[data-test=previous-page-link]')
       .should('be.disabled');
 
-    cy.get('[data-test=pagination]')
-      .find('[data-test=nextPageLink]')
+    cy.get('[data-test=custom-pagination-top]')
+      .find('[data-test=next-page-link]')
       .click();
-
     cy.url().should('include', '/products/women-clothing-dresses/2');
-    cy.get('[data-test=pagination]')
+    cy.get('[data-test=custom-pagination-top]')
       .find('[data-test=total-pages]')
-      .contains('Page 2 of 2')
-      .parent()
-      .find('[data-test=nextPageLink]')
+      .contains('Page 2 of 2');
+    cy.get('[data-test=custom-pagination-top]')
+      .find('[data-test=next-page-link]')
       .should('be.disabled');
 
-    cy.get('[data-test=pagination]')
-      .find('[data-test=previousPageLink]')
+    cy.get('[data-test=custom-pagination-top]')
+      .find('[data-test=previous-page-link]')
       .click();
     cy.url().should('include', '/products/women-clothing-dresses');
-    cy.get('[data-test=pagination]')
+    cy.get('[data-test=custom-pagination-top]')
       .find('[data-test=total-pages]')
       .contains('Page 1 of 2');
   });

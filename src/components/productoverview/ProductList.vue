@@ -26,7 +26,8 @@
               <!--{{> catalog/pop/sort-selector sortSelector=content.sortSelector}}-->
             </div>
           </div>
-          <div class="custom-pagination">
+          <div class="custom-pagination"
+               data-test="custom-pagination-top">
             <Pagination :products="products"
                         :offset="offset"
                         :limit="limit"

@@ -5,7 +5,7 @@
         data-test="paginate-prev">
       <button type="button"
               class="icon-prev"
-              data-test="previousPageLink"
+              data-test="previous-page-link"
               @click="previousPage"
               :disabled="isInFirstPage"
               aria-label="Go to previous page">
@@ -21,7 +21,7 @@
         data-test="paginate-next">
       <button type="button"
               class="icon-next"
-              data-test="nextPageLink"
+              data-test="next-page-link"
               @click="nextPage"
               :disabled="isInLastPage"
               aria-label="Go to next page">
