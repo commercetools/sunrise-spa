@@ -6,18 +6,16 @@ module.exports = {
     jquery: true,
   },
 
-  extends: [
-    'plugin:vue/essential',
-    '@vue/airbnb',
-  ],
+  extends: ['plugin:vue/essential', '@vue/airbnb'],
 
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-underscore-dangle': ['error', { 'allow': ['__typename'] }],
-    'max-len': [
-      'error', { code: 120 },
-    ],
+    'no-underscore-dangle': ['error', {allow: ['__typename']}],
+    'max-len': ['error', {code: 120}],
+    //do not use this rule since it'll conflict with prettier formatting
+    //https://github.com/prettier/prettier-eslint/issues/186
+    'operator-linebreak': 'off',
     'no-param-reassign': [
       'error',
       {
@@ -49,7 +47,5 @@ module.exports = {
     parser: 'babel-eslint',
   },
 
-  plugins: [
-    'graphql',
-  ],
+  plugins: ['graphql'],
 };
