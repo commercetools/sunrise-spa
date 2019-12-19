@@ -49,6 +49,19 @@
                             :key="product.id"
                             :product="product" />
         </div>
+        <a href="#"
+            class="scroll-to-top"
+            v-scroll-to="'#form-filter-products'">
+            go to top
+          </a>
+        <div class="custom-pagination">
+          <Pagination :products="products"
+                      :offset="offset"
+                      :limit="limit"
+                      :totalProducts="totalProducts"
+                      :page="page"
+                      @pagechanged="changePage" />
+        </div>
       </form>
       <div v-else>
         <div class="empty-results-container">
@@ -68,14 +81,10 @@
         </span>
       </div>
     </div>
-    <go-top v-if="hasManyProducts"
-        data-test="go-top-button"
-        :size="50" :bottom="50"></go-top>
   </div>
 </template>
 
 <script>
-import GoTop from '@inotom/vue-go-top';
 import gql from 'graphql-tag';
 import LoadingSpinner from '../common/LoadingSpinner.vue';
 import ProductThumbnail from '../common/ProductThumbnail.vue';
@@ -90,7 +99,6 @@ export default {
     ProductThumbnail,
     ProductSortSelector,
     Pagination,
-    GoTop,
   },
 
   data: () => ({
@@ -103,6 +111,10 @@ export default {
   computed: {
     category() {
       return this.categories.results[0];
+    },
+
+    hasManyProducts() {
+      return this.products?.results.length >= this.limit / 2;
     },
 
     offset() {
@@ -123,12 +135,8 @@ export default {
       this.sort = sort;
     },
 
-    hasManyProducts() {
-      return this.products?.results.length >= this.limit / 2;
-    },
-
     changePage(page) {
-      this.$router.push({ name: 'products', params: { page } });
+      this.$router.push({ name: 'productsPagination', params: { page } });
     },
   },
 
