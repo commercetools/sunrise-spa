@@ -5,7 +5,7 @@
       <span class="my-account-title-text icon-user">{{ $t('title') }}</span>
     </div>
       <div class="row my-account-content">
-        <div class="col-sm-12">
+        <div class="col-sm-12 my-account-tab">
           <div class="checkout-form-step">
             <div class="personal-details-title">
               <span>{{ $t('forgotPassword') }}</span>
