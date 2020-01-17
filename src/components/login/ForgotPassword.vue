@@ -52,6 +52,7 @@
 <script>
 import { required } from 'vuelidate/lib/validators';
 import axios from 'axios';
+import sunriseConfig from '../../../sunrise.config';
 import ServerError from '../common/form/ServerError.vue';
 import LoadingButton from '../common/form/LoadingButton.vue';
 import BaseInput from '../common/form/BaseInput.vue';
@@ -71,8 +72,9 @@ export default {
 
   methods: {
     sendRecoveryEmail() {
+      console.log(sunriseConfig);
       return axios.post('https://a8nroxg8i3.execute-api.eu-west-1.amazonaws.com/dev/email/send',
-        { email: this.email, baseUrl: window.location.origin });
+        { email: this.email, baseUrl: window.location.origin, projectConfig: sunriseConfig.ct });
     },
 
     getErrorMessage({ code }) {
