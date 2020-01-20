@@ -51,6 +51,7 @@
                             :product="product" />
         </div>
         <a href="#"
+            id="scroll-to-top"
             class="scroll-to-top"
             v-scroll-to="{
               el: '#form-filter-products',
@@ -58,7 +59,7 @@
               easing: 'linear',
               offset: -200,
           }">
-            go to top
+            <span class="scroll-to-top-text"> go to top </span>
           </a>
         <div class="custom-pagination">
           <Pagination :products="products"
@@ -143,6 +144,9 @@ export default {
 
     changePage(page) {
       this.$router.push({ name: 'productsPagination', params: { page } });
+    },
+
+    scrollToTop() {
     },
   },
 
