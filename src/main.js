@@ -19,6 +19,27 @@ Vue.config.productionTip = false;
 Vue.use(VueScrollTo);
 Vue.use(ProductZoomer);
 Vue.use(Vuelidate);
+Vue.directive('vpshow', {
+  /* eslint-disable no-param-reassign */
+  bind(el, binding) {
+    el.$onScroll = function onScroll() {
+      binding.value(el);
+    };
+    document.addEventListener('scroll', el.$onScroll);
+  },
+
+  inserted(el) {
+    el.$onScroll();
+  },
+
+  unbind(el) {
+    document.removeEventListener('scroll', el.$onScroll);
+    delete el.$onScroll;
+  },
+  /* eslint-enable no-param-reassign */
+});
+
+
 Vue.prototype.$sunrise = sunriseConfig;
 
 new Vue({

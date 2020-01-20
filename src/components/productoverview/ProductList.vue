@@ -51,14 +51,16 @@
                             :product="product" />
         </div>
         <a href="#"
-            id="scroll-to-top"
-            class="scroll-to-top"
-            v-scroll-to="{
-              el: '#form-filter-products',
-              duration: 500,
-              easing: 'linear',
-              offset: -200,
-          }">
+          id="scroll-to-top"
+          class="scroll-to-top"
+          v-scroll-to="{
+            el: '#form-filter-products',
+            duration: 500,
+            easing: 'linear',
+            offset: -200,
+          }"
+          v-vpshow="showScroll"
+        >
             <span class="scroll-to-top-text"> go to top </span>
           </a>
         <div class="custom-pagination">
@@ -146,7 +148,10 @@ export default {
       this.$router.push({ name: 'productsPagination', params: { page } });
     },
 
-    scrollToTop() {
+    showScroll(el) {
+      // eslint-disable-next-line no-param-reassign
+      el.style.display = window.innerHeight > 300
+       && window.scrollY > 200 ? '' : 'none';
     },
   },
 
