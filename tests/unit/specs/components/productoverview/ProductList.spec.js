@@ -13,6 +13,10 @@ describe('ProductList.vue', () => {
       computed: {
         isLoading: jest.fn(),
       },
+      directives: {
+        'scroll-to': jest.fn(),
+        vpshow: jest.fn(),
+      },
     };
   });
 
