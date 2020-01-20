@@ -52,7 +52,12 @@
         </div>
         <a href="#"
             class="scroll-to-top"
-            v-scroll-to="'#form-filter-products'">
+            v-scroll-to="{
+              el: '#form-filter-products',
+              duration: 500,
+              easing: 'linear',
+              offset: -200,
+          }">
             go to top
           </a>
         <div class="custom-pagination">

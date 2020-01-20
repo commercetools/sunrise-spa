@@ -13,7 +13,6 @@
   "dependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.2.0",
     "@commercetools/sdk-auth": "^1.5.0",
-    "@inotom/vue-go-top": "^1.1.0",
     "apollo-cache-inmemory": "^1.3.5",
     "apollo-client": "^2.4.12",
     "apollo-link": "^1.2.12",
@@ -32,6 +31,7 @@
     "vue-perfect-scrollbar": "^0.1.0",
     "vue-product-zoomer": "^2.0.11",
     "vue-router": "^3.0.3",
+    "vue-scrollto": "^2.17.1",
     "vuelidate": "^0.7.4",
     "vuex": "^3.0.1",
     "vuex-persistedstate": "^2.5.4",

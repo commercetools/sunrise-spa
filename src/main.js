@@ -4,6 +4,7 @@ import Vue from 'vue';
 import 'whatwg-fetch';
 import Vuelidate from 'vuelidate';
 import ProductZoomer from 'vue-product-zoomer';
+import VueScrollTo from 'vue-scrollto';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -17,7 +18,7 @@ Vue.config.productionTip = false;
 
 Vue.use(ProductZoomer);
 Vue.use(Vuelidate);
-
+Vue.use(VueScrollTo);
 Vue.prototype.$sunrise = sunriseConfig;
 
 new Vue({
