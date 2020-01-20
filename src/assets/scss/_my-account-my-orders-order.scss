@@ -35,15 +35,17 @@
 }
 .my-orders-order-dark-box {
   background: $wild-sand;
-  padding: 15px;
-  color: $gray;
+  padding: 15px 10px;
   position: relative;
   margin-bottom: 15px;
   .my-orders-order-dark-box-title {
-    color: $mine-shaft;
+    font-weight: bold;
     font-size: 14px;
     padding-bottom: 10px;
     text-transform: uppercase;
+    .checkout-summary-edit-icon {
+      font-weight: normal;
+    }
   }
 }
 .my-orders-order-price-summary-wrapper {

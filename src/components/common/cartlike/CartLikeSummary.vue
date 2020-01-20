@@ -7,12 +7,14 @@
             {{ $t('shippingAddress') }}
             <router-link v-if="editable"
                          :to="{ name: 'checkout' }"
-                         class="checkout-summary-edit-icon pull-right">
+                         class="checkout-summary-edit-icon pull-right"
+                         data-test="summary-shipping-address-edit">
               <img src="../../../assets/img/edit-1.png" class="checkout-summary-edit-icon"/>
               {{ $t('edit') }}
             </router-link>
           </div>
-          <BaseAddress :address="shippingAddress"/>
+          <BaseAddress :address="shippingAddress"
+                       data-test="summary-shipping-address"/>
         </div>
       </div>
       <div class="col-sm-6">
@@ -21,12 +23,14 @@
             {{ $t('billingAddress') }}
             <router-link v-if="editable"
                          :to="{ name: 'checkout-billing-address' }"
-                         class="checkout-summary-edit-icon pull-right">
+                         class="checkout-summary-edit-icon pull-right"
+                         data-test="summary-billing-address-edit">
               <img src="../../../assets/img/edit-1.png" class="checkout-summary-edit-icon"/>
               {{ $t('edit') }}
             </router-link>
           </div>
-          <BaseAddress :address="billingAddress"/>
+          <BaseAddress :address="billingAddress"
+                       data-test="summary-billing-address"/>
         </div>
       </div>
     </div>
@@ -37,12 +41,14 @@
             {{ $t('shippingMethod') }}
             <router-link v-if="editable"
                          :to="{ name: 'checkout-shipping-method' }"
-                         class="checkout-summary-edit-icon pull-right">
+                         class="checkout-summary-edit-icon pull-right"
+                         data-test="summary-shipping-method-edit">
               <img src="../../../assets/img/edit-1.png" class="checkout-summary-edit-icon"/>
               {{ $t('edit') }}
             </router-link>
           </div>
-          <div v-if="shippingMethod">
+          <div v-if="shippingMethod"
+               data-test="summary-shipping-method">
             {{ shippingMethod.name }}
             <span v-if="shippingMethod.description">- {{ shippingMethod.description }}</span>
           </div>
@@ -54,12 +60,14 @@
             {{ $t('paymentDetails') }}
             <router-link v-if="editable"
                          :to="{ name: 'checkout-payment-method' }"
-                         class="checkout-summary-edit-icon pull-right">
+                         class="checkout-summary-edit-icon pull-right"
+                         data-test="summary-payment-method-edit">
               <img src="../../../assets/img/edit-1.png" class="checkout-summary-edit-icon"/>
               {{ $t('edit') }}
             </router-link>
           </div>
-          <div v-if="payments">
+          <div v-if="payments"
+               data-test="summary-payment-method">
             <span v-for="payment in payments"
                   :key="payment.id">
               {{ payment.paymentMethodInfo.method }}

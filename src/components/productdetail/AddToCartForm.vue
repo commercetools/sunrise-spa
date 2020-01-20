@@ -1,5 +1,6 @@
 <template>
-  <BaseForm :vuelidate="$v"
+  <BaseForm v-if="!isLoading"
+            :vuelidate="$v"
             :onSubmit="addLineItem"
             #default="{ error, state }">
     <ServerError :error="error"/>
@@ -72,6 +73,10 @@ export default {
   }),
 
   computed: {
+    isLoading() {
+      return this.$apollo.loading;
+    },
+
     quantities() {
       return [...Array(MAX_QUANTITY).keys()].map(i => ({ id: i + 1, name: i + 1 }));
     },

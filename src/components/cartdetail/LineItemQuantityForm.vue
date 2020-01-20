@@ -128,7 +128,7 @@ export default {
     display: inline;
   }
 
-  .form-error-message {
+  .validation-wrapper {
     display: none;
   }
 }

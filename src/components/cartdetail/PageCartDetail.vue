@@ -4,13 +4,6 @@
 
     <div v-else-if="cartNotEmpty">
       <div class="row">
-        <div class="col-sm-8 col-xs-12">
-        </div>
-        <div class="col-sm-4">
-          <!--{{> checkout/start-checkout-link id="cart-checkoutnow-btn"}}-->
-        </div>
-      </div>
-      <div class="row">
         <div class="col-sm-12">
           <div class="current-in-bag">
             <span>

@@ -7,10 +7,7 @@
 <script>
 export default {
   props: {
-    money: {
-      type: Object,
-      required: true,
-    },
+    money: Object,
   },
 
   computed: {
@@ -19,7 +16,10 @@ export default {
     },
 
     amount() {
-      return this.money.centAmount / (10 ** this.money.fractionDigits);
+      if (this.money) {
+        return this.money.centAmount / (10 ** this.money.fractionDigits);
+      }
+      return 0;
     },
   },
 };
