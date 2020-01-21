@@ -94,12 +94,64 @@
 </template>
 
 <script>
+/* eslint-disable no-param-reassign */
 import gql from 'graphql-tag';
 import LoadingSpinner from '../common/LoadingSpinner.vue';
 import ProductThumbnail from '../common/ProductThumbnail.vue';
 import ProductSortSelector from './ProductSortSelector.vue';
 import Pagination from './Pagination.vue';
+import { products } from '../../api';
 
+const getProducts = (component) => {
+  const category = component.categories?.results[0].id;
+  component.loadingProducts = true;
+  const route = component.$route || {};
+  const {
+    locale = 'en',
+    currency = 'EUR',
+    country = 'DE',
+  } = component?.$store.state || {};
+  const sortValue = route.query?.sort;
+  const sort = sortValue
+    ? { sort: `createdAt ${sortValue === 'newest' ? 'desc' : 'asc'}` }
+    : {};
+  products.get({
+    category,
+    page: Number(route.params?.page || 1),
+    pageSize: component.limit,
+    ...sort,
+  }).then(({ results, ...meta }) => {
+    component.products = {
+      ...meta,
+      results: results.map(
+        ({
+          id, masterVariant: { sku, images, prices }, name, slug,
+        }) => ({
+          id,
+          masterData: {
+            current: {
+              name: name[locale],
+              slug: slug[locale],
+              masterVariant: {
+                sku,
+                images,
+                price: {
+                  ...prices.filter(
+                    p => !p.customerGroup
+                        && !p.channel
+                        && p.country === country
+                        && p.value.currencyCode === currency,
+                  )[0],
+                },
+              },
+            },
+          },
+        }),
+      ),
+    };
+    component.loadingProducts = false;
+  });
+};
 export default {
   props: ['categorySlug', 'page'],
 
@@ -115,6 +167,7 @@ export default {
     products: null,
     sort: null,
     limit: 75,
+    loadingProducts: false,
   }),
 
   computed: {
@@ -135,7 +188,7 @@ export default {
     },
 
     isLoading() {
-      return this.$apollo.loading;
+      return this.loadingProducts || this.$apollo.loading;
     },
   },
 
@@ -145,7 +198,12 @@ export default {
     },
 
     changePage(page) {
-      this.$router.push({ name: 'productsPagination', params: { page } });
+      const { params, query } = this.$route;
+      this.$router.push({
+        name: 'productsPagination',
+        params: { ...params, page },
+        query,
+      });
     },
 
     showScroll(el) {
@@ -173,57 +231,14 @@ export default {
       skip: vm => !vm.categorySlug,
     },
 
-    products: {
-      query: gql`
-        query products($offset: Int!, $limit: Int!, $locale: Locale!, 
-                       $currency: Currency!,
-                       $where: String, $sort: [String!]) {
-          products(offset: $offset, limit: $limit, where: $where, sort: $sort) {
-            offset
-            total
-            results {
-              id
-              masterData {
-                current {
-                  name(locale: $locale)
-                  slug(locale: $locale)
-                  masterVariant {
-                    sku
-                    images {
-                      url
-                    }
-                    price(currency: $currency) {
-                      discounted {
-                        value {
-                          ...ProductListPriceInfo
-                        }
-                      }
-                      value {
-                        ...ProductListPriceInfo
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+  },
 
-        fragment ProductListPriceInfo on BaseMoney {
-          centAmount
-          fractionDigits
-        }`,
-      variables() {
-        return {
-          locale: this.$store.state.locale,
-          currency: this.$store.state.currency,
-          where: `masterData(current(categories(id="${this.category.id}")))`,
-          sort: this.sort,
-          offset: this.offset,
-          limit: this.limit,
-        };
-      },
-      skip: vm => !vm.categories || !vm.category,
+  watch: {
+    $route() {
+      getProducts(this);
+    },
+    categories() {
+      getProducts(this);
     },
   },
 };
