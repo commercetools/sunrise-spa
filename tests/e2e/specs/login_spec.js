@@ -1,6 +1,7 @@
-const apiKey = '8f503737c8bf1a135b14b3b8b0325ccb4422c3b635cfb93eb30873c770282b01';
 const MailSlurp = require('mailslurp-client').default;
 
+const apiKey = Cypress.env('MAILSLURP_KEY');
+const msEmail = Cypress.env('MAILSLURP_EMAIL');
 const mailslurp = new MailSlurp({ apiKey });
 
 
@@ -15,7 +16,7 @@ describe('Login', () => {
   const newCustomer = {
     firstName: 'Andy',
     lastName: 'Garcia',
-    email: 'f4831546-0062-470d-b6a9-cacb8e0a2aa4@mailslurp.com',
+    email: msEmail,
     password: 'p@ssword',
   };
 
