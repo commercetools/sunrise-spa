@@ -145,7 +145,10 @@ export default {
     },
 
     changePage(page) {
-      this.$router.push({ name: 'productsPagination', params: { page } });
+      this.$router.push({
+        ...this.$route,
+        params: { ...this.$route.params, page },
+      });
     },
 
     showScroll(el) {
