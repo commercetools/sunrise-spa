@@ -33,7 +33,6 @@ Vue.directive('vpshow', {
   },
 
   unbind(el) {
-    // test pass local but not on github
     document.removeEventListener('scroll', el.$onScroll);
     delete el.$onScroll;
   },
