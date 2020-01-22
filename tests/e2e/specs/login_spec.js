@@ -23,9 +23,8 @@ describe('Login', () => {
   const newPassword = 'newp@ssword';
 
   before(() => {
-    cy.wrap(mailslurp.getAllEmails().then(emails => emails.content.forEach((e) => {
-      mailslurp.deleteEmail(e.id);
-    })));
+    cy.wrap(mailslurp.getAllEmails()
+      .then(emails => Promise.all(emails.content.map(e => mailslurp.deleteEmail(e.id)))));
   });
 
   it('logs in', () => {
