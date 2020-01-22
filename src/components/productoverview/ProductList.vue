@@ -145,9 +145,11 @@ export default {
     },
 
     changePage(page) {
+      const { params, query } = this.$route;
       this.$router.push({
-        ...this.$route,
-        params: { ...this.$route.params, page },
+        name: 'productsPagination',
+        params: { ...params, page },
+        query,
       });
     },
 
