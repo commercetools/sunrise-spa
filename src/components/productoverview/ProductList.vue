@@ -103,14 +103,14 @@ import Pagination from './Pagination.vue';
 import { products } from '../../api';
 
 const getProducts = (component) => {
-  const category = component.categories?.results[0].id;
+  const category = component.categories?.results[0]?.id;
   component.loadingProducts = true;
-  const route = component.$route || {};
+  const route = component.$route;
   const {
-    locale = 'en',
-    currency = 'EUR',
-    country = 'DE',
-  } = component?.$store.state || {};
+    locale,
+    currency,
+    country,
+  } = component?.$store.state;
   const sortValue = route.query?.sort;
   const sort = sortValue
     ? { sort: `createdAt ${sortValue === 'newest' ? 'desc' : 'asc'}` }

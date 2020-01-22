@@ -1,15 +1,39 @@
-import { shallowMount } from '@vue/test-utils';
+import Vuex from 'vuex';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import ProductList from '@/components/productoverview/ProductList.vue';
 import ProductThumbnail from '@/components/common/ProductThumbnail.vue';
+// tests/unit/specs/components/productoverview/
+jest.mock('../../../../../src/api', () => ({
+  products: {
+    get: () => Promise.resolve({ results: [], total: 0 }),
+  },
+}));
+const localVue = createLocalVue();
+
+localVue.use(Vuex);
 
 describe('ProductList.vue', () => {
   let options;
 
   beforeEach(() => {
     options = {
+      localVue,
       mocks: {
         $t: jest.fn(),
+        $route: {
+          query: {},
+          params: {
+            page: 1,
+          },
+        },
       },
+      store: new Vuex.Store({
+        state: {
+          locale: 'en',
+          currency: 'EUR',
+          country: 'DE',
+        },
+      }),
       computed: {
         isLoading: jest.fn(),
       },
