@@ -170,7 +170,7 @@ export default {
     categories: null,
     products: null,
     sort: null,
-    limit: 75,
+    limit: 20,
     loadingProducts: false,
   }),
 
