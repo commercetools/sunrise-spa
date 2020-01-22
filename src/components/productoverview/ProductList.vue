@@ -110,8 +110,11 @@ const getProducts = (component) => {
     locale,
     currency,
     country,
-  } = component?.$store.state;
-  const sortValue = route.query?.sort;
+  } = component.$store.state;
+  const sortValue = route.query.sort;
+  const searchText = route.query.q
+    ? { [`text.${locale}`]: route.query.q }
+    : {};
   const sort = sortValue
     ? { sort: `createdAt ${sortValue === 'newest' ? 'desc' : 'asc'}` }
     : {};
@@ -120,6 +123,7 @@ const getProducts = (component) => {
     page: Number(route.params?.page || 1),
     pageSize: component.limit,
     ...sort,
+    ...searchText,
   }).then(({ results, ...meta }) => {
     component.products = {
       ...meta,
