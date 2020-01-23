@@ -14,11 +14,11 @@ describe('Product overview page', () => {
     cy.get('[data-test=product-list]')
       .first()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Shirt ”David” MU light blue');
+      .contains('Casual jacket Michael Kors beige');
     cy.get('[data-test=product-list]')
       .last()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Lace up shoes Tods dark blue');
+      .contains('Shirt Aspesi light blue');
 
     cy.get('span[data-test=sort-selector]')
       .click()
@@ -33,11 +33,11 @@ describe('Product overview page', () => {
     cy.get('[data-test=product-list]')
       .first()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Lace up shoes Tods dark blue');
+      .contains('Daniele Alessandrini – T-Shirt');
     cy.get('[data-test=product-list]')
       .last()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Shirt ”David” MU light blue');
+      .contains('Down jacket ”Daniel” Moncler blue');
   });
 
   it('Applies sorting settings from URL', () => {
@@ -49,15 +49,15 @@ describe('Product overview page', () => {
     cy.get('[data-test=product-list]')
       .first()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Shirt ”David” MU light blue');
+      .contains('Casual jacket Michael Kors beige');
     cy.get('[data-test=product-list]')
       .last()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Lace up shoes Tods dark blue');
+      .contains('Shirt Aspesi light blue');
   });
 
   it('Displays a message when an error occurs', () => {
-    cy.visit('/products/accessories');
+    cy.visit('/products/accessories-men-sunglasses');
     cy.get('[data-test=empty-results]')
       .contains('No Results Found');
 
