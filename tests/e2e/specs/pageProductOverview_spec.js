@@ -14,11 +14,11 @@ describe('Product overview page', () => {
     cy.get('[data-test=product-list]')
       .first()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Casual jacket Michael Kors beige');
+      .contains('Sneaker – Lotto “Tokyo“');
     cy.get('[data-test=product-list]')
       .last()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Shirt Aspesi light blue');
+      .contains('Polo Moncler red');
 
     cy.get('span[data-test=sort-selector]')
       .click()
@@ -33,11 +33,11 @@ describe('Product overview page', () => {
     cy.get('[data-test=product-list]')
       .first()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Daniele Alessandrini – T-Shirt');
+      .contains('Long shirt Thom Krom grey');
     cy.get('[data-test=product-list]')
       .last()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Down jacket ”Daniel” Moncler blue');
+      .contains('Sneakers ”Flyknit Chukka” Nike grey');
   });
 
   it('Applies sorting settings from URL', () => {
@@ -49,11 +49,11 @@ describe('Product overview page', () => {
     cy.get('[data-test=product-list]')
       .first()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Casual jacket Michael Kors beige');
+      .contains('Sneaker – Lotto “Tokyo“');
     cy.get('[data-test=product-list]')
       .last()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Shirt Aspesi light blue');
+      .contains('Polo Moncler red');
   });
 
   it('Displays a message when an error occurs', () => {
