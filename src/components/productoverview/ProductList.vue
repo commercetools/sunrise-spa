@@ -102,6 +102,15 @@ import ProductSortSelector from './ProductSortSelector.vue';
 import Pagination from './Pagination.vue';
 import { products } from '../../api';
 
+const toPrice = (prices, country, currency) => ({
+  ...prices.filter(
+    p => !p.customerGroup
+        && !p.channel
+        && p.country === country
+        && p.value.currencyCode === currency,
+  )[0],
+});
+
 const getProducts = (component) => {
   const category = component.categories?.results[0]?.id;
   component.loadingProducts = true;
@@ -139,14 +148,7 @@ const getProducts = (component) => {
               masterVariant: {
                 sku,
                 images,
-                price: {
-                  ...prices.filter(
-                    p => !p.customerGroup
-                        && !p.channel
-                        && p.country === country
-                        && p.value.currencyCode === currency,
-                  )[0],
-                },
+                price: toPrice(prices, country, currency),
               },
             },
           },
