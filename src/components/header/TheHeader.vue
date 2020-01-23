@@ -62,18 +62,24 @@
           </router-link>
         </div>
         <div class="col-sm-4">
-          <!--<form id="form-search" action="#" class="search-box text-right">-->
-            <!--<input name="q"-->
-                   <!--type="search"-->
-                   <!--placeholder="{{ $t('main.header.search') }}"-->
-                   <!--id="search-input"-->
-                   <!--class="search-field"-->
-                   <!--required/>-->
-            <!--<button type="submit" id="search-button" class="search-button">-->
-              <!--<span class="icon-font icon-magnifying-glass"></span>-->
-              <!--<span class="sr-only">{{ $t('main.header.search') }}</span>-->
-            <!--</button>-->
-          <!--</form>-->
+          <form
+            id="form-search"
+            action="#"
+            class="search-box text-right"
+            v-on:submit.prevent="search"
+          >
+            <input name="q"
+                   type="search"
+                   :placeholder="$t('search')"
+                   id="search-input"
+                   class="search-field"
+                   v-model="searchText"
+                   required/>
+            <button type="submit" id="search-button" class="search-button">
+              <span class="icon-font icon-magnifying-glass"></span>
+              <span class="sr-only">{{ $t('search') }}</span>
+            </button>
+          </form>
         </div>
       </div>
 
@@ -106,6 +112,26 @@ export default {
     CategoriesMenu,
     LoginButton,
     MiniCart,
+  },
+  data() {
+    return {
+      searchText: this.$route.query.q || '',
+    };
+  },
+  methods: {
+    search() {
+      const { params, query } = this.$route;
+      this.$router.push({
+        name: 'products',
+        params: { categorySlug: params.categorySlug || 'all' },
+        query: { ...query, q: this.searchText },
+      });
+    },
+  },
+  watch: {
+    $route(to) {
+      this.searchText = to.query.q || '';
+    },
   },
 };
 </script>

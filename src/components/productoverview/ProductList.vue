@@ -2,7 +2,7 @@
   <div>
     <LoadingSpinner v-if="isLoading"/>
 
-    <div v-else-if="categories && products">
+    <div v-else-if="products">
       <form v-if="products.results.length"
             id="form-filter-products"
             name="filter-products" action="#">
@@ -170,7 +170,7 @@ export default {
     categories: null,
     products: null,
     sort: null,
-    limit: 20,
+    limit: 75,
     loadingProducts: false,
   }),
 
@@ -204,7 +204,7 @@ export default {
     changePage(page) {
       const { params, query } = this.$route;
       this.$router.push({
-        name: 'productsPagination',
+        name: 'products',
         params: { ...params, page },
         query,
       });

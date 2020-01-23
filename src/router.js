@@ -67,7 +67,7 @@ const router = new Router({
       },
     },
     {
-      path: '/products/:categorySlug',
+      path: '/products/:categorySlug/:page?',
       name: 'products',
       components: {
         default: PageProductOverview,
@@ -75,24 +75,15 @@ const router = new Router({
         footer: TheFooter,
       },
       props: {
-        default: true,
-        header: false,
-        footer: false,
-      },
-    },
-    {
-      path: '/products/:categorySlug/:page?',
-      name: 'productsPagination',
-      components: {
-        default: PageProductOverview,
-        header: TheHeader,
-        footer: TheFooter,
-      },
-      props: {
-        default: route => ({
-          categorySlug: route.params.categorySlug,
-          page: +route.params.page <= 0 ? 1 : +route.params.page,
-        }),
+        default: (route) => {
+          const pageNum = Number(route.params.page);
+          const page = Number.isNaN(pageNum) || pageNum <= 1
+            ? 1 : pageNum;
+          return ({
+            categorySlug: route.params.categorySlug,
+            page,
+          });
+        },
         header: false,
         footer: false,
       },
