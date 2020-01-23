@@ -63,10 +63,6 @@ describe('Product overview page', () => {
 
     cy.get('span[data-test=sort-selector]')
       .should('not.exist');
-
-    cy.visit('/products/unvalidCategory');
-    cy.get('[data-test=category-not-found]')
-      .contains('Category Not Found');
   });
 
   it('Paginates back and forth through product list', () => {
