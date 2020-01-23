@@ -123,7 +123,10 @@ export default {
       const { params, query } = this.$route;
       this.$router.push({
         name: 'products',
-        params: { categorySlug: params.categorySlug || 'all' },
+        params: {
+          categorySlug: params.categorySlug || 'all',
+          page: 1,
+        },
         query: { ...query, q: this.searchText },
       });
     },
