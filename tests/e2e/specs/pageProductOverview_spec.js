@@ -33,11 +33,11 @@ describe('Product overview page', () => {
     cy.get('[data-test=product-list]')
       .first()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Long shirt Thom Krom grey');
+      .contains('Polo Ralph Lauren green');
     cy.get('[data-test=product-list]')
       .last()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Sneakers ”Flyknit Chukka” Nike grey');
+      .contains('Hoodie Moncler dark blue');
   });
 
   it('Applies sorting settings from URL', () => {
