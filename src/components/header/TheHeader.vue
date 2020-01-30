@@ -120,11 +120,11 @@ export default {
   },
   methods: {
     search() {
-      const { params, query } = this.$route;
+      const { query } = this.$route;
       this.$router.push({
         name: 'products',
         params: {
-          categorySlug: params.categorySlug || 'all',
+          categorySlug: 'all',
           page: 1,
         },
         query: { ...query, q: this.searchText },

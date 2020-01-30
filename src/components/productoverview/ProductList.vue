@@ -2,7 +2,7 @@
   <div>
     <LoadingSpinner v-if="isLoading"/>
 
-    <div v-else-if="products">
+    <div v-else-if="categories && products">
       <form v-if="products.results.length"
             id="form-filter-products"
             name="filter-products" action="#">
@@ -113,6 +113,12 @@ const toPrice = (prices, country, currency) => ({
 
 const getProducts = (component) => {
   const category = component.categories?.results[0]?.id;
+  if (
+    !category
+    && component.$route.params.categorySlug !== 'all'
+  ) {
+    return;
+  }
   component.loadingProducts = true;
   const route = component.$route;
   const {
