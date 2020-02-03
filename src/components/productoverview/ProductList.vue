@@ -61,7 +61,7 @@
           }"
           v-vpshow="showScroll"
         >
-            <span class="scroll-to-top-text"> go to top </span>
+            <span class="scroll-to-top-text">{{$t('go-to-top')}}</span>
           </a>
         <div class="custom-pagination">
           <Pagination :products="products"
@@ -255,3 +255,9 @@ export default {
   },
 };
 </script>
+<i18n>
+en:
+  go-to-top: "go to top"
+de:
+  go-to-top: "????? ??? ???"
+</i18n>
