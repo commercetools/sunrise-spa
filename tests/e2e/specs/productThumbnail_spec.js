@@ -1,6 +1,6 @@
 describe('Product thumbnail', () => {
   before(() => {
-    cy.visit('/products/women-shoes-ankle-boots/');
+    cy.visit('/products/women-shoes-ankle-boots');
   });
 
   it('displays product information', () => {
@@ -20,11 +20,11 @@ describe('Product thumbnail', () => {
 
         cy.wrap($thumbnail)
           .find('[data-test=price-old-value]')
-          .contains(/^\s*248,75\s€\s*$/);
+          .contains(/^\s*199,00\s€\s*$/);
 
         cy.wrap($thumbnail)
           .find('[data-test=price-new-value]')
-          .contains(/^\s*174,12\s€\s*$/);
+          .contains(/^\s*139,30\s€\s*$/);
       });
 
     cy.get('[data-test=product-thumbnail-name]')
@@ -38,7 +38,7 @@ describe('Product thumbnail', () => {
 
         cy.wrap($thumbnail)
           .find('[data-test=product-original-price]')
-          .contains(/\s*231,25\s€\s*$/);
+          .contains(/\s*185,00\s€\s*$/);
 
         cy.wrap($thumbnail)
           .find('[data-test=price-new-value]')

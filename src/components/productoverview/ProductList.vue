@@ -26,11 +26,14 @@
               <!--{{> catalog/pop/sort-selector sortSelector=content.sortSelector}}-->
             </div>
           </div>
-
-          <div class="col-xs-4 hidden-xs text-center custom-pagination">
-            <ul class="page-numbers">
-              <!--{{> common/pagination pagination=content.pagination}}-->
-            </ul>
+          <div class="custom-pagination"
+               data-test="custom-pagination-top">
+            <Pagination :products="products"
+                        :offset="offset"
+                        :limit="limit"
+                        :totalProducts="totalProducts"
+                        :page="page"
+                        @pagechanged="changePage" />
           </div>
           <div class="col-xs-4 hidden-xs text-right">
             <!--{{> catalog/pop/display-selector displaySelector=content.displaySelector}}-->
@@ -46,6 +49,27 @@
                             data-test="product-list"
                             :key="product.id"
                             :product="product" />
+        </div>
+        <a href="#"
+          id="scroll-to-top"
+          class="scroll-to-top"
+          v-scroll-to="{
+            el: '#form-filter-products',
+            duration: 500,
+            easing: 'linear',
+            offset: -200,
+          }"
+          v-vpshow="showScroll"
+        >
+            <span class="scroll-to-top-text">{{$t('go-to-top')}}</span>
+          </a>
+        <div class="custom-pagination">
+          <Pagination :products="products"
+                      :offset="offset"
+                      :limit="limit"
+                      :totalProducts="totalProducts"
+                      :page="page"
+                      @pagechanged="changePage" />
         </div>
       </form>
       <div v-else>
@@ -70,24 +94,94 @@
 </template>
 
 <script>
+/* eslint-disable no-param-reassign */
 import gql from 'graphql-tag';
 import LoadingSpinner from '../common/LoadingSpinner.vue';
 import ProductThumbnail from '../common/ProductThumbnail.vue';
 import ProductSortSelector from './ProductSortSelector.vue';
+import Pagination from './Pagination.vue';
+import { products, onlyLastRequestedPromise } from '../../api';
 
+const toPrice = (prices, country, currency) => ({
+  ...prices.filter(
+    p => !p.customerGroup
+        && !p.channel
+        && p.country === country
+        && p.value.currencyCode === currency,
+  )[0],
+});
+const last = onlyLastRequestedPromise('products');
+const getProducts = (component) => {
+  const category = component.$route.params.categorySlug === 'all'
+    ? undefined
+    : component.categories?.results[0]?.id;
+  if (
+    !category
+    && component.$route.params.categorySlug !== 'all'
+  ) {
+    return;
+  }
+  component.loadingProducts = true;
+  const route = component.$route;
+  const {
+    locale,
+    currency,
+    country,
+  } = component.$store.state;
+  const sortValue = route.query.sort;
+  const searchText = route.query.q
+    ? { [`text.${locale}`]: route.query.q }
+    : {};
+  const sort = sortValue
+    ? { sort: `createdAt ${sortValue === 'newest' ? 'desc' : 'asc'}` }
+    : {};
+  last(products.get({
+    category,
+    page: Number(route.params?.page || 1),
+    pageSize: component.limit,
+    ...sort,
+    ...searchText,
+  })).then(({ results, ...meta }) => {
+    component.products = {
+      ...meta,
+      results: results.map(
+        ({
+          id, masterVariant: { sku, images, prices }, name, slug,
+        }) => ({
+          id,
+          masterData: {
+            current: {
+              name: name[locale],
+              slug: slug[locale],
+              masterVariant: {
+                sku,
+                images,
+                price: toPrice(prices, country, currency),
+              },
+            },
+          },
+        }),
+      ),
+    };
+    component.loadingProducts = false;
+  });
+};
 export default {
-  props: ['categorySlug'],
+  props: ['categorySlug', 'page'],
 
   components: {
     LoadingSpinner,
     ProductThumbnail,
     ProductSortSelector,
+    Pagination,
   },
 
   data: () => ({
     categories: null,
     products: null,
     sort: null,
+    limit: 75,
+    loadingProducts: false,
   }),
 
   computed: {
@@ -95,14 +189,41 @@ export default {
       return this.categories.results[0];
     },
 
+    hasManyProducts() {
+      return this.products?.results.length >= this.limit / 2;
+    },
+
+    offset() {
+      return (this.page - 1) * this.limit;
+    },
+
+    totalProducts() {
+      return this.products.total;
+    },
+
     isLoading() {
-      return this.$apollo.loading;
+      return this.loadingProducts || this.$apollo.loading;
     },
   },
 
   methods: {
     changeSort(sort) {
       this.sort = sort;
+    },
+
+    changePage(page) {
+      const { params, query } = this.$route;
+      this.$router.push({
+        name: 'products',
+        params: { ...params, page },
+        query,
+      });
+    },
+
+    showScroll(el) {
+      // eslint-disable-next-line no-param-reassign
+      el.style.display = window.innerHeight > 300
+       && window.scrollY > 200 ? '' : 'none';
     },
   },
 
@@ -124,52 +245,21 @@ export default {
       skip: vm => !vm.categorySlug,
     },
 
-    products: {
-      query: gql`
-        query products($locale: Locale!, $currency: Currency!, $where: String, $sort: [String!]) {
-          products(limit: 20, where: $where, sort: $sort) {
-            results {
-              id
-              masterData {
-                current {
-                  name(locale: $locale)
-                  slug(locale: $locale)
-                  masterVariant {
-                    sku
-                    images {
-                      url
-                    }
-                    price(currency: $currency) {
-                      discounted {
-                        value {
-                          ...ProductListPriceInfo
-                        }
-                      }
-                      value {
-                        ...ProductListPriceInfo
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+  },
 
-        fragment ProductListPriceInfo on BaseMoney {
-          centAmount
-          fractionDigits
-        }`,
-      variables() {
-        return {
-          locale: this.$store.state.locale,
-          currency: this.$store.state.currency,
-          where: `masterData(current(categories(id="${this.category.id}")))`,
-          sort: this.sort,
-        };
-      },
-      skip: vm => !vm.categories || !vm.category,
+  watch: {
+    $route() {
+      getProducts(this);
+    },
+    categories() {
+      getProducts(this);
     },
   },
 };
 </script>
+<i18n>
+en:
+  go-to-top: "go to top"
+de:
+  go-to-top: "????? ??? ???"
+</i18n>

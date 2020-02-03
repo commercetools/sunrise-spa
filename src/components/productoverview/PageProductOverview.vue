@@ -40,16 +40,8 @@
           </div>
           <!-- End mobile version -->
 
-          <ProductList :categorySlug="categorySlug" />
-
-          <div class="row">
-            <div class="col-sm-9 col-sm-offset-3 col-xs-12 text-center custom-pagination">
-              <ul class="page-numbers page-numbers-bottom">
-                <!--{{> common/pagination pagination=content.pagination}}-->
-              </ul>
-            </div>
-          </div>
-          <hr class="hr">
+          <ProductList :categorySlug="categorySlug"
+                       :page="page" />
         </div>
       </div>
     </div>
@@ -65,8 +57,13 @@ export default {
     ProductList,
     Breadcrumb,
   },
-
-  props: ['categorySlug'],
+  props: {
+    categorySlug: String,
+    page: {
+      type: Number,
+      default: 1,
+    },
+  },
 };
 </script>
 

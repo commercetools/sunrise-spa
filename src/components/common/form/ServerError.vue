@@ -9,6 +9,7 @@
     </span>
     <span v-else-if="isBadRequestError">{{ $t('badRequestError') }}</span>
     <span v-else-if="isNetworkError">{{ $t('networkError') }}</span>
+    <span v-else-if="is404Error">{{ error.response.data }}</span>
     <span v-else>{{ $t('unknownError') }}</span>
   </div>
 </template>
@@ -32,6 +33,10 @@ export default {
 
     isGraphQLError() {
       return Array.isArray(this.error?.graphQLErrors) && this.error?.graphQLErrors.length;
+    },
+
+    is404Error() {
+      return this.error?.response?.status === 404;
     },
 
     graphQLErrors() {

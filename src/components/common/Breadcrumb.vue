@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ol v-if="categories && category"
+    <ol v-if="cat && category"
         class="breadcrumb">
       <li>
         <router-link to="/"
@@ -38,7 +38,12 @@ export default {
   }),
 
   computed: {
-    category: vm => vm.categories.results[0],
+    category: vm => ((vm.categorySlug === 'all')
+      ? { name: vm.$t('all'), slug: 'all' }
+      : vm.categories.results[0]),
+    cat: vm => ((vm.categorySlug === 'all')
+      ? true
+      : vm.categories),
   },
 
   apollo: {
@@ -74,6 +79,8 @@ export default {
 <i18n>
 en:
   home: "Home"
+  all: 'All'
 de:
   home: "Home"
+  all: 'Alle'
 </i18n>
