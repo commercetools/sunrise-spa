@@ -49,9 +49,9 @@
           </div>
           <div class="pull-right">
             <div class="login-box-forgot-password">
-              <!--<a href="{{@root.meta._links.recoveryEmail.href}}">-->
-              <!--{{ $t('forgotPassword') }}-->
-              <!--</a>-->
+            <router-link :to="{ name: 'forgot-password'}">
+              {{ $t('forgotPassword') }}
+            </router-link>
             </div>
           </div>
         </div>
