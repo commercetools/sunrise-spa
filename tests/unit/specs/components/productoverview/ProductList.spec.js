@@ -7,6 +7,7 @@ jest.mock('../../../../../src/api', () => ({
   products: {
     get: () => Promise.resolve({ results: [], total: 0 }),
   },
+  onlyLastRequestedPromise: () => y => y,
 }));
 const localVue = createLocalVue();
 
