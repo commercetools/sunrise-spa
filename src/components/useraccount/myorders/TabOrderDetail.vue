@@ -57,9 +57,9 @@ export default {
   apollo: {
     me: {
       query: gql`
-        query orderByOrderNumber($orderNumber: String, $locale: Locale!) {
+        query orderById($id: String, $locale: Locale!) {
           me {
-            order(orderNumber: $orderNumber) {
+            order(id: $id) {
               ...OrderFields
             }
           }
@@ -69,7 +69,7 @@ export default {
         ${ADDRESS_FRAGMENT}`,
       variables() {
         return {
-          orderNumber: this.$route.params.orderNumber,
+          id: this.$route.params.id,
           locale: this.$store.state.locale,
         };
       },

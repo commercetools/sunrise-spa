@@ -101,7 +101,7 @@ const router = new Router({
           path: 'orders', name: 'orders', component: TabOrderList,
         },
         {
-          path: 'orders/:orderNumber', name: 'order', component: TabOrderDetail,
+          path: 'orders/:id', name: 'order', component: TabOrderDetail,
         },
         {
           path: 'account', alias: '', name: 'user', component: TabPersonalDetails,
