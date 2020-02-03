@@ -56,28 +56,18 @@ const getToken = (refresh = false) => {
       },
     )
       .then(r => r.json())
-      .then((tokenInfo) => {
-        const session = JSON.parse(
-          localStorage.getItem('session'),
-        );
-        localStorage.setItem(
-          'session',
-          JSON.stringify({
-            ...session,
-            tokenInfo,
-          }),
-        );
-        return tokenInfo;
-      });
+      .then(tokenInfo => tokenInfo);
 };
 export const baseUrl = `${config.ct.api}/${config.ct.auth.projectKey}`;
 export const withToken = (() => {
   let token = getToken();
+  let tries = 0;
   return (fn) => {
     const doRequest = (...args) => token
       .then(tk => fn(...args.concat(tk)))
       .catch((err) => {
-        if (err.statusCode === 401) {
+        tries += 1;
+        if (err.statusCode === 401 && tries < 3) {
           token = getToken(true);
           return doRequest(...args);
         }
