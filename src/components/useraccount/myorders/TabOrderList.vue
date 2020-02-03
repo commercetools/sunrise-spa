@@ -137,6 +137,7 @@ export default {
           }
         },
         ${MONEY_FRAGMENT}`,
+      fetchPolicy: 'no-cache',
     },
   },
 };
