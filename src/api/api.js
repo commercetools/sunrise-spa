@@ -91,7 +91,8 @@ export const toUrl = (
   base,
   { query: { pageSize, page, ...query } },
 ) => {
-  const queryParams = Object.entries(query);
+  const queryParams = Object.entries(query)
+    .filter(([, v]) => v !== undefined);
   queryParams.push(['limit', pageSize]);
   queryParams.push(['offset', pageSize * (page - 1)]);
   return (
