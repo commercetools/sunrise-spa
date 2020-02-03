@@ -100,7 +100,7 @@ import LoadingSpinner from '../common/LoadingSpinner.vue';
 import ProductThumbnail from '../common/ProductThumbnail.vue';
 import ProductSortSelector from './ProductSortSelector.vue';
 import Pagination from './Pagination.vue';
-import { products } from '../../api';
+import { products, onlyLastRequestedPromise } from '../../api';
 
 const toPrice = (prices, country, currency) => ({
   ...prices.filter(
@@ -110,9 +110,11 @@ const toPrice = (prices, country, currency) => ({
         && p.value.currencyCode === currency,
   )[0],
 });
-
+const last = onlyLastRequestedPromise('products');
 const getProducts = (component) => {
-  const category = component.categories?.results[0]?.id;
+  const category = component.$route.params.categorySlug === 'all'
+    ? undefined
+    : component.categories?.results[0]?.id;
   if (
     !category
     && component.$route.params.categorySlug !== 'all'
@@ -133,13 +135,13 @@ const getProducts = (component) => {
   const sort = sortValue
     ? { sort: `createdAt ${sortValue === 'newest' ? 'desc' : 'asc'}` }
     : {};
-  products.get({
+  last(products.get({
     category,
     page: Number(route.params?.page || 1),
     pageSize: component.limit,
     ...sort,
     ...searchText,
-  }).then(({ results, ...meta }) => {
+  })).then(({ results, ...meta }) => {
     component.products = {
       ...meta,
       results: results.map(
