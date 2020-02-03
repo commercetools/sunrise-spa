@@ -10,6 +10,8 @@ import TheCheckoutFooter from './components/footer/TheCheckoutFooter.vue';
 import PageHome from './components/home/PageHome.vue';
 import PageProductOverview from './components/productoverview/PageProductOverview.vue';
 import PageLogin from './components/login/PageLogin.vue';
+import ForgotPassword from './components/login/ForgotPassword.vue';
+import ResetPassword from './components/login/ResetPassword.vue';
 import PageUserAccount from './components/useraccount/PageUserAccount.vue';
 import PageNotFound from './components/common/PageNotFound.vue';
 import PageProductDetail from './components/productdetail/PageProductDetail.vue';
@@ -25,6 +27,7 @@ import StepBillingAddressForm from './components/checkout/StepBillingAddressForm
 import StepShippingMethodForm from './components/checkout/StepShippingMethodForm.vue';
 import StepPaymentMethodForm from './components/checkout/StepPaymentMethodForm.vue';
 import StepPlaceOrderForm from './components/checkout/StepPlaceOrderForm.vue';
+
 
 Vue.use(Router);
 
@@ -67,7 +70,25 @@ const router = new Router({
       },
     },
     {
-      path: '/products/:categorySlug',
+      path: '/forgot-password',
+      name: 'forgot-password',
+      components: {
+        default: ForgotPassword,
+        header: TheHeader,
+        footer: TheFooter,
+      },
+    },
+    {
+      path: '/reset-password/:token',
+      name: 'reset-password',
+      components: {
+        default: ResetPassword,
+        header: TheHeader,
+        footer: TheFooter,
+      },
+    },
+    {
+      path: '/products/:categorySlug/:page?',
       name: 'products',
       components: {
         default: PageProductOverview,
@@ -75,7 +96,15 @@ const router = new Router({
         footer: TheFooter,
       },
       props: {
-        default: true,
+        default: (route) => {
+          const pageNum = Number(route.params.page);
+          const page = Number.isNaN(pageNum) || pageNum <= 1
+            ? 1 : pageNum;
+          return ({
+            categorySlug: route.params.categorySlug,
+            page,
+          });
+        },
         header: false,
         footer: false,
       },
@@ -93,7 +122,7 @@ const router = new Router({
           path: 'orders', name: 'orders', component: TabOrderList,
         },
         {
-          path: 'orders/:orderNumber', name: 'order', component: TabOrderDetail,
+          path: 'orders/:id', name: 'order', component: TabOrderDetail,
         },
         {
           path: 'account', alias: '', name: 'user', component: TabPersonalDetails,

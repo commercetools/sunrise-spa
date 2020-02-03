@@ -32,9 +32,11 @@
     }
   }
 }
-#form-filter-products {
-  text-transform: uppercase;
-}
+
+// #form-filter-products {
+//   text-transform: uppercase;
+// }
+
 .mobile-filter-row {
   padding: 1em 0;
 }
@@ -65,13 +67,13 @@
   word-spacing: 0.1em;
 }
 
-#pop-product-list {
-
-  @media screen and (min-width: 767px) {
-    float: right;
-    width: 75%;
-  }
-}
+// since we are not using the filters on the left side,
+// #pop-product-list {
+  // @media screen and (min-width: 767px) {
+  //   float: right;
+  //   width: 75%;
+  // }
+// }
 
 .jumbotron-row {
   margin-bottom: 20px;

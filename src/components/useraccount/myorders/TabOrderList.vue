@@ -66,7 +66,7 @@
             <span>{{ translateStatus(order.shipmentState) }}</span>
           </div>
           <div class="col-md-2 col-sm-3 col-xs-4 text-right">
-            <router-link :to="{ name: 'order', params: { orderNumber: order.orderNumber } }">
+            <router-link :to="{ name: 'order', params: { id: order.id } }">
               <button class="my-orders-view-order-btn"
                       data-test="view-order-btn">
                 {{ $t('view') }}
@@ -137,6 +137,7 @@ export default {
           }
         },
         ${MONEY_FRAGMENT}`,
+      fetchPolicy: 'no-cache',
     },
   },
 };

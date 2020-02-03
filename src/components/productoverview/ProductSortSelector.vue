@@ -1,6 +1,5 @@
 <template>
   <div>
-    <label>{{ $t('sortBy') }}</label>
     <SelectBoxIt :options="sortOptions"
                  v-model="sort"
                  data-test="sort-selector"

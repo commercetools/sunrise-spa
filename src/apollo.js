@@ -20,6 +20,7 @@ function createClient() {
     const statusCode = networkError?.statusCode;
     if (statusCode === 401 || statusCode === 403) {
       const { headers } = operation.getContext();
+      // eslint-disable-next-line no-console
       console.warn('Unauthorized or forbidden connection to commercetools, cleaning up session...', networkError);
       return fromPromise(cleanUpSession().then(getAuthToken)).flatMap((authorization) => {
         operation.setContext({ headers: { ...headers, authorization } });

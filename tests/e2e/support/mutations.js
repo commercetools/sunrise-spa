@@ -122,6 +122,7 @@ export function deleteDiscountCode(client, code) {
             id: discountCode.id,
             version: discountCode.version,
           },
+        // eslint-disable-next-line no-console
         }).catch(e => console.warn('Discount code might have already been deleted', e));
         await discountCode.cartDiscounts.forEach(cartDiscount => client.mutate({
           mutation: gql`
@@ -134,6 +135,7 @@ export function deleteDiscountCode(client, code) {
             id: cartDiscount.id,
             version: cartDiscount.version,
           },
+        // eslint-disable-next-line no-console
         }).catch(e => console.warn('Cart discount might have already been deleted', e)));
       }
     });
@@ -154,6 +156,7 @@ export function deleteOrder(client, orderNumber) {
             id: order.id,
             version: order.version,
           },
+        // eslint-disable-next-line no-console
         }).catch(e => console.warn('Order might have already been deleted', e));
       }
     });
@@ -174,6 +177,7 @@ export function deleteCustomer(client, email) {
             id: customer.id,
             version: customer.version,
           },
+        // eslint-disable-next-line no-console
         }).catch(e => console.warn('Customer might have already been deleted', e));
       }
     });
@@ -199,6 +203,7 @@ export function deleteProduct(client, key) {
               id: unpublishedProduct.id,
               version: unpublishedProduct.version,
             },
+          // eslint-disable-next-line no-console
           }).catch(e => console.warn('Product might have already been deleted', e));
         });
       }
