@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
-import BaseSelect from '@/components/common/form/BaseSelect.vue';
+import BaseSelect from '@/components/common/form/BaseSelect/index.vue';
 
-describe('BaseSelect.vue', () => {
+describe('BaseSelect/index.vue', () => {
   let options;
 
   beforeEach(() => {

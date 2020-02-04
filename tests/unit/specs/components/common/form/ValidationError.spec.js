@@ -1,11 +1,11 @@
 import VueI18n from 'vue-i18n';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import ValidationError from '@/components/common/form/ValidationError.vue';
+import ValidationError from '@/components/common/form/ValidationError/index.vue';
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);
 
-describe('ValidationError.vue', () => {
+describe('ValidationError/index.vue', () => {
   const unknownValidationTranslation = 'unknown validation';
   const requiredTranslation = 'required error';
 

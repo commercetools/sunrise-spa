@@ -1,0 +1,4 @@
+en:
+  shippingMethod: Shipping method
+de:
+  shippingMethod: Versandart

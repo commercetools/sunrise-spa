@@ -1,0 +1,6 @@
+en:
+  home: "Home"
+  all: 'All'
+de:
+  home: "Home"
+  all: 'Alle'

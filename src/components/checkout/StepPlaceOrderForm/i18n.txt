@@ -1,0 +1,12 @@
+en:
+  confirmOrder: "Confirm your order"
+  completeMyOrder: "Complete My Order"
+  thankYou: "Thank you for your order!"
+  yourOrder: "Your order details"
+  continueShopping: "Continue shopping"
+de:
+  completeMyOrder: "Zahlungspflichtig bestellen"
+  confirmOrder: "Bestätige Ihre Bestellung"
+  thankYou: "Vielen Dank für Ihre Bestellung!"
+  yourOrder: "Ihre Bestelldetails"
+  continueShopping: "Weiter einkaufen"

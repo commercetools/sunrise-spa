@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
-import Breadcrumb from '@/components/common/Breadcrumb.vue';
+import Breadcrumb from '@/components/common/Breadcrumb/index.vue';
 
-describe('Breadcrumb.vue', () => {
+describe('Breadcrumb/index.vue', () => {
   const someCategory = {
     id: 'some-id',
     ancestors: [],

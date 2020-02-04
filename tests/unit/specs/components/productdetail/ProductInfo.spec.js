@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
-import ProductInfo from '@/components/productdetail/ProductInfo.vue';
+import ProductInfo from '@/components/productdetail/ProductInfo/index.vue';
 
-describe('ProductInfo.vue', () => {
+describe('ProductInfo/index.vue', () => {
   let product;
   let options;
 

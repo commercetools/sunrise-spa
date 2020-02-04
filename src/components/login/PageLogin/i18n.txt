@@ -1,0 +1,4 @@
+en:
+  pageTitle: "Customer Sign In"
+de:
+  pageTitle: "Kundenanmeldung"

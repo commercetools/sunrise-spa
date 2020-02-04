@@ -1,12 +1,12 @@
 import VueI18n from 'vue-i18n';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import { ApolloError } from 'apollo-client';
-import ServerError from '@/components/common/form/ServerError.vue';
+import ServerError from '@/components/common/form/ServerError/index.vue';
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);
 
-describe('ServerError.vue', () => {
+describe('ServerError/index.vue', () => {
   const graphQLError1 = { code: 'ErrorA' };
   const graphQLError2 = { code: 'ErrorB' };
   const unknownErrorTranslation = 'unknown error';

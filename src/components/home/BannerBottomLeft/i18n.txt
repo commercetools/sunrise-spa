@@ -1,0 +1,8 @@
+en:
+  title: "Unique style for every season"
+  subtitle: "Fashion styles"
+  linkLabel: "Shop collection"
+de:
+  title: "Einzigartige Stücke für jede Saison"
+  subtitle: "Lassen Sie sich inspirieren"
+  linkLabel: "Shop collection"

@@ -1,0 +1,5 @@
+  <ProductZoomer v-if="product"
+                 :base-images="zoomerImages"
+                 :base-zoomer-options="zoomerOptions"
+                 :key="product.masterData.current.variant.sku"
+                 data-test="product-image" />

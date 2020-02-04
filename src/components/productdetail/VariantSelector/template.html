@@ -1,0 +1,19 @@
+  <div v-if="product"
+       class="row select-row">
+    <ul class="list-inline"
+        data-test="variant-selector-list">
+      <li v-for="(values, name) in attributes"
+          :key="name">
+        <p class="text-uppercase"
+           data-test="attribute-name">
+          {{name}}
+        </p>
+        <AttributeSelect :product="product"
+                         :values="values"
+                         :sku="sku"
+                         :name="name"
+                         :selected="selected"
+                         :variantCombinations="variantCombinations" />
+      </li>
+    </ul>
+  </div>

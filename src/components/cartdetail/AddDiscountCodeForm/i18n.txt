@@ -1,0 +1,8 @@
+en:
+  code: "Discount code"
+  apply: "Apply"
+  nonApplicable: "This discount code is non applicable"
+de:
+  code: "Rabattcode"
+  apply: "Anwenden"
+  nonApplicable: "Dieser Rabattcode ist nicht anwendbar"

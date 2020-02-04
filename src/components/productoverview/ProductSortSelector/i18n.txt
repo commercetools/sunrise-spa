@@ -1,0 +1,10 @@
+en:
+  sortBy: "Sort by"
+  newest: "Newest"
+  oldest: "Oldest"
+  recommended: "Recommended"
+de:
+  sortBy: "Sortieren nach"
+  newest: "Neueste"
+  oldest: "Älteste"
+  recommended: "Empfohlen"

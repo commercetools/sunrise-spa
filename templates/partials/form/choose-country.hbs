@@ -1,9 +1,0 @@
-<div class="{{containerClass}} input-block">
-  <span class="text-uppercase">{{i18n "main:form.country"}}*</span><br>
-  <select id="{{selectId}}" class="checkout-dropdown" name="{{options.formFieldName}}{{#unless options.formFieldName}}{{selectName}}{{/unless}}">
-    <option value="" selected>{{i18n "main:form.choose"}}</option>
-    {{#each options.list}}
-    <option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>
-    {{/each}}
-  </select>
-</div>

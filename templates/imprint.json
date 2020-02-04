@@ -1,8 +1,0 @@
-{
-	"header" : { "$ref" : "common/header.json" },
-	"footer" : { "$ref" : "common/footer.json" },
-	"content" : {
-
-	},
-	"meta" : { "$ref" : "common/meta.json" }
-}

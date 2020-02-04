@@ -1,9 +1,0 @@
-<div class="col-sm-{{columnWidth}}">
-  <div class="input-block">
-    <span class="text-uppercase">{{i18n labelKey}}{{#if required}}<abbr title="{{i18n "main:form.required"}}">*</abbr>{{/if}}</span><br>
-    <input id="input-{{name}}" class="checkout-input-field" type="text" name="{{settings.formFieldName}}{{#unless settings.formFieldName}}{{name}}{{/unless}}" value="{{value}}">
-    {{#if additionalInfoKey}}
-    <span class="tel-email-text">{{i18n additionalInfoKey}}</span>
-    {{/if}}
-  </div>
-</div>
