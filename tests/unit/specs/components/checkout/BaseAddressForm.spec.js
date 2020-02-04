@@ -1,11 +1,11 @@
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import BaseAddressForm from '@/components/checkout/BaseAddressForm.vue';
+import BaseAddressForm from '@/components/checkout/BaseAddressForm/index.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuelidate);
 
-describe('BaseAddressForm.vue', () => {
+describe('BaseAddressForm/index.vue', () => {
   let options;
 
   beforeEach(() => {

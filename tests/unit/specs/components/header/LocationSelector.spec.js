@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import { shallowMount } from '@vue/test-utils';
-import LocationSelector from '@/components/header/LocationSelector.vue';
-import SelectBoxIt from '@/components/common/form/SelectBoxIt.vue';
+import LocationSelector from '@/components/header/LocationSelector/index.vue';
+import SelectBoxIt from '@/components/common/form/SelectBoxIt/index.vue';
 
 Vue.component('SelectBoxIt', SelectBoxIt);
 
-describe('LocationSelector.vue', () => {
+describe('LocationSelector/index.vue', () => {
   let options;
 
   beforeEach(() => {

@@ -1,9 +1,0 @@
-{
-    "label" : "DHL Standard",
-    "value" : "dhl-standard",
-    "selected" : true,
-    "deliveryDays" : "Delivery: 3-5 Days",
-    "url" : "",
-    "price": "3,00 €",
-    "description" : "DHL Standard - Delivery 3-5 Days"
-}

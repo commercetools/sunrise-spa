@@ -1,0 +1,4 @@
+en:
+  required: "Required field"
+de:
+  required: "Pflichtfeld"

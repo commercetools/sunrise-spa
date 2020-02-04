@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
-import CartLikeContentDetail from '@/components/common/cartlike/CartLikeContentDetail.vue';
+import CartLikeContentDetail from '@/components/common/cartlike/CartLikeContentDetail/index.vue';
 
-describe('CartLikeContentDetail.vue', () => {
+describe('CartLikeContentDetail/index.vue', () => {
   const cartLike = {
     lineItems: [],
     totalPrice: {

@@ -1,0 +1,18 @@
+  <div class="col-sm-12 nopadding">
+    <div class="aspect-ratio aspect-ratio--8to3">
+      <BannerPicture :file="'middle.jpg'"/>
+    </div>
+    <div class="banner-text">
+      <h4 class="banner-title">
+        <img class="hidden-xs" src="../../../assets/img/banners/sun-logo.png"/>
+        <br/><br/>
+        {{ $t('title') }}
+      </h4>
+      <p class="banner-subtitle">{{ $t('subtitle') }}</p>
+      <p class="hidden-xs hidden-sm">{{ $t('description1') }}<br/><br/>{{ $t('description2') }}</p>
+      <router-link :to="{ name: 'products', params: { categorySlug: 'men-clothing-shirts' } }"
+                   class="btn banner-btn">
+        {{ $t('linkLabel') }}
+      </router-link>
+    </div>
+  </div>

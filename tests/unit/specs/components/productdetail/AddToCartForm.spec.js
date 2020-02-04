@@ -2,8 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import AddToCartForm from '@/components/productdetail/AddToCartForm.vue';
-import SelectBoxIt from '@/components/common/form/SelectBoxIt.vue';
+import AddToCartForm from '@/components/productdetail/AddToCartForm/index.vue';
+import SelectBoxIt from '@/components/common/form/SelectBoxIt/index.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuelidate);
@@ -11,7 +11,7 @@ localVue.use(Vuex);
 
 Vue.component('SelectBoxIt', SelectBoxIt);
 
-describe('AddToCartForm.vue', () => {
+describe('AddToCartForm/index.vue', () => {
   let actions;
   let options;
 

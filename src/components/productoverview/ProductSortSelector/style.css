@@ -1,0 +1,14 @@
+label {
+  font-size: 0.9em;
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: normal;
+}
+.sort-selector {
+  background: #ffffff url("../../../assets/img/arrow-67-filled.png") no-repeat 90% 50%;
+  background-size: 12px;
+  color: #333333;
+  padding-right: 10px;
+  border: 1px solid #D6D6D6;
+}

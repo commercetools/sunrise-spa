@@ -1,0 +1,9 @@
+  .product-gallery-zoomer-box .control svg {
+    display: block;
+    margin: auto;
+  }
+  .product-gallery-zoomer-box .thumb-list img {
+    max-height: 100px;
+    width: auto;
+    margin: 2px;
+  }

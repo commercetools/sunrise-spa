@@ -1,13 +1,13 @@
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import SignUpForm from '@/components/login/SignUpForm.vue';
+import SignUpForm from '@/components/login/SignUpForm/index.vue';
 
 jest.mock('@/auth', () => ({ clientLogin: jest.fn() }));
 
 const localVue = createLocalVue();
 localVue.use(Vuelidate);
 
-describe('SignUpForm.vue', () => {
+describe('SignUpForm/index.vue', () => {
   let options;
 
   beforeEach(() => {
