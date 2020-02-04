@@ -1,0 +1,8 @@
+en:
+  go-to-top: "go to top"
+  notFound: "No Results Found"
+  categoryNotFound: "Category Not Found"
+de:
+  go-to-top: "????? ??? ???"
+  notFound: "Keine Ergebnisse Gefunden"
+  categoryNotFound: "Kategorie nicht gefunden"

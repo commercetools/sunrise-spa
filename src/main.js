@@ -5,7 +5,7 @@ import 'whatwg-fetch';
 import VueScrollTo from 'vue-scrollto';
 import Vuelidate from 'vuelidate';
 import ProductZoomer from 'vue-product-zoomer';
-import App from './App.vue';
+import App from './App/index.vue';
 import router from './router';
 import store from './store';
 import apolloProvider from './apollo';

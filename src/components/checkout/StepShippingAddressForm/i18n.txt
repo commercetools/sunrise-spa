@@ -1,0 +1,4 @@
+en:
+  shippingInformation: "Shipping Information"
+de:
+  shippingInformation: "Versand Information"

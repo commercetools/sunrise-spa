@@ -1,9 +1,0 @@
-{
-	"list" : [
-		{ "$ref" : "facet-hierarchical-select-category.json" },
-		{ "$ref" : "facet-select-size.json" },
-		{ "$ref" : "facet-select-color.json" },
-		{ "$ref" : "facet-select-brands.json" },
-		{ "$ref" : "facet-slider-range-price.json" }
-	]
-}

@@ -1,11 +1,11 @@
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import StepShippingMethodForm from '@/components/checkout/StepShippingMethodForm.vue';
+import StepShippingMethodForm from '@/components/checkout/StepShippingMethodForm/index.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuelidate);
 
-describe('StepShippingMethodForm.vue', () => {
+describe('StepShippingMethodForm/index.vue', () => {
   let options;
 
   beforeEach(() => {

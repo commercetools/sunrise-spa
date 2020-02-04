@@ -1,11 +1,11 @@
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import MiniCart from '@/components/header/MiniCart.vue';
+import MiniCart from '@/components/header/MiniCart/index.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
-describe('MiniCart.vue', () => {
+describe('MiniCart/index.vue', () => {
   const lineItem = id => ({
     id,
     quantity: 3,

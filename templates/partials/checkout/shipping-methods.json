@@ -1,6 +1,0 @@
-{
-    "list" : [
-        { "$ref" : "../common/shipping-method-1.json" },
-        { "$ref" : "../common/shipping-method-2.json" }
-    ]
-}

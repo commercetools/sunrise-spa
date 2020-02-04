@@ -1,0 +1,14 @@
+  en:
+    itemsTotal: "{n} item in total | {n} items in total"
+    editMyCart: "Edit my shopping cart"
+    orderSummary: "Order Summary"
+    quantity: "Quantity"
+    price: "Price"
+    total: "Total"
+  de:
+    itemsTotal: "{n} Artikel im Warenkorb"
+    editMyCart: "Warenkorb bearbeiten"
+    orderSummary: "Bestellübersicht"
+    quantity: "Menge"
+    price: "Preis"
+    total: "Gesamtpreis"

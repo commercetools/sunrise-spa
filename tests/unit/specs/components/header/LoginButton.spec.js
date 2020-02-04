@@ -1,13 +1,13 @@
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import LoginHeaderButton from '@/components/header/LoginButton.vue';
+import LoginHeaderButton from '@/components/header/LoginButton/index.vue';
 
 jest.mock('@/auth', () => ({ clientLogout: jest.fn() }));
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
-describe('LoginHeaderButton.vue', () => {
+describe('LoginHeaderButton/index.vue', () => {
   let options;
   let state;
 

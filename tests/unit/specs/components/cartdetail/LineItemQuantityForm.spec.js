@@ -1,11 +1,11 @@
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import LineItemQuantityForm from '@/components/cartdetail/LineItemQuantityForm.vue';
+import LineItemQuantityForm from '@/components/cartdetail/LineItemQuantityForm/index.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuelidate);
 
-describe('LineItemQuantityForm.vue', () => {
+describe('LineItemQuantityForm/index.vue', () => {
   let mockedDebounced;
   let options;
 

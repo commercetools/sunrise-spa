@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
-import CategoriesMenu from '@/components/header/CategoriesMenu.vue';
+import CategoriesMenu from '@/components/header/CategoriesMenu/index.vue';
 
-describe('CategoriesMenu.vue', () => {
+describe('CategoriesMenu/index.vue', () => {
   const categoryWithChildren1 = {
     id: 'category-children-1-id',
     children: [

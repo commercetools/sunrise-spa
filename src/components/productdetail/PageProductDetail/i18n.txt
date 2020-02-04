@@ -1,0 +1,6 @@
+en:
+  suggestions:
+    title: "You may also like"
+de:
+  suggestions:
+    title: "Das könnte Ihnen auch gefallen"

@@ -1,12 +1,12 @@
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import BaseMoney from '@/components/common/BaseMoney.vue';
+import BaseMoney from '@/components/common/BaseMoney/index.vue';
 
 const localVue = createLocalVue();
 
 localVue.use(Vuex);
 
-describe('BaseMoney.vue', () => {
+describe('BaseMoney/index.vue', () => {
   let options;
 
   beforeEach(() => {

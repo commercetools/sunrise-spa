@@ -1,0 +1,8 @@
+en:
+  title: "Summer Lovin'"
+  subtitle: "Summer must have outfits"
+  linkLabel: "Shop collection"
+de:
+  title: "Sommer Fashion"
+  subtitle: "Beste Outfits für die Saison"
+  linkLabel: "Jetzt bestellen"
