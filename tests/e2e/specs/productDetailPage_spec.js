@@ -88,11 +88,11 @@ describe('Product detail page', () => {
 
         cy.wrap($product)
           .find('[data-test=price-old-value]')
-          .contains(/^\s*248,75\s€\s*$/);
+          .contains(/^\s*199,00\s€\s*$/);
 
         cy.wrap($product)
           .find('[data-test=price-new-value]')
-          .contains(/^\s*174,12\s€\s*$/);
+          .contains(/^\s*139,30\s€\s*$/);
 
         cy.wrap($product)
           .find('[data-test=product-attributes-accordion]')
