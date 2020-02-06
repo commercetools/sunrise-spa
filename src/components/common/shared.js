@@ -11,3 +11,17 @@ export function totalPrice(lineItem) {
   }
   return price;
 }
+export const toPrice = (prices, country, currency) => {
+  const price = prices.find(
+    p => !p.customerGroup
+      && !p.channel
+      && p.country === country
+      && p.value.currencyCode === currency,
+  );
+  return price || prices.find(
+    p => !p.customerGroup
+      && !p.channel
+      && !p.country
+      && p.value.currencyCode === currency,
+  );
+};
