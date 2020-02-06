@@ -5,15 +5,8 @@ import ProductThumbnail from '../../common/ProductThumbnail/index.vue';
 import ProductSortSelector from '../ProductSortSelector/index.vue';
 import Pagination from '../Pagination/index.vue';
 import { products, onlyLastRequestedPromise } from '../../../api';
+import { toPrice } from '../../common/shared';
 
-const toPrice = (prices, country, currency) => ({
-  ...prices.filter(
-    p => !p.customerGroup
-        && !p.channel
-        && p.country === country
-        && p.value.currencyCode === currency,
-  )[0],
-});
 const last = onlyLastRequestedPromise('products');
 const getProducts = (component) => {
   const category = component.$route.params.categorySlug === 'all'
