@@ -33,7 +33,7 @@
                   <div class="text-right order-item-value">
                     <span class="text-uppercase pricing-titles">{{ $t("total") }}</span>
                     <br>
-                    <BaseMoney :money="lineItem.totalPrice"/>
+                    <BasePrice :price="totalPrice(lineItem)"/>
                   </div>
                 </div>
               </div>

@@ -19,9 +19,9 @@ describe('Location selector', () => {
 
   it('changes prices to selected country', () => {
     cy.changeCountry('United States');
-    cy.get('[data-test=product-original-price]').contains(/^\s*(US)?\$174.12\s*$/);
+    cy.get('[data-test=product-original-price]').contains(/^\s*(US)?\$248.75\s*$/);
     cy.changeCountry('Deutschland');
-    cy.get('[data-test=product-original-price]').contains(/^\s*174,12\s€\s*$/);
+    cy.get('[data-test=product-original-price]').contains(/^\s*199,00\s€\s*$/);
   });
 
   it('opens and closes location selector', () => {
