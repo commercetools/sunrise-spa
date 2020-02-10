@@ -11,17 +11,18 @@ export function totalPrice(lineItem) {
   }
   return price;
 }
-export const toPrice = (prices, country, currency) => {
-  const price = prices.find(
-    p => !p.customerGroup
-      && !p.channel
-      && p.country === country
-      && p.value.currencyCode === currency,
-  );
-  return price || prices.find(
-    p => !p.customerGroup
-      && !p.channel
-      && !p.country
-      && p.value.currencyCode === currency,
-  );
+// eslint-disable-next-line max-len
+const createPricePoints = country => price => (price.country === country ? 1 : 0);
+export const toPrice = (prices, {
+  country, currency, customerGroup, channel,
+}) => {
+  const pricePonts = createPricePoints(country);
+  return prices.filter(
+    p => p.value.currencyCode === currency
+    && p.customerGroup?.id === customerGroup
+    && p.channel?.id === channel,
+  )// sort mutates but filter copied prices so no problem
+    .sort(
+      (a, b) => pricePonts(b) - pricePonts(a),
+    )[0];
 };
