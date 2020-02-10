@@ -64,7 +64,7 @@ describe('Login', () => {
     cy.visit('/forgot-password');
     cy.get('[data-test=forgot-password-email]').type(newCustomer.email);
     cy.get('[data-test=forgot-password-form-submit]').click();
-    cy.wrap(mailslurp.waitForEmailCount(1, 'f4831546-0062-470d-b6a9-cacb8e0a2aa4')
+    cy.wrap(mailslurp.waitForEmailCount(1, msEmail.substring(0, msEmail.lastIndexOf('@')))
       .then(response => mailslurp.getEmail(response[0].id)
         .then(fullEmail => fullEmail.body.match(/a href="([^"]*)/)[1])))
       .then((link) => {
