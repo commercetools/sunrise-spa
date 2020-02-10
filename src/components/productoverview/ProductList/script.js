@@ -53,7 +53,11 @@ const getProducts = (component) => {
               masterVariant: {
                 sku,
                 images,
-                price: toPrice(prices, country, currency),
+                price: toPrice(prices, {
+                  country,
+                  currency,
+                  // @todo: what about customerGroup and channel
+                }),
               },
             },
           },
