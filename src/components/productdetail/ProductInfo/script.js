@@ -34,7 +34,7 @@ export default {
   apollo: {
     product: {
       query: gql`
-        query Product($locale: Locale!, $sku: String!, $currency: Currency!) {
+        query Product($locale: Locale!, $sku: String!, $currency: Currency!, $country: Country!) {
           product(sku: $sku) {
             id
             masterData {
@@ -42,7 +42,7 @@ export default {
                 name(locale: $locale)
                 slug(locale: $locale)
                 variant(sku: $sku) {
-                  price(currency: $currency) {
+                  price(currency: $currency,country:$country) {
                     value {
                       ...printPrice
                     }
@@ -66,6 +66,7 @@ export default {
           locale: this.$store.state.locale,
           currency: this.$store.state.currency,
           sku: this.sku,
+          country: this.$store.state.country,
         };
       },
     },
