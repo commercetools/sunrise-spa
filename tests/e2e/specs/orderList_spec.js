@@ -70,6 +70,21 @@ describe('my orders', () => {
       });
   });
 
+  it('shows pages', () => {
+    for (let i = 9001; i < 9012; i += 1) {
+      cy.createOrder(cartDraft1, { orderNumber: String(i) });
+      if (i === 9011) {
+        cy.get('[data-test=my-orders-button]').click();
+        cy.get('[data-test=order-list]')
+          .should('have.length', 10);
+        cy.get('[data-test=orders-page]').contains('1 / 2');
+        cy.get('[data-test=orders-next-page-button').click();
+        cy.get('[data-test=order-list]')
+          .should('have.length', 1);
+      }
+    }
+  });
+
   it('displays an empty order list message when no orders have been placed', () => {
     cy.get('[data-test=my-orders-button]', { timeout: Cypress.config('graphqlTimeout') }).click();
     cy.get('[data-test=order-list]')

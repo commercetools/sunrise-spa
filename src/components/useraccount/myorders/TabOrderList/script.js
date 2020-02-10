@@ -11,7 +11,7 @@ export default {
   data: () => ({
     me: null,
     page: 0,
-    limit: 3,
+    limit: 10,
   }),
   computed: {
     ordersPerPage() {
