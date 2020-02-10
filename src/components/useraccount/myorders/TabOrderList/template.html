@@ -81,12 +81,13 @@
           :disabled="isInFirstPage"
           class="icon-prev"></button>
         </li>
-          {{ this.page + 1 }} / {{ this.totalPages }}
+          <span data-test="orders-page">{{ this.page + 1 }} / {{ this.totalPages }}</span>
         <li class="pagination-item">
           <button type="button"
           @click="pageForward"
           :disabled="isInLastPage"
-          class="icon-next"></button>
+          class="icon-next"
+          data-test="orders-next-page-button"></button>
         </li>
       </ul>
       </div>
