@@ -1,4 +1,23 @@
+import _const from '../support/const';
+
 describe('Product overview page', () => {
+  const wFetch = window.fetch;
+  const later = () => new Promise(
+    r => setTimeout(r, 1000),
+  );
+  before(() => {
+    window.fetch = function fetch() {
+      // eslint-disable-next-line prefer-rest-params
+      const args = arguments;
+      return later().then(() => wFetch.apply(window, args));
+    };
+  });
+
+  after(() => {
+    window.fetch = wFetch;
+  });
+
+
   it('Changes sorting settings', () => {
     cy.visit('/products/men');
     cy.get('span[data-test=sort-selector]', { timeout: Cypress.config('graphqlTimeout') })
@@ -14,11 +33,15 @@ describe('Product overview page', () => {
     cy.get('[data-test=product-list]')
       .first()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Sneaker – Lotto “Tokyo“');
+      .should((e) => {
+        expect(e.text()).to.include(_const.three.NAME);
+      });
     cy.get('[data-test=product-list]')
       .last()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Polo Moncler red');
+      .should((e) => {
+        expect(e.text()).to.include(_const.two.NAME);
+      });
 
     cy.get('span[data-test=sort-selector]')
       .click()
@@ -33,11 +56,16 @@ describe('Product overview page', () => {
     cy.get('[data-test=product-list]')
       .first()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Polo Ralph Lauren green');
+      .should((e) => {
+        expect(e.text()).to.include(_const.one.NAME);
+      });
+
     cy.get('[data-test=product-list]')
       .last()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Hoodie Moncler dark blue');
+      .should((e) => {
+        expect(e.text()).to.include(_const.two.NAME);
+      });
   });
 
   it('Applies sorting settings from URL', () => {
@@ -49,11 +77,11 @@ describe('Product overview page', () => {
     cy.get('[data-test=product-list]')
       .first()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Sneaker – Lotto “Tokyo“');
+      .contains(_const.three.NAME);
     cy.get('[data-test=product-list]')
       .last()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Polo Moncler red');
+      .contains(_const.two.NAME);
   });
 
   it('Displays a message when an error occurs', () => {
@@ -70,7 +98,7 @@ describe('Product overview page', () => {
   });
 
   it('Paginates back and forth through product list', () => {
-    cy.visit('/products/women-clothing-dresses');
+    cy.visit('/products/men');
     cy.get('[data-test=product-list]', { timeout: Cypress.config('graphqlTimeout') });
     cy.get('[data-test=custom-pagination-top]')
       .find('[data-test=total-pages]')
@@ -82,7 +110,7 @@ describe('Product overview page', () => {
     cy.get('[data-test=custom-pagination-top]')
       .find('[data-test=next-page-link]')
       .click();
-    cy.url().should('include', '/products/women-clothing-dresses/2');
+    cy.url().should('include', '/products/men/2');
     cy.get('[data-test=custom-pagination-top]')
       .find('[data-test=total-pages]')
       .contains('Page 2 of 2');
@@ -93,7 +121,7 @@ describe('Product overview page', () => {
     cy.get('[data-test=custom-pagination-top]')
       .find('[data-test=previous-page-link]')
       .click();
-    cy.url().should('include', '/products/women-clothing-dresses');
+    cy.url().should('include', '/products/men/1');
     cy.get('[data-test=custom-pagination-top]')
       .find('[data-test=total-pages]')
       .contains('Page 1 of 2');

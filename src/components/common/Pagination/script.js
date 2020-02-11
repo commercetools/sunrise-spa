@@ -1,16 +1,18 @@
 export default {
-  props: ['products', 'offset', 'limit', 'totalProducts', 'page'],
+  props: ['pageSize', 'total', 'page'],
   computed: {
     totalPages() {
-      const productListLength = this.totalProducts;
-      const pageLimit = this.limit;
-      return Math.ceil(productListLength / pageLimit);
+      const { total, pageSize } = this;
+      return Math.ceil(total / pageSize);
     },
     isInFirstPage() {
       return this.page === 1;
     },
     isInLastPage() {
       return this.page > this.totalPages - 1;
+    },
+    show() {
+      return this.totalPages > 1;
     },
   },
   methods: {

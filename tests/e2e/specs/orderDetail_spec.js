@@ -59,10 +59,10 @@ describe('OrderDetailPage', () => {
       key: 'express-EU',
     },
     lineItems: [{
-      sku: 'M0E20000000EFWN',
+      sku: 'M0E20000000ELAJ',
     },
     {
-      sku: 'M0E20000000E0WX',
+      sku: 'M0E20000000DX1Y',
       quantity: 2,
     },
     ],
@@ -89,23 +89,41 @@ describe('OrderDetailPage', () => {
     cy.get('[data-test=details-order-date]')
       .contains(/^\s*\d{1,2}\.*\s*[A-Za-zäÄöÖüÜß].+\s*\d{4}\s*$/);
     cy.get('[data-test=cart-subtotal-price]')
-      .contains(/^\s*183,80\s€\s*$/);
+      .should((e) => {
+        expect(e.text()).to.match(/^\s*149,50\s€\s*$/);
+      });
     cy.get('[data-test=cart-shipping-price]')
       .contains(/^\s*10,00\s€\s*$/);
     cy.get('[data-test=cart-taxes-amount]')
-      .contains(/^\s*30,95\s€\s*$/);
+      .should((e) => {
+        expect(e.text()).to.match(/^\s*25,47\s€\s*$/);
+      });
     cy.get('[data-test=cart-total-price]')
-      .contains(/^\s*193,80\s€\s*$/);
+      .should((e) => {
+        expect(e.text()).to.match(/^\s*159,50\s€\s*$/);
+      });
     cy.get('[data-test=cart-line-item]')
       .should('have.length', 2)
       .eq(1)
       .then(($item) => {
         cy.wrap($item)
           .find('[data-test=price-old-value]')
-          .contains(/^\s*199,00\s€\s*$/);
+          .eq(1)
+          .should((e) => {
+            expect(e.text()).to.match(/^\s*275,00\s€\s*$/);
+          });
         cy.wrap($item)
           .find('[data-test=price-new-value]')
-          .contains(/^\s*139,30\s€\s*$/);
+          .eq(0)
+          .should((e) => {
+            expect(e.text()).to.match(/^\s*137,50\s€\s*$/);
+          });
+        cy.wrap($item)
+          .find('[data-test=price-new-value]')
+          .eq(1)
+          .should((e) => {
+            expect(e.text()).to.match(/^\s*137,50\s€\s*$/);
+          });
       });
     cy.get('[data-test=discount-code-name]')
       .contains('SUNRISE_CI');

@@ -36,7 +36,7 @@
           </div>
         </div>
       </div>
-      <div v-for="order in ordersPerPage"
+      <div v-for="order in orders"
            :key="order.id"
            data-test="order-list"
            class="my-orders-table-order">
@@ -73,23 +73,11 @@
           </div>
         </div>
       </div>
-      <div class="custom-pagination">
-        <ul class="pagination">
-        <li class="pagination-item">
-          <button type="button"
-          @click="pageBack"
-          :disabled="isInFirstPage"
-          class="icon-prev"></button>
-        </li>
-          <span data-test="orders-page">{{ this.page + 1 }} / {{ this.totalPages }}</span>
-        <li class="pagination-item">
-          <button type="button"
-          @click="pageForward"
-          :disabled="isInLastPage"
-          class="icon-next"
-          data-test="orders-next-page-button"></button>
-        </li>
-      </ul>
+      <div class="orders-pagination">
+        <Pagination :pageSize="limit"
+          :total="total"
+          :page="page"
+          @pagechanged="changePage" />
       </div>
     </div>
     <div v-else
