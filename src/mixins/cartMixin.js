@@ -95,6 +95,12 @@ export default {
           const data = store.readQuery({ query: BASIC_CART_QUERY });
           data.me.activeCart = null;
           store.writeQuery({ query: BASIC_CART_QUERY, data });
+          // invalidate cached order pages
+          Object.keys(store.data.toObject())
+            .filter(key => key.startsWith('Order'))
+            .forEach(
+              key => store.data.delete(key),
+            );
         },
       });
     },

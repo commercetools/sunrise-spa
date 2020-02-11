@@ -27,6 +27,7 @@ import StepBillingAddressForm from './components/checkout/StepBillingAddressForm
 import StepShippingMethodForm from './components/checkout/StepShippingMethodForm/index.vue';
 import StepPaymentMethodForm from './components/checkout/StepPaymentMethodForm/index.vue';
 import StepPlaceOrderForm from './components/checkout/StepPlaceOrderForm/index.vue';
+import { pageFromRoute } from './components/common/shared';
 
 
 Vue.use(Router);
@@ -96,15 +97,10 @@ const router = new Router({
         footer: TheFooter,
       },
       props: {
-        default: (route) => {
-          const pageNum = Number(route.params.page);
-          const page = Number.isNaN(pageNum) || pageNum <= 1
-            ? 1 : pageNum;
-          return ({
-            categorySlug: route.params.categorySlug,
-            page,
-          });
-        },
+        default: route => ({
+          ...pageFromRoute(route),
+          categorySlug: route.params.categorySlug,
+        }),
         header: false,
         footer: false,
       },
@@ -119,10 +115,12 @@ const router = new Router({
       },
       children: [
         {
-          path: 'orders', name: 'orders', component: TabOrderList,
+          path: 'order/:id', name: 'order', component: TabOrderDetail,
         },
         {
-          path: 'orders/:id', name: 'order', component: TabOrderDetail,
+          path: 'orders/:page?',
+          name: 'orders',
+          component: TabOrderList,
         },
         {
           path: 'account', alias: '', name: 'user', component: TabPersonalDetails,

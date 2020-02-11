@@ -36,8 +36,8 @@ export default {
     sort(newValue) {
       const sortCriteria = (sort) => {
         switch (sort) {
-          case 'newest': return 'createdAt desc';
-          case 'oldest': return 'createdAt asc';
+          case 'newest': return 'lastModifiedAt desc';
+          case 'oldest': return 'lastModifiedAt asc';
           default: return null;
         }
       };
