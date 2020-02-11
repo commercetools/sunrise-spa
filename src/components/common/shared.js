@@ -26,3 +26,19 @@ export const toPrice = (prices, {
       (a, b) => pricePonts(b) - pricePonts(a),
     )[0];
 };
+export const pageFromRoute = (route) => {
+  const pageNum = Number(route.params.page);
+  const page = Number.isNaN(pageNum) || pageNum <= 1
+    ? 1 : pageNum;
+  return {
+    page,
+  };
+};
+export const pushPage = (page, component, name) => {
+  const { params, query } = component.$route;
+  component.$router.push({
+    name,
+    params: { ...params, page },
+    query,
+  });
+};

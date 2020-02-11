@@ -19,7 +19,7 @@ describe('my orders', () => {
     customerEmail: 'charlie.bucket+ci@commercetools.com',
     currency: 'EUR',
     lineItems: {
-      sku: 'M0E20000000DPZ0',
+      sku: 'M0E20000000ELAJ',
     },
     shippingAddress: {
       country: 'DE',
@@ -30,7 +30,7 @@ describe('my orders', () => {
     customerEmail: 'charlie.bucket+ci@commercetools.com',
     currency: 'EUR',
     lineItems: {
-      sku: 'M0E20000000DLPH',
+      sku: 'M0E20000000DX1Y',
     },
     shippingAddress: {
       country: 'DE',
@@ -53,13 +53,17 @@ describe('my orders', () => {
       .then(($order) => {
         cy.wrap($order)
           .find('[data-test=total-price]')
-          .contains(/^\s*368,75\s€\s*$/);
+          .should((e) => {
+            expect(e.text()).to.match(/^\s*30,00\s€\s*$/);
+          });
         cy.wrap($order)
           .find('[data-test=order-date]')
           .contains(/^\s*\d{1,2}\.*\s*[A-Za-zäÄöÖüÜß].+\s*\d{4}\s*$/);
-        cy.wrap($order)
-          .find('[data-test=order-number]')
-          .contains('1234');
+        // pointless to check for order number, my route does not allow
+        //   order number
+        // cy.wrap($order)
+        //   .find('[data-test=order-number]')
+        //   .contains('1234');
         cy.changeLanguage('Deutsch');
         cy.wrap($order)
           .find('[data-test=shipment-state]')
@@ -71,18 +75,25 @@ describe('my orders', () => {
   });
 
   it('shows pages', () => {
-    for (let i = 9001; i < 9012; i += 1) {
-      cy.createOrder(cartDraft1, { orderNumber: String(i) });
-      if (i === 9011) {
-        cy.get('[data-test=my-orders-button]').click();
-        cy.get('[data-test=order-list]')
-          .should('have.length', 10);
-        cy.get('[data-test=orders-page]').contains('1 / 2');
-        cy.get('[data-test=orders-next-page-button').click();
-        cy.get('[data-test=order-list]')
-          .should('have.length', 1);
-      }
-    }
+    cy.createOrder(cartDraft1, { orderNumber: String(9001) });
+    cy.get('[data-test=my-orders-button]').click();
+    cy.get('[data-test=pagination]').should('not.exist');
+    cy.createOrder(cartDraft1, { orderNumber: String(9002) });
+    cy.createOrder(cartDraft1, { orderNumber: String(9003) });
+    cy.visit('/user/account');
+    cy.get('[data-test=my-orders-button]').click();
+    cy.get('[data-test=pagination]').should('exist');
+    cy.get('[data-test=order-list]')
+      .should('have.length', 2);
+    cy.get('[data-test=pagination]').contains('1 of 2');
+    cy.get('[data-test=next-page-link').click();
+    cy.get('[data-test=order-list]')
+      .should('have.length', 1);
+    cy.visit('/user/orders/1');
+    cy.get('[data-test=pagination]').should('exist');
+    cy.get('[data-test=order-list]')
+      .should('have.length', 2);
+    cy.get('[data-test=pagination]').contains('1 of 2');
   });
 
   it('displays an empty order list message when no orders have been placed', () => {
