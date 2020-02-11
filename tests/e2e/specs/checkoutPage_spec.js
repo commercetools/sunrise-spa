@@ -52,48 +52,54 @@ describe('CheckoutPage', () => {
       .should('contain', 'Express EU');
 
     cy.get('[data-test=cart-subtotal-price]')
-      .contains(/^\s*815,90\s€\s*$/);
+      .contains(/^\s*378,00\s€\s*$/);
     cy.get('[data-test=cart-shipping-price]')
       .contains(/^\s*10,00\s€\s*$/);
     cy.get('[data-test=cart-taxes-amount]')
-      .contains(/^\s*131,87\s€\s*$/);
+      .contains(/^\s*61,95\s€\s*$/);
     cy.get('[data-test=cart-total-price]')
-      .contains(/^\s*825,90\s€\s*$/);
+      .contains(/^\s*388,00\s€\s*$/);
 
     cy.get('[data-test=cart-line-item]')
       .should('have.length', 2)
-      .eq(1)
+      .eq(0)
       .then(($lineItem) => {
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-link]')
-          .should('have.attr', 'href', '/product/lemare-booties-0778-grey/M0E20000000E0WX')
-          .should('contain', 'Booties Lemare grey');
+          .should('have.attr', 'href', '/product/newbalance-sneakers-MT980BB-multi/M0E20000000E1AZ')
+          .should('contain', 'Sneakers New Balance multi');
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-sku]')
-          .should('contain', 'M0E20000000E0WX');
+          .should('contain', 'M0E20000000E1AZ');
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-quantity]')
-          .should('contain', '3');
+          .should('contain', '2');
 
         cy.wrap($lineItem)
           .find('[data-test=price-old-value]')
-          .contains(/^\s*199,00\s€\s*$/);
+          .should((e) => {
+            expect(e.text()).to.match(/^\s*120,00\s€\s*$/);
+          });
 
         cy.wrap($lineItem)
           .find('[data-test=price-new-value]')
-          .contains(/^\s*139,30\s€\s*$/);
+          .should((e) => {
+            expect(e.text()).to.match(/^\s*60,00\s€\s*$/);
+          });
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-total-price]')
-          .contains(/^\s*417,90\s€\s*$/);
+          .should((e) => {
+            expect(e.text()).to.match(/^\s*120,00\s€\s*$/);
+          });
       });
   }
 
   it('allows to place an order', () => {
-    cy.addLineItem('/product/lemare-booties-0778-brown/M0E20000000E0XM', 2);
-    cy.addLineItem('/product/lemare-booties-0778-grey/M0E20000000E0WX', 3);
+    cy.addLineItem('/product/newbalance-sneakers-MT980BB-multi/M0E20000000E1AZ', 2);
+    cy.addLineItem('/product/poloralphlauren-polo-C8312A3ZHJ-green/M0E20000000E2Q5', 3);
     cy.visit('/cart');
     cy.get('[data-test=checkout-button]').click();
 

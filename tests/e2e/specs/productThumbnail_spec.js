@@ -1,11 +1,11 @@
 describe('Product thumbnail', () => {
   before(() => {
-    cy.visit('/products/women-shoes-ankle-boots');
+    cy.visit('/products/men/2');
   });
 
   it('displays product information', () => {
     cy.get('[data-test=product-thumbnail-name]', { timeout: Cypress.config('graphqlTimeout') })
-      .contains('Booties Lemare grey')
+      .contains('Sneakers New Balance multi')
       .parentsUntil('[data-test=product-thumbnail]')
       .parent()
       .then(($thumbnail) => {
@@ -20,15 +20,15 @@ describe('Product thumbnail', () => {
 
         cy.wrap($thumbnail)
           .find('[data-test=price-old-value]')
-          .contains(/^\s*199,00\s€\s*$/);
+          .contains(/^\s*120,00\s€\s*$/);
 
         cy.wrap($thumbnail)
           .find('[data-test=price-new-value]')
-          .contains(/^\s*139,30\s€\s*$/);
+          .contains(/^\s*60,00\s€\s*$/);
       });
-
+    cy.visit('/products/men/1');
     cy.get('[data-test=product-thumbnail-name]')
-      .contains('Booties Lemare black')
+      .contains('Sneakers ”R261” Hogan Rebel grey')
       .parentsUntil('[data-test=product-thumbnail]')
       .parent()
       .then(($thumbnail) => {
@@ -38,7 +38,7 @@ describe('Product thumbnail', () => {
 
         cy.wrap($thumbnail)
           .find('[data-test=product-original-price]')
-          .contains(/\s*185,00\s€\s*$/);
+          .contains(/\s*275,00\s€\s*$/);
 
         cy.wrap($thumbnail)
           .find('[data-test=price-new-value]')

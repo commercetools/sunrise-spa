@@ -9,54 +9,54 @@ describe('CartDetailPage', () => {
   });
 
   it('displays content of cart', () => {
-    cy.addLineItem('/product/lemare-booties-0778-brown/M0E20000000E0XM', 2);
-    cy.addLineItem('/product/lemare-booties-0778-grey/M0E20000000E0WX', 3);
+    cy.addLineItem('/product/newbalance-sneakers-MT980BB-multi/M0E20000000E1AZ', 2);
+    cy.addLineItem('/product/poloralphlauren-polo-C8312A3ZHJ-green/M0E20000000E2Q5', 3);
     cy.visit('/cart');
     cy.get('[data-test=cart-total-items]', { timeout: Cypress.config('graphqlTimeout') })
       .contains(/^\s*5 items in total\s*$/);
 
     cy.get('[data-test=cart-total-price]')
-      .contains(/^\s*815,90\s€\s*$/);
+      .contains(/^\s*378,00\s€\s*$/);
 
     cy.get('[data-test=cart-taxes-amount]')
-      .contains(/^\s*130,27\s€\s*$/);
+      .contains(/^\s*60,35\s€\s*$/);
 
     cy.get('[data-test=cart-subtotal-price]')
-      .contains(/^\s*815,90\s€\s*$/);
+      .contains(/^\s*378,00\s€\s*$/);
 
     cy.get('[data-test=cart-line-item]')
       .should('have.length', 2)
-      .eq(1)
+      .eq(0)
       .then(($lineItem) => {
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-link]')
-          .should('have.attr', 'href', '/product/lemare-booties-0778-grey/M0E20000000E0WX')
-          .should('contain', 'Booties Lemare grey');
+          .should('have.attr', 'href', '/product/newbalance-sneakers-MT980BB-multi/M0E20000000E1AZ')
+          .should('contain', 'Sneakers New Balance multi');
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-sku]')
-          .should('contain', 'M0E20000000E0WX');
+          .should('contain', 'M0E20000000E1AZ');
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-quantity]')
-          .should('have.value', '3');
+          .should('have.value', '2');
 
         cy.wrap($lineItem)
           .find('[data-test=price-old-value]')
-          .contains(/^\s*199,00\s€\s*$/);
+          .contains(/^\s*120,00\s€\s*$/);
 
         cy.wrap($lineItem)
           .find('[data-test=price-new-value]')
-          .contains(/^\s*139,30\s€\s*$/);
+          .contains(/^\s*60,00\s€\s*$/);
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-total-price]')
-          .contains(/^\s*417,90\s€\s*$/);
+          .contains(/^\s*120,00\s€\s*$/);
       });
   });
 
   it('manages line items in cart', () => {
-    cy.addLineItem('/product/lemare-booties-0778-grey/M0E20000000E0WX', 3);
+    cy.addLineItem('/product/newbalance-sneakers-MT980BB-multi/M0E20000000E1AZ', 3);
     cy.visit('/cart');
 
     cy.get('[data-test=cart-line-item]', { timeout: Cypress.config('graphqlTimeout') })
@@ -69,7 +69,7 @@ describe('CartDetailPage', () => {
           .type('5');
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-total-price]')
-          .contains(/^\s*696,50\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
+          .contains(/^\s*300,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-quantity-inc]')
@@ -80,7 +80,7 @@ describe('CartDetailPage', () => {
           .should('have.value', '7');
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-total-price]')
-          .contains(/^\s*975,10\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
+          .contains(/^\s*420,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-quantity-dec]')
@@ -90,7 +90,7 @@ describe('CartDetailPage', () => {
           .should('have.value', '6');
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-total-price]')
-          .contains(/^\s*835,80\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
+          .contains(/^\s*360,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-delete]').click();
@@ -100,7 +100,7 @@ describe('CartDetailPage', () => {
   });
 
   it('removes line item when quantity is decreased to less than 1', () => {
-    cy.addLineItem('/product/lemare-booties-0778-grey/M0E20000000E0WX', 1);
+    cy.addLineItem('/product/newbalance-sneakers-MT980BB-multi/M0E20000000E1AZ', 1);
     cy.visit('/cart');
 
     cy.get('[data-test=cart-line-item]')
@@ -126,18 +126,18 @@ describe('CartDetailPage', () => {
 
   it('applies and deletes discount codes', () => {
     cy.addDiscountCode(cartDiscount, 'SUNRISE_CI');
-    cy.addLineItem('/product/lemare-booties-0778-brown/M0E20000000E0XM', 1);
+    cy.addLineItem('/product/newbalance-sneakers-MT980BB-multi/M0E20000000E1AZ', 1);
     cy.visit('/cart');
 
     cy.get('[data-test=cart-line-item-total-price]')
-      .contains(/^\s*199,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
+      .contains(/^\s*60,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
     cy.get('[data-test=discount-code-input]')
       .type('SUNRISE_CI');
     cy.get('[data-test=apply-discount-code-button]')
       .click();
     cy.get('[data-test=cart-total-price]')
-      .contains(/^\s*99,50\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
+      .contains(/^\s*30,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
     cy.get('[data-test=discount-code-name]')
       .contains('SUNRISE_CI');
@@ -145,6 +145,6 @@ describe('CartDetailPage', () => {
       .click();
 
     cy.get('[data-test=cart-line-item-total-price]')
-      .contains(/^\s*199,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
+      .contains(/^\s*60,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
   });
 });

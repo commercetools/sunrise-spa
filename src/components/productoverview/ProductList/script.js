@@ -79,7 +79,7 @@ export default {
     categories: null,
     products: null,
     sort: null,
-    limit: 75,
+    limit: Number(process.env.VUE_APP_PAGE_SIZE || 75),
     loadingProducts: false,
   }),
   computed: {

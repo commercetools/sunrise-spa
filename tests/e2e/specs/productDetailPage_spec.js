@@ -75,24 +75,24 @@ describe('Product detail page', () => {
   };
 
   it('displays a single product details', () => {
-    cy.visit('/product/lemare-booties-0778-grey/M0E20000000E0WX');
+    cy.visit('/product/newbalance-sneakers-MT980BB-multi/M0E20000000E1AZ');
     cy.get('[data-test=product-data]')
       .then(($product) => {
         cy.wrap($product)
           .find('[data-test=product-name]')
-          .should('contain', 'Booties Lemare grey');
+          .should('contain', 'Sneakers New Balance multi');
 
         cy.wrap($product)
           .find('[data-test=product-sku]')
-          .should('contain', 'M0E20000000E0WX');
+          .should('contain', 'M0E20000000E1AZ');
 
         cy.wrap($product)
           .find('[data-test=price-old-value]')
-          .contains(/^\s*199,00\s€\s*$/);
+          .contains(/^\s*120,00\s€\s*$/);
 
         cy.wrap($product)
           .find('[data-test=price-new-value]')
-          .contains(/^\s*139,30\s€\s*$/);
+          .contains(/^\s*60,00\s€\s*$/);
 
         cy.wrap($product)
           .find('[data-test=product-attributes-accordion]')
@@ -102,7 +102,9 @@ describe('Product detail page', () => {
           .find('[data-test=product-attributes-list]')
           .should('have.length', 6)
           .eq(2)
-          .contains(/^\s*size:\s+34\s*$/);
+          .should((e) => {
+            expect(e.text()).to.match(/^\s*size:\s+5\s*$/);
+          });
       });
 
     cy.get('[data-test=product-gallery]')

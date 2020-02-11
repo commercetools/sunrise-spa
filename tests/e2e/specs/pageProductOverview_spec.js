@@ -14,11 +14,11 @@ describe('Product overview page', () => {
     cy.get('[data-test=product-list]')
       .first()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Sneaker – Lotto “Tokyo“');
+      .contains('Sneakers ”R261” Hogan Rebel grey');
     cy.get('[data-test=product-list]')
       .last()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Polo Moncler red');
+      .contains('Polo Ralph Lauren green');
 
     cy.get('span[data-test=sort-selector]')
       .click()
@@ -33,11 +33,11 @@ describe('Product overview page', () => {
     cy.get('[data-test=product-list]')
       .first()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Polo Ralph Lauren green');
+      .contains('Sneakers New Balance multi');
     cy.get('[data-test=product-list]')
       .last()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Hoodie Moncler dark blue');
+      .contains('Polo Ralph Lauren green');
   });
 
   it('Applies sorting settings from URL', () => {
@@ -49,11 +49,11 @@ describe('Product overview page', () => {
     cy.get('[data-test=product-list]')
       .first()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Sneaker – Lotto “Tokyo“');
+      .contains('Sneakers ”R261” Hogan Rebel grey');
     cy.get('[data-test=product-list]')
       .last()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Polo Moncler red');
+      .contains('Polo Ralph Lauren green');
   });
 
   it('Displays a message when an error occurs', () => {
@@ -70,7 +70,7 @@ describe('Product overview page', () => {
   });
 
   it('Paginates back and forth through product list', () => {
-    cy.visit('/products/women-clothing-dresses');
+    cy.visit('/products/men');
     cy.get('[data-test=product-list]', { timeout: Cypress.config('graphqlTimeout') });
     cy.get('[data-test=custom-pagination-top]')
       .find('[data-test=total-pages]')
@@ -82,7 +82,7 @@ describe('Product overview page', () => {
     cy.get('[data-test=custom-pagination-top]')
       .find('[data-test=next-page-link]')
       .click();
-    cy.url().should('include', '/products/women-clothing-dresses/2');
+    cy.url().should('include', '/products/men/2');
     cy.get('[data-test=custom-pagination-top]')
       .find('[data-test=total-pages]')
       .contains('Page 2 of 2');
@@ -93,7 +93,7 @@ describe('Product overview page', () => {
     cy.get('[data-test=custom-pagination-top]')
       .find('[data-test=previous-page-link]')
       .click();
-    cy.url().should('include', '/products/women-clothing-dresses');
+    cy.url().should('include', '/products/men/1');
     cy.get('[data-test=custom-pagination-top]')
       .find('[data-test=total-pages]')
       .contains('Page 1 of 2');
