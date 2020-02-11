@@ -3,9 +3,9 @@ import gql from 'graphql-tag';
 import LoadingSpinner from '../../common/LoadingSpinner/index.vue';
 import ProductThumbnail from '../../common/ProductThumbnail/index.vue';
 import ProductSortSelector from '../ProductSortSelector/index.vue';
-import Pagination from '../Pagination/index.vue';
+import Pagination from '../../common/Pagination/index.vue';
 import { products, onlyLastRequestedPromise } from '../../../api';
-import { toPrice } from '../../common/shared';
+import { toPrice, pushPage } from '../../common/shared';
 
 const last = onlyLastRequestedPromise('products');
 const getProducts = (component) => {
@@ -30,7 +30,7 @@ const getProducts = (component) => {
     ? { [`text.${locale}`]: route.query.q }
     : {};
   const sort = sortValue
-    ? { sort: `createdAt ${sortValue === 'newest' ? 'desc' : 'asc'}` }
+    ? { sort: `lastModifiedAt ${sortValue === 'newest' ? 'desc' : 'asc'}` }
     : {};
   last(products.get({
     category,
@@ -79,7 +79,7 @@ export default {
     categories: null,
     products: null,
     sort: null,
-    limit: 75,
+    limit: Number(process.env.VUE_APP_PAGE_SIZE || 75),
     loadingProducts: false,
   }),
   computed: {
@@ -104,12 +104,7 @@ export default {
       this.sort = sort;
     },
     changePage(page) {
-      const { params, query } = this.$route;
-      this.$router.push({
-        name: 'products',
-        params: { ...params, page },
-        query,
-      });
+      pushPage(page, this, 'products');
     },
     showScroll(el) {
       // eslint-disable-next-line no-param-reassign

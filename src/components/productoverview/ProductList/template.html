@@ -25,10 +25,8 @@
           </div>
           <div class="custom-pagination"
                data-test="custom-pagination-top">
-            <Pagination :products="products"
-                        :offset="offset"
-                        :limit="limit"
-                        :totalProducts="totalProducts"
+            <Pagination :pageSize="limit"
+                        :total="totalProducts"
                         :page="page"
                         @pagechanged="changePage" />
           </div>
@@ -60,12 +58,10 @@
             <span class="scroll-to-top-text">{{$t('go-to-top')}}</span>
           </a>
         <div class="custom-pagination">
-          <Pagination :products="products"
-                      :offset="offset"
-                      :limit="limit"
-                      :totalProducts="totalProducts"
-                      :page="page"
-                      @pagechanged="changePage" />
+          <Pagination :pageSize="limit"
+            :total="totalProducts"
+            :page="page"
+            @pagechanged="changePage" />
         </div>
       </form>
       <div v-else>
