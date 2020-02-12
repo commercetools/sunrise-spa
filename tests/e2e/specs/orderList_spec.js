@@ -75,18 +75,25 @@ describe('my orders', () => {
   });
 
   it('shows pages', () => {
-    for (let i = 9001; i < 9012; i += 1) {
-      cy.createOrder(cartDraft1, { orderNumber: String(i) });
-      if (i === 9011) {
-        cy.get('[data-test=my-orders-button]').click();
-        cy.get('[data-test=order-list]')
-          .should('have.length', 10);
-        cy.get('[data-test=orders-page]').contains('1 / 2');
-        cy.get('[data-test=orders-next-page-button').click();
-        cy.get('[data-test=order-list]')
-          .should('have.length', 1);
-      }
-    }
+    cy.createOrder(cartDraft1, { orderNumber: String(9001) });
+    cy.get('[data-test=my-orders-button]').click();
+    cy.get('[data-test=order-pagination]').should('not.exist');
+    cy.createOrder(cartDraft1, { orderNumber: String(9002) });
+    cy.createOrder(cartDraft1, { orderNumber: String(9003) });
+    cy.get('[data-test=change-password-button]').click();
+    cy.get('[data-test=my-orders-button]').click();
+    cy.get('[data-test=order-pagination]').should('exist');
+    cy.get('[data-test=order-list]')
+      .should('have.length', 2);
+    cy.get('[data-test=orders-page]').contains('1 / 2');
+    cy.get('[data-test=orders-next-page-button').click();
+    cy.get('[data-test=order-list]')
+      .should('have.length', 1);
+    cy.visit('/user/orders/1');
+    cy.get('[data-test=order-pagination]').should('exist');
+    cy.get('[data-test=order-list]')
+      .should('have.length', 2);
+    cy.get('[data-test=orders-page]').contains('1 / 2');
   });
 
   it('displays an empty order list message when no orders have been placed', () => {
