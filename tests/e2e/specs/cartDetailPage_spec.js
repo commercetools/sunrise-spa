@@ -1,3 +1,5 @@
+import _const from '../support/const';
+
 describe('CartDetailPage', () => {
   beforeEach(() => {
     cy.visit('/cart');
@@ -9,20 +11,26 @@ describe('CartDetailPage', () => {
   });
 
   it('displays content of cart', () => {
-    cy.addLineItem('/product/newbalance-sneakers-MT980BB-multi/M0E20000000E1AZ', 2);
-    cy.addLineItem('/product/poloralphlauren-polo-C8312A3ZHJ-green/M0E20000000E2Q5', 3);
+    cy.addLineItem('/product/hoganrebel-r261-sneaker-6708K62AZC-grey/M0E20000000DX1Y', 2);
+    cy.addLineItem('/product/havaianas-flipflops-brasil-green/M0E20000000ELAJ', 3);
     cy.visit('/cart');
     cy.get('[data-test=cart-total-items]', { timeout: Cypress.config('graphqlTimeout') })
       .contains(/^\s*5 items in total\s*$/);
 
     cy.get('[data-test=cart-total-price]')
-      .contains(/^\s*378,00\s€\s*$/);
+      .should((e) => {
+        expect(e.text()).to.include('347,00');
+      });
 
     cy.get('[data-test=cart-taxes-amount]')
-      .contains(/^\s*60,35\s€\s*$/);
+      .should((e) => {
+        expect(e.text()).to.include('55,41');
+      });
 
     cy.get('[data-test=cart-subtotal-price]')
-      .contains(/^\s*378,00\s€\s*$/);
+      .should((e) => {
+        expect(e.text()).to.include('347,00');
+      });
 
     cy.get('[data-test=cart-line-item]')
       .should('have.length', 2)
@@ -30,12 +38,12 @@ describe('CartDetailPage', () => {
       .then(($lineItem) => {
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-link]')
-          .should('have.attr', 'href', '/product/newbalance-sneakers-MT980BB-multi/M0E20000000E1AZ')
-          .should('contain', 'Sneakers New Balance multi');
+          .should('have.attr', 'href', '/product/hoganrebel-r261-sneaker-6708K62AZC-grey/M0E20000000DX1Y')
+          .should('contain', _const.one.NAME);
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-sku]')
-          .should('contain', 'M0E20000000E1AZ');
+          .should('contain', _const.one.sku);
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-quantity]')
@@ -43,20 +51,27 @@ describe('CartDetailPage', () => {
 
         cy.wrap($lineItem)
           .find('[data-test=price-old-value]')
-          .contains(/^\s*120,00\s€\s*$/);
+          .should((e) => {
+            expect(e.text()).to.include('275,00');
+          });
+
 
         cy.wrap($lineItem)
           .find('[data-test=price-new-value]')
-          .contains(/^\s*60,00\s€\s*$/);
+          .should((e) => {
+            expect(e.text()).to.include('137,50');
+          });
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-total-price]')
-          .contains(/^\s*120,00\s€\s*$/);
+          .should((e) => {
+            expect(e.text()).to.include('275,00');
+          });
       });
   });
 
   it('manages line items in cart', () => {
-    cy.addLineItem('/product/newbalance-sneakers-MT980BB-multi/M0E20000000E1AZ', 3);
+    cy.addLineItem('/product/havaianas-flipflops-brasil-green/M0E20000000ELAJ', 3);
     cy.visit('/cart');
 
     cy.get('[data-test=cart-line-item]', { timeout: Cypress.config('graphqlTimeout') })
@@ -69,7 +84,7 @@ describe('CartDetailPage', () => {
           .type('5');
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-total-price]')
-          .contains(/^\s*300,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
+          .contains(/^\s*120,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-quantity-inc]')
@@ -80,7 +95,7 @@ describe('CartDetailPage', () => {
           .should('have.value', '7');
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-total-price]')
-          .contains(/^\s*420,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
+          .contains(/^\s*168,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-quantity-dec]')
@@ -90,7 +105,7 @@ describe('CartDetailPage', () => {
           .should('have.value', '6');
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-total-price]')
-          .contains(/^\s*360,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
+          .contains(/^\s*144,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-delete]').click();
@@ -100,7 +115,7 @@ describe('CartDetailPage', () => {
   });
 
   it('removes line item when quantity is decreased to less than 1', () => {
-    cy.addLineItem('/product/newbalance-sneakers-MT980BB-multi/M0E20000000E1AZ', 1);
+    cy.addLineItem('/product/havaianas-flipflops-brasil-green/M0E20000000ELAJ', 1);
     cy.visit('/cart');
 
     cy.get('[data-test=cart-line-item]')
@@ -126,18 +141,18 @@ describe('CartDetailPage', () => {
 
   it('applies and deletes discount codes', () => {
     cy.addDiscountCode(cartDiscount, 'SUNRISE_CI');
-    cy.addLineItem('/product/newbalance-sneakers-MT980BB-multi/M0E20000000E1AZ', 1);
+    cy.addLineItem('/product/hoganrebel-r261-sneaker-6708K62AZC-grey/M0E20000000DX1Y', 1);
     cy.visit('/cart');
 
     cy.get('[data-test=cart-line-item-total-price]')
-      .contains(/^\s*60,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
+      .contains(/^\s*137,50\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
     cy.get('[data-test=discount-code-input]')
       .type('SUNRISE_CI');
     cy.get('[data-test=apply-discount-code-button]')
       .click();
     cy.get('[data-test=cart-total-price]')
-      .contains(/^\s*30,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
+      .contains(/^\s*68,75\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
     cy.get('[data-test=discount-code-name]')
       .contains('SUNRISE_CI');
@@ -145,6 +160,6 @@ describe('CartDetailPage', () => {
       .click();
 
     cy.get('[data-test=cart-line-item-total-price]')
-      .contains(/^\s*60,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
+      .contains(/^\s*137,50\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
   });
 });

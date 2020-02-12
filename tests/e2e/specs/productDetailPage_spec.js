@@ -1,3 +1,5 @@
+import _const from '../support/const';
+
 describe('Product detail page', () => {
   const draft = {
     key: 't-shirt-for-testing',
@@ -75,24 +77,30 @@ describe('Product detail page', () => {
   };
 
   it('displays a single product details', () => {
-    cy.visit('/product/newbalance-sneakers-MT980BB-multi/M0E20000000E1AZ');
+    cy.visit('/product/hoganrebel-r261-sneaker-6708K62AZC-grey/M0E20000000DX1Y');
     cy.get('[data-test=product-data]')
       .then(($product) => {
         cy.wrap($product)
           .find('[data-test=product-name]')
-          .should('contain', 'Sneakers New Balance multi');
+          .should('contain', _const.one.NAME);
 
         cy.wrap($product)
           .find('[data-test=product-sku]')
-          .should('contain', 'M0E20000000E1AZ');
+          .should((e) => {
+            expect(e.text()).to.include(_const.one.sku);
+          });
 
         cy.wrap($product)
           .find('[data-test=price-old-value]')
-          .contains(/^\s*120,00\s€\s*$/);
+          .should((e) => {
+            expect(e.text()).to.include(_const.one.OLD_PRICE);
+          });
 
         cy.wrap($product)
           .find('[data-test=price-new-value]')
-          .contains(/^\s*60,00\s€\s*$/);
+          .should((e) => {
+            expect(e.text()).to.include(_const.one.PRICE);
+          });
 
         cy.wrap($product)
           .find('[data-test=product-attributes-accordion]')

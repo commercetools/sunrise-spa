@@ -77,13 +77,13 @@ Cypress.Commands.add('addLineItem', (url, quantity) => {
   // move mouse out of the way so menu doesn't cover the button we want to click
   cy.get('body').trigger('mousemove', { pageX: 0, pageY: 50000 });
   cy.get('span[data-test=add-to-cart-form-quantity-dropdown]')
-    .click()
+    .click({ force: true })
     .parent()
     .contains(`${quantity}`)
-    .click();
+    .click({ force: true });
   // move mouse out of the way so menu doesn't cover the button we want to click
   cy.get('body').trigger('mousemove', { pageX: 0, pageY: 50000 });
-  cy.get('[data-test=add-to-cart-form-button]').click();
+  cy.get('[data-test=add-to-cart-form-button]').click({ force: true });
   cy.get('[data-test=mini-cart-content]').should('be.visible');
 });
 

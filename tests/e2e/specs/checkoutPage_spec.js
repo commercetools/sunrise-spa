@@ -1,3 +1,5 @@
+import _const from '../support/const';
+
 describe('CheckoutPage', () => {
   beforeEach(() => {
     cy.visit('/');
@@ -52,13 +54,15 @@ describe('CheckoutPage', () => {
       .should('contain', 'Express EU');
 
     cy.get('[data-test=cart-subtotal-price]')
-      .contains(/^\s*378,00\s€\s*$/);
+      .should((e) => {
+        expect(e.text()).to.match(/^\s*347,00\s€\s*$/);
+      });
     cy.get('[data-test=cart-shipping-price]')
       .contains(/^\s*10,00\s€\s*$/);
     cy.get('[data-test=cart-taxes-amount]')
-      .contains(/^\s*61,95\s€\s*$/);
+      .contains(/^\s*57,01\s€\s*$/);
     cy.get('[data-test=cart-total-price]')
-      .contains(/^\s*388,00\s€\s*$/);
+      .contains(/^\s*357,00\s€\s*$/);
 
     cy.get('[data-test=cart-line-item]')
       .should('have.length', 2)
@@ -66,12 +70,12 @@ describe('CheckoutPage', () => {
       .then(($lineItem) => {
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-link]')
-          .should('have.attr', 'href', '/product/newbalance-sneakers-MT980BB-multi/M0E20000000E1AZ')
-          .should('contain', 'Sneakers New Balance multi');
+          .should('have.attr', 'href', '/product/hoganrebel-r261-sneaker-6708K62AZC-grey/M0E20000000DX1Y')
+          .should('contain', _const.one.NAME);
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-sku]')
-          .should('contain', 'M0E20000000E1AZ');
+          .should('contain', _const.one.sku);
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-quantity]')
@@ -80,26 +84,26 @@ describe('CheckoutPage', () => {
         cy.wrap($lineItem)
           .find('[data-test=price-old-value]')
           .should((e) => {
-            expect(e.text()).to.match(/^\s*120,00\s€\s*$/);
+            expect(e.text()).to.match(/^\s*275,00\s€\s*$/);
           });
 
         cy.wrap($lineItem)
           .find('[data-test=price-new-value]')
           .should((e) => {
-            expect(e.text()).to.match(/^\s*60,00\s€\s*$/);
+            expect(e.text()).to.match(/^\s*137,50\s€\s*$/);
           });
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-total-price]')
           .should((e) => {
-            expect(e.text()).to.match(/^\s*120,00\s€\s*$/);
+            expect(e.text()).to.match(/^\s*275,00\s€\s*$/);
           });
       });
   }
 
   it('allows to place an order', () => {
-    cy.addLineItem('/product/newbalance-sneakers-MT980BB-multi/M0E20000000E1AZ', 2);
-    cy.addLineItem('/product/poloralphlauren-polo-C8312A3ZHJ-green/M0E20000000E2Q5', 3);
+    cy.addLineItem('/product/hoganrebel-r261-sneaker-6708K62AZC-grey/M0E20000000DX1Y', 2);
+    cy.addLineItem('/product/havaianas-flipflops-brasil-green/M0E20000000ELAJ', 3);
     cy.visit('/cart');
     cy.get('[data-test=checkout-button]').click();
 

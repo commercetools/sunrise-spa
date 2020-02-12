@@ -30,7 +30,7 @@ const getProducts = (component) => {
     ? { [`text.${locale}`]: route.query.q }
     : {};
   const sort = sortValue
-    ? { sort: `createdAt ${sortValue === 'newest' ? 'desc' : 'asc'}` }
+    ? { sort: `lastModifiedAt ${sortValue === 'newest' ? 'desc' : 'asc'}` }
     : {};
   last(products.get({
     category,

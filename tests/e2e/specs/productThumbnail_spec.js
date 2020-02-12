@@ -1,11 +1,13 @@
+import _const from '../support/const';
+
 describe('Product thumbnail', () => {
   before(() => {
-    cy.visit('/products/men/2');
+    cy.visit('/products/men/1');
   });
 
   it('displays product information', () => {
     cy.get('[data-test=product-thumbnail-name]', { timeout: Cypress.config('graphqlTimeout') })
-      .contains('Sneakers New Balance multi')
+      .contains(_const.one.NAME)
       .parentsUntil('[data-test=product-thumbnail]')
       .parent()
       .then(($thumbnail) => {
@@ -20,15 +22,18 @@ describe('Product thumbnail', () => {
 
         cy.wrap($thumbnail)
           .find('[data-test=price-old-value]')
-          .contains(/^\s*120,00\s€\s*$/);
+          .contains(new RegExp(`^\\s*${_const.one.OLD_PRICE}\\s€\\s*$`));
 
         cy.wrap($thumbnail)
           .find('[data-test=price-new-value]')
-          .contains(/^\s*60,00\s€\s*$/);
+          .contains(new RegExp(`^\\s*${_const.one.PRICE}\\s€\\s*$`));
       });
-    cy.visit('/products/men/1');
+    cy.visit('/products/men/2');
     cy.get('[data-test=product-thumbnail-name]')
-      .contains('Sneakers ”R261” Hogan Rebel grey')
+      .should((e) => {
+        expect(e.text()).to.include(_const.three.NAME);
+        return e;
+      })
       .parentsUntil('[data-test=product-thumbnail]')
       .parent()
       .then(($thumbnail) => {
@@ -38,7 +43,9 @@ describe('Product thumbnail', () => {
 
         cy.wrap($thumbnail)
           .find('[data-test=product-original-price]')
-          .contains(/\s*275,00\s€\s*$/);
+          .should((e) => {
+            expect(e.text()).to.include(_const.three.PRICE);
+          });
 
         cy.wrap($thumbnail)
           .find('[data-test=price-new-value]')

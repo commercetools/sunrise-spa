@@ -1,3 +1,5 @@
+import _const from '../support/const';
+
 describe('Product overview page', () => {
   it('Changes sorting settings', () => {
     cy.visit('/products/men');
@@ -7,53 +9,65 @@ describe('Product overview page', () => {
       .contains('Newest')
       .click();
     cy.url().should('include', '/products/men?sort=newest');
-    cy.get('[data-test=spinner]')
-      .should('exist');
-    cy.get('[data-test=spinner]')
-      .should('not.exist');
+    // by the time cypress gets to look for the spinner it is already gone
+    // cy.get('[data-test=spinner]')
+    //   .should('exist');
+    // cy.get('[data-test=spinner]')
+    //   .should('not.exist');
     cy.get('[data-test=product-list]')
       .first()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Sneakers ”R261” Hogan Rebel grey');
+      .should((e) => {
+        expect(e.text()).to.include(_const.three.NAME);
+      });
     cy.get('[data-test=product-list]')
       .last()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Polo Ralph Lauren green');
+      .should((e) => {
+        expect(e.text()).to.include(_const.two.NAME);
+      });
 
     cy.get('span[data-test=sort-selector]')
       .click()
       .parent()
       .contains('Oldest')
       .click();
-    cy.get('[data-test=spinner]')
-      .should('exist');
-    cy.get('[data-test=spinner]')
-      .should('not.exist');
+    // by the time cypress gets to look for the spinner it is already gone
+    // cy.get('[data-test=spinner]')
+    //   .should('exist');
+    // cy.get('[data-test=spinner]')
+    //   .should('not.exist');
     cy.url().should('include', '/products/men?sort=oldest');
     cy.get('[data-test=product-list]')
       .first()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Sneakers New Balance multi');
+      .should((e) => {
+        expect(e.text()).to.include(_const.one.NAME);
+      });
+
     cy.get('[data-test=product-list]')
       .last()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Polo Ralph Lauren green');
+      .should((e) => {
+        expect(e.text()).to.include(_const.two.NAME);
+      });
   });
 
   it('Applies sorting settings from URL', () => {
     cy.visit('/products/men?sort=newest');
-    cy.get('[data-test=spinner]')
-      .should('exist');
-    cy.get('[data-test=spinner]')
-      .should('not.exist');
+    // by the time cypress gets to look for the spinner it is already gone
+    // cy.get('[data-test=spinner]')
+    //   .should('exist');
+    // cy.get('[data-test=spinner]')
+    //   .should('not.exist');
     cy.get('[data-test=product-list]')
       .first()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Sneakers ”R261” Hogan Rebel grey');
+      .contains(_const.three.NAME);
     cy.get('[data-test=product-list]')
       .last()
       .find('[data-test=product-thumbnail-name]')
-      .contains('Polo Ralph Lauren green');
+      .contains(_const.two.NAME);
   });
 
   it('Displays a message when an error occurs', () => {

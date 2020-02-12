@@ -19,7 +19,7 @@ describe('my orders', () => {
     customerEmail: 'charlie.bucket+ci@commercetools.com',
     currency: 'EUR',
     lineItems: {
-      sku: 'M0E20000000E2Q5',
+      sku: 'M0E20000000ELAJ',
     },
     shippingAddress: {
       country: 'DE',
@@ -30,7 +30,7 @@ describe('my orders', () => {
     customerEmail: 'charlie.bucket+ci@commercetools.com',
     currency: 'EUR',
     lineItems: {
-      sku: 'M0E20000000E1AZ',
+      sku: 'M0E20000000DX1Y',
     },
     shippingAddress: {
       country: 'DE',
@@ -54,7 +54,7 @@ describe('my orders', () => {
         cy.wrap($order)
           .find('[data-test=total-price]')
           .should((e) => {
-            expect(e.text()).to.match(/^\s*107,50\s€\s*$/);
+            expect(e.text()).to.match(/^\s*30,00\s€\s*$/);
           });
         cy.wrap($order)
           .find('[data-test=order-date]')
