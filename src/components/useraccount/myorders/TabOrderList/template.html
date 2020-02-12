@@ -36,7 +36,7 @@
           </div>
         </div>
       </div>
-      <div v-for="order in me.orders.results"
+      <div v-for="order in ordersPerPage"
            :key="order.id"
            data-test="order-list"
            class="my-orders-table-order">
@@ -72,6 +72,24 @@
             </router-link>
           </div>
         </div>
+      </div>
+      <div class="custom-pagination">
+        <ul class="pagination">
+        <li class="pagination-item">
+          <button type="button"
+          @click="pageBack"
+          :disabled="isInFirstPage"
+          class="icon-prev"></button>
+        </li>
+          <span data-test="orders-page">{{ this.page + 1 }} / {{ this.totalPages }}</span>
+        <li class="pagination-item">
+          <button type="button"
+          @click="pageForward"
+          :disabled="isInLastPage"
+          class="icon-next"
+          data-test="orders-next-page-button"></button>
+        </li>
+      </ul>
       </div>
     </div>
     <div v-else
