@@ -9,12 +9,17 @@ export default {
   },
   data: () => ({
     product: null,
+    attributeTranslation: null,
   }),
   computed: {
     productAttributes() {
       const { attributes } = this.product.masterData.current.variant;
       delete attributes.__typename;
-      return Object.values(attributes).filter(attribute => attribute);
+      return Object.values(attributes).filter(attribute => attribute)
+        .map(a => ({
+          ...a,
+          name: this.attributeTranslation.get(a.name) || a.name,
+        }));
     },
   },
   methods: {
@@ -76,6 +81,33 @@ export default {
         return {
           locale: this.$store.state.locale,
           sku: this.sku,
+        };
+      },
+    },
+    attributeName: {
+      query: gql`
+        query Translation($locale: Locale!, $type:String!) {
+          productType(key:$type) {
+            attributeDefinitions {
+              results {
+                name
+                label(locale:$locale)
+              }
+            }
+          }
+        }`,
+      manual: true,
+      result({ data, loading }) {
+        if (!loading) {
+          this.attributeTranslation = data.productType.attributeDefinitions.results.reduce(
+            (result, item) => result.set(item.name, item.label), new Map(),
+          );
+        }
+      },
+      variables() {
+        return {
+          locale: this.$i18n.locale,
+          type: 'main',
         };
       },
     },

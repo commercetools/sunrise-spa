@@ -111,7 +111,7 @@ describe('Product detail page', () => {
           .should('have.length', 6)
           .eq(2)
           .should((e) => {
-            expect(e.text()).to.match(/^\s*size:\s+5\s*$/);
+            expect(e.text()).to.match(/^\s*Size:\s+5\s*$/g);
           });
       });
 
@@ -153,5 +153,23 @@ describe('Product detail page', () => {
           .find('[data-test=product-sku]')
           .should('contain', 'sku-36-black');
       });
+  });
+  it('shows correct language', async () => {
+    cy.visit('/product/havaianas-flipflops-brasil-gruen/M0E20000000ELAJ');
+    cy.changeLanguage('Deutsch');
+    cy.get('[data-test=attribute-name]')
+      .should(
+        e => expect(e[1].innerText)
+          .to
+          .include('GRÖSSE'),
+      );
+    cy.get('.accordion-plus').eq(0).click();
+    cy.get('[data-test=product-attributes-list]')
+      .eq(2)
+      .should(
+        (e) => {
+          expect(e[0].innerText).to.include('GRÖSSE');
+        },
+      );
   });
 });
