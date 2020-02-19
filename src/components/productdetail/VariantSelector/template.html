@@ -1,17 +1,17 @@
-  <div v-if="product"
+  <div v-if="product && attributeTranslation"
        class="row select-row">
     <ul class="list-inline"
         data-test="variant-selector-list">
-      <li v-for="(values, name) in attributes"
+      <li v-for="(value, name) in attributes"
           :key="name">
         <p class="text-uppercase"
            data-test="attribute-name">
           {{name}}
         </p>
         <AttributeSelect :product="product"
-                         :values="values"
+                         :values="value.values"
                          :sku="sku"
-                         :name="name"
+                         :name="value.name"
                          :selected="selected"
                          :variantCombinations="variantCombinations" />
       </li>
