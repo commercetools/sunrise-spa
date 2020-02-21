@@ -6,6 +6,7 @@ import DetailsSection from '../DetailsSection/index.vue';
 import AddToCartForm from '../AddToCartForm/index.vue';
 import BasePrice from '../../common/BasePrice/index.vue';
 import VariantSelector from '../VariantSelector/index.vue';
+import { locale } from '../../common/shared';
 
 export default {
   props: {
@@ -63,7 +64,7 @@ export default {
         }`,
       variables() {
         return {
-          locale: this.$store.state.locale,
+          locale: locale(this),
           currency: this.$store.state.currency,
           sku: this.sku,
           country: this.$store.state.country,
