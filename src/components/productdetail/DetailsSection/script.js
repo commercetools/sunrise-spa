@@ -19,7 +19,7 @@ export default {
       return Object.values(attributes).filter(attribute => attribute)
         .map(a => ({
           ...a,
-          name: this.attributeTranslation.get(a.name) || a.name,
+          name: this.attributeTranslation?.get(a.name) || a.name,
         }));
     },
   },
