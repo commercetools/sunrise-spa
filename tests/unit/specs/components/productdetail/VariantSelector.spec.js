@@ -63,8 +63,14 @@ describe('VariantSelector/index.vue', () => {
 
   it('groups values by their attributes', () => {
     const attrs = {
-      color: ['black', 'grey'],
-      size: ['34', '30'],
+      color: {
+        name: 'color',
+        values: ['black', 'grey'],
+      },
+      size: {
+        name: 'size',
+        values: ['34', '30'],
+      },
     };
     const wrapper = shallowMount(VariantSelector, options);
     wrapper.setData({ product });
