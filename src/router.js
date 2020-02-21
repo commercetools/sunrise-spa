@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import gql from 'graphql-tag';
 import store from './store';
 import apollo from './apollo';
+import config from '../sunrise.config';
 import TheHeader from './components/header/TheHeader/index.vue';
 import TheFooter from './components/footer/TheFooter/index.vue';
 import TheCheckoutHeader from './components/header/TheCheckoutHeader/index.vue';
@@ -28,6 +29,7 @@ import StepShippingMethodForm from './components/checkout/StepShippingMethodForm
 import StepPaymentMethodForm from './components/checkout/StepPaymentMethodForm/index.vue';
 import StepPlaceOrderForm from './components/checkout/StepPlaceOrderForm/index.vue';
 import { pageFromRoute } from './components/common/shared';
+import Root from './components/root/index.vue';
 
 
 Vue.use(Router);
@@ -41,149 +43,155 @@ const router = new Router({
   scrollBehavior: () => ({ x: 0, y: 0 }),
   routes: [
     {
+      path: `/:locale(${Object.keys(config.languages).join('|')})?`,
+      component: Root,
+      children: [
+        {
+          path: '',
+          name: 'home',
+          components: {
+            default: PageHome,
+            header: TheHeader,
+            footer: TheFooter,
+          },
+        },
+        {
+          path: 'stores',
+          name: 'stores',
+        },
+        {
+          path: 'login',
+          name: 'login',
+          components: {
+            default: PageLogin,
+            header: TheHeader,
+            footer: TheFooter,
+          },
+        },
+        {
+          path: 'forgot-password',
+          name: 'forgot-password',
+          components: {
+            default: ForgotPassword,
+            header: TheHeader,
+            footer: TheFooter,
+          },
+        },
+        {
+          path: 'reset-password/:token',
+          name: 'reset-password',
+          components: {
+            default: ResetPassword,
+            header: TheHeader,
+            footer: TheFooter,
+          },
+        },
+        {
+          path: 'products/:categorySlug/:page?',
+          name: 'products',
+          components: {
+            default: PageProductOverview,
+            header: TheHeader,
+            footer: TheFooter,
+          },
+          props: {
+            default: route => ({
+              ...pageFromRoute(route),
+              categorySlug: route.params.categorySlug,
+            }),
+            header: false,
+            footer: false,
+          },
+        },
+        {
+          path: 'user',
+          meta: { requiresAuth },
+          components: {
+            default: PageUserAccount,
+            header: TheHeader,
+            footer: TheFooter,
+          },
+          children: [
+            {
+              path: 'order/:id', name: 'order', component: TabOrderDetail,
+            },
+            {
+              path: 'orders/:page?',
+              name: 'orders',
+              component: TabOrderList,
+            },
+            {
+              path: 'account', alias: '', name: 'user', component: TabPersonalDetails,
+            },
+            {
+              path: 'changepassword', name: 'changepassword', component: TabChangePassword,
+            },
+          ],
+        },
+        {
+          path: 'product/:productSlug/:sku',
+          name: 'product',
+          components: {
+            default: PageProductDetail,
+            header: TheHeader,
+            footer: TheFooter,
+          },
+          props: {
+            default: true,
+            header: false,
+            footer: false,
+          },
+        },
+        {
+          path: 'cart',
+          name: 'cart',
+          components: {
+            default: PageCartDetail,
+            header: TheHeader,
+            footer: TheFooter,
+          },
+        },
+        {
+          path: 'checkout',
+          meta: { requiresCart },
+          components: {
+            default: PageCheckout,
+            header: TheCheckoutHeader,
+            footer: TheCheckoutFooter,
+          },
+          children: [
+            {
+              path: '',
+              component: StepWithOverview,
+              children: [
+                {
+                  path: 'payment', name: 'checkout-payment-method', component: StepPaymentMethodForm,
+                },
+                {
+                  path: 'shipping', name: 'checkout-shipping-method', component: StepShippingMethodForm,
+                },
+                {
+                  path: 'billing', name: 'checkout-billing-address', component: StepBillingAddressForm,
+                },
+                {
+                  path: 'address', alias: '', name: 'checkout', component: StepShippingAddressForm,
+                },
+              ],
+            },
+            {
+              path: 'order', name: 'checkout-order', component: StepPlaceOrderForm,
+            },
+          ],
+        },
+      ],
+    },
+    {
       path: '*',
       components: {
         default: PageNotFound,
         header: TheHeader,
         footer: TheFooter,
       },
-    },
-    {
-      path: '/',
-      name: 'home',
-      components: {
-        default: PageHome,
-        header: TheHeader,
-        footer: TheFooter,
-      },
-    },
-    {
-      path: '/stores',
-      name: 'stores',
-    },
-    {
-      path: '/login',
-      name: 'login',
-      components: {
-        default: PageLogin,
-        header: TheHeader,
-        footer: TheFooter,
-      },
-    },
-    {
-      path: '/forgot-password',
-      name: 'forgot-password',
-      components: {
-        default: ForgotPassword,
-        header: TheHeader,
-        footer: TheFooter,
-      },
-    },
-    {
-      path: '/reset-password/:token',
-      name: 'reset-password',
-      components: {
-        default: ResetPassword,
-        header: TheHeader,
-        footer: TheFooter,
-      },
-    },
-    {
-      path: '/products/:categorySlug/:page?',
-      name: 'products',
-      components: {
-        default: PageProductOverview,
-        header: TheHeader,
-        footer: TheFooter,
-      },
-      props: {
-        default: route => ({
-          ...pageFromRoute(route),
-          categorySlug: route.params.categorySlug,
-        }),
-        header: false,
-        footer: false,
-      },
-    },
-    {
-      path: '/user',
-      meta: { requiresAuth },
-      components: {
-        default: PageUserAccount,
-        header: TheHeader,
-        footer: TheFooter,
-      },
-      children: [
-        {
-          path: 'order/:id', name: 'order', component: TabOrderDetail,
-        },
-        {
-          path: 'orders/:page?',
-          name: 'orders',
-          component: TabOrderList,
-        },
-        {
-          path: 'account', alias: '', name: 'user', component: TabPersonalDetails,
-        },
-        {
-          path: 'changepassword', name: 'changepassword', component: TabChangePassword,
-        },
-      ],
-    },
-    {
-      path: '/product/:productSlug/:sku',
-      name: 'product',
-      components: {
-        default: PageProductDetail,
-        header: TheHeader,
-        footer: TheFooter,
-      },
-      props: {
-        default: true,
-        header: false,
-        footer: false,
-      },
-    },
-    {
-      path: '/cart',
-      name: 'cart',
-      components: {
-        default: PageCartDetail,
-        header: TheHeader,
-        footer: TheFooter,
-      },
-    },
-    {
-      path: '/checkout',
-      meta: { requiresCart },
-      components: {
-        default: PageCheckout,
-        header: TheCheckoutHeader,
-        footer: TheCheckoutFooter,
-      },
-      children: [
-        {
-          path: '',
-          component: StepWithOverview,
-          children: [
-            {
-              path: 'payment', name: 'checkout-payment-method', component: StepPaymentMethodForm,
-            },
-            {
-              path: 'shipping', name: 'checkout-shipping-method', component: StepShippingMethodForm,
-            },
-            {
-              path: 'billing', name: 'checkout-billing-address', component: StepBillingAddressForm,
-            },
-            {
-              path: 'address', alias: '', name: 'checkout', component: StepShippingAddressForm,
-            },
-          ],
-        },
-        {
-          path: 'order', name: 'checkout-order', component: StepPlaceOrderForm,
-        },
-      ],
     },
   ],
 });

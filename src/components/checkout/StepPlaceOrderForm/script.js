@@ -7,6 +7,7 @@ import CartLikeSummary from '../../common/cartlike/CartLikeSummary/index.vue';
 import CART_FRAGMENT from '../../Cart.gql';
 import ADDRESS_FRAGMENT from '../../Address.gql';
 import MONEY_FRAGMENT from '../../Money.gql';
+import { locale } from '../../common/shared';
 
 export default {
   components: {
@@ -55,7 +56,7 @@ export default {
         ${ADDRESS_FRAGMENT}`,
       variables() {
         return {
-          locale: this.$store.state.locale,
+          locale: locale(this),
         };
       },
     },

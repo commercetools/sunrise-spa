@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import { locale } from '../shared';
 
 export default {
   props: ['categorySlug'],
@@ -33,8 +34,8 @@ export default {
         }`,
       variables() {
         return {
-          locale: this.$store.state.locale,
-          where: `slug(${this.$store.state.locale}="${this.categorySlug}")`,
+          locale: locale(this),
+          where: `slug(${locale(this)}="${this.categorySlug}")`,
         };
       },
       skip: vm => !vm.categorySlug,
