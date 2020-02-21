@@ -106,7 +106,7 @@ export default {
       query: gql`
         query Translation($locale: Locale!, $type:String!) {
           productType(key:$type) {
-            attributeDefinitions {
+            attributeDefinitions(limit:50) {
               results {
                 name
                 label(locale:$locale)
