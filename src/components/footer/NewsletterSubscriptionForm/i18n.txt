@@ -1,0 +1,8 @@
+en:
+  joinNewsletter: "Join our newsletter"
+  subscribe: "Subscribe"
+  yourEmail: "Your email..."
+de:
+  joinNewsletter: "Newsletter abonnieren"
+  subscribe: "Anmelden"
+  yourEmail: "Ihre E-Mail-Adresse..."

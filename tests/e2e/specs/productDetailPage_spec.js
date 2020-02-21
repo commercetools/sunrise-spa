@@ -1,3 +1,5 @@
+import _const from '../support/const';
+
 describe('Product detail page', () => {
   const draft = {
     key: 't-shirt-for-testing',
@@ -75,24 +77,30 @@ describe('Product detail page', () => {
   };
 
   it('displays a single product details', () => {
-    cy.visit('/product/lemare-booties-0778-grey/M0E20000000E0WX');
+    cy.visit('/product/hoganrebel-r261-sneaker-6708K62AZC-grey/M0E20000000DX1Y');
     cy.get('[data-test=product-data]')
       .then(($product) => {
         cy.wrap($product)
           .find('[data-test=product-name]')
-          .should('contain', 'Booties Lemare grey');
+          .should('contain', _const.one.NAME);
 
         cy.wrap($product)
           .find('[data-test=product-sku]')
-          .should('contain', 'M0E20000000E0WX');
+          .should((e) => {
+            expect(e.text()).to.include(_const.one.sku);
+          });
 
         cy.wrap($product)
           .find('[data-test=price-old-value]')
-          .contains(/^\s*248,75\s€\s*$/);
+          .should((e) => {
+            expect(e.text()).to.include(_const.one.OLD_PRICE);
+          });
 
         cy.wrap($product)
           .find('[data-test=price-new-value]')
-          .contains(/^\s*174,12\s€\s*$/);
+          .should((e) => {
+            expect(e.text()).to.include(_const.one.PRICE);
+          });
 
         cy.wrap($product)
           .find('[data-test=product-attributes-accordion]')
@@ -102,7 +110,9 @@ describe('Product detail page', () => {
           .find('[data-test=product-attributes-list]')
           .should('have.length', 6)
           .eq(2)
-          .contains(/^\s*size:\s+34\s*$/);
+          .should((e) => {
+            expect(e.text()).to.match(/^\s*Size:\s+5\s*$/g);
+          });
       });
 
     cy.get('[data-test=product-gallery]')
@@ -143,5 +153,23 @@ describe('Product detail page', () => {
           .find('[data-test=product-sku]')
           .should('contain', 'sku-36-black');
       });
+  });
+  it('shows correct language', async () => {
+    cy.visit('/product/havaianas-flipflops-brasil-gruen/M0E20000000ELAJ');
+    cy.changeLanguage('Deutsch');
+    cy.get('[data-test=attribute-name]')
+      .should(
+        e => expect(e[1].innerText)
+          .to
+          .include('GRÖSSE'),
+      );
+    cy.get('.accordion-plus').eq(0).click();
+    cy.get('[data-test=product-attributes-list]')
+      .eq(2)
+      .should(
+        (e) => {
+          expect(e[0].innerText).to.include('GRÖSSE');
+        },
+      );
   });
 });

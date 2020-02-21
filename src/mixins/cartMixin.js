@@ -4,6 +4,7 @@ import CART_FRAGMENT from '../components/Cart.gql';
 import ORDER_FRAGMENT from '../components/Order.gql';
 import MONEY_FRAGMENT from '../components/Money.gql';
 import ADDRESS_FRAGMENT from '../components/Address.gql';
+import { locale } from '../components/common/shared';
 
 function cartExists(vm) {
   return vm.me?.activeCart;
@@ -52,7 +53,7 @@ export default {
           actions,
           id: this.me.activeCart?.id,
           version: this.me.activeCart?.version,
-          locale: this.$store.state.locale,
+          locale: locale(this),
         },
       });
     },
@@ -89,12 +90,18 @@ export default {
         variables: {
           id: this.me.activeCart?.id,
           version: this.me.activeCart?.version,
-          locale: this.$store.state.locale,
+          locale: locale(this),
         },
         update: (store) => {
           const data = store.readQuery({ query: BASIC_CART_QUERY });
           data.me.activeCart = null;
           store.writeQuery({ query: BASIC_CART_QUERY, data });
+          // invalidate cached order pages
+          Object.keys(store.data.toObject())
+            .filter(key => key.startsWith('Order'))
+            .forEach(
+              key => store.data.delete(key),
+            );
         },
       });
     },

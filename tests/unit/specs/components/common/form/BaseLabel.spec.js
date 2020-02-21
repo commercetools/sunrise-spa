@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
-import BaseLabel from '@/components/common/form/BaseLabel.vue';
+import BaseLabel from '@/components/common/form/BaseLabel/index.vue';
 
-describe('BaseLabel.vue', () => {
+describe('BaseLabel/index.vue', () => {
   let options;
 
   beforeEach(() => {

@@ -1,0 +1,12 @@
+en:
+  sale: "Sale"
+  new: "New"
+  quickView: "Quick view"
+  moreColors: "More colours"
+  add: "Add item to wishlist"
+de:
+  sale: "Sale"
+  new: "Neu"
+  quickView: "Schnellansicht"
+  moreColors: "Mehr Farben"
+  add: "Auf den Wunschzettel"

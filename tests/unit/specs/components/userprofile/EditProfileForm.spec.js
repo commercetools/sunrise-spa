@@ -1,11 +1,11 @@
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import EditProfileForm from '@/components/useraccount/userdetail/EditProfileForm.vue';
+import EditProfileForm from '@/components/useraccount/userdetail/EditProfileForm/index.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuelidate);
 
-describe('EditProfileForm.vue', () => {
+describe('EditProfileForm/index.vue', () => {
   const me = {
     customer: {
       email: 'willy.wonka@commercetools.com',

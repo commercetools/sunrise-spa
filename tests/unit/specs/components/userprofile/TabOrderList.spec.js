@@ -1,11 +1,11 @@
 import VueI18n from 'vue-i18n';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import TabOrderList from '@/components/useraccount/myorders/TabOrderList.vue';
+import TabOrderList from '@/components/useraccount/myorders/TabOrderList/index.vue';
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);
 
-describe('TabOrderList.vue', () => {
+describe('TabOrderList/index.vue', () => {
   let options;
 
   beforeEach(() => {

@@ -1,15 +1,15 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import ProductSortSelector from '@/components/productoverview/ProductSortSelector.vue';
-import SelectBoxIt from '@/components/common/form/SelectBoxIt.vue';
+import ProductSortSelector from '@/components/productoverview/ProductSortSelector/index.vue';
+import SelectBoxIt from '@/components/common/form/SelectBoxIt/index.vue';
 
 Vue.component('SelectBoxIt', SelectBoxIt);
 const localVue = createLocalVue();
 localVue.use(VueRouter);
 const router = new VueRouter();
 
-describe('ProductSortSelector.vue', () => {
+describe('ProductSortSelector/index.vue', () => {
   let options;
 
   beforeEach(() => {

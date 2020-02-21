@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
-import AttributeSelect from '@/components/productdetail/AttributeSelect.vue';
+import AttributeSelect from '@/components/productdetail/AttributeSelect/index.vue';
 
-describe('AttributeSelect.vue', () => {
+describe('AttributeSelect/index.vue', () => {
   let options;
 
   beforeEach(() => {

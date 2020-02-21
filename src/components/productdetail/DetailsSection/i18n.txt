@@ -1,0 +1,10 @@
+de:
+  productDetails: "Produktdetails"
+  deliveryReturns: "Versand & Retoure"
+  freeReturns: "Kostenlose Retoure."
+  moreDeliveryInfo: "Versandinformationen"
+en:
+  productDetails: "Product Details"
+  deliveryReturns: "Delivery & Returns"
+  freeReturns: "Free return for all orders."
+  moreDeliveryInfo: "Delivery information"

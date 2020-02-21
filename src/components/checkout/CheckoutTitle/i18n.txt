@@ -1,0 +1,12 @@
+en:
+  secureCheckout: "Secure Checkout"
+  securePayment: "Secure payment"
+  shipping: "Shipping"
+  payment: "Payment"
+  confirmation: "Confirmation"
+de:
+  secureCheckout: "Sicherer Bestellprozess"
+  securePayment: "Sichere Bezahlung"
+  shipping: "Versand"
+  payment: "Zahlung"
+  confirmation: "Bestätigung"

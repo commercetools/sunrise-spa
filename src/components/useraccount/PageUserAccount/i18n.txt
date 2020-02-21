@@ -1,0 +1,4 @@
+en:
+  title: "My Account"
+de:
+  title: "Mein Konto"

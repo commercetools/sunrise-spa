@@ -1,0 +1,58 @@
+  <li @mouseleave="close"
+      @mouseenter="open"
+      class="list-item-bag">
+    <router-link :to=" { name: 'cart' }"
+                 data-test="mini-cart-open-button"
+                 class="not-empty link-your-bag icon-hand-bag">
+      <span class="hidden-xs hidden-sm">{{ $t('miniCart') }}</span>
+      <span class="cart-item-number">{{ totalItems }}</span>
+    </router-link>
+    <transition name="fade">
+      <div v-show="show"
+           v-if="totalItems"
+           class="nav-minicart"
+           data-test="mini-cart-content">
+        <VuePerfectScrollbar>
+          <ul>
+            <li v-for="lineItem in sortedLineItems"
+                :key="lineItem.id"
+                data-test="mini-cart-line-item">
+              <div>
+                <LineItemInfo :line-item="lineItem"
+                              :extended="false" />
+                <div class="details">
+                  <p class="product-quantity">
+                    {{ $t('quantity') }}
+                    <span data-test="cart-line-item-quantity">
+                      {{ lineItem.quantity }}
+                    </span>
+                  </p>
+                  <p class="product-price">
+                    {{ $t('price') }}
+                    <span data-test="cart-line-item-price">
+                      <BaseMoney :money="lineItem.totalPrice"/>
+                    </span>
+                  </p>
+                  <LineItemDeleteForm :lineItemId="lineItem.id"/>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </VuePerfectScrollbar>
+        <div class="gradient"></div>
+        <p class="total-price"
+           data-test="mini-cart-price">
+          {{ $t('totalPrice') }}
+          <BaseMoney :money="me.activeCart.totalPrice"/>
+        </p>
+        <router-link :to="{ name: 'cart' }"
+                     @click.native="close"
+                     class="btn-grey">
+          {{ $t('viewBag') }}
+        </router-link>
+        <router-link :to="{ name: 'checkout' }"
+                     @click.native="close"
+                     class="btn-yellow">{{ $t('checkout') }}</router-link>
+      </div>
+    </transition>
+  </li>

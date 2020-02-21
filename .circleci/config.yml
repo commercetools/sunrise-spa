@@ -27,7 +27,7 @@ jobs:
 
       - run:
           name: Run Unit tests
-          command: yarn test:unit --ci --reporters=default --reporters=jest-junit
+          command: yarn test:unit --ci --reporters=default --reporters=jest-junit --no-cache
 
       - run:
           name: Run E2E tests

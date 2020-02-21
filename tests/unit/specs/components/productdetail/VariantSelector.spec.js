@@ -1,12 +1,12 @@
 import VueRouter from 'vue-router';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import VariantSelector from '@/components/productdetail/VariantSelector.vue';
+import VariantSelector from '@/components/productdetail/VariantSelector/index.vue';
 
 const localVue = createLocalVue();
 localVue.use(VueRouter);
 const router = new VueRouter();
 
-describe('VariantSelector.vue', () => {
+describe('VariantSelector/index.vue', () => {
   let options;
   let product;
 
@@ -63,8 +63,14 @@ describe('VariantSelector.vue', () => {
 
   it('groups values by their attributes', () => {
     const attrs = {
-      color: ['black', 'grey'],
-      size: ['34', '30'],
+      color: {
+        name: 'color',
+        values: ['black', 'grey'],
+      },
+      size: {
+        name: 'size',
+        values: ['34', '30'],
+      },
     };
     const wrapper = shallowMount(VariantSelector, options);
     wrapper.setData({ product });

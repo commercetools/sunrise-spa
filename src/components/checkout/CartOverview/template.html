@@ -1,0 +1,52 @@
+  <div v-if="me && me.activeCart">
+    <div class="order-summary">
+      <span class="text-uppercase order-summary-title">{{ $t("orderSummary") }}:</span>
+      <span class="checkout-total-items">
+        {{ $tc('itemsTotal', totalItems) }}
+      </span>
+    </div>
+    <div class="checkout-order">
+      <VuePerfectScrollbar>
+        <div class="order-summary-items">
+          <div v-for="lineItem in sortedLineItems"
+               :key="lineItem.id"
+               class="order-summary-item">
+            <LineItemInfo :line-item="lineItem"
+                          class="line-item-info"/>
+            <div class="order-item-price">
+              <div class="row">
+                <div class="col-xs-3">
+                  <div class="text-right">
+                    <span class="text-uppercase pricing-titles">{{ $t("quantity") }}</span>
+                    <br>
+                    <span>{{ lineItem.quantity }}</span>
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <div class="text-right order-item-value">
+                    <span class="text-uppercase pricing-titles">{{ $t("price") }}</span>
+                    <br>
+                    <BasePrice :price="lineItem.price"/>
+                  </div>
+                </div>
+                <div class="col-xs-5">
+                  <div class="text-right order-item-value">
+                    <span class="text-uppercase pricing-titles">{{ $t("total") }}</span>
+                    <br>
+                    <BasePrice :price="totalPrice(lineItem)"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </VuePerfectScrollbar>
+      <CartLikePriceDetail :cart-like="me.activeCart"
+                           :editable="true"/>
+      <div class="row">
+        <span class="text-uppercase pull-right edit-quantity-order">
+          <router-link :to="{ name: 'cart' }">{{ $t("editMyCart") }}</router-link>
+        </span>
+      </div>
+    </div>
+  </div>

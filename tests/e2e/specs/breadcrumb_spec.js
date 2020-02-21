@@ -1,6 +1,6 @@
 describe('Breadcrumb', () => {
   before(() => {
-    cy.visit('/products/women-shoes-ankle-boots/');
+    cy.visit('/products/women-shoes-ankle-boots');
   });
 
   it('links to each category of the breadcrumb', () => {

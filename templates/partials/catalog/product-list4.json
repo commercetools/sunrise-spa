@@ -1,8 +1,0 @@
-{
-	"list" : [
-		{ "$ref" : "product-thumbnail.json" },
-		{ "$ref" : "product-thumbnail.json" },
-		{ "$ref" : "product-thumbnail.json" },
-		{ "$ref" : "product-thumbnail.json" }
-	]
-}

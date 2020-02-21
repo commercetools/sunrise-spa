@@ -1,0 +1,84 @@
+  <div>
+    <LoadingSpinner v-if="isLoading"/>
+    <div v-else-if="categories && products">
+      <form v-if="products.results.length"
+            id="form-filter-products"
+            name="filter-products" action="#">
+        <!--  {{#if content.searchTerm}}
+          <input type="hidden" name="q" value="{{content.searchTerm}}"/>
+        {{/if}}-->
+        <div class="row item-list-pagination">
+          <!--    {{#if content.searchResult}}
+          <div class="search-results-row">
+            {{> catalog/pop/search-result searchResult=content.searchResult}}
+          </div>
+          {{else}}
+          <div class="jumbotron-row">
+            {{> catalog/pop/jumbotron jumbotron=content.jumbotron}}
+          </div>
+          {{/if}}-->
+          <div class="col-xs-4 hidden-xs text-left">
+            <div class="custom-select-wrapper">
+              <ProductSortSelector @changeSort="changeSort" />
+              <!--{{> catalog/pop/sort-selector sortSelector=content.sortSelector}}-->
+            </div>
+          </div>
+          <div class="custom-pagination"
+               data-test="custom-pagination-top">
+            <Pagination :pageSize="limit"
+                        :total="totalProducts"
+                        :page="page"
+                        @pagechanged="changePage" />
+          </div>
+          <div class="col-xs-4 hidden-xs text-right">
+            <!--{{> catalog/pop/display-selector displaySelector=content.displaySelector}}-->
+          </div>
+        </div>
+        <div class="product-filter hidden-xs">
+          <!--{{> catalog/pop/filters-sidebar}}-->
+        </div>
+        <div id="pop-product-list"
+             class="row">
+          <ProductThumbnail v-for="product in products.results"
+                            data-test="product-list"
+                            :key="product.id"
+                            :product="product" />
+        </div>
+        <a href="#"
+          id="scroll-to-top"
+          class="scroll-to-top"
+          v-scroll-to="{
+            el: '#form-filter-products',
+            duration: 500,
+            easing: 'linear',
+            offset: -200,
+          }"
+          v-vpshow="showScroll"
+        >
+            <span class="scroll-to-top-text">{{$t('go-to-top')}}</span>
+          </a>
+        <div class="custom-pagination">
+          <Pagination :pageSize="limit"
+            :total="totalProducts"
+            :page="page"
+            @pagechanged="changePage" />
+        </div>
+      </form>
+      <div v-else>
+        <div class="empty-results-container">
+            <span class="empty-results"
+                  data-test="empty-results">
+              {{ $t('notFound') }}
+            </span>
+        </div>
+      </div>
+    </div>
+    <div v-else>
+      <div class="empty-results-container">
+        <span class="empty-results"
+              data-test="category-not-found">
+          {{ $t('categoryNotFound') }}
+        </span>
+      </div>
+    </div>
+  </div>
