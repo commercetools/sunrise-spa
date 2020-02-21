@@ -16,7 +16,7 @@ export default {
   }),
   methods: {
     groupValuesByAttribute(acc, currentItem) {
-      const key = this.attributeTranslation.get(currentItem.name)
+      const key = this.attributeTranslation?.get(currentItem.name)
         || currentItem.name;
       if (!acc[key]) {
         acc[key] = {
