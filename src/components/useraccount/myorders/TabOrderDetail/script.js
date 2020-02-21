@@ -4,6 +4,7 @@ import CartLikeSummary from '../../../common/cartlike/CartLikeSummary/index.vue'
 import ORDER_FRAGMENT from '../../../Order.gql';
 import ADDRESS_FRAGMENT from '../../../Address.gql';
 import MONEY_FRAGMENT from '../../../Money.gql';
+import { locale } from '../../../common/shared';
 
 export default {
   components: {
@@ -29,7 +30,7 @@ export default {
       variables() {
         return {
           id: this.$route.params.id,
-          locale: this.$store.state.locale,
+          locale: locale(this),
         };
       },
     },

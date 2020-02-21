@@ -42,3 +42,4 @@ export const pushPage = (page, component, name) => {
     query,
   });
 };
+export const locale = component => component?.$route?.params?.locale;

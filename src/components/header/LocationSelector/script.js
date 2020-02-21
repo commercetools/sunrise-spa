@@ -1,4 +1,5 @@
 import SelectBoxIt from '../../common/form/SelectBoxIt/index.vue';
+import { locale } from '../../common/shared';
 
 export default {
   components: {
@@ -19,10 +20,17 @@ export default {
     },
     language: {
       get() {
-        return this.$store.state.locale;
+        return locale(this);
       },
       set(value) {
         this.$store.dispatch('setLocale', value);
+        this.$router.replace({
+          ...this.$route,
+          params: {
+            ...this.$route.params,
+            locale: value,
+          },
+        });
       },
     },
     languages() {

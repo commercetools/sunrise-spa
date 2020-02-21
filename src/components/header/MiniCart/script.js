@@ -7,6 +7,7 @@ import BaseMoney from '../../common/BaseMoney/index.vue';
 import LineItemInfo from '../../common/cartlike/LineItemInfo/index.vue';
 import LineItemDeleteForm from '../../cartdetail/LineItemDeleteForm/index.vue';
 import MONEY_FRAGMENT from '../../Money.gql';
+import { locale } from '../../common/shared';
 
 export default {
   components: {
@@ -70,7 +71,7 @@ export default {
         ${MONEY_FRAGMENT}`,
       variables() {
         return {
-          locale: this.$store.state.locale,
+          locale: locale(this),
         };
       },
     },
