@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import { locale } from '../../common/shared';
 
 export default {
   props: {
@@ -79,7 +80,7 @@ export default {
         }`,
       variables() {
         return {
-          locale: this.$store.state.locale,
+          locale: locale(this),
           sku: this.sku,
         };
       },

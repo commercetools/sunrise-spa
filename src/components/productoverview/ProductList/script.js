@@ -5,7 +5,7 @@ import ProductThumbnail from '../../common/ProductThumbnail/index.vue';
 import ProductSortSelector from '../ProductSortSelector/index.vue';
 import Pagination from '../../common/Pagination/index.vue';
 import { products, onlyLastRequestedPromise } from '../../../api';
-import { toPrice, pushPage } from '../../common/shared';
+import { toPrice, pushPage, locale } from '../../common/shared';
 
 const last = onlyLastRequestedPromise('products');
 const getProducts = (component) => {
@@ -21,13 +21,13 @@ const getProducts = (component) => {
   component.loadingProducts = true;
   const route = component.$route;
   const {
-    locale,
     currency,
     country,
   } = component.$store.state;
+  const loc = locale(component);
   const sortValue = route.query.sort;
   const searchText = route.query.q
-    ? { [`text.${locale}`]: route.query.q }
+    ? { [`text.${loc}`]: route.query.q }
     : {};
   const sort = sortValue
     ? { sort: `lastModifiedAt ${sortValue === 'newest' ? 'desc' : 'asc'}` }
@@ -48,8 +48,8 @@ const getProducts = (component) => {
           id,
           masterData: {
             current: {
-              name: name[locale],
-              slug: slug[locale],
+              name: name[loc],
+              slug: slug[loc],
               masterVariant: {
                 sku,
                 images,
@@ -124,7 +124,7 @@ export default {
         }`,
       variables() {
         return {
-          where: `slug(${this.$store.state.locale}="${this.categorySlug}")`,
+          where: `slug(${locale(this)}="${this.categorySlug}")`,
         };
       },
       skip: vm => !vm.categorySlug,
