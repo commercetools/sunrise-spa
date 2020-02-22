@@ -1,16 +1,16 @@
 button {
   font-weight: 900;
-  background-color: #FFBA27;
+  background-color: $my-sin;
   padding: 10px 20px;
   text-transform: uppercase;
   font-size: 16px;
   letter-spacing: 1px;
   position: relative;
   &:hover {
-    background-color: lighten(#FFBA27, 5%);
+    background-color: lighten($my-sin, 5%);
   }
   .state-layer {
-    background-color: #FFBA27;
+    background-color: $my-sin;
   }
   .state-layer {
     background-color: inherit;
@@ -42,7 +42,7 @@ button {
 svg.check {
   circle, path {
     fill: none;
-    stroke: #333333;
+    stroke: $mine-shaft;
     stroke-linecap: round;
     stroke-miterlimit: 10;
     stroke-width: 8px;

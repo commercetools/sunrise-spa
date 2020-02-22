@@ -43,3 +43,4 @@ export const pushPage = (page, component, name) => {
   });
 };
 export const locale = component => component?.$route?.params?.locale;
+export const isToughDevice = () => 'ontouchstart' in window;
