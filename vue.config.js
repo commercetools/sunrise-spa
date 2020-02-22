@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   chainWebpack: (config) => {
     config.module
@@ -11,6 +13,15 @@ module.exports = {
       .loader('yaml-loader')
       .end();
   },
+  css: {
+    loaderOptions: {
+      sass: {
+        data: `
+          @import "SASS/_global.scss";
+        `,
+      },
+    },
+  },
   pluginOptions: {
     i18n: {
       enableInSFC: true,
@@ -20,6 +31,14 @@ module.exports = {
     performance: {
       maxEntrypointSize: 500000,
       maxAssetSize: 350000,
+    },
+    resolve: {
+      alias: {
+        SASS: path.resolve(
+          __dirname,
+          'src/assets/scss/',
+        ),
+      },
     },
   },
 };

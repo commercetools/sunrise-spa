@@ -8,12 +8,12 @@
     font-size: 1.2em;
   }
   .next-button {
-    background: url('../../../assets/img/arrow-66.png') no-repeat 95% 13px #FFBA27;
+    background: url('../../../assets/img/arrow-66.png') no-repeat 95% 13px $my-sin;
     background-size: 15px;
-    border-color: #FFBA27;
+    border-color: $my-sin;
     /*padding: 0.5em 0;*/
     &:hover {
-      background: url('../../../assets/img/arrow-66.png') no-repeat 95% 13px lighten(#FFBA27, 5%);
+      background: url('../../../assets/img/arrow-66.png') no-repeat 95% 13px lighten($my-sin, 5%);
       background-size: 15px;
     }
   }
