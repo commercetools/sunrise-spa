@@ -58,7 +58,7 @@ describe('CategoriesMenu/index.vue', () => {
     });
     expect(wrapper.vm.isMenuOpen(childlessCategory)).toBeFalsy();
 
-    wrapper.find('[data-test="category-1st-level"]').trigger('mouseover');
+    wrapper.find('[data-test="category-1st-level"]').trigger('mouseenter');
     expect(wrapper.vm.isMenuOpen(childlessCategory)).toBeFalsy();
 
     wrapper.find('[data-test="category-1st-level"]').trigger('mouseleave');
@@ -75,7 +75,7 @@ describe('CategoriesMenu/index.vue', () => {
     expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeFalsy();
     expect(wrapper.vm.isMenuOpen(categoryWithChildren2)).toBeFalsy();
 
-    wrapper.find('[data-test="category-1st-level"]').trigger('mouseover');
+    wrapper.find('[data-test="category-1st-level"]').trigger('mouseenter');
     expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeTruthy();
     expect(wrapper.vm.isMenuOpen(categoryWithChildren2)).toBeFalsy();
 
@@ -93,7 +93,7 @@ describe('CategoriesMenu/index.vue', () => {
     });
     expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeFalsy();
 
-    wrapper.find('[data-test="category-1st-level"]').trigger('mouseover');
+    wrapper.find('[data-test="category-1st-level"]').trigger('mouseenter');
     expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeTruthy();
 
     wrapper.find('[data-test="category-1st-level-link"]').trigger('click');
@@ -109,7 +109,7 @@ describe('CategoriesMenu/index.vue', () => {
     });
     expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeFalsy();
 
-    wrapper.find('[data-test="category-1st-level"]').trigger('mouseover');
+    wrapper.find('[data-test="category-1st-level"]').trigger('mouseenter');
     expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeTruthy();
 
     wrapper.find('[data-test="category-2nd-level-link"]').trigger('click');
@@ -125,7 +125,7 @@ describe('CategoriesMenu/index.vue', () => {
     });
     expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeFalsy();
 
-    wrapper.find('[data-test="category-1st-level"]').trigger('mouseover');
+    wrapper.find('[data-test="category-1st-level"]').trigger('mouseenter');
     expect(wrapper.vm.isMenuOpen(categoryWithChildren1)).toBeTruthy();
 
     wrapper.find('[data-test="category-3rd-level-link"]').trigger('click');
