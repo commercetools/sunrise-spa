@@ -28,7 +28,7 @@
 
 @media screen and (min-width: 768px) {
   .navbar-default .navbar-nav > li:hover > a::after,
-  .navbar-default .navbar-nav > li > a:hover::after {
+  .navbar-default .navbar-nav > li > div:hover::after {
     content: "";
     border-bottom: solid 2px $mine-shaft;
     position: relative;
@@ -104,7 +104,8 @@
   }
 }
 
-.navbar-default .navbar-nav > li > a {
+.navbar-default .navbar-nav > li > div {
+  text-align: left;
   color: $mine-shaft;
   padding: 20px 15px;
   font-size: 18px;
@@ -186,7 +187,7 @@
     }
   }
 
-  .navbar-default .navbar-nav > li > a {
+  .navbar-default .navbar-nav > li > div {
     padding: 10px 15px;
   }
 
@@ -225,10 +226,6 @@
 
   .dropdown-menu {
     position: relative;
-  }
-
-  .navbar-default .navbar-nav > li > a {
-    text-align: left;
   }
 
   .navbar-default .navbar-nav > li:nth-child(n+2) {

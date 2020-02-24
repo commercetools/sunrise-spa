@@ -1,21 +1,38 @@
 import gql from 'graphql-tag';
-import { locale } from '../../common/shared';
+import { locale, isToughDevice } from '../../common/shared';
+
+const minus = require('@/assets/img/minus-1.png');
+const plus = require('@/assets/img/plus79.png');
 
 export default {
+  props: {
+    openMobile: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data: () => ({
     categories: null,
     openCategoryMenu: '',
     someCategoryWasClicked: false,
   }),
   methods: {
+    mobileImage(level) {
+      return this.isMenuOpen(level)
+        ? minus
+        : plus;
+    },
     isSale({ externalId }) {
       const categoriesConfig = this.$sunrise.categories;
       return categoriesConfig ? externalId === categoriesConfig.salesExternalId : false;
     },
     isMenuOpen({ id }) {
-      return !this.someCategoryWasClicked && this.openCategoryMenu === id;
+      return (isToughDevice() || !this.someCategoryWasClicked) && this.openCategoryMenu === id;
     },
     hoverOnCategory({ id, children }) {
+      if (isToughDevice()) {
+        return;
+      }
       const hasChildren = Array.isArray(children) && children.length;
       if (hasChildren) {
         this.openCategoryMenu = id;
@@ -23,10 +40,20 @@ export default {
       this.someCategoryWasClicked = false;
     },
     hoverOffCategory() {
-      this.openCategoryMenu = '';
+      if (isToughDevice()) {
+        return;
+      }
+      this.openCategoryMenu = false;
+    },
+    toggleOpenCategory({ id }) {
+      this.openCategoryMenu = id === this.openCategoryMenu
+        ? false
+        : id;
     },
     clickOnCategory() {
       this.someCategoryWasClicked = true;
+      this.openCategoryMenu = false;
+      this.$emit('closeMobile');
     },
   },
   apollo: {
