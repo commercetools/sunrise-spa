@@ -12,7 +12,7 @@ describe('Categories menu', () => {
           .contains('Women')
           .should('have.attr', 'href', '/products/women');
 
-        cy.wrap($menu).trigger('mouseover');
+        cy.wrap($menu).trigger('mouseenter');
 
         cy.wrap($menu)
           .find('[data-test=category-2nd-level-link]')

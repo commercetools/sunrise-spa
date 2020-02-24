@@ -13,6 +13,7 @@ export default {
   data() {
     return {
       searchText: this.$route.query.q || '',
+      mobileMenuOpen: false,
     };
   },
   methods: {
@@ -26,6 +27,9 @@ export default {
         },
         query: { ...query, q: this.searchText },
       });
+    },
+    toggleMobileMenu() {
+      this.mobileMenuOpen = !this.mobileMenuOpen;
     },
   },
   watch: {
