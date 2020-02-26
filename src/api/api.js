@@ -89,23 +89,32 @@ export const makeConfig = token => ({
 
 export const toUrl = (
   base,
-  { query: { pageSize, page, ...query } },
+  query,
 ) => {
-  const queryParams = Object.entries(query)
-    .filter(([, v]) => v !== undefined);
-  queryParams.push(['limit', pageSize]);
-  queryParams.push(['offset', pageSize * (page - 1)]);
-  return (
-    base
-    + (queryParams.length ? '?' : '')
-    + queryParams
-      .reduce(
-        (q, [key, value]) => {
-          q.set(key, value);
-          return q;
-        },
-        new URLSearchParams(),
-      )
-      .toString()
-  );
+  const url = new URL(base);
+  const pageSize = query.find(([key]) => key === 'pageSize')[1];
+  const page = query.find(([key]) => key === 'page')[1];
+  query
+    .filter(
+      ([k, v]) => v !== undefined
+        && !['pageSize', 'page'].includes(k),
+    )
+    .concat([['limit', pageSize]])
+    .concat([['offset', pageSize * (page - 1)]])
+    .reduce(
+      (result, [key, value]) => {
+        if (Array.isArray(value)) {
+          return result.concat(
+            value.map(
+              v => [key, v],
+            ),
+          );
+        }
+        return result.concat([[key, value]]);
+      }, [],
+    )
+    .forEach(
+      ([key, val]) => url.searchParams.append(key, val),
+    );
+  return url.toString();
 };

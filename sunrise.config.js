@@ -57,4 +57,9 @@ export default {
   categories: {
     salesExternalId: '6',
   },
+  facetSearches: [
+    { name: 'color', type: 'lnum' },
+    { name: 'size', type: 'text' },
+    { name: 'designer', type: 'enum' },
+  ],
 };
