@@ -1,5 +1,5 @@
 .add-discount-code-form {
-  border-top: 1px solid #D6D6D6;
+  border-top: 1px solid $alto;
   padding: 1em;
   .form-field {
     display: inline;
@@ -7,7 +7,7 @@
   label {
     display: inline;
     .text {
-      color: #858585;
+      color: $gray;
       letter-spacing: 0.1em;
       margin-right: 1em;
     }
@@ -22,13 +22,13 @@
     background: none;
     font-weight: normal;
     font-size: 14px;
-    border: 2px solid #D6D6D6;
-    color: #ADADAD;
+    border: 2px solid $alto;
+    color: $silver-chalice;
     padding: 0.5em 1em;
     &:hover {
       background: none;
-      color: #858585;
-      border: 2px solid #858585;
+      color: $gray;
+      border: 2px solid $gray;
     }
   }
   .server-error {

@@ -1,6 +1,6 @@
   input {
     width: 100%;
-    border: 1px solid #D6D6D6;
+    border: 1px solid $alto;
     border-radius: 1px;
     padding: 0.5em;
     margin-top: 0.2em;
