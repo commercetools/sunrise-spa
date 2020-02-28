@@ -44,3 +44,26 @@ export const pushPage = (page, component, name) => {
 };
 export const locale = component => component?.$route?.params?.locale;
 export const isToughDevice = () => 'ontouchstart' in window;
+export const modifyQuery = (key, value, query, add = true) => {
+  const values = [value]
+    .concat(query[key])
+    .filter(v => add || v !== value);
+  let newValue = [...new Set(values)]
+    .filter(v => v !== undefined);
+  newValue = (newValue.length > 1) ? newValue : newValue[0];
+  return (newValue !== undefined)
+    ? {
+      ...query,
+      [key]: newValue,
+    }
+    : Object.entries(query).reduce(
+      // eslint-disable-next-line no-shadow
+      (result, [k, value]) => {
+        if (k !== key) {
+        // eslint-disable-next-line no-param-reassign
+          result[k] = value;
+        }
+        return result;
+      }, {},
+    );
+};

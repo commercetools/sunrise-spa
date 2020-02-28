@@ -1,0 +1,17 @@
+  <div >
+    <div v-for="facet in facets">
+      <h1>{{facet.name}}</h1>
+        <div v-for="term in facet.terms">
+          <label >
+            <input 
+              type="checkbox" 
+              name="facet.name" 
+              :value="term.term"
+              :checked="isChecked(facet.name,term.term)"
+              v-on:change="filerChange($event, facet.name)"
+            >
+              {{term.term}} <span class="facet-count">({{term.productCount}})</span>
+          </label>
+      </div>
+    </div>
+  </div>

@@ -1,12 +1,54 @@
 /* eslint-disable no-param-reassign */
 import gql from 'graphql-tag';
 import LoadingSpinner from '../../common/LoadingSpinner/index.vue';
+import ProductFilter from '../ProductFilter/index.vue';
 import ProductThumbnail from '../../common/ProductThumbnail/index.vue';
 import ProductSortSelector from '../ProductSortSelector/index.vue';
 import Pagination from '../../common/Pagination/index.vue';
 import { products, onlyLastRequestedPromise } from '../../../api';
-import { toPrice, pushPage, locale } from '../../common/shared';
+import {
+  toPrice, pushPage, locale, modifyQuery,
+} from '../../common/shared';
+import sunriseConfig from '../../../../sunrise.config';
 
+const removeHiddenFacetFromQuery = (facets, component) => {
+  const facetObject = facets.reduce(
+    (result, { name, terms }) => result.set(
+      name,
+      terms.map(t => t.term),
+    ),
+    new Map(),
+  );
+  const facetKeys = sunriseConfig.facetSearches.map(({ name }) => name);
+  // see if facets are in query that are missing in facets
+  const missing = Object.entries(component.$route.query)
+    .map(
+      ([key, value]) => [key, [].concat(value)],
+    ).reduce(
+      (result, [key, values]) => result.concat(
+        values.map(v => [key, v]),
+      ), [],
+    ).filter(
+      ([key]) => facetKeys.includes(key),
+    )
+    .filter(
+      ([key, value]) => !(facetObject.get(key) || [])
+        .includes(value),
+    );
+  if (missing.length) {
+    // remove the facets that are missing from query
+    const query = missing.reduce(
+      (result, [key, value]) => modifyQuery(
+        key, value, result, false,
+      ),
+      component.$route.query,
+    );
+    component.$router.replace({
+      ...component.$route,
+      query,
+    });
+  }
+};
 const last = onlyLastRequestedPromise('products');
 const getProducts = (component) => {
   const category = component.$route.params.categorySlug === 'all'
@@ -19,6 +61,7 @@ const getProducts = (component) => {
     return;
   }
   component.loadingProducts = true;
+  component.loadingFacets = true;
   const route = component.$route;
   const {
     currency,
@@ -32,16 +75,30 @@ const getProducts = (component) => {
   const sort = sortValue
     ? { sort: `lastModifiedAt ${sortValue === 'newest' ? 'desc' : 'asc'}` }
     : {};
-  last(products.get(
-    {
-      category,
-      page: Number(route.params?.page || 1),
-      pageSize: component.limit,
-      ...sort,
-      ...searchText,
-    },
-    route.query,
-  )).then(({ results, ...meta }) => {
+  last(
+    Promise.all([
+      products.get([
+        {
+          category,
+          page: Number(route.params?.page || 1),
+          pageSize: component.limit,
+          ...sort,
+          ...searchText,
+        },
+        route.query,
+      ]),
+      products.facets(
+        {
+          category,
+          ...searchText,
+        },
+        route.query,
+      )]),
+  ).then(([{ results, ...meta }, facets]) => {
+    removeHiddenFacetFromQuery(
+      facets,
+      component,
+    );
     component.products = {
       ...meta,
       results: results.map(
@@ -67,7 +124,9 @@ const getProducts = (component) => {
         }),
       ),
     };
+    component.facets = facets;
     component.loadingProducts = false;
+    component.loadingFacets = false;
   });
 };
 export default {
@@ -77,13 +136,16 @@ export default {
     ProductThumbnail,
     ProductSortSelector,
     Pagination,
+    ProductFilter,
   },
   data: () => ({
     categories: null,
     products: null,
+    facets: null,
     sort: null,
     limit: Number(process.env.VUE_APP_PAGE_SIZE || 75),
     loadingProducts: false,
+    loadingFacets: false,
   }),
   computed: {
     category() {

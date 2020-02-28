@@ -58,8 +58,8 @@ export default {
     salesExternalId: '6',
   },
   facetSearches: [
-    { name: 'color', type: 'lnum' },
     { name: 'size', type: 'text' },
+    { name: 'color', type: 'lnum' },
     { name: 'designer', type: 'enum' },
   ],
 };
