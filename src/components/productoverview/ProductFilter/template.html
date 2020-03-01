@@ -1,17 +1,40 @@
-  <div >
-    <div v-for="facet in facets">
-      <h1>{{facet.name}}</h1>
-        <div v-for="term in facet.terms">
-          <label >
-            <input 
-              type="checkbox" 
-              name="facet.name" 
-              :value="term.term"
-              :checked="isChecked(facet.name,term.term)"
-              v-on:change="filerChange($event, facet.name)"
-            >
-              {{term.term}} <span class="facet-count">({{term.productCount}})</span>
-          </label>
+<div class="filter-options sidebar-offcanvas">
+  <button class="offcanvas-btn offcanvas-btn-close icon-close" data-toggle="offcanvas" type="button">
+    <span class="sr-only">{{ $t('close') }}</span>
+  </button>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-12 ">
+          <p class="filter-products"><b>{{ $t("filterProducts") }}</b></p>
+        </div>
+      </div>
+      <div v-for="facet in facets">
+        <hr class="hr">
+        <div class="row facet-block">
+          <div class="col-xs-8 text-left">
+            {{facet.name}}
+          </div>
+          <div class="col-xs-4">
+            <a class="text-right clear-btn facet-clear-btn" href="#">
+              {{ $t("clear") }}
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pop-filter-select select-facet two-column-select">
+              <div v-for="term in facet.terms">
+                <label>
+                  <input type="checkbox" :name="facet.name" :value="term.term"
+                    :checked="isChecked(facet.name,term.term)" v-on:change="filerChange($event, facet.name)" />
+                  {{term.term}} <span class="facet-count">({{term.productCount}})</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</div>
