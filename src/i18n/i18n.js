@@ -24,6 +24,7 @@ const i18n = new VueI18n({
   messages: loadMessages(),
   numberFormats: sunriseConfig.formats.number,
   dateTimeFormats: sunriseConfig.formats.datetime,
+  silentFallbackWarn: true
 });
 
 store.watch((state) => state.locale, (value) => {

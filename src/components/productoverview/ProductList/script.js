@@ -86,6 +86,7 @@ const getProducts = (component) => {
           ...searchText,
         },
         route.query,
+        loc,
       ]),
       products.facets(
         {
@@ -93,6 +94,7 @@ const getProducts = (component) => {
           ...searchText,
         },
         route.query,
+        loc,
       )]),
   ).then(([{ results, ...meta }, facets]) => {
     removeHiddenFacetFromQuery(

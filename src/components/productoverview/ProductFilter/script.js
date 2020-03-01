@@ -8,17 +8,33 @@ export default {
   computed: {
   },
   methods: {
-    filerChange(e, name) {
+    pushRouter(query) {
+      this.$router.push({
+        ...this.$route,
+        query,
+      });
+    },
+    filterChange(e, name) {
       const query = modifyQuery(
         name,
         e.target.value,
         this.$route.query,
         e.target.checked,
       );
-      this.$router.push({
-        ...this.$route,
-        query,
-      });
+      this.pushRouter(query);
+    },
+    clearFacet(name) {
+      this.pushRouter([]
+        .concat(this.$route.query[name])
+        .filter(v => v !== undefined)
+        .reduce(
+          (result, val) => modifyQuery(
+            name,
+            val,
+            result,
+            false,
+          ), this.$route.query,
+        ));
     },
     isChecked(name, value) {
       return Array.isArray(this.$route.query[name])
