@@ -7,7 +7,7 @@ import ProductSortSelector from '../ProductSortSelector/index.vue';
 import Pagination from '../../common/Pagination/index.vue';
 import { products, onlyLastRequestedPromise } from '../../../api';
 import {
-  toPrice, pushPage, locale, modifyQuery,
+  toPrice, pushPage, locale, modifyQuery, changeRoute,
 } from '../../common/shared';
 import sunriseConfig from '../../../../sunrise.config';
 
@@ -43,10 +43,14 @@ const removeHiddenFacetFromQuery = (facets, component) => {
       ),
       component.$route.query,
     );
-    component.$router.replace({
-      ...component.$route,
-      query,
-    });
+    changeRoute(
+      {
+        ...component.$route,
+        query,
+      },
+      component,
+      false,
+    );
   }
 };
 const last = onlyLastRequestedPromise('products');

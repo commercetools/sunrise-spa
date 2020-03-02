@@ -1,4 +1,4 @@
-import { modifyQuery } from '../../common/shared';
+import { modifyQuery, changeRoute } from '../../common/shared';
 
 /* eslint-disable no-prototype-builtins */
 export default {
@@ -9,10 +9,12 @@ export default {
   },
   methods: {
     pushRouter(query) {
-      this.$router.push({
-        ...this.$route,
-        query,
-      });
+      changeRoute(
+        {
+          ...this.$route,
+          query,
+        }, this,
+      );
     },
     filterChange(e, name) {
       const query = modifyQuery(

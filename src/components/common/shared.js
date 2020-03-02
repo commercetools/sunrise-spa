@@ -42,6 +42,23 @@ export const pushPage = (page, component, name) => {
     query,
   });
 };
+export const changeRoute = (route, component, push = true, keepScrollPosition = true) => {
+  const pos = {
+    top: window.scrollY,
+    left: window.scrollX,
+  };
+  if (push) {
+    component.$router.push(route);
+  } else {
+    component.$router.replace(route);
+  }
+
+  if (keepScrollPosition) {
+    Promise.resolve().then(
+      () => { window.scrollTo(pos); },
+    );
+  }
+};
 export const locale = component => component?.$route?.params?.locale;
 export const isToughDevice = () => 'ontouchstart' in window;
 export const modifyQuery = (key, value, query, add = true) => {
