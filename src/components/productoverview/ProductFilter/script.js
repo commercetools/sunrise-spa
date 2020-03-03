@@ -13,6 +13,7 @@ export default {
         {
           ...this.$route,
           query,
+          params: { ...this.$route.params, page: 1 },
         }, this,
       );
     },
