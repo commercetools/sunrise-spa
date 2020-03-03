@@ -6,19 +6,26 @@ import {
 import config from '../../sunrise.config';
 import productTypes from './productTypes';
 
-const asAttribute = (name, type) => (['enum', 'lnum'].includes(type)
-  ? `variants.attributes.${name}.key`
-  : `variants.attributes.${name}`);
+const asAttribute = (name, type, locale) => {
+  if (type === 'lnum') {
+    return `variants.attributes.${name}.label.${locale}`;
+  }
+  if (type === 'enum') {
+    return `variants.attributes.${name}.key`;
+  }
+  return `variants.attributes.${name}`;
+};
+
 // The array of attributes is in config, there are many searchable
 //  attributes but only a couple of them will display in UI
-const facets = (query = {}) => config.facetSearches
+const facets = (query = {}, locale) => config.facetSearches
   .reduce(
     (result, { name, type }) => {
     // eslint-disable-next-line no-prototype-builtins
       if (query.hasOwnProperty(name)) {
         result['filter.query'] = result['filter.query'] || [];
         result['filter.query'].push(
-          `${asAttribute(name, type)}:${
+          `${asAttribute(name, type, locale)}:${
             Array.isArray(query[name])
               ? query[name].map(
                 value => `"${value}"`,
@@ -51,11 +58,11 @@ const products = {
             `${baseUrl}/product-projections/search`,
             [
               ...Object.entries(query),
-              ...Object.entries(facets(routeQuery)),
+              ...Object.entries(facets(routeQuery, locale)),
               ...totalFacets.map(
                 ({ name, type }) => [
                   'facet',
-                  `${asAttribute(name, type)} counting products`,
+                  `${asAttribute(name, type, locale)} counting products`,
                 ],
               ),
             ],
@@ -68,7 +75,7 @@ const products = {
           ...result,
           facets: config.facetSearches.map(
             ({ name, type }) => {
-              const facet = facets[asAttribute(name, type)];
+              const facet = facets[asAttribute(name, type, locale)];
               return ({
                 ...facet,
                 name,
@@ -76,14 +83,6 @@ const products = {
                 type,
                 terms: [...(facet?.terms || [])].sort(
                   (a, b) => a.term.localeCompare(b.term),
-                ).map(
-                  t => ({
-                    ...t,
-                    label:
-                        translation[name]
-                          ?.values
-                          ?.[t.term][locale] || t.term,
-                  }),
                 ),
               });
             },

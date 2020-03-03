@@ -14,25 +14,10 @@ const productTypes = {
   ),
   translations: () => productTypes.getItem().then(
     productType => productType.attributes.reduce(
-      (result, { name, label, type }) => {
+      (result, { name, label }) => {
         result[name] = {
           ...label,
         };
-        Object.entries(label).forEach(
-          ([locale, value]) => result[`${value} ... ${locale}`] = name,
-        );
-        if (type.name === 'lenum') {
-          result[name].values = type.values.reduce(
-            (result, { key, label }) => {
-              result[key] = label;
-              Object.entries(label).forEach(
-                ([locale, value]) => result[`${value} ... ${locale}`] = key,
-              );
-              return result;
-            }, {},
-          );
-        }
-
         return result;
       }, {},
     ),
