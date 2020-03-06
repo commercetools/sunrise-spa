@@ -22,6 +22,11 @@ export default {
       lastLocale: null,
     };
   },
+  computed: {
+    locale() {
+      return loc(this);
+    },
+  },
   beforeCreate() {
     // when the page loads set store locale to what is in the url
     if (this?.$store?.state?.locale !== loc(this)) {
