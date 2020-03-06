@@ -5,7 +5,7 @@ import ProductThumbnail from '../../common/ProductThumbnail/index.vue';
 import ProductSortSelector from '../ProductSortSelector/index.vue';
 import Pagination from '../../common/Pagination/index.vue';
 import { products, onlyLastRequestedPromise } from '../../../api';
-import { toPrice, pushPage, locale } from '../../common/shared';
+import { pushPage, locale } from '../../common/shared';
 
 const last = onlyLastRequestedPromise('products');
 const getProducts = (component) => {
@@ -36,6 +36,8 @@ const getProducts = (component) => {
     category,
     page: Number(route.params?.page || 1),
     pageSize: component.limit,
+    priceCurrency: currency,
+    priceCountry: country,
     ...sort,
     ...searchText,
   })).then(({ results, ...meta }) => {
@@ -43,7 +45,7 @@ const getProducts = (component) => {
       ...meta,
       results: results.map(
         ({
-          id, masterVariant: { sku, images, prices }, name, slug,
+          id, masterVariant: { sku, images, price }, name, slug,
         }) => ({
           id,
           masterData: {
@@ -53,11 +55,7 @@ const getProducts = (component) => {
               masterVariant: {
                 sku,
                 images,
-                price: toPrice(prices, {
-                  country,
-                  currency,
-                  // @todo: what about customerGroup and channel
-                }),
+                price,
               },
             },
           },
@@ -85,6 +83,12 @@ export default {
   computed: {
     category() {
       return this.categories.results[0];
+    },
+    countyCurrency() {
+      return {
+        currency: this.$store.state.currency,
+        country: this.$store.state.country,
+      };
     },
     hasManyProducts() {
       return this.products?.results.length >= this.limit / 2;
@@ -135,6 +139,9 @@ export default {
       getProducts(this);
     },
     categories() {
+      getProducts(this);
+    },
+    countyCurrency() {
       getProducts(this);
     },
   },
