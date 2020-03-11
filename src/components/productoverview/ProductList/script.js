@@ -32,15 +32,18 @@ const getProducts = (component) => {
   const sort = sortValue
     ? { sort: `lastModifiedAt ${sortValue === 'newest' ? 'desc' : 'asc'}` }
     : {};
-  last(products.get({
-    category,
-    page: Number(route.params?.page || 1),
-    pageSize: component.limit,
-    priceCurrency: currency,
-    priceCountry: country,
-    ...sort,
-    ...searchText,
-  })).then(({ results, ...meta }) => {
+  last(products.get(
+    {
+      category,
+      page: Number(route.params?.page || 1),
+      pageSize: component.limit,
+      priceCurrency: currency,
+      priceCountry: country,
+      ...sort,
+      ...searchText,
+    },
+    route.query,
+  )).then(({ results, ...meta }) => {
     component.products = {
       ...meta,
       results: results.map(
