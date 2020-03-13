@@ -18,6 +18,10 @@ const asAttribute = (name, type, locale) => {
 
 // The array of attributes is in config, there are many searchable
 //  attributes but only a couple of them will display in UI
+//  this will turn { designer: ['rebel', 'havaianas'] }; into
+//  {"filter.query":["variants.attributes.designer.key:\"rebel\",\"havaianas\""]}
+//  when 'designer' is the value of the name property of one of the items in
+//  vueConfig.facetSearches
 const facets = (query = {}, locale) => config.facetSearches
   .reduce(
     (result, { name, type }) => {
