@@ -43,7 +43,11 @@ const router = new Router({
   scrollBehavior: () => ({ x: 0, y: 0 }),
   routes: [
     {
-      path: `/:locale(${Object.keys(config.languages).join('|')})?`,
+      path: `/:country(${
+        Object.keys(config.countries).join('|')
+      })?/:locale(${
+        Object.keys(config.languages).join('|')
+      })?`,
       component: Root,
       children: [
         {
