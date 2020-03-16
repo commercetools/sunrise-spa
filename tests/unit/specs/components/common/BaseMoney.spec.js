@@ -37,7 +37,7 @@ describe('BaseMoney/index.vue', () => {
 
     // eslint-disable-next-line no-unused-expressions
     wrapper.vm.formattedPrice;
-    expect(options.mocks.$n).toHaveBeenCalledWith(12.75, 'currency', 'EUR');
+    expect(options.mocks.$n).toHaveBeenCalledWith(12.75, 'currency', 'DE');
   });
 
   it('calculates price amount with 2 fraction digit', () => {
