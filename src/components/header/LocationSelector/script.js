@@ -16,6 +16,13 @@ export default {
       },
       set(value) {
         this.$store.dispatch('setCountry', value);
+        this.$router.replace({
+          ...this.$route,
+          params: {
+            ...this.$route.params,
+            country: value,
+          },
+        });
       },
     },
     language: {
