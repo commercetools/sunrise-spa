@@ -22,6 +22,7 @@ describe('BaseMoney/index.vue', () => {
         money: {
           centAmount: 1275,
           fractionDigits: 2,
+          currencyCode: 'EUR',
         },
       },
     };
@@ -36,7 +37,7 @@ describe('BaseMoney/index.vue', () => {
 
     // eslint-disable-next-line no-unused-expressions
     wrapper.vm.formattedPrice;
-    expect(options.mocks.$n).toHaveBeenCalledWith(12.75, 'currency', 'de-DE');
+    expect(options.mocks.$n).toHaveBeenCalledWith(12.75, 'currency', 'DE');
   });
 
   it('calculates price amount with 2 fraction digit', () => {

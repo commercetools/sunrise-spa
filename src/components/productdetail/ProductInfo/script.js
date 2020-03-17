@@ -61,6 +61,7 @@ export default {
         fragment printPrice on BaseMoney {
           centAmount
           fractionDigits
+          currencyCode
         }`,
       variables() {
         return {
