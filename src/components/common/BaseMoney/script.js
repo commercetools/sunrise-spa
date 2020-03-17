@@ -4,7 +4,11 @@ export default {
   },
   computed: {
     formattedMoney() {
-      return this.$n(this.amount, 'currency', this.$store.state.country);
+      const countryIsNotCurrency = {
+        USD: 'US',
+        EUR: 'DE',
+      };
+      return this.$n(this.amount, 'currency', countryIsNotCurrency[this.currency]);
     },
     amount() {
       if (this.money) {
@@ -12,5 +16,12 @@ export default {
       }
       return 0;
     },
+    currency() {
+      if (this.money) {
+        return this.money.currencyCode;
+      }
+      return '';
+    },
+
   },
 };
