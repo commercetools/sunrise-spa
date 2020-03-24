@@ -38,3 +38,27 @@ $orange: #ff761a;
 // GREEN
 $highland: #699E63;
 $citron: #95c11f;
+
+
+//from new design
+// Font Family
+$montserrat: 'Montserrat', sans-serif;
+$playfairdisplay: 'Playfair Display', serif;
+$notoserif: 'Noto Serif', serif;
+$vidaloka: 'Vidaloka', serif;
+
+// text Colors ---------------
+$white: #ffffff;
+$black: #000000;
+$grey: #f8f8f8;
+
+// Theme Color
+$theme-color: #a38b5e;
+
+// Responsive Variables 
+$xx-layout : 'only screen and (min-width: 1366px) and (max-width: 1600px)';
+$xl-layout : 'only screen and (min-width: 1200px) and (max-width: 1365px)';
+$lg-layout : 'only screen and (min-width: 992px) and (max-width: 1199px)';
+$md-layout:'only screen and (min-width: 768px) and (max-width: 991px)';
+$xs-layout:'only screen and (max-width: 767px)';
+$sm-layout: 'only screen and (min-width: 576px) and (max-width: 767px)';

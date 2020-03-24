@@ -3,8 +3,9 @@ import gql from 'graphql-tag';
 import LoadingSpinner from '../../common/LoadingSpinner/index.vue';
 import ProductFilter from '../ProductFilter/index.vue';
 import ProductThumbnail from '../../common/ProductThumbnail/index.vue';
-import ProductSortSelector from '../ProductSortSelector/index.vue';
+import TopBar from '../TopBar/index.vue';
 import Pagination from '../../common/Pagination/index.vue';
+
 import { products, onlyLastRequestedPromise } from '../../../api';
 import {
   pushPage, locale, modifyQuery, changeRoute,
@@ -138,18 +139,19 @@ export default {
   components: {
     LoadingSpinner,
     ProductThumbnail,
-    ProductSortSelector,
     Pagination,
     ProductFilter,
+    TopBar,
   },
   data: () => ({
     categories: null,
     products: null,
     facets: null,
     sort: null,
-    limit: Number(process.env.VUE_APP_PAGE_SIZE || 75),
+    limit: Number(process.env.VUE_APP_PAGE_SIZE || 12),
     loadingProducts: false,
     loadingFacets: false,
+    show: false,
   }),
   computed: {
     category() {
@@ -177,6 +179,15 @@ export default {
   methods: {
     changeSort(sort) {
       this.sort = sort;
+      const query = { ...this.$route.query };
+      if (query.sort !== sort) {
+        if (sort) {
+          query.sort = sort;
+        } else {
+          delete query.sort;
+        }
+        this.$router.replace({ query });
+      }
     },
     changePage(page) {
       pushPage(page, this, 'products');
@@ -185,6 +196,9 @@ export default {
       // eslint-disable-next-line no-param-reassign
       el.style.display = window.innerHeight > 300
        && window.scrollY > 200 ? '' : 'none';
+    },
+    toggleFilter() {
+      this.show = !this.show;
     },
   },
   apollo: {

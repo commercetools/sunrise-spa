@@ -1,47 +1,21 @@
-<div class="filter-options sidebar-offcanvas">
-  <button class="offcanvas-btn offcanvas-btn-close icon-close" data-toggle="offcanvas" type="button">
-    <span class="sr-only">{{ $t('close') }}</span>
-  </button>
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="row">
-        <div class="col-sm-12 ">
-          <p class="filter-products"><b>{{ $t("filterProducts") }}</b></p>
-        </div>
-      </div>
-      <div v-for="facet in facets">
-        <hr class="hr">
-        <div class="row facet-block">
-          <div class="col-xs-8 text-left">
-           {{facet.label}}
-          </div>
-          <div class="col-xs-4">
-            <a 
-              class="text-right clear-btn facet-clear-btn" 
-              href="#"
-              v-on:click.prevent="clearFacet(facet.name)">
-                {{ $t("clear") }}
-            </a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="pop-filter-select select-facet two-column-select">
-              <div v-for="term in facet.terms">
-                <label>
-                  <input 
-                    type="checkbox" 
-                    :name="facet.name" 
-                    :value="term.term"
-                    :checked="isChecked(facet.name,term.term)" 
-                    v-on:change="filterChange($event, facet.name)" />
-                  {{term.term}} <span class="facet-count">({{term.productCount}})</span>
-                </label>
-              </div>
-            </div>
+<SlideDown v-bind:show="show">
+  <div class="product-filter-wrapper">
+    <div class="row">
+      <!-- Product Filter -->
+      <div v-for="facet in facets" class="custom-col-width-23 mb-20">
+        <div class="product-filter">
+          <h5>{{facet.label}}</h5>
+          <div class="filter-multiple" v-for="term in facet.terms">
+            <ul>
+              <li><label>
+                  <input type="checkbox" :name="facet.name" :value="term.term"
+                    :checked="isChecked(facet.name,term.term)" v-on:change="filterChange($event, facet.name)" />
+                  {{term.term}} <span>({{term.productCount}})</span>
+                </label></li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</SlideDown>

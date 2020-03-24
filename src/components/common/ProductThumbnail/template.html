@@ -1,79 +1,31 @@
-  <div class="col-xs-12 col-sm-6 col-md-4">
-    <router-link :to="productRoute(currentProduct.slug, matchingVariant.sku)">
-      <div data-test="product-thumbnail"
-           class="shop-item">
-        <div v-if="hasPrice && hasDiscount"
-             class="sale-flag"
-             data-test="product-thumbnail-sale-flag">
-          {{ $t('sale') }}
-        </div>
-        <!-- <div v-if="thumbnail.new" class="new-flag">
-          {{ $t('new') }}
-        </div> -->
-      <!-- <form id="form-add-to-wishlist-mobile{{index}}"
-            method="post"
-            {{#if wishlist}}class="hidden"{{/if}}
-            name="add-to-wishlist-mobile"
-            action="{{@root.meta._links.addToWishlist.href}}">
-          <input type="hidden" name="csrfToken" value="{{@root.meta.csrfToken}}"/>
-          <input type="hidden" name="productId" value="{{product.productId}}">
-          <input type="hidden" name="variantId" value="{{product.variantId}}">
-          <button type="submit" class="heart-xs visible-xs">
-          <span class="sr-only">{{ $t("add") }}</span>
-        </button>
-      </form> -->
-      <div v-if="hasImages"
-           class="pop-product-image">
-        <img class="img-lazy"
-             :src="displayedImageUrl(matchingVariant)"
-             :alt="currentProduct.name"/>
-      </div>
-      <div class="pop-product-name">
-        <span data-test="product-thumbnail-name"
-              class="name-headline">
-          {{ currentProduct.name }}
-        </span>
-      </div>
-      <div v-if="hasPrice"
-           class="pop-item-price">
-        <BasePrice :price="matchingVariant.price" />
-      </div>
-      <div class="pop-product-more-colors">
-        <div v-if="hasMoreColors">
-          {{ $t('moreColors')}} &nbsp;
-          <ul class="list-inline">
-            <li>
-              <div class="product-thumbnail-swatch-red"></div>
-            </li>
-            <li>
-              <div class="product-thumbnail-swatch-green"></div>
-            </li>
-            <li>
-              <div class="product-thumbnail-swatch-blue"></div>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="shop-item-overlay hidden-xs">
-        <!--<button type="button"-->
-                <!--class="quickview"-->
-                <!--data-modal="quickview-modal">-->
-          <!--{{ $t("quickView") }}-->
-        <!--</button>-->
-         <!-- <form id="form-add-to-wishlist{{index}}"
-                    method="post"
-                    {{#if wishlist}}class="hidden"{{/if}}
-                    name="add-to-wishlist"
-                    action="{{@root.meta._links.addToWishlist.href}}">
-            <input type="hidden" name="csrfToken" value="{{@root.meta.csrfToken}}"/>
-            <input type="hidden" name="productId" value="{{product.productId}}">
-            <input type="hidden" name="variantId" value="{{product.variantId}}">
-            <button type="submit" class="heart">
-            <span class="sr-only">{{i18n "add"}}</span>
-          </button>
-        </form> -->
+<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+  <div class="product-wrap mb-50">
+    <div class="product-img mb-25">
+      <router-link :to="productRoute(currentProduct.slug, matchingVariant.sku)">
+        <img class="default-img" :src="displayedImageUrl(matchingVariant)" alt="">
+        <img class="hover-img" :src="displayedImageUrl(matchingVariant)" alt="">
+        <span data-test="product-thumbnail-sale-flag" v-if="hasPrice && hasDiscount"
+          class="badge-pink badge-right">Sale</span>
+      </router-link>
+      <div class="product-action">
+        <a data-toggle="modal" data-target="#exampleModal" href="#"><i class="dl-icon-view"></i>
+          <span>Quick Shop</span></a>
+        <a data-toggle="tooltip" title="Add to Cart" href="#"><i class=" dl-icon-cart29"></i></a>
+        <a data-toggle="tooltip" title="Add to Wishlist" href="#"><i class="dl-icon-heart4"></i></a>
+        <a data-toggle="tooltip" title="Add to Compare" href="#"><i class="dl-icon-compare"></i></a>
       </div>
     </div>
-  </router-link>
-  <!-- {{> catalog/quickview wishlist=wishlist}} -->
+    <div class="product-content text-center">
+      <h3>
+        <router-link 
+          :to="productRoute(currentProduct.slug, matchingVariant.sku)"
+          data-test="product-thumbnail-name"
+        >{{ currentProduct.name }}
+        </router-link>
+      </h3>
+      <div class="product-price" v-if="hasPrice">
+        <BasePrice :price="matchingVariant.price" />
+      </div>
+    </div>
   </div>
+</div>

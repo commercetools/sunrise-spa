@@ -11,6 +11,13 @@ export default {
     isInLastPage() {
       return this.page > this.totalPages - 1;
     },
+    pages() {
+      const last = Math.ceil(this.page / 3) * 3;
+      const total = this.totalPages;
+      return [last - 2, last - 1, last].filter(
+        page => page < total,
+      );
+    },
     show() {
       return this.totalPages > 1;
     },
@@ -21,6 +28,12 @@ export default {
     },
     previousPage() {
       this.$emit('pagechanged', this.page - 1);
+    },
+    goToPage(page) {
+      this.$emit('pagechanged', page);
+    },
+    isCurrentPage(page) {
+      return page === this.page;
     },
   },
 };

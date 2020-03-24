@@ -95,8 +95,8 @@ const router = new Router({
           name: 'products',
           components: {
             default: PageProductOverview,
-            header: TheHeader,
-            footer: TheFooter,
+            header: null,
+            footer: null,
           },
           props: {
             default: route => ({

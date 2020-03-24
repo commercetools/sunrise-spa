@@ -1,28 +1,30 @@
-  <ul data-test="pagination"
-      class="pagination"
-      v-if="show">
-    <li class="pagination-item"
-        data-test="paginate-prev">
-      <button type="button"
-              class="icon-prev"
-              data-test="previous-page-link"
-              @click="previousPage"
-              :disabled="isInFirstPage"
-              aria-label="Go to previous page">
-      </button>
+<div 
+  class="pro-pagination-style text-center"
+  data-test="pagination"
+  v-if="show"
+>
+  <ul>
+    <li
+      data-test="paginate-prev"
+      v-if="!isInFirstPage"
+    ><a 
+      class="next" href="#"
+      data-test="previous-page-link"
+      @click.prevent="previousPage"
+      aria-label="Go to previous page"      
+    >Previous</a></li>
+    <li v-for="page in pages">
+      <a 
+        v-bind:class="{ active: isCurrentPage(page) }" 
+        @click.prevent="()=>goToPage(page)"
+      >{{page}}</a>
     </li>
-    <span class="total-pages"
-          data-test="total-pages">
-      {{ $t('page') }} {{page}} {{ $t('of') }} {{totalPages}}
-    </span>
-    <li class="pagination-item"
-        data-test="paginate-next">
-      <button type="button"
-              class="icon-next"
-              data-test="next-page-link"
-              @click="nextPage"
-              :disabled="isInLastPage"
-              aria-label="Go to next page">
-      </button>
-    </li>
+    <li v-if="!isInLastPage"><a 
+      class="next" 
+      href="#"
+      data-test="next-page-link"
+      @click.prevent="nextPage"
+      aria-label="Go to next page"
+    >Next</a></li>
   </ul>
+</div>

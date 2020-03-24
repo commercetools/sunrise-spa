@@ -1,10 +1,12 @@
 import { modifyQuery, changeRoute } from '../../common/shared';
+import SlideDown from '../../common/SlideDown/index.vue';
 
 /* eslint-disable no-prototype-builtins */
 export default {
-  props: ['facets'],
-  data: () => ({
-  }),
+  props: ['facets', 'show'],
+  components: {
+    SlideDown,
+  },
   computed: {
   },
   methods: {

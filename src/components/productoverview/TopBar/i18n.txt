@@ -1,0 +1,16 @@
+en:
+  go-to-top: "go to top"
+  notFound: "No Results Found"
+  categoryNotFound: "Category Not Found"
+  sortBy: "Sort by"
+  newest: "Newest"
+  oldest: "Oldest"
+  recommended: "Recommended"
+de:
+  go-to-top: Seitenanfang"
+  notFound: "Keine Ergebnisse Gefunden"
+  categoryNotFound: "Kategorie nicht gefunden"
+  sortBy: "Sortieren nach"
+  newest: "Neueste"
+  oldest: "Älteste"
+  recommended: "Empfohlen"
