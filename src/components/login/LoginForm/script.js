@@ -27,7 +27,10 @@ export default {
           mutation customerSignMeIn($draft: CustomerSignMeInDraft!) {
             customerSignMeIn(draft: $draft) {
               customer {
-                id
+                id 
+                customerGroup {
+                  id
+                }                
               }
             }
           }`,
@@ -37,7 +40,7 @@ export default {
             password: this.form.password,
           },
         },
-      }).then(() => this.login(this.form.email, this.form.password))
+      }).then(({ data }) => this.login(this.form.email, this.form.password, data))
         .then(() => this.$router.push({ name: 'user' }));
     },
     getErrorMessage({ code }) {

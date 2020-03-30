@@ -7,6 +7,7 @@ Vue.use(Vuex);
 
 const SET_LOCALE = 'SET_LOCALE';
 const SET_COUNTRY = 'SET_COUNTRY';
+const SET_CUSTOMER_GROUP = 'SET_CUSTOMER_GROUP';
 const SET_CURRENCY = 'SET_CURRENCY';
 const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 const SET_TOKEN_INFO = 'SET_TOKEN_INFO';
@@ -32,7 +33,7 @@ const setMiniCartTimeout = (commit, state, timeout) => {
 export default new Vuex.Store({
   plugins: [createPersistedState({
     key: 'session',
-    paths: ['locale', 'country', 'currency', 'tokenInfo', 'authenticated'],
+    paths: ['locale', 'country', 'currency', 'tokenInfo', 'authenticated', 'customerGroup'],
   })],
 
   state: {
@@ -48,6 +49,9 @@ export default new Vuex.Store({
   actions: {
     setLocale: ({ commit }, locale) => {
       if (availableLocales.includes(locale)) commit(SET_LOCALE, locale);
+    },
+    setCustomerGroup: ({ commit }, customerGroup) => {
+      commit(SET_CUSTOMER_GROUP, customerGroup);
     },
 
     setCountry: ({ commit }, country) => {
@@ -95,6 +99,9 @@ export default new Vuex.Store({
 
     [SET_LOCALE](state, locale) {
       state.locale = locale;
+    },
+    [SET_CUSTOMER_GROUP](state, customerGroup) {
+      state.customerGroup = customerGroup;
     },
 
     [SET_AUTHENTICATED](state, authenticated) {
