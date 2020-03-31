@@ -1,39 +1,9 @@
-  <li v-if="languages.length || countries.length"
-      @mouseleave="open"
-      @mouseenter="close"
-      data-test="location-selector"
-      class="list-item-location clearfix">
-    <button @click="toggle"
-            data-test="location-selector-open-button">
-      <img class="pull-right"
-           src="../../../assets/img/globe-2.png"
-           :alt="$t('location')">
-    </button>
-    <transition name="fade">
-      <div v-if="show"
-           class="location-dropdown">
-        <div v-if="languages.length">
-          <span class="location-dropdown-label">
-            {{ $t('language') }}
-          </span>
-          <SelectBoxIt v-model="language"
-                       :options="languages"
-                       id="language"
-                       data-test="language-selector-dropdown"
-                       class="select location-select"
-                       @input="toggle"/>
-        </div>
-        <div v-if="countries.length">
-          <span class="location-dropdown-label">
-            {{ $t('country') }}
-          </span>
-          <SelectBoxIt v-model="country"
-                       :options="countries"
-                       id="country-select"
-                       data-test="country-selector-dropdown"
-                       class="select location-select"
-                       @input="toggle"/>
-        </div>
-      </div>
-    </transition>
+  <li><a href="#">{{$t(title)}}</a>
+      <ul>
+          <li v-for="value in listValues">
+            <a
+              @click.prevent="()=>setValue(value.id)" 
+              href="#">{{value.name}}</a>
+          </li>
+      </ul>
   </li>
