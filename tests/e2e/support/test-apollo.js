@@ -3,7 +3,7 @@ import { createApolloClient } from 'vue-cli-plugin-apollo/graphql-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
 const projectKey = Cypress.env('VUE_APP_CT_PROJECT_KEY');
-const apiHost = Cypress.env('VUE_APP_CT_API_HOST') || 'https://api.commercetools.com';
+const apiHost = Cypress.env('VUE_APP_CT_API_HOST') || 'https://api.europe-west1.gcp.commercetools.com';
 
 const authClient = new SdkAuth({
   projectKey,
@@ -11,7 +11,7 @@ const authClient = new SdkAuth({
     clientId: Cypress.env('CT_CLIENT_ID'),
     clientSecret: Cypress.env('CT_CLIENT_SECRET'),
   },
-  host: Cypress.env('VUE_APP_CT_AUTH_HOST') || 'https://auth.commercetools.com',
+  host: Cypress.env('VUE_APP_CT_AUTH_HOST') || 'https://auth.europe-west1.gcp.commercetools.com',
 });
 
 export default async function createClient() {
