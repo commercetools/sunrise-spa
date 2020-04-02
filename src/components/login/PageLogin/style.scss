@@ -1,0 +1,138 @@
+/*-------- 23. Login register style ---------*/
+
+.login-register-wrap {
+  h3 {
+      i {
+          margin-right: 3px;
+      }
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0;
+  }
+  .login-register-form {
+      margin: 47px 0 0;
+      @media #{$xs-layout} {
+          margin: 10px 0 0;
+      }
+      .sin-login-register {
+          margin: 0 0 16px;
+          label {
+              font-size: 12px;
+              color: #262626;
+              span {
+                  color: red;
+              }
+          }
+          input {
+              background: transparent;
+              border: 1px solid #CDCDCD;
+              height: 70px;
+              padding: 5px 10px;
+              &:focus {
+                  border: 1px solid #262626;
+              }
+          }
+      }
+      .login-register-btn-remember {
+          display: flex;
+          align-items: center;
+          margin: 0 0 17px;
+          @media #{$xs-layout} {
+              margin: 0 0 10px;
+          }
+          .login-register-remember {
+              margin-left: 25px;
+              input {
+                  width: 13px;
+                  height: auto;
+              }
+              label {
+                  line-height: 1;
+                  margin: 0;
+                  font-size: 12px;
+              }
+          }
+      }
+      .lost-password {
+          > a {
+              font-size: 12px;
+              color: $theme-color;
+              &:hover {
+                  text-decoration: underline;
+              }
+          }
+      }
+      p {
+          color: #989898;
+          font-size: 12px;
+          margin: 0 0 16px;
+          a {
+              color: $theme-color;
+              &:hover {
+                  text-decoration: underline;
+              }
+          }
+      }
+  }
+  @media #{$lg-layout} {
+      &.mr-70 {
+          margin-right: 0;
+      }
+  }
+  @media #{$md-layout} {
+      &.mr-70 {
+          margin-right: 0;
+      }
+  }
+  @media #{$xs-layout} {
+      &.mr-70 {
+          margin-right: 0;
+      }
+      &.register-wrap {
+          margin-top: 30px;
+      }
+  }
+}
+
+.login-register-btn {
+  button {
+      border: none;
+      background-color: #262626;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 18px 40px 18px;
+      text-transform: uppercase;
+      line-height: 1;
+      @media #{$xs-layout} {
+          padding: 14px 30px 17px;
+      }
+      &:hover {
+          background-color: $theme-color;
+      }
+  }
+}
+
+.vendor-customar-wrap {
+  margin: 0 0 23px;
+      label {
+          display: flex;
+          margin: 0 0 10px;
+          color: #262626;
+          font-size: 12px;
+          line-height: 1;
+          input {
+              width: auto;
+              height: auto;
+              margin-right: 5px;
+          }
+      }
+}
+
+.vendor-customar-active {
+display: none;
+}
+
+
+
+
