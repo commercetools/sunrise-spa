@@ -70,6 +70,7 @@ const getProducts = (component) => {
   const {
     currency,
     country,
+    customerGroup,
   } = component.$store.state;
   const loc = locale(component);
   const sortValue = route.query.sort;
@@ -88,6 +89,7 @@ const getProducts = (component) => {
           pageSize: component.limit,
           priceCurrency: currency,
           priceCountry: country,
+          priceCustomerGroup: customerGroup,
           ...sort,
           ...searchText,
         },
