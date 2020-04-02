@@ -32,8 +32,11 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="header-search header-search-mrg">
-                                    <form class="search-form" action="#">
-                                        <input placeholder="Search here…" type="search">
+                                    <form class="search-form" action="#" v-on:submit.prevent="search">
+                                        <input 
+                                            v-model="searchText"
+                                            :placeholder="$t('search')" 
+                                            type="search">
                                         <button>
                                             <i class="dl-icon-search10"></i>
                                         </button>
@@ -43,8 +46,7 @@
                             <div class="col-md-4">
                                 <div class="header-component-wrap">
                                     <div class="header-login component-same">
-                                        <a href="login-register.html"><i class="dl-icon-user12"></i><span>Sign
-                                                In</span></a>
+                                        <LoginButton />
                                     </div>
                                     <div class="cart-wrap component-same ml-10">
                                         <a href="#" class="cart-active">
