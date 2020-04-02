@@ -1,5 +1,5 @@
 <div class="login-register-wrap">
-  <h3>{{ $t('signIn') }}XXXX</h3>
+  <h3>{{ $t('signIn') }}</h3>
   <div class="login-register-form">
     <BaseForm :vuelidate="$v" :onSubmit="customerSignMeIn" #default="{ error, state }">
       <ServerError :error="error" v-slot="{ graphQLError }">
