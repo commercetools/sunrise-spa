@@ -27,16 +27,17 @@
                         <div class="row align-items-center">
                             <div class="col-md-4">
                                 <div class="logo">
-                                    <a href="index.html"><img src="assets/images/logo/logo.svg" alt="logo"></a>
+                                    <router-link to="/">
+                                        <img src="../../../assets/img/logo.svg" alt="SUNRISE"
+                                            class="img-responsive sunrise-logo" />
+                                    </router-link>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="header-search header-search-mrg">
-                                    <form class="search-form" action="#" v-on:submit.prevent="search">
-                                        <input 
-                                            v-model="searchText"
-                                            :placeholder="$t('search')" 
-                                            type="search">
+                                    <form class="search-form" action="#">
+                                        <input name="q" type="search" :placeholder="$t('search')" id="search-input"
+                                            class="search-field" v-model="searchText" required />
                                         <button>
                                             <i class="dl-icon-search10"></i>
                                         </button>
@@ -46,18 +47,11 @@
                             <div class="col-md-4">
                                 <div class="header-component-wrap">
                                     <div class="header-login component-same">
-                                        <LoginButton />
+                                        <a href="login-register.html"><i class="dl-icon-user12"></i><span>Sign
+                                                In</span></a>
                                     </div>
                                     <div class="cart-wrap component-same ml-10">
-                                        <a href="#" class="cart-active">
-                                            <i class="dl-icon-cart1"></i>
-                                            <span class="count-style">02</span>
-                                        </a>
-                                    </div>
-                                    <div class="quick-info component-same ml-20">
-                                        <a href="#" class="quick-info-active">
-                                            <i class="dl-icon-menu1"></i>
-                                        </a>
+                                        <MiniCart />
                                     </div>
                                 </div>
                             </div>
@@ -68,210 +62,7 @@
                     <div class="custom-container">
                         <div class="menu-support-wrap">
                             <div class="main-menu menu-lh-1">
-                                <nav>
-                                    <ul>
-                                        <li><a class="active" href="index.html">Home</a>
-                                            <ul class="mega-menu mega-menu-width1">
-                                                <li><a class="menu-title" href="#"><span>Demo Group 01</span> </a>
-                                                    <ul>
-                                                        <li><a href="index.html"><span>Demo 01</span></a></li>
-                                                        <li><a href="index-2.html"><span>Demo 02</span></a></li>
-                                                        <li><a href="index-3.html"><span>Demo 03</span></a></li>
-                                                        <li><a href="index-4.html"><span>Demo 04</span></a></li>
-                                                        <li><a href="index-5.html"><span>Demo 05</span></a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a class="menu-title" href="#"><span>Demo Group 02</span></a>
-                                                    <ul>
-                                                        <li><a href="index-6.html"><span>Demo 06</span></a></li>
-                                                        <li><a href="index-7.html"><span>Demo 07</span></a></li>
-                                                        <li><a href="index-8.html"><span>Demo 08</span></a></li>
-                                                        <li><a href="index-9.html"><span>Demo 09</span></a></li>
-                                                        <li><a href="index-10.html"><span>Demo 10</span></a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a class="menu-title" href="#"><span>Demo Group 03</span></a>
-                                                    <ul>
-                                                        <li><a href="index-11.html"><span>Demo 11</span></a></li>
-                                                        <li><a href="index-12.html"><span>Demo 12</span></a></li>
-                                                        <li><a href="index-13.html"><span>Demo 13</span></a></li>
-                                                        <li><a href="index-14.html"><span>Demo 14</span></a></li>
-                                                        <li><a href="index-15.html"><span>Demo 15</span></a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Pages</a>
-                                            <ul class="sub-menu-width">
-                                                <li><a href="about-us.html"><span>About Us</span> </a></li>
-                                                <li><a href="our-team.html"><span>Our Team</span></a></li>
-                                                <li><a href="team-details.html"><span>Member Page</span></a></li>
-                                                <li><a href="contact-us.html"><span>Contact Us</span></a></li>
-                                                <li><a href="coming-soon.html"><span>Coming Soon</span></a></li>
-                                                <li><a href="404.html"><span>404 Page</span></a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="index-8.html">Gallery <span class="tip-arrow">hot</span></a></li>
-                                        <li class="position-static"><a href="#">Shop</a>
-                                            <ul class="mega-menu mega-menu-width3">
-                                                <li>
-                                                    <ul class="mega-menu-width4">
-                                                        <li><a class="menu-title" href="#"><span>Shop Pages</span> </a>
-                                                            <ul>
-                                                                <li><a href="shop-fullwide.html"><span>Shop
-                                                                            Fullwidth</span></a></li>
-                                                                <li><a href="shop-3-col.html"><span>Shop 03
-                                                                            Columns</span></a></li>
-                                                                <li><a href="shop-masonry.html"><span>Shop
-                                                                            Masonry</span></a></li>
-                                                                <li><a href="shop-4-col.html"><span>Shop 04
-                                                                            Columns</span></a></li>
-                                                                <li><a href="shop-left-sidebar.html"><span>Shop
-                                                                            Sidebar</span></a></li>
-                                                                <li><a href="shop-matro.html"><span>Shop
-                                                                            Metro</span></a></li>
-                                                                <li><a href="shop-by-collection.html"><span>Shop By
-                                                                            Collections</span></a></li>
-                                                                <li><a href="shop-vendor.html"><span>Shop
-                                                                            Vendor</span></a></li>
-                                                                <li><a href="shop-no-gutter.html"><span>Shop No
-                                                                            Gutter</span></a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li><a class="menu-title" href="#"><span>Product
-                                                                    Pages</span></a>
-                                                            <ul>
-                                                                <li><a href="product-details.html"><span>Product
-                                                                            Simple</span></a></li>
-                                                                <li><a href="product-details-2.html"><span>Product
-                                                                            Simple 02</span></a></li>
-                                                                <li><a href="product-details-sticky.html"><span>Product
-                                                                            Simple 03</span></a></li>
-                                                                <li><a href="product-details-3.html"><span>Product
-                                                                            Simple 04</span></a></li>
-                                                                <li><a href="product-details-grouped.html"><span>Product
-                                                                            Grouped</span></a></li>
-                                                                <li><a href="product-details-configurable.html"><span>Product
-                                                                            Configurable</span></a></li>
-                                                                <li><a href="product-details-affiliate.html"><span>Product
-                                                                            Affiliate</span></a></li>
-                                                                <li><a href="product-details-video.html"><span>Product
-                                                                            Video</span></a></li>
-                                                                <li><a href="product-details-sidebar.html"><span>Product
-                                                                            Sidebar</span></a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li><a class="menu-title" href="#"><span>Shop Page</span></a>
-                                                            <ul>
-                                                                <li><a href="myaccount.html"><span>My Account</span></a>
-                                                                </li>
-                                                                <li><a href="cart.html"><span>Shopping Cart</span></a>
-                                                                </li>
-                                                                <li><a href="checkout.html"><span>Checkout</span></a>
-                                                                </li>
-                                                                <li><a href="wishlist.html"><span>Wish List</span></a>
-                                                                </li>
-                                                                <li><a href="compare.html"><span>Compare</span></a></li>
-                                                                <li><a
-                                                                        href="login-register.html"><span>login/register</span></a>
-                                                                </li>
-                                                                <li><a href="order-tracking.html"><span>Order
-                                                                            Tracking</span></a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                    <ul class="mega-menu-width4 mega-menu-mrg-top">
-                                                        <li class="menu-banner-wrap banner-hover"><a
-                                                                href="product-details.html"><img
-                                                                    src="assets/images/banner/menu-1.jpg"
-                                                                    alt="menu"></a>
-                                                            <div class="menu-banner-content">
-                                                                <span>#Sport new</span>
-                                                                <h2>Off 20%</h2>
-                                                            </div>
-                                                        </li>
-                                                        <li class="menu-banner-wrap banner-hover"><a
-                                                                href="product-details.html"><img
-                                                                    src="assets/images/banner/menu-2.jpg"
-                                                                    alt="menu"></a>
-                                                            <div class="menu-banner-content">
-                                                                <span>Hello Summer</span>
-                                                                <h2>Off 25%</h2>
-                                                            </div>
-                                                        </li>
-                                                        <li class="menu-banner-wrap banner-hover"><a
-                                                                href="product-details.html"><img
-                                                                    src="assets/images/banner/menu-3.jpg"
-                                                                    alt="menu"></a>
-                                                            <div class="menu-banner-content">
-                                                                <span>#Fashion2018</span>
-                                                                <h2>New Arrival</h2>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="blog-no-sidebar.html">Blog</a>
-                                            <ul class="sub-menu-width">
-                                                <li><a href="blog-no-sidebar.html"><span>Blog No Sidebar</span> </a>
-                                                </li>
-                                                <li><a href="blog-left-sidebar.html"><span>Blog Left Sidebar</span></a>
-                                                </li>
-                                                <li><a href="blog-masonry.html"><span>Blog Masonry</span></a></li>
-                                                <li><a href="blog-details.html"><span>Single Post 01</span></a></li>
-                                                <li><a href="blog-details-2.html"><span>Single Post 02</span></a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Elements</a>
-                                            <ul class="mega-menu mega-menu-width2">
-                                                <li><a class="menu-title" href="#"><span>Text & icon list</span> </a>
-                                                    <ul>
-                                                        <li><a href="element-heading.html"><span>Heading &
-                                                                    Delimiters</span></a></li>
-                                                        <li><a href="element-heading-list-icon.html"><span>List
-                                                                    Icons</span></a></li>
-                                                        <li><a
-                                                                href="element-highlights.html"><span>Highlights</span></a>
-                                                        </li>
-                                                        <li><a href="element-block-quote.html"><span>Block
-                                                                    Quote</span></a></li>
-                                                        <li><a href="element-dropcaps.html"><span>Various
-                                                                    Dropcaps</span></a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a class="menu-title" href="#"><span>Presentation & info
-                                                            graphic</span></a>
-                                                    <ul>
-                                                        <li><a href="element-pie-chart.html"><span>Pie Charts
-                                                                    Variants</span></a></li>
-                                                        <li><a href="element-countdown.html"><span>Countdown
-                                                                    Module</span></a></li>
-                                                        <li><a href="element-info-box.html"><span>Info Box
-                                                                    Module</span></a></li>
-                                                        <li><a href="element-price-box.html"><span>Price Box</span></a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li><a class="menu-title" href="#"><span>Interactive Elements</span></a>
-                                                    <ul>
-                                                        <li><a href="shop-masonry.html"><span>Product Lists</span></a>
-                                                        </li>
-                                                        <li><a href="blog-masonry.html"><span>Post Lists</span></a></li>
-                                                        <li><a
-                                                                href="element-testimonial.html"><span>Testimonial</span></a>
-                                                        </li>
-                                                        <li><a href="our-team.html"><span>Our Teams</span></a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                            <div class="support-demo-wrap">
-                                <a target="_blank" href="https://hasthemes.com/contact-us/">Get Support</a>
-                                <a target="_blank" href="#">View Demos</a>
+                                <CategoriesMenu />
                             </div>
                         </div>
                     </div>

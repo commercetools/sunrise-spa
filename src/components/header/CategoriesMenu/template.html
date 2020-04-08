@@ -1,78 +1,34 @@
-<div class="dropdown-megamenu navbar navbar-default">
-  <div class="navbar-collapse collapse" v-bind:class="{in:openMobile}">
-    <transition name="fade">
-      <ul v-if="categories && categories.results.length" class="nav navbar-nav">
-        <li
-          v-for="category1stLevel in categories.results"
-          :key="category1stLevel.id"
-          @mouseenter="hoverOnCategory(category1stLevel)"
-          @mouseleave="hoverOffCategory()"
-          data-test="category-1st-level"
-          class="dropdown menu-large"
-        >
-          <div>
-            <router-link
-              :to="{ name: 'products', params: { categorySlug: category1stLevel.slug } }"
-              @click.native="clickOnCategory()"
-              data-test="category-1st-level-link"
-              :class="{ 'icon-ribbon sale': isSale(category1stLevel) }"
-              class="dropdown-toggle"
-            >
-              {{ category1stLevel.name }}
-            </router-link>
-              <img
-                :alt="$t('more')"
-                class="mobile-plus-content visible-xs"
-                @click="toggleOpenCategory(category1stLevel)"
-                v-bind:src="mobileImage(category1stLevel)"
-              />
-          </div>
-          <ul
-            v-if="isMenuOpen(category1stLevel)"
-            class="dropdown-menu megamenu row dropdown-submenu"
-          >
-            <li class="col-sm-8">
-              <div class="nav-accordion">
-                <div
-                  v-for="category2ndLevel in category1stLevel.children"
-                  :key="category2ndLevel.id"
-                >
-                  <h3>
-                    <router-link
-                      :to="{ name: 'products', params: { categorySlug: category2ndLevel.slug } }"
-                      @click.native="clickOnCategory()"
-                      data-test="category-2nd-level-link"
-                    >
-                      {{ category2ndLevel.name }}
-                    </router-link>
-                  </h3>
-                  <ul>
-                    <li
-                      v-for="category3rdLevel in category2ndLevel.children"
-                      :key="category3rdLevel.id"
-                    >
-                      <router-link
-                        :to="{ name: 'products', params: { categorySlug: category3rdLevel.slug } }"
-                        @click.native="clickOnCategory()"
-                        data-test="category-3rd-level-link"
-                      >
-                        {{ category3rdLevel.name }}
-                      </router-link>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </li>
-            <li class="col-sm-4 hidden-xs">
-              <img
-                :alt="$t('teaser')"
-                src="../../../assets/img/menu-teaser.jpg"
-                class="img-responsive megamenu-img"
-              />
+<nav>
+  <ul v-if="categories && categories.results.length">
+    <li v-for="category1stLevel in categories.results" :key="category1stLevel.id"
+      @mouseenter="hoverOnCategory(category1stLevel)" @mouseleave="hoverOffCategory()" data-test="category-1st-level">
+      <router-link :to="{ name: 'products', params: { categorySlug: category1stLevel.slug } }"
+        @click.native="clickOnCategory()" data-test="category-1st-level-link">
+        {{ category1stLevel.name.toUpperCase() }}
+      </router-link>
+      <!-- <img :alt="$t('more')" class="mobile-plus-content visible-xs" @click="toggleOpenCategory(category1stLevel)"
+          v-bind:src="mobileImage(category1stLevel)" /> -->
+      <ul class="mega-menu mega-menu-width3">
+        <li>
+          <ul class="mega-menu-width4">
+            <li v-for="category2ndLevel in category1stLevel.children" :key="category2ndLevel.id">
+              <router-link class="menu-title"
+                :to="{ name: 'products', params: { categorySlug: category2ndLevel.slug } }"
+                @click.native="clickOnCategory()" data-test="category-2nd-level-link">
+                <span>{{ category2ndLevel.name }}</span>
+              </router-link>
+              <ul>
+                <li v-for="category3rdLevel in category2ndLevel.children" :key="category3rdLevel.id">
+                  <router-link :to="{ name: 'products', params: { categorySlug: category3rdLevel.slug } }"
+                    @click.native="clickOnCategory()" data-test="category-3rd-level-link">
+                    <span>{{ category3rdLevel.name }}</span>
+                  </router-link>
+                </li>
+              </ul>
             </li>
           </ul>
         </li>
       </ul>
-    </transition>
-  </div>
-</div>
+    </li>
+  </ul>
+</nav>
