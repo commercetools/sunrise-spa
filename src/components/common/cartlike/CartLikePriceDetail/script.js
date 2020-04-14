@@ -17,6 +17,14 @@ export default {
     },
   },
   computed: {
+    netSubtotal() {
+      const { currencyCode, fractionDigits } = this.cartLike.totalPrice;
+      return {
+        centAmount: this.cartLike.lineItems.reduce((acc, li) => acc + li.price.value.centAmount, 0),
+        currencyCode,
+        fractionDigits,
+      };
+    },
     subtotal() {
       const { currencyCode, fractionDigits } = this.cartLike.totalPrice;
       return {

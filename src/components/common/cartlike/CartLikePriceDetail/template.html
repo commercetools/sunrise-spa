@@ -12,17 +12,9 @@
         <span class="subtotal-title">{{ $t('subtotal') }}</span>
       </div>
       <div class="col-sm-5">
-        <span data-test="cart-subtotal-price">
-          <BaseMoney :money="subtotal"/>
+        <span data-test="cart-subtotal-price" class="net-subtotal old-price">
+          <BaseMoney :money="netSubtotal"/>
         </span>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-7 subtotal">
-        <span class="subtotal-title">{{ $t('subtotal') }}</span>
-      </div>
-      <div class="col-sm-5">
         <span data-test="cart-subtotal-price">
           <BaseMoney :money="subtotal"/>
         </span>

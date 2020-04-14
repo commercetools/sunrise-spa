@@ -3,3 +3,8 @@
     padding: 1em 0;
     text-align: right;
   }
+
+  .net-subtotal {
+    text-decoration: line-through;
+    color: #ADADAD;
+  }
