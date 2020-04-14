@@ -19,6 +19,19 @@ fragment CartFields on Cart {
     totalPrice {
       ...MoneyFields
     }
+    discountedPricePerQuantity {
+      quantity
+      discountedPrice {
+        includedDiscounts {
+          discount {
+            name(locale: $locale)
+          }
+          discountedAmount {
+            ...MoneyFields
+          }
+        }
+      }
+    }
     variant {
       sku
       images {
