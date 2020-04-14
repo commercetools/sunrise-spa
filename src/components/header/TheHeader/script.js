@@ -31,6 +31,9 @@ export default {
     toggleMobileMenu() {
       this.mobileMenuOpen = !this.mobileMenuOpen;
     },
+    onToggleMinicart() {
+      this.$store.dispatch('toggleMiniCart');
+    },
   },
   watch: {
     $route(to) {

@@ -1,4 +1,4 @@
-  <li @mouseleave="close"
+<!-- <li @mouseleave="close"
       @mouseenter="open"
       class="list-item-bag">
     <router-link :to=" { name: 'cart' }"
@@ -55,4 +55,42 @@
                      class="btn-yellow">{{ $t('checkout') }}</router-link>
       </div>
     </transition>
-  </li>
+  </li> -->
+<div class="sidebar-cart-active" v-bind:class="{inside:show}">
+  <div class="sidebar-cart-all" v-if="me">
+    <a class="cart-close" href="#" @click.prevent="close"><i class="dl-icon-close"></i></a>
+    <div class="cart-content">
+      <h3>{{ $t('miniCart') }}</h3>
+      <ul>
+        <li class="single-product-cart" v-for="lineItem in sortedLineItems" :key="lineItem.id"
+          data-test="mini-cart-line-item">
+          <div class="cart-img">
+            <router-link :to="productRoute(lineItem.productSlug, lineItem.variant.sku)" data-test="cart-line-item-link">
+            <img :src="displayedImageUrl(lineItem.variant)" :alt="lineItem.name" class="img-responsive img"></a>
+            </router-link>
+          </div>
+          <div class="cart-title">
+            <h4>
+              <router-link :to="productRoute(lineItem.productSlug, lineItem.variant.sku)" data-test="cart-line-item-link">
+               {{ lineItem.name }}
+              </router-link>
+            </h4>
+            {{lineItem.quantity}} * <BasePrice :price="lineItem.price"/>
+          </div>
+          <LineItemDeleteForm :lineItemId="lineItem.id"/>
+
+        </li>
+      </ul>
+      <div class="cart-total">
+        <h4>Subtotal: <BaseMoney :money="me.activeCart.totalPrice"/></h4>
+      </div>
+      <div class="cart-checkout-btn">
+        <router-link :to="{ name: 'cart' }" @click.native="close" class="btn-hover cart-btn-style">
+          {{ $t('viewBag') }}
+        </router-link>
+        <router-link :to="{ name: 'checkout' }" @click.native="close" class="no-mrg btn-hover cart-btn-style">
+          {{ $t('checkout') }}</router-link>
+      </div>
+    </div>
+  </div>
+</div>

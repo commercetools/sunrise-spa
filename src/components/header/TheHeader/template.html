@@ -1,4 +1,4 @@
-<header class="header-area" style="display:none">
+<header class="header-area">
     <div class="main-header-wrap">
         <div class="custom-container">
             <div class="header-top pt-10">
@@ -47,11 +47,13 @@
                             <div class="col-md-4">
                                 <div class="header-component-wrap">
                                     <div class="header-login component-same">
-                                        <a href="login-register.html"><i class="dl-icon-user12"></i><span>Sign
-                                                In</span></a>
+                                        <LoginButton />
                                     </div>
                                     <div class="cart-wrap component-same ml-10">
-                                        <MiniCart />
+                                        <a href="#" class="cart-active" @click.prevent="onToggleMinicart">
+                                            <i class="dl-icon-cart1"></i>
+                                            <span class="count-style">02</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

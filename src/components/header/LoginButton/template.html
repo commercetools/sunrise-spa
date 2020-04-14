@@ -1,6 +1,7 @@
-<a v-if="showLoggedIn" @click.prevent="logout" href="#"><i class="dl-icon-user12"></i><span>{{ $t("signOut") }}</span></a>
+<router-link v-if="showLoggedIn" :to="{name:'user'}">
+  <i class="dl-icon-user12"></i><span>{{ $t("myAccount") }}</span>
+</router-link>
 
-<router-link :to="{ name: 'login' }"
-v-else>
-<i class="dl-icon-user12"></i><span>{{ $t("signIn") }}</span>
+<router-link :to="{ name: 'login' }" v-else>
+  <i class="dl-icon-user12"></i><span>{{ $t("signIn") }}</span>
 </router-link>

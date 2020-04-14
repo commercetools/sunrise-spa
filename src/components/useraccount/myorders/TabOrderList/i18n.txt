@@ -16,6 +16,7 @@ en:
   Paid: "Paid"
   view: "View"
   emptyOrders: "You have not placed any orders yet!"
+  orders: "Orders"
 de:
   orderNumber: "Best.-Nr."
   date: "Datum"
@@ -34,3 +35,4 @@ de:
   Paid: "Bezahlt"
   view: "Ansehen"
   emptyOrders: "Sie haben noch keine Bestellungen aufgegeben!"
+  orders: "Bestellungen"

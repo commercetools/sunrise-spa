@@ -1,4 +1,4 @@
-  <div v-if="product">
+<!-- <div v-if="product">
     <div data-test="product-gallery"
          class="col-md-4 col-md-offset-1 col-sm-6 product-gallery">
       <ProductGallery :sku="sku" />
@@ -19,35 +19,319 @@
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <!-- {{> catalog/product-rating }} -->
+          <!-- {{> catalog/product-rating }} 
+</div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <p class="pdp-product-description view-details more" data-text-show="$t('showMore')"
+      data-text-hide="$t('showLess')">
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div v-if="hasPrice" class="col-sm-12">
+    <p class="product-price">
+      <BasePrice :price="matchingVariant.price" />
+    </p>
+  </div>
+</div>
+<VariantSelector :sku="sku" />
+<AddToCartForm :sku="sku" />
+<!-- {{> catalog/add-to-wishlist-btn}}
+      {{> catalog/reserve-in-store-btn}} 
+<div class="row">
+  <div class="col-sm-12">
+    <!-- {{> catalog/product-availability availability=product.availability}} 
+  </div>
+</div>
+<DetailsSection :sku="sku" />
+<SocialMediaLinks />
+</div>
+</div> -->
+<div class="product-details-area border-top-2 mt-175 pt-100 pb-100">
+  <div class="custom-container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="product-details-tab">
+          <div class="pro-dec-big-img-slider product-big-img-style">
+            <div class="easyzoom-style">
+              <div class="easyzoom easyzoom--overlay">
+                <a href="assets/images/product-details/b-large-1.jpg">
+                  <img src="assets/images/product-details/large-1.jpg" alt="">
+                </a>
+              </div>
+              <span class="badge-black badge-right">New</span>
+              <div class="pro-dec-zoom-img">
+                <a class="img-popup" href="assets/images/product-details/b-large-1.jpg"><i
+                    class="fa fa-search-plus"></i></a>
+              </div>
+              <div class="pro-dec-video">
+                <a class="video-popup" href="https://www.youtube.com/watch?v=tce_Ap96b0c"><i
+                    class="dl-icon-format-video"></i></a>
+              </div>
+            </div>
+            <div class="easyzoom-style">
+              <div class="easyzoom easyzoom--overlay">
+                <a href="assets/images/product-details/b-large-2.jpg">
+                  <img src="assets/images/product-details/large-2.jpg" alt="">
+                </a>
+              </div>
+              <span class="badge-black badge-right">New</span>
+              <div class="pro-dec-zoom-img">
+                <a class="img-popup" href="assets/images/product-details/b-large-2.jpg"><i
+                    class="fa fa-search-plus"></i></a>
+              </div>
+              <div class="pro-dec-video">
+                <a class="video-popup" href="https://www.youtube.com/watch?v=tce_Ap96b0c"><i
+                    class="dl-icon-format-video"></i></a>
+              </div>
+            </div>
+            <div class="easyzoom-style">
+              <div class="easyzoom easyzoom--overlay">
+                <a href="assets/images/product-details/b-large-3.jpg">
+                  <img src="assets/images/product-details/large-3.jpg" alt="">
+                </a>
+              </div>
+              <span class="badge-black badge-right">New</span>
+              <div class="pro-dec-zoom-img">
+                <a class="img-popup" href="assets/images/product-details/b-large-3.jpg"><i
+                    class="fa fa-search-plus"></i></a>
+              </div>
+              <div class="pro-dec-video">
+                <a class="video-popup" href="https://www.youtube.com/watch?v=tce_Ap96b0c"><i
+                    class="dl-icon-format-video"></i></a>
+              </div>
+            </div>
+            <div class="easyzoom-style">
+              <div class="easyzoom easyzoom--overlay">
+                <a href="assets/images/product-details/b-large-4.jpg">
+                  <img src="assets/images/product-details/large-4.jpg" alt="">
+                </a>
+              </div>
+              <span class="badge-black badge-right">New</span>
+              <div class="pro-dec-zoom-img">
+                <a class="img-popup" href="assets/images/product-details/b-large-4.jpg"><i
+                    class="fa fa-search-plus"></i></a>
+              </div>
+              <div class="pro-dec-video">
+                <a class="video-popup" href="https://www.youtube.com/watch?v=tce_Ap96b0c"><i
+                    class="dl-icon-format-video"></i></a>
+              </div>
+            </div>
+            <div class="easyzoom-style">
+              <div class="easyzoom easyzoom--overlay">
+                <a href="assets/images/product-details/b-large-2.jpg">
+                  <img src="assets/images/product-details/large-2.jpg" alt="">
+                </a>
+              </div>
+              <span class="badge-black badge-right">New</span>
+              <div class="pro-dec-zoom-img">
+                <a class="img-popup" href="assets/images/product-details/b-large-2.jpg"><i
+                    class="fa fa-search-plus"></i></a>
+              </div>
+              <div class="pro-dec-video">
+                <a class="video-popup" href="https://www.youtube.com/watch?v=tce_Ap96b0c"><i
+                    class="dl-icon-format-video"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="product-dec-slider product-small-img-style mt-10">
+            <div class="product-dec-small active">
+              <img src="assets/images/product-details/small-1.jpg" alt="">
+            </div>
+            <div class="product-dec-small">
+              <img src="assets/images/product-details/small-2.jpg" alt="">
+            </div>
+            <div class="product-dec-small">
+              <img src="assets/images/product-details/small-3.jpg" alt="">
+            </div>
+            <div class="product-dec-small">
+              <img src="assets/images/product-details/small-4.jpg" alt="">
+            </div>
+            <div class="product-dec-small">
+              <img src="assets/images/product-details/small-2.jpg" alt="">
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-12">
-          <p class="pdp-product-description view-details more"
-             data-text-show="$t('showMore')"
-             data-text-hide="$t('showLess')">
-          </p>
+      <div class="col-lg-6">
+        <div class="product-details-content product-details-ptb">
+          <div class="breadcrumb-content mb-35">
+            <ul>
+              <li>
+                <a href="index.html">Home </a>
+              </li>
+              <li> shop</li>
+              <li> Detachable belt dress</li>
+            </ul>
+          </div>
+          <h2>Detachable belt dress</h2>
+          <h3>$29.00</h3>
+          <div class="product-dec-peragraph">
+            <p>Linen and cotton mix. Straight design. Classic collar. Sleeveless. Removable belt at the waist. Two patch
+              pockets on the front. Button fastening on the front section.</p>
+          </div>
+          <div class="product-dec-action-wrap pro-dec-action-2">
+            <div class="quality-cart-wrap">
+              <div class="quality-wrap">
+                <input class="input-text qty" type="text" name="qty" maxlength="12" value="1" title="Qty">
+              </div>
+              <div class="pro-cart-wrap">
+                <a href="#">Add to cart</a>
+              </div>
+            </div>
+            <div class="pro-dec-wishlist-compare">
+              <a title="Add to wishlist" href="#"><i class="dl-icon-heart2"></i></a>
+              <a title="Add to compare" href="#"><i class="dl-icon-compare2"></i></a>
+            </div>
+          </div>
+          <div class="store-delivery-wrap">
+            <a href="#"><i class="fa fa-map-marker"></i>Find store near you</a>
+            <a href="#"><i class="fa fa-exchange"></i>Delivery and return</a>
+          </div>
+          <div class="description-review-wrapper">
+            <div class="panel-group" id="accordion1">
+              <div class="panel pro-dec-accordion">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#pro-dec-accordion1">
+                      Description
+                    </a>
+                  </h4>
+                </div>
+                <div data-parent="#accordion1" id="pro-dec-accordion1"
+                  class="product-description-wrapper panel-collapse collapse show">
+                  <div class="panel-body">
+                    <p>Donec venenatis tellus ut nisl rutrum luctus. Quisque euismod rutrum nibh, vel euismod augue
+                      iaculis eget. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+                      mus. Fusce magna nunc, iaculis sit amet eros eu, accumsan accumsan lacus. Aliquam viverra tellus
+                      quis ligula rutrum, ac ornare lorem rutrum. Suspendisse sagittis nisl sit amet nibh euismod con
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="panel pro-dec-accordion">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" href="#pro-dec-accordion2">
+                      Reviews (0)
+                    </a>
+                  </h4>
+                </div>
+                <div data-parent="#accordion1" id="pro-dec-accordion2"
+                  class="description-review panel-collapse collapse">
+                  <div class="panel-body">
+                    <div class="ratting-form-wrapper">
+                      <h6>Reviews</h6>
+                      <div class="review-comments">
+                        <p>There are no reviews yet.</p>
+                        <h6>Be the first to review “Detachable belt dress” </h6>
+                      </div>
+                      <p>Your email address will not be published. Required fields are marked <span>*</span></p>
+                      <div class="star-box-wrap">
+                        <div class="single-ratting-star">
+                          <i class="dl-icon-star"></i>
+                        </div>
+                        <div class="single-ratting-star">
+                          <i class="dl-icon-star"></i>
+                          <i class="dl-icon-star"></i>
+                        </div>
+                        <div class="single-ratting-star">
+                          <i class="dl-icon-star"></i>
+                          <i class="dl-icon-star"></i>
+                          <i class="dl-icon-star"></i>
+                        </div>
+                        <div class="single-ratting-star">
+                          <i class="dl-icon-star"></i>
+                          <i class="dl-icon-star"></i>
+                          <i class="dl-icon-star"></i>
+                          <i class="dl-icon-star"></i>
+                        </div>
+                        <div class="single-ratting-star">
+                          <i class="dl-icon-star"></i>
+                          <i class="dl-icon-star"></i>
+                          <i class="dl-icon-star"></i>
+                          <i class="dl-icon-star"></i>
+                          <i class="dl-icon-star"></i>
+                        </div>
+                      </div>
+                      <div class="ratting-form">
+                        <form action="#">
+                          <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12">
+                              <div class="rating-form-style mb-25">
+                                <label>Your review <span>*</span></label>
+                                <textarea name="Your Review"></textarea>
+                              </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-6 col-md-6">
+                              <div class="rating-form-style mb-30">
+                                <label>Name <span>*</span></label>
+                                <input type="text">
+                              </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-6 col-md-6">
+                              <div class="rating-form-style mb-30">
+                                <label>Email <span>*</span></label>
+                                <input type="email">
+                              </div>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12">
+                              <div class="form-submit">
+                                <input type="submit" value="Submit">
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="panel pro-dec-accordion">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" href="#pro-dec-accordion3">
+                      Vendor Info
+                    </a>
+                  </h4>
+                </div>
+                <div data-parent="#accordion1" id="pro-dec-accordion3"
+                  class="pro-additional-info panel-collapse collapse">
+                  <div class="panel-body">
+                    <ul>
+                      <li><span>Store Name:</span> HasTech</li>
+                      <li><span>Vendor:</span> <a href="#">John Smith</a></li>
+                      <li><span>Address:</span>PO Box 16122 Collins Street West <br>Melbourne Victoria 8007</li>
+                      <li><i class="dl-icon-star"></i><i class="dl-icon-star"></i><i class="dl-icon-star"></i><i
+                          class="dl-icon-star"></i><i class="dl-icon-star"></i></li>
+                      <li>5.00 rating from 1 review</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-dec-meta">
+            <span>Categories: <a href="#">Women</a></span>
+            <span>Tags: <a href="#">Fashion</a>, <a href="#">Lookbook</a></span>
+          </div>
+          <div class="product-social">
+            <span>Share with</span>
+            <ul>
+              <li><a data-toggle="tooltip" title="Share this post on Facebook" href="#"><i
+                    class="fa fa-facebook"></i></a></li>
+              <li><a data-toggle="tooltip" title="Share this post on Twitter" href="#"><i class="fa fa-twitter"></i></a>
+              </li>
+              <li><a data-toggle="tooltip" title="Share this post on Pinterest" href="#"><i
+                    class="fa fa-pinterest-p"></i></a></li>
+              <li><a data-toggle="tooltip" title="Share this post on Google Plus" href="#"><i
+                    class="fa fa-google-plus"></i></a></li>
+            </ul>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div v-if="hasPrice"
-             class="col-sm-12">
-          <p class="product-price">
-            <BasePrice :price="matchingVariant.price"/>
-          </p>
-        </div>
-      </div>
-      <VariantSelector :sku="sku" />
-      <AddToCartForm :sku="sku"/>
-      <!-- {{> catalog/add-to-wishlist-btn}}
-      {{> catalog/reserve-in-store-btn}} -->
-      <div class="row">
-        <div class="col-sm-12">
-          <!-- {{> catalog/product-availability availability=product.availability}} -->
-        </div>
-      </div>
-      <DetailsSection :sku="sku"/>
-      <SocialMediaLinks/>
     </div>
   </div>
+</div>

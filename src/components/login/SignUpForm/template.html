@@ -46,9 +46,9 @@
       </div>
     </div>
     <div class="login-register-btn">
-      <button 
-      :state="state" class="signup-register-btn" data-test="signup-form-submit"
-      type="submit">{{ $t('registerNow') }}</button>
+      <LoadingButton :state="state" data-test="signup-form-submit">
+        {{ $t('registerNow') }}
+      </LoadingButton>
     </div>
   </BaseForm>
 </div>

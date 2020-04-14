@@ -94,25 +94,6 @@
   }
 }
 
-.login-register-btn {
-  button {
-      border: none;
-      background-color: #262626;
-      color: #fff;
-      font-size: 12px;
-      font-weight: 600;
-      padding: 18px 40px 18px;
-      text-transform: uppercase;
-      line-height: 1;
-      @media #{$xs-layout} {
-          padding: 14px 30px 17px;
-      }
-      &:hover {
-          background-color: $theme-color;
-      }
-  }
-}
-
 .vendor-customar-wrap {
   margin: 0 0 23px;
       label {

@@ -1,4 +1,4 @@
-  <div>
+<!-- <div>
     <div class="col-sm-3 col-xs-4 product-img-col">
       <router-link :to="productRoute(lineItem.productSlug, lineItem.variant.sku)"
                    class="img">
@@ -19,15 +19,19 @@
          data-test="cart-line-item-sku">
         {{ lineItem.variant.sku }}
       </p>
-      <!--<p class="cart-attributes">-->
-      <!--{{#each attributes}}-->
-      <!--{{name}}-->
-      <!--<span class="black-p" data-model="cartItem.{{key}}">{{value}}</span>-->
-      <!--{{#unless @last}}<br>{{/unless}}-->
-      <!--{{/each}}-->
-      <!--</p>-->
-      <!--<p class="cart-item-availability grey-p">-->
-      <!--<span class="glyphicon glyphicon-ok-sign"></span>{{ $t('available') }}-->
-      <!--</p>-->
     </div>
+  </div> -->
+<div>
+  <div class="cart-img">
+    <router-link :to="productRoute(lineItem.productSlug, lineItem.variant.sku)" data-test="cart-line-item-link">
+    <img :src="displayedImageUrl(lineItem.variant)" :alt="lineItem.name" class="img-responsive img"></a>
+    </router-link>
   </div>
+  <div class="cart-title">
+    <h4>
+      <router-link :to="productRoute(lineItem.productSlug, lineItem.variant.sku)" data-test="cart-line-item-link">
+        {{ lineItem.name }}
+      </router-link>
+    </h4>
+  </div>
+</div>

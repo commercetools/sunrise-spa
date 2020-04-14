@@ -4,6 +4,7 @@ import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import cartMixin from '../../../mixins/cartMixin';
 import productMixin from '../../../mixins/productMixin';
 import BaseMoney from '../../common/BaseMoney/index.vue';
+import BasePrice from '../../common/BasePrice/MiniCardBasePrice.vue';
 import LineItemInfo from '../../common/cartlike/LineItemInfo/index.vue';
 import LineItemDeleteForm from '../../cartdetail/LineItemDeleteForm/index.vue';
 import MONEY_FRAGMENT from '../../Money.gql';
@@ -15,6 +16,7 @@ export default {
     LineItemInfo,
     BaseMoney,
     VuePerfectScrollbar,
+    BasePrice,
   },
   mixins: [cartMixin, productMixin],
   data: () => ({
@@ -30,7 +32,7 @@ export default {
       this.$store.dispatch('openMiniCart', 0);
     },
     close() {
-      this.$store.dispatch('closeMiniCart', 300);
+      this.$store.dispatch('toggleMiniCart');
     },
   },
   watch: {
@@ -56,6 +58,16 @@ export default {
                   sku
                   images {
                     url
+                  }
+                }
+                price {
+                  value {
+                    ...MoneyFields
+                  }
+                  discounted {
+                    value {
+                      ...MoneyFields
+                    }
                   }
                 }
                 totalPrice {

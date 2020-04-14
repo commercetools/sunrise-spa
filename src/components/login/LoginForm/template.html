@@ -15,7 +15,9 @@
       </div>
       <div class="login-register-btn-remember">
         <div class="login-register-btn">
-          <button type="submit">{{ $t('signIn') }}</button>
+          <LoadingButton :state="state">
+            {{ $t('signIn') }}
+          </LoadingButton>
         </div>
       </div>
 
