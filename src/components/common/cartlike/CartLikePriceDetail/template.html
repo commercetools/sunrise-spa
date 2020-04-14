@@ -17,6 +17,17 @@
         </span>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-sm-7 subtotal">
+        <span class="subtotal-title">{{ $t('subtotal') }}</span>
+      </div>
+      <div class="col-sm-5">
+        <span data-test="cart-subtotal-price">
+          <BaseMoney :money="subtotal"/>
+        </span>
+      </div>
+    </div>
     <div v-if="cartLike.shippingInfo"
          class="row">
       <div class="col-sm-7 delivery-info">
@@ -46,7 +57,7 @@
       <div class="col-sm-5">
         <span data-test="cart-total-price"
               class="order-total">
-          <BaseMoney :money="cartLike.totalPrice"/>
+          <BaseMoney :money="cartLike.taxedPrice.totalGross"/>
         </span>
       </div>
     </div>
