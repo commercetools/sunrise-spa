@@ -200,8 +200,6 @@ describe('CheckoutPage', () => {
     cy.get('[data-test=checkout-form-submit]').click();
 
     cy.get('[data-test=checkout-form-success]').should('exist');
-
-    // there do not appear to be line items on the order confirmation page
-    // shouldShowCorrectCartLike();
+    shouldShowCorrectCartLike();
   });
 });
