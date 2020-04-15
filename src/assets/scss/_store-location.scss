@@ -1,8 +1,28 @@
+#googlePlaceBar {
+  float: right;
+  width: 40%;
+  height: 120px;
+  background-color: #F5F2EA;
+  padding-bottom: 20px;
+}
+
 .store-location-wrapper {
   border: 1px solid $alto;
   background-color: $white;
   margin-bottom: 50px;
   overflow: hidden;
+
+  .pac-target-input {
+    width: 80%;
+  }
+
+  .pad-left {
+    padding-left: 20px;
+  }
+
+  .container {
+    width: 100% !important;
+  }
 
   .store-selected {
     font-size: 16px;
@@ -22,13 +42,17 @@
     }
 
     #map {
-      height: 705px;
+      height: 825px;
       width: 100%;
       float: left;
       @media screen and (max-width: 991px) {
         height: 400px;
       }
     }
+  }
+
+  .store-distance {
+    font-style: italic;
   }
 
   .addresses {

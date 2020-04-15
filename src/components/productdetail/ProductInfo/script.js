@@ -6,6 +6,7 @@ import DetailsSection from '../DetailsSection/index.vue';
 import AddToCartForm from '../AddToCartForm/index.vue';
 import BasePrice from '../../common/BasePrice/index.vue';
 import VariantSelector from '../VariantSelector/index.vue';
+import StoreLocator from '../../stores/PageStoreLocator/index.vue';
 import { locale } from '../../common/shared';
 
 export default {
@@ -15,6 +16,11 @@ export default {
       required: true,
     },
   },
+  methods: {
+    showStoreFinder() {
+      $('#store-finder-modal').modal('show');
+    },
+  },
   components: {
     DetailsSection,
     ProductGallery,
@@ -22,6 +28,7 @@ export default {
     AddToCartForm,
     BasePrice,
     VariantSelector,
+    StoreLocator,
   },
   mixins: [productMixin],
   data: () => ({

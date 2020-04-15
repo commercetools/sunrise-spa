@@ -17,8 +17,7 @@ import './assets/scss/main.scss';
 
 Vue.use(VueGoogleMaps, {
   load: {
-    // key: "AIzaSyCYaZbpn6q_-iliKWpm0dcnAR7zGJBpk-I",
-    key: 'AIzaSyAUazDx5PN8QjERnWKME7405A3xdjcA7QY',
+    key: process.env.VUE_APP_GOOGLE_MAPS_API_KEY,
     libraries: 'places', // necessary for places input
   },
 });

@@ -113,10 +113,12 @@ export default {
               lng: position.coords.longitude,
             };
           }, (err) => {
+            // eslint-disable-next-line
             alert(`Error: The Geolocation service failed: ${err}`);
           });
         } else {
           // Browser doesn't support Geolocation
+          // eslint-disable-next-line
           alert('Error: Your browser doesn\'t support geolocation.');
         }
       },
