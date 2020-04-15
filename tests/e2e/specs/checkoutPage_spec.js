@@ -55,7 +55,7 @@ describe('CheckoutPage', () => {
 
     cy.get('[data-test=cart-subtotal-price]')
       .should((e) => {
-        expect(e.text()).to.match(/^\s*347,00\s€\s*$/);
+        expect(e.text()).to.match(/\s*347,00\s€\s*$/);
       });
     cy.get('[data-test=cart-shipping-price]')
       .contains(/^\s*10,00\s€\s*$/);
