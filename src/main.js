@@ -5,6 +5,7 @@ import 'whatwg-fetch';
 import VueScrollTo from 'vue-scrollto';
 import Vuelidate from 'vuelidate';
 import ProductZoomer from 'vue-product-zoomer';
+import * as VueGoogleMaps from 'vue2-google-maps';
 import App from './App/index.vue';
 import router from './router';
 import store from './store';
@@ -13,6 +14,14 @@ import i18n from './i18n/i18n';
 import sunriseConfig from '../sunrise.config';
 import './registerServiceWorker';
 import './assets/scss/main.scss';
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    // key: "AIzaSyCYaZbpn6q_-iliKWpm0dcnAR7zGJBpk-I",
+    key: 'AIzaSyAUazDx5PN8QjERnWKME7405A3xdjcA7QY',
+    libraries: 'places', // necessary for places input
+  },
+});
 
 Vue.config.productionTip = false;
 

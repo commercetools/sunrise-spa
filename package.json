@@ -35,6 +35,7 @@
     "vue-product-zoomer": "^2.0.11",
     "vue-router": "^3.0.3",
     "vue-scrollto": "^2.17.1",
+    "vue2-google-maps": "^0.10.7",
     "vuelidate": "^0.7.4",
     "vuex": "^3.0.1",
     "vuex-persistedstate": "^2.5.4",

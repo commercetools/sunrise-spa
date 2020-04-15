@@ -37,4 +37,9 @@ export default {
       this.searchText = to.query.q || '';
     },
   },
+  computed: {
+    storeName() {
+      return this.$store.state.storeName || ' Select a store to get started';
+    },
+  },
 };

@@ -7,7 +7,10 @@ Vue.use(Vuex);
 
 const SET_LOCALE = 'SET_LOCALE';
 const SET_COUNTRY = 'SET_COUNTRY';
+const SET_CUSTOMER_GROUP = 'SET_CUSTOMER_GROUP';
 const SET_CURRENCY = 'SET_CURRENCY';
+const SET_CHANNEL = 'SET_CHANNEL';
+const SET_STORE_NAME = 'SET_STORE_NAME';
 const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 const SET_TOKEN_INFO = 'SET_TOKEN_INFO';
 const SET_MINI_CART_OPEN = 'SET_MINI_CART_OPEN';
@@ -32,13 +35,15 @@ const setMiniCartTimeout = (commit, state, timeout) => {
 export default new Vuex.Store({
   plugins: [createPersistedState({
     key: 'session',
-    paths: ['locale', 'country', 'currency', 'tokenInfo', 'authenticated'],
+    paths: ['locale', 'country', 'currency', 'tokenInfo', 'authenticated', 'customerGroup', 'channel', 'storeName'],
   })],
 
   state: {
     locale: fallbackLocale,
     country: fallbackCountry,
     currency: obtainCurrency(fallbackCountry),
+    channel: null,
+    storeName: null,
     tokenInfo: null,
     authenticated: false,
     miniCartOpen: false,
@@ -49,7 +54,17 @@ export default new Vuex.Store({
     setLocale: ({ commit }, locale) => {
       if (availableLocales.includes(locale)) commit(SET_LOCALE, locale);
     },
+    setCustomerGroup: ({ commit }, customerGroup) => {
+      commit(SET_CUSTOMER_GROUP, customerGroup);
+    },
 
+    setChannel: ({ commit }, channel) => {
+      commit(SET_CHANNEL, channel);
+    },
+
+    setStoreName: ({ commit }, storeName) => {
+      commit(SET_STORE_NAME, storeName);
+    },
     setCountry: ({ commit }, country) => {
       if (availableCountries.includes(country)) {
         commit(SET_COUNTRY, country);
@@ -64,6 +79,7 @@ export default new Vuex.Store({
     clearAuthentication: ({ commit }) => {
       commit(SET_TOKEN_INFO, null);
       commit(SET_AUTHENTICATED, false);
+      commit(SET_CHANNEL, null);
     },
 
     openMiniCart: ({ commit, state }, timeout = 2000) => {
@@ -95,6 +111,17 @@ export default new Vuex.Store({
 
     [SET_LOCALE](state, locale) {
       state.locale = locale;
+    },
+    [SET_CUSTOMER_GROUP](state, customerGroup) {
+      state.customerGroup = customerGroup;
+    },
+
+    [SET_CHANNEL](state, channel) {
+      state.channel = channel;
+    },
+
+    [SET_STORE_NAME](state, storeName) {
+      state.storeName = storeName;
     },
 
     [SET_AUTHENTICATED](state, authenticated) {

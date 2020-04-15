@@ -4,6 +4,14 @@
   margin-bottom: 50px;
   overflow: hidden;
 
+  .store-selected {
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #4BB543;
+  }
+
   .map {
     width: 60%;
     background: $gray;
