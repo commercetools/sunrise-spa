@@ -13,7 +13,7 @@
       </div>
       <div class="col-sm-5">
         <span data-test="cart-subtotal-price" class="net-subtotal old-price">
-          <BaseMoney :money="netSubtotal"/>
+          <BaseMoney :money="netSubtotal" v-if="isDiscounted"/>
         </span>
         <span data-test="cart-subtotal-price">
           <BaseMoney :money="subtotal"/>
