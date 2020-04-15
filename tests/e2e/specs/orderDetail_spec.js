@@ -90,7 +90,7 @@ describe('OrderDetailPage', () => {
       .contains(/^\s*\d{1,2}\.*\s*[A-Za-zäÄöÖüÜß].+\s*\d{4}\s*$/);
     cy.get('[data-test=cart-subtotal-price]')
       .should((e) => {
-        expect(e.text()).to.match(/\s*149,50\s€\s*$/);
+        expect(e.text()).to.match(/^\s*149,50\s€\s*$/);
       });
     cy.get('[data-test=cart-shipping-price]')
       .contains(/^\s*10,00\s€\s*$/);
