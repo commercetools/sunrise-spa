@@ -26,13 +26,13 @@
           <h2>Search near a location</h2>
           <div id='place-radius'>
             <gmap-autocomplete @place_changed="setPlace"/>
-            <v-select id='radius' v-model="searchRadius" :options="['25', '50', '100', '500', '3000', '5000', '10000']" :clearable=false @input="setRadius"></v-select>
+            <v-select id='radius' v-model="searchRadius" :options="radiusOptions" :reduce="option => option.distance" :clearable=false @input="setRadius"></v-select>
           </div>
         </div>
 
         <div class="addresses">
           <h2 class='pad-left'>Stores</h2>
-          <ul class="list" v-if="channels">
+          <ul class="list" v-if="channels && channels.results && channels.results.length > 0">
             <li v-for="channel in channels.results" 
               :key="channel.id" class="item address address--active"
               @click="click(channel)">
@@ -56,6 +56,7 @@
               </div>    
             </li>
           </ul>
+          <div class="no-stores-found" v-else>No stores found.  Try increasing your search radius.</div>
         </div>
       </div>
     </div>

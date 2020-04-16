@@ -1,5 +1,6 @@
 import productMixin from '@/mixins/productMixin';
 import BasePrice from '../BasePrice/index.vue';
+import InventoryAvailability from '../InventoryAvailability/index.vue';
 
 export default {
   props: {
@@ -10,6 +11,7 @@ export default {
   },
   components: {
     BasePrice,
+    InventoryAvailability,
   },
   mixins: [productMixin],
   computed: {
@@ -20,6 +22,9 @@ export default {
     hasMoreColors() {
       // with sunrise data it is not possible to determine
       return false;
+    },
+    hasInventory() {
+      return this.currentProduct.masterVariant.availability;
     },
     hasDiscount() {
       return this.matchingVariant.price.discounted;
