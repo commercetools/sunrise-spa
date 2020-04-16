@@ -8,6 +8,7 @@ import BasePrice from '../../common/BasePrice/index.vue';
 import VariantSelector from '../VariantSelector/index.vue';
 import StoreLocator from '../../stores/PageStoreLocator/index.vue';
 import { locale } from '../../common/shared';
+import InventoryAvailability from '../../common/InventoryAvailability/index.vue';
 
 export default {
   props: {
@@ -16,17 +17,13 @@ export default {
       required: true,
     },
   },
-  methods: {
-    showStoreFinder() {
-      $('#store-finder-modal').modal('show');
-    },
-  },
   components: {
     DetailsSection,
     ProductGallery,
     SocialMediaLinks,
     AddToCartForm,
     BasePrice,
+    InventoryAvailability,
     VariantSelector,
     StoreLocator,
   },
@@ -39,29 +36,6 @@ export default {
   computed: {
     matchingVariant() {
       return this.currentProduct.variant || {};
-    },
-    storeInventory() {
-      let inventoryStatus = 'Out of Stock';
-      const atStore = this.inventory ? ` at ${this.$store.state.storeName}` : '';
-      if (!this.inventory) {
-        inventoryStatus = 'Find In Store';
-      } else if (this.inventory.availableQuantity > 20) {
-        inventoryStatus = 'In Stock';
-      } else if (this.inventory.availableQuantity > 0) {
-        inventoryStatus = 'Only a few left';
-      }
-      return ` ${inventoryStatus}${atStore}`;
-    },
-    storeInventoryIcon() {
-      let inventoryIcon = 'times';
-      if (!this.inventory) {
-        inventoryIcon = 'map-marker-alt';
-      } else if (this.inventory.availableQuantity > 20) {
-        inventoryIcon = 'check';
-      } else if (this.inventory.availableQuantity > 0) {
-        inventoryIcon = 'exclamation-triangle';
-      }
-      return inventoryIcon;
     },
   },
   apollo: {

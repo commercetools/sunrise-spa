@@ -43,7 +43,9 @@ const getProducts = (component) => {
       ...meta,
       results: results.map(
         ({
-          id, masterVariant: { sku, images, prices }, name, slug,
+          id, masterVariant: {
+            sku, images, prices, availability,
+          }, name, slug,
         }) => ({
           id,
           masterData: {
@@ -52,6 +54,7 @@ const getProducts = (component) => {
               slug: slug[loc],
               masterVariant: {
                 sku,
+                availability: availability && availability.channels[component.$store.state.channel],
                 images,
                 price: toPrice(prices, {
                   country,

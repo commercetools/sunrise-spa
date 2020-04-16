@@ -40,7 +40,7 @@
       </div>
       <VariantSelector :sku="sku" />
 
-      <div @click="showStoreFinder" id="showStoreFinder" :class="storeInventoryIcon"><font-awesome-icon :icon="storeInventoryIcon" /> {{ storeInventory }}</div>
+      <InventoryAvailability :inventory="inventory"/>
       <div class="modal fade" id="store-finder-modal" tabindex="-1" role="dialog" aria-labelledby="quickviewModal">
         <div class="modal-dialog modal-dialog-store-finder" role="document">
           <StoreLocator :isModal=true />

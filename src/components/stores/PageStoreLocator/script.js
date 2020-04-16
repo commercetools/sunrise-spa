@@ -35,6 +35,10 @@ export default {
     },
   },
   methods: {
+    hasChannels() {
+      return this.channels && this.channels.results && this.channels.results.length > 0;
+    },
+
     setRadius(value) {
       this.searchRadius = value;
     },
@@ -87,6 +91,25 @@ export default {
     currentPlace: null,
     center: { lat: 35.9937228, lng: -78.9052195 },
     searchRadius: 25,
+    radiusOptions: [{
+      distance: 25,
+      label: '25 mi',
+    }, {
+      distance: 50,
+      label: '50 mi',
+    }, {
+      distance: 100,
+      label: '100 mi',
+    }, {
+      distance: 500,
+      label: '500 mi',
+    }, {
+      distance: 1000,
+      label: '1000 mi',
+    }, {
+      distance: 3000,
+      label: '3000 mi',
+    }],
   }),
 
   apollo: {
@@ -118,7 +141,6 @@ export default {
           }
         }`,
       variables() {
-        // where:  { predicate: `orderNumber = "${orderNumber}"` },
         return {
           where:
             `geoLocation within circle(${(this && this.center && this.center.lng) || -78.9052195},
@@ -129,23 +151,22 @@ export default {
       },
       result() {
         this.markers = this.channels && this.channels.results.map(c => ({ position: getLocationFromChannel(c) }));
-        // this.center = this.markers[0] && this.markers[0].position;
 
-        // if (navigator.geolocation) {
-        //   navigator.geolocation.getCurrentPosition((position) => {
-        //     // this.center = {
-        //     //   lat: position.coords.latitude,
-        //     //   lng: position.coords.longitude,
-        //     // };
-        //   }, (err) => {
-        //     // eslint-disable-next-line
-        //     alert(`Error: The Geolocation service failed: ${err}`);
-        //   });
-        // } else {
-        //   // Browser doesn't support Geolocation
-        //   // eslint-disable-next-line
-        //   alert('Error: Your browser doesn\'t support geolocation.');
-        // }
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((position) => {
+            this.center = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            };
+          }, (err) => {
+            // eslint-disable-next-line
+            alert(`Error: The Geolocation service failed: ${err}`);
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          // eslint-disable-next-line
+          alert('Error: Your browser doesn\'t support geolocation.');
+        }
       },
     },
   },
