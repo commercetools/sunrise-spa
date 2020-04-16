@@ -40,10 +40,10 @@
       </div>
       <VariantSelector :sku="sku" />
 
-      <div @click="showStoreFinder">Find Store</div>
+      <div @click="showStoreFinder" id="showStoreFinder" :class="storeInventoryIcon"><font-awesome-icon :icon="storeInventoryIcon" /> {{ storeInventory }}</div>
       <div class="modal fade" id="store-finder-modal" tabindex="-1" role="dialog" aria-labelledby="quickviewModal">
         <div class="modal-dialog modal-dialog-store-finder" role="document">
-          <StoreLocator/>
+          <StoreLocator :isModal=true />
         </div>
       </div>
 

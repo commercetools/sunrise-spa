@@ -3,7 +3,39 @@
   width: 40%;
   height: 120px;
   background-color: #F5F2EA;
-  padding-bottom: 20px;
+  padding: 0 20px 20px 20px;
+}
+
+#place-radius {
+  display: flex;
+}
+
+#radius {
+  width: 25%;
+}
+
+#store-finder-modal {
+  .modal-dialog {
+    width: 50%;
+  }
+}
+
+.pac-container {
+  z-index: 1100 !important;
+}
+
+#showStoreFinder {
+  &.check {
+    color: #4BB543;
+  }
+
+  &.exclamation-triangle {
+    color: #ffae42;
+  }
+
+  &.times {
+    color: #f30000;
+  }
 }
 
 .store-location-wrapper {

@@ -28,7 +28,17 @@ function haversineDistance(mk1, mk2) {
 
 export default {
   components: {},
+  props: {
+    isModal: {
+      type: Boolean,
+      required: false,
+    },
+  },
   methods: {
+    setRadius(value) {
+      this.searchRadius = value;
+    },
+
     setPlace(place) {
       this.center = getLocationFromPlace(place);
     },
@@ -51,7 +61,11 @@ export default {
       });
 
       setTimeout(() => {
-        this.$router.go(-1);
+        if (this.isModal) {
+          $('#store-finder-modal').modal('hide');
+        } else {
+          this.$router.go(-1);
+        }
       }, 500);
     },
 
@@ -71,14 +85,15 @@ export default {
     markers: [],
     places: [],
     currentPlace: null,
-    center: { lat: 0, lng: 0 },
+    center: { lat: 35.9937228, lng: -78.9052195 },
+    searchRadius: 25,
   }),
 
   apollo: {
     channels: {
       query: gql`
-        query Channels {
-          channels {
+        query Channels($where: String) {
+          channels(where: $where) {
             results {
               id,
               name(locale:"en"),
@@ -102,25 +117,35 @@ export default {
             }
           }
         }`,
+      variables() {
+        // where:  { predicate: `orderNumber = "${orderNumber}"` },
+        return {
+          where:
+            `geoLocation within circle(${(this && this.center && this.center.lng) || -78.9052195},
+              ${(this && this.center && this.center.lat) || 35.9937228},
+              ${((this && this.searchRadius) || 1000000) * 1609.4})
+            `,
+        };
+      },
       result() {
         this.markers = this.channels && this.channels.results.map(c => ({ position: getLocationFromChannel(c) }));
-        this.center = this.markers[0] && this.markers[0].position;
+        // this.center = this.markers[0] && this.markers[0].position;
 
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition((position) => {
-            this.center = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            };
-          }, (err) => {
-            // eslint-disable-next-line
-            alert(`Error: The Geolocation service failed: ${err}`);
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          // eslint-disable-next-line
-          alert('Error: Your browser doesn\'t support geolocation.');
-        }
+        // if (navigator.geolocation) {
+        //   navigator.geolocation.getCurrentPosition((position) => {
+        //     // this.center = {
+        //     //   lat: position.coords.latitude,
+        //     //   lng: position.coords.longitude,
+        //     // };
+        //   }, (err) => {
+        //     // eslint-disable-next-line
+        //     alert(`Error: The Geolocation service failed: ${err}`);
+        //   });
+        // } else {
+        //   // Browser doesn't support Geolocation
+        //   // eslint-disable-next-line
+        //   alert('Error: Your browser doesn\'t support geolocation.');
+        // }
       },
     },
   },

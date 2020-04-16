@@ -8,8 +8,8 @@ const apiHost = Cypress.env('VUE_APP_CT_API_HOST') || 'https://api.commercetools
 const authClient = new SdkAuth({
   projectKey,
   credentials: {
-    clientId: Cypress.env('CT_CLIENT_ID'),
-    clientSecret: Cypress.env('CT_CLIENT_SECRET'),
+    clientId: Cypress.env('VUE_APP_CT_CLIENT_ID'),
+    clientSecret: Cypress.env('VUE_APP_CT_CLIENT_SECRET'),
   },
   host: Cypress.env('VUE_APP_CT_AUTH_HOST') || 'https://auth.commercetools.com',
 });

@@ -1,4 +1,11 @@
 import Vue from 'vue';
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+  faCheck, faExclamationTriangle, faTimes, faMapMarkerAlt,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
 // Required until Cypress supports fetch API
 // https://github.com/cypress-io/cypress/issues/95
 import 'whatwg-fetch';
@@ -6,15 +13,26 @@ import VueScrollTo from 'vue-scrollto';
 import Vuelidate from 'vuelidate';
 import ProductZoomer from 'vue-product-zoomer';
 import * as VueGoogleMaps from 'vue2-google-maps';
-import App from './App/index.vue';
-import router from './router';
-import store from './store';
-import apolloProvider from './apollo';
-import i18n from './i18n/i18n';
-import sunriseConfig from '../sunrise.config';
+import vSelect from 'vue-select';
 import './registerServiceWorker';
 import './assets/scss/main.scss';
+import 'vue-select/dist/vue-select.css';
 
+import i18n from './i18n/i18n';
+import sunriseConfig from '../sunrise.config';
+import apolloProvider from './apollo';
+import store from './store';
+import router from './router';
+import App from './App/index.vue';
+
+library.add(faCheck);
+library.add(faExclamationTriangle);
+library.add(faTimes);
+library.add(faMapMarkerAlt);
+
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+
+Vue.component('v-select', vSelect);
 Vue.use(VueGoogleMaps, {
   load: {
     key: process.env.VUE_APP_GOOGLE_MAPS_API_KEY,

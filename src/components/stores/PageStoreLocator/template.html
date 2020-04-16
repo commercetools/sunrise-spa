@@ -22,9 +22,12 @@
       </div>    
     
       <div>
-        <div class='pad-left' id='googlePlaceBar'>
+        <div id='googlePlaceBar'>
           <h2>Search near a location</h2>
-          <gmap-autocomplete @place_changed="setPlace"/>
+          <div id='place-radius'>
+            <gmap-autocomplete @place_changed="setPlace"/>
+            <v-select id='radius' v-model="searchRadius" :options="['25', '50', '100', '500', '3000', '5000', '10000']" :clearable=false @input="setRadius"></v-select>
+          </div>
         </div>
 
         <div class="addresses">
