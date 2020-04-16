@@ -39,7 +39,7 @@ export default {
   },
   computed: {
     storeName() {
-      return this.$store.state.storeName || ' Select a store to get started';
+      return this.$store.state.storeName || this.$t('stores');
     },
   },
 };
