@@ -12,6 +12,9 @@
         <span class="subtotal-title">{{ $t('subtotal') }}</span>
       </div>
       <div class="col-sm-5">
+        <span data-test="cart-net-subtotal-price" class="net-subtotal old-price">
+          <BaseMoney :money="netSubtotal" v-if="isDiscounted"/>
+        </span>
         <span data-test="cart-subtotal-price">
           <BaseMoney :money="subtotal"/>
         </span>
@@ -46,7 +49,7 @@
       <div class="col-sm-5">
         <span data-test="cart-total-price"
               class="order-total">
-          <BaseMoney :money="cartLike.totalPrice"/>
+          <BaseMoney :money="cartLike.taxedPrice && cartLike.taxedPrice.totalGross" v-if="cartLike.taxedPrice"/>
         </span>
       </div>
     </div>
