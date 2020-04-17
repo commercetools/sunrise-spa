@@ -8,10 +8,13 @@ describe('Location selector', () => {
 
     cy.get('[data-test=product-name]')
       .should('contain', 'Sneakers „R261” Hogan Rebel grau', { timeout: Cypress.config('graphqlTimeout') });
+    cy.get('[data-test=stores-link]')
+      .should('contain', 'Filiale');
 
     cy.changeLanguage('English');
     cy.get('[data-test=product-name]')
       .should('contain', 'Sneakers ”R261” Hogan Rebel grey', { timeout: Cypress.config('graphqlTimeout') });
+    cy.get('[data-test=stores-link]').should('contain', 'Stores');
   });
 
   it('changes prices to selected country', () => {
