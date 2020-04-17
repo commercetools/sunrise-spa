@@ -38,6 +38,10 @@
            class="pop-item-price">
         <BasePrice :price="matchingVariant.price" />
       </div>
+      <div v-if="hasInventory"
+           class="pop-item-inventory">
+        <InventoryAvailability v-if="hasInventory" :inventory="currentProduct.masterVariant.availability"/>
+      </div>
       <div class="pop-product-more-colors">
         <div v-if="hasMoreColors">
           {{ $t('moreColors')}} &nbsp;

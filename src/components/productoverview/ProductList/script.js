@@ -113,7 +113,9 @@ const getProducts = (component) => {
       ...meta,
       results: results.map(
         ({
-          id, masterVariant: { sku, images, price }, name, slug,
+          id, masterVariant: {
+            sku, images, price, availability,
+          }, name, slug,
         }) => ({
           id,
           masterData: {
@@ -122,6 +124,7 @@ const getProducts = (component) => {
               slug: slug[loc],
               masterVariant: {
                 sku,
+                availability: availability && availability.channels[component.$store.state.channel],
                 images,
                 price,
               },
@@ -153,6 +156,7 @@ export default {
     loadingProducts: false,
     loadingFacets: false,
   }),
+  // please circle ci give me a status report
   computed: {
     category() {
       return this.categories.results[0];

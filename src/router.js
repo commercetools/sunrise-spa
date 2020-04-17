@@ -28,6 +28,7 @@ import StepBillingAddressForm from './components/checkout/StepBillingAddressForm
 import StepShippingMethodForm from './components/checkout/StepShippingMethodForm/index.vue';
 import StepPaymentMethodForm from './components/checkout/StepPaymentMethodForm/index.vue';
 import StepPlaceOrderForm from './components/checkout/StepPlaceOrderForm/index.vue';
+import StoreLocator from './components/stores/PageStoreLocator/index.vue';
 import { pageFromRoute } from './components/common/shared';
 import Root from './components/root/index.vue';
 
@@ -62,6 +63,11 @@ const router = new Router({
         {
           path: 'stores',
           name: 'stores',
+          components: {
+            default: StoreLocator,
+            header: TheHeader,
+            footer: TheFooter,
+          },
         },
         {
           path: 'login',

@@ -1,9 +1,77 @@
+#googlePlaceBar {
+  float: right;
+  width: 40%;
+  height: 120px;
+  background-color: #F5F2EA;
+  padding: 0 20px 20px 20px;
+}
+
+#place-radius {
+  display: flex;
+}
+
+#radius {
+  width: 30%;
+}
+
+.no-stores-found {
+  text-align: center;
+  font-style: italic;
+  padding-top: 20px;
+}
+
+#store-finder-modal {
+  .modal-dialog {
+    width: 50%;
+  }
+}
+
+.pac-container {
+  z-index: 1100 !important;
+}
+
+#showStoreFinder {
+  cursor: pointer;
+
+  &.check {
+    color: #4BB543;
+  }
+
+  &.exclamation-triangle {
+    color: #ffae42;
+  }
+
+  &.times {
+    color: #f30000;
+  }
+}
+
 .store-location-wrapper {
   border: 1px solid $alto;
   background-color: $white;
   margin-bottom: 50px;
   overflow: hidden;
 
+  .pac-target-input {
+    width: 80%;
+  }
+
+  .pad-left {
+    padding-left: 20px;
+  }
+
+  .container {
+    width: 100% !important;
+  }
+
+  .store-selected {
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #4BB543;
+  }
+  
   .map {
     width: 60%;
     background: $gray;
@@ -14,13 +82,17 @@
     }
 
     #map {
-      height: 705px;
+      height: 825px;
       width: 100%;
       float: left;
       @media screen and (max-width: 991px) {
         height: 400px;
       }
     }
+  }
+
+  .store-distance {
+    font-style: italic;
   }
 
   .addresses {
