@@ -39,6 +39,14 @@
         </div>
       </div>
       <VariantSelector :sku="sku" />
+
+      <InventoryAvailability :inventory="inventory"/>
+      <div class="modal fade" id="store-finder-modal" tabindex="-1" role="dialog" aria-labelledby="quickviewModal">
+        <div class="modal-dialog modal-dialog-store-finder" role="document">
+          <StoreLocator :isModal=true />
+        </div>
+      </div>
+
       <AddToCartForm :sku="sku"/>
       <!-- {{> catalog/add-to-wishlist-btn}}
       {{> catalog/reserve-in-store-btn}} -->
