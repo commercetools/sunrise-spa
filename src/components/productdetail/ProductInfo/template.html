@@ -159,10 +159,11 @@
       <div class="product-details-content product-details-ptb">
         <h2>{{ currentProduct.name }}</h2>
         <h3><BasePrice :price="matchingVariant.price"/></h3>
-        <div class="product-dec-peragraph">
-          <p>Linen and cotton mix. Straight design. Classic collar. Sleeveless. Removable belt at the waist. Two patch
-            pockets on the front. Button fastening on the front section.</p>
-        </div>
+        <VariantSelector :sku="sku" />
+        <AddToCartForm :sku="sku"/>
+        <DetailsSection :sku="sku"/>
+        <SocialMediaLinks/>
+  
         <div class="product-dec-action-wrap pro-dec-action-2">
           <div class="quality-cart-wrap">
             <div class="quality-wrap">
@@ -180,6 +181,10 @@
         <div class="store-delivery-wrap">
           <a href="#"><i class="fa fa-map-marker"></i>Find store near you</a>
           <a href="#"><i class="fa fa-exchange"></i>Delivery and return</a>
+        </div>
+        <div class="product-dec-peragraph">
+          <p>Linen and cotton mix. Straight design. Classic collar. Sleeveless. Removable belt at the waist. Two patch
+            pockets on the front. Button fastening on the front section.</p>
         </div>
         <div class="description-review-wrapper">
           <div class="panel-group" id="accordion1">
