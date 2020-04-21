@@ -1,4 +1,4 @@
-  <div v-if="product && attributeTranslation"
+  <!-- <div v-if="product && attributeTranslation"
        class="row">
     <div class="col-sm-12">
       <div data-test="panel-group-pdp"
@@ -78,12 +78,60 @@
                   <span>{{name}}:</span> {{price}}{{#if freeAbove}} (FREE for orders above {{freeAbove}}){{/if}}
                   {{#if description}}. {{description}}.{{/if}}
                 </li>
-                {{/each}} -->
+                {{/each}} 
                 <li>{{ $t('freeReturns') }}</li>
                 <li>{{ $t('moreDeliveryInfo') }}</li>
               </ul>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <div class="description-review-wrapper" v-if="product && attributeTranslation">
+    <div class="panel-group" id="accordion1">
+      <div class="panel pro-dec-accordion">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" href="#pro-dec-accordion1">
+              {{$t('productDetails')}}
+            </a>
+          </h4>
+        </div>
+        <div data-parent="#accordion1" id="pro-dec-accordion1"
+          class="product-description-wrapper panel-collapse collapse show">
+          <div class="panel-body">
+            <ul class="product-features-list">
+              <li v-for="attribute in productAttributes"
+                  data-test="product-attributes-list"
+                  :key="attribute.name">
+                <span class="attribute-name">
+                  {{ attribute.name }}:
+                </span>
+                <span>
+                  {{ attribute.label || attribute.value }}
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="panel pro-dec-accordion">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" href="#pro-dec-accordion2">
+              {{$t('deliveryReturns')}}
+            </a>
+          </h4>
+        </div>
+        <div data-parent="#accordion1" id="pro-dec-accordion2"
+          class="product-description-wrapper panel-collapse collapse show">
+          <div class="panel-body">
+            <ul class="product-delivery-list">
+              <li>{{ $t('freeReturns') }}</li>
+              <li>{{ $t('moreDeliveryInfo') }}</li>
+            </ul>
+        </div>
         </div>
       </div>
     </div>
