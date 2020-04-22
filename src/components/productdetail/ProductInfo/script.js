@@ -32,6 +32,11 @@ export default {
       return this.currentProduct.variant || {};
     },
   },
+  watch: {
+    product() {
+      $(this.$refs.easyzoom).easyZoom();
+    },
+  },
   apollo: {
     product: {
       query: gql`
