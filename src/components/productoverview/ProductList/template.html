@@ -1,6 +1,6 @@
-<div class="shop-area pt-100 pb-100">
+<div class="shop-area pb-100">
   <LoadingSpinner v-if="isLoading" />
-  <div v-else-if="categories && products" class="container">
+  <div v-else-if="categories && products">
     <TopBar @toggleFilter="toggleFilter" @changeSort="changeSort" v-bind:show="show" v-bind:sort="sort" />
     <ProductFilter :facets="facets" v-bind:show="show" />
     <div class="shop-wrapper" v-if="products.results.length">
