@@ -1,6 +1,6 @@
 import productMixin from '@/mixins/productMixin';
 import LineItemQuantityForm from '../../../cartdetail/LineItemQuantityForm/index.vue';
-import Remove from '../../../cartdetail/LineItemQuantityForm/remove.vue';
+import Remove from '../../../cartdetail/LineItemQuantityForm/Remove/index.vue';
 import BasePrice from '../../BasePrice/index.vue';
 
 export default {
