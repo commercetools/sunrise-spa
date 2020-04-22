@@ -54,36 +54,7 @@
   <div class="row" v-if="product">
     <div class="col-lg-6">
       <div class="product-details-tab">
-        <div class="pro-dec-big-img-slider product-big-img-style">
-          <div class="easyzoom-style">
-            <div class="easyzoom easyzoom--overlay" ref="easyzoom">
-              <a href="assets/images/product-details/b-large-1.jpg">
-                <img src="assets/images/product-details/large-1.jpg" alt="">
-              </a>
-            </div>
-            <div class="pro-dec-zoom-img">
-              <a class="img-popup" href="assets/images/product-details/b-large-1.jpg"><i
-                  class="fa fa-search-plus"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="product-dec-slider product-small-img-style mt-10">
-          <div class="product-dec-small active">
-            <img src="assets/images/product-details/small-1.jpg" alt="">
-          </div>
-          <div class="product-dec-small">
-            <img src="assets/images/product-details/small-2.jpg" alt="">
-          </div>
-          <div class="product-dec-small">
-            <img src="assets/images/product-details/small-3.jpg" alt="">
-          </div>
-          <div class="product-dec-small">
-            <img src="assets/images/product-details/small-4.jpg" alt="">
-          </div>
-          <div class="product-dec-small">
-            <img src="assets/images/product-details/small-2.jpg" alt="">
-          </div>
-        </div>
+        <ProductGallery :sku="sku" />
       </div>
     </div>
     <div class="col-lg-6">

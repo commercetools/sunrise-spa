@@ -14,6 +14,9 @@ export default {
     productImages() {
       return this.product.masterData.current.variant.images;
     },
+    productImage() {
+      return this.product.masterData.current.variant.images[0]?.url;
+    },
     zoomerImages() {
       const imageInfos = this.productImages.map((image, index) => ({
         id: index,
@@ -38,6 +41,19 @@ export default {
     },
     galleryThumbnailsCount() {
       return Math.min(this.productImages.length, 3);
+    },
+  },
+  watch: {
+    product() {
+      $(this.$refs.easyzoom).easyZoom();
+      $(this.$refs.slick).slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        draggable: false,
+        fade: false,
+        asNavFor: '.product-dec-slider',
+      });
     },
   },
   apollo: {
