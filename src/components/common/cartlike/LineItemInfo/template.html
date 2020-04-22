@@ -21,17 +21,28 @@
       </p>
     </div>
   </div> -->
-<div>
-  <div class="cart-img">
-    <router-link :to="productRoute(lineItem.productSlug, lineItem.variant.sku)" data-test="cart-line-item-link">
-    <img :src="displayedImageUrl(lineItem.variant)" :alt="lineItem.name" class="img-responsive img"></a>
+<tr data-test="cart-line-item">
+  <td class="product-remove">
+    <a href="#"><i class="fa fa-trash-o"></i></a>
+  </td>
+  <td class="product-img">
+    <router-link :to="productRoute(lineItem.productSlug, lineItem.variant.sku)" class="img">
+      <img :src="displayedImageUrl(lineItem.variant)" :alt="lineItem.name">
     </router-link>
-  </div>
-  <div class="cart-title">
-    <h4>
-      <router-link :to="productRoute(lineItem.productSlug, lineItem.variant.sku)" data-test="cart-line-item-link">
-        {{ lineItem.name }}
-      </router-link>
-    </h4>
-  </div>
-</div>
+
+  </td>
+  <td class="product-name">
+    <router-link :to="productRoute(lineItem.productSlug, lineItem.variant.sku)" data-test="cart-line-item-link">
+      {{ lineItem.name }}
+    </router-link>
+  </td>
+  <td class="product-price"><span class="amount">$26.00</span></td>
+  <td class="cart-quality">
+    <div class="quickview-quality quality-height-dec2">
+      <div class="cart-plus-minus">
+        <input class="cart-plus-minus-box" type="text" name="qtybutton" v-model="lineItem.quantity">
+      </div>
+    </div>
+  </td>
+  <td class="product-total"><span>$110.00</span></td>
+</tr>

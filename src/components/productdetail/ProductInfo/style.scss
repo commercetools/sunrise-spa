@@ -226,55 +226,6 @@ span {
       }
   }
 }
-.cart-plus-minus {
-  display: inline-block;
-  height: 60px;
-  overflow: hidden;
-  padding: 0;
-  position: relative;
-  width: 80px;
-  input.cart-plus-minus-box {
-      background: transparent none repeat scroll 0 0;
-      border: medium none;
-      color: #343538;
-      float: left;
-      font-size: 14px;
-      height: 60px;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      width: 80px;
-      border: 1px solid #e8e8e8;
-      &:focus {
-          border: 1px solid #343538;
-      }
-  }
-  .qtybutton {
-      color: #343538;
-      cursor: pointer;
-      float: inherit;
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 20px;
-      margin: 0;
-      position: absolute;
-      text-align: center;
-      transition: all 0.3s ease 0s;
-      width: 24px;
-      &.dec {
-          height: 60px;
-          left: 0;
-          padding-top: 20px;
-          top: 0;
-      }
-      &.inc {
-          height: 60px;
-          padding-top: 20px;
-          right: 0;
-          top: 0;
-      }
-  }
-}
 .pro-details-size {
   margin-top: 17px;
   span {

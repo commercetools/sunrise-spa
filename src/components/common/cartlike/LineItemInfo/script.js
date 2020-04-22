@@ -11,5 +11,11 @@ export default {
       default: () => true,
     },
   },
+  computed: {
+    dump() {
+      // console.log(this.lineItem);
+      return 22;
+    },
+  },
   mixins: [productMixin],
 };
