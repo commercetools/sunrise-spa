@@ -37,7 +37,9 @@
       {{ lineItem.name }}
     </router-link>
   </td>
-  <td class="product-price"><span class="amount">$26.00</span></td>
+  <td class="product-price"><span class="amount">
+    <BasePrice :price="lineItem.price"/>
+  </span></td>
   <td class="cart-quality">
     <div class="quickview-quality quality-height-dec2">
       <div class="cart-plus-minus">
@@ -46,5 +48,7 @@
       </div>
     </div>
   </td>
-  <td class="product-total"><span>$110.00</span></td>
+  <td class="product-total">
+    <BasePrice :price="lineItem.price"/>
+  </td>
 </tr>

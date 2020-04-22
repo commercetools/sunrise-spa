@@ -1,11 +1,13 @@
 import productMixin from '@/mixins/productMixin';
 import LineItemQuantityForm from '../../../cartdetail/LineItemQuantityForm/index.vue';
 import Remove from '../../../cartdetail/LineItemQuantityForm/remove.vue';
+import BasePrice from '../../BasePrice/index.vue';
 
 export default {
   components: {
     LineItemQuantityForm,
     Remove,
+    BasePrice,
   },
   props: {
     lineItem: {
