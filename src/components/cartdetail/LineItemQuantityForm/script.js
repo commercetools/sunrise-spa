@@ -28,12 +28,12 @@ export default {
     },
   }),
   methods: {
-    changeLineItemQuantity() {
+    changeLineItemQuantity(e) {
       return this.updateMyCart([
         {
           changeLineItemQuantity: {
             lineItemId: this.lineItemId,
-            quantity: this.form.quantity,
+            quantity: Number(e.target.value),
           },
         },
       ]);

@@ -23,7 +23,8 @@
   </div> -->
 <tr data-test="cart-line-item">
   <td class="product-remove">
-    <a href="#"><i class="fa fa-trash-o"></i></a>
+    <Remove :lineItemId="lineItem.id"
+    :quantity="lineItem.quantity"/>
   </td>
   <td class="product-img">
     <router-link :to="productRoute(lineItem.productSlug, lineItem.variant.sku)" class="img">
@@ -40,7 +41,8 @@
   <td class="cart-quality">
     <div class="quickview-quality quality-height-dec2">
       <div class="cart-plus-minus">
-        <input class="cart-plus-minus-box" type="text" name="qtybutton" v-model="lineItem.quantity">
+        <LineItemQuantityForm :lineItemId="lineItem.id"
+        :quantity="lineItem.quantity"/>
       </div>
     </div>
   </td>
