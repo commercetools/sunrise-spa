@@ -47,7 +47,8 @@ export default {
           $currency: Currency!,
           $country: Country!,
           $customerGroupId:String,
-          $where: String!
+          $where: String!,
+          $preview: Boolean!,
         ) {
           inventoryEntries(where: $where) {
             results {
@@ -60,7 +61,24 @@ export default {
           product(sku: $sku) {
             id
             masterData {
-              current {
+              current @skip(if: $preview) {
+                name(locale: $locale)
+                slug(locale: $locale)
+                variant(sku: $sku) {
+                  price(currency: $currency,country:$country,customerGroupId:$customerGroupId) {
+                    value {
+                      ...printPrice
+                    }
+                    discounted {
+                      value {
+                       ...printPrice
+                      }
+                    }
+                  }
+                }
+              }
+
+              staged @include(if: $preview) {
                 name(locale: $locale)
                 slug(locale: $locale)
                 variant(sku: $sku) {
@@ -93,6 +111,7 @@ export default {
           customerGroupId: this.$store.state.customerGroup,
           sku: this.sku,
           country: this.$store.state.country,
+          preview: this.$route.query.preview === 'true' || false,
         };
       },
       result({ data }) {

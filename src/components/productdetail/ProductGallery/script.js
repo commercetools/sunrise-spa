@@ -12,7 +12,12 @@ export default {
   }),
   computed: {
     productImages() {
-      return this.product.masterData.current.variant.images;
+      const selected = this.product.masterData.staged || this.product.masterData.current;
+      return selected.variant.images;
+    },
+    baseSku() {
+      const selected = this.product.masterData.staged || this.product.masterData.current;
+      return selected.variant.sku;
     },
     zoomerImages() {
       const imageInfos = this.productImages.map((image, index) => ({
@@ -43,24 +48,35 @@ export default {
   apollo: {
     product: {
       query: gql`
-        query ProductGallery($sku: String!) {
+        query ProductGallery($sku: String!, $preview: Boolean!) {
           product(sku: $sku) {
             id
             masterData {
-              current {
+              current @skip(if: $preview) {
                 variant(sku: $sku) {
-                  sku
-                  images {
-                    url
-                  }
+                  ...variantFields
+                }
+              }
+
+              staged @include(if: $preview) {
+                variant(sku: $sku) {
+                  ...variantFields
                 }
               }
             }
+          }
+        }
+        
+        fragment variantFields on ProductVariant {
+          sku
+          images {
+            url
           }
         }`,
       variables() {
         return {
           sku: this.sku,
+          preview: this.$route.query.preview === 'true' || false,
         };
       },
     },

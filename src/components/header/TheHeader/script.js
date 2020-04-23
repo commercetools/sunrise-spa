@@ -14,6 +14,7 @@ export default {
     return {
       searchText: this.$route.query.q || '',
       mobileMenuOpen: false,
+      isPreview: this.$route.query.preview,
     };
   },
   methods: {
