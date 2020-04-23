@@ -155,7 +155,6 @@ export default {
     limit: Number(process.env.VUE_APP_PAGE_SIZE || 75),
     loadingProducts: false,
     loadingFacets: false,
-    facetFilter: {},
   }),
   // please circle ci give me a status report
   computed: {
@@ -184,9 +183,6 @@ export default {
   methods: {
     changeSort(sort) {
       this.sort = sort;
-    },
-    facetFilterChange({ name, value }) {
-      this.facetFilter = { ...this.facetFilter, [name]: value };
     },
     changePage(page) {
       pushPage(page, this, 'products');

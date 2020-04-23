@@ -2,34 +2,12 @@ import { modifyQuery, changeRoute } from '../../common/shared';
 
 /* eslint-disable no-prototype-builtins */
 export default {
-  props: ['facets', 'facetFilter'],
-  // data: compoment => ({
-  // }),
+  props: ['facets'],
+  data: () => ({
+  }),
   computed: {
   },
   methods: {
-    showFacetFilter(facet) {
-      return facet?.terms?.length > 32
-        || this.facetFilter[facet.name];
-    },
-    facetFilterValue(facetName) {
-      return this.facetFilter[facetName] || '';
-    },
-    changeFacetFilter(e, facetName) {
-      this.$emit(
-        'filterChange',
-        { name: facetName, value: e.target.value },
-      );
-    },
-    getTerms(facet) {
-      if (this.facetFilter[facet.name]) {
-        const filter = this.facetFilter[facet.name].toLowerCase();
-        return facet.terms.filter(
-          ({ term }) => term && term.toLowerCase().includes(filter),
-        );
-      }
-      return facet.terms;
-    },
     pushRouter(query) {
       changeRoute(
         {
