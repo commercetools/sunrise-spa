@@ -71,6 +71,7 @@ const getProducts = (component) => {
     currency,
     country,
     customerGroup,
+    channel: priceChannel,
   } = component.$store.state;
   const loc = locale(component);
   const sortValue = route.query.sort;
@@ -89,6 +90,7 @@ const getProducts = (component) => {
           pageSize: component.limit,
           priceCurrency: currency,
           priceCountry: country,
+          priceChannel: component.allChannels ? null : priceChannel,
           priceCustomerGroup: customerGroup,
           ...sort,
           ...searchText,
@@ -99,6 +101,10 @@ const getProducts = (component) => {
       products.facets(
         {
           category,
+          priceCurrency: currency,
+          priceCountry: country,
+          priceChannel: component.allChannels ? null : priceChannel,
+          priceCustomerGroup: customerGroup,
           ...searchText,
         },
         route.query,
@@ -124,7 +130,7 @@ const getProducts = (component) => {
               slug: slug[loc],
               masterVariant: {
                 sku,
-                availability: availability && availability.channels[component.$store.state.channel],
+                availability: availability?.channels && availability.channels[component?.$store?.state?.channel],
                 images,
                 price,
               },
@@ -155,6 +161,8 @@ export default {
     limit: Number(process.env.VUE_APP_PAGE_SIZE || 75),
     loadingProducts: false,
     loadingFacets: false,
+    facetFilter: {},
+    allChannels: false,
   }),
   // please circle ci give me a status report
   computed: {
@@ -183,6 +191,12 @@ export default {
   methods: {
     changeSort(sort) {
       this.sort = sort;
+    },
+    facetFilterChange({ name, value }) {
+      this.facetFilter = { ...this.facetFilter, [name]: value };
+    },
+    channelChange(value) {
+      this.allChannels = value;
     },
     changePage(page) {
       pushPage(page, this, 'products');
@@ -219,6 +233,9 @@ export default {
       getProducts(this);
     },
     countyCurrency() {
+      getProducts(this);
+    },
+    allChannels() {
       getProducts(this);
     },
   },

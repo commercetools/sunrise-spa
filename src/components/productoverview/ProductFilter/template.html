@@ -9,36 +9,37 @@
           <p class="filter-products"><b>{{ $t("filterProducts") }}</b></p>
         </div>
       </div>
+      <ChannelFilter :allChannels="allChannels" @channelChanged="channelChanged" />
+      <hr class="hr">
+      <PriceFilter 
+        v-on:pricefilterchanged="priceFilterChanged"
+        :min="min"
+        :max="max"
+      />
       <div v-for="facet in facets">
         <hr class="hr">
         <div class="row facet-block">
           <div class="col-xs-8 text-left">
-           {{facet.label}}
+            {{facet.label}}
           </div>
           <div class="col-xs-4">
-            <a 
-              class="text-right clear-btn facet-clear-btn" 
-              href="#"
-              v-on:click.prevent="clearFacet(facet.name)">
-                {{ $t("clear") }}
+            <a class="text-right clear-btn facet-clear-btn" href="#" v-on:click.prevent="clearFacet(facet.name)">
+              {{ $t("clear") }}
             </a>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="pop-filter-select select-facet two-column-select">
-              <div v-for="term in facet.terms">
-                <label>
-                  <input 
-                    type="checkbox" 
-                    :name="facet.name" 
-                    :value="term.term"
-                    :checked="isChecked(facet.name,term.term)" 
-                    v-on:change="filterChange($event, facet.name)" />
-                  {{term.term}} <span class="facet-count">({{term.productCount}})</span>
-                </label>
-              </div>
-            </div>
+        <div>
+          <div v-if="showFacetFilter(facet)">
+            <input type="text" :placeholder="$t('filter') + ' '+ facet.name" :value="facetFilterValue(facet.name)"
+              v-on:keyup="e=>changeFacetFilter(e,facet.name)" />
+          </div>
+          <div class="filter-content">
+            <TermFilter 
+              :name="facet.name"
+              :component="facet.component"
+              :terms="getTerms(facet)" 
+              v-on:changed="filterChange"
+            />
           </div>
         </div>
       </div>

@@ -39,7 +39,6 @@ Vue.use(VueGoogleMaps, {
     libraries: 'places', // necessary for places input
   },
 });
-
 Vue.config.productionTip = false;
 
 Vue.use(VueScrollTo);

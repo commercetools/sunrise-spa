@@ -3,12 +3,10 @@
     editMyCart: "Edit my shopping cart"
     orderSummary: "Order Summary"
     quantity: "Quantity"
-    price: "Price"
     total: "Total"
   de:
     itemsTotal: "{n} Artikel im Warenkorb"
     editMyCart: "Warenkorb bearbeiten"
     orderSummary: "Bestellübersicht"
     quantity: "Menge"
-    price: "Preis"
     total: "Gesamtpreis"

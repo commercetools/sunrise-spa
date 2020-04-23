@@ -34,16 +34,27 @@
           <!--{{> catalog/pop/display-selector displaySelector=content.displaySelector}}-->
         </div>
       </div>
-      <div class="product-filter hidden-xs">
-        <ProductFilter :facets="facets" />
-        <!--{{> catalog/pop/filters-sidebar}}-->
-      </div>
-      <div id="pop-product-list"
-           class="row">
-        <ProductThumbnail v-for="product in products.results"
-                          data-test="product-list"
-                          :key="product.id"
-                          :product="product" />
+      <div class="row">
+        <div class="col-xs-12 col-sm-3 col-md-3">
+          <div class="product-filter hidden-xs">
+            <ProductFilter 
+              :facets="facets"
+              :facetFilter="facetFilter" 
+              v-on:filterChange="facetFilterChange"
+              v-on:channelChange="channelChange"
+              :allChannels="allChannels"
+            />
+            <!--{{> catalog/pop/filters-sidebar}}-->
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-9 col-md-9">
+          <div id="pop-product-list" class="row">
+            <ProductThumbnail v-for="product in products.results"
+                              data-test="product-list"
+                              :key="product.id"
+                              :product="product" />
+          </div>
+        </div>
       </div>
       <a href="#"
         id="scroll-to-top"

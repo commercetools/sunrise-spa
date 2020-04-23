@@ -59,7 +59,7 @@ export default {
   },
   facetSearches: [
     { name: 'size', type: 'text' },
-    { name: 'color', type: 'lnum' },
-    { name: 'designer', type: 'enum' },
+    { name: 'color', type: 'lnum', component: 'colors' },
+    { name: 'designer', type: 'enum', component: 'designer' },
   ],
 };

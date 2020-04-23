@@ -52,16 +52,28 @@ const setCategory = ({ category, ...query }) => (category
 const products = {
   get: withToken(
     (
-      [query, routeQuery, locale, totalFacets = []],
+      [query, routeQ, locale, totalFacets = []],
       { access_token: accessToken },
     ) => {
       query = setCategory(query);
+      const { min, max, ...routeQuery } = routeQ;
+      const priceFilter = {};
+      if (min || max) {
+        const minQ = min ? min * 100 : '*';
+        const maxQ = max ? max * 100 : '*';
+        priceFilter['filter.query'] = `variants.scopedPrice.value.centAmount: range (${minQ} to ${maxQ})`;
+        // priceFilter['filter.query'] = `variants.price.centAmount: range (${minQ} to ${maxQ})`;
+      }
       return Promise.all([
         groupFetchJson(
           toUrl(
             `${baseUrl}/product-projections/search`,
             [
-              ...Object.entries(query),
+              ...Object.entries(priceFilter),
+              ...Object.entries(query)
+                .filter(
+                  ([, val]) => !(val === null || val === undefined),
+                ),
               ...Object.entries(facets(routeQuery, locale)),
               ...totalFacets.map(
                 ({ name, type }) => [
@@ -103,7 +115,7 @@ const products = {
     };
     return Promise.all(
       config.facetSearches.map(
-        ({ name }) => {
+        ({ name, component }) => {
           const newRouteQuery = { ...routeQuery };
           delete newRouteQuery[name];
           return products.get([
@@ -115,8 +127,11 @@ const products = {
             ),
           ])
             .then(
-              ({ facets }) => facets
-                .find(f => f.name === name),
+              ({ facets }) => ({
+                ...facets
+                  .find(f => f.name === name),
+                component,
+              }),
             );
         },
       ),
