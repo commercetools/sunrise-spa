@@ -1,11 +1,9 @@
-import { required, numeric, between } from 'vuelidate/lib/validators';
 import cartMixin from '../../../mixins/cartMixin';
-import ServerError from '../../common/form/ServerError/index.vue';
-import LoadingButton from '../../common/form/LoadingButton/index.vue';
-import BaseSelect from '../../common/form/BaseSelect/index.vue';
-import BaseForm from '../../common/form/BaseForm/index.vue';
+// import ServerError from '../../common/form/ServerError/index.vue';
+// import LoadingButton from '../../common/form/LoadingButton/index.vue';
+// import BaseSelect from '../../common/form/BaseSelect/index.vue';
+// import BaseForm from '../../common/form/BaseForm/index.vue';
 
-const MAX_QUANTITY = 10;
 export default {
   props: {
     sku: {
@@ -14,23 +12,18 @@ export default {
     },
   },
   components: {
-    BaseForm,
-    BaseSelect,
-    LoadingButton,
-    ServerError,
+    // BaseForm,
+    // BaseSelect,
+    // LoadingButton,
+    // ServerError,
   },
   mixins: [cartMixin],
   data: () => ({
-    form: {
-      quantity: 1,
-    },
+    quantity: 1,
   }),
   computed: {
     isLoading() {
       return this.$apollo.loading;
-    },
-    quantities() {
-      return [...Array(MAX_QUANTITY).keys()].map(i => ({ id: i + 1, name: i + 1 }));
     },
   },
   methods: {
@@ -45,16 +38,9 @@ export default {
       return this.updateMyCart({
         addLineItem: {
           sku: this.sku,
-          quantity: this.form.quantity,
+          quantity: this.quantity,
         },
       }).then(() => this.$store.dispatch('openMiniCart'));
     },
-  },
-  validations() {
-    return {
-      form: {
-        quantity: { required, numeric, between: between(1, MAX_QUANTITY) },
-      },
-    };
   },
 };

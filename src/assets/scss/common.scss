@@ -89,6 +89,26 @@ button {
     color: #4A4141;
 }
 
+button {
+  outline: none;
+  background: none;
+  border: none;
+  background-color: #262626;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 18px 40px 18px;
+  text-transform: uppercase;
+  line-height: 1;
+  @media #{$xs-layout} {
+      padding: 14px 30px 17px;
+  }
+  &:hover {
+      background-color: $theme-color;
+  }
+}
+  
+
 
 a,
 button,

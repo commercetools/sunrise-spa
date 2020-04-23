@@ -1,25 +1,14 @@
-  <div>
-    <div id="my-account-mobile-content"
-         class="my-account-sidebar-items">
-      <router-link :to="{ name: 'user' }">
-        {{ $t("personalDetails") }}
-      </router-link>
-    </div>
-    <div class="my-account-sidebar-items">
-      <router-link :to="{ name: 'orders' }"
-                   data-test="my-orders-button">
-          {{ $t("myOrders") }}
-      </router-link>
-    </div>
-    <div class="my-account-sidebar-items">
-      <router-link :to="{ name: 'changepassword' }"
-                   data-test="change-password-button">
-          {{ $t("changePassword") }}
-      </router-link>
-    </div>
-    <div class="my-account-sidebar-items">
-      <button @click="logout">
-        {{ $t("signOut") }}
-      </button>
-    </div>
-  </div>
+<div class="myaccount-tab-menu nav" role="tablist">
+  <router-link :to="{ name: 'user' }">
+    {{ $t("personalDetails") }}
+  </router-link>
+  <router-link :to="{ name: 'orders' }" data-test="my-orders-button">
+    {{ $t("myOrders") }}
+  </router-link>
+  <router-link :to="{ name: 'changepassword' }" data-test="change-password-button">
+    {{ $t("changePassword") }}
+  </router-link>
+  <a href="#" @click.prevent="logout">
+    {{ $t("signOut") }}
+  </a>
+</div>

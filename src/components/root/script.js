@@ -1,4 +1,5 @@
 import { locale as loc } from '../common/shared';
+import MiniCart from '../header/MiniCart/index.vue';
 // locale is an optional route parameter, if it's missing
 // then see if it's set in store (local storage) and use that
 // if it's not in store then default to en
@@ -28,10 +29,26 @@ const checkLocale = (component) => {
   }
 };
 export default {
+  components: {
+    MiniCart,
+  },
   computed: {
     locale() {
       return loc(this);
     },
+  },
+  data() {
+    return {
+      sharedState: {
+        expanded: false,
+      },
+    };
+  },
+
+  provide() {
+    return {
+      accordionItemState: this.sharedState,
+    };
   },
   beforeCreate() {
     // when the page loads set store locale and country to what is in the url

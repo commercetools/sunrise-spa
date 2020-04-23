@@ -1,4 +1,4 @@
-  <div v-if="product">
+  <!-- <div v-if="product">
     <div data-test="product-gallery"
          class="col-md-4 col-md-offset-1 col-sm-6 product-gallery">
       <ProductGallery :sku="sku" />
@@ -19,7 +19,7 @@
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <!-- {{> catalog/product-rating }} -->
+          <!-- {{> catalog/product-rating }} 
         </div>
       </div>
       <div class="row">
@@ -41,13 +41,57 @@
       <VariantSelector :sku="sku" />
       <AddToCartForm :sku="sku"/>
       <!-- {{> catalog/add-to-wishlist-btn}}
-      {{> catalog/reserve-in-store-btn}} -->
+      {{> catalog/reserve-in-store-btn}} 
       <div class="row">
         <div class="col-sm-12">
-          <!-- {{> catalog/product-availability availability=product.availability}} -->
+          <!-- {{> catalog/product-availability availability=product.availability}} 
         </div>
       </div>
       <DetailsSection :sku="sku"/>
       <SocialMediaLinks/>
     </div>
+  </div> -->
+  <div class="row" v-if="product">
+    <div class="col-lg-6">
+      <div class="product-details-tab">
+        <ProductGallery :sku="sku" />
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="product-details-content product-details-ptb">
+        <h2>{{ currentProduct.name }}</h2>
+        <h3><BasePrice :price="matchingVariant.price"/></h3>
+        <VariantSelector :sku="sku" />
+        <AddToCartForm :sku="sku"/>
+        <DetailsSection :sku="sku"/>
+        <!-- <SocialMediaLinks/> -->
+  
+        <!-- <div class="store-delivery-wrap">
+          <a href="#"><i class="fa fa-map-marker"></i>Find store near you</a>
+          <a href="#"><i class="fa fa-exchange"></i>Delivery and return</a>
+        </div> -->
+        <!-- <div class="product-dec-peragraph">
+          <p>Linen and cotton mix. Straight design. Classic collar. Sleeveless. Removable belt at the waist. Two patch
+            pockets on the front. Button fastening on the front section.</p>
+        </div> -->
+        <!-- <div class="product-dec-meta">
+          <span>Categories: <a href="#">Women</a></span>
+          <span>Tags: <a href="#">Fashion</a>, <a href="#">Lookbook</a></span>
+        </div> -->
+        <!-- <div class="product-social">
+          <span>Share with</span>
+          <ul>
+            <li><a data-toggle="tooltip" title="Share this post on Facebook" href="#"><i
+                  class="fa fa-facebook"></i></a></li>
+            <li><a data-toggle="tooltip" title="Share this post on Twitter" href="#"><i class="fa fa-twitter"></i></a>
+            </li>
+            <li><a data-toggle="tooltip" title="Share this post on Pinterest" href="#"><i
+                  class="fa fa-pinterest-p"></i></a></li>
+            <li><a data-toggle="tooltip" title="Share this post on Google Plus" href="#"><i
+                  class="fa fa-google-plus"></i></a></li>
+          </ul>
+        </div> -->
+      </div>
+    </div>
   </div>
+  

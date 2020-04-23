@@ -1,4 +1,4 @@
-  <div>
+<!-- <div>
     <div class="col-sm-3 col-xs-4 product-img-col">
       <router-link :to="productRoute(lineItem.productSlug, lineItem.variant.sku)"
                    class="img">
@@ -19,15 +19,36 @@
          data-test="cart-line-item-sku">
         {{ lineItem.variant.sku }}
       </p>
-      <!--<p class="cart-attributes">-->
-      <!--{{#each attributes}}-->
-      <!--{{name}}-->
-      <!--<span class="black-p" data-model="cartItem.{{key}}">{{value}}</span>-->
-      <!--{{#unless @last}}<br>{{/unless}}-->
-      <!--{{/each}}-->
-      <!--</p>-->
-      <!--<p class="cart-item-availability grey-p">-->
-      <!--<span class="glyphicon glyphicon-ok-sign"></span>{{ $t('available') }}-->
-      <!--</p>-->
     </div>
-  </div>
+  </div> -->
+<tr data-test="cart-line-item">
+  <td class="product-remove">
+    <Remove :lineItemId="lineItem.id"
+    :quantity="lineItem.quantity"/>
+  </td>
+  <td class="product-img">
+    <router-link :to="productRoute(lineItem.productSlug, lineItem.variant.sku)" class="img">
+      <img :src="displayedImageUrl(lineItem.variant)" :alt="lineItem.name">
+    </router-link>
+
+  </td>
+  <td class="product-name">
+    <router-link :to="productRoute(lineItem.productSlug, lineItem.variant.sku)" data-test="cart-line-item-link">
+      {{ lineItem.name }}
+    </router-link>
+  </td>
+  <td class="product-price"><span class="amount">
+    <BasePrice :price="lineItem.price"/>
+  </span></td>
+  <td class="cart-quality">
+    <div class="quickview-quality quality-height-dec2">
+      <div class="cart-plus-minus">
+        <LineItemQuantityForm :lineItemId="lineItem.id"
+        :quantity="lineItem.quantity"/>
+      </div>
+    </div>
+  </td>
+  <td class="product-total">
+    <BasePrice :price="lineItem.price"/>
+  </td>
+</tr>

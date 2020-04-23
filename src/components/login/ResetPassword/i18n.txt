@@ -1,12 +1,10 @@
 en:
-  title: "My Account"
   resetPassword: "Reset Password"
   newPassword: "New Password"
   confirmPassword: "Confirm New Password"
   submit: "Submit"
   invalidSubject: "The token is invalid"
 de:
-  title: "Mein Konto"
   resetPassword: "Passwort Zurücksetzen"
   newPassword: "Neues Password"
   confirmPassword: "Neues Passwort bestätigen"

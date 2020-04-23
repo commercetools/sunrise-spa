@@ -1,5 +1,9 @@
 /*-------- 23. Login register style ---------*/
 
+.login-register-row {
+  padding-top: 150px;
+}
+
 .login-register-wrap {
   h3 {
     i {
@@ -9,6 +13,11 @@
     font-size: 24px;
     font-weight: 700;
     margin: 0;
+  }
+
+  .agree-to-terms .field-label-text {
+    position: relative;
+    top: 16px;
   }
 
   .login-register-form {
@@ -112,27 +121,6 @@
 
     &.register-wrap {
       margin-top: 30px;
-    }
-  }
-}
-
-.login-register-btn {
-  button {
-    border: none;
-    background-color: #262626;
-    color: #fff;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 18px 40px 18px;
-    text-transform: uppercase;
-    line-height: 1;
-
-    @media #{$xs-layout} {
-      padding: 14px 30px 17px;
-    }
-
-    &:hover {
-      background-color: $theme-color;
     }
   }
 }

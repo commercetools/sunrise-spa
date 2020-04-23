@@ -1,19 +1,2 @@
-  <BaseForm v-if="cartExists"
-            :vuelidate="$v"
-            :onSubmit="changeLineItemQuantity"
-            #default="{ error }"
-            ref="form"
-            class="quantity-spinner">
-    <ServerError :error="error"/>
-    <span @click="decrement"
-          data-test="cart-line-item-quantity-dec"
-          class="change-quantity-button input-number-decrement">–</span>
-    <BaseInput v-model.number="form.quantity"
-               :vuelidate="$v.form.quantity"
-               type="text"
-               class="input-number"
-               data-test="cart-line-item-quantity" />
-    <span @click="increment"
-          data-test="cart-line-item-quantity-inc"
-          class="change-quantity-button input-number-increment">+</span>
-  </BaseForm>
+
+<input class="cart-plus-minus-box" type="text" name="qtybutton" :value="quantity" @change="changeLineItemQuantity">

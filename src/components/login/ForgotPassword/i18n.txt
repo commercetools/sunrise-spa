@@ -1,11 +1,9 @@
 en:
-  title: "My Account"
   forgotPassword: "Forgot Password"
   email: "Email"
   submit: "Submit"
   invalidSubject: "Customer with this email was not found"
 de:
-  title: "Mein Konto"
   forgotPassword: "Passwort vergessen"
   email: "Email"
   submit: "Weiter"

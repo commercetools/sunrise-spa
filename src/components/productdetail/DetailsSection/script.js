@@ -11,6 +11,7 @@ export default {
   data: () => ({
     product: null,
     attributeTranslation: null,
+    expanded: [true, false],
   }),
   computed: {
     productAttributes() {
@@ -31,6 +32,11 @@ export default {
       contextButton.toggleClass('accordion-minus');
       // Remove minus class on all other buttons
       contextPanelGroup.find('.accordion-plus').not(contextButton).removeClass('accordion-minus');
+    },
+    toggle(index) {
+      const copy = [...this.expanded];
+      copy[index] = !copy[index];
+      this.expanded = copy;
     },
   },
   apollo: {

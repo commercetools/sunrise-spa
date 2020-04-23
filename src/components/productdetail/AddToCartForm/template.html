@@ -1,17 +1,17 @@
-  <BaseForm v-if="!isLoading"
+  <!-- <BaseForm v-if="!isLoading"
             :vuelidate="$v"
             :onSubmit="addLineItem"
             #default="{ error, state }">
     <ServerError :error="error"/>
     <div class="row select-row">
       <ul class="list-inline">
-        <!--{{#each product.attributes}}-->
+        <!--{{#each product.attributes}}
         <!--{{> catalog/product-attribute attribute=this
-                variants=../product.variants identifiers=../product.variantIdentifiers}}-->
-        <!--{{/each}}-->
-        <!--<li class="size-guide-li">-->
-        <!--{{> catalog/size-guide}}-->
-        <!--</li>-->
+                variants=../product.variants identifiers=../product.variantIdentifiers}}
+        <!--{{/each}}
+        <!--<li class="size-guide-li">
+        <!--{{> catalog/size-guide}}
+        <!--</li>
       </ul>
     </div>
     <div class="row">
@@ -35,4 +35,24 @@
         </li>
       </ul>
     </div>
-  </BaseForm>
+  </BaseForm> -->
+  <div class="product-dec-action-wrap pro-dec-action-2">
+    <div class="quality-cart-wrap">
+      <div class="quality-wrap">
+        <input 
+          class="input-text qty" 
+          type="number" 
+          name="qty" 
+          maxlength="12" 
+          v-model="quantity" 
+          title="Qty">
+      </div>
+      <div class="pro-cart-wrap">
+        <a href="#" @click.prevent="addLineItem">{{$t('addToCart')}}</a>
+      </div>
+    </div>
+    <!-- <div class="pro-dec-wishlist-compare">
+      <a title="Add to wishlist" href="#"><i class="dl-icon-heart2"></i></a>
+      <a title="Add to compare" href="#"><i class="dl-icon-compare2"></i></a>
+    </div> -->
+  </div>

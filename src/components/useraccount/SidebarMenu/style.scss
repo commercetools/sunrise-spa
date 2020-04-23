@@ -1,0 +1,32 @@
+.myaccount-tab-menu {
+  flex-direction: column;
+  background: #f7f7f7;
+  margin-right: 80px;
+  @media #{$lg-layout} {
+      margin-right: 0px;
+  }
+  @media #{$md-layout} {
+      margin-right: 0px;
+  }
+  @media #{$xs-layout} {
+      margin-right: 0px;
+  }
+  a {
+      border-bottom: none;
+      font-size: 14px;
+      display: block; 
+      padding: 10px 30px;
+      text-transform: capitalize;
+      &:hover,
+      &.active {
+          background-color: $theme-color;
+          border-color: $theme-color;
+          color: $white;
+      }
+      i.fa {
+          font-size: 14px;
+          text-align: center;
+          width: 25px;
+      }
+  }
+}

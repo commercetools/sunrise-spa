@@ -1,7 +1,9 @@
-<div v-if="locale">
+<div v-if="locale" class="main-wrapper main-wrapper-2 main-wrapper-3">
   <header>
     <router-view name="header"/>
   </header>
+  <MiniCart />
+
   <router-view />
   <footer>
     <router-view name="footer"/>

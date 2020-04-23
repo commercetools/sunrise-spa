@@ -28,6 +28,8 @@
     width: 40%;
     height: 705px;
     padding: 0;
+    overflow: auto;
+
     @media screen and (max-width: 991px) {
       width: 100%;
     }
