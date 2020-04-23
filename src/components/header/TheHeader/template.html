@@ -1,99 +1,139 @@
-<header class="header-area">
-    <div class="main-header-wrap">
-        <div class="custom-container">
-            <div class="header-top pt-10">
-                <div class="row align-items-center">
-                    <div class="col-sm-6">
-                        <div class="header-info">
-                            <a href="#">(800) +54.656.565</a>
-                            <a href="#">info@example.com</a>
+<div>
+    <header class="header-area">
+        <div class="main-header-wrap">
+            <div class="custom-container">
+                <div class="header-top pt-10">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6">
+                            <div class="header-info">
+                                <a href="#">STORES</a>
+                                <a href="#">HELP</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6 d-flex justify-content-end">
-                        <div class="curr-lang-wrap">
-                            <ul>
-                                <LocationSelector v-bind:values="$sunrise.countries" title='location' />
-                                <LocationSelector v-bind:values="$sunrise.languages" title="language" />
-                            </ul>
+                        <div class="col-sm-6 d-flex justify-content-end">
+                            <div class="curr-lang-wrap">
+                                <ul>
+                                    <LocationSelector v-bind:values="$sunrise.countries" title='location' />
+                                    <LocationSelector v-bind:values="$sunrise.languages" title="language" />
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="site-header-outer">
-            <div class="intelligent-header bg-white">
-                <div class="header-middle header-middle-mrg">
-                    <div class="custom-container">
-                        <div class="row align-items-center">
-                            <div class="col-md-4">
-                                <div class="logo">
-                                    <router-link to="/">
-                                        <img src="../../../assets/img/logo.svg" alt="SUNRISE"
-                                            class="img-responsive sunrise-logo" />
-                                    </router-link>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="header-search header-search-mrg">
-                                    <form class="search-form" action="#">
-                                        <input name="q" type="search" :placeholder="$t('search')" id="search-input"
-                                            class="search-field" v-model="searchText" required />
-                                        <button>
-                                            <i class="dl-icon-search10"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="header-component-wrap">
-                                    <div class="header-login component-same">
-                                        <a href="login-register.html"><i class="dl-icon-user12"></i><span>Sign
-                                                In</span></a>
+            <div class="site-header-outer">
+                <div class="intelligent-header bg-white">
+                    <div class="header-middle header-middle-mrg">
+                        <div class="custom-container">
+                            <div class="row align-items-center">
+                                <div class="col-md-4">
+                                    <div class="logo">
+                                        <router-link to="/">
+                                            <img src="../../../assets/img/logo.svg" alt="SUNRISE"
+                                                class="img-responsive sunrise-logo" />
+                                        </router-link>
                                     </div>
-                                    <div class="cart-wrap component-same ml-10">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="header-search header-search-mrg">
+                                        <form class="search-form" action="#">
+                                            <input name="q" type="search" :placeholder="$t('search')" id="search-input"
+                                                class="search-field" v-model="searchText" required />
+                                            <button>
+                                                <i class="dl-icon-search10"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="header-component-wrap">
+                                        <LoginButton />
                                         <MiniCart />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="header-bottom">
-                    <div class="custom-container">
-                        <div class="menu-support-wrap">
-                            <div class="main-menu menu-lh-1">
-                                <CategoriesMenu />
+                    <div class="header-bottom">
+                        <div class="custom-container">
+                            <div class="menu-support-wrap">
+                                <div class="main-menu menu-lh-1">
+                                    <CategoriesMenu />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="header-small-mobile">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-6">
-                    <div class="mobile-logo logo-width">
-                        <a href="index.html">
-                            <img alt="" src="assets/images/logo/logo.svg">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="mobile-header-right-wrap">
-                        <div class="same-style cart-wrap">
-                            <a href="#" class="cart-active">
-                                <i class="dl-icon-cart1 "></i>
-                                <span class="count-style">02</span>
+        <div class="header-small-mobile">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-6">
+                        <div class="mobile-logo logo-width">
+                            <a href="index.html">
+                                <img alt="" src="assets/images/logo/logo.svg">
                             </a>
                         </div>
-                        <div class="mobile-off-canvas">
-                            <a class="mobile-aside-button" href="#"><i class="dl-icon-menu2"></i></a>
+                    </div>
+                    <div class="col-6">
+                        <div class="mobile-header-right-wrap">
+                            <div class="same-style cart-wrap">
+                                <a href="#" class="cart-active">
+                                    <i class="dl-icon-cart1 "></i>
+                                    <span class="count-style">02</span>
+                                </a>
+                            </div>
+                            <div class="mobile-off-canvas">
+                                <a class="mobile-aside-button" href="#"><i class="dl-icon-menu2"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </header>
+    <div class="sidebar-cart-active">
+        <div class="sidebar-cart-all">
+            <a class="cart-close" href="#"><i class="dl-icon-close"></i></a>
+            <div class="cart-content">
+                <h3>Shopping Cart</h3>
+                <ul>
+                    <li class="single-product-cart">
+                        <div class="cart-img">
+                            <a href="#"><img src="assets/images/cart/cart-1.jpg" alt=""></a>
+                        </div>
+                        <div class="cart-title">
+                            <h4><a href="#">Paisley print dress</a></h4>
+                            <p><span>Vendor:</span> HasTech</p>
+                            <span>3 × $23.99</span>
+                        </div>
+                        <div class="cart-delete">
+                            <a href="#">×</a>
+                        </div>
+                    </li>
+                    <li class="single-product-cart">
+                        <div class="cart-img">
+                            <a href="#"><img src="assets/images/cart/cart-2.jpg" alt=""></a>
+                        </div>
+                        <div class="cart-title">
+                            <h4><a href="#">Asymmetrical satin dress </a></h4>
+                            <p><span>Vendor:</span> HasTech</p>
+                            <span>1 × $23.99</span>
+                        </div>
+                        <div class="cart-delete">
+                            <a href="#">×</a>
+                        </div>
+                    </li>
+                </ul>
+                <div class="cart-total">
+                    <h4>Subtotal: <span>$150.00</span></h4>
+                </div>
+                <div class="cart-checkout-btn">
+                    <a class="btn-hover cart-btn-style" href="cart.html">view cart</a>
+                    <a class="no-mrg btn-hover cart-btn-style" href="checkout.html">checkout</a>
+                </div>
+            </div>
+        </div>
     </div>
-</header>
+</div>

@@ -8,7 +8,7 @@
       </router-link>
       <!-- <img :alt="$t('more')" class="mobile-plus-content visible-xs" @click="toggleOpenCategory(category1stLevel)"
           v-bind:src="mobileImage(category1stLevel)" /> -->
-      <ul class="mega-menu mega-menu-width3">
+      <ul v-if="category1stLevel.children.length" class="mega-menu mega-menu-width3">
         <li>
           <ul class="mega-menu-width4">
             <li v-for="category2ndLevel in category1stLevel.children" :key="category2ndLevel.id">
