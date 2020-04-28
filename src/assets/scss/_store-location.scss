@@ -22,7 +22,7 @@
 
 #store-finder-modal {
   .modal-dialog {
-    width: 50%;
+    width: 75%;
   }
 }
 
@@ -46,6 +46,10 @@
   }
 }
 
+#store-finder-modal .container {
+  width: 100% !important;
+}
+
 .store-location-wrapper {
   border: 1px solid $alto;
   background-color: $white;
@@ -53,15 +57,11 @@
   overflow: hidden;
 
   .pac-target-input {
-    width: 80%;
+    width: 65%;
   }
 
   .pad-left {
     padding-left: 20px;
-  }
-
-  .container {
-    width: 100% !important;
   }
 
   .store-selected {
