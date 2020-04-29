@@ -142,10 +142,8 @@ const getProducts = (component) => {
       ),
     };
 
-    if (!component.allChannels) {
-      component.products.results = component.products.results
-        .filter(p => p.masterData.current.masterVariant.availability);
-    }
+    component.products.results = component.products.results
+      .filter(p => component.allChannels || p.masterData.current.masterVariant.availability);
 
     component.facets = facets;
     component.loadingProducts = false;
