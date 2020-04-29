@@ -51,7 +51,7 @@
                   <div class="action" v-if="!isSelected(channel)">
                       <input type="hidden" :value="channel.id">  <button v-on:click="setStore" class="btn btn-standard" :value="channel.id">Select This Store</button>
                   </div>
-                  <div class="store-selected action" v-else>Selected</div>
+                  <div class="store-selected action" v-on:click="unsetStore" v-else>Selected</div>
                 </div>
               </div>    
             </li>

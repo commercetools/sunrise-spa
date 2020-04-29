@@ -51,6 +51,11 @@ export default {
       return this.$store.state.storeName === channel.name;
     },
 
+    unsetStore() {
+      this.$store.dispatch('setChannel', null);
+      this.$store.dispatch('setStoreName', null);
+    },
+
     setStore(event) {
       const channelId = event.target.value;
       this.$store.dispatch('setChannel', channelId);
