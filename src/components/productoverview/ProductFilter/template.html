@@ -17,31 +17,29 @@
         :max="max"
       />
       <div v-for="facet in facets">
-        <div v-if="facet.total > 0">
-          <hr class="hr">
-          <div class="row facet-block">
-            <div class="col-xs-8 text-left">
-              {{facet.label}}
-            </div>
-            <div class="col-xs-4">
-              <a class="text-right clear-btn facet-clear-btn" href="#" v-on:click.prevent="clearFacet(facet.name)">
-                {{ $t("clear") }}
-              </a>
-            </div>
+        <hr class="hr">
+        <div class="row facet-block">
+          <div class="col-xs-8 text-left">
+            {{facet.label}}
           </div>
-          <div>
-            <div v-if="showFacetFilter(facet)">
-              <input type="text" :placeholder="$t('filter') + ' '+ facet.name" :value="facetFilterValue(facet.name)"
-                v-on:keyup="e=>changeFacetFilter(e,facet.name)" />
-            </div>
-            <div class="filter-content">
-              <TermFilter 
-                :name="facet.name"
-                :component="facet.component"
-                :terms="getTerms(facet)" 
-                v-on:changed="filterChange"
-              />
-            </div>
+          <div class="col-xs-4">
+            <a class="text-right clear-btn facet-clear-btn" href="#" v-on:click.prevent="clearFacet(facet.name)">
+              {{ $t("clear") }}
+            </a>
+          </div>
+        </div>
+        <div>
+          <div v-if="showFacetFilter(facet)">
+            <input type="text" :placeholder="$t('filter') + ' '+ facet.name" :value="facetFilterValue(facet.name)"
+              v-on:keyup="e=>changeFacetFilter(e,facet.name)" />
+          </div>
+          <div class="filter-content">
+            <TermFilter 
+              :name="facet.name"
+              :component="facet.component"
+              :terms="getTerms(facet)" 
+              v-on:changed="filterChange"
+            />
           </div>
         </div>
       </div>

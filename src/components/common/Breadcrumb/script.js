@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import { locale } from '../shared';
 
 export default {
-  props: ['categorySlug'],
+  props: ['categorySlug', 'categoryId'],
   data: () => ({
     categories: null,
   }),
@@ -35,10 +35,12 @@ export default {
       variables() {
         return {
           locale: locale(this),
-          where: `slug(${locale(this)}="${this.categorySlug}")`,
+          where: this.categorySlug
+            ? `slug(${locale(this)}="${this.categorySlug}")`
+            : `id="${this.categoryId}"`,
         };
       },
-      skip: vm => !vm.categorySlug,
+      skip: vm => !vm.categorySlug && !vm.categoryId,
     },
   },
 };

@@ -142,10 +142,13 @@ const getProducts = (component) => {
       ),
     };
 
+    // if we are not looking at all channels, filter out the ones that don't have an inventory entry for this channel
     component.products.results = component.products.results
       .filter(p => component.allChannels || p.masterData.current.masterVariant.availability);
 
-    component.facets = facets;
+    // also hide facets that have no options
+    component.facets = facets.filter(f => f.total);
+
     component.loadingProducts = false;
     component.loadingFacets = false;
   });
