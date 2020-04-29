@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     attributes() {
-      const { allVariants } = this.product.masterData.current;
+      const { allVariants } = this.product.masterData.staged || this.product.masterData.current;
       return flatMap(allVariants, variant => Object.values(variant.attributes)
         .filter(attr => typeof attr === 'object'))
         .reduce(this.groupValuesByAttribute, {});
@@ -40,7 +40,8 @@ export default {
         .find(variant => variant.sku === this.sku);
     },
     variantCombinations() {
-      return this.product.masterData.current.allVariants
+      const p = this.product.masterData.staged || this.product.masterData.current;
+      return p.allVariants
         .map((variant) => {
           const attrs = variant.attributes;
           const combi = { sku: variant.sku };
@@ -55,11 +56,45 @@ export default {
   apollo: {
     product: {
       query: gql`
-        query VariantSelector($locale: Locale!, $sku: String!) {
+        query VariantSelector($locale: Locale!, $sku: String!, $preview: Boolean!) {
           product(sku: $sku) {
             id
             masterData {
-              current {
+              current @skip(if: $preview) {
+                allVariants {
+                  sku
+                  attributes {
+                    ...on mainProductType {
+                      color {
+                        key
+                        label(locale: $locale)
+                        name
+                      }
+                      size {
+                        value
+                        name
+                      }
+                    }
+                  }
+                }
+                variant(sku: $sku) {
+                  attributes {
+                    ...on mainProductType {
+                      color {
+                        key
+                        label(locale: $locale)
+                        name
+                      }
+                      size {
+                        value
+                        name
+                      }               
+                    }
+                  }
+                }
+              }
+              
+              staged @include(if: $preview) {
                 allVariants {
                   sku
                   attributes {
@@ -99,6 +134,7 @@ export default {
         return {
           locale: this.$i18n.locale,
           sku: this.sku,
+          preview: this.$route.query.preview === 'true' || false,
         };
       },
     },
