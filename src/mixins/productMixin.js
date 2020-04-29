@@ -1,7 +1,7 @@
 export default {
   computed: {
     currentProduct() {
-      return this.product.masterData.current || {};
+      return this.product.masterData.staged || this.product.masterData.current;
     },
 
     hasPrice() {

@@ -1,10 +1,22 @@
 import { locale as loc } from '../common/shared';
+
+let preview = false;
 // locale is an optional route parameter, if it's missing
 // then see if it's set in store (local storage) and use that
 // if it's not in store then default to en
 const checkLocale = (component) => {
   const { name, query, params } = component.$route;
   let newParams = params;
+  let newQuery = query;
+  if (query.preview) {
+    preview = true;
+  }
+  if (preview && !query.preview) {
+    newQuery = {
+      ...query,
+      preview: true,
+    };
+  }
   if (!params.country) {
     const country = component?.$store?.state?.country || 'DE';
     newParams = {
@@ -19,10 +31,10 @@ const checkLocale = (component) => {
       locale,
     };
   }
-  if (params !== newParams) {
+  if (params !== newParams || query !== newQuery) {
     component.$router.replace({
       name,
-      query,
+      query: newQuery,
       params: newParams,
     });
   }
