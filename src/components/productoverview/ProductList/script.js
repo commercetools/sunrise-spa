@@ -141,6 +141,7 @@ const getProducts = (component) => {
         }),
       ),
     };
+
     component.facets = facets;
     component.loadingProducts = false;
     component.loadingFacets = false;

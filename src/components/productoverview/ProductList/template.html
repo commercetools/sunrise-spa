@@ -1,8 +1,7 @@
 <div>
   <LoadingSpinner v-if="isLoading"/>
   <div v-else-if="categories && products">
-    <form v-if="products.results.length"
-          id="form-filter-products"
+    <form id="form-filter-products"
           name="filter-products" action="#">
       <!--  {{#if content.searchTerm}}
         <input type="hidden" name="q" value="{{content.searchTerm}}"/>
@@ -48,11 +47,19 @@
           </div>
         </div>
         <div class="col-xs-12 col-sm-9 col-md-9">
-          <div id="pop-product-list" class="row">
+          <div id="pop-product-list" class="row" v-if="products.results.length">
             <ProductThumbnail v-for="product in products.results"
                               data-test="product-list"
                               :key="product.id"
                               :product="product" />
+          </div>
+          <div v-else>
+            <div class="empty-results-container">
+                <span class="empty-results"
+                      data-test="empty-results">
+                  {{ $t('notFound') }}
+                </span>
+            </div>
           </div>
         </div>
       </div>
@@ -76,14 +83,6 @@
           @pagechanged="changePage" />
       </div>
     </form>
-    <div v-else>
-      <div class="empty-results-container">
-          <span class="empty-results"
-                data-test="empty-results">
-            {{ $t('notFound') }}
-          </span>
-      </div>
-    </div>
   </div>
   <div v-else>
     <div class="empty-results-container">
