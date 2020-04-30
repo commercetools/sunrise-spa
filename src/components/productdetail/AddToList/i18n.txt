@@ -1,0 +1,4 @@
+de:
+  addToList: "In der Liste"
+en:
+  addToList: "Add to List"

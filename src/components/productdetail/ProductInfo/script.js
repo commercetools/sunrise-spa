@@ -4,6 +4,7 @@ import ProductGallery from '../ProductGallery/index.vue';
 import SocialMediaLinks from '../SocialMediaLinks/index.vue';
 import DetailsSection from '../DetailsSection/index.vue';
 import AddToCartForm from '../AddToCartForm/index.vue';
+import AddToList from '../AddToList/index.vue';
 import BasePrice from '../../common/BasePrice/index.vue';
 import VariantSelector from '../VariantSelector/index.vue';
 import StoreLocator from '../../stores/PageStoreLocator/index.vue';
@@ -22,6 +23,7 @@ export default {
     ProductGallery,
     SocialMediaLinks,
     AddToCartForm,
+    AddToList,
     BasePrice,
     InventoryAvailability,
     VariantSelector,

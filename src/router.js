@@ -32,6 +32,7 @@ import StoreLocator from './components/stores/PageStoreLocator/index.vue';
 import { pageFromRoute } from './components/common/shared';
 import Root from './components/root/index.vue';
 
+import TabMyLists from './components/useraccount/MyLists/index.vue';
 
 Vue.use(Router);
 
@@ -129,6 +130,11 @@ const router = new Router({
               path: 'orders/:page?',
               name: 'orders',
               component: TabOrderList,
+            },
+            {
+              path: 'lists',
+              name: 'lists',
+              component: TabMyLists,
             },
             {
               path: 'account', alias: '', name: 'user', component: TabPersonalDetails,

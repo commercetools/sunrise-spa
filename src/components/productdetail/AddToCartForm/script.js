@@ -4,6 +4,7 @@ import ServerError from '../../common/form/ServerError/index.vue';
 import LoadingButton from '../../common/form/LoadingButton/index.vue';
 import BaseSelect from '../../common/form/BaseSelect/index.vue';
 import BaseForm from '../../common/form/BaseForm/index.vue';
+import AddToList from '../AddToList/index.vue';
 
 const MAX_QUANTITY = 10;
 export default {
@@ -18,6 +19,7 @@ export default {
     BaseSelect,
     LoadingButton,
     ServerError,
+    AddToList,
   },
   mixins: [cartMixin],
   data: () => ({
