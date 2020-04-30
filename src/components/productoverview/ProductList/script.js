@@ -90,7 +90,7 @@ const getProducts = (component) => {
           pageSize: component.limit,
           priceCurrency: currency,
           priceCountry: country,
-          priceChannel: component.allChannels ? null : priceChannel,
+          priceChannel: component.showAllChannels ? null : priceChannel,
           priceCustomerGroup: customerGroup,
           ...sort,
           ...searchText,
@@ -104,7 +104,7 @@ const getProducts = (component) => {
           category,
           priceCurrency: currency,
           priceCountry: country,
-          priceChannel: component.allChannels ? null : priceChannel,
+          priceChannel: component.showAllChannels ? null : priceChannel,
           priceCustomerGroup: customerGroup,
           ...searchText,
           staged: route.query.preview,
@@ -171,10 +171,13 @@ export default {
     loadingProducts: false,
     loadingFacets: false,
     facetFilter: {},
-    allChannels: false,
+    showAllChannels: false,
   }),
   // please circle ci give me a status report
   computed: {
+    allChannels() {
+      return this.showAllChannels || !this.$store?.state?.channel;
+    },
     category() {
       return this.categories.results[0];
     },
@@ -205,7 +208,7 @@ export default {
       this.facetFilter = { ...this.facetFilter, [name]: value };
     },
     channelChange(value) {
-      this.allChannels = value;
+      this.showAllChannels = value;
     },
     changePage(page) {
       pushPage(page, this, 'products');
