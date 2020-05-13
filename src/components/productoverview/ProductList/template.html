@@ -8,11 +8,7 @@
         <ProductThumbnail v-for="product in products.results" data-test="product-list" :key="product.id"
           :product="product" />
       </div>
-      <Pagination 
-        :pageSize="limit"
-        :total="totalProducts"
-        :page="page"
-        @pagechanged="changePage" />
+      <Pagination :pageSize="limit" :total="totalProducts" :page="page" @pagechanged="changePage" />
     </div>
 
     <div v-else>

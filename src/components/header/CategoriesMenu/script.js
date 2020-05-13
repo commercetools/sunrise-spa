@@ -16,11 +16,19 @@ export default {
     openCategoryMenu: '',
     someCategoryWasClicked: false,
   }),
+
   methods: {
     mobileImage(level) {
       return this.isMenuOpen(level)
         ? minus
         : plus;
+    },
+    isActive(name) {
+      // eslint-disable-next-line no-param-reassign
+      name = name.toLowerCase();
+      // eslint-disable-next-line no-useless-escape
+      const regex = new RegExp(`^${name}*\w?`);
+      return this.$route.params.categorySlug?.match(regex);
     },
     isSale({ externalId }) {
       const categoriesConfig = this.$sunrise.categories;

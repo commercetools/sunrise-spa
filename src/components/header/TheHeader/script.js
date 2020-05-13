@@ -1,11 +1,9 @@
-import LocationSelector from '../LocationSelector/index.vue';
 import CategoriesMenu from '../CategoriesMenu/index.vue';
 import LoginButton from '../LoginButton/index.vue';
 import MiniCart from '../MiniCart/index.vue';
 
 export default {
   components: {
-    LocationSelector,
     CategoriesMenu,
     LoginButton,
     MiniCart,
@@ -14,18 +12,28 @@ export default {
     return {
       searchText: this.$route.query.q || '',
       mobileMenuOpen: false,
+      searchOpen: false,
     };
   },
   methods: {
+    toggleSearch() {
+      this.searchOpen = !this.searchOpen;
+    },
     search() {
-      const { query } = this.$route;
+      this.toggleSearch();
+      const {
+        query,
+      } = this.$route;
       this.$router.push({
         name: 'products',
         params: {
           categorySlug: 'all',
           page: 1,
         },
-        query: { ...query, q: this.searchText },
+        query: {
+          ...query,
+          q: this.searchText,
+        },
       });
     },
     toggleMobileMenu() {

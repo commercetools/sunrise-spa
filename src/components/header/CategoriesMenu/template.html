@@ -1,17 +1,20 @@
 <nav>
   <ul v-if="categories && categories.results.length">
-    <li v-for="category1stLevel in categories.results" :key="category1stLevel.id"
+    <li class="position-static" v-for="category1stLevel in categories.results" :key="category1stLevel.id"
       @mouseenter="hoverOnCategory(category1stLevel)" @mouseleave="hoverOffCategory()" data-test="category-1st-level">
       <router-link :to="{ name: 'products', params: { categorySlug: category1stLevel.slug } }"
-        @click.native="clickOnCategory()" data-test="category-1st-level-link">
+        @click.native="clickOnCategory()" :class="isActive(category1stLevel.name) ? 'active' : ''"
+        data-test="category-1st-level-link">
         {{ category1stLevel.name.toUpperCase() }}
       </router-link>
-      <!-- <img :alt="$t('more')" class="mobile-plus-content visible-xs" @click="toggleOpenCategory(category1stLevel)"
-          v-bind:src="mobileImage(category1stLevel)" /> -->
-      <ul v-if="category1stLevel.children.length" class="mega-menu mega-menu-width3">
+
+      <ul v-if="category1stLevel.children.length" class="mega-menu"
+        :class="category1stLevel.children.length === 2 ? 'menu-2-col mega-menu-width3' : 'mega-menu-width3'">
+
         <li>
           <ul class="mega-menu-width4">
-            <li v-for="category2ndLevel in category1stLevel.children" :key="category2ndLevel.id">
+            <li v-if="category2ndLevel.children.length" v-for="category2ndLevel in category1stLevel.children"
+              :key="category2ndLevel.id">
               <router-link class="menu-title"
                 :to="{ name: 'products', params: { categorySlug: category2ndLevel.slug } }"
                 @click.native="clickOnCategory()" data-test="category-2nd-level-link">

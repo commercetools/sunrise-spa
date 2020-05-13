@@ -1,139 +1,95 @@
-<div>
-    <header class="header-area">
-        <div class="main-header-wrap">
-            <div class="custom-container">
-                <div class="header-top pt-10">
-                    <div class="row align-items-center">
-                        <div class="col-sm-6">
-                            <div class="header-info">
-                                <a href="#">STORES</a>
-                                <a href="#">HELP</a>
-                            </div>
+<header class="header-area">
+    <div class="main-header-wrap bg-gray">
+        <div class="custom-container">
+            <div class="header-top pt-10 pb-10">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="header-info header-info-inc">
+                            <a href="#">STORES</a>
+                            <a href="#">HELP</a>
                         </div>
-                        <div class="col-sm-6 d-flex justify-content-end">
-                            <div class="curr-lang-wrap">
-                                <ul>
-                                    <LocationSelector v-bind:values="$sunrise.countries" title='location' />
-                                    <LocationSelector v-bind:values="$sunrise.languages" title="language" />
-                                </ul>
-                            </div>
+                    </div>
+                    <div class="col-sm-6 d-flex justify-content-end">
+                        <div class="curr-lang-wrap curr-lang-inc">
+                            <ul>
+                                <LocationSelector v-bind:values="$sunrise.countries" title="location" />
+                                <LocationSelector v-bind:values="$sunrise.languages" title="language" />
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="site-header-outer">
-                <div class="intelligent-header bg-white">
-                    <div class="header-middle header-middle-mrg">
-                        <div class="custom-container">
-                            <div class="row align-items-center">
-                                <div class="col-md-4">
-                                    <div class="logo">
-                                        <router-link to="/">
-                                            <img src="../../../assets/img/logo.svg" alt="SUNRISE"
-                                                class="img-responsive sunrise-logo" />
-                                        </router-link>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="header-search header-search-mrg">
-                                        <form class="search-form" action="#">
-                                            <input name="q" type="search" :placeholder="$t('search')" id="search-input"
-                                                class="search-field" v-model="searchText" required />
-                                            <button>
-                                                <i class="dl-icon-search10"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="header-component-wrap">
-                                        <LoginButton />
-                                        <MiniCart />
-                                    </div>
+        </div>
+        <div class="site-header-outer">
+            <div class="intelligent-header bg-white">
+                <div class="header-middle">
+                    <div class="custom-container">
+                        <div class="row align-items-center">
+                            <div class="col-xl-2 col-lg-3">
+                                <div class="logo">
+                                    <router-link to="/">
+                                        <img src="../../../assets/img/logo.svg" alt="SUNRISE"
+                                            class="img-responsive sunrise-logo" />
+                                    </router-link>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="header-bottom">
-                        <div class="custom-container">
-                            <div class="menu-support-wrap">
-                                <div class="main-menu menu-lh-1">
+                            <div class="col-xl-8 col-lg-6 position-static">
+                                <div class="main-menu menu-lh-3 main-menu-blod main-menu-center">
                                     <CategoriesMenu />
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="header-small-mobile">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-6">
-                        <div class="mobile-logo logo-width">
-                            <a href="index.html">
-                                <img alt="" src="assets/images/logo/logo.svg">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="mobile-header-right-wrap">
-                            <div class="same-style cart-wrap">
-                                <a href="#" class="cart-active">
-                                    <i class="dl-icon-cart1 "></i>
-                                    <span class="count-style">02</span>
-                                </a>
-                            </div>
-                            <div class="mobile-off-canvas">
-                                <a class="mobile-aside-button" href="#"><i class="dl-icon-menu2"></i></a>
+                            <div class="col-xl-2 col-lg-3">
+                                <div class="header-component-wrap">
+                                    <div class="header-search-2 component-same">
+                                        <a href="javascript:;" @click="toggleSearch" class="search-active">
+                                            <i class="dl-icon-search10"></i>
+                                        </a>
+                                    </div>
+                                    <LoginButton />
+                                    <MiniCart />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <div class="sidebar-cart-active">
-        <div class="sidebar-cart-all">
-            <a class="cart-close" href="#"><i class="dl-icon-close"></i></a>
-            <div class="cart-content">
-                <h3>Shopping Cart</h3>
-                <ul>
-                    <li class="single-product-cart">
-                        <div class="cart-img">
-                            <a href="#"><img src="assets/images/cart/cart-1.jpg" alt=""></a>
-                        </div>
-                        <div class="cart-title">
-                            <h4><a href="#">Paisley print dress</a></h4>
-                            <p><span>Vendor:</span> HasTech</p>
-                            <span>3 × $23.99</span>
-                        </div>
-                        <div class="cart-delete">
-                            <a href="#">×</a>
-                        </div>
-                    </li>
-                    <li class="single-product-cart">
-                        <div class="cart-img">
-                            <a href="#"><img src="assets/images/cart/cart-2.jpg" alt=""></a>
-                        </div>
-                        <div class="cart-title">
-                            <h4><a href="#">Asymmetrical satin dress </a></h4>
-                            <p><span>Vendor:</span> HasTech</p>
-                            <span>1 × $23.99</span>
-                        </div>
-                        <div class="cart-delete">
-                            <a href="#">×</a>
-                        </div>
-                    </li>
-                </ul>
-                <div class="cart-total">
-                    <h4>Subtotal: <span>$150.00</span></h4>
-                </div>
-                <div class="cart-checkout-btn">
-                    <a class="btn-hover cart-btn-style" href="cart.html">view cart</a>
-                    <a class="no-mrg btn-hover cart-btn-style" href="checkout.html">checkout</a>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <div class="header-small-mobile">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-6">
+                    <div class="mobile-logo logo-width">
+                        <a href="index.html">
+                            <img alt="" src="assets/images/logo/logo.svg" />
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="mobile-header-right-wrap">
+                        <div class="same-style cart-wrap">
+                            <a href="#" class="cart-active">
+                                <i class="dl-icon-cart1 "></i>
+                                <span class="count-style">02</span>
+                            </a>
+                        </div>
+                        <div class="mobile-off-canvas">
+                            <a class="mobile-aside-button" href="#"><i class="dl-icon-menu2"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="search-content-wrap main-search-active" :class="{'search-visible' : searchOpen}">
+        <a @click="toggleSearch" class="search-close"><i class="dl-icon-close"></i></a>
+        <div class="search-content">
+            <form class="search-form">
+                <input name="q" type="text" v-model="searchText" placeholder="Search entire store…" />
+                <button @click="search" class="button-search">
+                    <i class="dl-icon-search10"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</header>

@@ -13,7 +13,7 @@
 }
 
 .sunrise-logo {
-    width: 60%;
+    width: 90%;
 }
 
 .header-area {
@@ -365,7 +365,7 @@
     transition: all 250ms ease-in;
     transform: translate(200px, 0);
     box-shadow: 0 0 87px 0 rgba(0, 0, 0, .09);
-    background-color: #fff;
+    background-color: #f2f2f2;
 
     &.inside {
         visibility: visible;
@@ -444,7 +444,7 @@
 
                         a {
                             img {
-                                width: 100%
+                                width: 100%;
                             }
                         }
                     }
@@ -687,18 +687,6 @@
                     &.active {
                         font-weight: 600;
                         color: $theme-color;
-
-                        &::after {
-                            content: "";
-                            right: 0;
-                            position: absolute;
-                            left: 0;
-                            width: 100%;
-                            bottom: 2px;
-                            top: 64%;
-                            height: 2px;
-                            background-color: $theme-color;
-                        }
                     }
                 }
 
@@ -790,7 +778,7 @@
                     }
 
                     &.mega-menu-width1 {
-                        width: 670px;
+                        width: 30em;
 
                         li {
                             width: 203.333px;
@@ -810,8 +798,8 @@
                     }
 
                     &.mega-menu-width2 {
-                        width: 1170px;
-                        left: -500px;
+                        width: 60%;
+                        left: 20%;
 
                         &.res-mega-menu-width2 {
                             left: -580px;
@@ -879,16 +867,19 @@
                 &.position-static {
                     position: static;
 
-                    >.mega-menu-width3 {
-                        width: 100%;
-                        left: 0px;
+
+
+                    &>.mega-menu-width3 {
+                        width: 60%;
+                        left: 20%;
+                        padding: 3%;
 
                         >li {
                             float: inherit;
                             display: block;
 
                             >ul.mega-menu-width4 {
-                                width: 1200px;
+                                width: 100%;
                                 margin: 0 auto;
                                 display: block;
                                 overflow: hidden;
@@ -904,7 +895,8 @@
                                 >li {
                                     display: inline-block;
                                     float: left;
-                                    width: 400px;
+                                    width: 33.3%;
+                                    text-align: left;
 
                                     @media #{$lg-layout} {
                                         width: 320.667px;
@@ -962,6 +954,19 @@
                                             }
                                         }
                                     }
+                                }
+                            }
+                        }
+                    }
+
+                    &>.menu-2-col {
+                        width: 40%;
+                        left: 30%;
+
+                        >li {
+                            >ul.mega-menu-width4 {
+                                >li {
+                                    width: 50%;
                                 }
                             }
                         }
@@ -1093,7 +1098,7 @@
                 >li {
                     >a {
                         font-weight: 600;
-                        font-size: 18px;
+                        font-size: 17px;
                         text-transform: capitalize;
 
                         >span {
@@ -1802,7 +1807,7 @@
     left: 0;
     opacity: 0;
     visibility: hidden;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.97);
     text-align: center;
     transition: all ease-in-out .25s;
     z-index: 99999;
@@ -2231,7 +2236,8 @@
                                 >li {
                                     display: inline-block;
                                     float: left;
-                                    width: 400px;
+                                    width: 33.3%;
+                                    padding-left: 20px;
 
                                     @media #{$xx-layout} {
                                         width: 350px;
