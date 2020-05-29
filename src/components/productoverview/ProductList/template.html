@@ -1,14 +1,31 @@
 <div class="shop-area pb-100">
   <LoadingSpinner v-if="isLoading" />
-  <div v-else-if="categories && products">
-    <TopBar @toggleFilter="toggleFilter" @changeSort="changeSort" v-bind:show="show" v-bind:sort="sort" />
+  <div class="custom-container" v-else-if="categories && products">
+    <TopBar
+      @toggleFilter="toggleFilter"
+      @changeSort="changeSort"
+      v-bind:show="show"
+      v-bind:sort="sort"
+      v-bind:count="products.count"
+      v-bind:offset="products.offset"
+      v-bind:total="products.total"
+    />
     <ProductFilter :facets="facets" v-bind:show="show" />
     <div class="shop-wrapper" v-if="products.results.length">
       <div class="row">
-        <ProductThumbnail v-for="product in products.results" data-test="product-list" :key="product.id"
-          :product="product" />
+        <ProductThumbnail
+          v-for="product in products.results"
+          data-test="product-list"
+          :key="product.id"
+          :product="product"
+        />
       </div>
-      <Pagination :pageSize="limit" :total="totalProducts" :page="page" @pagechanged="changePage" />
+      <Pagination
+        :pageSize="limit"
+        :total="totalProducts"
+        :page="page"
+        @pagechanged="changePage"
+      />
     </div>
 
     <div v-else>

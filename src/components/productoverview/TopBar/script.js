@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 export default {
-  props: ['show', 'sort'],
+  props: ['show', 'sort', 'offset', 'count', 'total'],
   components: {
   },
   data() {

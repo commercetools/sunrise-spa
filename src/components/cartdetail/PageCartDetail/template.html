@@ -1,5 +1,5 @@
 <div>
-  <div class="breadcrumb-area bg-gray mt-175">
+  <div class="breadcrumb-area bg-gray mt-120">
     <div class="container-fluid">
       <div class="breadcrumb-content text-center">
         <div class="breadcrumb-title">
@@ -9,12 +9,12 @@
           <li>
             <a href="index.html">Home </a>
           </li>
-          <li class="active"> Cart</li>
+          <li class="active">Cart</li>
         </ul>
       </div>
     </div>
   </div>
-  <LoadingSpinner v-if="isLoading"/>
+  <LoadingSpinner v-if="isLoading" />
   <div class="cart-main-area pt-95 pb-100" v-else-if="cartNotEmpty">
     <div class="container">
       <div class="row">
@@ -22,12 +22,21 @@
           <form action="#">
             <div class="row">
               <div class="col-lg-8">
-                <CartLikeContentDetail :cartLike="me.activeCart"
-                :editable="true"/>
+                <CartLikeContentDetail
+                  :cartLike="me.activeCart"
+                  :editable="true"
+                />
                 <div class="cart-shiping-update-wrapper">
                   <div class="discount-code">
-                    <input type="text" required="" name="name" placeholder="Coupon code">
-                    <button class="coupon-btn" type="submit">Apply coupon</button>
+                    <input
+                      type="text"
+                      required=""
+                      name="name"
+                      placeholder="Coupon code"
+                    />
+                    <button class="coupon-btn" type="submit">
+                      Apply coupon
+                    </button>
                   </div>
                   <div class="cart-clear">
                     <a href="#">Clear Cart</a>
@@ -53,9 +62,28 @@
                       </div>
                       <div class="single-grand-total-right">
                         <ul>
-                          <li><input type="radio" name="shipping" value="info" checked="checked">Flat rate: $2.00</li>
-                          <li><input type="radio" name="shipping" value="info2">Free shipping</li>
-                          <li><input type="radio" name="shipping" value="info3">Local pickup: $0.00</li>
+                          <li>
+                            <input
+                              type="radio"
+                              name="shipping"
+                              value="info"
+                              checked="checked"
+                            />Flat rate: $2.00
+                          </li>
+                          <li>
+                            <input
+                              type="radio"
+                              name="shipping"
+                              value="info2"
+                            />Free shipping
+                          </li>
+                          <li>
+                            <input
+                              type="radio"
+                              name="shipping"
+                              value="info3"
+                            />Local pickup: $0.00
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -82,8 +110,7 @@
   </div>
 </div>
 
-
-  <!-- <LoadingSpinner v-if="isLoading"/>
+<!-- <LoadingSpinner v-if="isLoading"/>
     <div v-else-if="cartNotEmpty">
       <div class="row">
         <div class="col-sm-12">

@@ -1,25 +1,24 @@
-  <div>
-    <ol v-if="cat && category"
-        class="breadcrumb">
-      <li>
-        <router-link to="/"
-                     data-test="breadcrumb-home-link">
-          {{ $t('home') }}
-        </router-link>
-      </li>
-      <li v-for="ancestor in category.ancestors"
-          :key="ancestor.id">
-        <router-link :to="{ name: 'products', params: { categorySlug: ancestor.slug } }"
-                     data-test="breadcrumb-ancestor-link">
-          {{ ancestor.name }}
-        </router-link>
-      </li>
-      <li class="active">
-        <router-link :to="{ name: 'products', params: { categorySlug: category.slug } }"
-                     data-test="breadcrumb-category-link"
-                     class="active">
-          &nbsp;&gt;&nbsp;{{ category.name }}
-        </router-link>
-      </li>
-    </ol>
+<div class="breadcrumb-area breadcrumb-bg-1 bg-gray mt-110">
+  <div class="container-fluid"></div>
+    <div class="breadcrumb-content text-center">
+      <div class="breadcrumb-title">
+        <h2>{{category.name}}</h2>
+      </div>
+      <ul>
+        <li>
+          <router-link to="/" data-test="breadcrumb-home-link">
+            {{ $t('home') }}
+          </router-link>
+        </li>
+        <li class="active" v-for="ancestor in category.ancestors">
+          <router-link
+            :to="{ name: 'products', params: { categorySlug: ancestor.slug } }"
+            class="active"
+          >
+            {{ancestor.name}}
+          </router-link>
+        </li>
+      </ul>
+    </div>
   </div>
+</div>
