@@ -41,6 +41,9 @@ export default {
         Vue.nextTick(() => $('.nav-minicart section').scrollTop(0));
       }
     },
+    totalItems() {
+      this.$store.dispatch('setCartItems', this.totalItems);
+    },
   },
   apollo: {
     me: {

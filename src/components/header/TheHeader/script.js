@@ -19,6 +19,11 @@ export default {
     };
   },
   mixins: [cartMixin],
+  computed: {
+    totalCartItems() {
+      return this.$store.state.cartItems;
+    },
+  },
   methods: {
     toggleSearch() {
       this.searchOpen = !this.searchOpen;
