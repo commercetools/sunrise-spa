@@ -1,5 +1,5 @@
 import ProductList from '../ProductList/index.vue';
-import Breadcrumb from '../../common/Breadcrumb/index.vue';
+import Breadcrumb from '../../common/Breadcrumb/Breadcrumb.vue';
 
 export default {
   components: {

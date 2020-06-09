@@ -1,5 +1,5 @@
 en:
-  title: "New Customer Registration"
+  title: "Registration"
   description: "Create an account to store your products, easy checkouts, customer discounts, benefits and more."
   titleSelect: "Title"
   firstName: "First Name"
@@ -16,7 +16,7 @@ en:
   registerNow: "Register Now"
   duplicatedEmail: "A customer with this email already exists"
 de:
-  title: "Neukunden Resigstrierung"
+  title: "Resigstrierung"
   description: "Konto einrichten, um das Shoppen noch einfacher zu machen."
   titleSelect: "Titel"
   firstName: "Vorname"

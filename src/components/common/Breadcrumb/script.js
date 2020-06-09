@@ -5,14 +5,14 @@ export default {
   props: ['categorySlug'],
   data: () => ({
     categories: null,
+    currentCategory: null,
   }),
-  computed: {
-    category: vm => ((vm.categorySlug === 'all')
-      ? { name: vm.$t('all'), slug: 'all' }
-      : vm.categories.results[0]),
-    cat: vm => ((vm.categorySlug === 'all')
-      ? true
-      : vm.categories),
+  watch: {
+    categories() {
+      this.currentCategory = (this.categorySlug === 'all')
+        ? { name: this.$t('all'), slug: 'all', ancestors: [] }
+        : this.categories.results[0];
+    },
   },
   apollo: {
     categories: {

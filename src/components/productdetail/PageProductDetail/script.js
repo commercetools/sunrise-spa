@@ -1,4 +1,4 @@
-import Breadcrumb from '../../common/Breadcrumb/index.vue';
+import Breadcrumb from '../../common/Breadcrumb/Breadcrumb.vue';
 import ProductInfo from '../ProductInfo/index.vue';
 
 export default {

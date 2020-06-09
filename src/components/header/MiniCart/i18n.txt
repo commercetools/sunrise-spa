@@ -6,6 +6,7 @@
     totalPrice: "Gesamtpreis"
     delete: "Löschen"
     checkout: "Checkout"
+    emptyCart: "Ihr Warenkorb ist derzeit leer"
   en:
     miniCart: "Cart"
     viewBag: "View Cart"
@@ -14,3 +15,4 @@
     totalPrice: "Total"
     delete: "Delete"
     checkout: "Checkout"
+    emptyCart: "Your cart is currently empty"

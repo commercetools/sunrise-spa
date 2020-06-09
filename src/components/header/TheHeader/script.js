@@ -1,12 +1,15 @@
 import CategoriesMenu from '../CategoriesMenu/index.vue';
 import LoginButton from '../LoginButton/index.vue';
+import LocationSelector from '../LocationSelector/index.vue';
 import MiniCart from '../MiniCart/index.vue';
+import cartMixin from '../../../mixins/cartMixin';
 
 export default {
   components: {
     CategoriesMenu,
     LoginButton,
     MiniCart,
+    LocationSelector,
   },
   data() {
     return {
@@ -15,6 +18,7 @@ export default {
       searchOpen: false,
     };
   },
+  mixins: [cartMixin],
   methods: {
     toggleSearch() {
       this.searchOpen = !this.searchOpen;
@@ -41,6 +45,9 @@ export default {
     },
     onToggleMinicart() {
       this.$store.dispatch('toggleMiniCart');
+    },
+    openMiniCart() {
+      this.$store.dispatch('openMiniCart', 0);
     },
   },
   watch: {

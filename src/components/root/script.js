@@ -36,6 +36,9 @@ export default {
     locale() {
       return loc(this);
     },
+    miniCartOpen() {
+      return this.$store.state.miniCartOpen;
+    },
   },
   data() {
     return {

@@ -5,7 +5,7 @@ en:
   email: "Email"
   password: "Password"
   rememberMe: "Remember Me"
-  forgotPassword: "Forgot Password"
+  forgotPassword: "Forgot your password?"
   signIn: "Sign In"
   invalidCredentials: "Invalid credentials"
 de:
