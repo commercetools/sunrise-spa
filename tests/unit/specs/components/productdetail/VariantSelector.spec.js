@@ -1,6 +1,6 @@
 import VueRouter from 'vue-router';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import VariantSelector from '@/components/productdetail/VariantSelector/index.vue';
+import VariantSelector from '@/components/productdetail/VariantSelector/VariantSelector.vue';
 
 const localVue = createLocalVue();
 localVue.use(VueRouter);

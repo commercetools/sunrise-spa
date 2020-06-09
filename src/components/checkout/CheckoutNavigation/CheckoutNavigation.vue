@@ -1,0 +1,29 @@
+<style src="./CheckoutNavigation.scss" lang="scss" scoped></style>
+<i18n src="./CheckoutNavigation.txt"></i18n>
+<script src="./CheckoutNavigation.js"></script>
+
+<template>
+  <div class="row checkout-navigation-buttons">
+    <div class="col-sm-6 col-xs-6">
+      <div>
+        <button @click="goBack"
+                type="button"
+                class="btn-grey text-uppercase back-button"
+                data-test="back-checkout-button">
+          {{ $t('back') }}
+        </button>
+      </div>
+    </div>
+    <div class="col-sm-6 col-xs-6">
+      <div>
+        <LoadingButton :state="state"
+                       id="shipping-continue-checkout-btn-xs"
+                       class="btn text-uppercase next-button"
+                       data-test="continue-checkout-button">
+          {{ $t('continue') }}
+        </LoadingButton>
+      </div>
+    </div>
+  </div>
+
+</template>

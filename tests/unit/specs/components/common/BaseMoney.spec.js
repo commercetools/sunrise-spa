@@ -1,6 +1,6 @@
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import BaseMoney from '@/components/common/BaseMoney/index.vue';
+import BaseMoney from '@/components/common/BaseMoney/BaseMoney.vue';
 
 const localVue = createLocalVue();
 

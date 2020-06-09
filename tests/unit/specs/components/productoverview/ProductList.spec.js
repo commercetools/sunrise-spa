@@ -1,7 +1,7 @@
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import ProductList from '@/components/productoverview/ProductList/index.vue';
-import ProductThumbnail from '@/components/common/ProductThumbnail/index.vue';
+import ProductList from '@/components/productoverview/ProductList/ProductList.vue';
+import ProductThumbnail from '@/components/common/ProductThumbnail/ProductThumbnail.vue';
 // tests/unit/specs/components/productoverview/
 jest.mock('../../../../../src/api', () => ({
   products: {

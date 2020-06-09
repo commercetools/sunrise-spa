@@ -1,6 +1,6 @@
 import VueI18n from 'vue-i18n';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import ValidationError from '@/components/common/form/ValidationError/index.vue';
+import ValidationError from '@/components/common/form/ValidationError/ValidationError.vue';
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);

@@ -1,6 +1,6 @@
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import EditProfileForm from '@/components/useraccount/userdetail/EditProfileForm/index.vue';
+import EditProfileForm from '@/components/useraccount/userdetail/EditProfileForm/EditProfileForm.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuelidate);

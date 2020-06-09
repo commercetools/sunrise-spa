@@ -4,7 +4,7 @@ import Vue from 'vue';
 import 'whatwg-fetch';
 import VueScrollTo from 'vue-scrollto';
 import Vuelidate from 'vuelidate';
-import App from './App/index.vue';
+import App from './App/App.vue';
 import router from './router';
 import store from './store';
 import apolloProvider from './apollo';

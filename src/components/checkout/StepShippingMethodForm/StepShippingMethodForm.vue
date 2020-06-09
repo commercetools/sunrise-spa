@@ -1,0 +1,43 @@
+<i18n src="./StepShippingMethodForm.txt"></i18n>
+<script src="./StepShippingMethodForm.js"></script>
+
+<template>
+  <div v-if="cartExists">
+    <BaseForm :vuelidate="$v"
+              :onSubmit="setShippingMethod"
+              #default="{ error, state }">
+      <div class="checkout-step-title">
+        <span>{{ $t('shippingMethod') }}</span>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <ServerError :error="error"/>
+        </div>
+      </div>
+      <BaseLabel :vuelidate="$v.form.shippingMethod"
+                 data-test="checkout-form-shipping-methods">
+        <BaseRadio v-for="shippingMethod in shippingMethodsByLocation"
+                   v-model="form.shippingMethod"
+                   :value="shippingMethod.id"
+                   :key="shippingMethod.id"
+                   class="checkout-form-option">
+          <span class="option-name">
+            <span data-test="checkout-form-shipping-method-name">
+              {{ shippingMethod.name }}
+            </span>
+            <span class="option-description"
+                  data-test="checkout-form-shipping-method-description">
+              {{ shippingMethod.description }}
+            </span>
+          </span>
+          <BaseMoney :money="price(shippingMethod)"
+                     class="option-price"
+                     data-test="checkout-form-shipping-method-price"/>
+        </BaseRadio>
+      </BaseLabel>
+      <CheckoutNavigation :state="state"
+                          @back="goToBilling"/>
+    </BaseForm>
+  </div>
+
+</template>

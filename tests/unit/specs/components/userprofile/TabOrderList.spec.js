@@ -1,6 +1,6 @@
 import VueI18n from 'vue-i18n';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import TabOrderList from '@/components/useraccount/myorders/TabOrderList/index.vue';
+import TabOrderList from '@/components/useraccount/myorders/TabOrderList/TabOrderList.vue';
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);

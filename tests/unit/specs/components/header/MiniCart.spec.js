@@ -1,6 +1,6 @@
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import MiniCart from '@/components/header/MiniCart/index.vue';
+import MiniCart from '@/components/header/MiniCart/MiniCart.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);

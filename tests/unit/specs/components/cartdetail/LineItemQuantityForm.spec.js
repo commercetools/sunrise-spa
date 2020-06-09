@@ -1,6 +1,6 @@
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import LineItemQuantityForm from '@/components/cartdetail/LineItemQuantityForm/index.vue';
+import LineItemQuantityForm from '@/components/cartdetail/LineItemQuantityForm/LineItemQuantityForm.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuelidate);

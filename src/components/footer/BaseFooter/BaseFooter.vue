@@ -1,0 +1,23 @@
+<i18n src="./BaseFooter.txt"></i18n>
+
+<template>
+  <div>
+    <slot/>
+    <div class="sub-footer">
+      <div class="container">
+        <div class="row text-uppercase">
+          <div class="col-sm-12">
+            <ul class="footer-title imprint-row">
+              <li class="hidden-xs">© 2019 Sunrise</li>
+              <li><a href="#">{{ $t("imprint") }}</a></li>
+              <li><a href="#">{{ $t("privacyPolicy") }}</a></li>
+              <li><a href="#">{{ $t("termsOfUse") }}</a></li>
+              <li class="visible-xs">© 2019 Sunrise</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</template>

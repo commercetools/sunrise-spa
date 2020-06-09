@@ -1,6 +1,6 @@
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import BaseAddressForm from '@/components/checkout/BaseAddressForm/index.vue';
+import BaseAddressForm from '@/components/checkout/BaseAddressForm/BaseAddressForm.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuelidate);

@@ -1,6 +1,6 @@
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import LoginForm from '@/components/login/LoginForm/index.vue';
+import LoginForm from '@/components/login/LoginForm/LoginForm.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuelidate);

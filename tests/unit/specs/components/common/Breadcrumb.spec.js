@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import Breadcrumb from '@/components/common/Breadcrumb/index.vue';
+import Breadcrumb from '@/components/common/Breadcrumb/Breadcrumb.vue';
 
 describe('Breadcrumb/index.vue', () => {
   const someCategory = {

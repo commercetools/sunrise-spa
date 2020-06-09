@@ -1,0 +1,16 @@
+<script src="./AttributeSelect.js"></script>
+
+<template>
+  <div>
+    <select v-model="selectedValue"
+            class="select-product-detail"
+            :data-test="`attribute-select-${this.name}`">
+      <option v-for="value in distinctValues"
+              data-test="attribute-select-option"
+              :key="value">
+        {{value}}
+      </option>
+    </select>
+  </div>
+
+</template>

@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import CartLikeContentDetail from '@/components/common/cartlike/CartLikeContentDetail/index.vue';
+import CartLikeContentDetail from '@/components/common/cartlike/CartLikeContentDetail/CartLikeContentDetail.vue';
 
 describe('CartLikeContentDetail/index.vue', () => {
   const cartLike = {

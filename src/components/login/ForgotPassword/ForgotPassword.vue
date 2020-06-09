@@ -1,0 +1,54 @@
+<i18n src="./ForgotPassword.txt"></i18n>
+<script src="./ForgotPassword.js"></script>
+
+<template>
+<div class="my-account">
+  <div class="container">
+    <div class="my-account-title">
+      <span class="my-account-title-text icon-user">{{ $t('myAccount') }}</span>
+    </div>
+      <div class="row my-account-content">
+        <div class="col-sm-12 my-account-tab">
+          <div class="checkout-form-step">
+            <div class="personal-details-title">
+              <span>{{ $t('forgotPassword') }}</span>
+            </div>
+            <BaseForm :vuelidate="$v"
+                      :onSubmit="sendRecoveryEmail"
+                      #default="{ error, state }"
+                      id="form-forgot-password">
+              <ServerError :error="error"
+                          #default="{ graphQLError }">
+                {{ getErrorMessage(graphQLError) }}
+              </ServerError>
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-sections">
+                    <BaseInput v-model="email"
+                              :vuelidate="$v.email"
+                              :label="$t('email')"
+                              type="email"
+                              class="form-inputs"
+                              data-test="forgot-password-email"/>
+                  </div>
+                </div>
+              </div>
+              <hr class="light-grey-hr">
+              <div class="personal-details-edit-btn">
+                <span>
+                  <LoadingButton :state="state"
+                                 :disabled="!$v.$anyDirty"
+                                 type="submit"
+                                 data-test="forgot-password-form-submit">
+                    {{ $t('submit') }}
+                  </LoadingButton>
+                </span>
+              </div>
+            </BaseForm>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+</template>

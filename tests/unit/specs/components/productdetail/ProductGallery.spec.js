@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import ProductGallery from '@/components/productdetail/ProductGallery/index.vue';
+import ProductGallery from '@/components/productdetail/ProductGallery/ProductGallery.vue';
 
 describe('Product gallery', () => {
   let options;

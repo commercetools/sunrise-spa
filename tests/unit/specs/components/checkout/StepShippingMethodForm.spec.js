@@ -1,6 +1,6 @@
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import StepShippingMethodForm from '@/components/checkout/StepShippingMethodForm/index.vue';
+import StepShippingMethodForm from '@/components/checkout/StepShippingMethodForm/StepShippingMethodForm.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuelidate);

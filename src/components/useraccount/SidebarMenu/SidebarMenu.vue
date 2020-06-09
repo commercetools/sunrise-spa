@@ -1,0 +1,21 @@
+<style src="./SidebarMenu.scss" lang="scss" scoped></style>
+<i18n src="./SidebarMenu.txt"></i18n>
+<script src="./SidebarMenu.js"></script>
+
+<template>
+<div class="myaccount-tab-menu nav" role="tablist">
+  <router-link :to="{ name: 'user' }">
+    {{ $t("personalDetails") }}
+  </router-link>
+  <router-link :to="{ name: 'orders' }" data-test="my-orders-button">
+    {{ $t("myOrders") }}
+  </router-link>
+  <router-link :to="{ name: 'changepassword' }" data-test="change-password-button">
+    {{ $t("changePassword") }}
+  </router-link>
+  <a href="#" @click.prevent="logout">
+    {{ $t("signOut") }}
+  </a>
+</div>
+
+</template>

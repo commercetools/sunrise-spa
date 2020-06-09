@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import BasePrice from '@/components/common/BasePrice/index.vue';
+import BasePrice from '@/components/common/BasePrice/BasePrice.vue';
 
 describe('BasePrice/index.vue', () => {
   const discountedPrice = {

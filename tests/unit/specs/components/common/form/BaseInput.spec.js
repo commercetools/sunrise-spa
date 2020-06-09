@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import BaseInput from '@/components/common/form/BaseInput/index.vue';
+import BaseInput from '@/components/common/form/BaseInput/BaseInput.vue';
 
 describe('BaseInput/index.vue', () => {
   let options;

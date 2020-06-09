@@ -1,3 +1,3 @@
 <template src="./minicart-template.html"></template>
 <style src="./style.css" scoped></style>
-<script src="./script.js"></script>
+<script src="./BasePrice.js"></script>

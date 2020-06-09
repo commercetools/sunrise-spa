@@ -1,0 +1,8 @@
+
+<template>
+  <div id="app">
+    <router-view/>
+    <!--{{> common/wishlist wishlist=content.wishlist}}-->
+  </div>
+
+</template>
