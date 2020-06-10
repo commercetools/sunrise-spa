@@ -56,9 +56,14 @@ const removeHiddenFacetFromQuery = (facets, component) => {
 };
 const last = onlyLastRequestedPromise('products');
 const getProducts = (component) => {
-  const category = component.$route.params.categorySlug === 'all'
-    ? undefined
-    : component.categories?.results[0]?.id;
+  const {
+    category,
+    currency,
+    country,
+    loc,
+    searchText,
+    sort,
+  } = products.paramsFromComponent(component);
   if (
     !category
     && component.$route.params.categorySlug !== 'all'
@@ -68,18 +73,6 @@ const getProducts = (component) => {
   component.loadingProducts = true;
   component.loadingFacets = true;
   const route = component.$route;
-  const {
-    currency,
-    country,
-  } = component.$store.state;
-  const loc = locale(component);
-  const sortValue = route.query.sort;
-  const searchText = route.query.q
-    ? { [`text.${loc}`]: route.query.q }
-    : {};
-  const sort = sortValue
-    ? { sort: `lastModifiedAt ${sortValue === 'newest' ? 'desc' : 'asc'}` }
-    : {};
   last(
     Promise.all([
       products.get([

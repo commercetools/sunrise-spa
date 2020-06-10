@@ -18,7 +18,7 @@
       @click.prevent="previousPage"
       aria-label="Go to previous page"
     >Previous</a></li>
-    <li v-for="page in pages">
+    <li v-for="page in pages" v-bind:key="page">
       <a
         v-bind:class="{ active: isCurrentPage(page) }"
         @click.prevent="()=>goToPage(page)"

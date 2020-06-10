@@ -5,7 +5,7 @@
 <li>
   <a href="javascript:;">{{$t(title)}}</a>
   <ul>
-    <li v-for="value in listValues">
+    <li v-for="value in listValues" v-bind:key="value.name">
       <a @click.prevent="()=>setValue(value.id)" href="javascript:;"
         >{{value.name}}</a
       >

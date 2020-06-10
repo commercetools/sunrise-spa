@@ -23,7 +23,7 @@
         <i class="fa fa-angle-up angle-up"></i
       ></span>
       <ul>
-        <li v-for="item in sortItems" v-bind:class="{active:sort===item.id}">
+        <li v-for="item in sortItems" v-bind:key="item.id" v-bind:class="{active:sort===item.id}">
           <a href="#" @click.prevent="()=>changeSort(item.id)">{{item.name}}</a>
         </li>
       </ul>

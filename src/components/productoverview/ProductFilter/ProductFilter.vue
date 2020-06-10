@@ -7,10 +7,10 @@
   <div class="product-filter-wrapper">
     <div class="row">
       <!-- Product Filter -->
-      <div v-for="facet in facets" class="custom-col-width-23 mb-20">
+      <div v-for="facet in facets" v-bind:key="facet.label" class="custom-col-width-23 mb-20">
         <div class="product-filter">
           <h5>{{facet.label}}</h5>
-          <div class="filter-multiple" v-for="term in facet.terms">
+          <div class="filter-multiple" v-for="term in facet.terms" v-bind:key="term.term">
             <ul>
               <li><label>
                   <input type="checkbox" :name="facet.name" :value="term.term"
