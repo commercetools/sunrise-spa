@@ -3,6 +3,6 @@ en:
   notFound: "No Results Found"
   categoryNotFound: "Category Not Found"
 de:
-  go-to-top: "????? ??? ???"
+  go-to-top: Seitenanfang"
   notFound: "Keine Ergebnisse Gefunden"
   categoryNotFound: "Kategorie nicht gefunden"

@@ -59,6 +59,9 @@ export default {
           locale: locale(this),
         };
       },
+      skip() {
+        return !locale(this);
+      },
     },
   },
   validations: {

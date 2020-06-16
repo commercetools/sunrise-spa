@@ -1,0 +1,8 @@
+en:
+  filterProducts: "Filter Products"
+  clear: "Clear"
+  filter: "Filter"
+de:
+  filterProducts: "Artikel filtern"
+  clear: "Alle löschen"
+  filter: "????"

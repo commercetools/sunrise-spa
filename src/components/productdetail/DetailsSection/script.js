@@ -14,7 +14,8 @@ export default {
   }),
   computed: {
     productAttributes() {
-      const { attributes } = this.product.masterData.current.variant;
+      const selected = this.product.masterData.staged || this.product.masterData.current;
+      const { attributes } = selected.variant;
       delete attributes.__typename;
       return Object.values(attributes).filter(attribute => attribute)
         .map(a => ({
@@ -36,11 +37,47 @@ export default {
   apollo: {
     product: {
       query: gql`
-        query ProductDetailsSection($locale: Locale!, $sku: String!) {
+        query ProductDetailsSection($locale: Locale!, $sku: String!, $preview: Boolean!) {
           product(sku: $sku) {
             id
             masterData {
-              current {
+              current @skip(if: $preview) {
+                variant(sku: $sku) {
+                  attributes {
+                    ...on mainProductType {
+                      designer {
+                        label
+                        key
+                        name
+                      }
+                      colorFreeDefinition {
+                        value(locale: $locale)
+                        name
+                      }
+                      size {
+                        value
+                        name
+                      }
+                      style {
+                        key
+                        label
+                        name
+                      }
+                      gender {
+                        key
+                        label
+                        name
+                      }
+                      articleNumberManufacturer {
+                        name
+                        value
+                      }
+                    }
+                  }
+                }
+              }
+
+              staged @include(if: $preview) {
                 variant(sku: $sku) {
                   attributes {
                     ...on mainProductType {
@@ -82,6 +119,7 @@ export default {
         return {
           locale: locale(this),
           sku: this.sku,
+          preview: this.$route.query.preview === 'true' || false,
         };
       },
     },

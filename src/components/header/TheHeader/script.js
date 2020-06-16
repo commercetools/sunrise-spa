@@ -14,6 +14,7 @@ export default {
     return {
       searchText: this.$route.query.q || '',
       mobileMenuOpen: false,
+      isPreview: this.$route.query.preview,
     };
   },
   methods: {
@@ -35,6 +36,11 @@ export default {
   watch: {
     $route(to) {
       this.searchText = to.query.q || '';
+    },
+  },
+  computed: {
+    storeName() {
+      return this.$store.state.storeName || this.$t('stores');
     },
   },
 };

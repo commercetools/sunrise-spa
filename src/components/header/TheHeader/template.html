@@ -29,13 +29,16 @@
                 :to="{ name: 'stores' }"
                 class="store-select icon-marker"
               >
-                <span class="hidden-xs">{{ $t("stores") }}</span>
+                <span class="hidden-xs">{{storeName}} </span>
               </router-link>
             </li>
             <li class="list-item-help">
               <a href="#" class="link-help">
                 {{ $t("help") }}
               </a>
+            </li>
+            <li class="preview-mode" v-if="isPreview">
+              [ {{$t('previewMode')}} ]
             </li>
             <MiniCart />
             <LoginButton />

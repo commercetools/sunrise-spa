@@ -1,0 +1,23 @@
+  label {
+    width: 100%;
+    padding-top: 15px;
+  }
+  label .field-label-text {
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .field-required {
+    color: $valencia;
+    cursor: default;
+  }
+  .validation-wrapper {
+    display: block;
+    position: relative;
+  }
+  .validation-error {
+    position: absolute;
+    margin-left: 1px;
+    z-index: 1000;
+    left: 0;
+    bottom: -14px;
+  }

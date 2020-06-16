@@ -1,12 +1,58 @@
 /* eslint-disable no-param-reassign */
 import gql from 'graphql-tag';
 import LoadingSpinner from '../../common/LoadingSpinner/index.vue';
+import ProductFilter from '../ProductFilter/index.vue';
 import ProductThumbnail from '../../common/ProductThumbnail/index.vue';
 import ProductSortSelector from '../ProductSortSelector/index.vue';
 import Pagination from '../../common/Pagination/index.vue';
 import { products, onlyLastRequestedPromise } from '../../../api';
-import { toPrice, pushPage, locale } from '../../common/shared';
+import {
+  pushPage, locale, modifyQuery, changeRoute,
+} from '../../common/shared';
+import sunriseConfig from '../../../../sunrise.config';
 
+const removeHiddenFacetFromQuery = (facets, component) => {
+  const facetObject = facets.reduce(
+    (result, { name, terms }) => result.set(
+      name,
+      terms.map(t => t.term),
+    ),
+    new Map(),
+  );
+  const facetKeys = sunriseConfig.facetSearches.map(({ name }) => name);
+  // see if facets are in query that are missing in facets
+  const missing = Object.entries(component.$route.query)
+    .map(
+      ([key, value]) => [key, [].concat(value)],
+    ).reduce(
+      (result, [key, values]) => result.concat(
+        values.map(v => [key, v]),
+      ), [],
+    ).filter(
+      ([key]) => facetKeys.includes(key),
+    )
+    .filter(
+      ([key, value]) => !(facetObject.get(key) || [])
+        .includes(value),
+    );
+  if (missing.length) {
+    // remove the facets that are missing from query
+    const query = missing.reduce(
+      (result, [key, value]) => modifyQuery(
+        key, value, result, false,
+      ),
+      component.$route.query,
+    );
+    changeRoute(
+      {
+        ...component.$route,
+        query,
+      },
+      component,
+      false,
+    );
+  }
+};
 const last = onlyLastRequestedPromise('products');
 const getProducts = (component) => {
   const category = component.$route.params.categorySlug === 'all'
@@ -19,10 +65,13 @@ const getProducts = (component) => {
     return;
   }
   component.loadingProducts = true;
+  component.loadingFacets = true;
   const route = component.$route;
   const {
     currency,
     country,
+    customerGroup,
+    channel: priceChannel,
   } = component.$store.state;
   const loc = locale(component);
   const sortValue = route.query.sort;
@@ -32,18 +81,49 @@ const getProducts = (component) => {
   const sort = sortValue
     ? { sort: `lastModifiedAt ${sortValue === 'newest' ? 'desc' : 'asc'}` }
     : {};
-  last(products.get({
-    category,
-    page: Number(route.params?.page || 1),
-    pageSize: component.limit,
-    ...sort,
-    ...searchText,
-  })).then(({ results, ...meta }) => {
+  last(
+    Promise.all([
+      products.get([
+        {
+          category,
+          page: Number(route.params?.page || 1),
+          pageSize: component.limit,
+          priceCurrency: currency,
+          priceCountry: country,
+          priceChannel: component.allChannels ? null : priceChannel,
+          priceCustomerGroup: customerGroup,
+          ...sort,
+          ...searchText,
+          staged: route.query.preview,
+        },
+        route.query,
+        loc,
+      ]),
+      products.facets(
+        {
+          category,
+          priceCurrency: currency,
+          priceCountry: country,
+          priceChannel: component.allChannels ? null : priceChannel,
+          priceCustomerGroup: customerGroup,
+          ...searchText,
+          staged: route.query.preview,
+        },
+        route.query,
+        loc,
+      )]),
+  ).then(([{ results, ...meta }, facets]) => {
+    removeHiddenFacetFromQuery(
+      facets,
+      component,
+    );
     component.products = {
       ...meta,
       results: results.map(
         ({
-          id, masterVariant: { sku, images, prices }, name, slug,
+          id, masterVariant: {
+            sku, images, price, availability,
+          }, name, slug,
         }) => ({
           id,
           masterData: {
@@ -52,19 +132,18 @@ const getProducts = (component) => {
               slug: slug[loc],
               masterVariant: {
                 sku,
+                availability: availability?.channels && availability.channels[component?.$store?.state?.channel],
                 images,
-                price: toPrice(prices, {
-                  country,
-                  currency,
-                  // @todo: what about customerGroup and channel
-                }),
+                price,
               },
             },
           },
         }),
       ),
     };
+    component.facets = facets;
     component.loadingProducts = false;
+    component.loadingFacets = false;
   });
 };
 export default {
@@ -74,17 +153,29 @@ export default {
     ProductThumbnail,
     ProductSortSelector,
     Pagination,
+    ProductFilter,
   },
   data: () => ({
     categories: null,
     products: null,
+    facets: null,
     sort: null,
     limit: Number(process.env.VUE_APP_PAGE_SIZE || 75),
     loadingProducts: false,
+    loadingFacets: false,
+    facetFilter: {},
+    allChannels: false,
   }),
+  // please circle ci give me a status report
   computed: {
     category() {
       return this.categories.results[0];
+    },
+    countyCurrency() {
+      return {
+        currency: this.$store.state.currency,
+        country: this.$store.state.country,
+      };
     },
     hasManyProducts() {
       return this.products?.results.length >= this.limit / 2;
@@ -102,6 +193,12 @@ export default {
   methods: {
     changeSort(sort) {
       this.sort = sort;
+    },
+    facetFilterChange({ name, value }) {
+      this.facetFilter = { ...this.facetFilter, [name]: value };
+    },
+    channelChange(value) {
+      this.allChannels = value;
     },
     changePage(page) {
       pushPage(page, this, 'products');
@@ -135,6 +232,12 @@ export default {
       getProducts(this);
     },
     categories() {
+      getProducts(this);
+    },
+    countyCurrency() {
+      getProducts(this);
+    },
+    allChannels() {
       getProducts(this);
     },
   },

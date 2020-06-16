@@ -1,0 +1,11 @@
+<div >
+  <div v-for="term in terms">
+    <label>
+      <input type="checkbox" :name="name" :value="term.term" :checked="isChecked(name,term.term)"
+        v-on:change="filterChange($event, name)" />
+        &nbsp;<span class="color" :class="term.term">X</span>&nbsp;
+        <span>{{term.term}}</span>&nbsp;
+        <span class="facet-count">({{term.productCount}})</span>
+    </label>
+  </div>
+</div>

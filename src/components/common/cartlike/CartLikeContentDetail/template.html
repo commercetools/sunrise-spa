@@ -55,6 +55,21 @@
             </div>
           </div>
         </div>
+
+        <!-- line item discount detail row -->
+        <div class="row discount-detail">
+          <div v-for="discount in groupedDiscounts(lineItem)"
+            :key="discount.name">
+            <div class="row">
+              <dt class="col-md-10 text-right">{{ discount.name }}</dt>
+              <dd class="col-md-2 text-right">
+                <BaseMoney
+                  :money="discount.discount"
+                  :negate="true"/>
+              </dd>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
