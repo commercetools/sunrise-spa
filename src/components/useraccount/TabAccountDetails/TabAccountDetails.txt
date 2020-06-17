@@ -1,0 +1,12 @@
+en:
+  title: "Account Details"
+  saveBtn: "Save Changes"
+  firstName: "First Name"
+  lastName: "Last Name"
+  email: "Email Address"
+de:
+  title: "Benutzerdaten"
+  saveBtn: "Speichern"
+  firstName: "Vorname"
+  lastName: "Nachname"
+  email: "Email Adresse"

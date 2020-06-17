@@ -11,7 +11,8 @@ export default {
     categories() {
       this.currentCategory = (this.categorySlug === 'all')
         ? { name: this.$t('all'), slug: 'all', ancestors: [] }
-        : this.categories.results[0];
+        : (this.categorySlug === 'user') ? { name: this.$t('myAccount'), slug: 'account', ancestors: [] }
+          : this.categories.results[0];
     },
   },
   apollo: {

@@ -4,6 +4,7 @@ import Vue from 'vue';
 import 'whatwg-fetch';
 import VueScrollTo from 'vue-scrollto';
 import Vuelidate from 'vuelidate';
+import ProductZoomer from 'vue-product-zoomer';
 import App from './App/App.vue';
 import router from './router';
 import store from './store';
@@ -17,6 +18,7 @@ Vue.config.productionTip = false;
 
 Vue.use(VueScrollTo);
 Vue.use(Vuelidate);
+Vue.use(ProductZoomer);
 Vue.directive('vpshow', {
   /* eslint-disable no-param-reassign */
   bind(el, binding) {

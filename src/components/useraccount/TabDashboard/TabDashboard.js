@@ -1,11 +1,11 @@
 import gql from 'graphql-tag';
-import EditProfileForm from '../EditProfileForm/EditProfileForm.vue';
+import authMixin from '../../../mixins/authMixin';
 
 export default {
-  components: { EditProfileForm },
   data: () => ({
     me: null,
   }),
+  mixins: [authMixin],
   apollo: {
     me: {
       query: gql`
@@ -14,6 +14,7 @@ export default {
             customer {
               id
               firstName
+              lastName
               customerNumber
             }
           }

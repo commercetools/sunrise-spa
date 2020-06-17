@@ -4,8 +4,11 @@
     .easyzoom {
       a {
         img {
-          width: 500px;
-          box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.36);
+          margin-left: 80px;
+          width: 400px;
+          // &:hover {
+          //   box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.36);
+          // }
         }
       }
     }
@@ -72,4 +75,18 @@
       }
     }
   }
+}
+
+.product-gallery-zoomer-box .control svg {
+  display: block;
+  margin: auto;
+}
+.product-gallery-zoomer-box .thumb-list img {
+  max-height: 100px;
+  width: auto;
+  margin: 2px;
+}
+
+.responsive-image .preview-box img {
+  width: 100px !important;
 }

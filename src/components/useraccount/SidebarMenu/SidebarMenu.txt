@@ -1,5 +1,5 @@
 en:
-  personalDetails: "Personal Details"
+  accountDetails: "Account Details"
   addressBook: "Address Book"
   paymentDetails: "Payment Details"
   myOrders: "My Orders"
@@ -8,7 +8,7 @@ en:
   signOut: "Sign Out"
   changePassword: "Change password"
 de:
-  personalDetails: "Meine Benutzerdaten"
+  accountDetails: "Benutzerdaten"
   addressBook: "Adressbuch"
   paymentDetails: "Meine Zahlungdaten"
   myOrders: "Meine Bestellungen"

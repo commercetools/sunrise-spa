@@ -17,10 +17,11 @@ import PageUserAccount from './components/useraccount/PageUserAccount/PageUserAc
 import PageNotFound from './components/common/PageNotFound/PageNotFound.vue';
 import PageProductDetail from './components/productdetail/PageProductDetail/PageProductDetail.vue';
 import PageCartDetail from './components/cartdetail/PageCartDetail/PageCartDetail.vue';
-import TabPersonalDetails from './components/useraccount/userdetail/TabPersonalDetails/TabPersonalDetails.vue';
-import TabOrderList from './components/useraccount/myorders/TabOrderList/TabOrderList.vue';
-import TabOrderDetail from './components/useraccount/myorders/TabOrderDetail/TabOrderDetail.vue';
-import TabChangePassword from './components/useraccount/changepassword/TabChangePassword/TabChangePassword.vue';
+import TabAccountDetails from './components/useraccount/TabAccountDetails/TabAccountDetails.vue';
+import TabOrderList from './components/useraccount/TabOrderList/TabOrderList.vue';
+import TabOrderDetail from './components/useraccount/TabOrderDetail/TabOrderDetail.vue';
+import TabChangePassword from './components/useraccount/TabChangePassword/TabChangePassword.vue';
+import TabDashboard from './components/useraccount/TabDashboard/TabDashboard.vue';
 import PageCheckout from './components/checkout/PageCheckout/PageCheckout.vue';
 import StepWithOverview from './components/checkout/StepWithOverview/StepWithOverview.vue';
 import StepShippingAddressForm from './components/checkout/StepShippingAddressForm/StepShippingAddressForm.vue';
@@ -117,6 +118,9 @@ const router = new Router({
           },
           children: [
             {
+              path: 'dashboard', alias: '', name: 'user', component: TabDashboard,
+            },
+            {
               path: 'order/:id', name: 'order', component: TabOrderDetail,
             },
             {
@@ -125,7 +129,7 @@ const router = new Router({
               component: TabOrderList,
             },
             {
-              path: 'account', alias: '', name: 'user', component: TabPersonalDetails,
+              path: 'account', name: 'account', component: TabAccountDetails,
             },
             {
               path: 'changepassword', name: 'changepassword', component: TabChangePassword,

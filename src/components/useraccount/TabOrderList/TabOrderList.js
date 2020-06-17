@@ -1,10 +1,10 @@
 import gql from 'graphql-tag';
-import BaseMoney from '../../../common/BaseMoney/BaseMoney.vue';
-import BaseDate from '../../../common/BaseDate/BaseDate.vue';
-import LoadingSpinner from '../../../common/LoadingSpinner/LoadingSpinner.vue';
-import MONEY_FRAGMENT from '../../../Money.gql';
-import { pageFromRoute, pushPage } from '../../../common/shared';
-import Pagination from '../../../common/Pagination/Pagination.vue';
+import BaseMoney from '../../common/BaseMoney/BaseMoney.vue';
+import BaseDate from '../../common/BaseDate/BaseDate.vue';
+import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner.vue';
+import MONEY_FRAGMENT from '../../Money.gql';
+import { pageFromRoute, pushPage } from '../../common/shared';
+import Pagination from '../../common/Pagination/Pagination.vue';
 
 export default {
   components: {

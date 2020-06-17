@@ -1,4 +1,6 @@
 en:
   signIn: "Sign In"
+  signOut: "Sign Out"
 de:
-  signIn: "Log In"
+  signIn: "Anmelden"
+  signOut: "Abmelden"

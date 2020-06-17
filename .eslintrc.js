@@ -12,6 +12,7 @@ module.exports = {
   ],
 
   rules: {
+    'no-nested-ternary': 0,
     'no-console': 'error',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-underscore-dangle': ['error', { 'allow': ['__typename'] }],

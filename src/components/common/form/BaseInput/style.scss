@@ -1,0 +1,17 @@
+input {
+  width: 100%;
+  border: 1px solid $alto;
+  border-radius: 1px;
+  padding: 0.5em;
+  margin-top: 0.2em;
+}
+
+input[type='checkbox'] {
+  float: left;
+  width: auto;
+  margin-top: 0.3em;
+  margin-right: 10px;
+}
+.error {
+  border-color: rgba(206, 65, 65, 0.6);
+}

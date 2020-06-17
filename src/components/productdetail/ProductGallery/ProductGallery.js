@@ -25,18 +25,19 @@ export default {
       return {
         thumbs: imageInfos,
         normal_size: imageInfos,
-        large_size: imageInfos,
+        // large_size: imageInfos,
       };
     },
     zoomerOptions() {
       return {
-        zoomFactor: 4,
-        pane: 'pane',
+        zoomFactor: 3,
+        pane: 'container',
         hoverDelay: 300,
         namespace: 'product-gallery',
         move_by_click: true,
         scroll_items: this.galleryThumbnailsCount,
         choosed_thumb_border_color: '#FEC14E',
+        scroller_position: 'bottom',
       };
     },
     galleryThumbnailsCount() {
@@ -44,17 +45,17 @@ export default {
     },
   },
   watch: {
-    product() {
-      $(this.$refs.easyzoom).easyZoom();
-      $(this.$refs.slick).slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        draggable: false,
-        fade: false,
-        asNavFor: '.product-dec-slider',
-      });
-    },
+    // product() {
+    //   $(this.$refs.easyzoom).easyZoom();
+    //   $(this.$refs.slick).slick({
+    //     slidesToShow: 1,
+    //     slidesToScroll: 1,
+    //     arrows: false,
+    //     draggable: false,
+    //     fade: false,
+    //     asNavFor: '.product-dec-slider',
+    //   });
+    // },
   },
   apollo: {
     product: {

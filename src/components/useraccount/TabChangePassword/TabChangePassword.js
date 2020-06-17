@@ -1,11 +1,11 @@
 import { required, sameAs } from 'vuelidate/lib/validators';
 import gql from 'graphql-tag';
-import customerMixin from '../../../../mixins/customerMixin';
-import authMixin from '../../../../mixins/authMixin';
-import ServerError from '../../../common/form/ServerError/ServerError.vue';
-import LoadingButton from '../../../common/form/LoadingButton/LoadingButton.vue';
-import BaseInput from '../../../common/form/BaseInput/BaseInput.vue';
-import BaseForm from '../../../common/form/BaseForm/BaseForm.vue';
+import customerMixin from '../../../mixins/customerMixin';
+import authMixin from '../../../mixins/authMixin';
+import ServerError from '../../common/form/ServerError/ServerError.vue';
+import LoadingButton from '../../common/form/LoadingButton/LoadingButton.vue';
+import BaseInput from '../../common/form/BaseInput/BaseInput.vue';
+import BaseForm from '../../common/form/BaseForm/BaseForm.vue';
 
 export default {
   components: {
