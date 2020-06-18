@@ -45,17 +45,13 @@ export default {
     },
   },
   watch: {
-    // product() {
-    //   $(this.$refs.easyzoom).easyZoom();
-    //   $(this.$refs.slick).slick({
-    //     slidesToShow: 1,
-    //     slidesToScroll: 1,
-    //     arrows: false,
-    //     draggable: false,
-    //     fade: false,
-    //     asNavFor: '.product-dec-slider',
-    //   });
-    // },
+    product() {
+      setTimeout(
+        () => {
+          $(this.$refs.easyzoom).easyZoom();
+        }, 500,
+      );
+    },
   },
   apollo: {
     product: {
