@@ -1,0 +1,18 @@
+<Colors 
+  :name="name" 
+  :terms="terms" 
+  v-if="component==='colors'" 
+  v-on:changed="filterChange"
+/>
+<Designer 
+  :name="name" 
+  :terms="terms" 
+  v-else-if="component==='designer'" 
+  v-on:changed="filterChange"
+/>
+<Standard 
+  :name="name" 
+  :terms="terms" 
+  v-else 
+  v-on:changed="filterChange"
+/>

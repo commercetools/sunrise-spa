@@ -13,8 +13,8 @@
     <div class="shop-filter">
       <a class="shop-filter-active" href="#" v-on:click.prevent="toggleFilter"
         >Filters
-        <i v-if="show" class="fa fa-angle-up angle-up"></i>
-        <i v-else class="fa fa-angle-down angle-down"></i>
+        <i v-if="show" class="fa fa-angle-up"></i>
+        <i v-else class="fa fa-angle-down"></i>
       </a>
     </div>
     <div class="shop-short-by ml-30">
