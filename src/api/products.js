@@ -104,7 +104,7 @@ const products = {
     };
     return Promise.all(
       config.facetSearches.map(
-        ({ name }) => {
+        ({ name, component }) => {
           const newRouteQuery = { ...routeQuery };
           delete newRouteQuery[name];
           return products.get([
@@ -116,8 +116,11 @@ const products = {
             ),
           ])
             .then(
-              ({ facets }) => facets
-                .find(f => f.name === name),
+              ({ facets }) => ({
+                ...facets
+                  .find(f => f.name === name),
+                component,
+              }),
             );
         },
       ),

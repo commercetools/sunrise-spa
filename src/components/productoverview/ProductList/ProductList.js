@@ -145,6 +145,8 @@ export default {
     loadingProducts: false,
     loadingFacets: false,
     show: false,
+    facetFilter: {},
+    allChannels: false,
   }),
   computed: {
     category() {
@@ -172,15 +174,12 @@ export default {
   methods: {
     changeSort(sort) {
       this.sort = sort;
-      const query = { ...this.$route.query };
-      if (query.sort !== sort) {
-        if (sort) {
-          query.sort = sort;
-        } else {
-          delete query.sort;
-        }
-        this.$router.replace({ query });
-      }
+    },
+    facetFilterChange({ name, value }) {
+      this.facetFilter = { ...this.facetFilter, [name]: value };
+    },
+    channelChange(value) {
+      this.allChannels = value;
     },
     changePage(page) {
       pushPage(page, this, 'products');

@@ -1,7 +1,7 @@
 export default {
   ct: {
     auth: {
-      host: process.env.VUE_APP_CT_AUTH_HOST || 'https://auth.sphere.io',
+      host: process.env.VUE_APP_CT_AUTH_HOST || 'https://auth.europe-west1.gcp.commercetools.com',
       projectKey: process.env.VUE_APP_CT_PROJECT_KEY || 'sunrise-spa',
       credentials: {
         clientId: process.env.VUE_APP_CT_CLIENT_ID || 'jFVHj0-tO-THQt9evnGTJ2fD',
@@ -11,7 +11,7 @@ export default {
       + ' manage_my_payments:sunrise-spa view_products:sunrise-spa manage_my_orders:sunrise-spa'
       + ' manage_my_shopping_lists:sunrise-spa'],
     },
-    api: process.env.VUE_APP_CT_API_HOST || 'https://api.sphere.io',
+    api: process.env.VUE_APP_CT_API_HOST || 'https://api.europe-west1.gcp.commercetools.com',
   },
   languages: {
     en: 'English',
@@ -59,7 +59,7 @@ export default {
   },
   facetSearches: [
     { name: 'size', type: 'text' },
-    { name: 'color', type: 'lnum' },
-    { name: 'designer', type: 'enum' },
+    { name: 'color', type: 'lnum', component: 'colors' },
+    { name: 'designer', type: 'enum', component: 'designer' },
   ],
 };
