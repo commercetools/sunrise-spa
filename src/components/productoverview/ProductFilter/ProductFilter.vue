@@ -4,7 +4,7 @@
 
 <template>
 <SlideDown v-bind:show="show">
-  <div class="product-filter-wrapper">
+  <div class="product-filter-wrapper" style="display:block">
     <div class="row">
       <!-- Product Filter -->
       <div v-for="facet in facets" v-bind:key="facet.label" class="custom-col-width-23 mb-20">
