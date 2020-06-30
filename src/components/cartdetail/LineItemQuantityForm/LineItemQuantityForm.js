@@ -28,12 +28,12 @@ export default {
     },
   }),
   methods: {
-    changeLineItemQuantity(e) {
+    changeLineItemQuantity() {
       return this.updateMyCart([
         {
           changeLineItemQuantity: {
             lineItemId: this.lineItemId,
-            quantity: Number(e.target.value),
+            quantity: this.form.quantity,
           },
         },
       ]);
@@ -69,7 +69,7 @@ export default {
   watch: {
     'form.quantity': function triggerDebouncedSubmit(newValue, oldValue) {
       if (oldValue !== null && newValue !== oldValue) {
-        this.$v.$touch();
+        this.changeLineItemQuantity();
         if (!this.$v.$invalid) {
           this.debouncedSubmit();
         }

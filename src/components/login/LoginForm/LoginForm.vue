@@ -5,7 +5,7 @@
   <div class="login-register-wrap">
     <h3>{{ $t('signIn') }}</h3>
     <div class="login-register-form">
-      <BaseForm :vuelidate="$v" :onSubmit="customerSignMeIn" #default="{ error, state }">
+      <BaseForm :vuelidate="$v" :onSubmit="customerSignMeIn" #default="{ error }">
         <ServerError :error="error" v-slot="{ graphQLError }">{{ getErrorMessage(graphQLError) }}</ServerError>
         <div class="sin-login-register">
           <BaseInput
