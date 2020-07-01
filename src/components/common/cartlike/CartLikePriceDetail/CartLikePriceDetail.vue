@@ -3,58 +3,61 @@
 <script src="./CartLikePriceDetail.js"></script>
 
 <template>
-  <div v-if="cartLike"
-       class="cart-like-price-detail">
-    <div v-if="discountCodesExist"
-         class="row">
-      <DiscountCodes :cartLike="cartLike"
-                     :editable="editable"
-                     class="col-sm-12"/>
-    </div>
-    <hr v-if="discountCodesExist">
-    <div class="row">
-      <div class="col-sm-7 subtotal">
-        <span class="subtotal-title">{{ $t('subtotal') }}</span>
+  <div v-if="cartLike" class="grand-total-wrap">
+    <h4>{{ $t('cartTotals')}}</h4>
+    <div class="grand-total-content">
+      <div class="single-grand-total">
+        <div class="single-grand-total-left">
+          <span>{{ $t('subtotal')}}</span>
+        </div>
+        <div class="single-grand-total-right">
+          <span>
+            <BaseMoney :money="subtotal" />
+          </span>
+        </div>
       </div>
-      <div class="col-sm-5">
-        <span data-test="cart-subtotal-price">
-          <BaseMoney :money="subtotal"/>
+      <div class="single-grand-total">
+        <div class="single-grand-total-left">
+          <span>{{ $t('salesTax') }}</span>
+        </div>
+        <div class="single-grand-total-right">
+          <span>
+            <BaseMoney :money="taxes" />
+          </span>
+        </div>
+      </div>
+      <!-- <div class="single-grand-total">
+        <div class="single-grand-total-left">
+          <span>Shipping</span>
+        </div>
+        <div class="single-grand-total-right">
+          <ul>
+            <li>
+              <input type="radio" name="shipping" value="info" checked="checked" />Flat rate: $2.00
+            </li>
+            <li>
+              <input type="radio" name="shipping" value="info2" />Free shipping
+            </li>
+            <li>
+              <input type="radio" name="shipping" value="info3" />Local pickup: $0.00
+            </li>
+          </ul>
+        </div>
+      </div>-->
+    </div>
+    <!-- <a href="#">Calculate shipping</a> -->
+    <div class="cart-total-wrap">
+      <div class="single-cart-total-left">
+        <span>{{ $t('total')}}</span>
+      </div>
+      <div class="single-cart-total-right">
+        <span>
+          <BaseMoney :money="cartLike.totalPrice" />
         </span>
       </div>
     </div>
-    <div v-if="cartLike.shippingInfo"
-         class="row">
-      <div class="col-sm-7 delivery-info">
-        <span class="delivery-info-title">{{ $t('shipping') }}</span>
-      </div>
-      <div class="col-sm-5">
-        <span data-test="cart-shipping-price">
-          <BaseMoney :money="cartLike.shippingInfo.price"/>
-        </span>
-      </div>
-    </div>
-    <hr class="total-divider">
-    <div v-if="taxes"
-         class="row">
-      <div class="col-sm-7">
-        <span>{{ $t('salesTax') }}</span>
-      </div>
-      <div data-test="cart-taxes-amount"
-           class="col-sm-5">
-        <BaseMoney :money="taxes"/>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-7">
-        <span class="order-total">{{ $t('total') }}</span>
-      </div>
-      <div class="col-sm-5">
-        <span data-test="cart-total-price"
-              class="order-total">
-          <BaseMoney :money="cartLike.totalPrice"/>
-        </span>
-      </div>
+    <div class="grand-btn">
+      <router-link :to="{ name: 'checkout'}" data-test="checkout-button">{{ $t('startCheckout') }}</router-link>
     </div>
   </div>
-
 </template>

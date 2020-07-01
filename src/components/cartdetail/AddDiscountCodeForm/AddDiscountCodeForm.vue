@@ -3,27 +3,23 @@
 <script src="./AddDiscountCodeForm.js"></script>
 
 <template>
-  <BaseForm :vuelidate="$v"
-            :onSubmit="addDiscountCode"
-            #default="{ error, state }">
-    <div class="text-right add-discount-code-form">
-      <ServerError :error="error"
-                   v-slot="{ graphQLError }"
-                   class="server-error">
-        {{ getErrorMessage(graphQLError) }}
-      </ServerError>
-      <BaseInput v-model="form.code"
-                 :vuelidate="$v.form.code"
-                 :label="$t('code')"
-                 type="text"
-                 id="promo-code"
-                 data-test="discount-code-input"/>
-      <LoadingButton :state="state"
-                     class="submit-button"
-                     data-test="apply-discount-code-button">
-        {{ $t('apply') }}
-      </LoadingButton>
+  <BaseForm :vuelidate="$v" :onSubmit="addDiscountCode" #default="{ error }">
+    <div class="discount-code">
+      <!-- <input type="text" required name="name" :placeholder="$t('code')" /> -->
+      <BaseInput
+        v-model="form.code"
+        :vuelidate="$v.form.code"
+        :placeholder="$t('code')"
+        type="text"
+        id="promo-code"
+        data-test="discount-code-input"
+      />
+      <button class="coupon-btn" type="submit">{{$t('apply')}}</button>
     </div>
+    <ServerError
+      :error="error"
+      v-slot="{ graphQLError }"
+      class="server-error"
+    >{{ getErrorMessage(graphQLError) }}</ServerError>
   </BaseForm>
-
 </template>

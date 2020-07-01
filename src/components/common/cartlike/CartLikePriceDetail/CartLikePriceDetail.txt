@@ -1,12 +1,15 @@
 en:
+  cartTotals: "Cart totals"
   subtotal: "Subtotal"
   shipping: "Shipping"
   salesTax: "Sales Tax"
   total: "Total"
   discount: "Discount"
+  startCheckout: "Start Checkout"
 de:
   subtotal: "Zwischensumme"
   shipping: "Versand"
   salesTax: "MwSt."
   total: "Gesamtpreis"
   discount: "Rabatt"
+  startCheckout: "Zur Kasse"
