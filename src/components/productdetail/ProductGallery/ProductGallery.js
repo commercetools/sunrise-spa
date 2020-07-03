@@ -15,7 +15,11 @@ export default {
       return this.product.masterData.current.variant.images;
     },
     productImage() {
-      return this.product.masterData.current.variant.images[0]?.url;
+      const img = this.product.masterData.current.variant.images[0]?.url;
+      if (img) {
+        return img.replace(/_medium.jpg$/, '_large.jpg');
+      }
+      return undefined;
     },
     zoomerImages() {
       const imageInfos = this.productImages.map((image, index) => ({
@@ -45,13 +49,13 @@ export default {
     },
   },
   watch: {
-    // product() {
-    //   setTimeout(
-    //     () => {
-    //       $(this.$refs.easyzoom).easyZoom();
-    //     }, 500,
-    //   );
-    // },
+    product() {
+      setTimeout(
+        () => {
+          $(this.$refs.easyzoom).easyZoom();
+        }, 500,
+      );
+    },
   },
   apollo: {
     product: {
