@@ -1,6 +1,10 @@
 import isEqual from 'lodash.isequal';
+import HooverDropdown from '../../common/HoverDropdown/HoverDropdown.vue';
 
 export default {
+  components: {
+    HooverDropdown,
+  },
   props: {
     name: {
       type: String,
@@ -23,21 +27,16 @@ export default {
     distinctValues() {
       return new Set(this.values);
     },
-    selectedValue: {
-      get() {
-        return this.selected[this.name];
-      },
-      set(value) {
-        const selectedSku = this.findSelectedSku(value);
-        this.$router.push({ path: selectedSku });
-      },
+    selectedValue() {
+      return this.selected[this.name];
     },
   },
   methods: {
-    findSelectedSku(value) {
-      const selected = { ...this.selected };
-      selected[this.name] = value;
-      return (this.findExactSelectedCombi(selected) || this.findFallbackSelectedCombi(selected)).sku;
+    setSelectedValue(type, value) {
+      const sku = this.variantCombinations.find(
+        combi => combi[type] === value,
+      )?.sku;
+      if (sku) this.$router.push({ path: sku });
     },
     findExactSelectedCombi(selected) {
       const { sku: selectedSku, ...selectedAttributes } = selected;

@@ -1,7 +1,11 @@
 /* eslint-disable no-param-reassign */
+
+import HoverDropdown from '../../common/HoverDropdown/HoverDropdown.vue';
+
 export default {
   props: ['show', 'sort', 'offset', 'count', 'total'],
   components: {
+    HoverDropdown,
   },
   data() {
     return {

@@ -1,4 +1,4 @@
-<style src="./TopBar.scss" lang="scss"></style>
+<style src="./TopBar.scss" lang="scss" scoped></style>
 <i18n src="./TopBar.txt"></i18n>
 <script src="./TopBar.js"></script>
 
@@ -17,7 +17,7 @@
         <i v-else class="fa fa-angle-down"></i>
       </a>
     </div>
-    <div class="shop-short-by ml-30">
+    <HoverDropdown>
       <span
         >Sort by <i class="fa fa-angle-down angle-down"></i>
         <i class="fa fa-angle-up angle-up"></i
@@ -27,7 +27,7 @@
           <a href="#" @click.prevent="()=>changeSort(item.id)">{{item.name}}</a>
         </li>
       </ul>
-    </div>
+    </HoverDropdown>
   </div>
 </div>
 

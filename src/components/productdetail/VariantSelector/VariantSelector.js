@@ -3,7 +3,9 @@ import flatMap from 'lodash.flatmap';
 import AttributeSelect from '../AttributeSelect/AttributeSelect.vue';
 
 export default {
-  components: { AttributeSelect },
+  components: {
+    AttributeSelect,
+  },
   props: {
     sku: {
       type: String,
