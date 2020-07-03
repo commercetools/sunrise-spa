@@ -13,11 +13,11 @@
           class="badge-pink badge-right">Sale</span>
       </router-link>
       <div class="product-action">
-        <a data-toggle="modal" data-target="#exampleModal" href="#"><i class="dl-icon-view"></i>
-          <span>Quick Shop</span></a>
-        <a data-toggle="tooltip" title="Add to Cart" href="#"><i class=" dl-icon-cart29"></i></a>
-        <a data-toggle="tooltip" title="Add to Wishlist" href="#"><i class="dl-icon-heart4"></i></a>
-        <a data-toggle="tooltip" title="Add to Compare" href="#"><i class="dl-icon-compare"></i></a>
+        <router-link :to="productRoute(currentProduct.slug, matchingVariant.sku)"><i class="dl-icon-view"></i>
+          <span>Quick Shop</span></router-link>
+        <a data-toggle="tooltip" title="Add to Cart" href="#" @click.prevent="addLineItem(matchingVariant.sku)"><i class=" dl-icon-cart29"></i></a>
+        <!-- <a data-toggle="tooltip" title="Add to Wishlist" href="#"><i class="dl-icon-heart4"></i></a>
+        <a data-toggle="tooltip" title="Add to Compare" href="#"><i class="dl-icon-compare"></i></a> -->
       </div>
     </div>
     <div class="product-content text-center">
