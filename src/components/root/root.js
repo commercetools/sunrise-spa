@@ -40,6 +40,16 @@ export default {
       return this.$store.state.miniCartOpen;
     },
   },
+  methods: {
+    close() {
+      this.$store.dispatch('toggleMiniCart');
+    },
+    keyUpListener(e) {
+      if (e.key === 'Escape') {
+        this.$store.dispatch('closeMiniCart');
+      }
+    },
+  },
   data() {
     return {
       sharedState: {
@@ -62,6 +72,12 @@ export default {
       this.$store.dispatch('setLocale', loc(this));
     }
     checkLocale(this);
+  },
+  beforeMount() {
+    document.body.addEventListener('keyup', this.keyUpListener);
+  },
+  beforeDestroy() {
+    document.body.removeEventListener('keyup', this.keyUpListener);
   },
   watch: {
     $route() {

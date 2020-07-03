@@ -60,9 +60,13 @@
             >
               {{ $t('viewBag') }}
             </router-link>
-            <a class="no-mrg btn-hover cart-btn-style" href="checkout.html"
-              >checkout</a
+            <router-link
+              :to="{ name: 'checkout' }"
+              @click.native="close"
+              class="btn-grey"
             >
+              {{ $t('checkout') }}
+            </router-link>
           </div>
         </span>
         <span v-if="!cartNotEmpty">
