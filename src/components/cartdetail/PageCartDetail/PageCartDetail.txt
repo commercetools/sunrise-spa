@@ -1,14 +1,14 @@
 en:
-  yourBag: "Your Bag"
+  yourCart: "Your Cart"
   itemsTotal: "{n} item in total | {n} items in total"
-  empty: "Your bag is empty!"
+  empty: "Your cart is currently empty"
   continueShopping: "Continue Shopping"
   shopNow: "Shop now"
   startCheckout: "Start Checkout"
 de:
-  yourBag: "Ihr Einkaufswagen"
+  yourCart: "Ihr Warenkorb"
   itemsTotal: "{n} Artikel im Warenkorb"
-  empty: "Ihr Einkaufswagen ist leer!"
+  empty: "Ihr Warenkorb ist derzeit leer"
   continueShopping: "Weiter einkaufen"
   shopNow: "Jetzt einkaufen"
   startCheckout: "Zur Kasse"

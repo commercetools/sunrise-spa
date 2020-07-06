@@ -3,24 +3,27 @@
 <script src="./DiscountCodes.js"></script>
 
 <template>
-  <div>
-    <div class="row text-right">
-      <div class="applied-discounts col-sm-12">
-        {{ $t('appliedDiscounts') }}:
-      </div>
+  <div class="single-grand-total">
+    <div class="single-grand-total-left col-sm-6">
+      <span>{{ $t('appliedDiscounts') }}</span>
     </div>
-    <div v-for="discountInfo in cartLike.discountCodes"
-         :key='discountInfo.discountCode.id'
-         class="row text-right"
-         data-test="discount-code-list">
-      <div class="col-sm-12"
-           data-test="discount-code-name">
-        <span class="discount-code">{{ discountInfo.discountCode.code }}</span>
-        <span v-if="discountInfo.discountCode.name"> ({{ discountInfo.discountCode.name }})</span>
-        <RemoveDiscountCodeForm v-if="editable"
-                                :codeId='discountInfo.discountCode.id'/>
-      </div>
+    <div
+      v-for="discountInfo in cartLike.discountCodes"
+      :key="discountInfo.discountCode.id"
+      class="single-grand-total-right col-sm-6"
+    >
+      <b>
+        {{ discountInfo.discountCode.code }}
+      </b>
+      <span v-if="discountInfo.discountCode.name">
+        ({{ discountInfo.discountCode.name }})</span
+      >
+      <span>
+        <RemoveDiscountCodeForm
+          v-if="editable"
+          :codeId="discountInfo.discountCode.id"
+        />
+      </span>
     </div>
   </div>
-
 </template>

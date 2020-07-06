@@ -1,11 +1,24 @@
 <script src="./RemoveDiscountCodeForm.js"></script>
 
 <template>
-  <button @click="removeDiscountCode"
-          class="discount-code-delete"
-          data-test="remove-discount-button">
-    <img src="../../../../assets/img/delete-1.png"
-         class="cart-action-icon">
-  </button>
-
+  <a
+    href=""
+    class="imgWrap"
+    @click.prevent="removeDiscountCode"
+    data-test="remove-discount-button"
+  >
+    <img
+      alt="remove"
+      class="deleteImg"
+      src="../../../../assets/img/delete-1.png"
+    />
+  </a>
 </template>
+<style lang="scss" scoped>
+.deleteImg {
+  width: 10px;
+}
+.imgWrap {
+  margin-left: 5px;
+}
+</style>

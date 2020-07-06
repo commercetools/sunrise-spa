@@ -188,9 +188,10 @@ h3.cart-page-title {
         margin: 0 0 0;
       }
       .single-grand-total-left {
-        margin-right: 34px;
+        padding: 0 !important;
       }
       .single-grand-total-right {
+        padding: 0 !important;
         > span {
           color: #262626;
         }
@@ -222,9 +223,10 @@ h3.cart-page-title {
     padding: 20px 0 0 0;
     margin: 20px 0 37px 0;
     .single-cart-total-left {
-      margin-right: 34px;
+      padding: 0 !important;
     }
     .single-cart-total-right {
+      padding: 0 !important;
       span {
         color: #262626;
       }
@@ -245,6 +247,33 @@ h3.cart-page-title {
       &:hover {
         background-color: $theme-color;
       }
+    }
+  }
+}
+
+.empty-content {
+  h2 {
+    font-size: 65px;
+    font-weight: bold;
+    margin: 0;
+    line-height: 58px;
+  }
+  p {
+    font-size: 18px;
+    margin: 25px 0 38px;
+  }
+  a {
+    background-color: #262626;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    color: #fff;
+    line-height: 1;
+    padding: 18px 40px 19px;
+    border-radius: 50px;
+    &:hover {
+      background-color: $theme-color;
+      color: #fff;
     }
   }
 }
