@@ -1,11 +1,11 @@
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import EditProfileForm from '@/components/useraccount/userdetail/EditProfileForm/EditProfileForm.vue';
+import TabAccountDetails from '@/components/useraccount/TabAccountDetails/TabAccountDetails.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuelidate);
 
-describe('EditProfileForm/index.vue', () => {
+describe('TabAccountDetails/index.vue', () => {
   const me = {
     customer: {
       email: 'willy.wonka@commercetools.com',
@@ -30,12 +30,12 @@ describe('EditProfileForm/index.vue', () => {
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(EditProfileForm, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(TabAccountDetails, options).isVueInstance()).toBeTruthy();
   });
 
   it('displays current form values', () => {
     options.sync = false;
-    const wrapper = shallowMount(EditProfileForm, options);
+    const wrapper = shallowMount(TabAccountDetails, options);
     wrapper.setData({ me });
     expect(wrapper.vm.form).toEqual({});
 
@@ -45,7 +45,7 @@ describe('EditProfileForm/index.vue', () => {
 
   it('re-opens form with initially stored values', () => {
     options.sync = false;
-    const wrapper = shallowMount(EditProfileForm, options);
+    const wrapper = shallowMount(TabAccountDetails, options);
     wrapper.setData({ me });
     expect(wrapper.vm.form).toEqual({});
 

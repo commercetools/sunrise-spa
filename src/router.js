@@ -6,8 +6,6 @@ import apollo from './apollo';
 import config from '../sunrise.config';
 import TheHeader from './components/header/TheHeader/TheHeader.vue';
 import TheFooter from './components/footer/TheFooter/TheFooter.vue';
-import TheCheckoutHeader from './components/header/TheCheckoutHeader/TheCheckoutHeader.vue';
-import TheCheckoutFooter from './components/footer/TheCheckoutFooter/TheCheckoutFooter.vue';
 import PageHome from './components/home/PageHome/PageHome.vue';
 import PageProductOverview from './components/productoverview/PageProductOverview/PageProductOverview.vue';
 import PageLogin from './components/login/PageLogin/PageLogin.vue';
@@ -23,13 +21,6 @@ import TabOrderDetail from './components/useraccount/TabOrderDetail/TabOrderDeta
 import TabChangePassword from './components/useraccount/TabChangePassword/TabChangePassword.vue';
 import TabDashboard from './components/useraccount/TabDashboard/TabDashboard.vue';
 import PageCheckout from './components/checkout/PageCheckout/PageCheckout.vue';
-import StepWithOverview from './components/checkout/StepWithOverview/StepWithOverview.vue';
-import StepShippingAddressForm from './components/checkout/StepShippingAddressForm/StepShippingAddressForm.vue';
-import StepBillingAddressForm from './components/checkout/StepBillingAddressForm/StepBillingAddressForm.vue';
-import StepShippingMethodForm from './components/checkout/StepShippingMethodForm/StepShippingMethodForm.vue';
-import StepPaymentMethodForm from './components/checkout/StepPaymentMethodForm/StepPaymentMethodForm.vue';
-import StepPlaceOrderForm from './components/checkout/StepPlaceOrderForm/StepPlaceOrderForm.vue';
-import StoreLocator from './components/stores/PageStoreLocator/PageStoreLocator.vue';
 import { pageFromRoute } from './components/common/shared';
 import Root from './components/root/root.vue';
 
@@ -167,35 +158,13 @@ const router = new Router({
         },
         {
           path: 'checkout',
+          name: 'checkout',
           meta: { requiresCart },
           components: {
             default: PageCheckout,
-            header: TheCheckoutHeader,
-            footer: TheCheckoutFooter,
+            header: TheHeader,
+            footer: TheFooter,
           },
-          children: [
-            {
-              path: '',
-              component: StepWithOverview,
-              children: [
-                {
-                  path: 'payment', name: 'checkout-payment-method', component: StepPaymentMethodForm,
-                },
-                {
-                  path: 'shipping', name: 'checkout-shipping-method', component: StepShippingMethodForm,
-                },
-                {
-                  path: 'billing', name: 'checkout-billing-address', component: StepBillingAddressForm,
-                },
-                {
-                  path: 'address', alias: '', name: 'checkout', component: StepShippingAddressForm,
-                },
-              ],
-            },
-            {
-              path: 'order', name: 'checkout-order', component: StepPlaceOrderForm,
-            },
-          ],
         },
       ],
     },

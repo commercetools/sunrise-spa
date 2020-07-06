@@ -3,78 +3,80 @@
 <script src="./MiniCart.js"></script>
 
 <template>
-<span>
-  <div class="sidebar-cart-active" :class="{ inside: show }">
-    <div class="sidebar-cart-all">
-      <a class="cart-close" href="javascript:;" @click="close"
-        ><i class="dl-icon-close"></i
-      ></a>
-      <div class="cart-content">
-        <h3>Shopping Cart</h3>
-        <span v-if="cartNotEmpty">
-          <ul>
-            <li
-              v-for="lineItem in sortedLineItems"
-              :key="lineItem.id"
-              data-test="mini-cart-line-item"
-              class="single-product-cart"
-            >
-              <div class="cart-img">
-                <router-link
-                  :to="productRoute(lineItem.productSlug, lineItem.variant.sku)"
-                >
-                  <img
-                    :src="displayedImageUrl(lineItem.variant)"
-                    :alt="lineItem.name"
-                  />
-                </router-link>
-              </div>
-              <div class="cart-title">
-                <h4>
+  <span>
+    <div class="sidebar-cart-active" :class="{ inside: show }">
+      <div class="sidebar-cart-all">
+        <a class="cart-close" href="javascript:;" @click="close"
+          ><i class="dl-icon-close"></i
+        ></a>
+        <div class="cart-content">
+          <h3>{{ $t('miniCart') }}</h3>
+          <span v-if="cartNotEmpty">
+            <ul>
+              <li
+                v-for="lineItem in sortedLineItems"
+                :key="lineItem.id"
+                data-test="mini-cart-line-item"
+                class="single-product-cart"
+              >
+                <div class="cart-img">
                   <router-link
-                    :to="productRoute(lineItem.productSlug, lineItem.variant.sku)"
-                    data-test="cart-line-item-link"
+                    :to="
+                      productRoute(lineItem.productSlug, lineItem.variant.sku)
+                    "
                   >
-                    {{ lineItem.name }}
+                    <img
+                      :src="displayedImageUrl(lineItem.variant)"
+                      :alt="lineItem.name"
+                    />
                   </router-link>
-                </h4>
-                <span
-                  >{{ lineItem.quantity }} ×
-                  <BaseMoney :money="lineItem.totalPrice"
-                /></span>
-              </div>
-              <LineItemDeleteForm :lineItemId="lineItem.id" />
-            </li>
-          </ul>
-          <div class="cart-total">
-            <h4>
-              Subtotal:
-              <BaseMoney :money="me.activeCart.totalPrice" />
-            </h4>
-          </div>
-          <div class="cart-checkout-btn">
-            <router-link
-              :to="{ name: 'cart' }"
-              @click.native="close"
-              class="btn-grey"
-            >
-              {{ $t('viewBag') }}
-            </router-link>
-            <router-link
-              :to="{ name: 'checkout' }"
-              @click.native="close"
-              class="btn-grey"
-            >
-              {{ $t('checkout') }}
-            </router-link>
-          </div>
-        </span>
-        <span v-if="!cartNotEmpty">
-          <h5>{{ $t('emptyCart') }}</h5>
-        </span>
+                </div>
+                <div class="cart-title">
+                  <h4>
+                    <router-link
+                      :to="
+                        productRoute(lineItem.productSlug, lineItem.variant.sku)
+                      "
+                      data-test="cart-line-item-link"
+                    >
+                      {{ lineItem.name }}
+                    </router-link>
+                  </h4>
+                  <span
+                    >{{ lineItem.quantity }} ×
+                    <BaseMoney :money="lineItem.totalPrice"
+                  /></span>
+                </div>
+                <LineItemDeleteForm :lineItemId="lineItem.id" />
+              </li>
+            </ul>
+            <div class="cart-total">
+              <h4>
+                {{ $t('subtotal') }}:
+                <BaseMoney :money="me.activeCart.totalPrice" />
+              </h4>
+            </div>
+            <div class="cart-checkout-btn">
+              <router-link
+                :to="{ name: 'cart' }"
+                @click.native="close"
+                class="btn-grey"
+              >
+                {{ $t('viewBag') }}
+              </router-link>
+              <router-link
+                :to="{ name: 'checkout' }"
+                data-test="checkout-button"
+                @click.native="close"
+                >{{ $t('checkout') }}</router-link
+              >
+            </div>
+          </span>
+          <span v-if="!cartNotEmpty">
+            <h5>{{ $t('emptyCart') }}</h5>
+          </span>
+        </div>
       </div>
     </div>
-  </div>
-</span>
-
+  </span>
 </template>
