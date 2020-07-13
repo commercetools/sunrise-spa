@@ -77,7 +77,7 @@ function getToken(error, tries) {
       tokenProvider.flowType = isUserToken ? REFRESH_USER : REFRESH_ANONYMOUS;
       tokenProvider.refreshToken = refreshToken;
       tokenProvider.fetchTokenInfo = sdkAuth => sdkAuth.refreshTokenFlow(
-        encodeURIComponent(refreshToken),
+        refreshToken,
       );
       cleanUpSession();
       promise = tokenProvider.getTokenInfo();
@@ -96,3 +96,11 @@ export const getAuthToken = group(error => getToken(error, 0)
   .then(
     tokenInfo => `${tokenInfo.token_type} ${tokenInfo.access_token}`,
   ), new Map(), false, () => 'getAuthToken');
+
+
+// localStorage.clear()
+// refresh_token: "sales-demo-db:Ep-ZR1tPqBU5EtEG9gmZoF8CGPnkFUQ6qvdlqI5Pl1U"
+
+// var token  = JSON.parse(localStorage.session);
+// token.tokenInfo.access_token=88;
+// localStorage.setItem('session',JSON.stringify(token))
