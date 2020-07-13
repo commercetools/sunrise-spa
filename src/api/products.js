@@ -5,7 +5,6 @@ import {
 } from './api';
 import config from '../../sunrise.config';
 import productTypes from './productTypes';
-import { locale } from '../components/common/shared';
 
 const asAttribute = (name, type, locale) => {
   if (type === 'lnum') {
@@ -49,12 +48,11 @@ const setCategory = ({ category, ...query }) => (category
   }
   : query);
 
-
 const products = {
   get: withToken(
     (
       [query, routeQuery, locale, totalFacets = []],
-      { access_token: accessToken },
+      accessToken,
     ) => {
       query = setCategory(query);
       return Promise.all([
@@ -104,7 +102,7 @@ const products = {
     };
     return Promise.all(
       config.facetSearches.map(
-        ({ name, component }) => {
+        ({ name }) => {
           const newRouteQuery = { ...routeQuery };
           delete newRouteQuery[name];
           return products.get([
@@ -116,54 +114,12 @@ const products = {
             ),
           ])
             .then(
-              ({ facets }) => ({
-                ...facets
-                  .find(f => f.name === name),
-                component,
-              }),
+              ({ facets }) => facets
+                .find(f => f.name === name),
             );
         },
       ),
     );
-  },
-  paramsFromComponent: (component) => {
-    const category = component.$route.params.categorySlug === 'all'
-      ? undefined
-      : component.categories?.results[0]?.id;
-    const route = component.$route;
-    const {
-      currency,
-      country,
-      customerGroup,
-      channel: priceChannel,
-    } = component.$store.state;
-    const loc = locale(component);
-    const sortValue = route.query.sort;
-    const searchText = route.query.q
-      ? { [`text.${loc}`]: route.query.q }
-      : {};
-    const sort = sortValue
-      ? { sort: `lastModifiedAt ${sortValue === 'newest' ? 'desc' : 'asc'}` }
-      : {};
-    const { min, max } = route.query;
-    const priceFilter = {};
-    if (min || max) {
-      const minQ = min ? min * 100 : '*';
-      const maxQ = max ? max * 100 : '*';
-      priceFilter.priceFilter = `variants.scopedPrice.value.centAmount: range (${minQ} to ${maxQ})`;
-    }
-
-    return {
-      category,
-      currency,
-      country,
-      customerGroup,
-      priceChannel,
-      loc,
-      searchText,
-      sort,
-      priceFilter,
-    };
   },
 };
 

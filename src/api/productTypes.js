@@ -7,7 +7,7 @@ import {
 
 const productTypes = {
   getItem: withToken(
-    ({ access_token: accessToken }) => groupFetchJson(
+    accessToken => groupFetchJson(
       `${baseUrl}/product-types/key=main`,
       makeConfig(accessToken),
     ),

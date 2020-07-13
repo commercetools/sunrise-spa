@@ -52,15 +52,15 @@ const router = new Router({
             footer: TheFooter,
           },
         },
-        {
-          path: 'stores',
-          name: 'stores',
-          components: {
-            default: StoreLocator,
-            header: TheHeader,
-            footer: TheFooter,
-          },
-        },
+        // {
+        //   path: 'stores',
+        //   name: 'stores',
+        //   components: {
+        //     default: StoreLocator,
+        //     header: TheHeader,
+        //     footer: TheFooter,
+        //   },
+        // },
         {
           path: 'login',
           name: 'login',
