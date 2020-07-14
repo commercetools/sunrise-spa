@@ -1,7 +1,7 @@
 <script src="./VariantSelector.js"></script>
 
 <template>
-  <div v-if="product && attributeTranslation"
+  <div v-if="product"
        class="row select-row">
     <ul class="list-inline"
         data-test="variant-selector-list">

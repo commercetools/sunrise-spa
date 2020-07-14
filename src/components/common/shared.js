@@ -78,3 +78,16 @@ export function debounce(fn, time = 500) {
     );
   };
 }
+
+export function getValue(type, value, language) {
+  if (type === 'enum') {
+    return value.label;
+  }
+  if (type === 'lenum') {
+    return value.label[language];
+  }
+  if (type === 'ltext') {
+    return value[language];
+  }
+  return value;
+}

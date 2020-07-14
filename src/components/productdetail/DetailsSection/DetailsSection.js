@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { locale } from '../../common/shared';
+import { locale, getValue } from '../../common/shared';
 
 export default {
   props: {
@@ -10,18 +10,18 @@ export default {
   },
   data: () => ({
     product: null,
-    attributeTranslation: null,
     expanded: [true, false],
   }),
   computed: {
     productAttributes() {
-      const { attributes } = this.product.masterData.current.variant;
-      delete attributes.__typename;
-      return Object.values(attributes).filter(attribute => attribute)
-        .map(a => ({
-          ...a,
-          name: this.attributeTranslation?.get(a.name) || a.name,
-        }));
+      const selected = this.product.masterData.staged || this.product.masterData.current;
+      const { attributesRaw } = (selected?.allVariants?.[0] || []);
+      return attributesRaw.map(
+        ({ attributeDefinition: { label, type }, value }) => ({
+          name: label,
+          value: getValue(type.name, value, locale(this)),
+        }),
+      );
     },
   },
   methods: {
@@ -42,44 +42,36 @@ export default {
   apollo: {
     product: {
       query: gql`
-        query ProductDetailsSection($locale: Locale!, $sku: String!) {
+        query ProductDetailsSection($locale: Locale!, $sku: String!, $preview: Boolean!) {
           product(sku: $sku) {
             id
             masterData {
-              current {
-                variant(sku: $sku) {
-                  attributes {
-                    ...on mainProductType {
-                      designer {
-                        label
-                        key
+              current @skip(if: $preview) {
+                allVariants(skus:[$sku]) {
+                  sku
+                  attributesRaw {
+                    attributeDefinition {
+                      name
+                      label(locale:$locale)
+                      type {
                         name
-                      }
-                      colorFreeDefinition {
-                        value(locale: $locale)
-                        name
-                      }
-                      size {
-                        value
-                        name
-                      }
-                      style {
-                        key
-                        label
-                        name
-                      }
-                      gender {
-                        key
-                        label
-                        name
-                      }
-                      articleNumberManufacturer {
-                        name
-                        value
                       }
                     }
+                    value
                   }
                 }
+              }
+              staged @include(if: $preview) {
+                allVariants(skus:[$sku]) {
+                  sku
+                    attributesRaw {
+                      attributeDefinition {
+                        name
+                        label(locale:$locale)
+                      }
+                      value
+                    }
+                  }
               }
             }
           }
@@ -88,33 +80,7 @@ export default {
         return {
           locale: locale(this),
           sku: this.sku,
-        };
-      },
-    },
-    attributeName: {
-      query: gql`
-        query Translation($locale: Locale!, $type:String!) {
-          productType(key:$type) {
-            attributeDefinitions(limit:50) {
-              results {
-                name
-                label(locale:$locale)
-              }
-            }
-          }
-        }`,
-      manual: true,
-      result({ data, loading }) {
-        if (!loading) {
-          this.attributeTranslation = data.productType.attributeDefinitions.results.reduce(
-            (result, item) => result.set(item.name, item.label), new Map(),
-          );
-        }
-      },
-      variables() {
-        return {
-          locale: this.$i18n.locale,
-          type: 'main',
+          preview: this.$route.query.preview === 'true' || false,
         };
       },
     },
