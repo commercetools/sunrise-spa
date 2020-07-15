@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 import AttributeSelect from '../AttributeSelect/AttributeSelect.vue';
 import { getValue, locale } from '../../common/shared';
+import config from '../../../../sunrise.config';
 
 export default {
   components: { AttributeSelect },
@@ -13,38 +14,39 @@ export default {
   data: () => ({
     product: null,
   }),
-  methods: {
-    groupValuesByAttribute(acc, currentItem) {
-      const key = currentItem.name;
-      if (!acc[key]) {
-        acc[key] = {
-          name: currentItem.name,
-          values: [],
-        };
-      }
-      acc[key].values.push(
-        currentItem.value,
-      );
-      return acc;
-    },
-  },
   computed: {
     attributes() {
       const { allVariants } = this.product.masterData.staged
         || this.product.masterData.current;
-      return allVariants
+      const attributes = allVariants
         .map(({ attributesRaw }) => attributesRaw.map(
           ({
-            attributeDefinition: { label, type },
+            attributeDefinition: { name, label, type },
             value,
           }) => ({
-            name: label,
+            id: name,
+            label,
             value:
                 getValue(type.name, value, locale(this)),
           }),
         ))
         .flat()
-        .reduce(this.groupValuesByAttribute, {});
+        .filter(({ id }) => config.variantSelector.includes(id));
+      const translations = attributes.reduce(
+        (result, { id, label }) => result.set(id, label), new Map(),
+      );
+      return [...config.variantSelector.reduce(
+        (result, key) => result.set(translations.get(key),
+          [
+            key,
+            [...new Set(attributes
+              .filter(({ id }) => id === key)
+              .map(({ value }) => value)),
+            ]]),
+        new Map(),
+      ).entries()]
+        .filter(([, [, values]]) => values.length > 1)
+        .map(([name, [id, values]]) => [name, id, values]);
     },
     selected() {
       return this.variantCombinations.find(

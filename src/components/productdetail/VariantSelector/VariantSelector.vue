@@ -5,13 +5,14 @@
        class="row select-row">
     <ul class="list-inline"
         data-test="variant-selector-list">
-      <li v-for="(value, name) in attributes"
+      <li v-for="([name,id,values]) in attributes"
           :key="name">
         <AttributeSelect
           :product="product"
-          :values="value.values"
+          :values="values"
           :sku="sku"
-          :name="value.name"
+          :name="name"
+          :id="id"
           :selected="selected"
           :variantCombinations="variantCombinations"
         />

@@ -65,4 +65,7 @@ export default {
   detailAttributes: [
     'designer', 'colorFreeDefinition', 'size', 'style', 'gender', 'articleNumberManufacturer',
   ],
+  variantSelector: [
+    'color', 'size',
+  ],
 };

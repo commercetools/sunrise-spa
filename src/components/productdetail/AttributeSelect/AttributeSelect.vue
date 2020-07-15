@@ -7,12 +7,12 @@
         <i class="fa fa-angle-up angle-up"></i
       ></span>
       <ul >
-        <li v-for="value in distinctValues"
+        <li v-for="value in values"
             data-test="attribute-select-option"
             :key="value">
           <a
             href="#"
-            @click.prevent="setSelectedValue(name,value)"
+            @click.prevent="setSelectedValue(id,value)"
           >
             {{value}}
           </a>
