@@ -49,13 +49,13 @@ export default {
     },
   },
   watch: {
-    product() {
-      setTimeout(
-        () => {
-          $(this.$refs.easyzoom).easyZoom();
-        }, 500,
-      );
-    },
+    // product() {
+    //   setTimeout(
+    //     () => {
+    //       $(this.$refs.easyzoom).easyZoom();
+    //     }, 500,
+    //   );
+    // },
   },
   apollo: {
     product: {

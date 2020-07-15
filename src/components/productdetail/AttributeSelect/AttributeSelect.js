@@ -27,16 +27,16 @@ export default {
     },
   },
   computed: {
-    selectedValue() {
-      return this.selected[this.name];
-    },
-  },
-  methods: {
-    setSelectedValue(id, value) {
-      const sku = this.variantCombinations.find(
-        combi => combi[id] === value,
-      )?.sku;
-      if (sku) this.$router.push({ path: sku });
+    selectedValue: {
+      get() {
+        return this.selected[this.id];
+      },
+      set(value) {
+        const sku = this.variantCombinations.find(
+          combi => combi[this.id] === value,
+        )?.sku;
+        if (sku) this.$router.push({ path: sku });
+      },
     },
   },
 };
