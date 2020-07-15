@@ -1,5 +1,6 @@
 import gql from 'graphql-tag';
 import { locale, getValue } from '../../common/shared';
+import config from '../../../../sunrise.config';
 
 export default {
   props: {
@@ -16,11 +17,15 @@ export default {
     productAttributes() {
       const selected = this.product.masterData.staged || this.product.masterData.current;
       const { attributesRaw } = (selected?.allVariants?.[0] || []);
-      return attributesRaw.map(
-        ({ attributeDefinition: { label, type }, value }) => ({
-          name: label,
-          value: getValue(type.name, value, locale(this)),
-        }),
+      const attributes = attributesRaw.map(
+        ({ attributeDefinition: { name, label, type }, value }) => [
+          name, label, getValue(type.name, value, locale(this)),
+        ],
+      );
+      return config.detailAttributes.map(
+        attributeName => attributes.find(([name]) => name === attributeName),
+      ).filter(x => x).map(
+        ([, name, value]) => ({ name, value }),
       );
     },
   },
