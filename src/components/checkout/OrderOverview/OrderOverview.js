@@ -1,5 +1,7 @@
 import gql from 'graphql-tag';
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
+import ShippingMethod from '../ShippingMethod/ShippingMethod.vue';
+import PaymentMethod from '../PaymentMethod/PaymentMethod.vue';
 import BasePrice from '../../common/BasePrice/BasePrice.vue';
 import BaseMoney from '../../common/BaseMoney/BaseMoney.vue';
 import productMixin from '../../../mixins/productMixin';
@@ -14,6 +16,8 @@ import { totalPrice, locale } from '../../common/shared';
 export default {
   components: {
     LineItemInfo,
+    ShippingMethod,
+    PaymentMethod,
     CartLikePriceDetail,
     BasePrice,
     BaseMoney,
@@ -25,6 +29,26 @@ export default {
   }),
   methods: {
     totalPrice,
+    updateShippingMethod(shippingId) {
+      this.$emit('updateShipping', shippingId);
+      this.$apollo.queries.me.refresh();
+    },
+    placeOrder() {
+      this.$emit('completeOrder');
+    },
+  },
+  computed: {
+    subtotal() {
+      if (this.me) {
+        const { currencyCode, fractionDigits } = this.me.activeCart.totalPrice;
+        return {
+          centAmount: this.me.activeCart.lineItems.reduce((acc, li) => acc + li.totalPrice.centAmount, 0),
+          currencyCode,
+          fractionDigits,
+        };
+      }
+      return null;
+    },
   },
   apollo: {
     me: {

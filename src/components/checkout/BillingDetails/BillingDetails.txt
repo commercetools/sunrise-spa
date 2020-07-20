@@ -1,0 +1,10 @@
+en:
+  differentAddress: "Ship to a different address?"
+  billingDetails: "Billing Details"
+  orderNotes: "Order notes (optional)"
+  notesPlaceholder: "Notes about your order, e.g. special notes for delivery."
+de:
+  differentAddress: "Zu einer anderen Adresse verschicken?"
+  billingDetails: "Rechnungsdetails"
+  orderNotes: "Bestellhinweise (optional)"
+  notesPlaceholder: "Hinweise zu Ihrer Bestellung, z. Besondere Hinweise zur Lieferung."

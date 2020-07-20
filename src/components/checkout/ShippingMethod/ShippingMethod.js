@@ -6,13 +6,11 @@ import BaseMoney from '../../common/BaseMoney/BaseMoney.vue';
 import BaseForm from '../../common/form/BaseForm/BaseForm.vue';
 import BaseLabel from '../../common/form/BaseLabel/BaseLabel.vue';
 import ServerError from '../../common/form/ServerError/ServerError.vue';
-import CheckoutNavigation from '../CheckoutNavigation/CheckoutNavigation.vue';
 import MONEY_FRAGMENT from '../../Money.gql';
 
 export default {
   components: {
     BaseLabel,
-    CheckoutNavigation,
     ServerError,
     BaseForm,
     BaseMoney,
@@ -21,9 +19,7 @@ export default {
   mixins: [cartMixin],
   data: () => ({
     me: null,
-    form: {
-      shippingMethod: null,
-    },
+    selectedShippingMethod: null,
   }),
   methods: {
     price(shippingMethod) {
@@ -43,30 +39,27 @@ export default {
       const totalPrice = this.me.activeCart.totalPrice.centAmount;
       return totalPrice > shippingRate.freeAbove?.centAmount;
     },
-    setShippingMethod() {
-      return this.updateMyCart([
+  },
+  watch: {
+    me(value) {
+      this.selectedShippingMethod = value?.activeCart?.shippingInfo?.shippingMethod?.id;
+    },
+    shippingMethodsByLocation(value) {
+      if (!this.selectedShippingMethod) {
+        this.selectedShippingMethod = value.find(shippingMethod => shippingMethod.isDefault)?.id || value[0]?.id;
+      }
+    },
+    selectedShippingMethod() {
+      this.updateMyCart([
         {
           setShippingMethod: {
             shippingMethod: {
               typeId: 'shipping-method',
-              id: this.form.shippingMethod,
+              id: this.selectedShippingMethod,
             },
           },
         },
-      ]).then(() => this.$router.push({ name: 'checkout-payment-method' }));
-    },
-    goToBilling() {
-      this.$router.push({ name: 'checkout-billing-address' });
-    },
-  },
-  watch: {
-    me(value) {
-      this.form.shippingMethod = value?.activeCart?.shippingInfo?.shippingMethod?.id;
-    },
-    shippingMethodsByLocation(value) {
-      if (!this.form.shippingMethod) {
-        this.form.shippingMethod = value.find(shippingMethod => shippingMethod.isDefault)?.id || value[0]?.id;
-      }
+      ]);
     },
   },
   apollo: {

@@ -1,6 +1,0 @@
-en:
-  sameAddress: "Same as shipping address"
-  billingInformation: "Billing Information"
-de:
-  sameAddress: "Entspricht die Lieferadresse"
-  billingInformation: "Rechnung Information"

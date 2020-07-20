@@ -155,6 +155,7 @@
       color: #262626;
       abbr {
         color: red;
+        text-decoration: none;
       }
     }
     input {
@@ -177,7 +178,15 @@
       margin: 0 0 10px;
       abbr {
         color: red;
+        text-decoration: none;
       }
+    }
+    .select {
+      border: 1px solid #e6e6e6;
+      height: 50px;
+      padding: 2px 20px;
+      color: #262626;
+      cursor: pointer;
     }
     .select2-container {
       display: block;
@@ -224,6 +233,11 @@
       margin-right: 0px;
     }
   }
+}
+
+.option-price {
+  margin-left: 22px;
+  font-weight: 500;
 }
 
 .select2-container--default .select2-selection--single {
@@ -357,7 +371,7 @@
     .checkout-shipping-content {
       display: flex;
       justify-content: space-between;
-      border-bottom: 1px solid #e7e7e7;
+      // border-bottom: 1px solid #e7e7e7;
       margin-top: 13px;
       padding-bottom: 7px;
       .shipping-content-left {
@@ -384,13 +398,13 @@
       }
     }
     .payment-method {
+      border-bottom: 1px solid #e7e7e7;
       margin: 17px 0 0;
       .sin-payment {
         margin-bottom: 20px;
         input {
           width: auto;
           display: inline-block;
-          float: left;
           height: auto;
           margin-top: 5px;
         }
@@ -415,7 +429,6 @@
         }
         .payment-box {
           margin: 6px 0 0;
-          display: none;
           p {
             font-size: 12px;
             margin: 0;
@@ -507,6 +520,7 @@
     margin: 0 0 5px;
     abbr {
       color: red;
+      text-decoration: none;
     }
   }
   input {
@@ -528,6 +542,34 @@
   @media #{$xs-layout} {
     &.pb-70 {
       padding-bottom: 50px;
+    }
+  }
+}
+
+.order-complete {
+  h2 {
+    font-size: 60px;
+    font-weight: bold;
+    margin: 0;
+    line-height: 58px;
+  }
+  p {
+    font-size: 18px;
+    margin: 25px 0 38px;
+  }
+  a {
+    background-color: #262626;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
+    color: #fff;
+    line-height: 1;
+    margin-top: 70px;
+    padding: 18px 40px 19px;
+    border-radius: 50px;
+    &:hover {
+      background-color: $theme-color;
+      color: #fff;
     }
   }
 }

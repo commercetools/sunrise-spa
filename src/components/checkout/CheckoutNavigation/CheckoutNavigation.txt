@@ -1,6 +1,0 @@
-en:
-  continue: "Continue"
-  back: "Back"
-de:
-  continue: "Weiter"
-  back: "Zurück"
