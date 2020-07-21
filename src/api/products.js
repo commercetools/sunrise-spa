@@ -49,12 +49,11 @@ const setCategory = ({ category, ...query }) => (category
   }
   : query);
 
-
 const products = {
   get: withToken(
     (
       [query, routeQuery, locale, totalFacets = []],
-      { access_token: accessToken },
+      accessToken,
     ) => {
       query = setCategory(query);
       return Promise.all([
@@ -62,7 +61,17 @@ const products = {
           toUrl(
             `${baseUrl}/product-projections/search`,
             [
-              ...Object.entries(query),
+              ...Object.entries(query)
+                .filter(
+                  ([, val]) => !(val === null || val === undefined),
+                ).map(
+                  ([k, v]) => {
+                    if (k === 'priceFilter') {
+                      return ['filter.query', v];
+                    }
+                    return [k, v];
+                  },
+                ),
               ...Object.entries(facets(routeQuery, locale)),
               ...totalFacets.map(
                 ({ name, type }) => [

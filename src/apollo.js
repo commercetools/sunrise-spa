@@ -5,7 +5,7 @@ import { setContext } from 'apollo-link-context';
 import { onError } from 'apollo-link-error';
 import { fromPromise } from 'apollo-link';
 import { createApolloClient } from 'vue-cli-plugin-apollo/graphql-client';
-import { getAuthToken, cleanUpSession } from './auth';
+import { getAuthToken } from './auth';
 import config from '../sunrise.config';
 import introspectionQueryResultData from '../graphql-fragments.json';
 
@@ -22,7 +22,7 @@ function createClient() {
       const { headers } = operation.getContext();
       // eslint-disable-next-line no-console
       console.warn('Unauthorized or forbidden connection to commercetools, cleaning up session...', networkError);
-      return fromPromise(cleanUpSession().then(getAuthToken)).flatMap((authorization) => {
+      return fromPromise(getAuthToken(true)).flatMap((authorization) => {
         operation.setContext({ headers: { ...headers, authorization } });
         return forward(operation);
       });

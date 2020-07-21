@@ -62,4 +62,10 @@ export default {
     { name: 'color', type: 'lnum', component: 'colors' },
     { name: 'designer', type: 'enum', component: 'designer' },
   ],
+  detailAttributes: [
+    'designer', 'colorFreeDefinition', 'size', 'style', 'gender', 'articleNumberManufacturer',
+  ],
+  variantSelector: [
+    'color', 'size',
+  ],
 };

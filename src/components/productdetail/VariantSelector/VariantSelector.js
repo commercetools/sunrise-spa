@@ -1,11 +1,10 @@
 import gql from 'graphql-tag';
-import flatMap from 'lodash.flatmap';
 import AttributeSelect from '../AttributeSelect/AttributeSelect.vue';
+import { getValue, locale } from '../../common/shared';
+import config from '../../../../sunrise.config';
 
 export default {
-  components: {
-    AttributeSelect,
-  },
+  components: { AttributeSelect },
   props: {
     sku: {
       type: String,
@@ -14,120 +13,121 @@ export default {
   },
   data: () => ({
     product: null,
-    attributeTranslation: null,
   }),
-  methods: {
-    groupValuesByAttribute(acc, currentItem) {
-      const key = this.attributeTranslation?.get(currentItem.name)
-        || currentItem.name;
-      if (!acc[key]) {
-        acc[key] = {
-          name: currentItem.name,
-          values: [],
-        };
-      }
-      acc[key].values.push(currentItem.value || currentItem.label);
-      return acc;
-    },
-  },
   computed: {
     attributes() {
-      const { allVariants } = this.product.masterData.current;
-      return flatMap(allVariants, variant => Object.values(variant.attributes)
-        .filter(attr => typeof attr === 'object'))
-        .reduce(this.groupValuesByAttribute, {});
+      const { allVariants } = this.product.masterData.staged
+        || this.product.masterData.current;
+      const attributes = allVariants
+        .map(({ attributesRaw }) => attributesRaw.map(
+          ({
+            attributeDefinition: { name, label, type },
+            value,
+          }) => ({
+            id: name,
+            label,
+            value:
+                getValue(type.name, value, locale(this)),
+          }),
+        ))
+        .flat()
+        .filter(({ id }) => config.variantSelector.includes(id));
+      const translations = attributes.reduce(
+        (result, { id, label }) => result.set(id, label), new Map(),
+      );
+      return [...config.variantSelector.reduce(
+        (result, key) => result.set(translations.get(key),
+          [
+            key,
+            [...new Set(attributes
+              .filter(({ id }) => id === key)
+              .map(({ value }) => value)),
+            ]]),
+        new Map(),
+      ).entries()]
+        .filter(([, [, values]]) => values.length > 1)
+        .map(([name, [id, values]]) => [name, id, values]);
     },
     selected() {
-      return this.variantCombinations
-        .find(variant => variant.sku === this.sku);
+      return this.variantCombinations.find(
+        variant => variant.sku === this.sku,
+      );
     },
     variantCombinations() {
-      return this.product.masterData.current.allVariants
-        .map((variant) => {
-          const attrs = variant.attributes;
-          const combi = { sku: variant.sku };
-          delete attrs.__typename;
-          Object.keys(attrs).forEach((key) => {
-            combi[key] = variant.attributes[key].label || variant.attributes[key].value;
-          });
-          return combi;
-        });
+      const p = this.product.masterData.staged
+        || this.product.masterData.current;
+      return p.allVariants.map(
+        ({ sku, attributesRaw }) => ({
+          sku,
+          ...Object.fromEntries(
+            attributesRaw.map(
+              ({
+                attributeDefinition: { name },
+                value,
+              }) => [
+                name,
+                typeof value === 'object'
+                  ? value.label
+                  : value,
+              ],
+            ),
+          ),
+        }),
+      );
     },
   },
   apollo: {
     product: {
       query: gql`
-        query VariantSelector($locale: Locale!, $sku: String!) {
+        query VariantSelector(
+          $sku: String!
+          $preview: Boolean!
+          $locale: Locale!
+        ) {
           product(sku: $sku) {
             id
             masterData {
-              current {
+              current @skip(if: $preview) {
                 allVariants {
                   sku
-                  attributes {
-                    ...on mainProductType {
-                      color {
-                        key
-                        label(locale: $locale)
-                        name
-                      }
-                      size {
-                        value
+                  attributesRaw {
+                    attributeDefinition {
+                      name
+                      label(locale: $locale)
+                      type {
                         name
                       }
                     }
+                    value
                   }
                 }
-                variant(sku: $sku) {
-                  attributes {
-                    ...on mainProductType {
-                      color {
-                        key
-                        label(locale: $locale)
+              }
+
+              staged @include(if: $preview) {
+                allVariants {
+                  sku
+                  attributesRaw {
+                    attributeDefinition {
+                      name
+                      label(locale: $locale)
+                      type {
                         name
                       }
-                      size {
-                        value
-                        name
-                      }               
                     }
+                    value
                   }
                 }
               }
             }
           }
-        }`,
-      variables() {
-        return {
-          locale: this.$i18n.locale,
-          sku: this.sku,
-        };
-      },
-    },
-    attributeName: {
-      query: gql`
-        query Translation($locale: Locale!, $type:String!) {
-          productType(key:$type) {
-            attributeDefinitions(limit:50) {
-              results {
-                name
-                label(locale:$locale)
-              }
-            }
-          }
-        }`,
-      manual: true,
-      result({ data, loading }) {
-        if (!loading) {
-          this.attributeTranslation = data.productType.attributeDefinitions.results.reduce(
-            (result, item) => result.set(item.name, item.label), new Map(),
-          );
         }
-      },
+      `,
       variables() {
         return {
-          locale: this.$i18n.locale,
-          type: 'main',
+          locale: locale(this),
+          sku: this.sku,
+          preview:
+            this.$route.query.preview === 'true' || false,
         };
       },
     },

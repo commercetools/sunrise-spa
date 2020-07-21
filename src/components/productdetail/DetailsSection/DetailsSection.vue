@@ -93,7 +93,7 @@
       </div>
     </div>
   </div> -->
-  <div class="description-review-wrapper" v-if="product && attributeTranslation">
+  <div class="description-review-wrapper" v-if="product">
     <div class="panel-group" id="accordion1">
       <div class="panel pro-dec-accordion">
         <div class="panel-heading">

@@ -1,17 +1,17 @@
 <script src="./VariantSelector.js"></script>
 
 <template>
-  <div v-if="product && attributeTranslation"
-       class="row select-row">
+  <div v-if="product">
     <ul class="list-inline"
         data-test="variant-selector-list">
-      <li v-for="(value, name) in attributes"
+      <li v-for="([name,id,values]) in attributes"
           :key="name">
         <AttributeSelect
           :product="product"
-          :values="value.values"
+          :values="values"
           :sku="sku"
-          :name="value.name"
+          :name="name"
+          :id="id"
           :selected="selected"
           :variantCombinations="variantCombinations"
         />
