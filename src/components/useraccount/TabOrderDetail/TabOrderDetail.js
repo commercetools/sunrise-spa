@@ -1,6 +1,8 @@
 import gql from 'graphql-tag';
 import BaseDate from '../../common/BaseDate/BaseDate.vue';
-import CartLikeSummary from '../../common/cartlike/CartLikeSummary/CartLikeSummary.vue';
+import BaseAddress from '../../common/BaseAddress/BaseAddress.vue';
+import LineItemInfo from '../../common/cartlike/LineItemInfo/LineItemInfo.vue';
+import CartLikeContentDetail from '../../common/cartlike/CartLikeContentDetail/CartLikeContentDetail.vue';
 import ORDER_FRAGMENT from '../../Order.gql';
 import ADDRESS_FRAGMENT from '../../Address.gql';
 import MONEY_FRAGMENT from '../../Money.gql';
@@ -8,8 +10,10 @@ import { locale } from '../../common/shared';
 
 export default {
   components: {
-    CartLikeSummary,
+    CartLikeContentDetail,
     BaseDate,
+    BaseAddress,
+    LineItemInfo,
   },
   data: () => ({
     me: null,
