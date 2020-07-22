@@ -4,12 +4,12 @@
 
 <template>
   <div class="row" v-if="product">
-    <div class="col-lg-6">
+    <div class="col-lg-5">
       <div class="product-details-tab">
         <ProductGallery :sku="sku" />
       </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-7">
       <div class="product-details-content product-details-ptb">
         <h2>{{ currentProduct.name }}</h2>
         <h3>
