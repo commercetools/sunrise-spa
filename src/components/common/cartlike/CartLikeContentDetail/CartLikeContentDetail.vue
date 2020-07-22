@@ -7,15 +7,16 @@
     <table>
       <thead>
         <tr>
+          <th v-if="editable"></th>
           <th></th>
-          <th></th>
-          <th>{{$t('description')}}</th>
-          <th>{{$t('price')}}</th>
-          <th>{{$t('quantity')}}</th>
-          <th>{{$t('total')}}</th>
+          <th>{{ $t('description') }}</th>
+          <th>{{ $t('price') }}</th>
+          <th>{{ $t('quantity') }}</th>
+          <th>{{ $t('total') }}</th>
         </tr>
       </thead>
       <LineItemInfo
+        :editable="editable"
         v-for="lineItem in cartLike.lineItems"
         :key="lineItem.id"
         data-test="cart-line-item"

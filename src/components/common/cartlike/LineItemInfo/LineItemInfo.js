@@ -22,6 +22,10 @@ export default {
       type: Boolean,
       default: () => true,
     },
+    editable: {
+      type: Boolean,
+      default: () => true,
+    },
   },
   computed: {
     dump() {

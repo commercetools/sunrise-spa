@@ -5,27 +5,40 @@
 <template>
   <tbody>
     <tr>
-      <td class="product-remove">
+      <td v-if="editable" class="product-remove">
         <LineItemDeleteForm :lineItemId="lineItem.id" />
       </td>
       <td class="product-img">
-        <router-link :to="productRoute(lineItem.productSlug, lineItem.variant.sku)" class="img">
-          <img :src="displayedImageUrl(lineItem.variant)" :alt="lineItem.name" />
+        <router-link
+          :to="productRoute(lineItem.productSlug, lineItem.variant.sku)"
+          class="img"
+        >
+          <img
+            :src="displayedImageUrl(lineItem.variant)"
+            :alt="lineItem.name"
+          />
         </router-link>
       </td>
       <td class="product-name">
         <router-link
           :to="productRoute(lineItem.productSlug, lineItem.variant.sku)"
           data-test="cart-line-item-link"
-        >{{ lineItem.name }}</router-link>
+          >{{ lineItem.name }}</router-link
+        >
+        <span>{{ lineItem.variant.sku }}</span>
       </td>
       <td class="product-price">
         <span class="amount">
           <BaseMoney :money="lineItem.price.value" />
         </span>
       </td>
-      <td class="cart-quality">
-        <LineItemQuantityForm :lineItemId="lineItem.id" :quantity="lineItem.quantity" />
+      <td class="text-center cart-quality">
+        <LineItemQuantityForm
+          v-if="editable"
+          :lineItemId="lineItem.id"
+          :quantity="lineItem.quantity"
+        />
+        <span v-else>{{ lineItem.quantity }}</span>
       </td>
       <td class="product-total">
         <span>
