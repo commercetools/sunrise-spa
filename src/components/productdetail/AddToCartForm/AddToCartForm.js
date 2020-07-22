@@ -38,7 +38,7 @@ export default {
       return this.updateMyCart({
         addLineItem: {
           sku: this.sku,
-          quantity: this.quantity,
+          quantity: Number(this.quantity),
         },
       }).then(() => this.$store.dispatch('openMiniCart'));
     },
