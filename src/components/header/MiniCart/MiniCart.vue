@@ -53,7 +53,7 @@
             <div class="cart-total">
               <h4>
                 {{ $t('subtotal') }}:
-                <BaseMoney :money="me.activeCart.totalPrice" />
+                <BaseMoney :money="subtotal" />
               </h4>
             </div>
             <div class="cart-checkout-btn">

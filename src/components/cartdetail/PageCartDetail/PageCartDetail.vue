@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    <div v-if="cartNotEmpty" class="breadcrumb-area bg-gray mt-120">
+    <div v-if="cartNotEmpty" class="breadcrumb-area bg-gray mt-110">
       <div class="container-fluid">
         <div class="breadcrumb-content text-center">
           <div class="breadcrumb-title">

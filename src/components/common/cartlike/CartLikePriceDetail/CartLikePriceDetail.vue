@@ -58,7 +58,7 @@
       </div>
       <div class="single-cart-total-right col-sm-6">
         <b>
-          <BaseMoney :money="cartLike.totalPrice" />
+          <BaseMoney :money="subtotal" />
         </b>
       </div>
     </div>

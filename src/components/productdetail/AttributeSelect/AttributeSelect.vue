@@ -3,7 +3,7 @@
 
 <template>
   <div class="pro-details-size">
-    <span>{{ name }}</span>
+    <span style="margin-left: 3px">{{ name }}</span>
     <select
       v-model="selectedValue"
       class="select-product-detail"
