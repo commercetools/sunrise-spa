@@ -3,12 +3,13 @@
 <script src="./LoginButton.js"></script>
 
 <template>
-  <div class="header-login component-same ml-30">
-    <span class="dl-icon-user12"></span>
-
+  <div class="header-login component-same ml-10">
     <span v-if="showLoggedIn">
       <router-link :to="{ name: 'user' }" data-test="login-info-name">
-        <span class="hidden-xs hidden-sm">{{ $t('myAccount') }}</span>
+        <i class="dl-icon-user12"></i>
+        <span class="target-text hidden-xs hidden-sm">{{
+          $t('myAccount')
+        }}</span>
       </router-link>
     </span>
     <!-- <span v-if="showLoggedIn" class="hidden-xs">
@@ -18,7 +19,8 @@
     </span>-->
     <span v-else data-test="login-button">
       <router-link :to="{ name: 'login' }">
-        <span class="hidden-xs hidden-sm">{{ $t("signIn") }}</span>
+        <i class="dl-icon-user12"></i>
+        <span class="target-text hidden-xs hidden-sm">{{ $t('signIn') }}</span>
       </router-link>
     </span>
   </div>

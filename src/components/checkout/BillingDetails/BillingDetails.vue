@@ -6,7 +6,7 @@
     <h3>{{ $t('billingDetails') }}</h3>
     <BaseAddressForm
       @updateAddress="updateBillingAddress"
-      @validForm="validForm"
+      @validForm="validBillingForm"
       :address="billingAddress"
     />
     <div class="checkout-account mt-20">
@@ -16,6 +16,7 @@
     <div v-if="differentAddress" class="checkout-ship-open mt-30">
       <BaseAddressForm
         @updateAddress="updateShippingAddress"
+        @validForm="validShippingForm"
         :address="shippingAddress"
       />
     </div>

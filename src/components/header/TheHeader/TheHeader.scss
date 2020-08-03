@@ -266,11 +266,6 @@
 .header-login {
   a {
     font-size: 16px;
-
-    > span {
-      margin-left: 5px;
-      font-size: 14px;
-    }
   }
 
   @media #{$xl-layout} {
@@ -305,7 +300,6 @@
       color: #fff;
       display: block;
       top: -20px;
-      right: -1px;
       width: 18px;
       text-align: center;
       padding: 0;
@@ -2088,7 +2082,7 @@
                   left: auto;
                   width: 0;
                   position: absolute;
-                  transition: width 300ms ease-out;
+                  // transition: width 300ms ease-out;
                   bottom: 0;
                   color: #989898;
                 }

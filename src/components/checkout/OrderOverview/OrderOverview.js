@@ -14,6 +14,12 @@ import ADDRESS_FRAGMENT from '../../Address.gql';
 import { totalPrice, locale } from '../../common/shared';
 
 export default {
+  props: {
+    showError: {
+      type: Boolean,
+      required: false,
+    },
+  },
   components: {
     LineItemInfo,
     ShippingMethod,

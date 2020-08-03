@@ -77,5 +77,8 @@
     <div class="Place-order mt-30">
       <a @click.prevent="placeOrder" href>{{ $t('placeOrder') }}</a>
     </div>
+    <div v-if="showError" class="error-message mt-10">
+      * Please fill in all required data
+    </div>
   </div>
 </template>

@@ -5,8 +5,11 @@
   <div class="login-register-wrap">
     <h3>{{ $t('signIn') }}</h3>
     <div class="login-register-form">
-      <BaseForm :vuelidate="$v" :onSubmit="customerSignMeIn" #default="{ error }">
-        <ServerError :error="error" v-slot="{ graphQLError }">{{ getErrorMessage(graphQLError) }}</ServerError>
+      <BaseForm
+        :vuelidate="$v"
+        :onSubmit="customerSignMeIn"
+        #default="{ error }"
+      >
         <div class="sin-login-register">
           <BaseInput
             v-model="form.email"
@@ -28,13 +31,19 @@
           />
         </div>
         <div class="lost-password mb-20">
-          <router-link :to="{ name: 'forgot-password'}">{{ $t('forgotPassword') }}</router-link>
+          <router-link :to="{ name: 'forgot-password' }">{{
+            $t('forgotPassword')
+          }}</router-link>
         </div>
+
         <div class="login-register-btn-remember">
           <div class="login-register-btn">
             <button>{{ $t('signIn') }}</button>
           </div>
         </div>
+        <ServerError class="mb-20" :error="error" v-slot="{ graphQLError }">{{
+          getErrorMessage(graphQLError)
+        }}</ServerError>
       </BaseForm>
     </div>
   </div>

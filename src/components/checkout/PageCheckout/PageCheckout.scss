@@ -547,3 +547,30 @@
   padding: 2px 20px;
   color: #777;
 }
+
+.order-complete {
+  h2 {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0;
+    line-height: 58px;
+  }
+  p {
+    font-size: 18px;
+    margin: 25px 0 38px;
+  }
+  a {
+    background-color: #262626;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
+    color: #fff;
+    line-height: 1;
+    padding: 18px 40px 19px;
+    border-radius: 50px;
+    &:hover {
+      background-color: $theme-color;
+      color: #fff;
+    }
+  }
+}
