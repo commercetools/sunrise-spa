@@ -11,11 +11,18 @@ describe('LocationSelector/index.vue', () => {
   beforeEach(() => {
     options = {
       mocks: { $t: jest.fn() },
+      propsData: {
+        values: {
+          it: 'Italiano',
+          es: 'Español',
+        },
+        title: 'hello world',
+      },
     };
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(LocationSelector, options).isVueInstance()).toBe(true);
+    expect(shallowMount(LocationSelector, options).vm).toBeTruthy();
   });
 
   it('computes languages defined in configuration', () => {
@@ -23,14 +30,6 @@ describe('LocationSelector/index.vue', () => {
     options.mocks.$sunrise = { languages: { it: 'Italiano', es: 'Español' } };
     const wrapper = shallowMount(LocationSelector, options);
 
-    expect(wrapper.vm.languages).toEqual([{ id: 'it', name: 'Italiano' }, { id: 'es', name: 'Español' }]);
-    expect(wrapper.find('[data-test="location-selector"]').exists()).toBe(true);
-  });
-
-  it('hides selector on empty languages', () => {
-    const wrapper = shallowMount(LocationSelector);
-
-    expect(wrapper.vm.languages).toEqual([]);
-    expect(wrapper.find('[data-test="location-selector"]').exists()).toBe(false);
+    expect(wrapper.vm.listValues).toEqual([{ id: 'it', name: 'Italiano' }, { id: 'es', name: 'Español' }]);
   });
 });

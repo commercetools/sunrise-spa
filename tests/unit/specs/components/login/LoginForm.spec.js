@@ -18,6 +18,6 @@ describe('LoginForm/index.vue', () => {
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(LoginForm, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(LoginForm, options).vm).toBeTruthy();
   });
 });

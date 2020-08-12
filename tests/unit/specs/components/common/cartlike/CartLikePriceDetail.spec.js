@@ -20,14 +20,15 @@ describe('CartLikePriceDetail/index.vue', () => {
 
   beforeEach(() => {
     options = {
-      methods: { formatPrice: jest.fn() },
+      // methods: { formatPrice: jest.fn() },
       mocks: { $t: jest.fn() },
       propsData: { cartLike },
+      stubs: { 'router-link': true },
     };
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(CartLikePriceDetail, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(CartLikePriceDetail, options).vm).toBeTruthy();
   });
 
   it('calculates applied taxes', () => {

@@ -30,7 +30,7 @@ describe('Product gallery', () => {
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(ProductGallery, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(ProductGallery, options).vm).toBeTruthy();
   });
 
   it('tranforms product images into ProductZoomer structure', () => {
@@ -59,16 +59,6 @@ describe('Product gallery', () => {
         },
       ],
 
-      large_size: [
-        {
-          id: 0,
-          url: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/079536_1_large.jpg',
-        },
-        {
-          id: 1,
-          url: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/079535_1_large.jpg',
-        },
-      ],
     });
   });
 
@@ -95,6 +85,6 @@ describe('Product gallery', () => {
   it('does not fail when there are no images', () => {
     options.computed = { productImages: jest.fn(() => []) };
     const wrapper = shallowMount(ProductGallery, options);
-    expect(wrapper.vm.zoomerImages).toEqual({ large_size: [], normal_size: [], thumbs: [] });
+    expect(wrapper.vm.zoomerImages).toEqual({ normal_size: [], thumbs: [] });
   });
 });

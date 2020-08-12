@@ -31,7 +31,7 @@ describe('ValidationError/index.vue', () => {
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(ValidationError, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(ValidationError, options).vm).toBeTruthy();
   });
 
   it('returns validations', () => {
@@ -91,7 +91,7 @@ describe('ValidationError/index.vue', () => {
     expect(wrapper.vm.getErrorMessage('params')).toEqual('min 3 max 5');
   });
 
-  it('does not render errors if no error flag', () => {
+  it('does not render errors if no error flag', async () => {
     const wrapper = shallowMount(ValidationError, options);
     wrapper.setProps({
       vuelidate: {
@@ -99,6 +99,7 @@ describe('ValidationError/index.vue', () => {
         $params: {},
       },
     });
+    await wrapper.vm.$nextTick();
     expect(wrapper.find('[data-test="validation-error-list"]').exists()).toBe(false);
 
     wrapper.setProps({
@@ -107,10 +108,11 @@ describe('ValidationError/index.vue', () => {
         $params: {},
       },
     });
+    await wrapper.vm.$nextTick();
     expect(wrapper.find('[data-test="validation-error-list"]').exists()).toBe(true);
   });
 
-  it('renders each validation error', () => {
+  it('renders each validation error', async () => {
     const wrapper = shallowMount(ValidationError, options);
     expect(wrapper.findAll('[data-test="validation-error"]').length).toBe(0);
 
@@ -125,6 +127,7 @@ describe('ValidationError/index.vue', () => {
       },
       customErrors: { custom: 'custom error' },
     });
+    await wrapper.vm.$nextTick();
     const errors = wrapper.findAll('[data-test="validation-error"]');
     expect(errors.length).toBe(3);
     expect(errors.at(0).text()).toBe(requiredTranslation);

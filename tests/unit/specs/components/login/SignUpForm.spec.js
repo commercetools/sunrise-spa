@@ -14,11 +14,12 @@ describe('SignUpForm/index.vue', () => {
     options = {
       localVue,
       mocks: { $t: jest.fn() },
-      methods: { customerSignMeUp: jest.fn() },
+      // overriding methods is depricated
+      // methods: { customerSignMeUp: jest.fn() },
     };
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(SignUpForm, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(SignUpForm, options).vm).toBeTruthy();
   });
 });

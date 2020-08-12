@@ -12,36 +12,67 @@ describe('VariantSelector/index.vue', () => {
 
   beforeEach(() => {
     product = {
+      id: '695b68e0-fb4b-4384-997a-1db12439b453',
       masterData: {
         current: {
           allVariants: [
             {
-              attributes: {
-                color: {
-                  key: 'black',
-                  label: 'black',
-                  name: 'color',
+              sku: 'M0E20000000EEWT',
+              attributesRaw: [
+                {
+                  attributeDefinition: {
+                    name: 'size',
+                    label: 'Size',
+                    type: {
+                      name: 'text',
+                      __typename: 'TextAttributeDefinitionType',
+                    },
+                    __typename: 'AttributeDefinition',
+                  },
+                  value: '0',
+                  __typename: 'RawProductAttribute',
                 },
-                size: {
-                  name: 'size',
-                  value: '34',
-                },
-              },
-              sku: 'sku-34-black',
+              ],
+              __typename: 'ProductVariant',
             },
             {
-              attributes: {
-                color: {
-                  key: 'grey',
-                  label: 'grey',
-                  name: 'color',
+              sku: 'M0E20000000EEWU',
+              attributesRaw: [
+                {
+                  attributeDefinition: {
+                    name: 'size',
+                    label: 'Size',
+                    type: {
+                      name: 'text',
+                      __typename: 'TextAttributeDefinitionType',
+                    },
+                    __typename: 'AttributeDefinition',
+                  },
+                  value: '1',
+                  __typename: 'RawProductAttribute',
                 },
-                size: {
-                  name: 'size',
-                  value: '30',
+              ],
+              __typename: 'ProductVariant',
+            },
+            {
+              sku: 'M0E20000000EEWV',
+              attributesRaw: [
+                {
+                  attributeDefinition: {
+                    name: 'size',
+                    label: 'Size',
+                    type: {
+                      name: 'text',
+                      __typename: 'TextAttributeDefinitionType',
+                    },
+                    __typename: 'AttributeDefinition',
+                  },
+                  value: '2',
+                  __typename: 'RawProductAttribute',
                 },
-              },
-              sku: 'sku-30-grey',
+
+              ],
+              __typename: 'ProductVariant',
             },
           ],
         },
@@ -52,26 +83,17 @@ describe('VariantSelector/index.vue', () => {
       router,
       localVue,
       propsData: {
-        sku: 'sku-34-black',
+        sku: 'M0E20000000EEWT',
       },
     };
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(VariantSelector, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(VariantSelector, options).vm).toBeTruthy();
   });
 
   it('groups values by their attributes', () => {
-    const attrs = {
-      color: {
-        name: 'color',
-        values: ['black', 'grey'],
-      },
-      size: {
-        name: 'size',
-        values: ['34', '30'],
-      },
-    };
+    const attrs = [['Size', 'size', ['0', '1', '2']]];
     const wrapper = shallowMount(VariantSelector, options);
     wrapper.setData({ product });
     expect(wrapper.vm.attributes).toEqual(attrs);
@@ -80,13 +102,14 @@ describe('VariantSelector/index.vue', () => {
   it('calculates the selected value', () => {
     const wrapper = shallowMount(VariantSelector, options);
     wrapper.setData({ product });
-    expect(wrapper.vm.selected).toEqual({ sku: 'sku-34-black', color: 'black', size: '34' });
+    expect(wrapper.vm.selected).toEqual({ size: '0', sku: 'M0E20000000EEWT' });
   });
 
   it('obtains variant combinations', () => {
     const combi = [
-      { sku: 'sku-34-black', color: 'black', size: '34' },
-      { sku: 'sku-30-grey', color: 'grey', size: '30' },
+      { size: '0', sku: 'M0E20000000EEWT' },
+      { size: '1', sku: 'M0E20000000EEWU' },
+      { size: '2', sku: 'M0E20000000EEWV' },
     ];
     const wrapper = shallowMount(VariantSelector, options);
     wrapper.setData({ product });

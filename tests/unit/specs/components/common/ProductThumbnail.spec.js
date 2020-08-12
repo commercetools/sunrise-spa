@@ -15,15 +15,15 @@ describe('ProductThumbnail/index.vue', () => {
     };
 
     options = {
-      methods: { formatPrice: jest.fn() },
+      // methods: { formatPrice: jest.fn() },
       mocks: { $t: jest.fn() },
       propsData: { product },
-      stubs: { 'router-link': '<a/>' },
+      stubs: { 'router-link': { template: '<a />' } },
     };
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(ProductThumbnail, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(ProductThumbnail, options).vm).toBeTruthy();
   });
 
   it.skip('obtains matching variant of the product', () => {

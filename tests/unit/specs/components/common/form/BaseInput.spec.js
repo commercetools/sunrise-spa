@@ -15,7 +15,7 @@ describe('BaseInput/index.vue', () => {
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(BaseInput, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(BaseInput, options).vm).toBeTruthy();
   });
 
   it('updates model with prop value', () => {

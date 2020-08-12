@@ -1,8 +1,8 @@
-import VueTestUtils from '@vue/test-utils';
+import { config } from '@vue/test-utils';
 
 global.fetch = require('jest-fetch-mock');
 
-VueTestUtils.config.mocks = {
+config.mocks = {
   $sunrise: {},
   $store: {},
 };

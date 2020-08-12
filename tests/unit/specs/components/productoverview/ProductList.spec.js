@@ -6,8 +6,9 @@ import ProductThumbnail from '@/components/common/ProductThumbnail/ProductThumbn
 jest.mock('../../../../../src/api', () => ({
   products: {
     get: () => Promise.resolve({ results: [], total: 0 }),
+    paramsFromComponent: () => false,
   },
-  onlyLastRequestedPromise: () => y => y,
+  onlyLastRequestedPromise: () => (y) => y,
 }));
 const localVue = createLocalVue();
 
@@ -46,7 +47,7 @@ describe('ProductList/index.vue', () => {
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(ProductList, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(ProductList, options).vm).toBeTruthy();
   });
 
   it('obtains category information', () => {
@@ -66,7 +67,7 @@ describe('ProductList/index.vue', () => {
     expect(wrapper.vm.category).toEqual({ id: 'category-id-1' });
   });
 
-  it('calls ProductThumbnail for each obtained product', () => {
+  it('calls ProductThumbnail for each obtained product', async () => {
     const wrapper = shallowMount(ProductList, options);
     wrapper.setData({
       categories: {
@@ -76,7 +77,7 @@ describe('ProductList/index.vue', () => {
         results: [],
       },
     });
-
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.ProductThumbnail).toBeUndefined();
 
     wrapper.setData({
@@ -91,7 +92,8 @@ describe('ProductList/index.vue', () => {
         ],
       },
     });
-    const thumbnails = wrapper.findAll(ProductThumbnail);
+    await wrapper.vm.$nextTick();
+    const thumbnails = wrapper.findAllComponents(ProductThumbnail);
 
     expect(thumbnails.length).toBe(3);
     expect(thumbnails.at(0).props().product.id).toEqual('product-id-1');

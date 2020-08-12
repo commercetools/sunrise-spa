@@ -15,14 +15,14 @@ describe('ProductInfo/index.vue', () => {
     };
 
     options = {
-      methods: { formatPrice: jest.fn() },
+      // methods: { formatPrice: jest.fn() },
       mocks: { $t: jest.fn() },
       propsData: { sku: 'product-sku' },
     };
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(ProductInfo, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(ProductInfo, options).vm).toBeTruthy();
   });
 
   it('obtains matching variant of the product', () => {

@@ -21,14 +21,14 @@ describe('CartLikeContentDetail/index.vue', () => {
 
   beforeEach(() => {
     options = {
-      methods: { formatPrice: jest.fn() },
+      // methods: { formatPrice: jest.fn() },
       mocks: { $t: jest.fn() },
       propsData: { cartLike },
     };
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(CartLikeContentDetail, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(CartLikeContentDetail, options).vm).toBeTruthy();
   });
 
   it('transforms the totalPrice with a cart discount', () => {

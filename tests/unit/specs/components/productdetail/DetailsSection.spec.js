@@ -9,9 +9,9 @@ describe('DetailsSection/index.vue', () => {
     product = {
       masterData: {
         current: {
-          variant: {
-            attributes: {},
-          },
+          allVariants: [{
+            attributesRaw: [],
+          }],
         },
       },
     };
@@ -23,15 +23,18 @@ describe('DetailsSection/index.vue', () => {
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(DetailsSection, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(DetailsSection, options).vm).toBeTruthy();
   });
 
-  it('obtains attributes of the product', () => {
-    const productAttributes = [{ foo: 'bar' }, { bar: 'foo' }];
-    product.masterData.current.variant.attributes = productAttributes;
+  it('obtains attributes of the product', async () => {
+    const productAttributes = [
+      { attributeDefinition: { name: 'designer', label: 'label', type: 'enum' }, value: { label: 'label' } },
+    ];
+    product.masterData.current.allVariants[0].attributesRaw = productAttributes;
     const wrapper = shallowMount(DetailsSection, options);
 
     wrapper.setData({ product });
-    expect(wrapper.vm.productAttributes).toEqual(productAttributes);
+    await wrapper.vm.$nextTick();
+    expect(wrapper.vm.productAttributes).toEqual([{ name: 'label', value: { label: 'label' } }]);
   });
 });

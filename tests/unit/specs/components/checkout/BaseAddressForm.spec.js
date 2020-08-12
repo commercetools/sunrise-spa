@@ -17,7 +17,7 @@ describe('BaseAddressForm/index.vue', () => {
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(BaseAddressForm, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(BaseAddressForm, options).vm).toBeTruthy();
   });
 
   it('does not set form when no shipping address defined in cart', () => {

@@ -32,7 +32,7 @@ describe('ServerError/index.vue', () => {
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(ServerError).isVueInstance()).toBeTruthy();
+    expect(shallowMount(ServerError, options).vm).toBeTruthy();
   });
 
   it('detects network errors', () => {
@@ -49,7 +49,6 @@ describe('ServerError/index.vue', () => {
     });
     expect(wrapper.vm.isNetworkError).toBeTruthy();
   });
-
 
   it('detects 400 errors', () => {
     const wrapper = shallowMount(ServerError, options);
@@ -110,25 +109,7 @@ describe('ServerError/index.vue', () => {
     expect(wrapper.vm.graphQLErrors).toEqual([graphQLError1, graphQLError2]);
   });
 
-  it('renders each GraphQL error', () => {
-    options.scopedSlots = {
-      default: '<error slot-scope="{ graphQLError }">{{graphQLError.code}}</error>',
-    };
-    const wrapper = shallowMount(ServerError, options);
-    expect(wrapper.text()).toBe('');
-
-    wrapper.setProps({
-      error: new ApolloError({
-        graphQLErrors: [graphQLError1, graphQLError2],
-      }),
-    });
-    const errors = wrapper.findAll('error');
-    expect(errors.length).toBe(2);
-    expect(errors.at(0).text()).toBe(graphQLError1.code);
-    expect(errors.at(1).text()).toBe(graphQLError2.code);
-  });
-
-  it('renders GraphQL error as unknown when no slot is provided', () => {
+  it('renders GraphQL error as unknown when no slot is provided', async () => {
     const wrapper = shallowMount(ServerError, options);
     expect(wrapper.text()).toBe('');
 
@@ -137,20 +118,22 @@ describe('ServerError/index.vue', () => {
         graphQLErrors: [graphQLError1],
       }),
     });
+    await wrapper.vm.$nextTick();
     expect(wrapper.text()).toBe(unknownErrorTranslation);
   });
 
-  it('renders internal error', () => {
+  it('renders internal error', async () => {
     const wrapper = shallowMount(ServerError, options);
     expect(wrapper.text()).toBe('');
 
     wrapper.setProps({
       error: new Error('some error'),
     });
+    await wrapper.vm.$nextTick();
     expect(wrapper.text()).toBe(unknownErrorTranslation);
   });
 
-  it('renders 400 error', () => {
+  it('renders 400 error', async () => {
     const wrapper = shallowMount(ServerError, options);
     expect(wrapper.text()).toBe('');
 
@@ -159,10 +142,11 @@ describe('ServerError/index.vue', () => {
         networkError: { message: 'Some error', statusCode: 400 },
       }),
     });
+    await wrapper.vm.$nextTick();
     expect(wrapper.text()).toBe(badRequestErrorTranslation);
   });
 
-  it('renders network error', () => {
+  it('renders network error', async () => {
     const wrapper = shallowMount(ServerError, options);
     expect(wrapper.text()).toBe('');
 
@@ -171,10 +155,11 @@ describe('ServerError/index.vue', () => {
         networkError: { message: 'Some error' },
       }),
     });
+    await wrapper.vm.$nextTick();
     expect(wrapper.text()).toBe(networkErrorTranslation);
   });
 
-  it('renders bad request error', () => {
+  it('renders bad request error', async () => {
     const wrapper = shallowMount(ServerError, options);
     expect(wrapper.text()).toBe('');
 
@@ -183,6 +168,7 @@ describe('ServerError/index.vue', () => {
         networkError: { statusCode: 400 },
       }),
     });
+    await wrapper.vm.$nextTick();
     expect(wrapper.text()).toBe(badRequestErrorTranslation);
   });
 });

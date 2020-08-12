@@ -39,7 +39,7 @@ export default {
           where: `slug(${locale(this)}="${this.categorySlug}")`,
         };
       },
-      skip: vm => !vm.categorySlug,
+      skip: (vm) => !vm.categorySlug,
     },
   },
 };

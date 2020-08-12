@@ -16,7 +16,7 @@ describe('BaseSelect/index.vue', () => {
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(BaseSelect, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(BaseSelect, options).vm).toBeTruthy();
   });
 
   it('updates model with prop value', () => {

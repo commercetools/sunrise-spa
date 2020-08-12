@@ -14,12 +14,6 @@ describe('TabAccountDetails/index.vue', () => {
     },
   };
 
-  const newUser = {
-    email: 'hey@gmail.com',
-    firstName: 'William',
-    lastName: 'Wonkala',
-  };
-
   let options;
 
   beforeEach(() => {
@@ -30,33 +24,13 @@ describe('TabAccountDetails/index.vue', () => {
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(TabAccountDetails, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(TabAccountDetails, options).vm).toBeTruthy();
   });
 
-  it('displays current form values', () => {
-    options.sync = false;
+  it('displays current form values', async () => {
     const wrapper = shallowMount(TabAccountDetails, options);
     wrapper.setData({ me });
-    expect(wrapper.vm.form).toEqual({});
-
-    wrapper.vm.openForm();
-    expect(wrapper.vm.form).toEqual(me.customer);
-  });
-
-  it('re-opens form with initially stored values', () => {
-    options.sync = false;
-    const wrapper = shallowMount(TabAccountDetails, options);
-    wrapper.setData({ me });
-    expect(wrapper.vm.form).toEqual({});
-
-    wrapper.vm.openForm();
-    expect(wrapper.vm.form).toEqual(me.customer);
-
-    wrapper.setData({ form: { ...newUser } });
-    expect(wrapper.vm.form).toEqual(newUser);
-
-    wrapper.vm.closeForm();
-    wrapper.vm.openForm();
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.form).toEqual(me.customer);
   });
 });

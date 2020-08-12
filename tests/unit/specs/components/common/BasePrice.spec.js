@@ -21,7 +21,6 @@ describe('BasePrice/index.vue', () => {
   let options;
   let price;
 
-
   beforeEach(() => {
     price = {
       ...originalPrice,
@@ -33,7 +32,7 @@ describe('BasePrice/index.vue', () => {
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(BasePrice, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(BasePrice, options).vm).toBeTruthy();
   });
 
   it('obtains whether product has a discount', () => {

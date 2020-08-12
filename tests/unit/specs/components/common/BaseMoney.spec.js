@@ -29,7 +29,7 @@ describe('BaseMoney/index.vue', () => {
   });
 
   it('renders a vue instance', () => {
-    expect(shallowMount(BaseMoney, options).isVueInstance()).toBeTruthy();
+    expect(shallowMount(BaseMoney, options).vm).toBeTruthy();
   });
 
   it('calls number formatting method with proper arguments', () => {
