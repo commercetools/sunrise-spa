@@ -45,9 +45,12 @@
             <span>{{ $t('shipping') }}</span>
           </div>
         </div>
-        <ShippingMethod @updateShipping="updateShippingMethod" />
+        <ShippingMethod
+          @updateShipping="updateShippingMethod"
+          data-test="shipping-methods"
+        />
       </div>
-      <PaymentMethod />
+      <PaymentMethod data-test="payment-methods"/>
       <div class="your-order-info order-total">
         <ul>
           <li>
@@ -75,7 +78,13 @@
       </div> -->
     </div>
     <div class="Place-order mt-30">
-      <a @click.prevent="placeOrder" href>{{ $t('placeOrder') }}</a>
+      <a
+        @click.prevent="placeOrder"
+        data-test="place-order"
+        href
+      >
+        {{ $t('placeOrder') }}
+      </a>
     </div>
   </div>
 </template>

@@ -15,7 +15,9 @@
         :value="shippingMethod.id"
         name="shipping_method"
       />
-      <label>
+      <label
+        data-test="checkout-form-shipping-method-name"
+      >
         {{ shippingMethod.name }}
         <BaseMoney
           :money="price(shippingMethod)"
@@ -24,7 +26,9 @@
         />
       </label>
       <div class="payment-box payment_method_bacs">
-        <p>
+        <p
+          data-test="checkout-form-shipping-method-description"
+        >
           {{ shippingMethod.description }}
         </p>
       </div>

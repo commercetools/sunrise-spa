@@ -13,6 +13,7 @@
           :vuelidate="$v.form.firstName"
           v-model="form.firstName"
           type="text"
+          data-test="address-form-firstName"
         />
       </div>
     </div>
@@ -26,6 +27,7 @@
           :vuelidate="$v.form.lastName"
           v-model="form.lastName"
           type="text"
+          data-test="address-form-lastName"
         />
       </div>
     </div>
@@ -42,11 +44,13 @@
           :vuelidate="$v.form.streetName"
           :placeholder="$t('streetName')"
           type="text"
+          data-test="address-form-streetName"
         />
         <input
           v-model="form.additionalStreetInfo"
           :placeholder="$t('additional')"
           type="text"
+          data-test="address-form-additionalStreetInfo"
         />
       </div>
     </div>
@@ -60,6 +64,7 @@
           :vuelidate="$v.form.postalCode"
           v-model="form.postalCode"
           type="text"
+          data-test="address-form-postalCode"
         />
       </div>
     </div>
@@ -69,7 +74,11 @@
           {{ $t('city') }}
           <abbr class="required" title="required">*</abbr>
         </label>
-        <input :vuelidate="$v.form.city" v-model="form.city" type="text" />
+        <input
+          :vuelidate="$v.form.city"
+          v-model="form.city" type="text"
+          data-test="address-form-city"
+        />
       </div>
     </div>
     <div class="col-lg-12">
@@ -97,7 +106,11 @@
         <label>
           {{ $t('phone') }}
         </label>
-        <input :vuelidate="$v.form.phone" v-model="form.phone" type="tel" />
+        <input
+          :vuelidate="$v.form.phone"
+          v-model="form.phone" type="tel"
+          data-test="address-form-phone"
+        />
       </div>
     </div>
     <div class="col-lg-6 col-md-6">
@@ -106,7 +119,11 @@
           {{ $t('email') }}
           <abbr class="required" title="required">*</abbr>
         </label>
-        <input :vuelidate="$v.form.email" v-model="form.email" type="email" />
+        <input
+          :vuelidate="$v.form.email"
+          v-model="form.email" type="email"
+          data-test="address-form-email"
+        />
       </div>
     </div>
   </div>
