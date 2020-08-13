@@ -9,20 +9,20 @@ describe('Categories menu', () => {
       .then(($menu) => {
         cy.wrap($menu)
           .find('[data-test=category-1st-level-link]')
-          .contains('Women')
+          .contains('WOMEN')
           .should('have.attr', 'href', '/products/women');
 
         cy.wrap($menu).trigger('mouseenter');
 
         cy.wrap($menu)
           .find('[data-test=category-2nd-level-link]')
-          .contains('Shoes')
-          .should('have.attr', 'href', '/products/women-shoes');
+          .should('have.attr', 'href', '/products/women-clothing')
+          .contains('Clothing');
 
         cy.wrap($menu)
           .find('[data-test=category-3rd-level-link]')
-          .contains('Ankle boots')
-          .should('have.attr', 'href', '/products/women-shoes-ankle-boots');
+          .should('have.attr', 'href', '/products/women-clothing-skirts')
+          .contains('Skirts');
       });
   });
 });
