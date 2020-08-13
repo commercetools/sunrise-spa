@@ -50,10 +50,16 @@
           name="qty"
           maxlength="12"
           v-model="quantity"
+          data-test="add-to-cart-amount"
           title="Qty">
       </div>
       <div class="pro-cart-wrap">
-        <a href="#" @click.prevent="addLineItem">{{$t('addToCart')}}</a>
+        <a
+          href="#" @click.prevent="addLineItem"
+          data-test="add-to-cart-button"
+        >
+          {{$t('addToCart')}}
+        </a>
       </div>
     </div>
     <!-- <div class="pro-dec-wishlist-compare">

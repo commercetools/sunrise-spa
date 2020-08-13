@@ -25,10 +25,17 @@
           data-test="cart-line-item-link"
           >{{ lineItem.name }}</router-link
         >
-        <span>{{ lineItem.variant.sku }}</span>
+        <span
+          data-test="cart-line-item-sku"
+        >
+          {{ lineItem.variant.sku }}
+        </span>
       </td>
       <td class="product-price">
-        <span class="amount">
+        <span
+          class="amount"
+          data-test="item-price"
+        >
           <BaseMoney :money="lineItem.price.value" />
         </span>
       </td>
@@ -40,7 +47,10 @@
         />
         <span v-else>{{ lineItem.quantity }}</span>
       </td>
-      <td class="product-total">
+      <td
+        class="product-total"
+        data-test="line-total"
+      >
         <span>
           <BaseMoney :money="lineItem.totalPrice" />
         </span>

@@ -11,6 +11,7 @@
       v-for="discountInfo in cartLike.discountCodes"
       :key="discountInfo.discountCode.id"
       class="single-grand-total-right col-sm-6"
+      data-test="discount-code-name"
     >
       <b>
         {{ discountInfo.discountCode.code }}

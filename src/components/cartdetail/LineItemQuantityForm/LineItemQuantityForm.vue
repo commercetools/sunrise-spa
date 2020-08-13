@@ -11,6 +11,7 @@
         name="qtybutton"
         v-model.number="form.quantity"
         :vuelidate="$v.form.quantity"
+        data-test="cart-line-item-quantity"
       />
       <div @click="increment" class="inc qtybutton">+</div>
     </div>

@@ -52,7 +52,7 @@
       class="empty-area mt-50 border-top-2 pt-120 pb-120"
     >
       <div class="container">
-        <div class="empty-content text-center">
+        <div class="empty-content text-center" data-test="empty-cart">
           <h2>{{ $t('yourCart') }}</h2>
           <p>{{ $t('empty') }}</p>
           <router-link to="/">{{ $t('continueShopping') }}</router-link>

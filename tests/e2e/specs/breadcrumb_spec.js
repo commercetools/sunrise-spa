@@ -12,22 +12,15 @@ describe('Breadcrumb', () => {
     cy.get('[data-test=breadcrumb-ancestor-link]')
       .eq(0)
       .should('contain', 'Women')
-      .should('have.attr', 'href', '/products/women')
-      .should('not.have.class', 'active');
+      .should('have.attr', 'href', '/products/women');
 
     cy.get('[data-test=breadcrumb-ancestor-link]')
       .eq(1)
       .should('contain', 'Shoes')
-      .should('have.attr', 'href', '/products/women-shoes')
-      .should('not.have.class', 'active');
+      .should('have.attr', 'href', '/products/women-shoes');
 
     cy.get('[data-test=breadcrumb-ancestor-link]')
       .eq(2)
       .should('not.exist');
-
-    cy.get('[data-test=breadcrumb-category-link]')
-      .should('contain', 'Ankle boots')
-      .should('have.attr', 'href', '/products/women-shoes-ankle-boots')
-      .should('have.class', 'active');
   });
 });

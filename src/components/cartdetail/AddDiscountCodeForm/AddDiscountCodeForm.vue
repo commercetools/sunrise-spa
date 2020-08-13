@@ -14,7 +14,13 @@
         id="promo-code"
         data-test="discount-code-input"
       />
-      <button class="coupon-btn" type="submit">{{$t('apply')}}</button>
+      <button
+        class="coupon-btn"
+        type="submit"
+        data-test="apply-discount-code-button"
+      >
+        {{$t('apply')}}
+      </button>
     </div>
     <ServerError
       :error="error"

@@ -11,6 +11,7 @@
         </li>
         <li class="active" v-for="ancestor in currentCategory.ancestors" :key="ancestor.slug">
           <router-link
+            data-test=breadcrumb-ancestor-link
             v-if="ancestor.name"
             :to="{ name: 'products', params: { categorySlug: ancestor.slug } }"
             class="active"

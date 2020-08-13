@@ -10,7 +10,10 @@
         <div class="single-grand-total-left col-sm-6">
           <span>{{ $t('subtotal') }}</span>
         </div>
-        <div class="single-grand-total-right col-sm-6">
+        <div
+          class="single-grand-total-right col-sm-6"
+          data-test="cart-subtotal-price"
+        >
           <span>
             <BaseMoney :money="subtotal" />
           </span>
@@ -21,7 +24,10 @@
         <div class="single-grand-total-left col-sm-6">
           <span>{{ $t('salesTax') }}</span>
         </div>
-        <div class="single-grand-total-right col-sm-6">
+        <div
+          class="single-grand-total-right col-sm-6"
+          data-test="cart-taxes-amount"
+        >
           <span>
             <BaseMoney :money="taxes" />
           </span>
@@ -56,7 +62,10 @@
       <div class="single-cart-total-left col-sm-6">
         <b>{{ $t('total') }}</b>
       </div>
-      <div class="single-cart-total-right col-sm-6">
+      <div
+        class="single-cart-total-right col-sm-6"
+        data-test="cart-total-price"
+      >
         <b>
           <BaseMoney :money="cartLike.totalPrice" />
         </b>

@@ -7,15 +7,13 @@ describe('CartDetailPage', () => {
 
   it('displays a message when cart is empty', () => {
     cy.get('[data-test=empty-cart]')
-      .contains('Your bag is empty!');
+      .contains('Your cart is currently empty');
   });
 
   it('displays content of cart', () => {
     cy.addLineItem('/product/hoganrebel-r261-sneaker-6708K62AZC-grey/M0E20000000DX1Y', 2);
     cy.addLineItem('/product/havaianas-flipflops-brasil-green/M0E20000000ELAJ', 3);
     cy.visit('/cart');
-    cy.get('[data-test=cart-total-items]', { timeout: Cypress.config('graphqlTimeout') })
-      .contains(/^\s*5 items in total\s*$/);
 
     cy.get('[data-test=cart-total-price]')
       .should((e) => {
@@ -50,20 +48,13 @@ describe('CartDetailPage', () => {
           .should('have.value', '2');
 
         cy.wrap($lineItem)
-          .find('[data-test=price-old-value]')
+          .find('[data-test=line-total]')
           .should((e) => {
             expect(e.text()).to.include('275,00');
           });
 
-
         cy.wrap($lineItem)
-          .find('[data-test=price-new-value]')
-          .should((e) => {
-            expect(e.text()).to.include('137,50');
-          });
-
-        cy.wrap($lineItem)
-          .find('[data-test=cart-line-item-total-price]')
+          .find('[data-test=item-price]')
           .should((e) => {
             expect(e.text()).to.include('275,00');
           });
@@ -83,28 +74,23 @@ describe('CartDetailPage', () => {
           .clear()
           .type('5');
         cy.wrap($lineItem)
-          .find('[data-test=cart-line-item-total-price]')
+          .find('[data-test=line-total]')
           .contains(/^\s*120,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
         cy.wrap($lineItem)
-          .find('[data-test=cart-line-item-quantity-inc]')
-          .click()
-          .click();
-        cy.wrap($lineItem)
           .find('[data-test=cart-line-item-quantity]')
-          .should('have.value', '7');
+          .clear()
+          .type(7);
         cy.wrap($lineItem)
-          .find('[data-test=cart-line-item-total-price]')
+          .find('[data-test=line-total]')
           .contains(/^\s*168,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
         cy.wrap($lineItem)
-          .find('[data-test=cart-line-item-quantity-dec]')
-          .click();
-        cy.wrap($lineItem)
           .find('[data-test=cart-line-item-quantity]')
-          .should('have.value', '6');
+          .clear()
+          .type(6);
         cy.wrap($lineItem)
-          .find('[data-test=cart-line-item-total-price]')
+          .find('[data-test=line-total]')
           .contains(/^\s*144,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
         cy.wrap($lineItem)
@@ -121,7 +107,8 @@ describe('CartDetailPage', () => {
     cy.get('[data-test=cart-line-item]')
       .should('have.length', 1);
 
-    cy.get('[data-test=cart-line-item-quantity-dec]')
+    cy.get('[data-test=cart-line-item-delete]')
+      .eq(1)
       .click();
     cy.get('[data-test=cart-line-item]').should('have.length', 0);
   });
@@ -143,8 +130,7 @@ describe('CartDetailPage', () => {
     cy.addDiscountCode(cartDiscount, 'SUNRISE_CI');
     cy.addLineItem('/product/hoganrebel-r261-sneaker-6708K62AZC-grey/M0E20000000DX1Y', 1);
     cy.visit('/cart');
-
-    cy.get('[data-test=cart-line-item-total-price]')
+    cy.get('[data-test=line-total]')
       .contains(/^\s*137,50\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
 
     cy.get('[data-test=discount-code-input]')
@@ -153,13 +139,12 @@ describe('CartDetailPage', () => {
       .click();
     cy.get('[data-test=cart-total-price]')
       .contains(/^\s*68,75\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
-
     cy.get('[data-test=discount-code-name]')
       .contains('SUNRISE_CI');
     cy.get('[data-test=remove-discount-button]')
       .click();
 
-    cy.get('[data-test=cart-line-item-total-price]')
+    cy.get('[data-test=line-total]')
       .contains(/^\s*137,50\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
   });
 });

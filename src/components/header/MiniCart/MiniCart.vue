@@ -4,7 +4,11 @@
 
 <template>
   <span>
-    <div class="sidebar-cart-active" :class="{ inside: show }">
+    <div
+      class="sidebar-cart-active"
+      :class="{ inside: show }"
+      data-test="mini-cart-content"
+    >
       <div class="sidebar-cart-all">
         <a class="cart-close" href="javascript:;" @click="close"
           ><i class="dl-icon-close"></i
