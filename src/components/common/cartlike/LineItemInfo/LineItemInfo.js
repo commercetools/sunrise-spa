@@ -3,14 +3,13 @@ import LineItemQuantityForm from '../../../cartdetail/LineItemQuantityForm/LineI
 import LineItemDeleteForm from '../../../cartdetail/LineItemDeleteForm/LineItemDeleteForm.vue';
 import Remove from '../../../cartdetail/LineItemQuantityForm/Remove/Remove.vue';
 import BasePrice from '../../BasePrice/BasePrice.vue';
-import BaseMoney from '../../BaseMoney/BaseMoney.vue';
+import { totalPrice, variantAttributes, locale } from '../../shared';
 
 export default {
   components: {
     LineItemQuantityForm,
     Remove,
     BasePrice,
-    BaseMoney,
     LineItemDeleteForm,
   },
   props: {
@@ -28,9 +27,14 @@ export default {
     },
   },
   computed: {
-    dump() {
-      // console.log(this.lineItem);
-      return 22;
+    total() {
+      return totalPrice(this.lineItem);
+    },
+    nameFromLineItem() {
+      const attributes = variantAttributes(this.lineItem?.variant, locale(this));
+      return `${this.lineItem.name} ${attributes.map(
+        ({ name, value }) => `${name}: ${value}`,
+      ).join(', ')}`;
     },
   },
   mixins: [productMixin],

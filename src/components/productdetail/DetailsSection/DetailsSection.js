@@ -23,8 +23,8 @@ export default {
         ],
       );
       return config.detailAttributes.map(
-        (attributeName) => attributes.find(([name]) => name === attributeName),
-      ).filter((x) => x).map(
+        attributeName => attributes.find(([name]) => name === attributeName),
+      ).filter(x => x).map(
         ([, name, value]) => ({ name, value }),
       );
     },

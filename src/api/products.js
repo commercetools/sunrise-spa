@@ -33,7 +33,7 @@ const facets = (query = {}, locale) => config.facetSearches
           `${asAttribute(name, type, locale)}:${
             Array.isArray(query[name])
               ? query[name].map(
-                (value) => `"${value}"`,
+                value => `"${value}"`,
               ).join(',')
               : `"${query[name]}"`
           }`,
@@ -52,7 +52,7 @@ const setCategory = ({ category, ...query }) => (category
 const products = {
   get: withToken(
     (
-      [query, routeQuery, locale, totalFacets = []],
+      [query, routeQuery, locale, totalFacets = config.facetSearches],
       accessToken,
     ) => {
       query = setCategory(query);
@@ -121,13 +121,13 @@ const products = {
             newRouteQuery,
             locale,
             config.facetSearches.filter(
-              (f) => f.name === name,
+              f => f.name === name,
             ),
           ])
             .then(
               ({ facets }) => ({
                 ...facets
-                  .find((f) => f.name === name),
+                  .find(f => f.name === name),
                 component,
               }),
             );
@@ -156,12 +156,9 @@ const products = {
       : {};
     const { min, max } = route.query;
     const priceFilter = {};
-    if (min || max) {
-      const minQ = min ? min * 100 : '*';
-      const maxQ = max ? max * 100 : '*';
-      priceFilter.priceFilter = `variants.scopedPrice.value.centAmount: range (${minQ} to ${maxQ})`;
-    }
-
+    const minQ = min ? min * 100 : '0';
+    const maxQ = max ? max * 100 : '100000000';
+    priceFilter.priceFilter = `variants.scopedPrice.value.centAmount: range (${minQ} to ${maxQ})`;
     return {
       category,
       currency,

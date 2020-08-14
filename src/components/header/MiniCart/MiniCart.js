@@ -3,18 +3,20 @@ import gql from 'graphql-tag';
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import cartMixin from '../../../mixins/cartMixin';
 import productMixin from '../../../mixins/productMixin';
-import BaseMoney from '../../common/BaseMoney/BaseMoney.vue';
 import BasePrice from '../../common/BasePrice/MiniCardBasePrice.vue';
 import LineItemInfo from '../../common/cartlike/LineItemInfo/LineItemInfo.vue';
 import LineItemDeleteForm from '../../cartdetail/LineItemDeleteForm/LineItemDeleteForm.vue';
 import MONEY_FRAGMENT from '../../Money.gql';
-import { locale } from '../../common/shared';
+import CART_FRAGMENT from '../../Cart.gql';
+import ADDRESS_FRAGMENT from '../../Address.gql';
+import {
+  locale, totalPrice, subTotal, variantAttributes,
+} from '../../common/shared';
 
 export default {
   components: {
     LineItemDeleteForm,
     LineItemInfo,
-    BaseMoney,
     VuePerfectScrollbar,
     BasePrice,
   },
@@ -27,15 +29,7 @@ export default {
       return this.$store.state.miniCartOpen;
     },
     subtotal() {
-      if (this.me) {
-        const { currencyCode, fractionDigits } = this.me.activeCart.totalPrice;
-        return {
-          centAmount: this.me.activeCart.lineItems.reduce((acc, li) => acc + li.totalPrice.centAmount, 0),
-          currencyCode,
-          fractionDigits,
-        };
-      }
-      return null;
+      return subTotal(this.me.activeCart);
     },
   },
   methods: {
@@ -44,6 +38,13 @@ export default {
     },
     close() {
       this.$store.dispatch('toggleMiniCart');
+    },
+    totalPrice,
+    nameFromLineItem(lineItem) {
+      const attributes = variantAttributes(lineItem?.variant, locale(this));
+      return `${lineItem.name} ${attributes.map(
+        ({ name, value }) => `${name}: ${value}`,
+      ).join(', ')}`;
     },
   },
   watch: {
@@ -62,39 +63,13 @@ export default {
         query me($locale: Locale!) {
           me {
             activeCart {
-              id
-              lineItems {
-                id
-                quantity
-                name(locale: $locale)
-                productSlug(locale: $locale)
-                variant {
-                  sku
-                  images {
-                    url
-                  }
-                }
-                price {
-                  value {
-                    ...MoneyFields
-                  }
-                  discounted {
-                    value {
-                      ...MoneyFields
-                    }
-                  }
-                }
-                totalPrice {
-                  ...MoneyFields
-                }
-              }
-              totalPrice {
-                ...MoneyFields
-              }
+              ...CartFields
             }
           }
         }
-        ${MONEY_FRAGMENT}`,
+        ${CART_FRAGMENT}
+        ${MONEY_FRAGMENT}
+        ${ADDRESS_FRAGMENT}`,
       variables() {
         return {
           locale: locale(this),

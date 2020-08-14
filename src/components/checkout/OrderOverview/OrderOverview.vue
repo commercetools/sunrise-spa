@@ -23,7 +23,7 @@
           >
             <div class="single-order-content">
               <h5>
-                {{ lineItem.name }}
+                {{ nameFromLineItem(lineItem) }}
                 <span>× {{ lineItem.quantity }}</span>
               </h5>
             </div>
@@ -36,7 +36,7 @@
           <ul>
             <li>
               <b class="bold-text">{{ $t('subtotal') }}</b>
-              <span><BaseMoney :money="subtotal"/></span>
+              <span><BasePrice :price="subtotal"/></span>
             </li>
           </ul>
         </div>
@@ -55,7 +55,7 @@
         <ul>
           <li class="bold-text">
             {{ $t('total') }}
-            <span><BaseMoney :money="me.activeCart.totalPrice"/></span>
+            <span><BasePrice :price="{value:me.activeCart.totalPrice}"/></span>
           </li>
         </ul>
       </div>

@@ -3,10 +3,10 @@
 
 <template>
 <nav>
-  <ul v-if="categories && categories.results.length">
+  <ul v-if="sortedCategories && sortedCategories.length">
     <li
       class="position-static"
-      v-for="category1stLevel in categories.results"
+      v-for="category1stLevel in sortedCategories"
       :key="category1stLevel.id"
       @mouseenter="hoverOnCategory(category1stLevel)"
       @mouseleave="hoverOffCategory()"

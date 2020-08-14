@@ -3,7 +3,6 @@ import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import ShippingMethod from '../ShippingMethod/ShippingMethod.vue';
 import PaymentMethod from '../PaymentMethod/PaymentMethod.vue';
 import BasePrice from '../../common/BasePrice/BasePrice.vue';
-import BaseMoney from '../../common/BaseMoney/BaseMoney.vue';
 import productMixin from '../../../mixins/productMixin';
 import cartMixin from '../../../mixins/cartMixin';
 import CartLikePriceDetail from '../../common/cartlike/CartLikePriceDetail/CartLikePriceDetail.vue';
@@ -11,7 +10,9 @@ import LineItemInfo from '../../common/cartlike/LineItemInfo/LineItemInfo.vue';
 import CART_FRAGMENT from '../../Cart.gql';
 import MONEY_FRAGMENT from '../../Money.gql';
 import ADDRESS_FRAGMENT from '../../Address.gql';
-import { totalPrice, locale } from '../../common/shared';
+import {
+  totalPrice, locale, subTotal, variantAttributes,
+} from '../../common/shared';
 
 export default {
   props: {
@@ -26,7 +27,6 @@ export default {
     PaymentMethod,
     CartLikePriceDetail,
     BasePrice,
-    BaseMoney,
     VuePerfectScrollbar,
   },
   mixins: [productMixin, cartMixin],
@@ -42,16 +42,17 @@ export default {
     placeOrder() {
       this.$emit('completeOrder');
     },
+    nameFromLineItem(lineItem) {
+      const attributes = variantAttributes(lineItem?.variant, locale(this));
+      return `${lineItem.name} ${attributes.map(
+        ({ name, value }) => `${name}: ${value}`,
+      ).join(', ')}`;
+    },
   },
   computed: {
     subtotal() {
       if (this.me) {
-        const { currencyCode, fractionDigits } = this.me.activeCart.totalPrice;
-        return {
-          centAmount: this.me.activeCart.lineItems.reduce((acc, li) => acc + li.totalPrice.centAmount, 0),
-          currencyCode,
-          fractionDigits,
-        };
+        return subTotal(this.me.activeCart);
       }
       return null;
     },

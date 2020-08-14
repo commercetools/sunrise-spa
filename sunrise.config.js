@@ -68,4 +68,7 @@ export default {
   variantSelector: [
     'color', 'size',
   ],
+  variantInProductName: [
+    'size',
+  ],
 };

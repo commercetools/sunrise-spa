@@ -64,6 +64,18 @@ export default {
       this.$emit('closeMobile');
     },
   },
+  computed: {
+    sortedCategories() {
+      const recurSort = categories => categories.map(
+        category => (category.children
+          ? { ...category, children: recurSort(category.children) }
+          : category),
+      ).sort(
+        (c1, c2) => c1.orderHint.localeCompare(c2.orderHint),
+      );
+      return this.categories && recurSort(this.categories.results);
+    },
+  },
   apollo: {
     categories: {
       query: gql`
@@ -85,6 +97,7 @@ export default {
           externalId
           name(locale: $locale)
           slug(locale: $locale)
+          orderHint
         }`,
       variables() {
         return {
