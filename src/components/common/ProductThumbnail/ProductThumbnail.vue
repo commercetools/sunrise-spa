@@ -27,9 +27,8 @@
           >
         </router-link>
         <div class="product-action">
-          <router-link
-            :to="productRoute(currentProduct.slug, matchingVariant.sku)"
-            ><i class="dl-icon-view"></i> <span>Quick Shop</span></router-link
+          <a href @click.prevent="showModal"
+            ><i class="dl-icon-view"></i> <span>Quick Shop</span></a
           >
           <a
             data-toggle="tooltip"

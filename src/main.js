@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import VModal from 'vue-js-modal';
 // Required until Cypress supports fetch API
 // https://github.com/cypress-io/cypress/issues/95
 import 'whatwg-fetch';
@@ -14,9 +15,11 @@ import sunriseConfig from '../sunrise.config';
 import './registerServiceWorker';
 import './assets/scss/main.scss';
 
+
 Vue.config.productionTip = false;
 
 Vue.use(VueScrollTo);
+Vue.use(VModal);
 Vue.use(Vuelidate);
 Vue.use(ProductZoomer);
 Vue.directive('vpshow', {

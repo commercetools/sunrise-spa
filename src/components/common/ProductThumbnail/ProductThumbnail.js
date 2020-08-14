@@ -1,6 +1,7 @@
 import productMixin from '@/mixins/productMixin';
 import BasePrice from '../BasePrice/BasePrice.vue';
 import cartMixin from '../../../mixins/cartMixin';
+import ProductQuickView from '../../productoverview/ProductQuickView/ProductQuickView.vue';
 
 export default {
   props: {
@@ -11,6 +12,7 @@ export default {
   },
   components: {
     BasePrice,
+    ProductQuickView,
   },
   mixins: [productMixin, cartMixin],
   methods: {
@@ -28,6 +30,9 @@ export default {
           quantity: 1,
         },
       }).then(() => this.$store.dispatch('openMiniCart'));
+    },
+    showModal() {
+      this.$emit('showModal', { slug: this.currentProduct.slug, sku: this.matchingVariant.sku });
     },
   },
   computed: {

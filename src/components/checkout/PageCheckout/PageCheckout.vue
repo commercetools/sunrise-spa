@@ -30,7 +30,7 @@
         </div>
       </div>
     </div>
-    <div v-if="orderComplete" class="mt-110 pt-80 pb-100">
+    <div v-if="orderComplete" class="pt-80 pb-100">
       <div class="container">
         <div class="order-complete text-center">
           <h2>{{ $t('thankYou') }}</h2>

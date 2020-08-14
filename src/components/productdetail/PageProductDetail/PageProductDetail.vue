@@ -2,7 +2,7 @@
 <script src="./PageProductDetail.js"></script>
 
 <template>
-<!-- <div>
+  <!-- <div>
     <div id="pdp-page">
       <div class="container">
         <div class="row">
@@ -37,7 +37,7 @@
       <!--</div>
     <!--</div>
   </div> -->
-<!-- <div v-if="product">
+  <!-- <div v-if="product">
     <div data-test="product-gallery"
          class="col-md-4 col-md-offset-1 col-sm-6 product-gallery">
       <ProductGallery :sku="sku" />
@@ -88,10 +88,9 @@
 <SocialMediaLinks />
 </div>
 </div> -->
-<div class="product-details-area mt-110 pt-50 pb-50">
-  <div class="custom-container">
-    <ProductInfo :sku="sku" />
+  <div class="product-details-area pt-50 pb-50">
+    <div class="custom-container">
+      <ProductInfo :sku="sku" />
+    </div>
   </div>
-</div>
-
 </template>

@@ -3,9 +3,17 @@
 <script src="./PageProductOverview.js"></script>
 
 <template>
-<div>
-  <Breadcrumb :categorySlug="categorySlug" />
-  <ProductList :categorySlug="categorySlug" :page="page" />
-</div>
-
+  <div>
+    <Breadcrumb :categorySlug="categorySlug" />
+    <ProductList
+      @showModal="showModal"
+      :categorySlug="categorySlug"
+      :page="page"
+    />
+    <ProductQuickView
+      :openModal="openModal"
+      :productSlug="productSlug"
+      :productSku="productSku"
+    />
+  </div>
 </template>
