@@ -60,8 +60,8 @@ export function variantAttributes(variant, language, variantNames = config.varia
   );
 
   return variantNames.map(
-    attributeName => attributes.find(([name]) => name === attributeName),
-  ).filter(x => x).map(
+    (attributeName) => attributes.find(([name]) => name === attributeName),
+  ).filter((x) => x).map(
     ([, name, value]) => ({ name, value }),
   );
 }
@@ -98,14 +98,14 @@ export const changeRoute = (route, component, push = true, keepScrollPosition = 
     );
   }
 };
-export const locale = component => component?.$route?.params?.locale;
+export const locale = (component) => component?.$route?.params?.locale;
 export const isToughDevice = () => 'ontouchstart' in window;
 export const modifyQuery = (key, value, query, add = true) => {
   const values = [value]
     .concat(query[key])
-    .filter(v => add || v !== value);
+    .filter((v) => add || v !== value);
   let newValue = [...new Set(values)]
-    .filter(v => v !== undefined);
+    .filter((v) => v !== undefined);
   newValue = (newValue.length > 1) ? newValue : newValue[0];
   return (newValue !== undefined)
     ? {

@@ -66,8 +66,8 @@ export default {
   },
   computed: {
     sortedCategories() {
-      const recurSort = categories => categories.map(
-        category => (category.children
+      const recurSort = (categories) => categories.map(
+        (category) => (category.children
           ? { ...category, children: recurSort(category.children) }
           : category),
       ).sort(

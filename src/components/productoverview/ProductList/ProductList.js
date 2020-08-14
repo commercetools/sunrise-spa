@@ -16,7 +16,7 @@ const removeHiddenFacetFromQuery = (facets, component) => {
   const facetObject = facets.reduce(
     (result, { name, terms }) => result.set(
       name,
-      terms.map(t => t.term),
+      terms.map((t) => t.term),
     ),
     new Map(),
   );
@@ -27,7 +27,7 @@ const removeHiddenFacetFromQuery = (facets, component) => {
       ([key, value]) => [key, [].concat(value)],
     ).reduce(
       (result, [key, values]) => result.concat(
-        values.map(v => [key, v]),
+        values.map((v) => [key, v]),
       ), [],
     ).filter(
       ([key]) => facetKeys.includes(key),
@@ -214,7 +214,7 @@ export default {
           where: `slug(${locale(this)}="${this.categorySlug}")`,
         };
       },
-      skip: vm => !vm.categorySlug,
+      skip: (vm) => !vm.categorySlug,
     },
   },
   watch: {
