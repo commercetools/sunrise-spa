@@ -10,7 +10,12 @@
         <div class="row align-items-center">
           <div class="col-sm-6">
             <div class="header-info header-info-inc">
-              <a href="#">STORES</a>
+              <a
+                href="#"
+                data-test="stores-link"
+              >
+                {{$t("stores")}}
+              </a>
               <a href="#">HELP</a>
             </div>
           </div>
@@ -20,10 +25,12 @@
                 <LocationSelector
                   v-bind:values="$sunrise.countries"
                   title="location"
+                  data-test="country-selector-dropdown"
                 />
                 <LocationSelector
                   v-bind:values="$sunrise.languages"
                   title="language"
+                  data-test="language-selector-dropdown"
                 />
               </ul>
             </div>

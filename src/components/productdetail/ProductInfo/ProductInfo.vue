@@ -11,7 +11,11 @@
     </div>
     <div class="col-lg-6">
       <div class="product-details-content product-details-ptb">
-        <h2>{{ currentProduct.name }}</h2>
+        <h2
+          data-test="product-name"
+        >
+          {{ currentProduct.name }}
+        </h2>
         <h3>
           <BasePrice :price="matchingVariant.price" />
         </h3>

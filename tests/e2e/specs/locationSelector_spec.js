@@ -24,7 +24,7 @@ describe('Location selector', () => {
     cy.get('[data-test=product-original-price]').contains(/^\s*275,00\s€\s*$/);
   });
 
-  it('opens and closes location selector', () => {
+  xit('opens and closes location selector', () => {
     cy.changeLanguage('Deutsch');
     cy.get('span[data-test=language-selector-dropdown]')
       .parent()

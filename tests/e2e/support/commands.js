@@ -48,21 +48,17 @@ Cypress.Commands.add('checkCustomerIsLoggedIn', (customer) => {
 });
 
 Cypress.Commands.add('changeLanguage', (language) => {
-  cy.get('[data-test=location-selector-open-button]').click();
-  cy.get('span[data-test=language-selector-dropdown]')
-    .click()
-    .parent()
+  cy.get('[data-test=language-selector-dropdown]')
+    .find('a')
     .contains(language)
-    .click();
+    .click({ force: true });
 });
 
 Cypress.Commands.add('changeCountry', (country) => {
-  cy.get('[data-test=location-selector-open-button]').click();
-  cy.get('span[data-test=country-selector-dropdown]')
-    .click()
-    .parent()
+  cy.get('[data-test=country-selector-dropdown]')
+    .find('a')
     .contains(country)
-    .click();
+    .click({ force: true });
 });
 
 Cypress.Commands.add('createCustomer', (draft) => cy.wrap(clientPromise
