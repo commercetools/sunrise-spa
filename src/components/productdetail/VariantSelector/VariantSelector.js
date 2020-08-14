@@ -50,7 +50,7 @@ export default {
     },
     selected() {
       return this.variantCombinations.find(
-        variant => variant.sku === this.sku,
+        (variant) => variant.sku === this.sku,
       );
     },
     variantCombinations() {

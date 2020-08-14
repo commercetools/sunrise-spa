@@ -14,7 +14,7 @@ Vue.use(VueApollo);
 
 function createClient() {
   const authLink = setContext((_, { headers = {} }) => getAuthToken()
-    .then(authorization => ({ headers: { ...headers, authorization } })));
+    .then((authorization) => ({ headers: { ...headers, authorization } })));
 
   const errorLink = onError(({ networkError, operation, forward }) => {
     const statusCode = networkError?.statusCode;

@@ -77,7 +77,7 @@ export default {
     clearFacet(name) {
       this.pushRouter([]
         .concat(this.$route.query[name])
-        .filter(v => v !== undefined)
+        .filter((v) => v !== undefined)
         .reduce(
           (result, val) => modifyQuery(
             name,

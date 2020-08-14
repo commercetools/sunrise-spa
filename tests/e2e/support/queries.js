@@ -13,7 +13,7 @@ export function customerByEmail(client, email) {
       }`,
     variables: { predicate: `email = "${email}"` },
     fetchPolicy: 'network-only',
-  }).then(response => response.data.customers.results[0]);
+  }).then((response) => response.data.customers.results[0]);
 }
 
 export function orderByNumber(client, orderNumber) {
@@ -29,7 +29,7 @@ export function orderByNumber(client, orderNumber) {
       }`,
     variables: { predicate: `orderNumber = "${orderNumber}"` },
     fetchPolicy: 'network-only',
-  }).then(response => response.data.orders.results[0]);
+  }).then((response) => response.data.orders.results[0]);
 }
 
 export function discountCodeByCode(client, code) {
@@ -49,7 +49,7 @@ export function discountCodeByCode(client, code) {
       }`,
     variables: { predicate: `code = "${code}"` },
     fetchPolicy: 'network-only',
-  }).then(response => response.data.discountCodes.results[0]);
+  }).then((response) => response.data.discountCodes.results[0]);
 }
 
 export function productByKey(client, key) {
@@ -63,5 +63,5 @@ export function productByKey(client, key) {
       }`,
     variables: { key },
     fetchPolicy: 'network-only',
-  }).then(response => response.data.product);
+  }).then((response) => response.data.product);
 }

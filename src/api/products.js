@@ -33,7 +33,7 @@ const facets = (query = {}, locale) => config.facetSearches
           `${asAttribute(name, type, locale)}:${
             Array.isArray(query[name])
               ? query[name].map(
-                value => `"${value}"`,
+                (value) => `"${value}"`,
               ).join(',')
               : `"${query[name]}"`
           }`,
@@ -121,13 +121,13 @@ const products = {
             newRouteQuery,
             locale,
             config.facetSearches.filter(
-              f => f.name === name,
+              (f) => f.name === name,
             ),
           ])
             .then(
               ({ facets }) => ({
                 ...facets
-                  .find(f => f.name === name),
+                  .find((f) => f.name === name),
                 component,
               }),
             );

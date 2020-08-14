@@ -159,7 +159,7 @@ describe('Product detail page', () => {
     cy.changeLanguage('Deutsch');
     cy.get('[data-test=attribute-name]')
       .should(
-        e => expect(e[1].innerText)
+        (e) => expect(e[1].innerText)
           .to
           .include('GRÖSSE'),
       );

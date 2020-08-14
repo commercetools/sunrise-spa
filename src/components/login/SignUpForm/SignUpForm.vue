@@ -5,7 +5,7 @@
 <template>
   <div class="login-register-wrap register-wrap">
     <h3>{{ $t('title') }}</h3>
-    <BaseForm :vuelidate="$v" :onSubmit="customerSignMeUp" #default="{ error, state }">
+    <BaseForm :vuelidate="$v" :onSubmit="customerSignMeUp" #default="{ error }">
       <ServerError :error="error" v-slot="{ graphQLError }">{{ getErrorMessage(graphQLError) }}</ServerError>
       <div class="login-register-form">
         <div class="row">

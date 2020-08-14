@@ -47,7 +47,7 @@ export default {
             }
           }
         }`,
-      skip: vm => !vm.$store.state.authenticated,
+      skip: (vm) => !vm.$store.state.authenticated,
     },
   },
   validations: {

@@ -3,7 +3,7 @@ import _const from '../support/const';
 describe('Product overview page', () => {
   const wFetch = window.fetch;
   const later = () => new Promise(
-    r => setTimeout(r, 1000),
+    (r) => setTimeout(r, 1000),
   );
   before(() => {
     window.fetch = function fetch() {
@@ -16,7 +16,6 @@ describe('Product overview page', () => {
   after(() => {
     window.fetch = wFetch;
   });
-
 
   it('Changes sorting settings', () => {
     cy.visit('/products/men');

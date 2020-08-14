@@ -33,7 +33,7 @@ export default {
       },
       set(value) {
         const sku = this.variantCombinations.find(
-          combi => combi[this.id] === value,
+          (combi) => combi[this.id] === value,
         )?.sku;
         if (sku) this.$router.push({ path: sku });
       },

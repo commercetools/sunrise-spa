@@ -7,7 +7,7 @@ export default {
     me: null,
   }),
   computed: {
-    showLoggedIn: vm => vm.$store.state.authenticated && vm.me,
+    showLoggedIn: (vm) => vm.$store.state.authenticated && vm.me,
   },
   apollo: {
     me: {
@@ -20,7 +20,7 @@ export default {
             }
           }
         }`,
-      skip: vm => !vm.$store.state.authenticated,
+      skip: (vm) => !vm.$store.state.authenticated,
     },
   },
 };

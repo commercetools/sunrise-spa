@@ -76,7 +76,6 @@ describe('OrderDetailPage', () => {
     cy.createOrder(cartDraft, orderDraft);
   });
 
-
   it('shows order details', () => {
     cy.get('[data-test=my-orders-button]').click();
     cy.reload();

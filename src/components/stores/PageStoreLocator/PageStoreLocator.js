@@ -4,7 +4,7 @@ const getCoordinates = ({ lat, lng }) => ({ lat: parseFloat(lat), lng: parseFloa
 
 // eslint-disable-next-line
 const getLocationFromChannel = c => getCoordinates({ lat: c.geoLocation.coordinates[1], lng: c.geoLocation.coordinates[0] });
-const getLocationFromPlace = p => getCoordinates({ lat: p.geometry.location.lat(), lng: p.geometry.location.lng() });
+const getLocationFromPlace = (p) => getCoordinates({ lat: p.geometry.location.lat(), lng: p.geometry.location.lng() });
 
 function haversineDistance(mk1, mk2) {
   const R = 3958.8; // Radius of the Earth in miles
@@ -146,7 +146,7 @@ export default {
         };
       },
       result() {
-        this.markers = this.channels && this.channels.results.map(c => ({ position: getLocationFromChannel(c) }));
+        this.markers = this.channels && this.channels.results.map((c) => ({ position: getLocationFromChannel(c) }));
 
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition((position) => {

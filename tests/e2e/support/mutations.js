@@ -14,7 +14,7 @@ export function createCustomer(client, draft) {
     variables: {
       draft,
     },
-  }).then(response => response.data.customerSignMeUp.customer);
+  }).then((response) => response.data.customerSignMeUp.customer);
 }
 
 export function createCart(client, draft) {
@@ -28,7 +28,7 @@ export function createCart(client, draft) {
     variables: {
       draft,
     },
-  }).then(response => response.data.createCart);
+  }).then((response) => response.data.createCart);
 }
 
 export function createOrder(client, draft) {
@@ -42,7 +42,7 @@ export function createOrder(client, draft) {
     variables: {
       draft,
     },
-  }).then(response => response.data.createOrderFromCart);
+  }).then((response) => response.data.createOrderFromCart);
 }
 
 export function createDiscountCode(client, cartDiscountDraft, code) {
@@ -57,8 +57,8 @@ export function createDiscountCode(client, cartDiscountDraft, code) {
       draft: cartDiscountDraft,
     },
   })
-    .then(response => response.data.createCartDiscount.id)
-    .then(id => client.mutate({
+    .then((response) => response.data.createCartDiscount.id)
+    .then((id) => client.mutate({
       mutation: gql`
       mutation createNewDiscountCode($id: String!, $code: String!) {
         createDiscountCode(draft: {
@@ -72,7 +72,7 @@ export function createDiscountCode(client, cartDiscountDraft, code) {
         }
       }`,
       variables: { code, id },
-    })).then(response => response.data.createDiscountCode);
+    })).then((response) => response.data.createDiscountCode);
 }
 
 export function createProduct(client, draft) {
@@ -87,7 +87,7 @@ export function createProduct(client, draft) {
     variables: {
       draft,
     },
-  }).then(response => response.data.createProduct);
+  }).then((response) => response.data.createProduct);
 }
 
 export function updateProduct(client, { id, version, actions }) {
@@ -104,7 +104,7 @@ export function updateProduct(client, { id, version, actions }) {
       version,
       actions,
     },
-  }).then(response => response.data.updateProduct);
+  }).then((response) => response.data.updateProduct);
 }
 
 export function deleteDiscountCode(client, code) {
@@ -123,8 +123,8 @@ export function deleteDiscountCode(client, code) {
             version: discountCode.version,
           },
         // eslint-disable-next-line no-console
-        }).catch(e => console.warn('Discount code might have already been deleted', e));
-        await discountCode.cartDiscounts.forEach(cartDiscount => client.mutate({
+        }).catch((e) => console.warn('Discount code might have already been deleted', e));
+        await discountCode.cartDiscounts.forEach((cartDiscount) => client.mutate({
           mutation: gql`
           mutation deleteCartDiscount($id: String!, $version: Long!) {
             deleteCartDiscount(id: $id, version: $version) {
@@ -136,7 +136,7 @@ export function deleteDiscountCode(client, code) {
             version: cartDiscount.version,
           },
         // eslint-disable-next-line no-console
-        }).catch(e => console.warn('Cart discount might have already been deleted', e)));
+        }).catch((e) => console.warn('Cart discount might have already been deleted', e)));
       }
     });
 }
@@ -157,7 +157,7 @@ export function deleteOrder(client, orderNumber) {
             version: order.version,
           },
         // eslint-disable-next-line no-console
-        }).catch(e => console.warn('Order might have already been deleted', e));
+        }).catch((e) => console.warn('Order might have already been deleted', e));
       }
     });
 }
@@ -178,7 +178,7 @@ export function deleteCustomer(client, email) {
             version: customer.version,
           },
         // eslint-disable-next-line no-console
-        }).catch(e => console.warn('Customer might have already been deleted', e));
+        }).catch((e) => console.warn('Customer might have already been deleted', e));
       }
     });
 }
@@ -204,7 +204,7 @@ export function deleteProduct(client, key) {
               version: unpublishedProduct.version,
             },
           // eslint-disable-next-line no-console
-          }).catch(e => console.warn('Product might have already been deleted', e));
+          }).catch((e) => console.warn('Product might have already been deleted', e));
         });
       }
     });

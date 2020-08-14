@@ -28,12 +28,12 @@ export default {
     },
     matchingShippingRate(shippingMethod) {
       return this.matchingZoneRate(shippingMethod).shippingRates
-        .find(shippingRate => shippingRate.isMatching);
+        .find((shippingRate) => shippingRate.isMatching);
     },
     matchingZoneRate(shippingMethod) {
       return shippingMethod.zoneRates
-        .find(zoneRate => zoneRate.shippingRates
-          .some(shippingRate => shippingRate.isMatching));
+        .find((zoneRate) => zoneRate.shippingRates
+          .some((shippingRate) => shippingRate.isMatching));
     },
     isFree(shippingRate) {
       const totalPrice = this.me.activeCart.totalPrice.centAmount;
@@ -46,7 +46,7 @@ export default {
     },
     shippingMethodsByLocation(value) {
       if (!this.selectedShippingMethod) {
-        this.selectedShippingMethod = value.find(shippingMethod => shippingMethod.isDefault)?.id || value[0]?.id;
+        this.selectedShippingMethod = value.find((shippingMethod) => shippingMethod.isDefault)?.id || value[0]?.id;
       }
     },
     selectedShippingMethod() {

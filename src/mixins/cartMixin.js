@@ -98,9 +98,9 @@ export default {
           store.writeQuery({ query: BASIC_CART_QUERY, data });
           // invalidate cached order pages
           Object.keys(store.data.toObject())
-            .filter(key => key.startsWith('Order'))
+            .filter((key) => key.startsWith('Order'))
             .forEach(
-              key => store.data.delete(key),
+              (key) => store.data.delete(key),
             );
         },
       });

@@ -26,7 +26,7 @@ const tokenProvider = new TokenProvider({
     }
     return store.dispatch('setTokenInfo', tokenInfo);
   },
-  fetchTokenInfo: sdkAuth => sdkAuth.anonymousFlow(),
+  fetchTokenInfo: (sdkAuth) => sdkAuth.anonymousFlow(),
 }, store.state.authenticated || store.state.tokenInfo);
 tokenProvider.flowType = ANONYMOUS;
 
@@ -35,7 +35,7 @@ export function cleanUpSession() {
 }
 
 export function clientLogin(apolloClient, credentials) {
-  tokenProvider.fetchTokenInfo = sdkAuth => sdkAuth.customerPasswordFlow(credentials);
+  tokenProvider.fetchTokenInfo = (sdkAuth) => sdkAuth.customerPasswordFlow(credentials);
   tokenProvider.flowType = PASSWORD;
   cleanUpSession();
   return apolloClient.resetStore()
@@ -64,7 +64,7 @@ function getToken(error, tries) {
   if (error) {
     if (tokenProvider.flowType === REFRESH_ANONYMOUS || tokenProvider.flowType === REFRESH_USER) {
       tokenProvider.flowType = ANONYMOUS;
-      tokenProvider.fetchTokenInfo = sdkAuth => sdkAuth.anonymousFlow();
+      tokenProvider.fetchTokenInfo = (sdkAuth) => sdkAuth.anonymousFlow();
       cleanUpSession();
       promise = tokenProvider.getTokenInfo();
     } else {
@@ -76,7 +76,7 @@ function getToken(error, tries) {
       }
       tokenProvider.flowType = isUserToken ? REFRESH_USER : REFRESH_ANONYMOUS;
       tokenProvider.refreshToken = refreshToken;
-      tokenProvider.fetchTokenInfo = sdkAuth => sdkAuth.refreshTokenFlow(
+      tokenProvider.fetchTokenInfo = (sdkAuth) => sdkAuth.refreshTokenFlow(
         refreshToken,
       );
       cleanUpSession();
@@ -92,11 +92,10 @@ function getToken(error, tries) {
   });
 }
 
-export const getAuthToken = group(error => getToken(error, 0)
+export const getAuthToken = group((error) => getToken(error, 0)
   .then(
-    tokenInfo => `${tokenInfo.token_type} ${tokenInfo.access_token}`,
+    (tokenInfo) => `${tokenInfo.token_type} ${tokenInfo.access_token}`,
   ), new Map(), false, () => 'getAuthToken');
-
 
 // localStorage.clear()
 // refresh_token: "sales-demo-db:Ep-ZR1tPqBU5EtEG9gmZoF8CGPnkFUQ6qvdlqI5Pl1U"
