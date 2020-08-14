@@ -17,7 +17,7 @@
         <i v-else class="fa fa-angle-down"></i>
       </a>
     </div>
-    <HoverDropdown>
+    <HoverDropdown data-test="sort-selector">
       <span
         >Sort by <i class="fa fa-angle-down angle-down"></i>
         <i class="fa fa-angle-up angle-up"></i

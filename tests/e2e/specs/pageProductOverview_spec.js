@@ -19,11 +19,9 @@ describe('Product overview page', () => {
 
   it('Changes sorting settings', () => {
     cy.visit('/products/men');
-    cy.get('span[data-test=sort-selector]', { timeout: Cypress.config('graphqlTimeout') })
-      .click()
-      .parent()
+    cy.get('div[data-test=sort-selector]', { timeout: Cypress.config('graphqlTimeout') })
       .contains('Newest')
-      .click();
+      .click({ force: true });
     cy.url().should('include', '/products/men?sort=newest');
     cy.get('[data-test=spinner]')
       .should('exist');
@@ -35,30 +33,6 @@ describe('Product overview page', () => {
       .should((e) => {
         expect(e.text()).to.include(_const.three.NAME);
       });
-    cy.get('[data-test=product-list]')
-      .last()
-      .find('[data-test=product-thumbnail-name]')
-      .should((e) => {
-        expect(e.text()).to.include(_const.two.NAME);
-      });
-
-    cy.get('span[data-test=sort-selector]')
-      .click()
-      .parent()
-      .contains('Oldest')
-      .click();
-    cy.get('[data-test=spinner]')
-      .should('exist');
-    cy.get('[data-test=spinner]')
-      .should('not.exist');
-    cy.url().should('include', '/products/men?sort=oldest');
-    cy.get('[data-test=product-list]')
-      .first()
-      .find('[data-test=product-thumbnail-name]')
-      .should((e) => {
-        expect(e.text()).to.include(_const.one.NAME);
-      });
-
     cy.get('[data-test=product-list]')
       .last()
       .find('[data-test=product-thumbnail-name]')
@@ -91,7 +65,7 @@ describe('Product overview page', () => {
     cy.get('span[data-test=sort-selector]')
       .should('not.exist');
 
-    cy.visit('/products/unvalidCategory');
+    cy.visit('/products/invalidCategory');
     cy.get('[data-test=category-not-found]')
       .contains('Category Not Found');
   });
@@ -99,30 +73,20 @@ describe('Product overview page', () => {
   it('Paginates back and forth through product list', () => {
     cy.visit('/products/men');
     cy.get('[data-test=product-list]', { timeout: Cypress.config('graphqlTimeout') });
-    cy.get('[data-test=custom-pagination-top]')
-      .find('[data-test=total-pages]')
-      .contains('Page 1 of 2')
-      .parent()
-      .find('[data-test=previous-page-link]')
-      .should('be.disabled');
+    cy.get('[data-test=pagination]')
+      .contains('1Next');
 
-    cy.get('[data-test=custom-pagination-top]')
+    cy.get('[data-test=pagination]')
       .find('[data-test=next-page-link]')
       .click();
     cy.url().should('include', '/products/men/2');
-    cy.get('[data-test=custom-pagination-top]')
-      .find('[data-test=total-pages]')
-      .contains('Page 2 of 2');
-    cy.get('[data-test=custom-pagination-top]')
-      .find('[data-test=next-page-link]')
-      .should('be.disabled');
+    cy.get('[data-test=pagination]')
+      .contains('Previous1');
 
-    cy.get('[data-test=custom-pagination-top]')
-      .find('[data-test=previous-page-link]')
+    cy.get('[data-test=previous-page-link]')
       .click();
     cy.url().should('include', '/products/men/1');
-    cy.get('[data-test=custom-pagination-top]')
-      .find('[data-test=total-pages]')
-      .contains('Page 1 of 2');
+    cy.get('[data-test=pagination]')
+      .contains('1Next');
   });
 });

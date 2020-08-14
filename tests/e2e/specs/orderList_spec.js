@@ -85,7 +85,7 @@ describe('my orders', () => {
     cy.get('[data-test=pagination]').should('exist');
     cy.get('[data-test=order-list]')
       .should('have.length', 2);
-    cy.get('[data-test=pagination]').contains('1 of 2');
+    cy.get('[data-test=pagination]').contains('1Next');
     cy.get('[data-test=next-page-link').click();
     cy.get('[data-test=order-list]')
       .should('have.length', 1);
@@ -93,7 +93,7 @@ describe('my orders', () => {
     cy.get('[data-test=pagination]').should('exist');
     cy.get('[data-test=order-list]')
       .should('have.length', 2);
-    cy.get('[data-test=pagination]').contains('1 of 2');
+    cy.get('[data-test=pagination]').contains('1Next');
   });
 
   it('displays an empty order list message when no orders have been placed', () => {
