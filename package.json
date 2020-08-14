@@ -31,6 +31,7 @@
     "vue-apollo": "^3.0.4",
     "vue-cli-plugin-apollo": "^0.22.2",
     "vue-i18n": "^8.20.0",
+    "vue-js-modal": "^2.0.0-rc.6",
     "vue-owl-carousel": "^2.0.3",
     "vue-perfect-scrollbar": "^0.2.1",
     "vue-product-zoomer": "^3.0.1",

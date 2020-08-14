@@ -15,24 +15,26 @@
                 :shippingAddress="me.activeCart.shippingAddress"
                 @updateBillingDetails="updateBilling"
                 @updateShippingDetails="updateShipping"
-                @validForm="setValidForm"
+                @validBillingForm="setValidBillingForm"
+                @validShippingForm="setValidShippingForm"
               />
             </div>
             <div class="col-lg-5">
               <OrderOverview
                 @updateShipping="updateShippingMethod"
                 @completeOrder="placeOrder"
+                :showError="showError"
               />
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div v-if="orderComplete" class="error-area mt-130 pt-100 pb-100">
+    <div v-if="orderComplete" class="pt-80 pb-100">
       <div class="container">
         <div class="order-complete text-center">
           <h2>{{ $t('thankYou') }}</h2>
-          <router-link to="/">
+          <router-link class="mt-50" to="/">
             {{ $t('continueShopping') }}
           </router-link>
         </div>

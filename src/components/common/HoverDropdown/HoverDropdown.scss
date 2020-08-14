@@ -13,8 +13,6 @@
       font-weight: 600;
       margin-left: 3px;
       transition: all 0.4s ease 0s;
-      &.angle-down {
-      }
       &.angle-up {
         position: absolute;
         right: 3px;
@@ -48,7 +46,7 @@
         line-height: 24px;
         &:hover {
           color: #fff;
-          background-color: $theme-color;
+          color: $theme-color;
         }
       }
       &.active {

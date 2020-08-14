@@ -6,7 +6,7 @@
   <span>
     <div class="checkout-shipping-content">
       <div class="shipping-content-left">
-        <span>{{ $t('paymentMethod') }}</span>
+        <span class="bold-text">{{ $t('paymentMethod') }}</span>
       </div>
     </div>
     <div class="payment-method">

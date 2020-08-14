@@ -1,6 +1,21 @@
-  .list-item-user > .nav-list > .list-item-user {
-    @media screen and (max-width: 767px) {
-      width: 100%;
-      border: none;
-    }
+.list-item-user > .nav-list > .list-item-user {
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    border: none;
   }
+}
+i {
+  display: inline-block;
+  line-height: 20px;
+  font-size: 16px;
+  margin-right: 5px;
+  position: relative;
+  vertical-align: middle;
+}
+
+.target-text {
+  display: inline-block;
+  font-size: 14px;
+  vertical-align: middle;
+  transition: all 0s ease 0s;
+}

@@ -9,8 +9,8 @@
       class="pay-top sin-payment"
     >
       <input
-        v-model="selectedShippingMethod"
         class="input-radio"
+        v-model="selectedShippingMethod"
         type="radio"
         :value="shippingMethod.id"
         name="shipping_method"
@@ -18,10 +18,11 @@
       <label
         data-test="checkout-form-shipping-method-name"
       >
-        {{ shippingMethod.name }}
+        <span class="col-md-10" style="padding: 0">
+          {{ shippingMethod.name }}
+        </span>
         <BaseMoney
           :money="price(shippingMethod)"
-          class="option-price"
           data-test="checkout-form-shipping-method-price"
         />
       </label>

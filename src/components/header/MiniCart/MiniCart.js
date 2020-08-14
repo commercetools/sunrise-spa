@@ -26,6 +26,17 @@ export default {
     show() {
       return this.$store.state.miniCartOpen;
     },
+    subtotal() {
+      if (this.me) {
+        const { currencyCode, fractionDigits } = this.me.activeCart.totalPrice;
+        return {
+          centAmount: this.me.activeCart.lineItems.reduce((acc, li) => acc + li.totalPrice.centAmount, 0),
+          currencyCode,
+          fractionDigits,
+        };
+      }
+      return null;
+    },
   },
   methods: {
     open() {

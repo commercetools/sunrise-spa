@@ -3,9 +3,9 @@
 
 <template>
   <div v-if="product" class="pro-dec-big-img-slider product-big-img-style">
-    <div class="easyzoom easyzoom--overlay" ref="easyzoom" >
+    <div class="easyzoom easyzoom--overlay" ref="easyzoom">
       <a :href="productImage">
-        <img :src="productImage" alt="" style="width:100%" />
+        <img class="product-image" :src="productImage" alt="" />
       </a>
     </div>
     <!-- <div class="pro-dec-zoom-img">

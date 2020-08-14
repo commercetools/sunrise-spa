@@ -67,7 +67,7 @@
         data-test="cart-total-price"
       >
         <b>
-          <BaseMoney :money="cartLike.totalPrice" />
+          <BaseMoney :money="subtotal" />
         </b>
       </div>
     </div>

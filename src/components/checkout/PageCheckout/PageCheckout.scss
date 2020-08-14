@@ -22,6 +22,7 @@
 }
 .checkout-login-info {
   margin: 30px 0 0;
+  display: none;
   p {
     color: #989898;
     font-size: 14px;
@@ -92,6 +93,7 @@
     color: #989898;
     margin: 0 0 22px;
   }
+  display: none;
   margin-top: 30px;
   margin-bottom: 55px;
   form {
@@ -181,13 +183,6 @@
         text-decoration: none;
       }
     }
-    .select {
-      border: 1px solid #e6e6e6;
-      height: 50px;
-      padding: 2px 20px;
-      color: #262626;
-      cursor: pointer;
-    }
     .select2-container {
       display: block;
       .select2-choice {
@@ -233,11 +228,6 @@
       margin-right: 0px;
     }
   }
-}
-
-.option-price {
-  margin-left: 22px;
-  font-weight: 500;
 }
 
 .select2-container--default .select2-selection--single {
@@ -371,7 +361,7 @@
     .checkout-shipping-content {
       display: flex;
       justify-content: space-between;
-      // border-bottom: 1px solid #e7e7e7;
+
       margin-top: 13px;
       padding-bottom: 7px;
       .shipping-content-left {
@@ -405,6 +395,7 @@
         input {
           width: auto;
           display: inline-block;
+          float: left;
           height: auto;
           margin-top: 5px;
         }
@@ -428,7 +419,7 @@
           }
         }
         .payment-box {
-          margin: 6px 0 0;
+          margin: 0;
           p {
             font-size: 12px;
             margin: 0;
@@ -546,9 +537,20 @@
   }
 }
 
+.bold-text {
+  font-weight: 600;
+}
+.select {
+  border: 1px solid #e8e8e8;
+  height: 50px;
+  background-color: transparent;
+  padding: 2px 20px;
+  color: #777;
+}
+
 .order-complete {
   h2 {
-    font-size: 60px;
+    font-size: 40px;
     font-weight: bold;
     margin: 0;
     line-height: 58px;
@@ -564,7 +566,6 @@
     display: inline-block;
     color: #fff;
     line-height: 1;
-    margin-top: 70px;
     padding: 18px 40px 19px;
     border-radius: 50px;
     &:hover {

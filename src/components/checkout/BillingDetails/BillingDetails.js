@@ -25,6 +25,9 @@ export default {
     differentAddress() {
       if (!this.differentAddress) {
         this.newShippingAddress = this.newBillingAddress;
+        this.validShippingForm(true);
+      } else {
+        this.validShippingForm(false);
       }
     },
     billingToJSON() {
@@ -53,8 +56,11 @@ export default {
     updateShippingAddress(address) {
       this.newShippingAddress = address;
     },
-    validForm(valid) {
-      this.$emit('validForm', valid);
+    validBillingForm(valid) {
+      this.$emit('validBillingForm', valid);
+    },
+    validShippingForm(valid) {
+      this.$emit('validShippingForm', valid);
     },
   },
 };

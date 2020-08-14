@@ -9,7 +9,7 @@
       <div class="your-order-info-wrap">
         <div class="your-order-info">
           <ul>
-            <li>
+            <li class="bold-text">
               {{ $t('product') }}
               <span>{{ $t('total') }}</span>
             </li>
@@ -35,15 +35,15 @@
         <div class="your-order-info order-subtotal">
           <ul>
             <li>
-              {{ $t('subtotal') }}
+              <b class="bold-text">{{ $t('subtotal') }}</b>
               <span><BaseMoney :money="subtotal"/></span>
             </li>
           </ul>
         </div>
-        <div class="checkout-shipping-content">
-          <div class="shipping-content-left">
-            <span>{{ $t('shipping') }}</span>
-          </div>
+      </div>
+      <div class="checkout-shipping-content">
+        <div class="shipping-content-left">
+          <span class="bold-text">{{ $t('shipping') }}</span>
         </div>
         <ShippingMethod
           @updateShipping="updateShippingMethod"
@@ -53,7 +53,7 @@
       <PaymentMethod data-test="payment-methods"/>
       <div class="your-order-info order-total">
         <ul>
-          <li>
+          <li class="bold-text">
             {{ $t('total') }}
             <span><BaseMoney :money="me.activeCart.totalPrice"/></span>
           </li>
@@ -85,6 +85,9 @@
       >
         {{ $t('placeOrder') }}
       </a>
+    </div>
+    <div v-if="showError" class="error-message mt-10">
+      * Please fill in all required data
     </div>
   </div>
 </template>

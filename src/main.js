@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import VModal from 'vue-js-modal';
 // Required until Cypress supports fetch API
 // https://github.com/cypress-io/cypress/issues/95
 import 'whatwg-fetch';
@@ -17,6 +18,7 @@ import './assets/scss/main.scss';
 Vue.config.productionTip = false;
 
 Vue.use(VueScrollTo);
+Vue.use(VModal);
 Vue.use(Vuelidate);
 Vue.use(ProductZoomer);
 Vue.directive('vpshow', {
@@ -39,7 +41,6 @@ Vue.directive('vpshow', {
   /* eslint-enable no-param-reassign */
 });
 
-
 Vue.prototype.$sunrise = sunriseConfig;
 
 new Vue({
@@ -47,5 +48,5 @@ new Vue({
   store,
   i18n,
   apolloProvider,
-  render: h => h(App),
+  render: (h) => h(App),
 }).$mount('#app');

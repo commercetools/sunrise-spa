@@ -21,12 +21,16 @@ export default {
     billingAddress: null,
     shippingAddress: null,
     orderComplete: false,
-    validForm: false,
+    validBillingForm: false,
+    validShippingForm: true,
     showError: false,
   }),
   methods: {
-    setValidForm(valid) {
-      this.validForm = valid;
+    setValidBillingForm(valid) {
+      this.validBillingForm = valid;
+    },
+    setValidShippingForm(valid) {
+      this.validShippingForm = valid;
     },
     updateBilling(billingDetails) {
       this.billingAddress = billingDetails;
@@ -38,7 +42,7 @@ export default {
       this.shippingMethod = shippingId;
     },
     placeOrder() {
-      if (this.validForm) {
+      if (this.validBillingForm && this.validShippingForm) {
         this.updateMyCart([
           { setBillingAddress: { address: this.billingAddress } },
         ])

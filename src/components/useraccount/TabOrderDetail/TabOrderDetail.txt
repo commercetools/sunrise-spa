@@ -1,20 +1,26 @@
 en:
-  title: "Your order details"
-  orderNumber: "Order Number"
-  date: "Date"
-  print: "Print receipt"
-  description: "Description"
-  quantity: "Quantity"
-  price: "Price"
-  total: "Total"
-  notFound: "Order not found"
+  title: Your order details
+  orderNumber: Order Number
+  date: Date
+  shippingAddress: Shipping address
+  billingAddress: Billing address
+  shippingMethod: Shipping method
+  paymentDetails: Payment details
+  subtotal: Subtotal
+  shipping: Shipping
+  appliedDiscounts: Applied discounts
+  total: Total
+  notFound: Order not found
 de:
-  title: "Ihre Bestelldetails"
-  orderNumber: "Bestellnummer"
-  date: "Datum"
-  print: "Beleg drucken"
-  description: "Beschreibung"
-  quantity: "Menge"
-  price: "Preis"
-  total: "Gesamtpreis"
-  notFound: "Bestellung nicht gefunden"
+  title: Ihre Bestelldetails
+  orderNumber: Bestellnummer
+  date: Datum
+  shippingAddress: Lieferanschrift
+  billingAddress: Rechnungsadresse
+  shippingMethod: Versandart
+  paymentDetails: Zahlungsdetails
+  subtotal: Zwischensumme
+  shipping: Versand
+  appliedDiscounts: Angewandte Rabatte
+  total: Gesamtpreis
+  notFound: Bestellung nicht gefunden

@@ -1,15 +1,21 @@
 <script src="./AttributeSelect.js"></script>
+<style lang="scss" src="./AttributeSelect.scss"></style>
 
 <template>
-  <select
-    v-model="selectedValue"
-    class="select-product-detail"
-    :data-test="`attribute-select-${this.name}`">
+  <div class="pro-details-size">
+    <span style="margin-left: 3px">{{ name }}</span>
+    <select
+      v-model="selectedValue"
+      class="select-product-detail"
+      :data-test="`attribute-select-${this.name}`"
+    >
       <option
         v-for="value in values"
         data-test="attribute-select-option"
-        :key="value">
-        {{value}}
+        :key="value"
+      >
+        {{ value }}
       </option>
-  </select>
+    </select>
+  </div>
 </template>
