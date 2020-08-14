@@ -1,5 +1,6 @@
 <i18n src="./ForgotPassword.txt"></i18n>
 <script src="./ForgotPassword.js"></script>
+<style src="./ForgotPassword.scss" lang="scss"></style>
 
 <template>
 <div class="my-account">

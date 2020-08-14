@@ -22,6 +22,12 @@
       :to="{ name: 'changepassword' }"
       data-test="change-password-button"
     >{{ $t("changePassword") }}</router-link>
-    <a href="#" @click.prevent="logout">{{ $t("signOut") }}</a>
+    <a
+      href="#"
+      @click.prevent="logout"
+      data-test="sign-out"
+    >
+      {{ $t("signOut") }}
+    </a>
   </div>
 </template>

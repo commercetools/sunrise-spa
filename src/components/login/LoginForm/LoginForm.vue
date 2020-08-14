@@ -32,7 +32,11 @@
         </div>
         <div class="login-register-btn-remember">
           <div class="login-register-btn">
-            <button>{{ $t('signIn') }}</button>
+            <button
+            data-test="login-form-submit"
+            >
+              {{ $t('signIn') }}
+            </button>
           </div>
         </div>
       </BaseForm>

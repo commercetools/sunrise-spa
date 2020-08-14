@@ -4,7 +4,6 @@ const apiKey = Cypress.env('MAILSLURP_KEY');
 const msEmail = Cypress.env('MAILSLURP_EMAIL');
 const mailslurp = new MailSlurp({ apiKey });
 
-
 describe('Login', () => {
   const customer = {
     firstName: 'Charlie',
@@ -23,7 +22,7 @@ describe('Login', () => {
   const newPassword = 'newp@ssword';
 
   before(() => {
-    cy.wrap(mailslurp.getAllEmails().then(emails => emails.content.forEach((e) => {
+    cy.wrap(mailslurp.getAllEmails().then((emails) => emails.content.forEach((e) => {
       mailslurp.deleteEmail(e.id);
     })));
   });
@@ -31,17 +30,15 @@ describe('Login', () => {
   it('logs in', () => {
     cy.createCustomer(customer);
     cy.login(customer);
-    cy.location('pathname').should('eq', '/DE/en/user/account', { timeout: Cypress.config('graphqlTimeout') });
+    cy.location('pathname').should('eq', '/DE/en/user/dashboard', { timeout: Cypress.config('graphqlTimeout') });
     cy.checkCustomerIsLoggedIn(customer);
 
     cy.reload();
-    cy.location('pathname').should('eq', '/DE/en/user/account', { timeout: Cypress.config('graphqlTimeout') });
+    cy.location('pathname').should('eq', '/DE/en/user/dashboard', { timeout: Cypress.config('graphqlTimeout') });
     cy.checkCustomerIsLoggedIn(customer);
-
-    cy.get('[data-test=logout-button]').click();
+    cy.logout();
     cy.location('pathname').should('eq', '/DE/en/login', { timeout: Cypress.config('graphqlTimeout') });
     cy.get('[data-test=login-button]').should('exist');
-    cy.get('[data-test=logout-button]').should('not.exist');
     cy.get('[data-test=login-info-name]').should('not.exist');
   });
 
@@ -65,8 +62,8 @@ describe('Login', () => {
     cy.get('[data-test=forgot-password-email]').type(newCustomer.email);
     cy.get('[data-test=forgot-password-form-submit]').click();
     cy.wrap(mailslurp.waitForEmailCount(1, msEmail.substring(0, msEmail.lastIndexOf('@')))
-      .then(response => mailslurp.getEmail(response[0].id)
-        .then(fullEmail => fullEmail.body.match(/a href="([^"]*)/)[1])))
+      .then((response) => mailslurp.getEmail(response[0].id)
+        .then((fullEmail) => fullEmail.body.match(/a href="([^"]*)/)[1])))
       .then((link) => {
         cy.visit(link);
         cy.get('[data-test=reset-new-password]').type(newPassword);

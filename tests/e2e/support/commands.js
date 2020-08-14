@@ -37,14 +37,14 @@ Cypress.Commands.add('login', (customer) => {
   cy.get('[data-test=login-form-password]').type(customer.password);
   cy.get('[data-test=login-form-submit]').click();
 });
+Cypress.Commands.add('logout', () => {
+  cy.visit('/user/dashboard');
+  cy.get('[data-test=sign-out]').click();
+});
 
-Cypress.Commands.add('checkCustomerIsLoggedIn', (customer) => {
-  cy.get('[data-test=user-profile-name]').should('contain', `${customer.firstName} ${customer.lastName}`);
-  cy.get('[data-test=user-profile-email]').should('contain', customer.email);
-
+Cypress.Commands.add('checkCustomerIsLoggedIn', () => {
   cy.get('[data-test=login-button]').should('not.exist');
-  cy.get('[data-test=logout-button]').should('exist');
-  cy.get('[data-test=login-info-name]').should('contain', customer.firstName);
+  cy.get('[data-test=login-info-name]').should('exist');
 });
 
 Cypress.Commands.add('changeLanguage', (language) => {
