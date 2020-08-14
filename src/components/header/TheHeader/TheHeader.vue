@@ -77,7 +77,7 @@
                     <a
                       href="javascript:;"
                       @click="openMiniCart"
-                      data-test=" mini-cart-open-button"
+                      data-test="mini-cart-open-button"
                       class="cart-active"
                     >
                       <i class="dl-icon-cart1"></i>

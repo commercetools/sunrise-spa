@@ -10,9 +10,14 @@
       data-test="mini-cart-content"
     >
       <div class="sidebar-cart-all">
-        <a class="cart-close" href="javascript:;" @click="close"
-          ><i class="dl-icon-close"></i
-        ></a>
+        <a
+          class="cart-close"
+          href="javascript:;"
+          @click="close"
+          data-test="mini-cart-close-button"
+        >
+          <i class="dl-icon-close"></i>
+        </a>
         <div class="cart-content">
           <h3>{{ $t('miniCart') }}</h3>
           <span v-if="cartNotEmpty">
@@ -47,7 +52,9 @@
                     </router-link>
                   </h4>
                   <span
-                    >{{ lineItem.quantity }} ×
+                    data-test="cart-line-item-quantity"
+                  >
+                    {{ lineItem.quantity }} ×
                     <BaseMoney :money="lineItem.totalPrice"
                   /></span>
                 </div>
@@ -57,7 +64,10 @@
             <div class="cart-total">
               <h4>
                 {{ $t('subtotal') }}:
-                <BaseMoney :money="me.activeCart.totalPrice" />
+                <BaseMoney
+                  :money="me.activeCart.totalPrice"
+                  data-test="mini-cart-price"
+                />
               </h4>
             </div>
             <div class="cart-checkout-btn">
