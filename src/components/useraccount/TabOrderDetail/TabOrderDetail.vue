@@ -65,12 +65,20 @@
       <div class="offset-md-6 text-right subtotal-price">
         <div class="row">
           <span class="col-md-6 title">{{ $t('subtotal') }}</span>
-          <span class="col-md-6 title"><BaseMoney :money="subtotal"/></span>
+          <span class="col-md-6 title">
+            <BaseMoney
+              :money="subtotal"
+              data-test="order-subtotal-price"
+            />
+          </span>
         </div>
         <div class="row">
           <p class="col-md-6">{{ $t('shipping') }}</p>
           <span class="col-md-6">
-            <BaseMoney :money="me.order.shippingInfo.price" />
+            <BaseMoney
+              :money="me.order.shippingInfo.price"
+              data-test="cart-shipping-price"
+            />
           </span>
         </div>
         <div v-if="me.order.discountCodes.length > 0" class="row">
@@ -87,9 +95,12 @@
       <div class="offset-md-6 text-right total-price">
         <div class="row">
           <span class="col-md-6 title">{{ $t('total') }}</span>
-          <span class="col-md-6 title"
-            ><BaseMoney :money="me.order.totalPrice"
-          /></span>
+          <span class="col-md-6 title">
+            <BaseMoney
+              :money="me.order.totalPrice"
+              data-test="cart-total-price"
+            />
+          </span>
         </div>
       </div>
     </div>

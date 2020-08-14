@@ -35,7 +35,10 @@
               {{ translateStatus(order.shipmentState) }}
             </td>
             <td>
-              <router-link :to="{ name: 'order', params: { id: order.id } }">
+              <router-link
+                :to="{ name: 'order', params: { id: order.id } }"
+                data-test="view-order-btn"
+              >
                 {{ $t('view') }}
               </router-link>
             </td>

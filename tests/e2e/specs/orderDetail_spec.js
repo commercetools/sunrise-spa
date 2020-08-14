@@ -87,16 +87,17 @@ describe('OrderDetailPage', () => {
     //   .contains('12345');
     cy.get('[data-test=details-order-date]')
       .contains(/^\s*\d{1,2}\.*\s*[A-Za-zäÄöÖüÜß].+\s*\d{4}\s*$/);
-    cy.get('[data-test=cart-subtotal-price]')
+    cy.get('[data-test=order-subtotal-price]')
       .should((e) => {
         expect(e.text()).to.match(/^\s*149,50\s€\s*$/);
       });
     cy.get('[data-test=cart-shipping-price]')
       .contains(/^\s*10,00\s€\s*$/);
-    cy.get('[data-test=cart-taxes-amount]')
-      .should((e) => {
-        expect(e.text()).to.match(/^\s*25,47\s€\s*$/);
-      });
+    // no tax on order detail
+    // cy.get('[data-test=cart-taxes-amount]')
+    //   .should((e) => {
+    //     expect(e.text()).to.match(/^\s*25,47\s€\s*$/);
+    //   });
     cy.get('[data-test=cart-total-price]')
       .should((e) => {
         expect(e.text()).to.match(/^\s*159,50\s€\s*$/);
