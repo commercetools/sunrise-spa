@@ -9,7 +9,9 @@ jobs:
           JEST_JUNIT_OUTPUT: test-results/unit/output.xml
 
     working_directory: ~/sunrise-spa
-
+    # docker image cypress/base:10 is broken yarn install --frozen-lockfile
+    # ends up with error: The engine "node" is incompatible with this module.
+    # tried updating yarn but failed so using npm now
     steps:
       - checkout
       - restore_cache:
@@ -22,10 +24,10 @@ jobs:
       #     command: apt-get upgrade yarn -y
       - run:
           name: Show versions
-          command: yarn -v && node -v
+          command: npm -v && node -v
       - run:
           name: Install dependencies
-          command: yarn install --frozen-lockfile
+          command: npm ci
       - save_cache:
           key: v6-deps-{{ checksum "yarn.lock" }}
           paths:
