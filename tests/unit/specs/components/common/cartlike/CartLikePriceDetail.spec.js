@@ -53,34 +53,33 @@ describe('CartLikePriceDetail/index.vue', () => {
       },
     });
     expect(wrapper.vm.taxes).toEqual({
-      centAmount: 13260,
-      currencyCode: 'EUR',
-      fractionDigits: 2,
+      value: {
+        centAmount: 13260,
+        currencyCode: 'EUR',
+        fractionDigits: 2,
+      },
     });
   });
 
   it('calculates subtotal price', () => {
     const wrapper = shallowMount(CartLikePriceDetail, options);
-    expect(wrapper.vm.subtotal).toEqual({
-      centAmount: 0,
-      currencyCode: 'EUR',
-      fractionDigits: 2,
-    });
-
+    expect(wrapper.vm.subtotal).toEqual({ value: { centAmount: 0, currencyCode: 'EUR', fractionDigits: 2 } });
     wrapper.setProps({
       cartLike: {
         ...cartLike,
         lineItems: [
-          { totalPrice: { centAmount: 11111 } },
-          { totalPrice: { centAmount: 22222 } },
-          { totalPrice: { centAmount: 44444 } },
+          { quantity: 1, totalPrice: { centAmount: 11111 }, price: { value: { centAmount: 11111 } } },
+          { quantity: 1, totalPrice: { centAmount: 22222 }, price: { value: { centAmount: 22222 } } },
+          { quantity: 1, totalPrice: { centAmount: 44444 }, price: { value: { centAmount: 44444 } } },
         ],
       },
     });
     expect(wrapper.vm.subtotal).toEqual({
-      centAmount: 77777,
-      currencyCode: 'EUR',
-      fractionDigits: 2,
+      value: {
+        centAmount: 77777,
+        currencyCode: 'EUR',
+        fractionDigits: 2,
+      },
     });
   });
 });
