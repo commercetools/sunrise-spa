@@ -62,13 +62,11 @@ export default {
           ...Object.fromEntries(
             attributesRaw.map(
               ({
-                attributeDefinition: { name },
+                attributeDefinition: { name, type },
                 value,
               }) => [
                 name,
-                typeof value === 'object'
-                  ? value.label
-                  : value,
+                getValue(type.name, value, locale(this)),
               ],
             ),
           ),

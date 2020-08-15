@@ -10,7 +10,10 @@
       </div>
     </div>
     <div class="col-lg-7">
-      <div class="product-details-content product-details-ptb">
+      <div
+        class="product-details-content product-details-ptb"
+        data-test="product-data"
+      >
         <h2
           data-test="product-name"
         >

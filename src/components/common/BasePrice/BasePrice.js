@@ -7,13 +7,13 @@ export default {
   props: { price: Object },
   computed: {
     hasDiscount() {
-      return this.price.discounted;
+      return this.price?.discounted;
     },
     discountedPrice() {
-      return this.price.discounted.value;
+      return this.price?.discounted?.value;
     },
     originalPrice() {
-      return this.price.value;
+      return this?.price?.value;
     },
   },
 };

@@ -5,7 +5,12 @@
   <div v-if="product" class="pro-dec-big-img-slider product-big-img-style">
     <div class="easyzoom easyzoom--overlay" ref="easyzoom">
       <a :href="productImage">
-        <img class="product-image" :src="productImage" alt="" />
+        <img
+          class="product-image"
+          :src="productImage"
+          alt=""
+          data-test="product-image"
+        />
       </a>
     </div>
     <!-- <div class="pro-dec-zoom-img">
