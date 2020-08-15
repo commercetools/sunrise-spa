@@ -18,6 +18,9 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v6-deps
       - run:
+          name: Show versions
+          command: yarn -v && node -v
+      - run:
           name: Install dependencies
           command: yarn install --frozen-lockfile
       - save_cache:
