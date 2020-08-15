@@ -36,10 +36,12 @@ jobs:
       - run:
           name: Run Unit tests
           command: yarn test:unit --ci --reporters=default --reporters=jest-junit --no-cache
-
+      # cannot use reporter after update:
+      #    https://github.com/cypress-io/cypress/issues/4304
       - run:
           name: Run E2E tests
-          command: yarn test:e2e --headless --reporter mocha-multi-reporters
+          # command: yarn test:e2e --headless --reporter mocha-multi-reporters
+          command: yarn test:e2e --headless
       - store_artifacts:
           name: Store E2E videos
           path: tests/e2e/videos
