@@ -17,9 +17,9 @@ jobs:
             - v6-deps-{{ checksum "yarn.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v6-deps
-      - run:
-          name: Get latest yarn version
-          command: apt-get upgrade yarn -y
+      # - run:
+      #     name: Get latest yarn version
+      #     command: apt-get upgrade yarn -y
       - run:
           name: Show versions
           command: yarn -v && node -v
