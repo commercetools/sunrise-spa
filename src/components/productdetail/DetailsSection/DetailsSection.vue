@@ -101,6 +101,7 @@
             <a href="#"
               @click.prevent="toggle(0)"
               :class="{collapsed:!expanded[0]}"
+              data-test="product-attributes-accordion"
             >
               {{$t('productDetails')}}
             </a>

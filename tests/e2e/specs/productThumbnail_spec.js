@@ -8,8 +8,7 @@ describe('Product thumbnail', () => {
   it('displays product information', () => {
     cy.get('[data-test=product-thumbnail-name]', { timeout: Cypress.config('graphqlTimeout') })
       .contains(_const.one.NAME)
-      .parentsUntil('[data-test=product-thumbnail]')
-      .parent()
+      .parentsUntil('[data-test=product-list]')
       .then(($thumbnail) => {
         cy.wrap($thumbnail)
           .find('img')
@@ -34,8 +33,7 @@ describe('Product thumbnail', () => {
         expect(e.text()).to.include(_const.three.NAME);
         return e;
       })
-      .parentsUntil('[data-test=product-thumbnail]')
-      .parent()
+      .parentsUntil('[data-test=product-list]')
       .then(($thumbnail) => {
         cy.wrap($thumbnail)
           .find('[data-test=product-thumbnail-sale-flag]')

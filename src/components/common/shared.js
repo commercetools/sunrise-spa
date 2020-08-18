@@ -1,15 +1,69 @@
+import config from '../../../sunrise.config';
+
 /* eslint-disable import/prefer-default-export */
+export function getValue(type, value, language) {
+  if (type === 'enum') {
+    return value.label;
+  }
+  if (type === 'lenum') {
+    return value.label[language];
+  }
+  if (type === 'ltext') {
+    return value[language];
+  }
+  return value;
+}
 export function totalPrice(lineItem) {
-  const { centAmount: unitCentAmount, ...unitPrice } = lineItem.price.discounted?.value || lineItem.price.value;
+  const { centAmount: unitCentAmount, ...unitPrice } = lineItem.price.value;
   const originalPrice = {
     ...unitPrice,
     centAmount: unitCentAmount * lineItem.quantity,
   };
-  const price = { value: { ...originalPrice } };
-  if (originalPrice.centAmount !== lineItem.totalPrice.centAmount) {
-    price.discounted = { value: { ...lineItem.totalPrice } };
+  const price = { value: originalPrice };
+  const discount = (lineItem.price.discounted?.value?.centAmount || lineItem.price.value.centAmount)
+     * lineItem.quantity;
+  if (originalPrice.centAmount !== discount) {
+    price.discounted = { value: { ...lineItem.totalPrice, centAmount: discount } };
   }
   return price;
+}
+export function subTotal(cartLike) {
+  const { currencyCode, fractionDigits } = cartLike.totalPrice;
+  const priceCentAmount = cartLike.lineItems
+    .reduce((acc, li) => acc + (li.quantity * li.price.value.centAmount), 0);
+  const totalPriceCentAmount = cartLike.lineItems.reduce((acc, li) => acc + li.totalPrice.centAmount, 0);
+  const discounted = priceCentAmount === totalPriceCentAmount
+    ? {}
+    : {
+      discounted: {
+        value: {
+          centAmount: totalPriceCentAmount,
+          currencyCode,
+          fractionDigits,
+        },
+      },
+    };
+  return {
+    value: {
+      centAmount: priceCentAmount,
+      currencyCode,
+      fractionDigits,
+    },
+    ...discounted,
+  };
+}
+export function variantAttributes(variant, language, variantNames = config.variantInProductName) {
+  const attributes = (variant?.attributesRaw || []).map(
+    ({ attributeDefinition: { name, label, type }, value }) => [
+      name, label, getValue(type.name, value, language),
+    ],
+  );
+
+  return variantNames.map(
+    (attributeName) => attributes.find(([name]) => name === attributeName),
+  ).filter((x) => x).map(
+    ([, name, value]) => ({ name, value }),
+  );
 }
 export const pageFromRoute = (route) => {
   const pageNum = Number(route.params.page);
@@ -44,14 +98,14 @@ export const changeRoute = (route, component, push = true, keepScrollPosition = 
     );
   }
 };
-export const locale = component => component?.$route?.params?.locale;
+export const locale = (component) => component?.$route?.params?.locale;
 export const isToughDevice = () => 'ontouchstart' in window;
 export const modifyQuery = (key, value, query, add = true) => {
   const values = [value]
     .concat(query[key])
-    .filter(v => add || v !== value);
+    .filter((v) => add || v !== value);
   let newValue = [...new Set(values)]
-    .filter(v => v !== undefined);
+    .filter((v) => v !== undefined);
   newValue = (newValue.length > 1) ? newValue : newValue[0];
   return (newValue !== undefined)
     ? {
@@ -77,17 +131,4 @@ export function debounce(fn, time = 500) {
       () => fn(...args), time,
     );
   };
-}
-
-export function getValue(type, value, language) {
-  if (type === 'enum') {
-    return value.label;
-  }
-  if (type === 'lenum') {
-    return value.label[language];
-  }
-  if (type === 'ltext') {
-    return value[language];
-  }
-  return value;
 }

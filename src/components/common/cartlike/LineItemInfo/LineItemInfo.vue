@@ -23,7 +23,7 @@
         <router-link
           :to="productRoute(lineItem.productSlug, lineItem.variant.sku)"
           data-test="cart-line-item-link"
-          >{{ lineItem.name }}</router-link
+          >{{ nameFromLineItem }}</router-link
         >
         <span
           data-test="cart-line-item-sku"
@@ -36,7 +36,7 @@
           class="amount"
           data-test="item-price"
         >
-          <BaseMoney :money="lineItem.price.value" />
+          <BasePrice :price="lineItem.price" />
         </span>
       </td>
       <td class="text-center cart-quality">
@@ -52,7 +52,7 @@
         data-test="line-total"
       >
         <span>
-          <BaseMoney :money="lineItem.totalPrice" />
+          <BasePrice :price="total" />
         </span>
       </td>
     </tr>

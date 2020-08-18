@@ -25,6 +25,17 @@ fragment OrderFields on Order {
       images {
         url
       }
+      attributesRaw {
+        name
+        value
+        attributeDefinition {
+          type {
+            name
+          }
+          name
+          label(locale:$locale)
+        }
+      }
     }
   }
   totalPrice {

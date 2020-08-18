@@ -26,7 +26,7 @@ export const withToken = (() => {
   let tries = 0;
   return function tryRequest(fn, error) {
     const doRequest = (...args) => getAuthToken(error)
-      .then(tk => fn(...args.concat(tk)))
+      .then((tk) => fn(...args.concat(tk)))
       .catch((err) => {
         tries += 1;
         if (err.statusCode === 401 && tries < 3) {
@@ -37,7 +37,7 @@ export const withToken = (() => {
     return doRequest;
   };
 })();
-export const makeConfig = token => ({
+export const makeConfig = (token) => ({
   headers: {
     accept: '*/*',
     authorization: token,
@@ -67,7 +67,7 @@ export const toUrl = (
         if (Array.isArray(value)) {
           return result.concat(
             value.map(
-              v => [key, v],
+              (v) => [key, v],
             ),
           );
         }

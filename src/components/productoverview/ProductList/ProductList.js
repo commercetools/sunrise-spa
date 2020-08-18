@@ -63,6 +63,7 @@ const getProducts = (component) => {
     loc,
     searchText,
     sort,
+    priceFilter,
   } = products.paramsFromComponent(component);
   if (
     !category
@@ -74,29 +75,21 @@ const getProducts = (component) => {
   component.loadingFacets = true;
   const route = component.$route;
   last(
-    Promise.all([
-      products.get([
-        {
-          category,
-          page: Number(route.params?.page || 1),
-          pageSize: component.limit,
-          priceCurrency: currency,
-          priceCountry: country,
-          ...sort,
-          ...searchText,
-        },
-        route.query,
-        loc,
-      ]),
-      products.facets(
-        {
-          category,
-          ...searchText,
-        },
-        route.query,
-        loc,
-      )]),
-  ).then(([{ results, ...meta }, facets]) => {
+    products.get([
+      {
+        category,
+        page: Number(route.params?.page || 1),
+        pageSize: component.limit,
+        priceCurrency: currency,
+        priceCountry: country,
+        ...sort,
+        ...priceFilter,
+        ...searchText,
+      },
+      route.query,
+      loc,
+    ]),
+  ).then(({ facets, results, ...meta }) => {
     removeHiddenFacetFromQuery(
       facets,
       component,
@@ -174,6 +167,16 @@ export default {
   methods: {
     changeSort(sort) {
       this.sort = sort;
+      const query = { ...this.$route.query, sort };
+      if (sort === null) {
+        delete query.sort;
+      }
+      changeRoute(
+        {
+          ...this.$route,
+          query,
+        }, this,
+      );
     },
     facetFilterChange({ name, value }) {
       this.facetFilter = { ...this.facetFilter, [name]: value };

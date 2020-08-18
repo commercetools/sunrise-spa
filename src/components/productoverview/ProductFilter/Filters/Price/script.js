@@ -4,7 +4,7 @@ const MIN = 0;
 const MAX = 2000;
 export default {
   props: ['min', 'max'],
-  data: component => ({
+  data: (component) => ({
     vmin: component.min || MIN,
     vmax: component.max || MAX,
     umin: component.min || MIN,

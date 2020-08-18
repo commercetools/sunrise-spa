@@ -48,14 +48,14 @@
                       "
                       data-test="cart-line-item-link"
                     >
-                      {{ lineItem.name }}
+                      {{ nameFromLineItem(lineItem) }}
                     </router-link>
                   </h4>
                   <span
                     data-test="cart-line-item-quantity"
                   >
                     {{ lineItem.quantity }} ×
-                    <BaseMoney :money="lineItem.totalPrice"
+                    <BasePrice :price="totalPrice(lineItem)"
                   /></span>
                 </div>
                 <LineItemDeleteForm :lineItemId="lineItem.id" />
@@ -64,8 +64,8 @@
             <div class="cart-total">
               <h4>
                 {{ $t('subtotal') }}:
-                <BaseMoney
-                  :money="me.activeCart.totalPrice"
+                <BasePrice
+                  :price="subtotal"
                   data-test="mini-cart-price"
                 />
               </h4>

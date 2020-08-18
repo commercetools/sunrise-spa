@@ -18,7 +18,7 @@ const availableCountries = Object.keys(sunriseConfig.countries);
 
 export const fallbackLocale = availableLocales[0];
 const fallbackCountry = availableCountries[0];
-const obtainCurrency = country => sunriseConfig.formats.number[country]?.currency?.currency;
+const obtainCurrency = (country) => sunriseConfig.formats.number[country]?.currency?.currency;
 
 const clearMiniCartTimeout = (state) => {
   if (state.miniCartCloseTimer !== 0) {

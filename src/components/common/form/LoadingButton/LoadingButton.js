@@ -2,7 +2,7 @@ export default {
   props: {
     state: {
       type: String,
-      validator: value => ['success', 'loading'].includes(value),
+      validator: (value) => ['success', 'loading'].includes(value),
     },
   },
   data: () => ({

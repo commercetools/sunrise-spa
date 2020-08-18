@@ -29,7 +29,13 @@
             <h2>Search near a location</h2>
             <div id='place-radius'>
               <gmap-autocomplete @place_changed="setPlace"/>
-              <v-select id='radius' v-model="searchRadius" :options="radiusOptions" :reduce="option => option.distance" :clearable=false @input="setRadius"></v-select>
+              <v-select
+                id='radius'
+                v-model="searchRadius"
+                :options="radiusOptions"
+                :reduce="option => option.distance"
+                :clearable=false @input="setRadius"
+              ></v-select>
             </div>
           </div>
 
@@ -39,10 +45,29 @@
               <li v-for="channel in channels.results"
                 :key="channel.id" class="item address address--active"
                 @click="click(channel)">
-                <div class="item-link"> <span class="distance">  <span class="gm-computed-distance" :data-coord-lat="channel.geoLocation.coordinates[1]" :data-coord-lng="channel.geoLocation.coordinates[0]"></span> <strong class="title"> {{channel.name}} </strong> </span> <b class="price"> </b>
+                <div
+                  class="item-link"
+                >
+                  <span class="distance">
+                    <span
+                      class="gm-computed-distance"
+                      :data-coord-lat="channel.geoLocation.coordinates[1]"
+                      :data-coord-lng="channel.geoLocation.coordinates[0]"
+                    ></span>
+                    <strong class="title">
+                      {{channel.name}}
+                    </strong>
+                  </span>
+                  <b class="price"> </b>
                   <div class="info">
                     <div class="info-title"> Address: </div>
-                    <div class="info-content"> {{ channel.address.streetNumber}}  {{channel.address.streetName}} <br> {{channel.address.city}}, {{channel.address.postalCode}} </div>
+                    <div class="info-content">
+                      {{ channel.address.streetNumber}}
+                      {{channel.address.streetName}}
+                      <br>
+                      {{channel.address.city}},
+                      {{channel.address.postalCode}}
+                    </div>
                     <div class="info-title"> Opening hours: </div>
                     <div class="info-content">{{ openingHours(channel) }}</div>
                     <div class="info-content store-distance">{{ distance(channel) }} mi away</div>
@@ -52,7 +77,16 @@
                     <!-- start catalog/product-availability.hbs -->
                     <div class="status"> </div> <!-- end catalog/product-availability.hbs -->
                     <div class="action" v-if="!isSelected(channel)">
-                        <input type="hidden" :value="channel.id">  <button v-on:click="setStore" class="btn btn-standard" :value="channel.id">Select This Store</button>
+                        <input
+                          type="hidden"
+                          :value="channel.id">
+                        <button
+                          v-on:click="setStore"
+                          class="btn btn-standard"
+                          :value="channel.id"
+                        >
+                          Select This Store
+                        </button>
                     </div>
                     <div class="store-selected action" v-else>Selected</div>
                   </div>

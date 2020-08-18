@@ -15,7 +15,7 @@ export default {
       const last = Math.ceil(this.page / 3) * 3;
       const total = this.totalPages;
       return [last - 2, last - 1, last].filter(
-        page => page < total,
+        (page) => page < total,
       );
     },
     show() {

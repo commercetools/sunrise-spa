@@ -48,6 +48,7 @@
             type="submit"
             class="check-btn sqr-btn"
             :class="$v.$invalid ? 'disabled' : ''"
+            data-test="change-password-submit"
           >{{$t('updateBtn')}}</button>
         </div>
       </BaseForm>

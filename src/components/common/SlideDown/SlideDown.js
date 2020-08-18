@@ -45,7 +45,7 @@ const animate = (callback, time) => {
   };
 };
 
-const createSetStyle = ref => (value) => {
+const createSetStyle = (ref) => (value) => {
   ref.style.maxHeight = `${value}px`;
   ref.style.position = 'inherit';
   ref.style.overflow = 'hidden';

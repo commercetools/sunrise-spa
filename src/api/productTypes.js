@@ -7,13 +7,13 @@ import {
 
 const productTypes = {
   getItem: withToken(
-    accessToken => groupFetchJson(
+    (accessToken) => groupFetchJson(
       `${baseUrl}/product-types/key=main`,
       makeConfig(accessToken),
     ),
   ),
   translations: () => productTypes.getItem().then(
-    productType => productType.attributes.reduce(
+    (productType) => productType.attributes.reduce(
       (result, { name, label }) => {
         result[name] = {
           ...label,

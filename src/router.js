@@ -24,7 +24,6 @@ import PageCheckout from './components/checkout/PageCheckout/PageCheckout.vue';
 import { pageFromRoute } from './components/common/shared';
 import Root from './components/root/root.vue';
 
-
 Vue.use(Router);
 
 const requiresAuth = true;
@@ -97,7 +96,7 @@ const router = new Router({
             footer: null,
           },
           props: {
-            default: route => ({
+            default: (route) => ({
               ...pageFromRoute(route),
               categorySlug: route.params.categorySlug,
             }),
@@ -180,7 +179,7 @@ const router = new Router({
 });
 
 router.beforeEach(async (to, from, next) => {
-  const routeRequiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  const routeRequiresAuth = to.matched.some((record) => record.meta.requiresAuth);
   if (routeRequiresAuth && !store.state.authenticated) {
     next({ name: 'login' });
   } else {
@@ -189,11 +188,11 @@ router.beforeEach(async (to, from, next) => {
 });
 
 router.beforeEach(async (to, from, next) => {
-  const routeRequiresCart = to.matched.some(record => record.meta.requiresCart);
+  const routeRequiresCart = to.matched.some((record) => record.meta.requiresCart);
   if (routeRequiresCart) {
     const hasCart = await apollo.defaultClient
       .query({ query: gql`{ me { activeCart { id } } }` })
-      .then(result => !!result.data.me.activeCart);
+      .then((result) => !!result.data.me.activeCart);
     if (!hasCart) next('/');
   }
   next();

@@ -9,6 +9,7 @@
           :class="!quickview ? 'product-image' : 'quickview-img'"
           :src="productImage"
           alt=""
+          data-test="product-image"
         />
       </a>
     </div>

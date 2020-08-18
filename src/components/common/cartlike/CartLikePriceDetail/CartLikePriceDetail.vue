@@ -15,7 +15,7 @@
           data-test="cart-subtotal-price"
         >
           <span>
-            <BaseMoney :money="subtotal" />
+            <BasePrice :price="subtotal" />
           </span>
         </div>
       </div>
@@ -29,7 +29,7 @@
           data-test="cart-taxes-amount"
         >
           <span>
-            <BaseMoney :money="taxes" />
+            <BasePrice :price="taxes" />
           </span>
         </div>
       </div>
@@ -67,7 +67,7 @@
         data-test="cart-total-price"
       >
         <b>
-          <BaseMoney :money="subtotal" />
+          <BasePrice :price="{value:cartLike.totalPrice}" />
         </b>
       </div>
     </div>

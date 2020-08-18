@@ -9,7 +9,9 @@ jobs:
           JEST_JUNIT_OUTPUT: test-results/unit/output.xml
 
     working_directory: ~/sunrise-spa
-
+    # docker image cypress/base:10 is broken yarn install --frozen-lockfile
+    # ends up with error: The engine "node" is incompatible with this module.
+    # tried updating yarn but failed so using npm now
     steps:
       - checkout
       - restore_cache:
@@ -17,9 +19,15 @@ jobs:
             - v6-deps-{{ checksum "yarn.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v6-deps
+      # - run:
+      #     name: Get latest yarn version
+      #     command: apt-get upgrade yarn -y
+      - run:
+          name: Show versions
+          command: npm -v && node -v
       - run:
           name: Install dependencies
-          command: yarn install --frozen-lockfile
+          command: npm ci
       - save_cache:
           key: v6-deps-{{ checksum "yarn.lock" }}
           paths:
@@ -28,10 +36,12 @@ jobs:
       - run:
           name: Run Unit tests
           command: yarn test:unit --ci --reporters=default --reporters=jest-junit --no-cache
-
+      # cannot use reporter after update:
+      #    https://github.com/cypress-io/cypress/issues/4304
       - run:
           name: Run E2E tests
-          command: yarn test:e2e --headless --reporter mocha-multi-reporters
+          # command: yarn test:e2e --headless --reporter mocha-multi-reporters
+          command: yarn test:e2e --headless
       - store_artifacts:
           name: Store E2E videos
           path: tests/e2e/videos

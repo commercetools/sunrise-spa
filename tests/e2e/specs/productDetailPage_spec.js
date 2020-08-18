@@ -83,12 +83,12 @@ describe('Product detail page', () => {
         cy.wrap($product)
           .find('[data-test=product-name]')
           .should('contain', _const.one.NAME);
-
-        cy.wrap($product)
-          .find('[data-test=product-sku]')
-          .should((e) => {
-            expect(e.text()).to.include(_const.one.sku);
-          });
+        // @todo: sku does not show up in product details
+        // cy.wrap($product)
+        //   .find('[data-test=product-sku]')
+        //   .should((e) => {
+        //     expect(e.text()).to.include(_const.one.sku);
+        //   });
 
         cy.wrap($product)
           .find('[data-test=price-old-value]')
@@ -115,8 +115,7 @@ describe('Product detail page', () => {
           });
       });
 
-    cy.get('[data-test=product-gallery]')
-      .find('[data-test=product-image]')
+    cy.get('[data-test=product-image]')
       .should('exist');
   });
 
@@ -125,33 +124,26 @@ describe('Product detail page', () => {
     cy.visit('/product/t-shirt-testing/sku-34-black');
     cy.get('[data-test=product-data]')
       .then(($product) => {
-        cy.wrap($product)
-          .find('[data-test=product-sku]')
-          .should('contain', 'sku-34-black');
+        // @todo: no sku in product detail
+        // cy.wrap($product)
+        //   .find('[data-test=product-sku]')
+        //   .should('contain', 'sku-34-black');
 
         cy.wrap($product)
-          .find('[data-test=attribute-select-color]')
+          .find('[data-test=attribute-select-Filtercolor]')
           .select('grey');
+        cy.url().should('include', 'sku-30-grey');
 
         cy.wrap($product)
-          .find('[data-test=product-sku]')
-          .should('contain', 'sku-30-grey');
-
-        cy.wrap($product)
-          .find('[data-test=attribute-select-size]')
+          .find('[data-test=attribute-select-Size]')
           .select('32');
+        cy.url().should('include', 'sku-32-grey');
 
         cy.wrap($product)
-          .find('[data-test=product-sku]')
-          .should('contain', 'sku-32-grey');
-
-        cy.wrap($product)
-          .find('[data-test=attribute-select-size]')
+          .find('[data-test=attribute-select-Size]')
           .select('36');
 
-        cy.wrap($product)
-          .find('[data-test=product-sku]')
-          .should('contain', 'sku-36-black');
+        cy.url().should('include', 'sku-36-black');
       });
   });
   it('shows correct language', async () => {
@@ -159,7 +151,7 @@ describe('Product detail page', () => {
     cy.changeLanguage('Deutsch');
     cy.get('[data-test=attribute-name]')
       .should(
-        e => expect(e[1].innerText)
+        (e) => expect(e[1].innerText)
           .to
           .include('GRÖSSE'),
       );
