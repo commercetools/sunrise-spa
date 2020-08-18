@@ -189,8 +189,8 @@ export default {
       el.style.display = window.innerHeight > 300
        && window.scrollY > 200 ? '' : 'none';
     },
-    showModal(productInfo) {
-      this.$emit('showModal', productInfo);
+    openModal(productInfo) {
+      this.$emit('openModal', productInfo);
     },
     toggleFilter() {
       this.show = !this.show;

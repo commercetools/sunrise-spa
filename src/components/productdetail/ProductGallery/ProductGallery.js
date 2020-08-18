@@ -6,6 +6,10 @@ export default {
       type: String,
       required: true,
     },
+    quickview: {
+      type: Boolean,
+      default: false,
+    },
   },
   data: () => ({
     product: null,

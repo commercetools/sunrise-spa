@@ -16,15 +16,17 @@ export default {
     },
   },
   data: () => ({
-    openModal: false,
-    productSlug: null,
+    showModal: false,
     productSku: null,
   }),
   methods: {
-    showModal(productInfo) {
-      this.openModal = true;
-      this.productSlug = productInfo.slug;
+    openModal(productInfo) {
+      this.showModal = true;
       this.productSku = productInfo.sku;
+    },
+    closeModal() {
+      this.showModal = false;
+      this.productSku = null;
     },
   },
 };

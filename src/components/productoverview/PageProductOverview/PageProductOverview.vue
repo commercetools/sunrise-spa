@@ -6,14 +6,14 @@
   <div>
     <Breadcrumb :categorySlug="categorySlug" />
     <ProductList
-      @showModal="showModal"
+      @openModal="openModal"
       :categorySlug="categorySlug"
       :page="page"
     />
     <ProductQuickView
-      :openModal="openModal"
-      :productSlug="productSlug"
+      :showModal="showModal"
       :productSku="productSku"
+      @closeModal="closeModal"
     />
   </div>
 </template>

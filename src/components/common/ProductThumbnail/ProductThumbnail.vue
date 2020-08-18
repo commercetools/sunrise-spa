@@ -27,7 +27,7 @@
           >
         </router-link>
         <div class="product-action">
-          <a href @click.prevent="showModal"
+          <a href @click.prevent="openModal"
             ><i class="dl-icon-view"></i> <span>Quick Shop</span></a
           >
           <a
