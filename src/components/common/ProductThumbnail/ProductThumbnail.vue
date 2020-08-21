@@ -14,11 +14,6 @@
             :src="displayedImageUrl(matchingVariant)"
             alt=""
           />
-          <img
-            class="hover-img"
-            :src="displayedImageUrl(matchingVariant)"
-            alt=""
-          />
           <span
             data-test="product-thumbnail-sale-flag"
             v-if="hasPrice && hasDiscount"
@@ -36,13 +31,14 @@
             href="#"
             @click.prevent="addLineItem(matchingVariant.sku)"
           >
-            <i class=" dl-icon-cart29"></i
-          ></a>
+            <i class=" dl-icon-cart29"></i>
+            <span>{{ $t('addToCart') }}</span></a
+          >
           <!-- <a data-toggle="tooltip" title="Add to Wishlist" href="#"><i class="dl-icon-heart4"></i></a>
         <a data-toggle="tooltip" title="Add to Compare" href="#"><i class="dl-icon-compare"></i></a> -->
         </div>
       </div>
-      <div class="product-content text-center">
+      <div class="product-content text-center mt-15">
         <h3>
           <router-link
             :to="productRoute(currentProduct.slug, matchingVariant.sku)"

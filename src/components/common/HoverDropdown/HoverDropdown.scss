@@ -12,11 +12,11 @@
       color: #262626;
       font-weight: 600;
       margin-left: 3px;
-      transition: all 0.4s ease 0s;
+      transition: all 0.1s ease 0s;
       &.angle-up {
         position: absolute;
-        right: 3px;
-        top: 1px;
+        right: 0;
+        top: 2px;
         opacity: 0;
         visibility: hidden;
       }

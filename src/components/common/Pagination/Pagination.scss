@@ -1,43 +1,49 @@
 .pro-pagination-style {
   ul {
-      li {
-          display: inline-block;
-          margin: 0 4px;
-          @media #{$xs-layout} {
-              margin: 0 2px;
-          }
-          a {
-              font-size: 12px;
-              text-align: center;
-              display: block;
-              position: relative;
-              background: #fff;
-              border: 1px solid transparent;
-              padding: 9px 10px;
-              line-height: 20px;
-              min-width: 40px;
-              margin: 0 1px;
-              color: #343538;
-              @media #{$xs-layout} {
-                  padding: 9px 7px;
-              }
-              &:hover {
-                  border: 1px solid #343538;
-              }
-              &.active {
-                  background-color: $theme-color;
-                  color: #fff;
-                  border-radius: 100%;
-              }
-          }
+    li {
+      display: inline-block;
+      margin: 0 4px;
+      @media #{$xs-layout} {
+        margin: 0 2px;
       }
+      a {
+        font-size: 12px;
+        text-align: center;
+        display: block;
+        position: relative;
+        background: #fff;
+        border: 1px solid transparent;
+        border-radius: 100%;
+        padding: 9px 10px;
+        line-height: 20px;
+        min-width: 40px;
+        margin: 0 1px;
+        color: #343538;
+        @media #{$xs-layout} {
+          padding: 9px 7px;
+        }
+        &:hover {
+          border: 1px solid #343538;
+        }
+        &.active {
+          background-color: $theme-color;
+          color: #fff;
+        }
+        &.next {
+          border-radius: 0;
+          &:hover {
+            border-radius: 0;
+          }
+        }
+      }
+    }
   }
   @media #{$xs-layout} {
-      &.mt-25 {
-          margin-top: 0px;
-      }
-      &.mt-15 {
-          margin-top: 0px;
-      }
+    &.mt-25 {
+      margin-top: 0px;
+    }
+    &.mt-15 {
+      margin-top: 0px;
+    }
   }
 }
