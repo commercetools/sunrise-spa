@@ -6,13 +6,6 @@
 ## Demo
 https://sunrise.netlify.com/
 
-## Deploy it on Netlify
-[Netlify](https://www.netlify.com/) allows you to clone the repository, configure the project with your own data and deploy it, all in one click.
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/commercetools/sunrise-spa)
-
-In order to deploy SUNRISE SPA with a different commercetools project than the default, follow the instructions described in the section [How to use your project data](#how-to-use-your-project-data) to obtain your credentials and use them to configure your site in Netlify.
-
 ## Run it locally 
 
 Steps   | with [Yarn](https://yarnpkg.com/)  | with [NPM](https://www.npmjs.com/) |
