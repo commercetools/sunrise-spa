@@ -20,8 +20,7 @@ export function totalPrice(lineItem) {
     centAmount: unitCentAmount * lineItem.quantity,
   };
   const price = { value: originalPrice };
-  const discount = (lineItem.price.discounted?.value?.centAmount || lineItem.price.value.centAmount)
-     * lineItem.quantity;
+  const discount = (lineItem.totalPrice.centAmount);
   if (originalPrice.centAmount !== discount) {
     price.discounted = { value: { ...lineItem.totalPrice, centAmount: discount } };
   }

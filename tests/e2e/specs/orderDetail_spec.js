@@ -122,7 +122,7 @@ describe('OrderDetailPage', () => {
           .find('[data-test=price-new-value]')
           .eq(1)
           .should((e) => {
-            expect(e.text()).to.match(/^\s*275,00\s€\s*$/);
+            expect(e.text()).to.match(/^\s*137,50\s€\s*$/);
           });
       });
     // @todo: should order detail display discount code?
