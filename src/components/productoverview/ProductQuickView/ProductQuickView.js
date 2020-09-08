@@ -124,5 +124,8 @@ export default {
         return !this.productSku;
       },
     },
+    close() {
+      this.$modal.close('quickView');
+    },
   },
 };

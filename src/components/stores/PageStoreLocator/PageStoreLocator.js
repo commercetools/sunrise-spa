@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import Breadcrumb from '../../common/Breadcrumb/Breadcrumb.vue';
 
 const getCoordinates = ({ lat, lng }) => ({ lat: parseFloat(lat), lng: parseFloat(lng) });
 
@@ -23,7 +24,7 @@ function haversineDistance(mk1, mk2) {
 }
 
 export default {
-  components: {},
+  components: { Breadcrumb },
   props: {
     isModal: {
       type: Boolean,
@@ -35,20 +36,20 @@ export default {
       return this.channels && this.channels.results && this.channels.results.length > 0;
     },
 
-    setRadius(value) {
-      this.searchRadius = value;
-    },
-
     setPlace(place) {
       this.center = getLocationFromPlace(place);
     },
 
-    click(channel) {
-      this.center = getLocationFromChannel(channel);
-    },
+    // click(channel) {
+    //   this.center = getLocationFromChannel(channel);
+    // },
 
     isSelected(channel) {
       return this.$store.state.storeName === channel.name;
+    },
+    unsetStore() {
+      this.$store.dispatch('setChannel', null);
+      this.$store.dispatch('setStoreName', null);
     },
 
     setStore(event) {
@@ -63,8 +64,6 @@ export default {
       setTimeout(() => {
         if (this.isModal) {
           $('#store-finder-modal').modal('hide');
-        } else {
-          this.$router.go(-1);
         }
       }, 500);
     },
@@ -85,7 +84,7 @@ export default {
     markers: [],
     places: [],
     currentPlace: null,
-    center: { lat: 35.9937228, lng: -78.9052195 },
+    center: {},
     searchRadius: 25,
     radiusOptions: [{
       distance: 25,

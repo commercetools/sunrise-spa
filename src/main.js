@@ -6,6 +6,7 @@ import 'whatwg-fetch';
 import VueScrollTo from 'vue-scrollto';
 import Vuelidate from 'vuelidate';
 import ProductZoomer from 'vue-product-zoomer';
+import * as VueGoogleMaps from 'vue2-google-maps';
 import App from './App/App.vue';
 import router from './router';
 import store from './store';
@@ -17,6 +18,13 @@ import './assets/scss/main.scss';
 
 Vue.config.productionTip = false;
 
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: process.env.VUE_APP_GOOGLE_MAPS_API_KEY,
+    libraries: 'places', // necessary for places input
+  },
+});
+Vue.config.productionTip = false;
 Vue.use(VueScrollTo);
 Vue.use(VModal);
 Vue.use(Vuelidate);

@@ -10,13 +10,10 @@
           <div class="row align-items-center">
             <div class="col-sm-6">
               <div class="header-info header-info-inc">
-                <a
-                  href="#"
-                  data-test="stores-link"
-                >
-                  {{$t("stores")}}
-                </a>
-                <a href="#">HELP</a>
+                <router-link :to="{ name: 'stores' }">
+                  {{ $t('stores') }}
+                </router-link>
+                <a href="#">Help</a>
               </div>
             </div>
             <div class="col-sm-6 d-flex justify-content-end">

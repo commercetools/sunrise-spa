@@ -13,7 +13,11 @@ export default {
         ? { name: this.$t('all'), slug: 'all', ancestors: [] }
         : (this.categorySlug === 'user') ? { name: this.$t('myAccount'), slug: 'account', ancestors: [] }
           : this.categories.results[0];
+      if (this.categorySlug === 'stores') {
+        this.currentCategory = { name: this.$t('stores'), slug: 'stores', ancestors: [] };
+      }
     },
+
   },
   apollo: {
     categories: {

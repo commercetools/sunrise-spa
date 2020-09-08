@@ -1,6 +1,7 @@
 en:
-  home: "Home"
-  all: 'All'
+  home: Home
+  all: All
+  stores: Sunrise Stores
 de:
-  home: "Home"
-  all: 'Alle'
+  home: Home
+  all: Alle

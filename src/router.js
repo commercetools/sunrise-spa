@@ -15,6 +15,7 @@ import PageUserAccount from './components/useraccount/PageUserAccount/PageUserAc
 import PageNotFound from './components/common/PageNotFound/PageNotFound.vue';
 import PageProductDetail from './components/productdetail/PageProductDetail/PageProductDetail.vue';
 import PageCartDetail from './components/cartdetail/PageCartDetail/PageCartDetail.vue';
+import PageStoreLocator from './components/stores/PageStoreLocator/PageStoreLocator.vue';
 import TabAccountDetails from './components/useraccount/TabAccountDetails/TabAccountDetails.vue';
 import TabOrderList from './components/useraccount/TabOrderList/TabOrderList.vue';
 import TabOrderDetail from './components/useraccount/TabOrderDetail/TabOrderDetail.vue';
@@ -51,15 +52,15 @@ const router = new Router({
             footer: TheFooter,
           },
         },
-        // {
-        //   path: 'stores',
-        //   name: 'stores',
-        //   components: {
-        //     default: StoreLocator,
-        //     header: TheHeader,
-        //     footer: TheFooter,
-        //   },
-        // },
+        {
+          path: 'stores',
+          name: 'stores',
+          components: {
+            default: PageStoreLocator,
+            header: TheHeader,
+            footer: TheFooter,
+          },
+        },
         {
           path: 'login',
           name: 'login',
