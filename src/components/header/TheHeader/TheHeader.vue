@@ -10,7 +10,10 @@
           <div class="row align-items-center">
             <div class="col-sm-6">
               <div class="header-info header-info-inc">
-                <router-link :to="{ name: 'stores' }">
+                <router-link
+                  :to="{ name: 'stores' }"
+                  data-test="stores-link"
+                >
                   {{ $t('stores') }}
                 </router-link>
                 <a href="#">Help</a>
