@@ -97,7 +97,7 @@ describe('CartLikeContentDetail/index.vue', () => {
       discounted: {
         value: {
           currencyCode: 'EUR',
-          centAmount: 52236,
+          centAmount: 26118,
           fractionDigits: 2,
         },
       },

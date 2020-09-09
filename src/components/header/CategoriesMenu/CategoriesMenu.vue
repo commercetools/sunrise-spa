@@ -29,7 +29,7 @@
         <li>
           <ul class="mega-menu-width4">
             <li
-              v-if="category2ndLevel.children.length"
+              v-if="category1stLevel.children.length"
               v-for="category2ndLevel in category1stLevel.children"
               :key="category2ndLevel.id"
             >
