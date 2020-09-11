@@ -1,20 +1,24 @@
 import { locale as loc } from '../common/shared';
 import MiniCart from '../header/MiniCart/MiniCart.vue';
+import config from '../../../sunrise.config';
 // locale is an optional route parameter, if it's missing
 // then see if it's set in store (local storage) and use that
 // if it's not in store then default to en
+
+const DEFAULT_COUNTRY = Object.keys(config.countries)[0];
+const DEFAULT_LANGUAGE = Object.keys(config.countries)[0];
 const checkLocale = (component) => {
   const { name, query, params } = component.$route;
   let newParams = params;
   if (!params.country) {
-    const country = component?.$store?.state?.country || 'DE';
+    const country = component?.$store?.state?.country || DEFAULT_COUNTRY;
     newParams = {
       ...newParams,
       country,
     };
   }
   if (!loc(component)) {
-    const locale = component?.$store?.state?.locale || 'en';
+    const locale = component?.$store?.state?.locale || DEFAULT_LANGUAGE;
     newParams = {
       ...newParams,
       locale,
