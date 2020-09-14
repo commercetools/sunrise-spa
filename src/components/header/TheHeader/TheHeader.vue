@@ -26,6 +26,7 @@
                     v-bind:values="$sunrise.countries"
                     title="location"
                     data-test="country-selector-dropdown"
+                    v-if="showLocationSelector"
                   />
                   <LocationSelector
                     v-bind:values="$sunrise.languages"

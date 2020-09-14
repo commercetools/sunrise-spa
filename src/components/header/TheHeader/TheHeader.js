@@ -23,6 +23,9 @@ export default {
     totalCartItems() {
       return this.$store.state.cartItems;
     },
+    showLocationSelector() {
+      return !this.me?.activeCart;
+    },
   },
   methods: {
     toggleSearch() {
