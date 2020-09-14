@@ -36,7 +36,10 @@ export default {
         });
       }
       const supplyChannel = this.$store.state.channel ? {
-        supplyChannel: { id: this.$store.state.channel.id },
+        supplyChannel: {
+          typeId: 'channel',
+          id: this.$store.state.channel.id,
+        },
       } : {};
       return this.updateMyCart({
         addLineItem: {
