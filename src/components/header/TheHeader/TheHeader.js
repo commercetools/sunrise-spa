@@ -23,7 +23,7 @@ export default {
     totalCartItems() {
       return this.$store.state.cartItems;
     },
-    showLocationSelector() {
+    canChangeLocation() {
       return !this.me?.activeCart;
     },
   },
