@@ -35,10 +35,14 @@ export default {
           shippingAddress: { country: this.$store.state.country },
         });
       }
+      const supplyChannel = this.$store.state.channel ? {
+        supplyChannel: { id: this.$store.state.channel.id },
+      } : {};
       return this.updateMyCart({
         addLineItem: {
           sku: this.sku,
           quantity: Number(this.quantity),
+          ...supplyChannel,
         },
       }).then(() => this.$store.dispatch('openMiniCart'));
     },
