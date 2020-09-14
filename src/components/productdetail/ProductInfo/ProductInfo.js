@@ -69,7 +69,7 @@ export default {
           currency: this.$store.state.currency,
           sku: this.sku,
           country: this.$store.state.country,
-          channelId: this.$store.state?.channel.id,
+          channelId: this.$store.state?.channel?.id,
         };
       },
     },

@@ -35,8 +35,8 @@ export default {
           shippingAddress: { country: this.$store.state.country },
         });
       }
-      const supplyChannel = this.$store.state.channel ? {
-        supplyChannel: {
+      const distributionChannel = this.$store.state.channel ? {
+        distributionChannel: {
           typeId: 'channel',
           id: this.$store.state.channel.id,
         },
@@ -45,7 +45,7 @@ export default {
         addLineItem: {
           sku: this.sku,
           quantity: Number(this.quantity),
-          ...supplyChannel,
+          ...distributionChannel,
         },
       }).then(() => this.$store.dispatch('openMiniCart'));
     },
