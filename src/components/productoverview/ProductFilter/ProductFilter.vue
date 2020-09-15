@@ -10,6 +10,7 @@
       <div v-for="facet in facets" v-bind:key="facet.label" class="custom-col-width-23 mb-20">
         <TermFilter
           :name="facet.name"
+          :label="facet.label"
           :component="facet.component"
           :terms="getTerms(facet)"
           v-on:changed="filterChange"

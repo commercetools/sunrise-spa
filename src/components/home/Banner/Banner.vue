@@ -1,4 +1,5 @@
 <script src="./Banner.js"></script>
+<i18n src="./Banner.txt"></i18n>
 
 <template>
   <div class="slider-area">
@@ -19,13 +20,13 @@
           <div class="row height-100-percent align-items-center">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
               <div class="slider-content-8 slider-animated-1 text-center">
-                <h3 class="animated">MID-SEASON SALE</h3>
-                <h1 class="animated">UP TO 50%</h1>
+                <h3 class="animated">{{$t("midSeasonSale")}}</h3>
+                <h1 class="animated">{{$t("up50")}}</h1>
                 <div class="slider-btn-1">
                   <router-link
                     :to="{ name: 'products', params: { categorySlug: 'sale' } }"
                     class="animated"
-                    >SHOP NOW</router-link
+                    >{{$t("shopNow")}}</router-link
                   >
                 </div>
               </div>
@@ -41,12 +42,12 @@
           <div class="row height-100-percent align-items-center">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
               <div class="slider-content-9 slider-animated-1">
-                <h1 class="animated"><span>CHECK OUT </span> NEW COLLECTION</h1>
+                <h1 class="animated"><span>{{$t("checkout")}} </span> {{$t("newCollection")}}</h1>
                 <div class="slider-btn-1 text-center">
                   <router-link
                     :to="{ name: 'products', params: { categorySlug: 'new' } }"
                     class="animated"
-                    >SHOP NOW</router-link
+                    >{{$t("shopNow")}}</router-link
                   >
                 </div>
               </div>

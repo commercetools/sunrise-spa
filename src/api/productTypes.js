@@ -8,19 +8,24 @@ import {
 const productTypes = {
   getItem: withToken(
     (accessToken) => groupFetchJson(
-      `${baseUrl}/product-types/key=main`,
+      `${baseUrl}/product-types/`,
       makeConfig(accessToken),
     ),
   ),
   translations: () => productTypes.getItem().then(
-    (productType) => productType.attributes.reduce(
-      (result, { name, label }) => {
-        result[name] = {
-          ...label,
-        };
-        return result;
-      }, {},
-    ),
+    ({ results }) => results
+      .map(
+        (r) => r.attributes,
+      )
+      .flat()
+      .reduce(
+        (result, { name, label }) => {
+          result[name] = {
+            ...label,
+          };
+          return result;
+        }, {},
+      ),
   ),
 };
 

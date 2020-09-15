@@ -56,7 +56,20 @@ export default {
 
     setStore(event) {
       const channelId = event.target.value;
-      this.$store.dispatch('setChannel', channelId);
+      const channel = this.channels.results.find(
+        ({ id }) => id === channelId,
+      ) || {};
+      const location = channel.geoLocation?.coordinates
+        ? {
+          location: {
+            lng: channel.geoLocation.coordinates[0],
+            lat: channel.geoLocation?.coordinates[1],
+          },
+        } : {};
+      this.$store.dispatch('setChannel', {
+        id: channel.id,
+        ...location,
+      });
       this.channels.results.forEach((element) => {
         if (element.id === event.target.value) {
           this.$store.dispatch('setStoreName', element.name);
@@ -109,7 +122,9 @@ export default {
     }],
   }),
   beforeMount() {
-    if (navigator.geolocation) {
+    if (this.$store.state?.channel) {
+      this.center = this.$store.state.channel.location;
+    } else if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.center = {
           lat: position.coords.latitude,
