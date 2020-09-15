@@ -26,18 +26,9 @@
 
         <div>
           <div id="googlePlaceBar">
-            <h4>Search by location</h4>
+            <h4>{{ $t('search') }}</h4>
             <div id="place-radius">
               <gmap-autocomplete id="place-input" @place_changed="setPlace" />
-              <!-- <v-select
-                class="col-md-4"
-                id="radius"
-                v-model="searchRadius"
-                :options="radiusOptions"
-                :reduce="(option) => option.distance"
-                :clearable="false"
-                @input="setRadius"
-              ></v-select> -->
               <select v-model="searchRadius" id="radius">
                 <option
                   v-for="opt in radiusOptions"

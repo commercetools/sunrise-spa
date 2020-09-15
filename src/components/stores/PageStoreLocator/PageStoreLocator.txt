@@ -1,5 +1,7 @@
 en:
-  title: "Store Locator"
-  enterPostalCode: "Enter your Zip Code:"
+  title: Store Locator
+  search: Search by location
+  enterPostalCode: Enter your Zip Code
 de:
-  title: "Filialsuche"
+  title: Filialsuche
+  search: Nach Ort suchen
