@@ -1,4 +1,4 @@
 en:
   inStore: "In Store"
 de:
-  inStore: "????"
+  inStore: "Auf Lager"
