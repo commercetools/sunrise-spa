@@ -3,12 +3,12 @@ describe('Store locator', () => {
     cy.visit('/stores');
   });
 
-  it('links to each category of the breadcrumb', () => {
+  it('Select store', () => {
     // select Berlin store
     cy.get('#place-input', { timeout: Cypress.config('graphqlTimeout') })
       .clear()
       .type('berlin');
-    cy.get('.pac-icon.pac-icon-marker')
+    cy.get('.pac-icon.pac-icon-marker', { timeout: Cypress.config('graphqlTimeout') })
       .eq(0)
       .click();
     cy.get('[data-test="select-store"]')
