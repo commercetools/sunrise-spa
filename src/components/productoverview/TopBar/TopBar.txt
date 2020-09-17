@@ -6,7 +6,6 @@ en:
   newest: "Newest"
   oldest: "Oldest"
   recommended: "Recommended"
-  filter: "Filter"
 de:
   go-to-top: Seitenanfang"
   notFound: "Keine Ergebnisse Gefunden"
@@ -15,4 +14,3 @@ de:
   newest: "Neueste"
   oldest: "Älteste"
   recommended: "Empfohlen"
-  filter: "??????"

@@ -58,7 +58,10 @@
                       :data-coord-lat="channel.geoLocation.coordinates[1]"
                       :data-coord-lng="channel.geoLocation.coordinates[0]"
                     ></span>
-                    <strong class="title text-center">
+                    <strong
+                      class="title text-center"
+                      data-test="store-name"
+                    >
                       {{ channel.name }}
                     </strong>
                     <div class="text-center store-distance">
@@ -88,6 +91,7 @@
                         v-on:click="setStore"
                         class="selectBtn"
                         :value="channel.id"
+                        data-test="select-store"
                       >
                         Select This Store
                       </button>
@@ -96,6 +100,7 @@
                       class="text-center store-selected action"
                       v-on:click="unsetStore"
                       v-else
+                      data-test="unselect-store"
                     >
                       Selected
                     </div>

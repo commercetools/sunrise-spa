@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import AddToCartForm from '@/components/productdetail/AddToCartForm/AddToCartForm.vue';
+import { updateCartVariables } from '@/components/productdetail/AddToCartForm/AddToCartForm';
 import SelectBoxIt from '@/components/common/form/SelectBoxIt/SelectBoxIt.vue';
 
 const localVue = createLocalVue();
@@ -37,6 +38,41 @@ describe('AddToCartForm/index.vue', () => {
 
   it('renders a vue instance', () => {
     expect(shallowMount(AddToCartForm, options).vm).toBeTruthy();
+  });
+
+  it('distribution channel is added to cart item', () => {
+    const variables = updateCartVariables({
+      $store: {
+        state: {
+          channel: { id: 'channel id' },
+        },
+      },
+      sku: 'sku',
+      quantity: 3,
+    });
+    expect(variables).toEqual({
+      addLineItem: {
+        distributionChannel: {
+          id: 'channel id',
+          typeId: 'channel',
+        },
+        quantity: 3,
+        sku: 'sku',
+      },
+    });
+    const variables1 = updateCartVariables({
+      $store: {
+        state: {},
+      },
+      sku: 'sku 1',
+      quantity: 8,
+    });
+    expect(variables1).toEqual({
+      addLineItem: {
+        quantity: 8,
+        sku: 'sku 1',
+      },
+    });
   });
 
   xit('returns the quantities to be displayed', () => {

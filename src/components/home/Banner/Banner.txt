@@ -5,8 +5,8 @@ en:
   checkout: "CHECK OUT"
   newCollection: "NEW COLLECTION"
 de:
-  midSeasonSale: "???????"
-  up50: "???????"
-  shopNow: "??????"
-  checkout: "??????"
-  newCollection: "??????"
+  midSeasonSale: "SOMMERSCHLUSSVERKAUF"
+  up50: "BIS ZU 50%"
+  shopNow: "JETZT SHOPPEN"
+  checkout: " "
+  newCollection: "NEUE KOLLEKTION"

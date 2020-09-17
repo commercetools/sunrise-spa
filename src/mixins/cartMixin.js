@@ -55,7 +55,27 @@ export default {
           version: this.me.activeCart?.version,
           locale: locale(this),
         },
-      });
+      }).then(
+        (result) => {
+          if (!result?.data?.updateMyCart?.lineItems?.length) {
+            return this.$apollo.mutate({
+              mutation: gql`
+                mutation deleteMyCart($id: String!, $version: Long!) {
+                  deleteMyCart(id: $id, version: $version) {
+                    id
+                  }
+                }`,
+              variables: {
+                id: result.data.updateMyCart.id,
+                version: result.data.updateMyCart.version,
+              },
+            }).then(
+              () => window.location.reload(),
+            );
+          }
+          return result;
+        },
+      );
     },
 
     createMyCart(draft) {

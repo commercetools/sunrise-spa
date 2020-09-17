@@ -2,5 +2,5 @@ en:
   max: "max"
   min: "min"
 de:
-  max: "?????"
-  min: "?????"
+  max: "max"
+  min: "min"
