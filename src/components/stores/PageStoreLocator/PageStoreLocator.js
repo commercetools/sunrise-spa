@@ -177,21 +177,6 @@ export default {
       },
       result() {
         this.markers = this.channels && this.channels.results.map((c) => ({ position: getLocationFromChannel(c) }));
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition((position) => {
-            this.center = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            };
-          }, () => {
-            // eslint-disable-next-line
-            alert('Error: The Geolocation service failed');
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          // eslint-disable-next-line
-          alert('Error: Your browser doesn\'t support geolocation.');
-        }
       },
     },
   },
