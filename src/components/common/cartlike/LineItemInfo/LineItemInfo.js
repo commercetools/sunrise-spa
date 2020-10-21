@@ -25,7 +25,35 @@ export default {
       type: Boolean,
       default: () => true,
     },
+    selectable: {
+      type: Boolean,
+      default: () => false,
+    },
   },
+  data() {
+    return {
+      selected: false,
+      item: null,
+    };
+  },
+
+  beforeMount() {
+    if (this.selectable) {
+      this.item = { lineItemId: this.lineItem.id, quantity: this.lineItem.quantity, shipmentState: 'Advised' };
+    }
+  },
+
+  watch: {
+    selected() {
+      if (this.selected === true) {
+        this.$emit('selectReturnItem', this.item);
+      }
+      if (this.selected === false) {
+        this.$emit('unselectReturnItem', this.item);
+      }
+    },
+  },
+
   computed: {
     total() {
       return totalPrice(this.lineItem);

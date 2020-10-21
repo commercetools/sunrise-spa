@@ -7,20 +7,24 @@
     <table>
       <thead>
         <tr>
+          <th style="width: 10%" v-if="selectable"></th>
           <th v-if="editable"></th>
           <th></th>
           <th>{{ $t('description') }}</th>
-          <th>{{ $t('price') }}</th>
+          <th v-if="!selectable">{{ $t('price') }}</th>
           <th>{{ $t('quantity') }}</th>
-          <th>{{ $t('total') }}</th>
+          <th v-if="!selectable">{{ $t('total') }}</th>
         </tr>
       </thead>
       <LineItemInfo
         :editable="editable"
+        :selectable="selectable"
         v-for="lineItem in cartLike.lineItems"
         :key="lineItem.id"
         data-test="cart-line-item"
         :lineItem="lineItem"
+        @selectReturnItem="selectReturnItem"
+        @unselectReturnItem="unselectReturnItem"
       />
     </table>
   </div>

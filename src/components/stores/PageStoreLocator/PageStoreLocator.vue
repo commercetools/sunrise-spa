@@ -23,7 +23,6 @@
             </gmap-map>
           </div>
         </div>
-
         <div>
           <div id="googlePlaceBar">
             <h4>{{ $t('search') }}</h4>

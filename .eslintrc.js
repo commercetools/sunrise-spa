@@ -13,7 +13,7 @@ module.exports = {
 
   rules: {
     'no-nested-ternary': 0,
-    'no-console': 'error',
+    'no-console': 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-underscore-dangle': ['error', { allow: ['__typename'] }],
     'max-len': [

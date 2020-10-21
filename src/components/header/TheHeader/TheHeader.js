@@ -23,9 +23,6 @@ export default {
     totalCartItems() {
       return this.$store.state.cartItems;
     },
-    canChangeLocation() {
-      return !this.me?.activeCart;
-    },
   },
   methods: {
     toggleSearch() {

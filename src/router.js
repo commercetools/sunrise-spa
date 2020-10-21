@@ -19,6 +19,7 @@ import PageStoreLocator from './components/stores/PageStoreLocator/PageStoreLoca
 import TabAccountDetails from './components/useraccount/TabAccountDetails/TabAccountDetails.vue';
 import TabOrderList from './components/useraccount/TabOrderList/TabOrderList.vue';
 import TabOrderDetail from './components/useraccount/TabOrderDetail/TabOrderDetail.vue';
+import TabReturn from './components/useraccount/TabReturn/TabReturn.vue';
 import TabChangePassword from './components/useraccount/TabChangePassword/TabChangePassword.vue';
 import TabDashboard from './components/useraccount/TabDashboard/TabDashboard.vue';
 import PageCheckout from './components/checkout/PageCheckout/PageCheckout.vue';
@@ -119,6 +120,9 @@ const router = new Router({
             },
             {
               path: 'order/:id', name: 'order', component: TabOrderDetail,
+            },
+            {
+              path: 'return/:id', name: 'return', component: TabReturn,
             },
             {
               path: 'orders/:page?',

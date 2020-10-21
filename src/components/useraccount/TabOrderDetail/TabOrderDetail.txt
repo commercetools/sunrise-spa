@@ -1,7 +1,7 @@
 en:
   title: Your order details
   orderNumber: Order Number
-  date: Date
+  date: Order date
   shippingAddress: Shipping address
   billingAddress: Billing address
   shippingMethod: Shipping method
@@ -11,10 +11,11 @@ en:
   appliedDiscounts: Applied discounts
   total: Total
   notFound: Order not found
+  return: Return an item
 de:
   title: Ihre Bestelldetails
   orderNumber: Bestellnummer
-  date: Datum
+  date: Bestelldatum
   shippingAddress: Lieferanschrift
   billingAddress: Rechnungsadresse
   shippingMethod: Versandart
@@ -24,3 +25,4 @@ de:
   appliedDiscounts: Angewandte Rabatte
   total: Gesamtpreis
   notFound: Bestellung nicht gefunden
+  return: Artikel zurückschicken

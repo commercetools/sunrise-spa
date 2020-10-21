@@ -25,6 +25,15 @@
             data-test="details-order-date"
           />
         </div>
+        <div class="col-md-5">
+          <router-link
+                :to="{ name: 'return', params: { id: me.order.id } }"
+              >
+          <button  class="float-right">
+            {{$t('return')}}
+          </button>
+          </router-link>
+        </div>
       </div>
       <div class="row pt-30">
         <div class="col-md-5 address-detail">

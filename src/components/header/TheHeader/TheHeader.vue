@@ -13,11 +13,10 @@
                 <router-link
                   :to="{ name: 'stores' }"
                   data-test="stores-link"
-                  v-if="canChangeLocation"
                 >
                   {{ $t('stores') }}
                 </router-link>
-                <a href="#">Help</a>
+                <a href="#">{{$t('help')}}</a>
               </div>
             </div>
             <div class="col-sm-6 d-flex justify-content-end">
@@ -27,7 +26,6 @@
                     v-bind:values="$sunrise.countries"
                     title="location"
                     data-test="country-selector-dropdown"
-                    v-if="canChangeLocation"
                   />
                   <LocationSelector
                     v-bind:values="$sunrise.languages"
