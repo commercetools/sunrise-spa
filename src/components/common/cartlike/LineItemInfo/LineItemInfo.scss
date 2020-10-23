@@ -97,6 +97,12 @@ tr {
   }
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .cart-plus-minus {
   display: inline-block;
   height: 60px;
@@ -154,4 +160,13 @@ tr {
 .check {
   width: 15px;
   height: 15px;
+}
+
+.attributes {
+  font-size: 13px;
+  font-weight: normal;
+}
+
+.quantity {
+  padding-left: 25%;
 }

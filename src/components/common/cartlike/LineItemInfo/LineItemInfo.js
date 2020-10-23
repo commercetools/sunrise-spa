@@ -46,10 +46,10 @@ export default {
   watch: {
     selected() {
       if (this.selected === true) {
-        this.$emit('selectReturnItem', this.item);
+        this.$emit('select-return-item', this.item);
       }
       if (this.selected === false) {
-        this.$emit('unselectReturnItem', this.item);
+        this.$emit('unselect-return-item', this.item);
       }
     },
   },
@@ -58,9 +58,9 @@ export default {
     total() {
       return totalPrice(this.lineItem);
     },
-    nameFromLineItem() {
+    lineItemAttr() {
       const attributes = variantAttributes(this.lineItem?.variant, locale(this));
-      return `${this.lineItem.name} ${attributes.map(
+      return `${attributes.map(
         ({ name, value }) => `${name}: ${value}`,
       ).join(', ')}`;
     },

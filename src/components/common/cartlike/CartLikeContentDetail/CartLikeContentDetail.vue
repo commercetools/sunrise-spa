@@ -23,8 +23,8 @@
         :key="lineItem.id"
         data-test="cart-line-item"
         :lineItem="lineItem"
-        @selectReturnItem="selectReturnItem"
-        @unselectReturnItem="unselectReturnItem"
+        @select-return-item="selectReturnItem"
+        @unselect-return-item="unselectReturnItem"
       />
     </table>
   </div>

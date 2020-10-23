@@ -32,7 +32,7 @@ export default {
   },
   watch: {
     selectedReturnItems() {
-      this.$emit('updateSelectedItems', this.selectedReturnItems);
+      this.$emit('update-selected-items', this.selectedReturnItems);
     },
   },
   methods: {

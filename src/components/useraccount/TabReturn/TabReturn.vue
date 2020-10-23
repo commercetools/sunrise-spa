@@ -7,7 +7,7 @@
       <h3>{{ $t('title') }}</h3>
       <div class="mt-40">
         <CartLikeContentDetail :editable="false" :selectable="true" :cartLike="me.order"
-                               @updateSelectedItems="updateSelectedItems"/>
+                               @update-selected-items="updateSelectedItems"/>
       </div>
       <button @click="submitReturn" class="mt-20">
         Return

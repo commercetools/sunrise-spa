@@ -13,7 +13,7 @@
     <ProductQuickView
       :showModal="showModal"
       :productSku="productSku"
-      @closeModal="closeModal"
+      @close-modal="closeModal"
     />
   </div>
 </template>

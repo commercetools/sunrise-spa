@@ -4,7 +4,6 @@ import BaseAddress from '../../common/BaseAddress/BaseAddress.vue';
 import BaseMoney from '../../common/BaseMoney/BaseMoney.vue';
 import LineItemInfo from '../../common/CartLike/LineItemInfo/LineItemInfo.vue';
 import CartLikeContentDetail from '../../common/CartLike/CartLikeContentDetail/CartLikeContentDetail.vue';
-import MONEY_FRAGMENT from '../../Money.gql';
 import { locale } from '../../common/shared';
 
 export default {
@@ -25,7 +24,6 @@ export default {
     },
     submitReturn() {
       if (this.selectedItems.length === 0) {
-        // eslint-disable-next-line no-alert
         alert(this.$t('alert'));
       } else {
         this.$apollo.mutate({
@@ -44,7 +42,9 @@ export default {
             version: this.me.order.version,
             items: this.selectedItems,
           },
-        });
+        }).then(() => {
+          this.$router.push({ name: 'orders' })
+        })
       }
     },
   },
@@ -54,25 +54,13 @@ export default {
         query orderById($id: String, $locale: Locale!) {
           me {
             order(id: $id) {
+                id
                 version
                 lineItems {
                   id
                   name(locale: $locale)
                   productSlug(locale: $locale)
                   quantity
-                  price {
-                    value {
-                      ...MoneyFields
-                    }
-                    discounted {
-                      value {
-                        ...MoneyFields
-                      }
-                    }
-                  }
-                  totalPrice {
-                    ...MoneyFields
-                  }
                   variant {
                     sku
                     images {
@@ -93,8 +81,7 @@ export default {
                 }
             }
           }
-        }
-         ${MONEY_FRAGMENT}`,
+        }`,
       variables() {
         return {
           id: this.$route.params.id,

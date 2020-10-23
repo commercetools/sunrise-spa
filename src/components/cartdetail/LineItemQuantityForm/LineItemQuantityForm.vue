@@ -9,7 +9,7 @@
         class="cart-plus-minus-box"
         type="text"
         name="qtybutton"
-        v-model.number="lineItem.quantity"
+        v-model.number="quantity"
       />
       <div @click="increment" class="inc qtybutton">+</div>
     </div>
