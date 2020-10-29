@@ -26,6 +26,9 @@ module.exports = {
     i18n: {
       enableInSFC: true,
     },
+    apollo: {
+      lintGQL: true
+    }
   },
   configureWebpack: {
     performance: {
