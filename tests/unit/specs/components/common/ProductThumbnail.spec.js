@@ -26,7 +26,7 @@ describe('ProductThumbnail/index.vue', () => {
     expect(shallowMount(ProductThumbnail, options).vm).toBeTruthy();
   });
 
-  it.skip('obtains matching variant of the product', () => {
+  xit('obtains matching variant of the product', () => {
     const matchingVariant = { foo: 'bar' };
     options.propsData.product.masterData.current.masterVariant = matchingVariant;
     const wrapper = shallowMount(ProductThumbnail, options);
@@ -34,7 +34,7 @@ describe('ProductThumbnail/index.vue', () => {
     expect(wrapper.vm.matchingVariant).toEqual(matchingVariant);
   });
 
-  it.skip('obtains whether product has more colors', () => {
+  xit('obtains whether product has more colors', () => {
     const wrapper = shallowMount(ProductThumbnail, options);
     expect(wrapper.vm.hasMoreColors).toBeFalsy();
   });
