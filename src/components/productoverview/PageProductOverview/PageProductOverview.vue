@@ -6,7 +6,7 @@
   <div>
     <Breadcrumb :categorySlug="categorySlug" />
     <ProductList
-      @openModal="openModal"
+      @open-modal="openModal"
       :categorySlug="categorySlug"
       :page="page"
     />

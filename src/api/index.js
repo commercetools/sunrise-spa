@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 export { default as products } from './products';
 export { default as productTypes } from './productTypes';
 export const onlyLastRequestedPromise = ((promiseIds) => {

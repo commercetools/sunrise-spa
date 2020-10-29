@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 export const group = (fn, groups = new Map(), cache = true,
   getKey = (args) => JSON.stringify(args)) => (...args) => {
   const key = getKey(args);

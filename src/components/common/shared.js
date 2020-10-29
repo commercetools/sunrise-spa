@@ -1,6 +1,5 @@
 import config from '../../../sunrise.config';
 
-/* eslint-disable import/prefer-default-export */
 export function getValue(type, value, language) {
   if (type === 'enum') {
     return value.label;

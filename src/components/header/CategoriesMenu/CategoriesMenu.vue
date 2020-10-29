@@ -14,7 +14,7 @@
     >
       <router-link
         :to="{ name: 'products', params: { categorySlug: category1stLevel.slug } }"
-        @click.native="clickOnCategory()"
+        @click="clickOnCategory"
         :class="isActive(category1stLevel.name) ? 'active' : ''"
         data-test="category-1st-level-link"
       >
@@ -29,14 +29,13 @@
         <li>
           <ul class="mega-menu-width4">
             <li
-              v-if="category1stLevel.children.length"
               v-for="category2ndLevel in category1stLevel.children"
               :key="category2ndLevel.id"
             >
               <router-link
                 class="menu-title"
                 :to="{ name: 'products', params: { categorySlug: category2ndLevel.slug } }"
-                @click.native="clickOnCategory()"
+                @click="clickOnCategory"
                 data-test="category-2nd-level-link"
               >
                 <span>{{ category2ndLevel.name }}</span>
@@ -48,7 +47,7 @@
                 >
                   <router-link
                     :to="{ name: 'products', params: { categorySlug: category3rdLevel.slug } }"
-                    @click.native="clickOnCategory()"
+                    @click="clickOnCategory"
                     data-test="category-3rd-level-link"
                   >
                     <span>{{ category3rdLevel.name }}</span>

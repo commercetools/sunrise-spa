@@ -18,10 +18,10 @@ export default {
   },
   methods: {
     toggleFilter(e) {
-      this.$emit('toggleFilter', e);
+      this.$emit('toggle-filter', e);
     },
     changeSort(sort) {
-      this.$emit('changeSort', sort);
+      this.$emit('change-sort', sort);
     },
   },
   watch: {

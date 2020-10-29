@@ -2,7 +2,7 @@ export default {
   props: ['allChannels'],
   methods: {
     changed() {
-      this.$emit('channelChanged', !this.allChannels);
+      this.$emit('channel-changed', !this.allChannels);
     },
   },
   computed: {
