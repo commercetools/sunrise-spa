@@ -15,6 +15,7 @@ import i18n from './i18n/i18n';
 import sunriseConfig from '../sunrise.config';
 import './registerServiceWorker';
 import './assets/scss/main.scss';
+import { locale } from './components/common/shared';
 
 Vue.config.productionTip = false;
 
@@ -22,7 +23,7 @@ Vue.use(VueGoogleMaps, {
   load: {
     key: process.env.VUE_APP_GOOGLE_MAPS_API_KEY,
     libraries: 'places', // necessary for places input
-    language: store.state.locale,
+    language: locale(this),
   },
 });
 Vue.config.productionTip = false;

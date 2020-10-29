@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import gql from 'graphql-tag';
 import Breadcrumb from '../../common/Breadcrumb/Breadcrumb.vue';
 // import store from '../../../store';
@@ -40,7 +39,6 @@ export default {
 
     setPlace(place) {
       this.center = getLocationFromPlace(place);
-      console.log(getLocationFromPlace(place));
     },
 
     // click(channel) {
