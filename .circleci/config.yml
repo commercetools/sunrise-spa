@@ -15,23 +15,25 @@ jobs:
     steps:
       - checkout
       - restore_cache:
+          name: Restore Yarn Package Cache
           keys:
-            - v6-deps-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ checksum "yarn.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v6-deps
-      # - run:
-      #     name: Get latest yarn version
-      #     command: apt-get upgrade yarn -y
+      - run:
+          name: Get latest yarn version
+          command: apt-get upgrade yarn -y
       - run:
           name: Show versions
-          command: npm -v && node -v
+          command: yarn -v && node -v
       - run:
           name: Install dependencies
-          command: npm ci
+          command: yarn install --immutable
       - save_cache:
-          key: v6-deps-{{ checksum "yarn.lock" }}
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
-            - /usr/local/share/.cache
+            - ~/.cache/yarn
 
       - run:
           name: Run Unit tests
