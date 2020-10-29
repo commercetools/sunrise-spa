@@ -1,0 +1,20 @@
+.cart-table-content {
+  table {
+      width: 100%;
+      thead > tr {
+          th {
+              border-top: medium none;
+              font-size: 11px;
+              text-transform: capitalize;
+              vertical-align: middle; 
+              white-space: nowrap;
+              font-weight: 400;
+              text-transform: uppercase;
+              padding: 0 0 10px 0;
+              @media #{$xs-layout}{
+                  padding: 0 10px 0px 20px;
+              }
+          }
+      }
+  }
+}

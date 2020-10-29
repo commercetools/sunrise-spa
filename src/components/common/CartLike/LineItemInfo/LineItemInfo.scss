@@ -1,0 +1,172 @@
+tr {
+  border-bottom: 1px solid #e7e7e7;
+
+  td {
+    font-size: 14px;
+    padding: 30px 0px 30px;
+
+    @media #{$xs-layout} {
+      padding: 30px 12px 30px 12px;
+    }
+  }
+
+  td.product-remove {
+    width: 30px;
+
+    a {
+      color: #989898;
+      font-size: 16px;
+    }
+  }
+
+  td.product-img {
+    width: 90px;
+
+    img {
+      height: 78px;
+    }
+  }
+
+  td.product-name {
+    width: 340px;
+
+    @media #{$md-layout} {
+      width: 250px;
+    }
+
+    @media #{$xs-layout} {
+      width: 200px;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-top: 0;
+    }
+
+    a {
+      font-size: 14px;
+      display: block;
+      margin: 0 0 5px;
+
+      &:hover {
+        color: $theme-color;
+      }
+    }
+
+    span {
+      color: #989898;
+      font-size: 12px;
+      display: block;
+      line-height: 1;
+    }
+  }
+
+  td.product-price {
+    width: 90px;
+
+    span {
+      color: #262626;
+      font-size: 16px;
+    }
+  }
+
+  td.cart-quality {
+    width: 110px;
+  }
+
+  td.product-total {
+    width: 70px;
+
+    span {
+      color: #262626;
+      font-size: 16px;
+    }
+  }
+
+  td.product-wishlist-cart {
+    > a {
+      background-color: #232323;
+      color: #fff;
+      font-size: 12px;
+      line-height: 1;
+      padding: 7px 8px;
+      text-transform: capitalize;
+
+      &:hover {
+        background-color: $theme-color;
+      }
+    }
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.cart-plus-minus {
+  display: inline-block;
+  height: 60px;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: 80px;
+
+  input.cart-plus-minus-box {
+    background: transparent none repeat scroll 0 0;
+    border: medium none;
+    color: #343538;
+    float: left;
+    font-size: 14px;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 80px;
+    border: 1px solid #e8e8e8;
+
+    &:focus {
+      border: 1px solid #343538;
+    }
+  }
+
+  .qtybutton {
+    color: #343538;
+    cursor: pointer;
+    float: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    margin: 0;
+    position: absolute;
+    text-align: center;
+    transition: all 0.3s ease 0s;
+    width: 24px;
+
+    &.dec {
+      height: 60px;
+      left: 0;
+      padding-top: 20px;
+      top: 0;
+    }
+
+    &.inc {
+      height: 60px;
+      padding-top: 20px;
+      right: 0;
+      top: 0;
+    }
+  }
+}
+.check {
+  width: 15px;
+  height: 15px;
+}
+
+.attributes {
+  font-size: 13px;
+  font-weight: normal;
+}
+
+.quantity {
+  padding-left: 25%;
+}
