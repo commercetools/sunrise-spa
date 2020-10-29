@@ -19,10 +19,10 @@ export default {
   }),
   watch: {
     formToJSON() {
-      this.$emit('updateAddress', this.form);
+      this.$emit('update-address', this.form);
     },
     validForm() {
-      this.$emit('validForm', this.validForm);
+      this.$emit('valid-form', this.validForm);
     },
   },
   computed: {

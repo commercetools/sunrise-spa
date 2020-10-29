@@ -30,7 +30,7 @@ export default {
       }).then(() => this.$store.dispatch('openMiniCart'));
     },
     openModal() {
-      this.$emit('openModal', { slug: this.currentProduct.slug, sku: this.matchingVariant.sku });
+      this.$emit('open-modal', { slug: this.currentProduct.slug, sku: this.matchingVariant.sku });
     },
   },
   computed: {

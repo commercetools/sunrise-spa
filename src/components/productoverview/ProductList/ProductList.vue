@@ -7,8 +7,8 @@
     <LoadingSpinner v-if="isLoading" />
     <div class="custom-container" v-else-if="categories && products">
       <TopBar
-        @toggleFilter="toggleFilter"
-        @changeSort="changeSort"
+        @toggl-filter="toggleFilter"
+        @change-sort="changeSort"
         v-bind:show="show"
         v-bind:sort="sort"
         v-bind:count="products.count"
@@ -18,15 +18,15 @@
       <ProductFilter
         :facets="facets"
         :facetFilter="facetFilter"
-        v-on:filterChange="facetFilterChange"
-        v-on:channelChange="channelChange"
+        @filter-change="facetFilterChange"
+        @channel-change="channelChange"
         :allChannels="allChannels"
         v-bind:show="show"
       />
       <div class="shop-wrapper" v-if="products.results.length">
         <div class="row">
           <ProductThumbnail
-            @openModal="openModal"
+            @open-modal="openModal"
             v-for="product in products.results"
             data-test="product-list"
             :key="product.id"

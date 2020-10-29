@@ -73,7 +73,7 @@
             <div class="cart-checkout-btn">
               <router-link
                 :to="{ name: 'cart' }"
-                @click.native="close"
+                @click="close"
                 class="btn-grey"
               >
                 {{ $t('viewBag') }}
@@ -81,7 +81,7 @@
               <router-link
                 :to="{ name: 'checkout' }"
                 data-test="checkout-button"
-                @click.native="close"
+                @click="close"
                 >{{ $t('checkout') }}</router-link
               >
             </div>

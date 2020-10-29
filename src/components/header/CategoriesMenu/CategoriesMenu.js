@@ -61,7 +61,6 @@ export default {
     clickOnCategory() {
       this.someCategoryWasClicked = true;
       this.openCategoryMenu = false;
-      this.$emit('closeMobile');
     },
   },
   computed: {

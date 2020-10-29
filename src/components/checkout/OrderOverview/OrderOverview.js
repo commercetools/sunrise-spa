@@ -36,11 +36,11 @@ export default {
   methods: {
     totalPrice,
     updateShippingMethod(shippingId) {
-      this.$emit('updateShipping', shippingId);
+      this.$emit('update-shipping', shippingId);
       this.$apollo.queries.me.refresh();
     },
     placeOrder() {
-      this.$emit('completeOrder');
+      this.$emit('complete-order');
     },
     nameFromLineItem(lineItem) {
       const attributes = variantAttributes(lineItem?.variant, locale(this));

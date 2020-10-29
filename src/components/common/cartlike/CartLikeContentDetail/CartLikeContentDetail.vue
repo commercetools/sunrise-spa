@@ -21,10 +21,10 @@
         :selectable="selectable"
         v-for="lineItem in cartLike.lineItems"
         :key="lineItem.id"
-        data-test="cart-line-item"
         :lineItem="lineItem"
         @select-return-item="selectReturnItem"
         @unselect-return-item="unselectReturnItem"
+        data-test="cart-line-item"
       />
     </table>
   </div>

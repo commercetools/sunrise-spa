@@ -46,7 +46,7 @@
           <span class="bold-text">{{ $t('shipping') }}</span>
         </div>
         <ShippingMethod
-          @updateShipping="updateShippingMethod"
+          @update-shipping="updateShippingMethod"
           data-test="shipping-methods"
         />
       </div>

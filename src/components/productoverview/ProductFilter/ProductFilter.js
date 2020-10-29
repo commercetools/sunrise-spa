@@ -29,7 +29,7 @@ export default {
         || this.facetFilter[facet.name];
     },
     channelChanged(value) {
-      this.$emit('channelChange', value);
+      this.$emit('channel-change', value);
     },
     priceFilterChanged({ min, max }) {
       // eslint-disable-next-line no-param-reassign
@@ -43,7 +43,7 @@ export default {
     },
     changeFacetFilter(e, facetName) {
       this.$emit(
-        'filterChange',
+        'filter-change',
         { name: facetName, value: e.target.value },
       );
     },

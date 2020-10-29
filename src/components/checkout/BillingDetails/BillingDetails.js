@@ -31,10 +31,10 @@ export default {
       }
     },
     billingToJSON() {
-      this.$emit('updateBillingDetails', this.newBillingAddress);
+      this.$emit('update-billing-details', this.newBillingAddress);
     },
     shippingToJSON() {
-      this.$emit('updateShippingDetails', this.newShippingAddress);
+      this.$emit('update-shipping-details', this.newShippingAddress);
     },
   },
   computed: {
@@ -57,10 +57,10 @@ export default {
       this.newShippingAddress = address;
     },
     validBillingForm(valid) {
-      this.$emit('validBillingForm', valid);
+      this.$emit('valid-billing-form', valid);
     },
     validShippingForm(valid) {
-      this.$emit('validShippingForm', valid);
+      this.$emit('valid-shipping-form', valid);
     },
   },
 };

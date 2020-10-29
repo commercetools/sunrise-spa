@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import config from '../../sunrise.config';
 import { getAuthToken } from '../auth';
 import { group } from './lib';
