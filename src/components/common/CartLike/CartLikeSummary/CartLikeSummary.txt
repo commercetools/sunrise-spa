@@ -1,0 +1,12 @@
+en:
+  shippingAddress: "Shipping address"
+  billingAddress: "Billing address"
+  shippingMethod: "Shipping method"
+  paymentDetails: "Payment details"
+  edit: "Edit"
+de:
+  paymentDetails: "Zahlungsdetails"
+  shippingMethod: "Versandart"
+  shippingAddress: "Lieferanschrift"
+  billingAddress: "Rechnungsadresse"
+  edit: "Bearbeiten"
