@@ -53,7 +53,7 @@ describe('MiniCart', () => {
   it('opens and closes mini-cart', () => {
     cy.get('[data-test=mini-cart-open-button]')
       .click();
-    cy.get('[data-test=mini-cart-content]').should('not.be.visible');
+    cy.get('[data-test=mini-cart-content]').should('be.visible');
 
     cy.addLineItem('/product/hoganrebel-r261-sneaker-6708K62AZC-grey/M0E20000000DX1Y', 2);
     cy.get('[data-test=mini-cart-content]', { timeout: Cypress.config('graphqlTimeout') })
