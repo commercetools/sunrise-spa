@@ -25,7 +25,7 @@
     >
       <BaseAddressForm
         @update-address="updateShippingAddress"
-        @validForm="validShippingForm"
+        @valid-form="validShippingForm"
         :address="shippingAddress"
       />
     </div>

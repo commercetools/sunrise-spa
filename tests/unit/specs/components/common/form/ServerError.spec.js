@@ -42,7 +42,7 @@ describe('ServerError/index.vue', () => {
     wrapper.setProps({ error: new ApolloError({}) });
     await wrapper.vm.$nextTick();
     expect(wrapper.vm.isNetworkError).toBeFalsy();
-
+    await wrapper.vm.$nextTick();
     wrapper.setProps({
       error: new ApolloError({
         networkError: { message: 'Some error' },
@@ -59,11 +59,11 @@ describe('ServerError/index.vue', () => {
     wrapper.setProps({ error: new ApolloError({}) });
     await wrapper.vm.$nextTick();
     expect(wrapper.vm.is400Error).toBeFalsy();
-
+    await wrapper.vm.$nextTick();
     wrapper.setProps({ error: new ApolloError({ networkError: {} }) });
     await wrapper.vm.$nextTick();
     expect(wrapper.vm.is400Error).toBeFalsy();
-
+    await wrapper.vm.$nextTick();
     wrapper.setProps({
       error: new ApolloError({
         networkError: { message: 'Some error', statusCode: 400 },
@@ -80,7 +80,7 @@ describe('ServerError/index.vue', () => {
     wrapper.setProps({ error: new ApolloError({}) });
     await wrapper.vm.$nextTick();
     expect(wrapper.vm.isGraphQLError).toBeFalsy();
-
+    await wrapper.vm.$nextTick();
     wrapper.setProps({
       error: new ApolloError({
         graphQLErrors: [],
@@ -88,7 +88,7 @@ describe('ServerError/index.vue', () => {
     });
     await wrapper.vm.$nextTick();
     expect(wrapper.vm.isGraphQLError).toBeFalsy();
-
+    await wrapper.vm.$nextTick();
     wrapper.setProps({
       error: new ApolloError({
         graphQLErrors: [graphQLError1, graphQLError2],
@@ -109,7 +109,7 @@ describe('ServerError/index.vue', () => {
     });
     await wrapper.vm.$nextTick();
     expect(wrapper.vm.graphQLErrors).toEqual([]);
-
+    await wrapper.vm.$nextTick();
     wrapper.setProps({
       error: new ApolloError({
         graphQLErrors: [graphQLError1, graphQLError2],

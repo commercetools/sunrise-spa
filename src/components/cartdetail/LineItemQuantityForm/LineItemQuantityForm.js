@@ -68,7 +68,6 @@ export default {
   },
   watch: {
     'form.quantity': function triggerDebouncedSubmit(newValue, oldValue) {
-      console.log('triggered')
       if (oldValue !== null && newValue !== oldValue) {
         this.changeLineItemQuantity();
         if (!this.$v.$invalid) {
