@@ -6,6 +6,7 @@ import 'whatwg-fetch';
 import VueScrollTo from 'vue-scrollto';
 import Vuelidate from 'vuelidate';
 import ProductZoomer from 'vue-product-zoomer';
+import * as VueGoogleMaps from 'vue2-google-maps';
 import App from './App/App.vue';
 import router from './router';
 import store from './store';
@@ -14,9 +15,18 @@ import i18n from './i18n/i18n';
 import sunriseConfig from '../sunrise.config';
 import './registerServiceWorker';
 import './assets/scss/main.scss';
+import { locale } from './components/common/shared';
 
 Vue.config.productionTip = false;
 
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: process.env.VUE_APP_GOOGLE_MAPS_API_KEY,
+    libraries: 'places', // necessary for places input
+    language: locale(this),
+  },
+});
+Vue.config.productionTip = false;
 Vue.use(VueScrollTo);
 Vue.use(VModal);
 Vue.use(Vuelidate);

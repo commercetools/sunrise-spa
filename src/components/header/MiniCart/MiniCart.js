@@ -4,7 +4,7 @@ import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import cartMixin from '../../../mixins/cartMixin';
 import productMixin from '../../../mixins/productMixin';
 import BasePrice from '../../common/BasePrice/MiniCardBasePrice.vue';
-import LineItemInfo from '../../common/cartlike/LineItemInfo/LineItemInfo.vue';
+import LineItemInfo from '../../common/CartLike/LineItemInfo/LineItemInfo.vue';
 import LineItemDeleteForm from '../../cartdetail/LineItemDeleteForm/LineItemDeleteForm.vue';
 import MONEY_FRAGMENT from '../../Money.gql';
 import CART_FRAGMENT from '../../Cart.gql';

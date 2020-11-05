@@ -1,12 +1,14 @@
 en:
-  sale: "Sale"
-  new: "New"
-  quickView: "Quick view"
-  moreColors: "More colours"
-  add: "Add item to wishlist"
+  sale: Sale
+  new: New
+  quickView: Quick view
+  moreColors: More colours
+  add: Add item to wishlist
+  addToCart: Add to Bag
 de:
-  sale: "Sale"
-  new: "Neu"
-  quickView: "Schnellansicht"
-  moreColors: "Mehr Farben"
-  add: "Auf den Wunschzettel"
+  sale: Sale
+  new: Neu
+  quickView: Schnellansicht
+  moreColors: Mehr Farben
+  add: Auf den Wunschzettel
+  addToCart: Zum Warenkorb Hinzufügen

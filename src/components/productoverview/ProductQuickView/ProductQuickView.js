@@ -30,7 +30,7 @@ export default {
   methods: {
     closeModal() {
       this.$modal.hide('quickView');
-      this.$emit('closeModal');
+      this.$emit('close-modal');
       this.quantity = 1;
     },
     async addToCart() {

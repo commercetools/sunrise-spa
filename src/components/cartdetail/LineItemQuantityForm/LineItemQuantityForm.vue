@@ -7,10 +7,9 @@
       <div @click="decrement" class="dec qtybutton">-</div>
       <input
         class="cart-plus-minus-box"
-        type="text"
+        type="number"
         name="qtybutton"
         v-model.number="form.quantity"
-        :vuelidate="$v.form.quantity"
         data-test="cart-line-item-quantity"
       />
       <div @click="increment" class="inc qtybutton">+</div>

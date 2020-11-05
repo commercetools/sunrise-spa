@@ -144,8 +144,9 @@ const products = {
       currency,
       country,
       customerGroup,
-      channel: priceChannel,
+      channel,
     } = component.$store.state;
+    const priceChannel = channel?.id;
     const loc = locale(component);
     const sortValue = route.query.sort;
     const searchText = route.query.q

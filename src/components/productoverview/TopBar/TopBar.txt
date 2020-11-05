@@ -14,3 +14,4 @@ de:
   newest: "Neueste"
   oldest: "Älteste"
   recommended: "Empfohlen"
+  filter: "Filter"

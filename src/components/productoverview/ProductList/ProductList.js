@@ -64,6 +64,7 @@ const getProducts = (component) => {
     searchText,
     sort,
     priceFilter,
+    priceChannel,
   } = products.paramsFromComponent(component);
   if (
     !category
@@ -78,6 +79,7 @@ const getProducts = (component) => {
     products.get([
       {
         category,
+        priceChannel,
         page: Number(route.params?.page || 1),
         pageSize: component.limit,
         priceCurrency: currency,
@@ -193,7 +195,7 @@ export default {
        && window.scrollY > 200 ? '' : 'none';
     },
     openModal(productInfo) {
-      this.$emit('openModal', productInfo);
+      this.$emit('open-modal', productInfo);
     },
     toggleFilter() {
       this.show = !this.show;

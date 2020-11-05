@@ -4,7 +4,7 @@ import Colors from './Colors/index.vue';
 import Designer from './Designer/index.vue';
 
 export default {
-  props: ['name', 'terms', 'component'],
+  props: ['name', 'label', 'terms', 'component'],
   components: {
     Standard,
     Colors,

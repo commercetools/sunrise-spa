@@ -35,62 +35,70 @@ describe('ServerError/index.vue', () => {
     expect(shallowMount(ServerError, options).vm).toBeTruthy();
   });
 
-  it('detects network errors', () => {
+  it('detects network errors', async () => {
     const wrapper = shallowMount(ServerError, options);
     expect(wrapper.vm.isNetworkError).toBeFalsy();
 
     wrapper.setProps({ error: new ApolloError({}) });
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.isNetworkError).toBeFalsy();
-
+    await wrapper.vm.$nextTick();
     wrapper.setProps({
       error: new ApolloError({
         networkError: { message: 'Some error' },
       }),
     });
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.isNetworkError).toBeTruthy();
   });
 
-  it('detects 400 errors', () => {
+  it('detects 400 errors', async () => {
     const wrapper = shallowMount(ServerError, options);
     expect(wrapper.vm.is400Error).toBeFalsy();
 
     wrapper.setProps({ error: new ApolloError({}) });
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.is400Error).toBeFalsy();
-
+    await wrapper.vm.$nextTick();
     wrapper.setProps({ error: new ApolloError({ networkError: {} }) });
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.is400Error).toBeFalsy();
-
+    await wrapper.vm.$nextTick();
     wrapper.setProps({
       error: new ApolloError({
         networkError: { message: 'Some error', statusCode: 400 },
       }),
     });
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.isBadRequestError).toBeTruthy();
   });
 
-  it('detects GraphQL errors', () => {
+  it('detects GraphQL errors', async () => {
     const wrapper = shallowMount(ServerError, options);
     expect(wrapper.vm.isGraphQLError).toBeFalsy();
 
     wrapper.setProps({ error: new ApolloError({}) });
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.isGraphQLError).toBeFalsy();
-
+    await wrapper.vm.$nextTick();
     wrapper.setProps({
       error: new ApolloError({
         graphQLErrors: [],
       }),
     });
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.isGraphQLError).toBeFalsy();
-
+    await wrapper.vm.$nextTick();
     wrapper.setProps({
       error: new ApolloError({
         graphQLErrors: [graphQLError1, graphQLError2],
       }),
     });
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.isGraphQLError).toBeTruthy();
   });
 
-  it('obtains all GraphQL errors', () => {
+  it('obtains all GraphQL errors', async () => {
     const wrapper = shallowMount(ServerError, options);
     expect(wrapper.vm.graphQLErrors).toEqual([]);
 
@@ -99,13 +107,15 @@ describe('ServerError/index.vue', () => {
         graphQLErrors: [],
       }),
     });
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.graphQLErrors).toEqual([]);
-
+    await wrapper.vm.$nextTick();
     wrapper.setProps({
       error: new ApolloError({
         graphQLErrors: [graphQLError1, graphQLError2],
       }),
     });
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.graphQLErrors).toEqual([graphQLError1, graphQLError2]);
   });
 

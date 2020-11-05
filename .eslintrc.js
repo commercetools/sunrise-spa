@@ -7,8 +7,8 @@ module.exports = {
   },
 
   extends: [
-    'plugin:vue/essential',
-    '@vue/airbnb',
+    'plugin:vue/vue3-essential',
+    // '@vue/airbnb',
   ],
 
   rules: {
@@ -46,6 +46,7 @@ module.exports = {
       },
     ],
     'vue/no-use-v-if-with-v-for': 0,
+    'vue/component-tags-order': 0,
     'vue/no-parsing-error': ['error', {
       'abrupt-closing-of-empty-comment': true,
       'absence-of-digits-in-numeric-character-reference': true,

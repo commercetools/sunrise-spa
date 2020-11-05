@@ -1,4 +1,4 @@
 de:
-  addToCart: "In den Warenkorb"
+  addToCart: Zum Warenkorb Hinzufügen
 en:
-  addToCart: "Add to Bag"
+  addToCart: Add to Bag

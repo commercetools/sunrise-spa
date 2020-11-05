@@ -5,8 +5,8 @@
   <div class="billing-info-wrap mr-100">
     <h3>{{ $t('billingDetails') }}</h3>
     <BaseAddressForm
-      @updateAddress="updateBillingAddress"
-      @validForm="validBillingForm"
+      @update-address="updateBillingAddress"
+      @valid-form="validBillingForm"
       :address="billingAddress"
     />
     <div class="checkout-account mt-20">
@@ -24,8 +24,8 @@
       data-test="alt-shipping-address"
     >
       <BaseAddressForm
-        @updateAddress="updateShippingAddress"
-        @validForm="validShippingForm"
+        @update-address="updateShippingAddress"
+        @valid-form="validShippingForm"
         :address="shippingAddress"
       />
     </div>

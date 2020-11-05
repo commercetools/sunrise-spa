@@ -1,0 +1,12 @@
+en:
+  midSeasonSale: "MID-SEASON SALE"
+  up50: "UP TO 50%"
+  shopNow: "SHOP NOW"
+  checkout: "CHECK OUT"
+  newCollection: "NEW COLLECTION"
+de:
+  midSeasonSale: "SOMMERSCHLUSSVERKAUF"
+  up50: "BIS ZU 50%"
+  shopNow: "JETZT SHOPPEN"
+  checkout: " "
+  newCollection: "NEUE KOLLEKTION"

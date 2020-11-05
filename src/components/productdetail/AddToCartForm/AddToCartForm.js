@@ -3,7 +3,27 @@ import cartMixin from '../../../mixins/cartMixin';
 // import LoadingButton from '../../common/form/LoadingButton/index.vue';
 // import BaseSelect from '../../common/form/BaseSelect/index.vue';
 // import BaseForm from '../../common/form/BaseForm/index.vue';
+export const createCartVariables = (component) => ({
+  currency: component.$store.state.currency,
+  country: component.$store.state.country,
+  shippingAddress: { country: component.$store.state.country },
+});
+export const updateCartVariables = (component) => {
+  const distributionChannel = component.$store.state.channel ? {
+    distributionChannel: {
+      typeId: 'channel',
+      id: component.$store.state.channel.id,
+    },
+  } : {};
 
+  return ({
+    addLineItem: {
+      sku: component.sku,
+      quantity: Number(component.quantity),
+      ...distributionChannel,
+    },
+  });
+};
 export default {
   props: {
     sku: {
@@ -29,18 +49,11 @@ export default {
   methods: {
     async addLineItem() {
       if (!this.cartExists) {
-        await this.createMyCart({
-          currency: this.$store.state.currency,
-          country: this.$store.state.country,
-          shippingAddress: { country: this.$store.state.country },
-        });
+        await this.createMyCart(createCartVariables(this));
       }
-      return this.updateMyCart({
-        addLineItem: {
-          sku: this.sku,
-          quantity: Number(this.quantity),
-        },
-      }).then(() => this.$store.dispatch('openMiniCart'));
+      return this.updateMyCart(
+        updateCartVariables(this),
+      ).then(() => this.$store.dispatch('openMiniCart'));
     },
   },
 };

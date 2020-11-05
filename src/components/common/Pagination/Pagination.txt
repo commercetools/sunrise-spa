@@ -1,6 +1,10 @@
   en:
-    page: "Page"
-    of: "of"
+    page: Page
+    of: of
+    next: Next
+    previous: Previous
   de:
-    page: "Seite"
-    of: "von"
+    page: Seite
+    of: von
+    next: Nächste
+    previous: Vorherige

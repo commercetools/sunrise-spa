@@ -1,0 +1,8 @@
+en:
+  title: What would you like to return?
+  return: Return
+  alert: Please select at least one item to return
+de:
+  title: Was möchten Sie zurückschicken?
+  return: Zurückschicken
+  alert: Bitte wählen Sie mindestens einen Artikel aus, der zurückgegeben werden soll

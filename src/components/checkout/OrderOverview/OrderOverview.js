@@ -5,8 +5,8 @@ import PaymentMethod from '../PaymentMethod/PaymentMethod.vue';
 import BasePrice from '../../common/BasePrice/BasePrice.vue';
 import productMixin from '../../../mixins/productMixin';
 import cartMixin from '../../../mixins/cartMixin';
-import CartLikePriceDetail from '../../common/cartlike/CartLikePriceDetail/CartLikePriceDetail.vue';
-import LineItemInfo from '../../common/cartlike/LineItemInfo/LineItemInfo.vue';
+import CartLikePriceDetail from '../../common/CartLike/CartLikePriceDetail/CartLikePriceDetail.vue';
+import LineItemInfo from '../../common/CartLike/LineItemInfo/LineItemInfo.vue';
 import CART_FRAGMENT from '../../Cart.gql';
 import MONEY_FRAGMENT from '../../Money.gql';
 import ADDRESS_FRAGMENT from '../../Address.gql';
@@ -36,11 +36,11 @@ export default {
   methods: {
     totalPrice,
     updateShippingMethod(shippingId) {
-      this.$emit('updateShipping', shippingId);
+      this.$emit('update-shipping', shippingId);
       this.$apollo.queries.me.refresh();
     },
     placeOrder() {
-      this.$emit('completeOrder');
+      this.$emit('complete-order');
     },
     nameFromLineItem(lineItem) {
       const attributes = variantAttributes(lineItem?.variant, locale(this));

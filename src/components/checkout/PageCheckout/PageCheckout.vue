@@ -13,16 +13,16 @@
               <BillingDetails
                 :billingAddress="me.activeCart.billingAddress"
                 :shippingAddress="me.activeCart.shippingAddress"
-                @updateBillingDetails="updateBilling"
-                @updateShippingDetails="updateShipping"
-                @validBillingForm="setValidBillingForm"
-                @validShippingForm="setValidShippingForm"
+                @update-billing-details="updateBilling"
+                @update-shipping-details="updateShipping"
+                @valid-billing-form="setValidBillingForm"
+                @valid-shipping-form="setValidShippingForm"
               />
             </div>
             <div class="col-lg-5">
               <OrderOverview
-                @updateShipping="updateShippingMethod"
-                @completeOrder="placeOrder"
+                @update-shipping="updateShippingMethod"
+                @complete-order="placeOrder"
                 :showError="showError"
               />
             </div>

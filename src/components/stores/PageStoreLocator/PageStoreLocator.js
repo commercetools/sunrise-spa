@@ -1,4 +1,6 @@
 import gql from 'graphql-tag';
+import Breadcrumb from '../../common/Breadcrumb/Breadcrumb.vue';
+// import store from '../../../store';
 
 const getCoordinates = ({ lat, lng }) => ({ lat: parseFloat(lat), lng: parseFloat(lng) });
 
@@ -23,7 +25,7 @@ function haversineDistance(mk1, mk2) {
 }
 
 export default {
-  components: {},
+  components: { Breadcrumb },
   props: {
     isModal: {
       type: Boolean,
@@ -35,25 +37,38 @@ export default {
       return this.channels && this.channels.results && this.channels.results.length > 0;
     },
 
-    setRadius(value) {
-      this.searchRadius = value;
-    },
-
     setPlace(place) {
       this.center = getLocationFromPlace(place);
     },
 
-    click(channel) {
-      this.center = getLocationFromChannel(channel);
-    },
+    // click(channel) {
+    //   this.center = getLocationFromChannel(channel);
+    // },
 
     isSelected(channel) {
       return this.$store.state.storeName === channel.name;
     },
+    unsetStore() {
+      this.$store.dispatch('setChannel', null);
+      this.$store.dispatch('setStoreName', null);
+    },
 
     setStore(event) {
       const channelId = event.target.value;
-      this.$store.dispatch('setChannel', channelId);
+      const channel = this.channels.results.find(
+        ({ id }) => id === channelId,
+      ) || {};
+      const location = channel.geoLocation?.coordinates
+        ? {
+          location: {
+            lng: channel.geoLocation.coordinates[0],
+            lat: channel.geoLocation?.coordinates[1],
+          },
+        } : {};
+      this.$store.dispatch('setChannel', {
+        id: channel.id,
+        ...location,
+      });
       this.channels.results.forEach((element) => {
         if (element.id === event.target.value) {
           this.$store.dispatch('setStoreName', element.name);
@@ -63,8 +78,6 @@ export default {
       setTimeout(() => {
         if (this.isModal) {
           $('#store-finder-modal').modal('hide');
-        } else {
-          this.$router.go(-1);
         }
       }, 500);
     },
@@ -85,7 +98,7 @@ export default {
     markers: [],
     places: [],
     currentPlace: null,
-    center: { lat: 35.9937228, lng: -78.9052195 },
+    center: {},
     searchRadius: 25,
     radiusOptions: [{
       distance: 25,
@@ -107,7 +120,30 @@ export default {
       label: '3000 mi',
     }],
   }),
-
+  beforeMount() {
+    if (this.$store.state?.channel) {
+      this.center = this.$store.state.channel.location;
+    } else if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.center = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+      }, (err) => {
+        // eslint-disable-next-line
+        alert(`Error: The Geolocation service failed: ${err}`);
+      });
+    } else {
+      // Browser doesn't support Geolocation
+      // eslint-disable-next-line
+      alert('Error: Your browser doesn\'t support geolocation.');
+    }
+  },
+  computed: {
+    canChangeStore() {
+      return this.me.ac;
+    },
+  },
   apollo: {
     channels: {
       query: gql`
@@ -147,22 +183,6 @@ export default {
       },
       result() {
         this.markers = this.channels && this.channels.results.map((c) => ({ position: getLocationFromChannel(c) }));
-
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition((position) => {
-            this.center = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            };
-          }, (err) => {
-            // eslint-disable-next-line
-            alert(`Error: The Geolocation service failed: ${err}`);
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          // eslint-disable-next-line
-          alert('Error: Your browser doesn\'t support geolocation.');
-        }
       },
     },
   },
