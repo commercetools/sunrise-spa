@@ -23,6 +23,9 @@ export default {
     totalCartItems() {
       return this.$store.state.cartItems;
     },
+    storeName() {
+      return this.$store.state.storeName;
+    },
   },
   methods: {
     toggleSearch() {

@@ -35,12 +35,16 @@ export default {
           shippingAddress: { country: this.$store.state.country },
         });
       }
-      return this.updateMyCart({
+      const action = {
         addLineItem: {
           sku: this.sku,
           quantity: Number(this.quantity),
         },
-      }).then(() => this.$store.dispatch('openMiniCart'));
+      };
+      if (this.$store.state.priceChannel) {
+        action.addLineItem.distributionChannel = { id: this.$store.state.priceChannel };
+      }
+      return this.updateMyCart(action).then(() => this.$store.dispatch('openMiniCart'));
     },
   },
 };

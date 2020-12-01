@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import createPersistedState from 'vuex-persistedstate';
+// import createPersistedState from 'vuex-persistedstate';
 import sunriseConfig from '../sunrise.config';
 
 Vue.use(Vuex);
@@ -8,6 +8,8 @@ Vue.use(Vuex);
 const SET_LOCALE = 'SET_LOCALE';
 const SET_COUNTRY = 'SET_COUNTRY';
 const SET_CURRENCY = 'SET_CURRENCY';
+const SET_PRICE_CHANNEL = 'SET_PRICE_CHANNEL';
+const SET_STORE_NAME = 'SET_STORE_NAME';
 const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 const SET_TOKEN_INFO = 'SET_TOKEN_INFO';
 const SET_MINI_CART_OPEN = 'SET_MINI_CART_OPEN';
@@ -31,15 +33,24 @@ const setMiniCartTimeout = (commit, state, timeout) => {
 };
 
 export default new Vuex.Store({
+  /*
   plugins: [createPersistedState({
     key: 'session',
-    paths: ['locale', 'country', 'currency', 'tokenInfo', 'authenticated'],
+    paths: ['locale',
+      'country',
+      'currency',
+      'customerGroup',
+      'priceChannel',
+      'storeName'],
   })],
+  */
 
   state: {
     locale: fallbackLocale,
     country: fallbackCountry,
     currency: obtainCurrency(fallbackCountry),
+    priceChannel: null,
+    storeName: null,
     tokenInfo: null,
     authenticated: false,
     miniCartOpen: false,
@@ -57,6 +68,14 @@ export default new Vuex.Store({
         commit(SET_COUNTRY, country);
         commit(SET_CURRENCY, obtainCurrency(country));
       }
+    },
+
+    setPriceChannel: ({ commit }, priceChannel) => {
+      commit(SET_PRICE_CHANNEL, priceChannel);
+    },
+
+    setStoreName: ({ commit }, storeName) => {
+      commit(SET_STORE_NAME, storeName);
     },
 
     setAuthenticated: ({ commit }, authenticated) => commit(SET_AUTHENTICATED, authenticated),
@@ -101,6 +120,14 @@ export default new Vuex.Store({
 
     [SET_CURRENCY](state, currency) {
       state.currency = currency;
+    },
+
+    [SET_PRICE_CHANNEL](state, priceChannel) {
+      state.priceChannel = priceChannel;
+    },
+
+    [SET_STORE_NAME](state, storeName) {
+      state.storeName = storeName;
     },
 
     [SET_LOCALE](state, locale) {

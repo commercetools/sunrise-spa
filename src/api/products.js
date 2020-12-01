@@ -144,7 +144,7 @@ const products = {
       currency,
       country,
       customerGroup,
-      channel: priceChannel,
+      priceChannel,
     } = component.$store.state;
     const loc = locale(component);
     const sortValue = route.query.sort;
@@ -158,7 +158,7 @@ const products = {
     const priceFilter = {};
     const minQ = min ? min * 100 : '0';
     const maxQ = max ? max * 100 : '100000000';
-    priceFilter.priceFilter = `variants.scopedPrice.value.centAmount: range (${minQ} to ${maxQ})`;
+    priceFilter.priceFilter = `variants.price.centAmount: range (${minQ} to ${maxQ})`;
     return {
       category,
       currency,

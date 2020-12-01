@@ -9,6 +9,7 @@ import TheFooter from './components/footer/TheFooter/TheFooter.vue';
 import PageHome from './components/home/PageHome/PageHome.vue';
 import PageProductOverview from './components/productoverview/PageProductOverview/PageProductOverview.vue';
 import PageLogin from './components/login/PageLogin/PageLogin.vue';
+import PageStoreLocator from './components/stores/PageStoreLocator/PageStoreLocator.vue';
 import ForgotPassword from './components/login/ForgotPassword/ForgotPassword.vue';
 import ResetPassword from './components/login/ResetPassword/ResetPassword.vue';
 import PageUserAccount from './components/useraccount/PageUserAccount/PageUserAccount.vue';
@@ -21,6 +22,7 @@ import TabOrderDetail from './components/useraccount/TabOrderDetail/TabOrderDeta
 import TabChangePassword from './components/useraccount/TabChangePassword/TabChangePassword.vue';
 import TabDashboard from './components/useraccount/TabDashboard/TabDashboard.vue';
 import PageCheckout from './components/checkout/PageCheckout/PageCheckout.vue';
+import PageCampaign from './components/campaign/PageCampaign/index.vue';
 import { pageFromRoute } from './components/common/shared';
 import Root from './components/root/root.vue';
 
@@ -51,15 +53,15 @@ const router = new Router({
             footer: TheFooter,
           },
         },
-        // {
-        //   path: 'stores',
-        //   name: 'stores',
-        //   components: {
-        //     default: StoreLocator,
-        //     header: TheHeader,
-        //     footer: TheFooter,
-        //   },
-        // },
+        {
+          path: 'stores',
+          name: 'stores',
+          components: {
+            default: PageStoreLocator,
+            header: TheHeader,
+            footer: TheFooter,
+          },
+        },
         {
           path: 'login',
           name: 'login',
@@ -161,6 +163,15 @@ const router = new Router({
           meta: { requiresCart },
           components: {
             default: PageCheckout,
+            header: TheHeader,
+            footer: TheFooter,
+          },
+        },
+        {
+          path: 'campaign',
+          name: 'campaign',
+          components: {
+            default: PageCampaign,
             header: TheHeader,
             footer: TheFooter,
           },

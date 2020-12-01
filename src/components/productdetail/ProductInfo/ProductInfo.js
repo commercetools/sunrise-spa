@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import gql from 'graphql-tag';
 import productMixin from '../../../mixins/productMixin';
 import ProductGallery from '../ProductGallery/ProductGallery.vue';
@@ -35,7 +37,11 @@ export default {
   apollo: {
     product: {
       query: gql`
-        query Product($locale: Locale!, $sku: String!, $currency: Currency!, $country: Country!) {
+        query Product($locale: Locale!, 
+                      $sku: String!, 
+                      $currency: Currency!, 
+                      $country: Country!, 
+                      $priceChannel: String) {
           product(sku: $sku) {
             id
             masterData {
@@ -43,7 +49,7 @@ export default {
                 name(locale: $locale)
                 slug(locale: $locale)
                 variant(sku: $sku) {
-                  price(currency: $currency,country:$country) {
+                  price(currency: $currency,country:$country,channelId:$priceChannel) {
                     value {
                       ...printPrice
                     }
@@ -64,11 +70,13 @@ export default {
           currencyCode
         }`,
       variables() {
+        console.log(this.$store.state.channel);
         return {
           locale: locale(this),
           currency: this.$store.state.currency,
           sku: this.sku,
           country: this.$store.state.country,
+          priceChannel: this.$store.state.priceChannel,
         };
       },
     },

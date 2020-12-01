@@ -18,7 +18,6 @@ export default {
     de: 'Deutsch',
   },
   countries: {
-    DE: 'Deutschland',
     US: 'United States',
   },
   formats: {

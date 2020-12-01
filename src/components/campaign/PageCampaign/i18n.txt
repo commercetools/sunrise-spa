@@ -1,0 +1,2 @@
+en:
+  title: "Campaign Landing Page"

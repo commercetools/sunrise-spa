@@ -59,7 +59,7 @@ const getProducts = (component) => {
   const {
     category,
     currency,
-    country,
+    priceChannel,
     loc,
     searchText,
     sort,
@@ -81,7 +81,7 @@ const getProducts = (component) => {
         page: Number(route.params?.page || 1),
         pageSize: component.limit,
         priceCurrency: currency,
-        priceCountry: country,
+        priceChannel,
         ...sort,
         ...priceFilter,
         ...searchText,
@@ -148,7 +148,6 @@ export default {
     countyCurrency() {
       return {
         currency: this.$store.state.currency,
-        country: this.$store.state.country,
       };
     },
     hasManyProducts() {
