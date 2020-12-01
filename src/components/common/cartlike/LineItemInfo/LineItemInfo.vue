@@ -42,7 +42,11 @@
           data-test="cart-line-item-sku"
         >
           {{ lineItem.variant.sku }}
+
         </span>
+        <p v-if="subscription">
+        Subscription -- Every {{ frequency }} Weeks </p>
+      
       </td>
       <td
         v-if="!selectable"

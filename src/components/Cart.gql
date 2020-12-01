@@ -16,6 +16,12 @@ fragment CartFields on Cart {
         }
       }
     }
+    
+      customFieldsRaw {
+        name
+        value
+      }
+    
     totalPrice {
       ...MoneyFields
     }

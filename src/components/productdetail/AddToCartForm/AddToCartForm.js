@@ -16,11 +16,27 @@ export const updateCartVariables = (component) => {
     },
   } : {};
 
+  const custom = component.subscribe=="1" ? {
+    custom: {
+      type: {
+        key: 'subscriptionLineItem'
+      },
+      fields: [{
+        name: 'subscription',
+        value: 'true',
+      },{
+        name: 'frequency',
+        value: component.frequency.toString(),
+      }]
+    },
+   } : {};
+
   return ({
     addLineItem: {
       sku: component.sku,
       quantity: Number(component.quantity),
       ...distributionChannel,
+      ...custom,
     },
   });
 };
@@ -29,6 +45,14 @@ export default {
     sku: {
       type: String,
       required: true,
+    },
+    subscribe: {
+      type: String,
+      required: false,
+    },
+    frequency: {
+      type: Number,
+      required: false,
     },
   },
   components: {

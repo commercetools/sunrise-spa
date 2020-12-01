@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-console
+
 import gql from 'graphql-tag';
 import productMixin from '../../../mixins/productMixin';
 import ProductGallery from '../ProductGallery/ProductGallery.vue';
@@ -6,8 +8,15 @@ import DetailsSection from '../DetailsSection/DetailsSection.vue';
 import AddToCartForm from '../AddToCartForm/AddToCartForm.vue';
 import BasePrice from '../../common/BasePrice/BasePrice.vue';
 import VariantSelector from '../VariantSelector/VariantSelector.vue';
+import SubscriptionSelector from '../SubscriptionSelector/SubscriptionSelector.vue';
 import { locale } from '../../common/shared';
 
+const getAttribute = (product, name) => {
+  const x = product.masterData.current.variant.attributesRaw.find(
+    att => att.name === name,
+  );
+  return x && x.value;
+};
 export default {
   props: {
     sku: {
@@ -22,12 +31,30 @@ export default {
     AddToCartForm,
     BasePrice,
     VariantSelector,
+    SubscriptionSelector,
   },
   mixins: [productMixin],
   data: () => ({
     product: null,
+    subscribe: 0,
+    frequency: 14,
   }),
+  methods: {
+    setSubscribe(value) {
+      this.subscribe=value;
+      // eslint-disable-next-line no-console
+      console.log('subs',value);
+    },
+    setFrequency(value) {
+      this.frequency=parseInt(value);
+      // eslint-disable-next-line no-console
+      console.log('freq',value);
+    }
+  },
   computed: {
+    hasSubscription() {
+      return getAttribute(this.product, 'subscription');
+    },
     matchingVariant() {
       return this.currentProduct.variant || {};
     },
@@ -52,6 +79,10 @@ export default {
                        ...printPrice
                       }
                     }
+                  }
+                  attributesRaw {
+                      name
+                      value
                   }
                 }
               }

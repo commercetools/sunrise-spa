@@ -5,6 +5,13 @@ import Remove from '../../../cartdetail/LineItemQuantityForm/Remove/Remove.vue';
 import BasePrice from '../../BasePrice/BasePrice.vue';
 import { totalPrice, variantAttributes, locale } from '../../shared';
 
+const getCustomField = (lineItem, name) => {
+  if(!lineItem.customFieldsRaw)
+    return null;
+
+  const x = lineItem.customFieldsRaw.find(field => field.name === name);
+  return x && x.value;
+};
 export default {
   components: {
     LineItemQuantityForm,
@@ -64,6 +71,12 @@ export default {
         ({ name, value }) => `${name}: ${value}`,
       ).join(', ')}`;
     },
+    subscription() {
+      return getCustomField(this.lineItem,'subscription');
+    },
+    frequency() {
+      return getCustomField(this.lineItem,'frequency')/7;
+    }
   },
   mixins: [productMixin],
 };

@@ -23,7 +23,10 @@
           <BasePrice :price="matchingVariant.price" />
         </h3>
         <VariantSelector :sku="sku" />
-        <AddToCartForm :sku="sku" />
+        <SubscriptionSelector :subscription="hasSubscription" 
+                              v-on:set-subscribe="setSubscribe"
+                              v-on:set-frequency="setFrequency"/>
+        <AddToCartForm :sku="sku" :subscribe="subscribe" :frequency="frequency" />
         <DetailsSection :sku="sku" />
         <!-- <SocialMediaLinks/> -->
 
