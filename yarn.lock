@@ -2,6 +2,16 @@
 # yarn lockfile v1
 
 
+"@adyen/adyen-web@^3.18.2":
+  version "3.18.2"
+  resolved "https://registry.yarnpkg.com/@adyen/adyen-web/-/adyen-web-3.18.2.tgz#9c4c8c57f1f0e9f7dd279d7d57af5f3b25001ab3"
+  integrity sha512-m7B16PfFVnBjfK/7jUWuMDuiKNBE1GiTwo8sEz5QX0KM+6HjN0u8HSOCe61WEN+IWkV8XxaNfUU1xyIyQOepkA==
+  dependencies:
+    "@types/applepayjs" "^3.0.1"
+    "@types/googlepay" "^0.5.1"
+    classnames "^2.2.6"
+    preact "^10.5.5"
+
 "@apollo/client@^3.1.5":
   version "3.2.5"
   resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.2.5.tgz#24e0a6faa1d231ab44807af237c6227410c75c4d"
@@ -1954,6 +1964,11 @@
   resolved "https://registry.yarnpkg.com/@types/anymatch/-/anymatch-1.3.1.tgz#336badc1beecb9dacc38bea2cf32adf627a8421a"
   integrity sha512-/+CRPXpBDpo2RK9C68N3b2cOvO0Cf5B9aPijHsoDQTHivnGSObdOF2BRQOYjojWTDy6nQvMjmqRXIxH55VjxxA==
 
+"@types/applepayjs@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@types/applepayjs/-/applepayjs-3.0.1.tgz#e6aa0e7a23dda22c99a634998946cde228eb5c71"
+  integrity sha512-zcwMSbo75E7VYi0jAo6rNpl+l4AXL98PCQRJEbUtChcSEiqfX+KFLz5eqaACI8fFx9lF4EjUv0W9XxAZXuMCNg==
+
 "@types/babel__core@^7.0.0", "@types/babel__core@^7.1.0", "@types/babel__core@^7.1.7":
   version "7.1.10"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.10.tgz#ca58fc195dd9734e77e57c6f2df565623636ab40"
@@ -2084,6 +2099,11 @@
   dependencies:
     "@types/minimatch" "*"
     "@types/node" "*"
+
+"@types/googlepay@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@types/googlepay/-/googlepay-0.5.1.tgz#a02c65181b09c6a7438626f4dd36527993b39fc5"
+  integrity sha512-6ONa1lKylL4WQr1t+rdV+QI825ugj/VPWDswq7HkPGsgaORbib++NKOPPdTZcP3AYrI8L/3XwUUCe89yKZ1Wow==
 
 "@types/graceful-fs@^4.1.2":
   version "4.1.4"
@@ -4733,6 +4753,11 @@ class-utils@^0.3.5:
     define-property "^0.2.5"
     isobject "^3.0.0"
     static-extend "^0.1.1"
+
+classnames@^2.2.6:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
+  integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
 
 clean-css@4.2.x:
   version "4.2.3"
@@ -12177,6 +12202,11 @@ postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.27, postcss@^7.0.3
     chalk "^2.4.2"
     source-map "^0.6.1"
     supports-color "^6.1.0"
+
+preact@^10.5.5:
+  version "10.5.7"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.5.7.tgz#f1d84725539e18f7ccbea937cf3db5895661dbd3"
+  integrity sha512-4oEpz75t/0UNcwmcsjk+BIcDdk68oao+7kxcpc1hQPNs2Oo3ZL9xFz8UBf350mxk/VEdD41L5b4l2dE3Ug3RYg==
 
 prelude-ls@^1.2.1:
   version "1.2.1"
