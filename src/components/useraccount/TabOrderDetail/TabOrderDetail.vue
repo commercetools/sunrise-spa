@@ -65,7 +65,7 @@
         <div class="col-md-1"></div>
         <div class="col-md-5 address-detail">
           <b>{{ $t('paymentDetails') }}</b>
-          <p class="mt-15">-</p>
+          <p class="mt-15">{{ paymentInfo }}</p>
         </div>
       </div>
       <div class="mt-40">

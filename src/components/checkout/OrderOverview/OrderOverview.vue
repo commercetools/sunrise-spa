@@ -41,7 +41,12 @@
           </ul>
         </div>
       </div>
-      <div class="checkout-shipping-content">
+      <!-- if you have adyen payment then you can't cahnge -->
+      <!-- shipping method after you paid -->
+      <!-- v-if="!paid" -->
+      <div 
+        class="checkout-shipping-content"
+      >
         <div class="shipping-content-left">
           <span class="bold-text">{{ $t('shipping') }}</span>
         </div>
@@ -50,7 +55,12 @@
           data-test="shipping-methods"
         />
       </div>
-      <PaymentMethod data-test="payment-methods"/>
+      <PaymentMethod 
+        data-test="payment-methods"
+        v-bind:amount="amount"
+        v-on:card-paid="cardPaid"
+        :key="me.activeCart.totalPrice.centAmount"
+      />
       <div class="your-order-info order-total">
         <ul>
           <li class="bold-text">
@@ -77,7 +87,10 @@
         </div>
       </div> -->
     </div>
-    <div class="Place-order mt-30">
+    <div 
+      class="Place-order mt-30"
+      v-if="paid"
+    >
       <a
         @click.prevent="placeOrder"
         data-test="place-order"

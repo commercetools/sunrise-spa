@@ -71,4 +71,11 @@ fragment OrderFields on Order {
   billingAddress {
     ...AddressFields
   }
+  paymentInfo {
+    payments {
+      paymentStatus {
+        interfaceCode
+      }
+    }
+  }
 }

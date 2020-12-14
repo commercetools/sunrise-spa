@@ -68,9 +68,9 @@ describe('my orders', () => {
         cy.wrap($order)
           .find('[data-test=shipment-state]')
           .contains('Versandt');
-        cy.wrap($order)
-          .find('[data-test=payment-state]')
-          .contains('Anstehend');
+        // cy.wrap($order)
+        //   .find('[data-test=payment-state]')
+        //   .contains('Anstehend');
       });
   });
 

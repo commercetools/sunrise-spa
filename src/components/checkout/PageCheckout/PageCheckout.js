@@ -1,12 +1,12 @@
-import gql from 'graphql-tag';
-import cartMixin from '../../../mixins/cartMixin';
-import CheckoutTopSection from '../CheckoutTopSection/CheckoutTopSection.vue';
-import OrderOverview from '../OrderOverview/OrderOverview.vue';
-import BillingDetails from '../BillingDetails/BillingDetails.vue';
-import CART_FRAGMENT from '../../Cart.gql';
-import MONEY_FRAGMENT from '../../Money.gql';
-import ADDRESS_FRAGMENT from '../../Address.gql';
-import { locale } from '../../common/shared';
+import gql from "graphql-tag";
+import cartMixin from "../../../mixins/cartMixin";
+import CheckoutTopSection from "../CheckoutTopSection/CheckoutTopSection.vue";
+import OrderOverview from "../OrderOverview/OrderOverview.vue";
+import BillingDetails from "../BillingDetails/BillingDetails.vue";
+import CART_FRAGMENT from "../../Cart.gql";
+import MONEY_FRAGMENT from "../../Money.gql";
+import ADDRESS_FRAGMENT from "../../Address.gql";
+import { locale } from "../../common/shared";
 
 export default {
   components: {
@@ -41,21 +41,47 @@ export default {
     updateShippingMethod(shippingId) {
       this.shippingMethod = shippingId;
     },
-    placeOrder() {
+    placeOrder(paymentid) {
       if (this.validBillingForm && this.validShippingForm) {
         this.updateMyCart([
-          { setBillingAddress: { address: this.billingAddress } },
+          {
+            setBillingAddress: {
+              address: this.billingAddress,
+            },
+          },
         ])
           .then((result) => {
             this.me.activeCart = result.data.updateMyCart;
             if (!this.shippingAddress) {
               return this.updateMyCart([
-                { setShippingAddress: { address: this.billingAddress } },
+                {
+                  setShippingAddress: {
+                    address: this.billingAddress,
+                  },
+                },
               ]);
             }
             return this.updateMyCart([
-              { setShippingAddress: { address: this.shippingAddress } },
+              {
+                setShippingAddress: {
+                  address: this.shippingAddress,
+                },
+              },
             ]);
+          })
+          .then((result) => {
+            if (paymentid) {
+              return this.updateMyCart([
+                {
+                  addPayment: {
+                    payment: {
+                      id: paymentid,
+                    },
+                  },
+                },
+              ]);
+            }
+            return result;
           })
           .then((result) => {
             this.me.activeCart = result.data.updateMyCart;
@@ -81,7 +107,8 @@ export default {
         }
         ${CART_FRAGMENT}
         ${MONEY_FRAGMENT}
-        ${ADDRESS_FRAGMENT}`,
+        ${ADDRESS_FRAGMENT}
+      `,
       variables() {
         return {
           locale: locale(this),

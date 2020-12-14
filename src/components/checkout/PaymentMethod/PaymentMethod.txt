@@ -1,6 +1,0 @@
-en:
-  paymentMethod: Payment method
-  creditCard: Credit Card
-de:
-  paymentMethod: Zahlungsart
-  creditCard: Kreditkarte

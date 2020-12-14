@@ -1,13 +1,13 @@
-import gql from 'graphql-tag';
-import BaseDate from '../../common/BaseDate/BaseDate.vue';
-import BaseAddress from '../../common/BaseAddress/BaseAddress.vue';
-import BaseMoney from '../../common/BaseMoney/BaseMoney.vue';
-import LineItemInfo from '../../common/CartLike/LineItemInfo/LineItemInfo.vue';
-import CartLikeContentDetail from '../../common/CartLike/CartLikeContentDetail/CartLikeContentDetail.vue';
-import ORDER_FRAGMENT from '../../Order.gql';
-import ADDRESS_FRAGMENT from '../../Address.gql';
-import MONEY_FRAGMENT from '../../Money.gql';
-import { locale } from '../../common/shared';
+import gql from "graphql-tag";
+import BaseDate from "../../common/BaseDate/BaseDate.vue";
+import BaseAddress from "../../common/BaseAddress/BaseAddress.vue";
+import BaseMoney from "../../common/BaseMoney/BaseMoney.vue";
+import LineItemInfo from "../../common/CartLike/LineItemInfo/LineItemInfo.vue";
+import CartLikeContentDetail from "../../common/CartLike/CartLikeContentDetail/CartLikeContentDetail.vue";
+import ORDER_FRAGMENT from "../../Order.gql";
+import ADDRESS_FRAGMENT from "../../Address.gql";
+import MONEY_FRAGMENT from "../../Money.gql";
+import { locale } from "../../common/shared";
 
 export default {
   components: {
@@ -23,14 +23,26 @@ export default {
   computed: {
     subtotal() {
       if (this.me) {
-        const { currencyCode, fractionDigits } = this.me.order.totalPrice;
+        const {
+          currencyCode,
+          fractionDigits,
+        } = this.me.order.totalPrice;
         return {
-          centAmount: this.me.order.lineItems.reduce((acc, li) => acc + li.totalPrice.centAmount, 0),
+          centAmount: this.me.order.lineItems.reduce(
+            (acc, li) => acc + li.totalPrice.centAmount,
+            0
+          ),
           currencyCode,
           fractionDigits,
         };
       }
       return null;
+    },
+    paymentInfo() {
+      return this.$t(
+        this?.me?.order?.paymentInfo?.payments?.[0]
+          ?.paymentStatus?.interfaceCode
+      );
     },
   },
   apollo: {
@@ -45,7 +57,8 @@ export default {
         }
         ${ORDER_FRAGMENT}
         ${MONEY_FRAGMENT}
-        ${ADDRESS_FRAGMENT}`,
+        ${ADDRESS_FRAGMENT}
+      `,
       variables() {
         return {
           id: this.$route.params.id,

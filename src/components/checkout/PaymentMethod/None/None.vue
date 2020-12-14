@@ -1,6 +1,4 @@
-<style src="./style.css" scoped></style>
-<i18n src="./PaymentMethod.txt"></i18n>
-<script src="./PaymentMethod.js"></script>
+<script src="./None.js"></script>
 
 <template>
   <span>
@@ -23,7 +21,7 @@
           >{{ $t('creditCard') }}
           <img
             class="payment-method-img"
-            src="../../../assets/img/CREDIT CARDS.png"
+            src="../../../../assets/img/CREDIT CARDS.png"
         /></label>
       </div>
       <div class="pay-top sin-payment">
@@ -37,7 +35,7 @@
         />
         <label for="payment-method-2"
           >PayPal
-          <img class="payment-method-img" src="../../../assets/img/PayPal.png"
+          <img class="payment-method-img" src="../../../../assets/img/PayPal.png"
         /></label>
       </div>
     </div>

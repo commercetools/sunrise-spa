@@ -29,7 +29,7 @@
               <BaseMoney :money="order.totalPrice" />
             </td>
             <td data-test="payment-state">
-              {{ translateStatus(order.paymentState) }}
+              {{ paymentInfo(order) }}
             </td>
             <td data-test="shipment-state">
               {{ translateStatus(order.shipmentState) }}
