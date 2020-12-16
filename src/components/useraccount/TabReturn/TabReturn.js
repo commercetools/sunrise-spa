@@ -22,6 +22,11 @@ export default {
     updateSelectedItems(items) {
       this.selectedItems = items;
     },
+    closeModal() {
+      this.$modal.hide('returnSuccess');
+      this.$router.push({ name: 'orders' })
+      this.$router.go()
+    },
     submitReturn() {
       if (this.selectedItems.length === 0) {
         alert(this.$t('alert'));
@@ -43,7 +48,8 @@ export default {
             items: this.selectedItems,
           },
         }).then(() => {
-          this.$router.push({ name: 'orders' })
+          // this.$router.push({ name: 'orders' })
+          this.$modal.show('returnSuccess');
         })
       }
     },
