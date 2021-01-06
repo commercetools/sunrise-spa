@@ -13,6 +13,7 @@
                 <router-link
                   :to="{ name: 'stores' }"
                   data-test="stores-link"
+                  v-if="showLocationChange"
                 >
                   {{ $t('stores') }}
                 </router-link>
@@ -26,6 +27,7 @@
                     v-bind:values="$sunrise.countries"
                     title="location"
                     data-test="country-selector-dropdown"
+                    v-if="showLocationChange"
                   />
                   <LocationSelector
                     v-bind:values="$sunrise.languages"
