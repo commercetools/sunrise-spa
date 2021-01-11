@@ -131,4 +131,18 @@ describe('OrderDetailPage', () => {
     cy.get('[data-test=remove-discount-button]')
       .should('not.exist');
   });
+
+  it('returns items', () => {
+    cy.get('[data-test=return-button]').click()
+    cy.get('[data-test=cart-line-item]')
+      .should('have.length', 2)
+      .eq(1)
+      .then(($item) => {
+        cy.wrap($item)
+          .find('[data-test=line-item-checkbox]').click()
+      });
+    cy.get('[data-test=return-submit]').click()
+    cy.get('[data-test=return-modal]').should('be.visible')
+    cy.get('[data-test=close-button]').click()
+  })
 });

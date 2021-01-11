@@ -5,10 +5,7 @@
 <template>
   <tbody>
     <tr>
-      <td
-        v-if="editable"
-        class="product-remove"
-      >
+      <td v-if="editable" class="product-remove">
         <LineItemDeleteForm :line-item-id="lineItem.id" />
       </td>
       <td v-if="selectable">
@@ -17,7 +14,8 @@
           class="check"
           :value="lineItem.variant.sku"
           type="checkbox"
-        >
+          data-test="line-item-checkbox"
+        />
       </td>
       <td class="product-img">
         <router-link
@@ -27,7 +25,7 @@
           <img
             :src="displayedImageUrl(lineItem.variant)"
             :alt="lineItem.name"
-          >
+          />
         </router-link>
       </td>
       <td class="product-name">
@@ -38,20 +36,12 @@
           {{ lineItem.name }}
         </router-link>
         <b class="attributes">{{ lineItemAttr }}</b>
-        <span
-          data-test="cart-line-item-sku"
-        >
+        <span data-test="cart-line-item-sku">
           {{ lineItem.variant.sku }}
         </span>
       </td>
-      <td
-        v-if="!selectable"
-        class="product-price"
-      >
-        <span
-          class="amount"
-          data-test="item-price"
-        >
+      <td v-if="!selectable" class="product-price">
+        <span class="amount" data-test="item-price">
           <BasePrice :price="lineItem.price" />
         </span>
       </td>
@@ -67,19 +57,14 @@
               v-model.number="item.quantity"
               class="cart-plus-minus-box"
               type="number"
-            >
+            />
           </div>
         </div>
         <div class="quantity" v-if="!editable && !selectable">
           <span>{{ lineItem.quantity }}</span>
         </div>
-        
       </td>
-      <td
-        v-if="!selectable"
-        class="product-total"
-        data-test="line-total"
-      >
+      <td v-if="!selectable" class="product-total" data-test="line-total">
         <span>
           <BasePrice :price="total" />
         </span>
