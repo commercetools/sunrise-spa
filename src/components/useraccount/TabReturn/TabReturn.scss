@@ -1,0 +1,17 @@
+.return-modal {
+    padding: 60px;
+    button {
+      background-color: #262626;
+      font-size: 14px;
+      font-weight: bold;
+      display: inline-block;
+      color: #fff;
+      line-height: 1;
+      padding: 18px 40px 19px;
+      border-radius: 50px;
+      &:hover {
+        background-color: $theme-color;
+        color: #fff;
+      }
+    }
+  }

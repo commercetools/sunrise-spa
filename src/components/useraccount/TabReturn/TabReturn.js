@@ -4,7 +4,7 @@ import BaseAddress from '../../common/BaseAddress/BaseAddress.vue';
 import BaseMoney from '../../common/BaseMoney/BaseMoney.vue';
 import LineItemInfo from '../../common/CartLike/LineItemInfo/LineItemInfo.vue';
 import CartLikeContentDetail from '../../common/CartLike/CartLikeContentDetail/CartLikeContentDetail.vue';
-import { locale } from '../../common/shared';
+import { changeRoute, locale } from '../../common/shared';
 
 export default {
   components: {
@@ -21,6 +21,12 @@ export default {
   methods: {
     updateSelectedItems(items) {
       this.selectedItems = items;
+    },
+    closeModal() {
+      this.$modal.hide('returnSuccess');
+      changeRoute(
+        { name: 'orders' }, this,
+      );
     },
     submitReturn() {
       if (this.selectedItems.length === 0) {
@@ -43,7 +49,8 @@ export default {
             items: this.selectedItems,
           },
         }).then(() => {
-          this.$router.push({ name: 'orders' })
+          // this.$router.push({ name: 'orders' })
+          this.$modal.show('returnSuccess');
         })
       }
     },

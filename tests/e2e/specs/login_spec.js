@@ -20,7 +20,6 @@ describe('Login', () => {
   };
 
   const newPassword = 'newp@ssword';
-
   before(() => {
     cy.wrap(mailslurp.getAllEmails().then((emails) => emails.content.forEach((e) => {
       mailslurp.deleteEmail(e.id);
