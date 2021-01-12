@@ -74,13 +74,13 @@ describe('my orders', () => {
       });
   });
 
-  it('shows pages', () => {
+  it.only('shows pages', () => {
     cy.createOrder(cartDraft1, { orderNumber: String(9001) });
     cy.get('[data-test=my-orders-button]').click();
     cy.get('[data-test=pagination]').should('not.exist');
     cy.createOrder(cartDraft1, { orderNumber: String(9002) });
     cy.createOrder(cartDraft1, { orderNumber: String(9003) });
-    cy.visit('/user/account');
+    cy.visit('/DE/en/user/account');
     cy.get('[data-test=my-orders-button]').click();
     cy.get('[data-test=pagination]').should('exist');
     cy.get('[data-test=order-list]')
@@ -89,7 +89,7 @@ describe('my orders', () => {
     cy.get('[data-test=next-page-link').click();
     cy.get('[data-test=order-list]')
       .should('have.length', 1);
-    cy.visit('/user/orders/1');
+    cy.visit('/DE/en/user/orders/1');
     cy.get('[data-test=pagination]').should('exist');
     cy.get('[data-test=order-list]')
       .should('have.length', 2);
