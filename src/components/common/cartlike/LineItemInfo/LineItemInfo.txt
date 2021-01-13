@@ -1,4 +1,0 @@
-en:
-  available: "Available"
-de:
-  available: "Verfügbar"
