@@ -1,8 +1,8 @@
-import CategoriesMenu from '../CategoriesMenu/CategoriesMenu.vue';
-import LoginButton from '../LoginButton/LoginButton.vue';
-import LocationSelector from '../LocationSelector/LocationSelector.vue';
-import MiniCart from '../MiniCart/MiniCart.vue';
-import cartMixin from '../../../mixins/cartMixin';
+import CategoriesMenu from "../CategoriesMenu";
+import LoginButton from "../LoginButton/LoginButton.vue";
+import LocationSelector from "../LocationSelector/LocationSelector.vue";
+import MiniCart from "../MiniCart/MiniCart.vue";
+import cartMixin from "../../../mixins/cartMixin";
 
 export default {
   components: {
@@ -13,7 +13,7 @@ export default {
   },
   data() {
     return {
-      searchText: this.$route.query.q || '',
+      searchText: this.$route.query.q || "",
       mobileMenuOpen: false,
       searchOpen: false,
     };
@@ -24,8 +24,8 @@ export default {
       return this.$store.state.cartItems;
     },
     showLocationChange() {
-      return !Boolean(this.totalCartItems)
-    }
+      return !Boolean(this.totalCartItems);
+    },
   },
   methods: {
     toggleSearch() {
@@ -33,13 +33,11 @@ export default {
     },
     search() {
       this.toggleSearch();
-      const {
-        query,
-      } = this.$route;
+      const { query } = this.$route;
       this.$router.push({
-        name: 'products',
+        name: "products",
         params: {
-          categorySlug: 'all',
+          categorySlug: "all",
           page: 1,
         },
         query: {
@@ -52,15 +50,15 @@ export default {
       this.mobileMenuOpen = !this.mobileMenuOpen;
     },
     onToggleMinicart() {
-      this.$store.dispatch('toggleMiniCart');
+      this.$store.dispatch("toggleMiniCart");
     },
     openMiniCart() {
-      this.$store.dispatch('openMiniCart', 0);
+      this.$store.dispatch("openMiniCart", 0);
     },
   },
   watch: {
     $route(to) {
-      this.searchText = to.query.q || '';
+      this.searchText = to.query.q || "";
     },
   },
 };
