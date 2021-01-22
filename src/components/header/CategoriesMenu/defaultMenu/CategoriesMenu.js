@@ -1,8 +1,11 @@
-import gql from 'graphql-tag';
-import { locale, isToughDevice } from '../../common/shared';
+import gql from "graphql-tag";
+import {
+  locale,
+  isToughDevice,
+} from "../../../common/shared";
 
-const minus = require('@/assets/img/minus-1.png');
-const plus = require('@/assets/img/plus79.png');
+const minus = require("@/assets/img/minus-1.png");
+const plus = require("@/assets/img/plus79.png");
 
 export default {
   props: {
@@ -13,15 +16,13 @@ export default {
   },
   data: () => ({
     categories: null,
-    openCategoryMenu: '',
+    openCategoryMenu: "",
     someCategoryWasClicked: false,
   }),
 
   methods: {
     mobileImage(level) {
-      return this.isMenuOpen(level)
-        ? minus
-        : plus;
+      return this.isMenuOpen(level) ? minus : plus;
     },
     isActive(name) {
       // eslint-disable-next-line no-param-reassign
@@ -32,16 +33,22 @@ export default {
     },
     isSale({ externalId }) {
       const categoriesConfig = this.$sunrise.categories;
-      return categoriesConfig ? externalId === categoriesConfig.salesExternalId : false;
+      return categoriesConfig
+        ? externalId === categoriesConfig.salesExternalId
+        : false;
     },
     isMenuOpen({ id }) {
-      return (isToughDevice() || !this.someCategoryWasClicked) && this.openCategoryMenu === id;
+      return (
+        (isToughDevice() || !this.someCategoryWasClicked) &&
+        this.openCategoryMenu === id
+      );
     },
     hoverOnCategory({ id, children }) {
       if (isToughDevice()) {
         return;
       }
-      const hasChildren = Array.isArray(children) && children.length;
+      const hasChildren =
+        Array.isArray(children) && children.length;
       if (hasChildren) {
         this.openCategoryMenu = id;
       }
@@ -54,9 +61,8 @@ export default {
       this.openCategoryMenu = false;
     },
     toggleOpenCategory({ id }) {
-      this.openCategoryMenu = id === this.openCategoryMenu
-        ? false
-        : id;
+      this.openCategoryMenu =
+        id === this.openCategoryMenu ? false : id;
     },
     clickOnCategory() {
       this.someCategoryWasClicked = true;
@@ -65,27 +71,40 @@ export default {
   },
   computed: {
     sortedCategories() {
-      const recurSort = (categories) => categories.map(
-        (category) => (category.children
-          ? { ...category, children: recurSort(category.children) }
-          : category),
-      ).sort(
-        (c1, c2) => c1.orderHint.localeCompare(c2.orderHint),
+      const recurSort = (categories) =>
+        categories
+          .map((category) =>
+            category.children
+              ? {
+                  ...category,
+                  children: recurSort(category.children),
+                }
+              : category
+          )
+          .sort((c1, c2) =>
+            c1.orderHint.localeCompare(c2.orderHint)
+          );
+      return (
+        this.categories &&
+        recurSort(this.categories.results)
       );
-      return this.categories && recurSort(this.categories.results);
     },
   },
   apollo: {
     categories: {
       query: gql`
         query categories($locale: Locale!) {
-          categories(limit: 10, where: "parent is not defined", sort: "orderHint asc") {
+          categories(
+            limit: 10
+            where: "parent is not defined"
+            sort: "orderHint asc"
+          ) {
             results {
-            ...MenuCategoryInfo
-              children {
               ...MenuCategoryInfo
-                children {
+              children {
                 ...MenuCategoryInfo
+                children {
+                  ...MenuCategoryInfo
                 }
               }
             }
@@ -97,7 +116,8 @@ export default {
           name(locale: $locale)
           slug(locale: $locale)
           orderHint
-        }`,
+        }
+      `,
       variables() {
         return {
           locale: locale(this),

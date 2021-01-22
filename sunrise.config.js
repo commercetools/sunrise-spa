@@ -73,12 +73,34 @@ export default {
     salesExternalId: "6",
   },
   facetSearches: [
-    { name: "size", type: "text" },
-    { name: "color", type: "lnum", component: "colors" },
+    {
+      name: "size",
+      type: "text",
+      label: {
+        it: "Size",
+        de: "Größe",
+        en: "Size",
+      },
+    },
+    {
+      name: "color",
+      type: "lnum",
+      component: "colors",
+      label: {
+        de: "Farbe",
+        it: "Color",
+        en: "Color",
+      },
+    },
     {
       name: "designer",
       type: "enum",
       component: "designer",
+      label: {
+        it: "Designer",
+        de: "Designer",
+        en: "Designer",
+      },
     },
   ],
   detailAttributes: [
