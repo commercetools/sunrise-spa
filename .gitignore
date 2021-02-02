@@ -30,3 +30,9 @@ _vscode
 /sunrise.iml
 /graphql.config.json
 /.graphqlconfig.yml
+
+# terraform files
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.*
+Deploy/.terraform
