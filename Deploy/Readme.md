@@ -7,7 +7,7 @@ gcloud auth login
 gcloud auth configure-docker
 ```
 
-Make sure you have your environment variables set up.
+Make sure you have your [environment variables](https://github.com/commercetools/sunrise-spa/tree/development/Docs#Environment-variables) set up.
 
 Then run the following commands to build the project, create a docker container with the build and publish the container.
 

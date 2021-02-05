@@ -87,7 +87,7 @@ export default {
     },
 
     openingHours(channel) {
-      const field = channel.customFieldsRaw.find(({ name }) => name === 'openingTimes');
+      const field = (channel?.custom?.customFieldsRaw || []).find(({ name }) => name === 'openingTimes');
       const hours = field && field.value && field.value.en;
       return hours;
     },
@@ -160,9 +160,14 @@ export default {
                 postalCode,
                 country
               },
-              customFieldsRaw {
-                name
-                value
+              # add customFieldsRaw to the query and get error
+              #   Cannot query field 'customFieldsRaw' on type 'Channel'.
+              #   support: https://jira.commercetools.com/browse/SUPPORT-11327
+              custom {
+                  customFieldsRaw {
+                  name
+                  value
+                }
               },
               geoLocation {
                 ... on Point {
