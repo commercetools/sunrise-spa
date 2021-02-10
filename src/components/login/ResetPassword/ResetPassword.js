@@ -4,6 +4,7 @@ import ServerError from '../../common/form/ServerError/ServerError.vue';
 import LoadingButton from '../../common/form/LoadingButton/LoadingButton.vue';
 import BaseInput from '../../common/form/BaseInput/BaseInput.vue';
 import BaseForm from '../../common/form/BaseForm/BaseForm.vue';
+import { changeRoute } from '../../common/shared';
 
 export default {
   components: {
@@ -30,7 +31,9 @@ export default {
           tokenValue,
           newPassword: this.newPassword,
         },
-      });
+      }).then(
+        ()=>changeRoute("/login",this,false,false)
+      )
     },
     getErrorMessage({ code }) {
       if (code === 'InvalidSubject') {
