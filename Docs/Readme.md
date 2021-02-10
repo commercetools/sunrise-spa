@@ -119,9 +119,9 @@ In order to apply a discount code in cart, [AddDiscountCodeForm](https://github.
 
 Form to reset password at the login page.
 
-[Serverless function](https://github.com/commercetools/sunrise-spa/blob/master/src/components/login/ForgotPassword/ForgotPassword.js#L21) on AWS is used to send the email with reset link.
+When the user [submits the email form](https://github.com/commercetools/sunrise-spa/blob/3a435ec1ddaa9641310551fd7bf916a479bb81df/src/components/login/ForgotPassword/ForgotPassword.vue#L18) a token is [requested](https://github.com/commercetools/sunrise-spa/blob/3a435ec1ddaa9641310551fd7bf916a479bb81df/src/components/login/ForgotPassword/ForgotPassword.js#L24). You need `manage_customers` scope to ask for this token. In a production environment this request would be made by your server and then that token will be used to email a reset password url to the client to reset their password. In the demo the reset password url will be opened when [we got the token](https://github.com/commercetools/sunrise-spa/blob/3a435ec1ddaa9641310551fd7bf916a479bb81df/src/components/login/ForgotPassword/ForgotPassword.js#L26).
 
-It takes current project credentials to generate token and currently it will only work for client with `manage_customers` scope permission.
+In the [reset password route](https://github.com/commercetools/sunrise-spa/blob/64a8e7191c64a91e7b103901e4ec3af893782794/src/router.js#L84-L90) a token is stored in a url parameter. When the user [submits the new password](https://github.com/commercetools/sunrise-spa/blob/bac3cd78ffc576523b78c62895becba7d0e8410f/src/components/login/ResetPassword/ResetPassword.vue#L17) that token will be used to [reset the password](https://github.com/commercetools/sunrise-spa/blob/3a435ec1ddaa9641310551fd7bf916a479bb81df/src/components/login/ResetPassword/ResetPassword.js#L22) and when the password is successfully reset the user will be [re routed](https://github.com/commercetools/sunrise-spa/blob/3a435ec1ddaa9641310551fd7bf916a479bb81df/src/components/login/ResetPassword/ResetPassword.js#L35) to the login page.
 
 ## Pagination
 
