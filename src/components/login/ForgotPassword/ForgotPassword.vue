@@ -15,7 +15,7 @@
               <span>{{ $t('forgotPassword') }}</span>
             </div>
             <BaseForm :vuelidate="$v"
-                      :onSubmit="sendRecoveryEmail"
+                      :onSubmit="createToken"
                       #default="{ error, state }"
                       id="form-forgot-password">
               <ServerError :error="error"
