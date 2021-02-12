@@ -16,4 +16,4 @@ docker build --file ./Deploy/Dockerfile -t gcr.io/[your project]/[image name] .
 docker push gcr.io/[your project]/[image name]
 ```
 
-In the `Deploy/main.tf` file replace `[your project]` with your project, `[resource name]` with how to name it on cloud platform and `[image name]` with the image name you used and run the following command(s) in the `./Deploy` directory: `terraform init` (only the first time) and `terraform apply`.
+In the `Deploy/main.tf` file replace `[your project]` with your [google cloud project id](https://cloud.google.com/resource-manager/docs/creating-managing-projects), `[resource name]` with how to name it on cloud platform and `[image name]` with the image name you used and run the following command(s) in the `./Deploy` directory: `terraform init` (only the first time) and `terraform apply`.
