@@ -44,7 +44,7 @@ fragment CartFields on Cart {
     shippingMethod {
       id
       name
-      description
+      # description
     }
     price {
       ...MoneyFields
