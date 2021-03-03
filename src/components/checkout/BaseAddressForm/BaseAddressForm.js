@@ -28,7 +28,9 @@ export default {
   computed: {
     countries() {
       const configCountries = this.$sunrise.countries;
-      const countries = configCountries ? Object.entries(configCountries) : [];
+      const countries = configCountries ? Object.entries(configCountries)
+      .filter(([id])=>id===this.$route.params.country)
+      : [];
       return countries.map(([id, name]) => ({ id, name }));
     },
     formToJSON() {
@@ -45,7 +47,7 @@ export default {
       delete this.form.__typename;
     }
     if (!this.form.country) {
-      this.form = { ...this.form, country: this.countries[0]?.id };
+      this.form = { ...this.form, country: this.$route.params.country };
     }
   },
   validations: {

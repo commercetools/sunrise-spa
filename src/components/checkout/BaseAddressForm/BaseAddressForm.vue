@@ -81,7 +81,7 @@
         />
       </div>
     </div>
-    <div class="col-lg-12">
+    <div class="col-lg-12" style="display:none">
       <div class="billing-select mb-25">
         <label>
           {{ $t('country') }}

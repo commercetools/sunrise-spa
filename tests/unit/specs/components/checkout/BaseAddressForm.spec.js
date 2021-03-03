@@ -1,7 +1,9 @@
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import BaseAddressForm from '@/components/checkout/BaseAddressForm/BaseAddressForm.vue';
-
+const $route = {
+  params: {country:'US'}
+}
 const localVue = createLocalVue();
 localVue.use(Vuelidate);
 
@@ -11,7 +13,7 @@ describe('BaseAddressForm/index.vue', () => {
   beforeEach(() => {
     options = {
       localVue,
-      mocks: { $t: jest.fn() },
+      mocks: { $t: jest.fn(), $route },
       propsData: { address: null },
     };
   });
@@ -22,7 +24,7 @@ describe('BaseAddressForm/index.vue', () => {
 
   it('does not set form when no shipping address defined in cart', () => {
     const wrapper = shallowMount(BaseAddressForm, options);
-    expect(wrapper.vm.form).toEqual({});
+    expect(wrapper.vm.form).toEqual({country:'US'});
   });
 
   it('sets shipping address in form if defined', () => {
