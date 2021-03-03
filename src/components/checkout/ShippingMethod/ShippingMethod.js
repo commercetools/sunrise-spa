@@ -7,6 +7,7 @@ import BaseForm from '../../common/form/BaseForm/BaseForm.vue';
 import BaseLabel from '../../common/form/BaseLabel/BaseLabel.vue';
 import ServerError from '../../common/form/ServerError/ServerError.vue';
 import MONEY_FRAGMENT from '../../Money.gql';
+import { locale } from '../../common/shared';
 
 export default {
   components: {
@@ -50,6 +51,9 @@ export default {
       }
     },
     selectedShippingMethod() {
+      if(!this.selectedShippingMethod){
+        return
+      };
       this.updateMyCart([
         {
           setShippingMethod: {
@@ -89,11 +93,11 @@ export default {
     },
     shippingMethodsByLocation: {
       query: gql`
-        query checkoutShippingMethods($currency: Currency!, $country: Country!, $state: String) {
+        query checkoutShippingMethods($currency: Currency!, $country: Country!, $state: String,$locale:Locale) {
           shippingMethodsByLocation(currency: $currency, country: $country, state: $state) {
             id
             name
-            description
+            localizedDescription(locale:$locale)
             isDefault
             zoneRates {
               shippingRates {
@@ -112,6 +116,7 @@ export default {
       variables() {
         return {
           currency: this.me.activeCart.totalPrice.currencyCode,
+          locale: locale(this),
           ...this.me.activeCart.shippingAddress,
         };
       },

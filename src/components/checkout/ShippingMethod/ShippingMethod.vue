@@ -30,7 +30,7 @@
         <p
           data-test="checkout-form-shipping-method-description"
         >
-          {{ shippingMethod.description }}
+          {{ shippingMethod.localizedDescription }}
         </p>
       </div>
     </div>
@@ -65,7 +65,7 @@
               class="option-description"
               data-test="checkout-form-shipping-method-description"
             >
-              {{ shippingMethod.description }}
+              {{ shippingMethod.localizedDescription }}
             </p>
           </span>
           <BaseMoney
