@@ -57,7 +57,7 @@
           <b>{{ $t("shippingMethod") }}</b>
           <p class="mt-15">
             {{ me.order.shippingInfo.shippingMethod.name }} -
-            {{ me.order.shippingInfo.shippingMethod.description }}
+            {{ me.order.shippingInfo.shippingMethod.localizedDescription }}
           </p>
         </div>
         <div class="col-md-1"></div>

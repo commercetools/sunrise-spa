@@ -44,7 +44,7 @@ fragment OrderFields on Order {
   shippingInfo {
     shippingMethod {
       name
-      # description
+      localizedDescription(locale:$locale)
     }
     price {
       ...MoneyFields

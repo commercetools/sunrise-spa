@@ -35,46 +35,4 @@
       </div>
     </div>
   </div>
-  <!-- <div v-if="cartExists">
-    <BaseForm
-      :vuelidate="$v"
-      :onSubmit="setShippingMethod"
-      #default="{ error }"
-    >
-      <div class="row">
-        <div class="col-sm-12">
-          <ServerError :error="error" />
-        </div>
-      </div>
-      <BaseLabel
-        :vuelidate="$v.form.shippingMethod"
-        data-test="checkout-form-shipping-methods"
-      >
-        <BaseRadio
-          v-for="shippingMethod in shippingMethodsByLocation"
-          v-model="form.shippingMethod"
-          :value="shippingMethod.id"
-          :key="shippingMethod.id"
-          class="checkout-form-option"
-        >
-          <span class="option-name">
-            <b data-test="checkout-form-shipping-method-name">
-              {{ shippingMethod.name }}
-            </b>
-            <p
-              class="option-description"
-              data-test="checkout-form-shipping-method-description"
-            >
-              {{ shippingMethod.localizedDescription }}
-            </p>
-          </span>
-          <BaseMoney
-            :money="price(shippingMethod)"
-            class="option-price"
-            data-test="checkout-form-shipping-method-price"
-          />
-        </BaseRadio>
-      </BaseLabel>
-    </BaseForm>
-  </div> -->
 </template>

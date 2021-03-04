@@ -53,7 +53,7 @@
           <div v-if="shippingMethod"
                data-test="summary-shipping-method">
             {{ shippingMethod.name }}
-            <span v-if="shippingMethod.description">- {{ shippingMethod.description }}</span>
+            <span v-if="shippingMethod.localizedDescription">- {{ shippingMethod.localizedDescription }}</span>
           </div>
         </div>
       </div>
