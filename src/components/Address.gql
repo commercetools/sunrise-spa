@@ -6,8 +6,6 @@ fragment AddressFields on Address {
   postalCode
   city
   country
-  # contactInfo {
-  #   phone
-  #   email
-  # }
+  phone
+  email
 }
