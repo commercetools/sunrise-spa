@@ -152,7 +152,7 @@ export default {
             },
           };
           const checkout = new AdyenCheckout(configuration);
-          const card = checkout
+          checkout
             .create("card")
             .mount(this.$refs.adyen);
           this.loading = false;

@@ -68,7 +68,7 @@ export default {
         return {
           locale: locale(this),
           where: this?.categorySlug
-            ? `slug(en=\"${this.categorySlug}\")`
+            ? `slug(en="${this.categorySlug}")`
             : "parent is not defined",
         };
       },

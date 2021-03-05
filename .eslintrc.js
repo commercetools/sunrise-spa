@@ -9,6 +9,7 @@ module.exports = {
   extends: [
     'plugin:vue/vue3-essential',
     // '@vue/airbnb',
+    "eslint:recommended"
   ],
 
   rules: {
@@ -36,11 +37,19 @@ module.exports = {
         ],
       },
     ],
-
     'graphql/template-strings': [
       'error',
       {
         env: 'literal',
+        // validators: 'all',
+        // eslint-disable-next-line global-require
+        schemaJson: require('./graphql.schema.json'),
+      },
+    ],
+    'graphql/no-deprecated-fields': [
+      'error',
+      {
+        env: 'apollo',
         // eslint-disable-next-line global-require
         schemaJson: require('./graphql.schema.json'),
       },
@@ -86,11 +95,9 @@ module.exports = {
       'x-invalid-namespace': true,
     }],
   },
-
   parserOptions: {
     parser: 'babel-eslint',
   },
-
   plugins: [
     'graphql',
   ],

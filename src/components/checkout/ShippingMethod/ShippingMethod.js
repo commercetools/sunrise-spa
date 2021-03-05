@@ -53,7 +53,7 @@ export default {
     selectedShippingMethod() {
       if(!this.selectedShippingMethod){
         return
-      };
+      }
       this.updateMyCart([
         {
           setShippingMethod: {

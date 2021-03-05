@@ -24,7 +24,7 @@ export default {
       return this.$store.state.cartItems;
     },
     showLocationChange() {
-      return !Boolean(this.totalCartItems);
+      return !this.totalCartItems;
     },
   },
   methods: {
