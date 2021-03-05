@@ -72,7 +72,10 @@ export default {
     if (this?.$store?.state?.country !== this.$route.params.country) {
       this.$store.dispatch('setCountry', this.$route.params.country);
     }
-    if (this?.$store?.state?.locale !== loc(this)) {
+    if (
+      this?.$store?.state?.locale !==
+      this.$route?.params?.locale
+    ) {
       this.$store.dispatch('setLocale', loc(this));
     }
     checkLocale(this);

@@ -96,7 +96,17 @@ export const changeRoute = (route, component, push = true, keepScrollPosition = 
     );
   }
 };
-export const locale = (component) => component?.$route?.params?.locale;
+export const locale = (component) => {
+  //get case insensitive locale from sunrise config
+  const loc = //locale from url to upper case
+  (component?.$route?.params?.locale || "").toUpperCase();
+  const [, fromConfig] =
+    Object.keys(config.languages)
+      //all locale keys from config in [UPPERCASE,org]
+      .map((key) => [key.toUpperCase(), key])
+      .find(([key]) => key === loc) || []; //find the one from url
+  return fromConfig; //return value from config (in correct case)
+};
 export const isToughDevice = () => 'ontouchstart' in window;
 export const modifyQuery = (key, value, query, add = true) => {
   const values = [value]
