@@ -140,3 +140,11 @@ export function debounce(fn, time = 500) {
     );
   };
 }
+const arrayToString = value => Array.isArray(value)?value.join(', '):value
+export function productAttributes(attributes) {
+  return config.detailAttributes.map(
+    (attributeName) => attributes.find(([name]) => name === attributeName),
+  ).filter((x) => x).map(
+    ([, name, value]) => ({ name, value:arrayToString(value) }),
+  );
+}

@@ -2,8 +2,7 @@ import gql from 'graphql-tag';
 import productMixin from '../../../mixins/productMixin';
 import BasePrice from '../../common/BasePrice/BasePrice.vue';
 import ProductGallery from '../../productdetail/ProductGallery/ProductGallery.vue';
-import { locale, getValue } from '../../common/shared';
-import config from '../../../../sunrise.config';
+import { locale, getValue, productAttributes } from '../../common/shared';
 import cartMixin from '../../../mixins/cartMixin';
 
 export default {
@@ -61,11 +60,7 @@ export default {
           name, label, getValue(type.name, value, locale(this)),
         ],
       );
-      return config.detailAttributes.map(
-        (attributeName) => attributes.find(([name]) => name === attributeName),
-      ).filter((x) => x).map(
-        ([, name, value]) => ({ name, value }),
-      );
+      return productAttributes(attributes);
     },
   },
   apollo: {

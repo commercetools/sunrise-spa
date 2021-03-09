@@ -1,3 +1,4 @@
+import sunriseConfig from "../../../../sunrise.config";
 export default {
   props: ['values', 'title'],
   computed: {
@@ -9,6 +10,11 @@ export default {
     setValue(value) {
       if (this.title === 'location') {
         this.$store.dispatch('setCountry', value);
+        if(sunriseConfig?.channels?.[value]){
+          this.$store.dispatch("setChannel", {
+            id: sunriseConfig.channels[value],
+          });
+        }
         this.$router.replace({
           ...this.$route,
           params: {

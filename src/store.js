@@ -26,6 +26,9 @@ const availableCountries = Object.keys(
 
 export const fallbackLocale = availableLocales[0];
 const fallbackCountry = availableCountries[0];
+const channel = sunriseConfig?.channels?.[fallbackCountry]
+  ? {id:sunriseConfig.channels[fallbackCountry]}
+  : null
 const obtainCurrency = (country) =>
   sunriseConfig.formats.number[country]?.currency?.currency;
 
@@ -64,7 +67,7 @@ export default new Vuex.Store({
     locale: fallbackLocale,
     country: fallbackCountry,
     currency: obtainCurrency(fallbackCountry),
-    channel: null,
+    channel,
     storeName: null,
     tokenInfo: null,
     authenticated: false,

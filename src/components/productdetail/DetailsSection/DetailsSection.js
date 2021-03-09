@@ -1,6 +1,5 @@
 import gql from 'graphql-tag';
-import { locale, getValue } from '../../common/shared';
-import config from '../../../../sunrise.config';
+import { locale, getValue, productAttributes } from '../../common/shared';
 
 export default {
   props: {
@@ -22,11 +21,7 @@ export default {
           name, label, getValue(type.name, value, locale(this)),
         ],
       );
-      return config.detailAttributes.map(
-        (attributeName) => attributes.find(([name]) => name === attributeName),
-      ).filter((x) => x).map(
-        ([, name, value]) => ({ name, value }),
-      );
+      return productAttributes(attributes);
     },
   },
   methods: {
