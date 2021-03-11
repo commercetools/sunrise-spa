@@ -1,4 +1,5 @@
 import cartMixin from '../../../mixins/cartMixin';
+import { addLine } from '../../common/shared';
 // import ServerError from '../../common/form/ServerError/index.vue';
 // import LoadingButton from '../../common/form/LoadingButton/index.vue';
 // import BaseSelect from '../../common/form/BaseSelect/index.vue';
@@ -8,34 +9,20 @@ export const createCartVariables = (component) => ({
   country: component.$store.state.country,
   shippingAddress: { country: component.$store.state.country },
 });
-export const updateCartVariables = (component) => {
-  const distributionChannel = component.$store.state.channel ? {
-    distributionChannel: {
-      typeId: 'channel',
-      id: component.$store.state.channel.id,
-    },
-  } : {};
-
-  return ({
-    addLineItem: {
-      sku: component.sku,
-      quantity: Number(component.quantity),
-      ...distributionChannel,
-    },
-  });
-};
 export default {
   props: {
     sku: {
       type: String,
       required: true,
     },
-  },
-  components: {
-    // BaseForm,
-    // BaseSelect,
-    // LoadingButton,
-    // ServerError,
+    isOnStock: {
+      type: Boolean,
+      required: true,
+    },
+    availableQuantity: {
+      type: Number,
+      required: false,
+    },
   },
   mixins: [cartMixin],
   data: () => ({
@@ -45,15 +32,20 @@ export default {
     isLoading() {
       return this.$apollo.loading;
     },
+    availableQ() {
+      return typeof this.availableQuantity !== "undefined"
+    },
   },
   methods: {
     async addLineItem() {
+      if(!this.isOnStock){
+        return;
+      }
       if (!this.cartExists) {
         await this.createMyCart(createCartVariables(this));
       }
-      return this.updateMyCart(
-        updateCartVariables(this),
-      ).then(() => this.$store.dispatch('openMiniCart'));
+      return addLine(this)
+        .then(() => this.$store.dispatch('openMiniCart'));
     },
   },
 };

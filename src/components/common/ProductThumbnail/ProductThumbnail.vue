@@ -29,13 +29,11 @@
             data-toggle="tooltip"
             title="Add to Cart"
             href="#"
-            @click.prevent="addLineItem(matchingVariant.sku)"
+            @click.prevent="addLineItem()"
           >
             <i class=" dl-icon-cart29"></i>
             <span>{{ $t('addToCart') }}</span></a
           >
-          <!-- <a data-toggle="tooltip" title="Add to Wishlist" href="#"><i class="dl-icon-heart4"></i></a>
-        <a data-toggle="tooltip" title="Add to Compare" href="#"><i class="dl-icon-compare"></i></a> -->
         </div>
       </div>
       <div class="product-content text-center mt-15">

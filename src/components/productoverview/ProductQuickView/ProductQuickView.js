@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import productMixin from '../../../mixins/productMixin';
 import BasePrice from '../../common/BasePrice/BasePrice.vue';
 import ProductGallery from '../../productdetail/ProductGallery/ProductGallery.vue';
-import { locale, getValue, productAttributes } from '../../common/shared';
+import { locale, getValue, productAttributes, addLine } from '../../common/shared';
 import cartMixin from '../../../mixins/cartMixin';
 
 export default {
@@ -33,19 +33,11 @@ export default {
       this.quantity = 1;
     },
     async addToCart() {
-      if (!this.cartExists) {
-        await this.createMyCart({
-          currency: this.$store.state.currency,
-          country: this.$store.state.country,
-          shippingAddress: { country: this.$store.state.country },
+      return addLine(this)
+        .then(() => { 
+          this.closeModal(); this.$store.dispatch('openMiniCart'); 
         });
-      }
-      return this.updateMyCart({
-        addLineItem: {
-          sku: this.productSku,
-          quantity: Number(this.quantity),
-        },
-      }).then(() => { this.closeModal(); this.$store.dispatch('openMiniCart'); });
+
     },
   },
   computed: {
@@ -62,6 +54,9 @@ export default {
       );
       return productAttributes(attributes);
     },
+    sku() {//needed for addLine to work
+      return this.productSku;
+    }
   },
   apollo: {
     product: {

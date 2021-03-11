@@ -148,3 +148,34 @@ export function productAttributes(attributes) {
     ([, name, value]) => ({ name, value:arrayToString(value) }),
   );
 }
+export const addLine = async (component) => {
+  if (!component.cartExists) {
+    await component.createMyCart({
+      currency: component.$store.state.currency,
+      country: component.$store.state.country,
+      shippingAddress: { country: component.$store.state.country },
+    });
+  }
+  const distributionChannel = component.$store.state.channel ? {
+    distributionChannel: {
+      typeId: 'channel',
+      id: component.$store.state.channel.id,
+    },
+  } : {};
+  const supplyChannel = component.$store.state.channel ? {
+    supplyChannel: {
+      typeId: 'channel',
+      id: component.$store.state.channel.id,
+    },
+  } : {};
+
+  return component.updateMyCart({
+    addLineItem: {
+      sku: component.sku,
+      quantity: Number(component.quantity),
+      ...distributionChannel,
+      ...supplyChannel
+    },
+  })
+
+}
