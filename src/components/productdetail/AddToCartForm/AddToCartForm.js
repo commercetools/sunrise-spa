@@ -37,6 +37,10 @@ export default {
     },
   },
   methods: {
+    submitForm() {
+      debugger
+      this.$refs.form.submit();
+    },
     async addLineItem() {
       if(!this.isOnStock){
         return;
