@@ -8,7 +8,7 @@ import Vuelidate from 'vuelidate';
 import ProductZoomer from 'vue-product-zoomer';
 import * as VueGoogleMaps from 'vue2-google-maps';
 import App from './App/App.vue';
-import router from './router';
+import router from './router/index';
 import store from './store';
 import apolloProvider from './apollo';
 import i18n from './i18n/i18n';
