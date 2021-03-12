@@ -30,7 +30,11 @@
           >
             {{$t('addToCart')}}
           </a> -->
-          <input type="submit" :value="$t('addToCart')">
+          <input
+            data-test="add-to-cart-button"
+            type="submit" 
+            :value="$t('addToCart')"
+          >
         </div>
       </div>
     </form>
