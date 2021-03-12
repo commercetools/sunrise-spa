@@ -38,7 +38,6 @@ export default {
   },
   methods: {
     submitForm() {
-      debugger
       this.$refs.form.submit();
     },
     async addLineItem() {
