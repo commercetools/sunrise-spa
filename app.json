@@ -9,6 +9,9 @@
     "repository": "https://github.com/photon-learning/sunrise-spa",
     "buildpacks": [
       {
+        "url": "heroku/nodejs"
+      },
+      {
         "url": "https://github.com/heroku/heroku-buildpack-static"
       }
     ]
