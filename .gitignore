@@ -7,7 +7,6 @@ node_modules
 /test-results/
 selenium-debug.log
 docker-compose.yml
-server.js
 
 # local env files
 .env.local
