@@ -14,7 +14,8 @@
         data-test="attribute-select-option"
         :key="value"
       >
-        {{ value }}
+      
+        {{ value.length == 1 ? value[0].label : value  }}
       </option>
     </select>
   </div>

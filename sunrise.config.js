@@ -97,15 +97,14 @@ export default {
         },
     ],
     detailAttributes: [
-        "productcolor",
+        "color",
         "designer",
         "colorFreeDefinition",
-        "size",
         "brand",
         "choosegender",
         "articleNumberManufacturer",
         "productDescription"
     ],
-    variantSelector: ["color", "size"],
-    variantInProductName: ["size"],
+    variantSelector: ["color", "testsize"],
+    variantInProductName: ["testsize"],
 };

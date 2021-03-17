@@ -6,7 +6,7 @@ en:
   newCollection: "NEW COLLECTION"
 id:
   midSeasonSale: "BAZAAR SEPATU"
-  up50: "DISKON SAMPAI 50%"
+  up50: "DISKON S/D 50%"
   shopNow: "BELI SEKARANG"
   checkout: "PESAN"
   newCollection: "KOLEKSI BARU"
