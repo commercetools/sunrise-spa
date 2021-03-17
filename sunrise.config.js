@@ -105,6 +105,6 @@ export default {
         "articleNumberManufacturer",
         "productDescription"
     ],
-    variantSelector: ["color", "testsize"],
+    variantSelector: ["color","testsize"],
     variantInProductName: ["testsize"],
 };
