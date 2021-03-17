@@ -6,6 +6,8 @@ node_modules
 /tests/e2e/screenshots/
 /test-results/
 selenium-debug.log
+docker-compose.yml
+server.js
 
 # local env files
 .env.local

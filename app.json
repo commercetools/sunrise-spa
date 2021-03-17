@@ -1,0 +1,15 @@
+{
+    "name": "Sunrise POC CommerceTools",
+    "description": "This app does one little thing, and does it well.",
+    "keywords": [
+      "productivity",
+      "HTML5",
+      "scalpel"
+    ],
+    "repository": "https://github.com/photon-learning/sunrise-spa",
+    "buildpacks": [
+      {
+        "url": "https://github.com/heroku/heroku-buildpack-static"
+      }
+    ]
+  }
