@@ -57,4 +57,3 @@ Follow the same steps explained in the section [How to use your own project data
 CYPRESS_CT_CLIENT_ID=<your client ID>
 CYPRESS_CT_CLIENT_SECRET=<your client secret>
 ```
-
