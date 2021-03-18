@@ -36,7 +36,7 @@
       </div>
       <div
         class="single-slider bg-img slider-height-2 align-items-center custom-d-flex"
-        style="background-image:url(assets/img/banner_new2.jpeg);"
+        style="background-image:url(assets/img/banner2_new.png);"
       >
         <div class="container">
           <div class="row height-100-percent align-items-center">
