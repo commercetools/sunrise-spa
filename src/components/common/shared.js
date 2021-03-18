@@ -148,3 +148,7 @@ export function productAttributes(attributes) {
     ([, name, value]) => ({ name, value:arrayToString(value) }),
   );
 }
+
+export function descriptiontext(description) {
+  return description;
+}

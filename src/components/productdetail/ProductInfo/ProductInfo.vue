@@ -24,7 +24,7 @@
         </h3>
         <VariantSelector :sku="sku" />
         <AddToCartForm :sku="sku" />
-        <DetailsSection :sku="sku" />
+        <DetailsSection :sku="sku" :description="currentProduct.description"/>
         <!-- <SocialMediaLinks/> -->
 
         <!-- <div class="store-delivery-wrap">

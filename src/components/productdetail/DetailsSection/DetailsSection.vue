@@ -33,6 +33,9 @@
                   {{ attribute.label || attribute.value }}
                 </span>
               </li>
+              <li>
+                {{ description }}
+              </li>
             </ul>
           </div>
         </div>

@@ -1,11 +1,15 @@
 import gql from 'graphql-tag';
-import { locale, getValue, productAttributes } from '../../common/shared';
+import { locale, getValue, productAttributes,descriptiontext } from '../../common/shared';
 
 export default {
   props: {
     sku: {
       type: String,
       required: true,
+    },
+    description: {
+      type: String,
+      required: false,
     },
   },
   data: () => ({
@@ -23,6 +27,9 @@ export default {
       );
       return productAttributes(attributes);
     },
+    descriptiontext(){
+      return descriptiontext(this.description);
+    }
   },
   methods: {
     openAccordion(e) {

@@ -52,7 +52,7 @@
               <router-link
                 :to="{ name: 'products', params: { categorySlug: 'man-soccer' } }"
               >
-                <img src="assets/img/acc.jpg" alt="banner" />
+                <img src="assets/img/soccer_banner.jpeg" alt="banner" />
                 <div class="banner-content">
                   <h3>SOCCER</h3>
                 </div>
@@ -70,7 +70,7 @@
               <router-link
                 :to="{ name: 'products', params: { categorySlug: 'kids' } }"
               >
-                <img src="assets/img/s3.jpg" alt="banner" />
+                <img src="assets/img/kids_banner.jpeg" alt="banner" />
                 <div class="banner-content">
                   <h3>KIDS SHOES</h3>
                 </div>

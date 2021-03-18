@@ -41,6 +41,7 @@ export default {
             masterData {
               current {
                 name(locale: $locale)
+                description(locale: $locale)
                 slug(locale: $locale)
                 variant(sku: $sku) {
                   price(currency: $currency,country:$country,channelId:$channelId) {
