@@ -93,6 +93,21 @@ describe('OrderDetailPage', () => {
       });
     cy.get('[data-test=cart-shipping-price]')
       .contains(/^\s*10,00\s€\s*$/);
+    cy.get('[data-test=address-name]')
+      .eq(0)
+      .should((e) => {
+        expect(e.text()).to.match(/^\s*Charlie Bucket\s*$/);
+      });
+    cy.get('[data-test=address-street]')
+      .eq(0)
+      .should((e) => {
+        expect(e.text()).to.match(/^\s*Sonnenallee\s*$/);
+      });
+    cy.get('[data-test=address-email]')
+      .eq(0)
+      .should((e) => {
+        expect(e.text()).to.match(/^\s*charlie\.bucket/);
+      });
     // no tax on order detail
     // cy.get('[data-test=cart-taxes-amount]')
     //   .should((e) => {
