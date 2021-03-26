@@ -39,9 +39,9 @@ function createClient() {
     link: authLink.concat(errorLink),
   }).apolloClient;
 }
-
+export const apolloClient = createClient();
 const apolloProvider = new VueApollo({
-  defaultClient: createClient(),
+  defaultClient: apolloClient,
   errorHandler(error) {
     // eslint-disable-next-line no-console
     console.error('An error occurred in a request to commercetools', error);
