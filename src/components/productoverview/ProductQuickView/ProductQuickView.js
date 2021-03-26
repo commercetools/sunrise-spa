@@ -43,14 +43,6 @@ export default {
     },
   },
   computed: {
-    matchingVariant() {
-      return this.currentProduct.variant || {};
-    },
-    productAttributes() {
-      //@todo: look at how src/components/productdetail/ProductInfo/ProductInfo.vue
-      //  renders, re use the components used in ProductInfo
-      return [];
-    },
     sku() {//needed for addLine to work
       return this.productSku;
     }

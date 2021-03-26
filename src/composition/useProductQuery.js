@@ -15,11 +15,35 @@ export default (props,ctx,selectSku=(props)=>props.productSku) => {
   const channel = useStore(ctx, selectChannel);
   const sku = computed(()=>selectSku(props));
   const apolloClient = inject(DefaultApolloClient);
-  const currentProduct = computed(()=> 
+  const currentProduct = computed(()=>
     product
       .value
       ?.masterData
       ?.current || {}
+  );
+  const availability = computed(()=>
+    currentProduct
+      .value
+      ?.variant
+      ?.availability
+      ?.channels
+      ?.results?.[0]
+      ?.availability
+  );
+  const availableQuantity = computed(()=>
+    availability.value?.availableQuantity
+  );
+  const availableQ = computed(()=>
+    typeof availableQuantity.value !== "undefined"
+  );
+  const isOnStock = computed(()=>{
+    const inStock = availability.value?.isOnStock;
+    return typeof inStock !== "boolean"
+      ? true
+      : inStock
+  });
+  const matchingVariant = computed(()=>
+    currentProduct.value?.variant || {}
   );
   const getProduct = () => {
     if(sku.value){
@@ -86,7 +110,10 @@ export default (props,ctx,selectSku=(props)=>props.productSku) => {
           withAvailability: Boolean(channel.value?.id)
         }
       )).result;
-      watch(result,(result)=>product.value=result.product);
+      product.value=result.value?.product
+      watch(result,(result)=>{
+        product.value=result.product
+      });
     }
   };
   watch(
@@ -96,5 +123,13 @@ export default (props,ctx,selectSku=(props)=>props.productSku) => {
     }
   );
   onMounted(getProduct);
-  return { currentProduct, product }
+  return { 
+    currentProduct,
+    product,
+    availableQuantity,
+    availableQ,
+    availability,
+    isOnStock,
+    matchingVariant
+  }
 };

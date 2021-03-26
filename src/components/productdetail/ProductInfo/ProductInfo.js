@@ -24,30 +24,4 @@ export default {
     BasePrice,
     VariantSelector,
   },
-  computed: {
-    matchingVariant() {
-      return this.currentProduct.variant || {};
-    },
-    availability() {
-      return this.currentProduct
-        ?.variant
-        ?.availability
-        ?.channels
-        ?.results?.[0]
-        ?.availability;
-    },
-    isOnStock() {
-      const inStock = this.availability?.isOnStock;
-      return typeof inStock !== "boolean"
-        ? true
-        : inStock
-    },
-    availableQuantity() {
-      return this.availability?.availableQuantity;
-    },
-    availableQ() {
-      return typeof this.availableQuantity !== "undefined"
-    },
-
-  },
 };
