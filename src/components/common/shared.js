@@ -107,6 +107,11 @@ export const locale = (component) => {
       .find(([key]) => key === loc) || []; //find the one from url
   return fromConfig; //return value from config (in correct case)
 };
+export const localeFromString = loc => locale({
+  $route:{
+    params:{ locale:loc }
+  }
+});
 export const isToughDevice = () => 'ontouchstart' in window;
 export const modifyQuery = (key, value, query, add = true) => {
   const values = [value]

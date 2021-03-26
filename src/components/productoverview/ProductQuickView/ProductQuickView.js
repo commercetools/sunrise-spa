@@ -4,6 +4,8 @@ import BasePrice from '../../common/BasePrice/BasePrice.vue';
 import ProductGallery from '../../productdetail/ProductGallery/ProductGallery.vue';
 import { locale, getValue, productAttributes, addLine } from '../../common/shared';
 import cartMixin from '../../../mixins/cartMixin';
+import useLocale from '../../../composition/useLocale';
+import { watch } from '@vue/composition-api';
 
 export default {
   mixins: [productMixin, cartMixin],
@@ -18,6 +20,16 @@ export default {
   props: {
     showModal: Boolean,
     productSku: String,
+  },
+  setup(){
+    //example of watching locale
+    const locale = useLocale();
+    watch(
+      locale,
+      // eslint-disable-next-line no-console
+      (arg)=>console.log('changed locale:',arg)
+    );
+    return {locale}
   },
   watch: {
     showModal() {

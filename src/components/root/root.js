@@ -1,6 +1,7 @@
 import { locale as loc } from "../common/shared";
 import MiniCart from "../header/MiniCart/MiniCart.vue";
 import config from "../../../sunrise.config";
+import { provide, watch,ref } from '@vue/composition-api';
 // locale is an optional route parameter, if it's missing
 // then see if it's set in store (local storage) and use that
 // if it's not in store then default to en
@@ -35,11 +36,25 @@ const checkLocale = (component) => {
   }
 };
 export default {
+  props: {
+    locale: String,
+    country:String
+  },
   components: {
     MiniCart,
   },
+  setup(props) {
+    const loc=ref(props.locale);
+    watch(
+      ()=>props.locale,
+      (current)=>{
+        loc.value=current
+      }
+    );
+    provide('locale', loc);
+  },
   computed: {
-    locale() {
+    computedLocale() {
       return loc(this);
     },
     miniCartOpen() {

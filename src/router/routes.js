@@ -31,6 +31,7 @@ export default [
     })?/:locale(${
       Object.keys(config.languages).join('|')
     })?`,
+    props:true,
     component: Root,
     children: [
       {

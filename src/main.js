@@ -16,6 +16,7 @@ import sunriseConfig from '../sunrise.config';
 import './registerServiceWorker';
 import './assets/scss/main.scss';
 import { locale } from './components/common/shared';
+import VueCompositionAPI from '@vue/composition-api'
 
 Vue.config.productionTip = false;
 
@@ -31,6 +32,7 @@ Vue.use(VueScrollTo);
 Vue.use(VModal);
 Vue.use(Vuelidate);
 Vue.use(ProductZoomer);
+Vue.use(VueCompositionAPI);
 Vue.directive('vpshow', {
   /* eslint-disable no-param-reassign */
   bind(el, binding) {
