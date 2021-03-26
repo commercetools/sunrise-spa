@@ -5,7 +5,10 @@ import ProductGallery from '../../productdetail/ProductGallery/ProductGallery.vu
 import { locale, getValue, productAttributes, addLine } from '../../common/shared';
 import cartMixin from '../../../mixins/cartMixin';
 import useLocale from '../../../composition/useLocale';
-import { watch } from '@vue/composition-api';
+import { computed, watch } from '@vue/composition-api';
+import useStore from '../../../composition/useStore';
+import { selectChannel, selectCurrency } from '../../../composition/selectors';
+import useCountry from '../../../composition/useCountry';
 
 export default {
   mixins: [productMixin, cartMixin],
@@ -21,13 +24,32 @@ export default {
     showModal: Boolean,
     productSku: String,
   },
-  setup(){
+  setup(props,ctx){
     //example of watching locale
     const locale = useLocale();
+    const country = useCountry();
+    const currency = useStore(ctx, selectCurrency);
+    const channel = useStore(ctx, selectChannel);
+    const sku = computed(()=>props.productSku);
     watch(
-      locale,
-      // eslint-disable-next-line no-console
-      (arg)=>console.log('changed locale:',arg)
+      [currency,locale,country, sku,channel],
+      ([currency,locale,country,sku,channel])=>{
+        if(sku){
+          //@todo: use graphql here
+          //we have all the parameters perform query same as:
+          // eslint-disable-next-line max-len
+          //https://github.com/commercetools/sunrise-spa/blob/b0e203f57685362f80bc53f290d4ea7dc929e62a/src/components/productdetail/ProductInfo/ProductInfo.js#L109-L122
+        }
+        // eslint-disable-next-line no-console
+        console.log(
+          'in quick view:',
+          currency,
+          locale,
+          country,
+          sku,
+          channel?.id
+        );
+      }
     );
     return {locale}
   },

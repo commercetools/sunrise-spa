@@ -44,14 +44,17 @@ export default {
     MiniCart,
   },
   setup(props) {
-    const loc=ref(props.locale);
+    const locale=ref(props.locale);
+    const country = ref(props.country);
     watch(
-      ()=>props.locale,
-      (current)=>{
-        loc.value=current
+      props,
+      (props)=>{
+        locale.value=props.locale;
+        country.value=props.country;
       }
     );
-    provide('locale', loc);
+    provide('locale', locale);
+    provide('country', country);
   },
   computed: {
     computedLocale() {
