@@ -5,6 +5,7 @@ import AddToCartForm from '../AddToCartForm/AddToCartForm.vue';
 import BasePrice from '../../common/BasePrice/BasePrice.vue';
 import VariantSelector from '../VariantSelector/VariantSelector.vue';
 import useProductQuery from '../../../composition/useProductQuery';
+import { ref, watch } from 'vue-demi';
 
 export default {
   props: {
@@ -14,7 +15,9 @@ export default {
     },
   },
   setup(props,ctx){
-    return useProductQuery(props,ctx,props=>props.sku);
+    const sku = ref(props.sku);
+    watch(props,newProps=>sku.value=newProps.sku)
+    return useProductQuery(props,ctx,sku);
   },
   components: {
     DetailsSection,

@@ -1,25 +1,37 @@
-import BasePrice from '../../common/BasePrice/BasePrice.vue';
 import ProductGallery from '../../productdetail/ProductGallery/ProductGallery.vue';
-import { addLine } from '../../common/shared';
-import cartMixin from '../../../mixins/cartMixin';
+import SocialMediaLinks from '../../productdetail/SocialMediaLinks/SocialMediaLinks.vue';
+import DetailsSection from '../../productdetail/DetailsSection/DetailsSection.vue';
+import AddToCartForm from '../../productdetail/AddToCartForm/AddToCartForm.vue';
+import BasePrice from '../../common/BasePrice/BasePrice.vue';
+import VariantSelector from '../../productdetail/VariantSelector/VariantSelector.vue';
 import useProductQuery from '../../../composition/useProductQuery';
+import { provide, ref, watch } from 'vue-demi';
 
 export default {
-  mixins: [cartMixin],
   data: () => ({
-    product: null,
     quantity: 1,
   }),
   components: {
-    BasePrice,
+    DetailsSection,
     ProductGallery,
+    SocialMediaLinks,
+    AddToCartForm,
+    BasePrice,
+    VariantSelector,
   },
   props: {
     showModal: Boolean,
     productSku: String,
   },
   setup(props,ctx){
-    return useProductQuery(props,ctx);
+    const sku = ref(props.productSku)
+    provide('onVariantSelect', (newSku)=>
+      sku.value=newSku
+    );
+    watch(props,(props)=>{
+      sku.value=props.productSku;
+    });
+    return useProductQuery(props,ctx,sku);
   },
   watch: {
     showModal() {
@@ -34,12 +46,8 @@ export default {
       this.$emit('close-modal');
       this.quantity = 1;
     },
-    async addToCart() {
-      return addLine(this)
-        .then(() => { 
-          this.closeModal(); this.$store.dispatch('openMiniCart'); 
-        });
-
+    productAdded() {
+      this.closeModal();
     },
   },
   computed: {

@@ -6,14 +6,13 @@ import useCountry from './useCountry';
 import useLocale from './useLocale';
 import useStore from './useStore';
 
-export default (props,ctx,selectSku=(props)=>props.productSku) => {
+export default (props,ctx,sku) => {
   //example of watching locale
   const product = ref(null);
   const locale = useLocale();
   const country = useCountry();
   const currency = useStore(ctx, selectCurrency);
   const channel = useStore(ctx, selectChannel);
-  const sku = computed(()=>selectSku(props));
   const apolloClient = inject(DefaultApolloClient);
   const currentProduct = computed(()=>
     product

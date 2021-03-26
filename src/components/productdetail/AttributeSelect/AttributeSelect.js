@@ -1,3 +1,4 @@
+import { inject } from 'vue-demi';
 import HooverDropdown from '../../common/HoverDropdown/HoverDropdown.vue';
 
 export default {
@@ -26,6 +27,10 @@ export default {
       required: true,
     },
   },
+  setup() {
+    const onVariantSelect = inject('onVariantSelect',false);
+    return {onVariantSelect};
+  },
   computed: {
     selectedValue: {
       get() {
@@ -35,7 +40,13 @@ export default {
         const sku = this.variantCombinations.find(
           (combi) => combi[this.id] === value,
         )?.sku;
-        if (sku) this.$router.push({ path: sku });
+        if (sku) {
+          if(this.onVariantSelect){
+            this.onVariantSelect(sku);
+            return sku;
+          }
+          this.$router.push({ path: sku })
+        }
       },
     },
   },

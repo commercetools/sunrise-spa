@@ -48,6 +48,7 @@ export default {
         await this.createMyCart(createCartVariables(this));
       }
       return addLine(this)
+        .then(() => this.$emit('product-added'))
         .then(() => this.$store.dispatch('openMiniCart'));
     },
   },

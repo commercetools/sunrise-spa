@@ -24,36 +24,30 @@
           <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
             <ProductGallery :sku="productSku" :quickview="true" />
           </div>
-          <div v-if="product" class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
-            <div class="product-details-content">
-              <h2>{{ currentProduct.name }}</h2>
-              <h3><BasePrice :price="matchingVariant.price" /></h3>
-              <div class="product-dec-action-wrap">
-                <div class="quality-cart-wrap">
-                  <div class="quality-wrap">
-                    <input
-                      class="input-text qty"
-                      type="text"
-                      maxlength="12"
-                      v-model="quantity"
-                    />
-                  </div>
-                  <div class="pro-cart-wrap">
-                    <a href @click.prevent="addToCart">{{ $t('addToCart') }}</a>
-                  </div>
+          <div class="row" v-if="product">
+            <div class="col-lg-7">
+              <div
+                class="product-details-content product-details-ptb"
+                data-test="product-data"
+              >
+                <h2
+                  data-test="product-name"
+                >
+                  {{ currentProduct.name }}
+                </h2>
+                <h3>
+                  <BasePrice :price="matchingVariant.price" />
+                </h3>
+                <VariantSelector :sku="sku" />
+                <div v-if="availableQ">
+                  {{$t('inStock')}}: {{availableQuantity}}
                 </div>
-              </div>
-              <div class="pt-30">
-                <ul class="product-features-list">
-                  <li
-                    v-for="attribute in productAttributes"
-                    data-test="product-attributes-list"
-                    :key="attribute.name"
-                  >
-                    <span class="attribute-name">{{ attribute.name }}:</span>
-                    {{ attribute.label || attribute.value }}
-                  </li>
-                </ul>
+                <AddToCartForm 
+                  :sku="sku" 
+                  :isOnStock="isOnStock" 
+                  :availableQuantity="availableQuantity"
+                  @product-added="productAdded"
+                />
               </div>
             </div>
           </div>
