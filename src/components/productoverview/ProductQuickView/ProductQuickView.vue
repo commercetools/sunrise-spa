@@ -25,7 +25,7 @@
             <ProductGallery :sku="productSku" :quickview="true" />
           </div>
           <div class="row" v-if="product">
-            <div class="col-lg-7">
+            <div class="col-lg-12" style="padding-top:30px">
               <div
                 class="product-details-content product-details-ptb"
                 data-test="product-data"
