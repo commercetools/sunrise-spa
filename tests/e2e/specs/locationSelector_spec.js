@@ -4,7 +4,8 @@ describe('Location selector', () => {
   });
 
   it('changes text to selected language', () => {
-    cy.changeLanguage('Deutsch');
+    cy.changeLanguage('Deutsch')
+    .wait(500);
 
     cy.get('[data-test=product-name]')
       .should('contain', 'Sneakers „R261” Hogan Rebel grau', { timeout: Cypress.config('graphqlTimeout') });

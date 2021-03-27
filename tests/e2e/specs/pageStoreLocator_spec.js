@@ -7,7 +7,7 @@ describe('Store locator', () => {
     // select Berlin store
     cy.get('#place-input', { timeout: Cypress.config('graphqlTimeout') })
       .clear()
-      .type('berlin');
+      .type('berlin germany');
     cy.get('.pac-icon.pac-icon-marker', { timeout: Cypress.config('graphqlTimeout') })
       .eq(0)
       .click();

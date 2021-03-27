@@ -19,11 +19,13 @@ describe('BaseSelect/index.vue', () => {
     expect(shallowMount(BaseSelect, options).vm).toBeTruthy();
   });
 
-  it('updates model with prop value', () => {
+  it('updates model with prop value', async () => {
     const wrapper = shallowMount(BaseSelect, options);
     expect(wrapper.vm.model).toBeNull();
 
     wrapper.setProps({ value: 'some val' });
+    //tests will fail after minor update
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.model).toBe('some val');
   });
 

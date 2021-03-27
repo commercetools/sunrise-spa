@@ -34,7 +34,7 @@ describe('ValidationError/index.vue', () => {
     expect(shallowMount(ValidationError, options).vm).toBeTruthy();
   });
 
-  it('returns validations', () => {
+  it('returns validations', async () => {
     const wrapper = shallowMount(ValidationError, options);
     expect(wrapper.vm.validations).toEqual([]);
 
@@ -47,10 +47,12 @@ describe('ValidationError/index.vue', () => {
         },
       },
     });
+    //tests will fail after minor update
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.validations).toEqual(['error1', 'error2', 'error3']);
   });
 
-  it('uses custom translation if available', () => {
+  it('uses custom translation if available', async () => {
     const wrapper = shallowMount(ValidationError, options);
     wrapper.setProps({
       vuelidate: {
@@ -59,15 +61,19 @@ describe('ValidationError/index.vue', () => {
         },
       },
     });
+    //tests will fail after minor update
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.getErrorMessage('required')).toEqual(requiredTranslation);
 
     wrapper.setProps({
       customErrors: { required: 'custom error' },
     });
+    //tests will fail after minor update
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.getErrorMessage('required')).toEqual('custom error');
   });
 
-  it('returns unknown validation when no translation available', () => {
+  it('returns unknown validation when no translation available', async () => {
     const wrapper = shallowMount(ValidationError, options);
     wrapper.setProps({
       vuelidate: {
@@ -76,10 +82,12 @@ describe('ValidationError/index.vue', () => {
         },
       },
     });
+    //tests will fail after minor update
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.getErrorMessage('email')).toEqual(unknownValidationTranslation);
   });
 
-  it('passes params attributes to translation', () => {
+  it('passes params attributes to translation', async () => {
     const wrapper = shallowMount(ValidationError, options);
     wrapper.setProps({
       vuelidate: {
@@ -88,6 +96,8 @@ describe('ValidationError/index.vue', () => {
         },
       },
     });
+    //tests will fail after minor update
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.getErrorMessage('params')).toEqual('min 3 max 5');
   });
 

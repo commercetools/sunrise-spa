@@ -11,9 +11,14 @@ module.exports = {
     '\\.(gql|graphql)$': 'jest-transform-graphql',
     '^.+\\.jsx?$': 'babel-jest',
   },
+  //another point for React, need to apply this workarround because
+  //  amateur vue-apollo takes months to merge in a simple fix
+  //  https://github.com/vuejs/vue-apollo/issues/1081#issuecomment-746652213
   moduleNameMapper: {
+    '@vue/apollo-composable': '@vue/apollo-composable/dist/index.js',
     '^@/(.*)$': '<rootDir>/src/$1',
   },
+  transformIgnorePatterns: ['/node_modules/(?!@vue/apollo-composable).+\\.js$'], 
   snapshotSerializers: [
     'jest-serializer-vue',
   ],
