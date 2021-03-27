@@ -31,7 +31,7 @@ export default {
     watch(props,(props)=>{
       sku.value=props.productSku;
     });
-    return useProductQuery(props,ctx,sku);
+    return {...useProductQuery(props,ctx,sku),sku};
   },
   watch: {
     showModal() {
@@ -49,10 +49,5 @@ export default {
     productAdded() {
       this.closeModal();
     },
-  },
-  computed: {
-    sku() {//needed for addLine to work
-      return this.productSku;
-    }
   },
 };
