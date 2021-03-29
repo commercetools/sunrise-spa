@@ -1,6 +1,7 @@
 import productMixin from '@/mixins/productMixin';
 import BasePrice from '../BasePrice/BasePrice.vue';
 import cartMixin from '../../../mixins/cartMixin';
+import { addLine } from '../shared';
 
 export default {
   props: {
@@ -14,20 +15,9 @@ export default {
   },
   mixins: [productMixin, cartMixin],
   methods: {
-    async addLineItem(sku) {
-      if (!this.cartExists) {
-        await this.createMyCart({
-          currency: this.$store.state.currency,
-          country: this.$store.state.country,
-          shippingAddress: { country: this.$store.state.country },
-        });
-      }
-      return this.updateMyCart({
-        addLineItem: {
-          sku,
-          quantity: 1,
-        },
-      }).then(() => this.$store.dispatch('openMiniCart'));
+    async addLineItem() {
+      return addLine(this)
+        .then(() => this.$store.dispatch('openMiniCart'));
     },
     openModal() {
       this.$emit('open-modal', { slug: this.currentProduct.slug, sku: this.matchingVariant.sku });
@@ -37,6 +27,9 @@ export default {
     matchingVariant() {
       // with query endpoint we cannot really determine
       return this.currentProduct.masterVariant || {};
+    },
+    sku() {//needed for addLine to work
+      return this.matchingVariant.sku;
     },
     hasMoreColors() {
       // with sunrise data it is not possible to determine

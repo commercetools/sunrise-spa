@@ -3,8 +3,8 @@ import Vuex from 'vuex';
 import Vuelidate from 'vuelidate';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import AddToCartForm from '@/components/productdetail/AddToCartForm/AddToCartForm.vue';
-import { updateCartVariables } from '@/components/productdetail/AddToCartForm/AddToCartForm';
 import SelectBoxIt from '@/components/common/form/SelectBoxIt/SelectBoxIt.vue';
+import { addLine } from '../../../../../src/components/common/shared';
 
 const localVue = createLocalVue();
 localVue.use(Vuelidate);
@@ -23,7 +23,7 @@ describe('AddToCartForm/index.vue', () => {
       localVue,
       mocks: { $t: jest.fn() },
       store: new Vuex.Store({ actions }),
-      propsData: { sku: 'some-sku' },
+      propsData: { sku: 'some-sku', isOnStock: true },
       computed: {
         currency: () => 'EUR',
         isLoading: jest.fn(),
@@ -39,40 +39,57 @@ describe('AddToCartForm/index.vue', () => {
   it('renders a vue instance', () => {
     expect(shallowMount(AddToCartForm, options).vm).toBeTruthy();
   });
-
-  it('distribution channel is added to cart item', () => {
-    const variables = updateCartVariables({
-      $store: {
-        state: {
-          channel: { id: 'channel id' },
+  it('channels added to cart line item', async () => {
+    const updateMyCart = jest.fn();
+    const createMyCart = jest.fn();
+    const component = {
+      cartExists:true,
+      $store:{
+        state:{
+          channel:{ id: 88 }
+        }
+      },
+      sku:'sku',
+      quantity: 888,
+      updateMyCart,
+      createMyCart,
+    }
+    addLine(component);
+    expect(updateMyCart).toHaveBeenCalledWith({
+      "addLineItem": {
+        "distributionChannel": {
+          "id": 88,
+          "typeId": "channel"
         },
-      },
-      sku: 'sku',
-      quantity: 3,
+        "quantity": 888,
+        "sku": "sku",
+        "supplyChannel": {
+          "id": 88,
+          "typeId": "channel"
+        }
+      }
     });
-    expect(variables).toEqual({
-      addLineItem: {
-        distributionChannel: {
-          id: 'channel id',
-          typeId: 'channel',
-        },
-        quantity: 3,
-        sku: 'sku',
-      },
-    });
-    const variables1 = updateCartVariables({
-      $store: {
-        state: {},
-      },
-      sku: 'sku 1',
-      quantity: 8,
-    });
-    expect(variables1).toEqual({
-      addLineItem: {
-        quantity: 8,
-        sku: 'sku 1',
-      },
-    });
+    updateMyCart.mockReset();
+    component.$store.state={
+      currency:1,country:2
+    }
+    addLine(component);
+    expect(updateMyCart)
+      .toHaveBeenLastCalledWith(
+        {"addLineItem": {"quantity": 888, "sku": "sku"}}
+      );
+    component.cartExists = false;
+    updateMyCart.mockReset();
+    createMyCart.mockReturnValue(Promise.resolve(88))
+    await addLine(component);
+    expect(createMyCart).toHaveBeenCalledWith(
+      {"country": 2, "currency": 1, "shippingAddress": {"country": 2}}
+    )
+    expect(updateMyCart)
+      .toHaveBeenCalledWith(
+        {"addLineItem": {"quantity": 888, "sku": "sku"}}
+      )
+    
   });
 
   xit('returns the quantities to be displayed', () => {

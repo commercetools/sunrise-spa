@@ -45,9 +45,12 @@ describe('ProductThumbnail/index.vue', () => {
 
     options.propsData.product.masterData.current.masterVariant.images = [{}, {}];
     wrapper.setProps({ product: { ...options.propsData.product } });
-    expect(wrapper.vm.hasImages).toBeTruthy();
+    //tests will fail after minor update
     await wrapper.vm.$nextTick();
+    expect(wrapper.vm.hasImages).toBeTruthy();
     options.propsData.product.masterData.current.masterVariant.images = [];
+    wrapper.setProps(options.propsData);
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.hasImages).toBeFalsy();
   });
 });

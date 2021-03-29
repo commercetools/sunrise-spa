@@ -31,7 +31,7 @@ describe('CartLikePriceDetail/index.vue', () => {
     expect(shallowMount(CartLikePriceDetail, options).vm).toBeTruthy();
   });
 
-  it('calculates applied taxes', () => {
+  it('calculates applied taxes', async () => {
     const wrapper = shallowMount(CartLikePriceDetail, options);
     expect(wrapper.vm.taxes).toBeNull();
 
@@ -52,6 +52,8 @@ describe('CartLikePriceDetail/index.vue', () => {
         },
       },
     });
+    //tests will fail after minor update
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.taxes).toEqual({
       value: {
         centAmount: 13260,
@@ -61,7 +63,7 @@ describe('CartLikePriceDetail/index.vue', () => {
     });
   });
 
-  it('calculates subtotal price', () => {
+  it('calculates subtotal price', async () => {
     const wrapper = shallowMount(CartLikePriceDetail, options);
     expect(wrapper.vm.subtotal).toEqual({ value: { centAmount: 0, currencyCode: 'EUR', fractionDigits: 2 } });
     wrapper.setProps({
@@ -74,6 +76,8 @@ describe('CartLikePriceDetail/index.vue', () => {
         ],
       },
     });
+    //tests will fail after minor update
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.subtotal).toEqual({
       value: {
         centAmount: 77777,

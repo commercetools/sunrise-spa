@@ -1,6 +1,9 @@
 import { locale as loc } from "../common/shared";
 import MiniCart from "../header/MiniCart/MiniCart.vue";
 import config from "../../../sunrise.config";
+import { provide, watch,ref } from '@vue/composition-api';
+import { DefaultApolloClient } from '@vue/apollo-composable'
+import { apolloClient } from "../../apollo";
 // locale is an optional route parameter, if it's missing
 // then see if it's set in store (local storage) and use that
 // if it's not in store then default to en
@@ -35,11 +38,29 @@ const checkLocale = (component) => {
   }
 };
 export default {
+  props: {
+    locale: String,
+    country:String
+  },
   components: {
     MiniCart,
   },
+  setup(props) {
+    const locale=ref(props.locale);
+    const country = ref(props.country);
+    watch(
+      props,
+      (props)=>{
+        locale.value=props.locale;
+        country.value=props.country;
+      }
+    );
+    provide('locale', locale);
+    provide('country', country);
+    provide(DefaultApolloClient, apolloClient)
+  },
   computed: {
-    locale() {
+    computedLocale() {
       return loc(this);
     },
     miniCartOpen() {

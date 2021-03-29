@@ -944,10 +944,15 @@
       @media #{$xs-layout} {
         width: 50px;
       }
+      &[type=submit] {
+        width: 100%;
+        padding: 20px;
+      }
     }
   }
   .pro-cart-wrap {
-    a {
+    a, input {
+      background-color: green;
       padding: 20px 60px;
       font-weight: 600;
       text-transform: uppercase;

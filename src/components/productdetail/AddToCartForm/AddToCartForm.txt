@@ -1,4 +1,6 @@
 de:
   addToCart: Zum Warenkorb Hinzufügen
+  notInStock: "???????????"
 en:
   addToCart: Add to Bag
+  notInStock: "Item is not in stock"

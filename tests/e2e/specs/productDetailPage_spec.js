@@ -124,25 +124,26 @@ describe('Product detail page', () => {
     cy.visit('/product/t-shirt-testing/sku-34-black');
     cy.get('[data-test=product-data]')
       .then(($product) => {
-        // @todo: no sku in product detail
-        // cy.wrap($product)
-        //   .find('[data-test=product-sku]')
-        //   .should('contain', 'sku-34-black');
-
         cy.wrap($product)
           .find('[data-test=attribute-select-Filtercolor]')
           .select('grey');
         cy.url().should('include', 'sku-30-grey');
-
+      });
+    cy.get('[data-test=product-data]')
+      .then(($product) => {
+        cy.wrap($product)
+        cy.url().should('include', 'sku-30-grey');
         cy.wrap($product)
           .find('[data-test=attribute-select-Size]')
           .select('32');
         cy.url().should('include', 'sku-32-grey');
+      });
 
+      cy.get('[data-test=product-data]')
+      .then(($product) => {
         cy.wrap($product)
           .find('[data-test=attribute-select-Size]')
           .select('36');
-
         cy.url().should('include', 'sku-36-black');
       });
   });

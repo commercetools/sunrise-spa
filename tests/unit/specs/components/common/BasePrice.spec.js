@@ -35,17 +35,21 @@ describe('BasePrice/index.vue', () => {
     expect(shallowMount(BasePrice, options).vm).toBeTruthy();
   });
 
-  it('obtains whether product has a discount', () => {
+  it('obtains whether product has a discount', async () => {
     const wrapper = shallowMount(BasePrice, options);
     expect(wrapper.vm.hasDiscount).toBeFalsy();
 
     wrapper.setProps({ price: { ...discountedPrice } });
+    //tests will fail after minor update
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.hasDiscount).toBeTruthy();
   });
 
-  it('obtains the discounted price', () => {
+  it('obtains the discounted price', async () => {
     const wrapper = shallowMount(BasePrice, options);
     wrapper.setProps({ price: { ...discountedPrice } });
+    //tests will fail after minor update
+    await wrapper.vm.$nextTick();
 
     const discounted = { ...discountedPrice.discounted.value };
     expect(wrapper.vm.discountedPrice).toEqual(discounted);

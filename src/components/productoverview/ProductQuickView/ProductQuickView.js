@@ -1,23 +1,37 @@
-import gql from 'graphql-tag';
-import productMixin from '../../../mixins/productMixin';
-import BasePrice from '../../common/BasePrice/BasePrice.vue';
 import ProductGallery from '../../productdetail/ProductGallery/ProductGallery.vue';
-import { locale, getValue, productAttributes } from '../../common/shared';
-import cartMixin from '../../../mixins/cartMixin';
+import SocialMediaLinks from '../../productdetail/SocialMediaLinks/SocialMediaLinks.vue';
+import DetailsSection from '../../productdetail/DetailsSection/DetailsSection.vue';
+import AddToCartForm from '../../productdetail/AddToCartForm/AddToCartForm.vue';
+import BasePrice from '../../common/BasePrice/BasePrice.vue';
+import VariantSelector from '../../productdetail/VariantSelector/VariantSelector.vue';
+import useProductQuery from '../../../composition/useProductQuery';
+import { provide, ref, watch } from 'vue-demi';
 
 export default {
-  mixins: [productMixin, cartMixin],
   data: () => ({
-    product: null,
     quantity: 1,
   }),
   components: {
-    BasePrice,
+    DetailsSection,
     ProductGallery,
+    SocialMediaLinks,
+    AddToCartForm,
+    BasePrice,
+    VariantSelector,
   },
   props: {
     showModal: Boolean,
     productSku: String,
+  },
+  setup(props,ctx){
+    const sku = ref(props.productSku)
+    provide('onVariantSelect', (newSku)=>
+      sku.value=newSku
+    );
+    watch(props,(props)=>{
+      sku.value=props.productSku;
+    });
+    return {...useProductQuery(props,ctx,sku),sku};
   },
   watch: {
     showModal() {
@@ -32,92 +46,8 @@ export default {
       this.$emit('close-modal');
       this.quantity = 1;
     },
-    async addToCart() {
-      if (!this.cartExists) {
-        await this.createMyCart({
-          currency: this.$store.state.currency,
-          country: this.$store.state.country,
-          shippingAddress: { country: this.$store.state.country },
-        });
-      }
-      return this.updateMyCart({
-        addLineItem: {
-          sku: this.productSku,
-          quantity: Number(this.quantity),
-        },
-      }).then(() => { this.closeModal(); this.$store.dispatch('openMiniCart'); });
-    },
-  },
-  computed: {
-    matchingVariant() {
-      return this.currentProduct.variant || {};
-    },
-    productAttributes() {
-      const selected = this.product.masterData.current;
-      const { attributesRaw } = (selected?.allVariants?.[0] || []);
-      const attributes = attributesRaw.map(
-        ({ attributeDefinition: { name, label, type }, value }) => [
-          name, label, getValue(type.name, value, locale(this)),
-        ],
-      );
-      return productAttributes(attributes);
-    },
-  },
-  apollo: {
-    product: {
-      query: gql`
-        query Product($locale: Locale!, $sku: String!, $currency: Currency!, $country: Country!) {
-          product(sku: $sku) {
-            id
-            masterData {
-              current {
-                allVariants(skus:[$sku]) {
-                  sku
-                  attributesRaw {
-                    attributeDefinition {
-                      name
-                      label(locale:$locale)
-                      type {
-                        name
-                      }
-                    }
-                    value
-                  }
-                }
-                name(locale: $locale)
-                slug(locale: $locale)
-                variant(sku: $sku) {
-                  price(currency: $currency,country:$country) {
-                    value {
-                      ...printPrice
-                    }
-                    discounted {
-                      value {
-                       ...printPrice
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-        fragment printPrice on BaseMoney {
-          centAmount
-          fractionDigits
-          currencyCode
-        }`,
-      variables() {
-        return {
-          locale: locale(this),
-          currency: this.$store.state.currency,
-          sku: this.productSku,
-          country: this.$store.state.country,
-        };
-      },
-      skip() {
-        return !this.productSku;
-      },
+    productAdded() {
+      this.closeModal();
     },
   },
 };

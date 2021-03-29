@@ -107,6 +107,11 @@ export const locale = (component) => {
       .find(([key]) => key === loc) || []; //find the one from url
   return fromConfig; //return value from config (in correct case)
 };
+export const localeFromString = loc => locale({
+  $route:{
+    params:{ locale:loc }
+  }
+});
 export const isToughDevice = () => 'ontouchstart' in window;
 export const modifyQuery = (key, value, query, add = true) => {
   const values = [value]
@@ -147,4 +152,35 @@ export function productAttributes(attributes) {
   ).filter((x) => x).map(
     ([, name, value]) => ({ name, value:arrayToString(value) }),
   );
+}
+export const addLine = async (component) => {
+  if (!component.cartExists) {
+    await component.createMyCart({
+      currency: component.$store.state.currency,
+      country: component.$store.state.country,
+      shippingAddress: { country: component.$store.state.country },
+    });
+  }
+  const distributionChannel = component.$store.state.channel ? {
+    distributionChannel: {
+      typeId: 'channel',
+      id: component.$store.state.channel.id,
+    },
+  } : {};
+  const supplyChannel = component.$store.state.channel ? {
+    supplyChannel: {
+      typeId: 'channel',
+      id: component.$store.state.channel.id,
+    },
+  } : {};
+
+  return component.updateMyCart({
+    addLineItem: {
+      sku: component.sku,
+      quantity: Number(component.quantity),
+      ...distributionChannel,
+      ...supplyChannel
+    },
+  })
+
 }

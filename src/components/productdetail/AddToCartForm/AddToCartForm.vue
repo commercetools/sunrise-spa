@@ -3,69 +3,47 @@
 <script src="./AddToCartForm.js"></script>
 
 <template>
-  <!-- <BaseForm v-if="!isLoading"
-            :vuelidate="$v"
-            :onSubmit="addLineItem"
-            #default="{ error, state }">
-    <ServerError :error="error"/>
-    <div class="row select-row">
-      <ul class="list-inline">
-        <!--{{#each product.attributes}}
-        <!--{{> catalog/product-attribute attribute=this
-                variants=../product.variants identifiers=../product.variantIdentifiers}}
-        <!--{{/each}}
-        <!--<li class="size-guide-li">
-        <!--{{> catalog/size-guide}}
-        <!--</li>
-      </ul>
-    </div>
-    <div class="row">
-      <ul class="product-actions-list list-inline">
-        <li class="bag-items-li">
-          <BaseSelect v-model.number="form.quantity"
-                      :vuelidate="$v.form.quantity"
-                      :options="quantities"
-                      data-test="add-to-cart-form-quantity-dropdown"
-                      class="bag-items"/>
-        </li>
-        <li>
-          <LoadingButton :state="state"
-                         data-test="add-to-cart-form-button"
-                         class="add-to-bag-btn">
-            <img class="bag-thumb"
-                 src="../../../assets/img/hand-bag-2-black.png"
-                 alt="$t('addToCart')">
-            {{ $t('addToCart') }}
-          </LoadingButton>
-        </li>
-      </ul>
-    </div>
-  </BaseForm> -->
   <div class="product-dec-action-wrap pro-dec-action-2">
-    <div class="quality-cart-wrap">
-      <div class="quality-wrap">
-        <input
-          class="input-text qty"
-          type="number"
-          name="qty"
-          maxlength="12"
-          v-model="quantity"
-          data-test="add-to-cart-amount"
-          title="Qty">
+    <form 
+      v-if="isOnStock"
+      ref="form"
+      v-on:submit.prevent="addLineItem"
+    >
+      <div class="quality-cart-wrap" >
+        <div class="quality-wrap">
+          <input
+            class="input-text qty"
+            type="number"
+            min="1"
+            :max="availableQuantity"
+            name="qty"
+            maxlength="12"
+            v-model="quantity"
+            data-test="add-to-cart-amount"
+            title="Qty">
+        </div>
+        <div class="quality-wrap">
+          <!-- <a
+            href="#" 
+            @click.prevent="submitForm"
+            data-test="add-to-cart-button"
+          >
+            {{$t('addToCart')}}
+          </a> -->
+          <input
+            data-test="add-to-cart-button"
+            type="submit" 
+            :value="$t('addToCart')"
+          >
+        </div>
       </div>
+    </form>
+    <div v-else>
       <div class="pro-cart-wrap">
-        <a
-          href="#" @click.prevent="addLineItem"
-          data-test="add-to-cart-button"
-        >
-          {{$t('addToCart')}}
-        </a>
+        {{$t('notInStock')}}
       </div>
     </div>
-    <!-- <div class="pro-dec-wishlist-compare">
-      <a title="Add to wishlist" href="#"><i class="dl-icon-heart2"></i></a>
-      <a title="Add to compare" href="#"><i class="dl-icon-compare2"></i></a>
-    </div> -->
+
   </div>
 
 </template>

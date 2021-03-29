@@ -79,15 +79,21 @@ export default {
     },
 
     createMyCart(draft) {
+      const inventoryMode = process.env.VUE_APP_INVENTORY_MODE;
+      if(inventoryMode){
+        // eslint-disable-next-line no-param-reassign
+        draft = { ...draft, inventoryMode };
+      }
       return this.$apollo.mutate({
         mutation: gql`
-          mutation ($draft: MyCartDraft!) {
+          mutation ($draft: MyCartDraft!, $withInventory: Boolean!) {
             createMyCart(draft: $draft) {
               id
               version
+              inventoryMode @include(if: $withInventory)
             }
           }`,
-        variables: { draft },
+        variables: { draft, withInventory: Boolean(inventoryMode) },
         update: (store, { data: { createMyCart } }) => {
           const data = store.readQuery({ query: BASIC_CART_QUERY });
           data.me.activeCart = createMyCart;
@@ -118,10 +124,19 @@ export default {
           store.writeQuery({ query: BASIC_CART_QUERY, data });
           // invalidate cached order pages
           Object.keys(store.data.toObject())
-            .filter((key) => key.startsWith('Order'))
+            .filter((key) => key.toLowerCase().includes('order'))
             .forEach(
               (key) => store.data.delete(key),
             );
+          //optionally invalidate product queries
+          //  inventory has changed
+          if(process.env.VUE_APP_INVENTORY_MODE){
+            Object.keys(store.data.toObject())
+            .filter((key) => key.toLowerCase().includes('product'))
+            .forEach(
+              (key) => store.data.delete(key),
+            );
+          }
         },
       });
     },
