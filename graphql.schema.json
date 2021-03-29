@@ -1075,7 +1075,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "DeliveryItemDraftType",
+                    "name": "ParcelDataDraftType",
                     "ofType": null
                   }
                 }
@@ -2116,7 +2116,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "DeliveryItemDraftType",
+                    "name": "ParcelDataDraftType",
                     "ofType": null
                   }
                 }
@@ -3517,7 +3517,7 @@
                 "ofType": null
               },
               "isDeprecated": true,
-              "deprecationReason": "Field 'contactInfo' is deprecated. Instead of using e.g. 'contactInfo.email' use 'email' directly."
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Field 'contactInfo' is deprecated. Instead of using e.g. 'contactInfo.email' use 'email' directly."
             },
             {
               "name": "phone",
@@ -12930,26 +12930,24 @@
           "fields": null,
           "inputFields": [
             {
-              "name": "text",
+              "name": "inputs",
               "description": null,
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
                 "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  }
                 }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "suggestTokenizer",
-              "description": null,
-              "type": {
-                "kind": "INPUT_OBJECT",
-                "name": "BaseSearchKeywordInput",
-                "ofType": null
               },
               "defaultValue": null
             }
@@ -25127,6 +25125,16 @@
                     }
                   },
                   "defaultValue": null
+                },
+                {
+                  "name": "storeKey",
+                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "KeyReferenceInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
                 }
               ],
               "type": {
@@ -25178,6 +25186,16 @@
                   "defaultValue": null
                 },
                 {
+                  "name": "storeKey",
+                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "KeyReferenceInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
                   "name": "id",
                   "description": "Queries with specified ID",
                   "type": {
@@ -25221,6 +25239,16 @@
                       "name": "Long",
                       "ofType": null
                     }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "storeKey",
+                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "KeyReferenceInput",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -30878,6 +30906,55 @@
           ],
           "inputFields": null,
           "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "ParcelDataDraftType",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "measurements",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "ParcelMeasurementsDraftType",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "trackingData",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "TrackingDataDraftType",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "items",
+              "description": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "DeliveryItemDraftType",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": "[]"
+            }
+          ],
+          "interfaces": null,
           "enumValues": null,
           "possibleTypes": null
         },
@@ -39446,11 +39523,46 @@
                     "name": null,
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "CustomSuggestTokenizerInput",
+                      "name": "SearchKeywordItemInput",
                       "ofType": null
                     }
                   }
                 }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "SearchKeywordItemInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "text",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "suggestTokenizer",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BaseSearchKeywordInput",
+                "ofType": null
               },
               "defaultValue": null
             }
@@ -59366,7 +59478,7 @@
                 "ofType": null
               },
               "isDeprecated": true,
-              "deprecationReason": "Field 'contactInfo' is deprecated. Instead of using e.g. 'contactInfo.email' use 'email' directly."
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Field 'contactInfo' is deprecated. Instead of using e.g. 'contactInfo.email' use 'email' directly."
             },
             {
               "name": "phone",
@@ -59758,7 +59870,7 @@
                 "ofType": null
               },
               "isDeprecated": true,
-              "deprecationReason": "Please use 'custom.customFieldsRaw'"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Please use 'custom.customFieldsRaw'"
             },
             {
               "name": "custom",
@@ -60959,7 +61071,7 @@
                 }
               },
               "isDeprecated": true,
-              "deprecationReason": "Please use 'custom.customFieldsRaw'"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Please use 'custom.customFieldsRaw'"
             },
             {
               "name": "customFields",
@@ -60971,7 +61083,7 @@
                 "ofType": null
               },
               "isDeprecated": true,
-              "deprecationReason": "Please use 'custom.customFieldsRaw'"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Please use 'custom.customFieldsRaw'"
             },
             {
               "name": "custom",
@@ -61378,7 +61490,7 @@
                 "ofType": null
               },
               "isDeprecated": true,
-              "deprecationReason": "Please use 'custom.customFieldsRaw'"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Please use 'custom.customFieldsRaw'"
             },
             {
               "name": "custom",
@@ -61522,6 +61634,51 @@
         },
         {
           "kind": "OBJECT",
+          "name": "CartDiscountLimitWithCurrent",
+          "description": null,
+          "fields": [
+            {
+              "name": "limit",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "current",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "LimitWithCurrent",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "CartDiscountLimitsProjection",
           "description": null,
           "fields": [
@@ -61534,7 +61691,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "LimitWithCurrent",
+                  "name": "CartDiscountLimitWithCurrent",
                   "ofType": null
                 }
               },
@@ -61733,6 +61890,51 @@
         },
         {
           "kind": "OBJECT",
+          "name": "CartLimitWithCurrent",
+          "description": null,
+          "fields": [
+            {
+              "name": "limit",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "current",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "LimitWithCurrent",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "CartLimitsProjection",
           "description": null,
           "fields": [
@@ -61745,7 +61947,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "LimitWithCurrent",
+                  "name": "CartLimitWithCurrent",
                   "ofType": null
                 }
               },
@@ -62609,7 +62811,7 @@
                 }
               },
               "isDeprecated": true,
-              "deprecationReason": "The returned number is representing only staged products. Use 'stagedProductCount' instead"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. The returned number is representing only staged products. Use 'stagedProductCount' instead"
             },
             {
               "name": "stagedProductCount",
@@ -62774,7 +62976,7 @@
                 }
               },
               "isDeprecated": true,
-              "deprecationReason": "Please use 'custom.customFieldsRaw'"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Please use 'custom.customFieldsRaw'"
             },
             {
               "name": "customFields",
@@ -62786,7 +62988,7 @@
                 "ofType": null
               },
               "isDeprecated": true,
-              "deprecationReason": "Please use 'custom.customFieldsRaw'"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Please use 'custom.customFieldsRaw'"
             },
             {
               "name": "custom",
@@ -63300,7 +63502,7 @@
                 }
               },
               "isDeprecated": true,
-              "deprecationReason": "The returned number is representing only staged products. Use 'stagedProductCount' instead"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. The returned number is representing only staged products. Use 'stagedProductCount' instead"
             },
             {
               "name": "stagedProductCount",
@@ -63617,7 +63819,7 @@
                 }
               },
               "isDeprecated": true,
-              "deprecationReason": "Use 'channelRef' to fetch the reference."
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Use 'channelRef' to fetch the reference."
             },
             {
               "name": "version",
@@ -64166,7 +64368,7 @@
                 }
               },
               "isDeprecated": true,
-              "deprecationReason": "Typed custom fields are no longer supported, please use customFieldsRaw instead."
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Typed custom fields are no longer supported, please use customFieldsRaw instead."
             }
           ],
           "inputFields": null,
@@ -64475,7 +64677,7 @@
                 }
               },
               "isDeprecated": true,
-              "deprecationReason": "Please use 'custom.customFieldsRaw'"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Please use 'custom.customFieldsRaw'"
             },
             {
               "name": "customFields",
@@ -64487,7 +64689,7 @@
                 "ofType": null
               },
               "isDeprecated": true,
-              "deprecationReason": "Please use 'custom.customFieldsRaw'"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Please use 'custom.customFieldsRaw'"
             },
             {
               "name": "custom",
@@ -64674,6 +64876,51 @@
         },
         {
           "kind": "OBJECT",
+          "name": "CustomObjectLimitWithCurrent",
+          "description": null,
+          "fields": [
+            {
+              "name": "limit",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "current",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "LimitWithCurrent",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "CustomObjectLimitsProjection",
           "description": null,
           "fields": [
@@ -64686,7 +64933,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "LimitWithCurrent",
+                  "name": "CustomObjectLimitWithCurrent",
                   "ofType": null
                 }
               },
@@ -65274,7 +65521,7 @@
                 }
               },
               "isDeprecated": true,
-              "deprecationReason": "Please use 'custom.customFieldsRaw'"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Please use 'custom.customFieldsRaw'"
             },
             {
               "name": "customFields",
@@ -65286,7 +65533,7 @@
                 "ofType": null
               },
               "isDeprecated": true,
-              "deprecationReason": "Please use 'custom.customFieldsRaw'"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Please use 'custom.customFieldsRaw'"
             },
             {
               "name": "custom",
@@ -65484,7 +65731,7 @@
                 }
               },
               "isDeprecated": true,
-              "deprecationReason": "Use 'customerGroupRef' to fetch the reference."
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Use 'customerGroupRef' to fetch the reference."
             },
             {
               "name": "version",
@@ -65612,6 +65859,51 @@
         },
         {
           "kind": "OBJECT",
+          "name": "CustomerGroupLimitWithCurrent",
+          "description": null,
+          "fields": [
+            {
+              "name": "limit",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "current",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "LimitWithCurrent",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "CustomerGroupLimitsProjection",
           "description": null,
           "fields": [
@@ -65624,7 +65916,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "LimitWithCurrent",
+                  "name": "CustomerGroupLimitWithCurrent",
                   "ofType": null
                 }
               },
@@ -65722,6 +66014,51 @@
         },
         {
           "kind": "OBJECT",
+          "name": "CustomerLimitWithCurrent",
+          "description": null,
+          "fields": [
+            {
+              "name": "limit",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "current",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "LimitWithCurrent",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "CustomerLimitsProjection",
           "description": null,
           "fields": [
@@ -65734,7 +66071,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "LimitWithCurrent",
+                  "name": "CustomerLimitWithCurrent",
                   "ofType": null
                 }
               },
@@ -66656,7 +66993,7 @@
                 }
               },
               "isDeprecated": true,
-              "deprecationReason": "Please use 'custom.customFieldsRaw'"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Please use 'custom.customFieldsRaw'"
             },
             {
               "name": "customFields",
@@ -66668,7 +67005,7 @@
                 "ofType": null
               },
               "isDeprecated": true,
-              "deprecationReason": "Please use 'custom.customFieldsRaw'"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Please use 'custom.customFieldsRaw'"
             },
             {
               "name": "custom",
@@ -68961,7 +69298,7 @@
                 "ofType": null
               },
               "isDeprecated": true,
-              "deprecationReason": "Use 'userRef' to fetch the reference."
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Use 'userRef' to fetch the reference."
             },
             {
               "name": "userRef",
@@ -69729,7 +70066,7 @@
           "possibleTypes": null
         },
         {
-          "kind": "OBJECT",
+          "kind": "INTERFACE",
           "name": "LimitWithCurrent",
           "description": null,
           "fields": [
@@ -69750,22 +70087,84 @@
               "description": null,
               "args": [],
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Long",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
             }
           ],
           "inputFields": null,
-          "interfaces": [],
+          "interfaces": null,
           "enumValues": null,
-          "possibleTypes": null
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "CartDiscountLimitWithCurrent",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CartLimitWithCurrent",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CustomObjectLimitWithCurrent",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CustomerGroupLimitWithCurrent",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CustomerLimitWithCurrent",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "OrderEditLimitWithCurrent",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "ProductDiscountLimitWithCurrent",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "RefreshTokenLimitWithCurrent",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "ShippingMethodLimitWithCurrent",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "ShoppingListLimitWithCurrent",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "StoreLimitWithCurrent",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "TaxCategoryLimitWithCurrent",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "ZoneLimitWithCurrent",
+              "ofType": null
+            }
+          ]
         },
         {
           "kind": "OBJECT",
@@ -70241,7 +70640,7 @@
                 }
               },
               "isDeprecated": true,
-              "deprecationReason": "Please use 'custom.customFieldsRaw'"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Please use 'custom.customFieldsRaw'"
             },
             {
               "name": "customFields",
@@ -70253,7 +70652,7 @@
                 "ofType": null
               },
               "isDeprecated": true,
-              "deprecationReason": "Please use 'custom.customFieldsRaw'"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Please use 'custom.customFieldsRaw'"
             },
             {
               "name": "custom",
@@ -72771,7 +73170,7 @@
                 }
               },
               "isDeprecated": true,
-              "deprecationReason": "Use 'typeRef' to fetch the reference."
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Use 'typeRef' to fetch the reference."
             },
             {
               "name": "typeRef",
@@ -73556,7 +73955,7 @@
                 }
               },
               "isDeprecated": true,
-              "deprecationReason": "Please use 'custom.customFieldsRaw'"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Please use 'custom.customFieldsRaw'"
             },
             {
               "name": "customFields",
@@ -73568,7 +73967,7 @@
                 "ofType": null
               },
               "isDeprecated": true,
-              "deprecationReason": "Please use 'custom.customFieldsRaw'"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Please use 'custom.customFieldsRaw'"
             },
             {
               "name": "custom",
@@ -73893,6 +74292,51 @@
         },
         {
           "kind": "OBJECT",
+          "name": "OrderEditLimitWithCurrent",
+          "description": null,
+          "fields": [
+            {
+              "name": "limit",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "current",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "LimitWithCurrent",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "OrderEditLimitsProjection",
           "description": null,
           "fields": [
@@ -73905,7 +74349,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "LimitWithCurrent",
+                  "name": "OrderEditLimitWithCurrent",
                   "ofType": null
                 }
               },
@@ -76657,6 +77101,51 @@
         },
         {
           "kind": "OBJECT",
+          "name": "ProductDiscountLimitWithCurrent",
+          "description": null,
+          "fields": [
+            {
+              "name": "limit",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "current",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "LimitWithCurrent",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "ProductDiscountLimitsProjection",
           "description": null,
           "fields": [
@@ -76669,7 +77158,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "LimitWithCurrent",
+                  "name": "ProductDiscountLimitWithCurrent",
                   "ofType": null
                 }
               },
@@ -77055,7 +77544,7 @@
                 }
               },
               "isDeprecated": true,
-              "deprecationReason": "Please use 'custom.customFieldsRaw'"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Please use 'custom.customFieldsRaw'"
             },
             {
               "name": "customFields",
@@ -77067,7 +77556,7 @@
                 "ofType": null
               },
               "isDeprecated": true,
-              "deprecationReason": "Please use 'custom.customFieldsRaw'"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Please use 'custom.customFieldsRaw'"
             },
             {
               "name": "custom",
@@ -77730,7 +78219,7 @@
             },
             {
               "name": "attributesRaw",
-              "description": "This field contains non-typed data. Consider using `attributes` as a typed alternative.",
+              "description": "This field contains raw attributes data",
               "args": [
                 {
                   "name": "includeNames",
@@ -82064,6 +82553,51 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RefreshTokenLimitWithCurrent",
+          "description": null,
+          "fields": [
+            {
+              "name": "limit",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "current",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "LimitWithCurrent",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "RefreshTokenLimitsProjection",
           "description": null,
           "fields": [
@@ -82076,7 +82610,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "LimitWithCurrent",
+                  "name": "RefreshTokenLimitWithCurrent",
                   "ofType": null
                 }
               },
@@ -82943,6 +83477,30 @@
               },
               "isDeprecated": false,
               "deprecationReason": null
+            },
+            {
+              "name": "lastModifiedAt",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "lastModifiedBy",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Initiator",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             }
           ],
           "inputFields": null,
@@ -83551,7 +84109,7 @@
                 "ofType": null
               },
               "isDeprecated": true,
-              "deprecationReason": "Use localizedDescription"
+              "deprecationReason": "This field has been removed and will return a HTTP code 400 with X-DEPRECATION-NOTICE when used. Use localizedDescription"
             },
             {
               "name": "localizedDescription",
@@ -83720,6 +84278,51 @@
         },
         {
           "kind": "OBJECT",
+          "name": "ShippingMethodLimitWithCurrent",
+          "description": null,
+          "fields": [
+            {
+              "name": "limit",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "current",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "LimitWithCurrent",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "ShippingMethodLimitsProjection",
           "description": null,
           "fields": [
@@ -83732,7 +84335,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "LimitWithCurrent",
+                  "name": "ShippingMethodLimitWithCurrent",
                   "ofType": null
                 }
               },
@@ -84549,6 +85152,51 @@
         },
         {
           "kind": "OBJECT",
+          "name": "ShoppingListLimitWithCurrent",
+          "description": null,
+          "fields": [
+            {
+              "name": "limit",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "current",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "LimitWithCurrent",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "ShoppingListLimitsProjection",
           "description": null,
           "fields": [
@@ -84593,7 +85241,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "LimitWithCurrent",
+                  "name": "ShoppingListLimitWithCurrent",
                   "ofType": null
                 }
               },
@@ -86379,6 +87027,51 @@
         },
         {
           "kind": "OBJECT",
+          "name": "StoreLimitWithCurrent",
+          "description": null,
+          "fields": [
+            {
+              "name": "limit",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "current",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "LimitWithCurrent",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "StoreLimitsProjection",
           "description": null,
           "fields": [
@@ -86391,7 +87084,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "LimitWithCurrent",
+                  "name": "StoreLimitWithCurrent",
                   "ofType": null
                 }
               },
@@ -87273,6 +87966,51 @@
         },
         {
           "kind": "OBJECT",
+          "name": "TaxCategoryLimitWithCurrent",
+          "description": null,
+          "fields": [
+            {
+              "name": "limit",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "current",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "LimitWithCurrent",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "TaxCategoryLimitsProjection",
           "description": null,
           "fields": [
@@ -87285,7 +88023,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "LimitWithCurrent",
+                  "name": "TaxCategoryLimitWithCurrent",
                   "ofType": null
                 }
               },
@@ -89294,6 +90032,51 @@
         },
         {
           "kind": "OBJECT",
+          "name": "ZoneLimitWithCurrent",
+          "description": null,
+          "fields": [
+            {
+              "name": "limit",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "current",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "LimitWithCurrent",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "ZoneLimitsProjection",
           "description": null,
           "fields": [
@@ -89306,7 +90089,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "LimitWithCurrent",
+                  "name": "ZoneLimitWithCurrent",
                   "ofType": null
                 }
               },
