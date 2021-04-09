@@ -4,23 +4,19 @@
 
 <template>
   <div class="product-dec-action-wrap pro-dec-action-2">
-    <form 
-      v-if="isOnStock"
-      ref="form"
-      v-on:submit.prevent="addLineItem"
-    >
-      <div class="quality-cart-wrap" >
+    <form v-if="isOnStock" ref="form" v-on:submit.prevent="addLineItem">
+      <div class="quality-cart-wrap">
         <div class="quality-wrap">
           <input
             class="input-text qty"
             type="number"
             min="1"
-            :max="availableQuantity"
             name="qty"
             maxlength="12"
             v-model="quantity"
             data-test="add-to-cart-amount"
-            title="Qty">
+            title="Qty"
+          />
         </div>
         <div class="quality-wrap">
           <!-- <a
@@ -32,18 +28,20 @@
           </a> -->
           <input
             data-test="add-to-cart-button"
-            type="submit" 
+            type="submit"
             :value="$t('addToCart')"
-          >
+          />
         </div>
       </div>
+      <div class="mt-2" style="color: red" v-if="showQuantityError">
+        {{ $t("quantityError", { quantity: availableQuantity }) }}
+      </div>
     </form>
+
     <div v-else>
       <div class="pro-cart-wrap">
-        {{$t('notInStock')}}
+        {{ $t("notInStock") }}
       </div>
     </div>
-
   </div>
-
 </template>

@@ -27,13 +27,14 @@ export default {
   mixins: [cartMixin],
   data: () => ({
     quantity: 1,
+    showQuantityError: false,
   }),
   computed: {
     isLoading() {
       return this.$apollo.loading;
     },
     availableQ() {
-      return typeof this.availableQuantity !== "undefined"
+      return typeof this.availableQuantity !== 'undefined';
     },
   },
   methods: {
@@ -41,15 +42,20 @@ export default {
       this.$refs.form.submit();
     },
     async addLineItem() {
-      if(!this.isOnStock){
+      if (!this.isOnStock) {
         return;
       }
       if (!this.cartExists) {
         await this.createMyCart(createCartVariables(this));
       }
-      return addLine(this)
-        .then(() => this.$emit('product-added'))
-        .then(() => this.$store.dispatch('openMiniCart'));
+      if (this.quantity <= this.availableQuantity) {
+        this.showQuantityError = false;
+        return addLine(this)
+          .then(() => this.$emit('product-added'))
+          .then(() => this.$store.dispatch('openMiniCart'));
+      } else {
+        this.showQuantityError = true;
+      }
     },
   },
 };

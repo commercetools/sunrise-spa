@@ -14,9 +14,7 @@
         class="product-details-content product-details-ptb"
         data-test="product-data"
       >
-        <h2
-          data-test="product-name"
-        >
+        <h2 data-test="product-name">
           {{ currentProduct.name }}
         </h2>
         <h3>
@@ -24,11 +22,11 @@
         </h3>
         <VariantSelector :sku="sku" />
         <div v-if="availableQ">
-          {{$t('inStock')}}: {{availableQuantity}}
+          {{ $t("available") }}: {{ availableQuantity }}
         </div>
-        <AddToCartForm 
-          :sku="sku" 
-          :isOnStock="isOnStock" 
+        <AddToCartForm
+          :sku="sku"
+          :isOnStock="isOnStock"
           :availableQuantity="availableQuantity"
         />
         <DetailsSection :sku="sku" />
