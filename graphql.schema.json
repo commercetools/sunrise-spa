@@ -23182,7 +23182,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -23223,7 +23223,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -23286,7 +23286,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -23353,7 +23353,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -23452,7 +23452,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -23513,7 +23513,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -23560,7 +23560,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -23607,7 +23607,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -23668,7 +23668,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -23691,7 +23691,7 @@
             },
             {
               "name": "customerSignMeUp",
-              "description": "If used with an access token for Anonymous Sessions, all orders and carts belonging to the anonymousId will be assigned to the newly created customer.",
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features If used with an access token for Anonymous Sessions, all orders and carts belonging to the anonymousId will be assigned to the newly created customer.",
               "args": [
                 {
                   "name": "draft",
@@ -23709,7 +23709,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -23732,7 +23732,7 @@
             },
             {
               "name": "customerSignMeIn",
-              "description": "Retrieves the authenticated customer (a customer that matches the given email/password pair).\n\nIf used with an access token for Anonymous Sessions, all orders and carts belonging to the `anonymousId` will be assigned to the newly created customer.\n\n* If the customer does not have a cart yet, the anonymous cart that was modified most recently becomes the customer's cart.\n* If the customer already has a cart, the most recently modified anonymous cart will be handled according to the `AnonymousCartSignInMode`.\n\nIf a cart is is returned as part of the `CustomerSignInResult`, it has been recalculated (it will have up-to-date prices, taxes and discounts, and invalid line items have been removed).",
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features\n\nRetrieves the authenticated customer (a customer that matches the given email/password pair).\n\nIf used with an access token for Anonymous Sessions, all orders and carts belonging to the `anonymousId` will be assigned to the newly created customer.\n\n* If the customer does not have a cart yet, the anonymous cart that was modified most recently becomes the customer's cart.\n* If the customer already has a cart, the most recently modified anonymous cart will be handled according to the `AnonymousCartSignInMode`.\n\nIf a cart is is returned as part of the `CustomerSignInResult`, it has been recalculated (it will have up-to-date prices, taxes and discounts, and invalid line items have been removed).",
               "args": [
                 {
                   "name": "draft",
@@ -23750,7 +23750,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -23773,7 +23773,7 @@
             },
             {
               "name": "updateMyCustomer",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "version",
@@ -23813,7 +23813,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -23832,7 +23832,7 @@
             },
             {
               "name": "deleteMyCustomer",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "version",
@@ -23860,7 +23860,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -23879,7 +23879,7 @@
             },
             {
               "name": "customerChangeMyPassword",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "version",
@@ -23925,7 +23925,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -23944,7 +23944,7 @@
             },
             {
               "name": "customerConfirmMyEmail",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "tokenValue",
@@ -23962,7 +23962,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -23981,7 +23981,7 @@
             },
             {
               "name": "customerResetMyPassword",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "tokenValue",
@@ -24013,7 +24013,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -24181,7 +24181,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -24240,7 +24240,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -24307,7 +24307,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -24374,7 +24374,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -24393,7 +24393,7 @@
             },
             {
               "name": "createMyCart",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "draft",
@@ -24411,7 +24411,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -24430,7 +24430,7 @@
             },
             {
               "name": "updateMyCart",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "id",
@@ -24484,7 +24484,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -24503,7 +24503,7 @@
             },
             {
               "name": "deleteMyCart",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "id",
@@ -24535,7 +24535,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -24572,7 +24572,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -24631,7 +24631,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -24698,7 +24698,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -24737,7 +24737,7 @@
             },
             {
               "name": "createMyOrderFromCart",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "draft",
@@ -24755,7 +24755,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -24945,7 +24945,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -25004,7 +25004,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -25071,7 +25071,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -25110,7 +25110,7 @@
             },
             {
               "name": "createMyShoppingList",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "draft",
@@ -25128,7 +25128,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -25147,7 +25147,7 @@
             },
             {
               "name": "updateMyShoppingList",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "version",
@@ -25187,7 +25187,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -25226,7 +25226,7 @@
             },
             {
               "name": "deleteMyShoppingList",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "version",
@@ -25244,7 +25244,7 @@
                 },
                 {
                   "name": "storeKey",
-                  "description": "Beta feature. The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
+                  "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features The mutation is only performed if the resource is part of the store. Can be used with store-specific OAuth permissions.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "KeyReferenceInput",
@@ -25436,7 +25436,7 @@
             },
             {
               "name": "createMyPayment",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "draft",
@@ -25616,7 +25616,7 @@
             },
             {
               "name": "createStore",
-              "description": "beta feature",
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "draft",
@@ -25643,7 +25643,7 @@
             },
             {
               "name": "updateStore",
-              "description": "beta feature",
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "version",
@@ -25712,7 +25712,7 @@
             },
             {
               "name": "deleteStore",
-              "description": "beta feature",
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "version",
@@ -60942,7 +60942,7 @@
             },
             {
               "name": "storeRef",
-              "description": "beta feature",
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [],
               "type": {
                 "kind": "OBJECT",
@@ -60954,7 +60954,7 @@
             },
             {
               "name": "store",
-              "description": "beta feature",
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [],
               "type": {
                 "kind": "OBJECT",
@@ -63035,6 +63035,33 @@
               "ofType": null
             }
           ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "CategoryLimitsProjection",
+          "description": null,
+          "fields": [
+            {
+              "name": "maxCategories",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Limit",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
           "enumValues": null,
           "possibleTypes": null
         },
@@ -65420,7 +65447,7 @@
             },
             {
               "name": "storesRef",
-              "description": "beta feature",
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [],
               "type": {
                 "kind": "NON_NULL",
@@ -65444,7 +65471,7 @@
             },
             {
               "name": "stores",
-              "description": "beta feature",
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [],
               "type": {
                 "kind": "NON_NULL",
@@ -68367,7 +68394,7 @@
             },
             {
               "name": "shippingMethodsByCart",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "id",
@@ -68406,7 +68433,7 @@
             },
             {
               "name": "customer",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "emailToken",
@@ -68459,7 +68486,7 @@
             },
             {
               "name": "customers",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "where",
@@ -68524,7 +68551,7 @@
             },
             {
               "name": "cart",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "id",
@@ -68551,7 +68578,7 @@
             },
             {
               "name": "carts",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "where",
@@ -68643,7 +68670,7 @@
             },
             {
               "name": "order",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "id",
@@ -68676,7 +68703,7 @@
             },
             {
               "name": "orders",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "where",
@@ -68741,7 +68768,7 @@
             },
             {
               "name": "shoppingList",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "id",
@@ -68774,7 +68801,7 @@
             },
             {
               "name": "shoppingLists",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "where",
@@ -68881,7 +68908,7 @@
           "fields": [
             {
               "name": "customer",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [],
               "type": {
                 "kind": "OBJECT",
@@ -68893,7 +68920,7 @@
             },
             {
               "name": "cart",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "id",
@@ -68920,7 +68947,7 @@
             },
             {
               "name": "carts",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "where",
@@ -68997,7 +69024,7 @@
             },
             {
               "name": "order",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "id",
@@ -69030,7 +69057,7 @@
             },
             {
               "name": "orders",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "where",
@@ -69095,7 +69122,7 @@
             },
             {
               "name": "shoppingList",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "id",
@@ -69128,7 +69155,7 @@
             },
             {
               "name": "shoppingLists",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "where",
@@ -71210,7 +71237,7 @@
           "fields": [
             {
               "name": "customer",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [],
               "type": {
                 "kind": "OBJECT",
@@ -71222,7 +71249,7 @@
             },
             {
               "name": "cart",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "id",
@@ -71249,7 +71276,7 @@
             },
             {
               "name": "carts",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "where",
@@ -71326,7 +71353,7 @@
             },
             {
               "name": "order",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "id",
@@ -71359,7 +71386,7 @@
             },
             {
               "name": "orders",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "where",
@@ -71424,7 +71451,7 @@
             },
             {
               "name": "shoppingList",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "id",
@@ -71457,7 +71484,7 @@
             },
             {
               "name": "shoppingLists",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "where",
@@ -71522,7 +71549,7 @@
             },
             {
               "name": "payment",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "id",
@@ -71549,7 +71576,7 @@
             },
             {
               "name": "payments",
-              "description": null,
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "where",
@@ -73678,7 +73705,7 @@
             },
             {
               "name": "storeRef",
-              "description": "beta feature",
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [],
               "type": {
                 "kind": "OBJECT",
@@ -73690,7 +73717,7 @@
             },
             {
               "name": "store",
-              "description": "beta feature",
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [],
               "type": {
                 "kind": "OBJECT",
@@ -78837,6 +78864,22 @@
               },
               "isDeprecated": false,
               "deprecationReason": null
+            },
+            {
+              "name": "category",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "CategoryLimitsProjection",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             }
           ],
           "inputFields": null,
@@ -81794,7 +81837,7 @@
             },
             {
               "name": "store",
-              "description": "beta feature",
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "id",
@@ -81827,7 +81870,7 @@
             },
             {
               "name": "stores",
-              "description": "beta feature",
+              "description": "BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features",
               "args": [
                 {
                   "name": "where",
