@@ -33,7 +33,7 @@ export default {
     isLoading() {
       return this.$apollo.loading;
     },
-    availableQ() {
+    hasStockInfo() {
       return typeof this.availableQuantity !== 'undefined';
     },
   },
@@ -48,7 +48,9 @@ export default {
       if (!this.cartExists) {
         await this.createMyCart(createCartVariables(this));
       }
-      if (this.quantity <= this.availableQuantity) {
+      //only if hasStockInfo is true, that means stock info is available
+      //  if stock info is not available then ignore stock errors
+      if (this.quantity <= this.availableQuantity || this.hasStockInfo === false) {
         this.showQuantityError = false;
         return addLine(this)
           .then(() => this.$emit('product-added'))
