@@ -53,15 +53,17 @@ export const toUrl = (base, query) => {
   const url = new URL(base);
   const pageSize = query.find(
     ([key]) => key === "pageSize"
-  )[1];
-  const page = query.find(([key]) => key === "page")[1];
+  )?.[1];
+  const page = query.find(([key]) => key === "page")?.[1]||1;
+  const paging = pageSize !== undefined
+    ? [["limit", pageSize],["offset", pageSize * (page - 1)]]
+    : []
   query
     .filter(
       ([k, v]) =>
         v !== undefined && !["pageSize", "page"].includes(k)
     )
-    .concat([["limit", pageSize]])
-    .concat([["offset", pageSize * (page - 1)]])
+    .concat(paging)
     .reduce((result, [key, value]) => {
       if (Array.isArray(value)) {
         return result.concat(value.map((v) => [key, v]));
