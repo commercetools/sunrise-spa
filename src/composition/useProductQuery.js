@@ -60,9 +60,11 @@ export default (props,ctx,sku) => {
       [query,{},locale.value,[]]
     ).then(
       (response)=>{
-        const product = response.results[0];
-        const allVariants = product.variants.concat(product.masterVariant);
-        variants.value= allVariants;
+        const p = response.results[0];
+        const allVariants = p.variants.concat(p.masterVariant);
+        variants.value = allVariants;
+        product.value = allVariants.find(v=>v.sku===sku.value);
+        masterVariant.value = p.masterVariant;
       }
     )
   }

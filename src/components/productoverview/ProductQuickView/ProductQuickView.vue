@@ -18,7 +18,7 @@
           @click="closeModal"
           aria-label="Close"
         >
-          <span class="dl-icon-close"></span>
+        <span class="dl-icon-close"></span>
         </button>
         <div class="row no-gutters">
           <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
@@ -36,7 +36,7 @@
                   {{ currentProduct.name }}
                 </h2>
                 <h3>
-                  <BasePrice :price="matchingVariant.price" />
+                  <BasePrice :price="currentProduct.price" />
                 </h3>
                 <VariantSelector :sku="sku" />
                 <div v-if="availableQ">
