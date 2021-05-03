@@ -72,7 +72,7 @@ export default (props,ctx,sku) => {
       getProductProjection();
     }
   );
-  onMounted(getProductProjection());
+  onMounted(getProductProjection);
   return { 
     product,
     variants,
