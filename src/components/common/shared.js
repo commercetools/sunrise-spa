@@ -1,14 +1,15 @@
 import config from '../../../sunrise.config';
 
-export function getValue(type, value, language) {
-  if (type === 'enum') {
+export function getValue(value, language) {
+  if (typeof value === 'object' && typeof value?.label === "string") {
     return value.label;
   }
-  if (type === 'lenum') {
-    return value.label[language];
-  }
-  if (type === 'ltext') {
-    return value[language];
+  if (
+    typeof value === 'object' && 
+    typeof value?.label === "object" &&
+    typeof value?.label?.[language] === "string"
+  ) {
+    return value?.label?.[language];
   }
   return value;
 }
