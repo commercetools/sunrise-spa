@@ -1,7 +1,8 @@
-import gql from 'graphql-tag';
 import AttributeSelect from '../AttributeSelect/AttributeSelect.vue';
 import { getValue, locale } from '../../common/shared';
 import config from '../../../../sunrise.config';
+import { ref, watch } from 'vue-demi';
+import useProductQuery from '../../../composition/useProductQuery';
 
 export default {
   components: { AttributeSelect },
@@ -11,27 +12,27 @@ export default {
       required: true,
     },
   },
-  data: () => ({
-    product: null,
-  }),
+  setup(props,ctx){
+    const sku = ref(props.sku);
+    watch(props,newProps=>sku.value=newProps.sku)
+    return useProductQuery(props,ctx,sku);
+  },
   computed: {
     attributes() {
-      const { allVariants } = this.product.masterData.staged
-        || this.product.masterData.current;
-      const attributes = allVariants
-        .map(({ attributesRaw }) => attributesRaw.map(
+      const attributes = this.variants
+        .map(({ attributes }) => attributes.map(
           ({
-            attributeDefinition: { name, label, type },
+            name,
             value,
           }) => ({
             id: name,
-            label,
+            label:name,
             value:
-                getValue(type.name, value, locale(this)),
+                getValue( value, locale(this)),
           }),
         ))
         .flat()
-        .filter(({ id }) => config.variantSelector.includes(id));
+        .filter(({ id }) => config.variantSelector.includes(id));  
       const translations = attributes.reduce(
         (result, { id, label }) => result.set(id, label), new Map(),
       );
@@ -54,80 +55,22 @@ export default {
       );
     },
     variantCombinations() {
-      const p = this.product.masterData.staged
-        || this.product.masterData.current;
-      return p.allVariants.map(
-        ({ sku, attributesRaw }) => ({
+      return this.variants.map(
+        ({ sku, attributes }) => ({
           sku,
           ...Object.fromEntries(
-            attributesRaw.map(
+            attributes.map(
               ({
-                attributeDefinition: { name, type },
+                name,
                 value,
               }) => [
                 name,
-                getValue(type.name, value, locale(this)),
+                getValue(value, locale(this)),
               ],
             ),
           ),
         }),
       );
-    },
-  },
-  apollo: {
-    product: {
-      query: gql`
-        query VariantSelector(
-          $sku: String!
-          $preview: Boolean!
-          $locale: Locale!
-        ) {
-          product(sku: $sku) {
-            id
-            masterData {
-              current @skip(if: $preview) {
-                allVariants {
-                  sku
-                  attributesRaw {
-                    attributeDefinition {
-                      name
-                      label(locale: $locale)
-                      type {
-                        name
-                      }
-                    }
-                    value
-                  }
-                }
-              }
-
-              staged @include(if: $preview) {
-                allVariants {
-                  sku
-                  attributesRaw {
-                    attributeDefinition {
-                      name
-                      label(locale: $locale)
-                      type {
-                        name
-                      }
-                    }
-                    value
-                  }
-                }
-              }
-            }
-          }
-        }
-      `,
-      variables() {
-        return {
-          locale: locale(this),
-          sku: this.sku,
-          preview:
-            this.$route.query.preview === 'true' || false,
-        };
-      },
     },
   },
 };
