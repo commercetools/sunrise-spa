@@ -56,6 +56,8 @@ export default (props,ctx,sku) => {
       priceCountry: country.value,
       channelId: channel.value?.id,
     };
+    //@todo: implement unpublished product fetching only when
+    //  env value is set (used in preview unpublished products)
     products.get(
       [query,{},locale.value,[]]
     ).then(

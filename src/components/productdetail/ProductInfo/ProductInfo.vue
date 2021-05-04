@@ -18,7 +18,7 @@
           {{ currentProduct.name }}
         </h2>
         <h3>
-          <BasePrice :price="matchingVariant.price" />
+          <BasePrice :price="currentProduct.price" />
         </h3>
         <VariantSelector :sku="sku" />
         <div v-if="availableQ">
