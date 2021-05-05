@@ -1,4 +1,5 @@
-import gql from 'graphql-tag';
+import { ref, watch } from 'vue-demi';
+import useProductQuery from '../../../composition/useProductQuery';
 import { locale, getValue, productAttributes } from '../../common/shared';
 
 export default {
@@ -8,20 +9,22 @@ export default {
       required: true,
     },
   },
+  setup(props,ctx){
+    const sku = ref(props.sku);
+    watch(props,newProps=>sku.value=newProps.sku)
+    return useProductQuery(props,ctx,sku);
+  },
   data: () => ({
-    product: null,
     expanded: [true, false],
   }),
   computed: {
     productAttributes() {
-      const selected = this.product.masterData.staged || this.product.masterData.current;
-      const { attributesRaw } = (selected?.allVariants?.[0] || []);
-      const attributes = attributesRaw.map(
-        ({ attributeDefinition: { name, label, type }, value }) => [
-          name, label, getValue(type.name, value, locale(this)),
+      const attributes = this.product.attributes.map(
+        ({ name, value }) => [
+          name, getValue( value, locale(this)),
         ],
       );
-      return productAttributes(attributes);
+      return productAttributes(attributes, locale(this));
     },
   },
   methods: {
@@ -37,52 +40,6 @@ export default {
       const copy = [...this.expanded];
       copy[index] = !copy[index];
       this.expanded = copy;
-    },
-  },
-  apollo: {
-    product: {
-      query: gql`
-        query ProductDetailsSection($locale: Locale!, $sku: String!, $preview: Boolean!) {
-          product(sku: $sku) {
-            id
-            masterData {
-              current @skip(if: $preview) {
-                allVariants(skus:[$sku]) {
-                  sku
-                  attributesRaw {
-                    attributeDefinition {
-                      name
-                      label(locale:$locale)
-                      type {
-                        name
-                      }
-                    }
-                    value
-                  }
-                }
-              }
-              staged @include(if: $preview) {
-                allVariants(skus:[$sku]) {
-                  sku
-                    attributesRaw {
-                      attributeDefinition {
-                        name
-                        label(locale:$locale)
-                      }
-                      value
-                    }
-                  }
-              }
-            }
-          }
-        }`,
-      variables() {
-        return {
-          locale: locale(this),
-          sku: this.sku,
-          preview: this.$route.query.preview === 'true' || false,
-        };
-      },
     },
   },
 };

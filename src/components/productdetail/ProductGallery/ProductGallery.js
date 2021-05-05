@@ -1,6 +1,12 @@
-import gql from 'graphql-tag';
+import { ref, watch } from "vue-demi";
+import useProductQuery from "../../../composition/useProductQuery";
 
 export default {
+  setup(props,ctx){
+    const sku = ref(props.sku);
+    watch(props,newProps=>sku.value=newProps.sku)
+    return useProductQuery(props,ctx,sku);
+  },
   props: {
     sku: {
       type: String,
@@ -11,15 +17,12 @@ export default {
       default: false,
     },
   },
-  data: () => ({
-    product: null,
-  }),
   computed: {
     productImages() {
-      return this.product.masterData.current.variant.images;
+      return this.product.images;
     },
     productImage() {
-      const img = this.product.masterData.current.variant.images[0]?.url;
+      const img = this.product?.images?.[0]?.url;
       if (img) {
         return img.replace(/_medium.jpg$/, '_large.jpg');
       }
@@ -50,40 +53,6 @@ export default {
     },
     galleryThumbnailsCount() {
       return Math.min(this.productImages.length, 3);
-    },
-  },
-  watch: {
-    // product() {
-    //   setTimeout(
-    //     () => {
-    //       $(this.$refs.easyzoom).easyZoom();
-    //     }, 500,
-    //   );
-    // },
-  },
-  apollo: {
-    product: {
-      query: gql`
-        query ProductGallery($sku: String!) {
-          product(sku: $sku) {
-            id
-            masterData {
-              current {
-                variant(sku: $sku) {
-                  sku
-                  images {
-                    url
-                  }
-                }
-              }
-            }
-          }
-        }`,
-      variables() {
-        return {
-          sku: this.sku,
-        };
-      },
     },
   },
 };

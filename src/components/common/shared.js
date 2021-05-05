@@ -4,6 +4,9 @@ export function getValue(value, language) {
   if (typeof value === 'object' && typeof value?.label === "string") {
     return value.label;
   }
+  if (typeof value === 'object' && typeof value?.[language] === "string") {
+    return value?.[language];
+  }
   if (
     typeof value === 'object' && 
     typeof value?.label === "object" &&
@@ -147,11 +150,14 @@ export function debounce(fn, time = 500) {
   };
 }
 const arrayToString = value => Array.isArray(value)?value.join(', '):value
-export function productAttributes(attributes) {
+export function productAttributes(attributes,locale) {
   return config.detailAttributes.map(
-    (attributeName) => attributes.find(([name]) => name === attributeName),
+    ({name:n,label}) => {
+      const value = attributes.find(([name]) => name === n)?.[1];
+      return value ? [label[locale], value] : false
+    },
   ).filter((x) => x).map(
-    ([, name, value]) => ({ name, value:arrayToString(value) }),
+    ([name, value]) => ({ name, value:arrayToString(value) }),
   );
 }
 export const addLine = async (component) => {
