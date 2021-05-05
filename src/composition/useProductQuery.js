@@ -63,10 +63,13 @@ export default (props,ctx,sku) => {
     ).then(
       (response)=>{
         const p = response.results[0];
-        const allVariants = p.variants.concat(p.masterVariant);
+        const name = p?.name[locale.value]
+        const allVariants = p.variants.concat(p.masterVariant).map(
+          p=>({...p,name})
+        )
         variants.value = allVariants;
         product.value = allVariants.find(v=>v.sku===sku.value);
-        masterVariant.value = p.masterVariant;
+        masterVariant.value = {...p.masterVariant,name};
       }
     )
   }
