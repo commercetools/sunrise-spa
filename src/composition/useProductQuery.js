@@ -54,7 +54,7 @@ export default (props,ctx,sku) => {
       priceCurrency: currency.value,
       'filter.query': `variants.sku:"${sku.value}"`,
       priceCountry: country.value,
-      channelId: channel.value?.id,
+      priceChannel: channel.value?.id,
     };
     //@todo: implement unpublished product fetching only when
     //  env value is set (used in preview unpublished products)

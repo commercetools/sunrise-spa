@@ -87,7 +87,10 @@ export function createProduct(client, draft) {
     variables: {
       draft,
     },
-  }).then((response) => response.data.createProduct);
+  }).then((response) => {
+    const {id,version}=response.data.createProduct;
+    return updateProduct(client,{id,version,actions:[{ publish: {} }]})
+  })
 }
 
 export function updateProduct(client, { id, version, actions }) {

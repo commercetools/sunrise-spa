@@ -1,6 +1,17 @@
 import _const from '../support/const';
 
 describe('Product detail page', () => {
+  var prices =  [
+    {
+      value: {
+        "centPrecision": {
+        "currencyCode": "EUR",
+        "centAmount": 2200,
+      },
+    },
+    "country": "DE"
+    }
+  ];
   const draft = {
     key: 't-shirt-for-testing',
     name: [{
@@ -16,6 +27,7 @@ describe('Product detail page', () => {
     },
     masterVariant: {
       sku: 'sku-34-black',
+      prices,
       attributes: [{
         name: 'baseId',
         value: '"123"',
@@ -31,6 +43,7 @@ describe('Product detail page', () => {
     },
     variants: [{
       sku: 'sku-36-black',
+      prices,
       attributes: [{
         name: 'baseId',
         value: '"463"',
@@ -46,6 +59,7 @@ describe('Product detail page', () => {
     },
     {
       sku: 'sku-30-grey',
+      prices,
       attributes: [{
         name: 'baseId',
         value: '"437"',
@@ -61,6 +75,7 @@ describe('Product detail page', () => {
     },
     {
       sku: 'sku-32-grey',
+      prices,
       attributes: [{
         name: 'baseId',
         value: '"343"',
@@ -125,7 +140,7 @@ describe('Product detail page', () => {
     cy.get('[data-test=product-data]')
       .then(($product) => {
         cy.wrap($product)
-          .find('[data-test=attribute-select-Filtercolor]')
+          .find('[data-test=attribute-select-color]')
           .select('grey');
         cy.url().should('include', 'sku-30-grey');
       });
@@ -134,7 +149,7 @@ describe('Product detail page', () => {
         cy.wrap($product)
         cy.url().should('include', 'sku-30-grey');
         cy.wrap($product)
-          .find('[data-test=attribute-select-Size]')
+          .find('[data-test=attribute-select-size]')
           .select('32');
         cy.url().should('include', 'sku-32-grey');
       });
@@ -142,7 +157,7 @@ describe('Product detail page', () => {
       cy.get('[data-test=product-data]')
       .then(($product) => {
         cy.wrap($product)
-          .find('[data-test=attribute-select-Size]')
+          .find('[data-test=attribute-select-size]')
           .select('36');
         cy.url().should('include', 'sku-36-black');
       });
