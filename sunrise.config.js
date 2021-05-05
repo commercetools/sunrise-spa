@@ -108,12 +108,54 @@ export default {
     },
   ],
   detailAttributes: [
-    "designer",
-    "colorFreeDefinition",
-    "size",
-    "style",
-    "gender",
-    "articleNumberManufacturer",
+    {
+      name:"designer",
+        label: {
+          it: "Designer",
+          de: "Designer",
+          en: "Designer",
+        },
+    },
+    {
+      name:"colorFreeDefinition",
+        label: {
+          it: "Color",
+          de: "Farbe",
+          en: "Color",
+        },
+    },
+    {
+      name:"size",
+        label: {
+          it: "Size",
+          de: "Grösse",
+          en: "Size",
+        },
+    },
+    {
+      name:"style",
+      label: {
+        it: "Style",
+        de: "Stil",
+        en: "Style",
+      },
+    },
+    {
+      name:"gender",
+      label: {
+        it: "Gender",
+        de: "Zielgruppe",
+        en: "Gender",
+      },
+    },
+    {
+      name:"articleNumberManufacturer",
+      label: {
+        it: "Manufacturer AID",
+        de: "Herstellernummer",
+        en: "Manufacturer AID",
+      },
+    },
   ],
   variantSelector: ["color", "size"],
   variantInProductName: ["size"],
