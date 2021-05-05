@@ -16,6 +16,7 @@ export default (props,ctx,sku) => {
   const currentProduct = computed(()=>
     product.value || {}
   );
+  const staged = computed(()=>Boolean(ctx?.root?.$route?.query?.staged))
   const availability = computed(()=>
     // currentProduct
     //   .value
@@ -56,6 +57,9 @@ export default (props,ctx,sku) => {
       priceCountry: country.value,
       priceChannel: channel.value?.id,
     };
+    if(staged.value){
+      query.staged=true
+    }
     //@todo: implement unpublished product fetching only when
     //  env value is set (used in preview unpublished products)
     products.get(
