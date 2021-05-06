@@ -18,34 +18,19 @@ export default (props,ctx,sku) => {
   );
   const staged = computed(()=>Boolean(ctx?.root?.$route?.query?.staged))
   const availability = computed(()=>
-    // currentProduct
-    //   .value
-    //   ?.variant
-    //   ?.availability
-    //   ?.channels
-    //   ?.results?.[0]
-    //   ?.availability
-    //@todo: to be implemented by Harm
-    undefined
+    currentProduct.value?.availability?.channels?.[channel.value?.id]
   );
   const availableQuantity = computed(()=>
-    // availability.value?.availableQuantity
-    //@todo: to be implemented by Harm
-    undefined
+    availability.value?.availableQuantity
   );
   const availableQ = computed(()=>
-    // typeof availableQuantity.value !== "undefined"
-    //@todo: to be implemented by Harm
-    undefined
+    availableQuantity.value !== "undefined"
   );
   const isOnStock = computed(()=>{
-    // const inStock = availability.value?.isOnStock;
-    // return typeof inStock !== "boolean"
-    //   ? true
-    //   : inStock
-    //@todo: to be implemented by Harm
-    return true
-
+    const inStock = availability.value?.isOnStock;
+    return typeof inStock !== "boolean"
+      ? true
+      : inStock
   });
   const getProductProjection = () => {
     if(!sku.value){
