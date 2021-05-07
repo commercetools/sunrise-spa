@@ -5,6 +5,8 @@ import useCountry from './useCountry';
 import useLocale from './useLocale';
 import useStore from './useStore';
 export default (props,ctx,sku) => {
+  //step one to solve race condition
+  const requested = {current:null};
   //example of watching locale
   const product = ref(null);
   const variants = ref(null);
@@ -45,12 +47,21 @@ export default (props,ctx,sku) => {
     if(staged.value){
       query.staged=true
     }
-    //@todo: implement unpublished product fetching only when
-    //  env value is set (used in preview unpublished products)
+    //step 2 in fixing race condition
+    const current = {};
+    requested.current=current;
+    //@todo: shows the race condition switch from de to us and then to de
+    //  within 2 seconds and the price will show usd amount in euro
     products.get(
       [query,{},locale.value,[]]
     ).then(
       (response)=>{
+        //step 3 in fixing race condition
+        if(requested.current!==current){
+          //do not set observable ref if this wasn't the last
+          //  requested product that resolved
+          return;
+        }
         const p = response.results[0];
         const name = p?.name[locale.value]
         const allVariants = p.variants.concat(p.masterVariant).map(
