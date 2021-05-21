@@ -71,7 +71,7 @@ export default {
       this.$store.dispatch("openMiniCart", 0);
     },
     openShoppingList() {
-      throw new Error('Have to implement open shopping list');
+      this.$store.dispatch("openShoppingList", 0);
     },
   },
   watch: {

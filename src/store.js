@@ -15,6 +15,7 @@ const SET_STORE_NAME = "SET_STORE_NAME";
 const SET_AUTHENTICATED = "SET_AUTHENTICATED";
 const SET_TOKEN_INFO = "SET_TOKEN_INFO";
 const SET_MINI_CART_OPEN = "SET_MINI_CART_OPEN";
+const SET_SHOPPING_LIST_OPEN = "SET_SHOPPING_LIST_OPEN";
 const SET_CART_ITEMS = "SET_CART_ITEMS";
 
 const availableLocales = Object.keys(
@@ -72,6 +73,7 @@ export default new Vuex.Store({
     tokenInfo: null,
     authenticated: false,
     miniCartOpen: false,
+    shoppingListOpen: false,
     miniCartCloseTimer: 0,
     cartItems: 0,
   },
@@ -121,6 +123,13 @@ export default new Vuex.Store({
       if (timeout !== 0) {
         setMiniCartTimeout(commit, state, timeout);
       }
+    },
+
+    openShoppingList: ({ commit }) => {
+      commit(SET_SHOPPING_LIST_OPEN, true);
+    },
+    closeShoppingList: ({ commit }) => {
+      commit(SET_SHOPPING_LIST_OPEN, false);
     },
 
     closeMiniCart: ({ commit, state }, timeout = 0) => {
@@ -178,6 +187,9 @@ export default new Vuex.Store({
 
     [SET_MINI_CART_OPEN](state, miniCartOpen) {
       state.miniCartOpen = miniCartOpen;
+    },
+    [SET_SHOPPING_LIST_OPEN](state, openState) {
+      state.shoppingListOpen = openState;
     },
     [SET_CART_ITEMS](state, cartItems) {
       state.cartItems = cartItems;
