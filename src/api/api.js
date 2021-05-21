@@ -55,6 +55,10 @@ export const makeConfig = (token) => ({
 });
 
 export const toUrl = (base, query) => {
+  const queryId = query.find(([key])=>key==='id');
+  if(queryId){
+    return base.slice(0,-6)+queryId[1]
+  }
   const url = new URL(base);
   const pageSize = query.find(
     ([key]) => key === "pageSize"

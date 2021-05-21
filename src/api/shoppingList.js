@@ -50,6 +50,26 @@ const shoppingList = {
       );
     }
   ),
+  removeItem: withToken(
+    ([lineItemId, listId, version], accessToken) => {
+      return groupFetchJson(
+        new URL(`${baseUrl}/me/shopping-lists/${listId}`),
+        {
+          method: "POST",
+          body: JSON.stringify({
+            version,
+            actions: [
+              {
+                action: "removeLineItem",
+                lineItemId,
+              },
+            ],
+          }),
+          ...makeConfig(accessToken),
+        }
+      );
+    }
+  ),
 };
 
 export default shoppingList;

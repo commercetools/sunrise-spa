@@ -30,13 +30,26 @@ export default () => {
     if (!shoppingList.value) {
       promise = createShoppingList();
     }
-    //if no shoppingList exist then create it
-    //https://docs.commercetools.com/api/projects/shoppingLists#add-lineitem
-    //https://docs.commercetools.com/api/projects/shoppingLists#lineitemdraft
-    //typeId is product
     return promise.then(() =>
       shoppingListApi.addItem([
         productId,
+        shoppingList.value.id,
+        shoppingList.value.version,
+      ])
+    ).then(
+      response=>{
+        shoppingList.value=response
+      }
+    )
+  };
+  const removeLineItem = (lineItemId) => {
+    let promise = getShoppingList()
+    if (!shoppingList.value) {
+      promise = Promise.reject('Cannot remove item from non existing list')
+    }
+    return promise.then(() =>
+      shoppingListApi.removeItem([
+        lineItemId,
         shoppingList.value.id,
         shoppingList.value.version,
       ])
@@ -51,6 +64,7 @@ export default () => {
     shoppingList,
     getShoppingList,
     addToShoppingList,
+    removeLineItem
   };
 };
 export const SHOPPING_LIST = 'SHOPPING_LIST';

@@ -68,18 +68,19 @@ export default {
     computedLocale() {
       return loc(this);
     },
-    miniCartOpen() {
-      return this.$store.state.miniCartOpen;
+    isMiniCartOpen() {
+      return this.$store.state.miniCartOpen ||
+        this.$store.state.shoppingListOpen
     },
   },
   methods: {
     close() {
-      this.$store.dispatch("toggleMiniCart");
+      this.$store.dispatch("closeMiniCart");
+      this.$store.dispatch("closeShoppingList");
     },
     keyUpListener(e) {
       if (e.key === "Escape") {
-        this.$store.dispatch("closeMiniCart");
-        this.$store.dispatch("closeShoppingList");
+        this.close();
       }
     },
   },

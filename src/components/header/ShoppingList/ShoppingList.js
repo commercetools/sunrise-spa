@@ -1,80 +1,68 @@
 import Vue from 'vue';
-import gql from 'graphql-tag';
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
-import cartMixin from '../../../mixins/cartMixin';
-import productMixin from '../../../mixins/productMixin';
-import BasePrice from '../../common/BasePrice/MiniCardBasePrice.vue';
-import LineItemInfo from '../../common/CartLike/LineItemInfo/LineItemInfo.vue';
-import LineItemDeleteForm from '../../cartdetail/LineItemDeleteForm/LineItemDeleteForm.vue';
-import MONEY_FRAGMENT from '../../Money.gql';
-import CART_FRAGMENT from '../../Cart.gql';
-import ADDRESS_FRAGMENT from '../../Address.gql';
-import {
-  locale, totalPrice, subTotal, variantAttributes,
-} from '../../common/shared';
-
+import { inject, computed } from '@vue/composition-api';
+import { SHOPPING_LIST } from '../../../composition/useShoppingList';
+import useLocale from '../../../composition/useLocale';
+import ShoppingListProduct from './ShoppingListProduct/ShoppingListProduct.vue'
 export default {
   components: {
-    LineItemDeleteForm,
-    LineItemInfo,
     VuePerfectScrollbar,
-    BasePrice,
+    ShoppingListProduct
   },
-  mixins: [cartMixin, productMixin],
-  data: () => ({
-    me: null,
-  }),
+  setup() {
+    const {shoppingList, removeLineItem} = inject(SHOPPING_LIST);
+    const locale = useLocale()
+    const totalShoppingCartItems = computed(() => {
+      return (shoppingList.value?.lineItems || []).reduce(
+        (total, { quantity }) => total + quantity,
+        0
+      );
+    });
+    const listNotEmpty = computed(() => {
+      return totalShoppingCartItems.value > 0
+    });
+    const lineItems = computed(() => {
+      return (shoppingList.value?.lineItems||[]).map(
+        item=>({
+          ...item,
+          name: item.name[locale.value]
+        })
+      )
+    });
+    return {
+      shoppingList,
+      totalShoppingCartItems,
+      listNotEmpty,
+      lineItems,
+      removeLineItem
+    };
+  },
+
   computed: {
     show() {
       return this.$store.state.shoppingListOpen;
     },
-    subtotal() {
-      return subTotal(this.me.activeCart);
-    },
   },
   methods: {
     open() {
-      this.$store.dispatch('openMiniCart', 0);
+      this.$store.dispatch('openShoppingList');
     },
     close() {
-      this.$store.dispatch('toggleMiniCart');
+      this.$store.dispatch('closeShoppingList');
     },
-    totalPrice,
-    nameFromLineItem(lineItem) {
-      const attributes = variantAttributes(lineItem?.variant, locale(this));
-      return `${lineItem.name} ${attributes.map(
-        ({ name, value }) => `${name}: ${value}`,
-      ).join(', ')}`;
-    },
-  },
+    removeItem(itemId) {
+      this.removeLineItem(
+        itemId,
+        this.shoppingList.id,
+        this.shoppingList.version
+      )
+    }
+ },
   watch: {
     show(newValue, oldValue) {
       if (newValue && !oldValue) {
         Vue.nextTick(() => $('.nav-minicart section').scrollTop(0));
       }
-    },
-    totalItems() {
-      this.$store.dispatch('setCartItems', this.totalItems);
-    },
-  },
-  apollo: {
-    me: {
-      query: gql`
-        query me($locale: Locale!) {
-          me {
-            activeCart {
-              ...CartFields
-            }
-          }
-        }
-        ${CART_FRAGMENT}
-        ${MONEY_FRAGMENT}
-        ${ADDRESS_FRAGMENT}`,
-      variables() {
-        return {
-          locale: locale(this),
-        };
-      },
     },
   },
 };

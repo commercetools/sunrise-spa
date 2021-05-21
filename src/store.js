@@ -144,6 +144,9 @@ export default new Vuex.Store({
     toggleMiniCart: ({ commit, state }) => {
       commit(SET_MINI_CART_OPEN, !state.miniCartOpen);
     },
+    toggleShoppingList: ({ commit, state }) => {
+      commit(SET_SHOPPING_LIST_OPEN, !state.shoppingListOpen);
+    },
 
     setCartItems: ({ commit }, cartItems) => {
       commit(SET_CART_ITEMS, cartItems);

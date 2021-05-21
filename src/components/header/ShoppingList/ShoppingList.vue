@@ -6,87 +6,54 @@
     <div
       class="sidebar-cart-active"
       :class="{ inside: show }"
-      data-test="mini-cart-content"
+      data-test="shopping-list-content"
     >
       <div class="sidebar-cart-all">
         <a
           class="cart-close"
           href="javascript:;"
           @click="close"
-          data-test="mini-cart-close-button"
+          data-test="shopping-list-close-button"
         >
           <i class="dl-icon-close"></i>
         </a>
         <div class="cart-content">
-          <h3>{{ $t('miniCart') }} </h3>
-          <span v-if="cartNotEmpty">
+          <h3>{{ $t('shoppingList') }} </h3>
+          <span v-if="listNotEmpty">
             <ul>
               <li
-                v-for="lineItem in sortedLineItems"
+                v-for="lineItem in lineItems"
                 :key="lineItem.id"
-                data-test="mini-cart-line-item"
+                data-test="shopping-list-line-item"
                 class="single-product-cart"
               >
-                <div class="cart-img">
-                  <router-link
-                    :to="
-                      productRoute(lineItem.productSlug, lineItem.variant.sku)
-                    "
+                <ShoppingListProduct 
+                  :id="lineItem.productId" 
+                  :quantity="lineItem.quantity"
+                />
+                <div class="cart-delete">
+                  <a
+                    href="javascript:;"
+                    @click="()=>removeItem(lineItem.id)"
+                    data-test="shopping-list-item-delete"
+                    class="edit-delete-section"
                   >
-                    <img
-                      :src="displayedImageUrl(lineItem.variant)"
-                      :alt="lineItem.name"
-                    />
-                  </router-link>
+                    <i class="fa fa-trash-o"></i>
+                  </a>
                 </div>
-                <div class="cart-title">
-                  <h4>
-                    <router-link
-                      :to="
-                        productRoute(lineItem.productSlug, lineItem.variant.sku)
-                      "
-                      data-test="cart-line-item-link"
-                    >
-                      {{ nameFromLineItem(lineItem) }}
-                    </router-link>
-                  </h4>
-                  <span
-                    data-test="cart-line-item-quantity"
-                  >
-                    {{ lineItem.quantity }} ×
-                    <BasePrice :price="totalPrice(lineItem)"
-                  /></span>
-                </div>
-                <LineItemDeleteForm :lineItemId="lineItem.id" />
               </li>
             </ul>
-            <div class="cart-total">
-              <h4>
-                {{ $t('subtotal') }}:
-                <BasePrice
-                  :price="subtotal"
-                  data-test="mini-cart-price"
-                />
-              </h4>
-            </div>
-            <div class="cart-checkout-btn">
-              <router-link
-                :to="{ name: 'cart' }"
-                @click="close"
-                class="btn-grey"
-              >
-                {{ $t('viewBag') }}
-              </router-link>
+            <!-- <div class="cart-checkout-btn">
               <router-link
                 :to="{ name: 'checkout' }"
                 data-test="checkout-button"
                 @click="close"
                 >{{ $t('checkout') }}</router-link
               >
-            </div>
+            </div> -->
           </span>
-          <span v-if="!cartNotEmpty">
-            <h5>{{ $t('emptyCart') }}</h5>
+          <span v-if="!listNotEmpty">
+            <h5>{{ $t('emptyList') }}</h5>
           </span>
         </div>
       </div>
