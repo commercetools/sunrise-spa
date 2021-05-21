@@ -22,6 +22,9 @@
           >
         </router-link>
         <div class="product-action">
+          <a href @click.prevent="addItemToShoppingList"
+            ><i class="dl-icon-star"></i> <span>Shopping list</span></a
+          >
           <a href @click.prevent="openModal"
             ><i class="dl-icon-view"></i> <span>Quick Shop</span></a
           >

@@ -20,6 +20,11 @@ export const fetchJson = (...args) =>
     return result.json();
   });
 export const groupFetchJson = group(fetchJson);
+export const groupFetchJsonCacheSession = group(
+  fetchJson,
+  new Map(),
+  false
+);
 
 export const baseUrl = `${config.ct.api}/${config.ct.auth.projectKey}`;
 export const withToken = (() => {

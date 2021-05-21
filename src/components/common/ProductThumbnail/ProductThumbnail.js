@@ -2,6 +2,8 @@ import productMixin from '@/mixins/productMixin';
 import BasePrice from '../BasePrice/BasePrice.vue';
 import cartMixin from '../../../mixins/cartMixin';
 import { addLine } from '../shared';
+import { inject } from '@vue/composition-api';
+import { SHOPPING_LIST } from '../../../composition/useShoppingList'
 
 export default {
   props: {
@@ -13,6 +15,9 @@ export default {
   components: {
     BasePrice,
   },
+  setup() {
+    return inject(SHOPPING_LIST);
+  },
   mixins: [productMixin, cartMixin],
   methods: {
     async addLineItem() {
@@ -21,6 +26,9 @@ export default {
     },
     openModal() {
       this.$emit('open-modal', { slug: this.currentProduct.slug, sku: this.matchingVariant.sku });
+    },
+    addItemToShoppingList() {
+      this.addToShoppingList(this.product.id);
     },
   },
   computed: {
