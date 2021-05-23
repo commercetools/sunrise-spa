@@ -43,7 +43,7 @@ export default (props,ctx) => {
       response=>{
         shoppingList.value=response
       }
-    )
+    ).finally(()=>shoppingListApi.resetCache())
   };
   const removeLineItem = (lineItemId) => {
     let promise = getShoppingList()
@@ -60,11 +60,12 @@ export default (props,ctx) => {
       response=>{
         shoppingList.value=response
       }
-    )
+    ).finally(()=>shoppingListApi.resetCache())
   };
   onMounted(getShoppingList);
   watch(auth,()=>{
-    getShoppingList()
+    shoppingListApi.resetCache();
+    getShoppingList();
   })
   return {
     shoppingList,

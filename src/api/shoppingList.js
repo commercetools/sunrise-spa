@@ -2,13 +2,16 @@
 /* eslint-disable no-shadow */
 import {
   withToken,
-  groupFetchJsonCacheSession as groupFetchJson,
+  groupApi,
+  fetchJson,
   makeConfig,
   baseUrl,
 } from "./api";
 // import config from "../../sunrise.config";
 // import { locale } from "../components/common/shared";
-
+const cache = new Map();
+const groupFetchJson = groupApi(fetchJson,cache);
+const resetCache = ()=>cache.clear();
 const shoppingList = {
   get: withToken((accessToken) => {
     return groupFetchJson(
@@ -70,6 +73,7 @@ const shoppingList = {
       );
     }
   ),
+  resetCache
 };
 
 export default shoppingList;

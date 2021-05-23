@@ -1,7 +1,7 @@
 import config from "../../sunrise.config";
 import { getAuthToken } from "../auth";
 import { group } from "./lib";
-
+export const groupApi = group;
 export const withPage = ({
   page = 1,
   pageSize = 20,
