@@ -63,8 +63,6 @@ export default (props,ctx) => {
   };
   onMounted(getShoppingList);
   watch(auth,()=>{
-    // eslint-disable-next-line no-console
-    console.log('... auth:',auth.value)
     getShoppingList()
   })
   return {
