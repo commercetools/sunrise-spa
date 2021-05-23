@@ -4,10 +4,11 @@ import {
   watch,
 } from "@vue/composition-api";
 import shoppingListApi from "../api/shoppingList";
+import { selectAuth } from "./selectors";
 import useStore from "./useStore";
 
 export default (props,ctx) => {
-  const auth = useStore(ctx,state=>state.authenticated)
+  const auth = useStore(ctx,selectAuth)
   const requested = { current: null };
   //example of watching locale
   const shoppingList = ref(undefined);
