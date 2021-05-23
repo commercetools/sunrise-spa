@@ -48,7 +48,7 @@ export default {
     MiniCart,
     ShoppingList
   },
-  setup(props) {
+  setup(props,ctx) {
     const locale=ref(props.locale);
     const country = ref(props.country);
     watch(
@@ -58,7 +58,7 @@ export default {
         country.value=props.country;
       }
     );
-    const shoppingList = useShoppingList();
+    const shoppingList = useShoppingList(undefined,ctx);
     provide('locale', locale);
     provide('country', country);
     provide(DefaultApolloClient, apolloClient)

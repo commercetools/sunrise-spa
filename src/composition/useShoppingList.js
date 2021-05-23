@@ -1,11 +1,13 @@
 import {
   onMounted,
   ref,
+  watch,
 } from "@vue/composition-api";
 import shoppingListApi from "../api/shoppingList";
+import useStore from "./useStore";
 
-export default () => {
-  //step one to solve race condition
+export default (props,ctx) => {
+  const auth = useStore(ctx,state=>state.authenticated)
   const requested = { current: null };
   //example of watching locale
   const shoppingList = ref(undefined);
@@ -60,6 +62,11 @@ export default () => {
     )
   };
   onMounted(getShoppingList);
+  watch(auth,()=>{
+    // eslint-disable-next-line no-console
+    console.log('... auth:',auth.value)
+    getShoppingList()
+  })
   return {
     shoppingList,
     getShoppingList,
