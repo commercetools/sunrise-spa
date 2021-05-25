@@ -26,7 +26,7 @@ export default (props,ctx,sku,id) => {
     availability.value?.availableQuantity
   );
   const availableQ = computed(()=>
-    availableQuantity.value !== "undefined"
+    availableQuantity.value !== undefined
   );
   const isOnStock = computed(()=>{
     const inStock = availability.value?.isOnStock;

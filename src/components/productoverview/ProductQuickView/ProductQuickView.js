@@ -5,7 +5,7 @@ import AddToCartForm from '../../productdetail/AddToCartForm/AddToCartForm.vue';
 import BasePrice from '../../common/BasePrice/BasePrice.vue';
 import VariantSelector from '../../productdetail/VariantSelector/VariantSelector.vue';
 import useProductQuery from '../../../composition/useProductQuery';
-import { provide, ref, watch } from 'vue-demi';
+import { computed, inject, provide, ref, watch } from 'vue-demi';
 
 export default {
   data: () => ({
@@ -35,8 +35,16 @@ export default {
     watch(props,(props)=>{
       sku.value=props.productSku;
     });
+    const override = inject('ADD_TO_SHOPPING_LIST',{
+      name:false,
+      onAdd:false,
+      addCaption:undefined
+    });
+    const showName = computed(()=>override.name!==false)
     return {
       ...useProductQuery(props,ctx,sku),
+      ...override,
+      showName,
       sku
     };
   },
