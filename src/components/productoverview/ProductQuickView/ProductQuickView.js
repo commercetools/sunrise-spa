@@ -22,6 +22,10 @@ export default {
   props: {
     showModal: Boolean,
     productSku: String,
+    modalName: {
+      type:String,
+      default:"quickView"
+    }
   },
   setup(props,ctx){
     const sku = ref(props.productSku)
@@ -39,13 +43,13 @@ export default {
   watch: {
     showModal() {
       if (this.showModal === true) {
-        this.$modal.show('quickView');
+        this.$modal.show(this.modalName);
       }
     },
   },
   methods: {
     closeModal() {
-      this.$modal.hide('quickView');
+      this.$modal.hide(this.modalName);
       this.$emit('close-modal');
       this.quantity = 1;
     },

@@ -6,7 +6,7 @@
   <div>
     <modal
       styles="border-radius: 0"
-      name="quickView"
+      :name="modalName"
       width="1000"
       height="500"
       @closed="closeModal"
