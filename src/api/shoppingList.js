@@ -13,20 +13,25 @@ const cache = new Map();
 const groupFetchJson = groupApi(fetchJson,cache);
 const resetCache = ()=>cache.clear();
 const shoppingList = {
-  get: withToken((accessToken) => {
+  get: withToken((query={},accessToken) => {
+    const url = new URL(`${baseUrl}/me/shopping-lists`);
+    if(query.name){
+      url.searchParams.append('where', `name(en="${query.name}")`)
+    }
     return groupFetchJson(
-      new URL(`${baseUrl}/me/shopping-lists`),
+      url,
       makeConfig(accessToken)
-    ).then((response) => response.results?.[0]);
+    );
   }),
-  create: withToken((accessToken) => {
+  create: withToken((query,accessToken) => {
     return groupFetchJson(
       new URL(`${baseUrl}/me/shopping-lists`),
       {
         method: "POST",
         body: JSON.stringify({
+          key: query.name,
           name: {
-            en: "my shopping list",
+            en: query.name,
           },
         }),
         ...makeConfig(accessToken),
@@ -34,7 +39,7 @@ const shoppingList = {
     );
   }),
   addItem: withToken(
-    ([productId, listId, version], accessToken) => {
+    ([sku, quantity, listId, version], accessToken) => {
       return groupFetchJson(
         new URL(`${baseUrl}/me/shopping-lists/${listId}`),
         {
@@ -44,7 +49,8 @@ const shoppingList = {
             actions: [
               {
                 action: "addLineItem",
-                productId
+                quantity,
+                sku
               },
             ],
           }),

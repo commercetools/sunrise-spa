@@ -1,6 +1,5 @@
 import { locale as loc } from "../common/shared";
 import MiniCart from "../header/MiniCart/MiniCart.vue";
-import ShoppingList from "../header/ShoppingList/ShoppingList.vue";
 import config from "../../../sunrise.config";
 import { provide, watch,ref } from '@vue/composition-api';
 import { DefaultApolloClient } from '@vue/apollo-composable'
@@ -49,7 +48,6 @@ export default {
   },
   components: {
     MiniCart,
-    ShoppingList
   },
   setup(props,ctx) {
     const locale=ref(props.locale);
@@ -87,7 +85,6 @@ export default {
   methods: {
     close() {
       this.$store.dispatch("closeMiniCart");
-      this.$store.dispatch("closeShoppingList");
     },
     keyUpListener(e) {
       if (e.key === "Escape") {

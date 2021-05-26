@@ -13,12 +13,11 @@ export default {
     productSku: String,
   },
   setup(){
-    const name = ref('')
+    const name = ref('My Shopping List')
     // eslint-disable-next-line no-unused-vars
-    const shoppingList = inject(SHOPPING_LIST);
+    const {addToShoppingList} = inject(SHOPPING_LIST);
     const onAdd = (sku,quantity)=>{
-      // eslint-disable-next-line no-console
-      console.log('need to add',sku,quantity,name.value)
+      addToShoppingList(sku,quantity,name.value)
     }
     provide('ADD_TO_SHOPPING_LIST',{
       onAdd,

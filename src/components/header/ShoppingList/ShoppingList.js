@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import { inject, computed } from '@vue/composition-api';
 import { SHOPPING_LIST } from '../../../composition/useShoppingList';
-import useLocale from '../../../composition/useLocale';
+// import useLocale from '../../../composition/useLocale';
 import ShoppingListProduct from './ShoppingListProduct/ShoppingListProduct.vue'
 export default {
   components: {
@@ -10,28 +10,24 @@ export default {
     ShoppingListProduct
   },
   setup() {
-    const {shoppingList, removeLineItem} = inject(SHOPPING_LIST);
-    const locale = useLocale()
-    const totalShoppingCartItems = computed(() => {
-      return (shoppingList.value?.lineItems || []).reduce(
-        (total, { quantity }) => total + quantity,
-        0
-      );
+    const {shoppingLists, removeLineItem} = inject(SHOPPING_LIST);
+    // const locale = useLocale()
+    const lists = computed(() => {
+      return (shoppingLists.value || []).length;
     });
     const listNotEmpty = computed(() => {
-      return totalShoppingCartItems.value > 0
+      return lists.value > 0
     });
     const lineItems = computed(() => {
-      return (shoppingList.value?.lineItems||[]).map(
-        item=>({
-          ...item,
-          name: item.name[locale.value]
-        })
-      )
+      return []
+      // return (shoppingList.value?.lineItems||[]).map(
+      //   item=>({
+      //     ...item,
+      //     name: item.name[locale.value]
+      //   })
+      // )
     });
     return {
-      shoppingList,
-      totalShoppingCartItems,
       listNotEmpty,
       lineItems,
       removeLineItem

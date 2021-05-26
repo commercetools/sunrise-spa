@@ -87,15 +87,12 @@
                       </a>
                     </div>
                     <div class="cart-wrap component-same ml-10">
-                      <a
-                        href
-                        @click.prevent="openShoppingList"
-                        data-test="shopping-list-open-button"
-                        class="cart-active"
+                      <router-link
+                        :to="{ name: 'shopping list' }"
                       >
                         <i class="dl-icon-heart"></i>
                         <span class="count-style">{{ totalShoppingCartItems }} </span>
-                      </a>
+                      </router-link>
                     </div>
                   </div>
                 </div>

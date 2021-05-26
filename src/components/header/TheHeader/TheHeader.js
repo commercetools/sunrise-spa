@@ -21,15 +21,16 @@ export default {
     };
   },
   setup() {
-    const {shoppingList} = inject(SHOPPING_LIST);
+    const {shoppingLists} = inject(SHOPPING_LIST);
     const totalShoppingCartItems = computed(() => {
-      return (shoppingList.value?.lineItems || []).reduce(
-        (total, { quantity }) => total + quantity,
-        0
+      return (shoppingLists.value || []).reduce(
+        (total,list)=>list.lineItems.reduce(
+          (total, { quantity }) => total + quantity,
+          total
+        ),0
       );
     });
     return {
-      shoppingList,
       totalShoppingCartItems,
     };
   },
@@ -69,9 +70,6 @@ export default {
     },
     openMiniCart() {
       this.$store.dispatch("openMiniCart", 0);
-    },
-    openShoppingList() {
-      this.$store.dispatch("openShoppingList", 0);
     },
   },
   watch: {

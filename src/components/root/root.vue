@@ -9,7 +9,6 @@
 >
   <div @click="close()" class="body-overlay"></div>
   <MiniCart />
-  <ShoppingList />
   <router-view name="header" />
   <router-view />
   <footer>

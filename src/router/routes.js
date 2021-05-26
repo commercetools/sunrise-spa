@@ -160,6 +160,16 @@ export default [
           footer: TheFooter,
         },
       },
+      {
+        path: 'shopping-list',
+        name: 'shopping list',
+        meta: { requiresCart },
+        components: {
+          default: PageCheckout,
+          header: TheHeader,
+          footer: TheFooter,
+        },
+      },
     ],
   },
   {

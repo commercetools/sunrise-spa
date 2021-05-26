@@ -10,55 +10,51 @@ import useStore from "./useStore";
 export default (props,ctx) => {
   const auth = useStore(ctx,selectAuth)
   const requested = { current: null };
-  //example of watching locale
-  const shoppingList = ref(undefined);
-  const getShoppingList = () => {
+  const shoppingLists = ref(undefined);
+  const getShoppingList = (query) => {
     const current = {};
     requested.current = current;
-    return shoppingListApi.get().then((list) => {
-      if (requested.current === current) {
-        shoppingList.value = list;
+    return shoppingListApi.get(query).then((response) => {
+      if (requested.current === current && !query) {
+        shoppingLists.value = response.results;
       }
     });
   };
-  const createShoppingList = () => {
-    const current = {};
-    requested.current = current;
-    return shoppingListApi.create().then((list) => {
-      shoppingList.value = list;
-    });
-  };
-  const addToShoppingList = (productId) => {
-    let promise = getShoppingList()
-    if (!shoppingList.value) {
-      promise = createShoppingList();
-    }
-    return promise.then(() =>
-      shoppingListApi.addItem([
-        productId,
-        shoppingList.value.id,
-        shoppingList.value.version,
-      ])
+  const addToShoppingList = (sku,quantity,name) => {
+    return shoppingListApi.get({name}).then(
+      result=>{
+        if(result.total===0){
+          return shoppingListApi.create({name})
+        }
+        return result.results[0]
+      }
     ).then(
-      response=>{
-        shoppingList.value=response
+      result=>{
+        return shoppingListApi.addItem([
+          sku, Number(quantity), result.id, result.version
+        ])
+      }
+    ).then(
+      ()=>{
+        shoppingListApi.resetCache()
+        return getShoppingList()
       }
     ).finally(()=>shoppingListApi.resetCache())
   };
   const removeLineItem = (lineItemId) => {
     let promise = getShoppingList()
-    if (!shoppingList.value) {
+    if (!shoppingLists.value) {
       promise = Promise.reject('Cannot remove item from non existing list')
     }
     return promise.then(() =>
       shoppingListApi.removeItem([
         lineItemId,
-        shoppingList.value.id,
-        shoppingList.value.version,
+        shoppingLists.value.id,
+        shoppingLists.value.version,
       ])
     ).then(
       response=>{
-        shoppingList.value=response
+        shoppingLists.value=response
       }
     ).finally(()=>shoppingListApi.resetCache())
   };
@@ -68,7 +64,7 @@ export default (props,ctx) => {
     getShoppingList();
   })
   return {
-    shoppingList,
+    shoppingLists,
     getShoppingList,
     addToShoppingList,
     removeLineItem
