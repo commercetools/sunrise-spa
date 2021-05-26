@@ -58,6 +58,14 @@ export default (props,ctx) => {
       }
     ).finally(()=>shoppingListApi.resetCache())
   };
+  const removeList = (list) => {
+    shoppingListApi.remove(list).finally(
+      ()=>{
+        shoppingListApi.resetCache();
+        getShoppingList();
+      }
+    )
+  }
   onMounted(getShoppingList);
   watch(auth,()=>{
     shoppingListApi.resetCache();
@@ -67,7 +75,8 @@ export default (props,ctx) => {
     shoppingLists,
     getShoppingList,
     addToShoppingList,
-    removeLineItem
+    removeLineItem,
+    removeList
   };
 };
 export const SHOPPING_LIST = 'SHOPPING_LIST';

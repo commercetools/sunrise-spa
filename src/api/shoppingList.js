@@ -38,6 +38,15 @@ const shoppingList = {
       }
     );
   }),
+  remove: withToken((list,accessToken) => {
+    return groupFetchJson(
+      new URL(`${baseUrl}/me/shopping-lists/${list.id}?version=${list.version}`),
+      {
+        method: "DELETE",
+        ...makeConfig(accessToken),
+      }
+    );
+  }),
   addItem: withToken(
     ([sku, quantity, listId, version], accessToken) => {
       return groupFetchJson(

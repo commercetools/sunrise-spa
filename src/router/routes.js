@@ -9,6 +9,7 @@ import ResetPassword from '../components/login/ResetPassword/ResetPassword.vue';
 import PageUserAccount from '../components/useraccount/PageUserAccount/PageUserAccount.vue';
 import PageNotFound from '../components/common/PageNotFound/PageNotFound.vue';
 import PageProductDetail from '../components/productdetail/PageProductDetail/PageProductDetail.vue';
+import PageShoppingList from '../components/cartdetail/PageShoppingList/PageShoppingList.vue';
 import PageCartDetail from '../components/cartdetail/PageCartDetail/PageCartDetail.vue';
 import PageStoreLocator from '../components/stores/PageStoreLocator/PageStoreLocator.vue';
 import TabAccountDetails from '../components/useraccount/TabAccountDetails/TabAccountDetails.vue';
@@ -163,9 +164,8 @@ export default [
       {
         path: 'shopping-list',
         name: 'shopping list',
-        meta: { requiresCart },
         components: {
-          default: PageCheckout,
+          default: PageShoppingList,
           header: TheHeader,
           footer: TheFooter,
         },
