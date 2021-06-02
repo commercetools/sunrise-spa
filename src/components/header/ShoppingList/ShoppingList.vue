@@ -3,20 +3,8 @@
 
 <template>
   <span>
-    <div
-      class="sidebar-cart-active"
-      :class="{ inside: show }"
-      data-test="shopping-list-content"
-    >
+    <div>
       <div class="sidebar-cart-all">
-        <a
-          class="cart-close"
-          href="javascript:;"
-          @click="close"
-          data-test="shopping-list-close-button"
-        >
-          <i class="dl-icon-close"></i>
-        </a>
         <div class="cart-content">
           <h3>{{ $t('shoppingList') }} </h3>
           <span v-if="listNotEmpty">

@@ -17,7 +17,9 @@ export default (props,ctx) => {
     return shoppingListApi.get(query).then((response) => {
       if (requested.current === current && !query) {
         shoppingLists.value = response.results;
+        return
       }
+      return response.results[0]
     });
   };
   const addToShoppingList = (sku,quantity,name) => {
@@ -41,22 +43,17 @@ export default (props,ctx) => {
       }
     ).finally(()=>shoppingListApi.resetCache())
   };
-  const removeLineItem = (lineItemId) => {
-    let promise = getShoppingList()
-    if (!shoppingLists.value) {
-      promise = Promise.reject('Cannot remove item from non existing list')
-    }
-    return promise.then(() =>
-      shoppingListApi.removeItem([
-        lineItemId,
-        shoppingLists.value.id,
-        shoppingLists.value.version,
-      ])
-    ).then(
-      response=>{
-        shoppingLists.value=response
-      }
-    ).finally(()=>shoppingListApi.resetCache())
+  const removeLineItem = (
+    itemId,
+    listId,
+    version
+
+  ) => {
+    return shoppingListApi.removeItem([
+        itemId,
+        listId,
+        version,
+      ]).finally(()=>shoppingListApi.resetCache())
   };
   const removeList = (list) => {
     shoppingListApi.remove(list).finally(

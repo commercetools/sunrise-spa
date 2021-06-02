@@ -43,7 +43,11 @@
                     ><i class="fa fa-trash-o"></i>
                     </a>
                   </td>
-                    {{item.name.en}}
+                    <router-link
+                      :to="{ name: 'single list', params: { listName: item.name.en } }"
+                    >
+                      {{item.name.en}}
+                    </router-link>
                   <td>
                   </td>
                 </tr>

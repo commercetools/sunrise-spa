@@ -1,36 +1,58 @@
 import Vue from 'vue';
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
-import { inject, computed } from '@vue/composition-api';
+import { inject, computed,ref } from '@vue/composition-api';
 import { SHOPPING_LIST } from '../../../composition/useShoppingList';
 // import useLocale from '../../../composition/useLocale';
 import ShoppingListProduct from './ShoppingListProduct/ShoppingListProduct.vue'
+
 export default {
+  props: {
+    shoppingListName: {
+      type: String,
+      required: true,
+    },
+  },
   components: {
     VuePerfectScrollbar,
     ShoppingListProduct
   },
-  setup() {
-    const {shoppingLists, removeLineItem} = inject(SHOPPING_LIST);
-    // const locale = useLocale()
-    const lists = computed(() => {
-      return (shoppingLists.value || []).length;
-    });
+  setup(props) {
+    const shoppingList = ref(null)
+    const {getShoppingList, removeLineItem} = inject(SHOPPING_LIST);
+    const result = getShoppingList({name:props.shoppingListName})
+    result.then(
+      resolve=>shoppingList.value=resolve
+    )
+    const items = computed(()=>{
+      return (shoppingList.value?.lineItems||[])
+    })
     const listNotEmpty = computed(() => {
-      return lists.value > 0
+      return items.value.length > 0
     });
+    const removeItem = (itemId) => {
+      removeLineItem(
+        itemId,
+        shoppingList.value.id,
+        shoppingList.value.version
+      ).then(
+        response=>shoppingList.value=response
+      )
+    }
+
     const lineItems = computed(() => {
-      return []
-      // return (shoppingList.value?.lineItems||[]).map(
-      //   item=>({
-      //     ...item,
-      //     name: item.name[locale.value]
-      //   })
-      // )
+      return items.value.map(
+        item=>({
+          ...item,
+          name: item.name.en
+        })
+      )
     });
     return {
       listNotEmpty,
       lineItems,
-      removeLineItem
+      removeLineItem,
+      removeItem,
+      shoppingList
     };
   },
 
@@ -39,21 +61,6 @@ export default {
       return this.$store.state.shoppingListOpen;
     },
   },
-  methods: {
-    open() {
-      this.$store.dispatch('openShoppingList');
-    },
-    close() {
-      this.$store.dispatch('closeShoppingList');
-    },
-    removeItem(itemId) {
-      this.removeLineItem(
-        itemId,
-        this.shoppingList.id,
-        this.shoppingList.version
-      )
-    }
- },
   watch: {
     show(newValue, oldValue) {
       if (newValue && !oldValue) {
