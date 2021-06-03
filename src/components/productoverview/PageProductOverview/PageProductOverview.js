@@ -37,7 +37,6 @@ export default {
     },
     closeAddToShoppingList() {
       this.showAddToShoppingList = false;
-      this.productSku = null;
     },
   },
 };

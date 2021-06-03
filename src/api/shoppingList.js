@@ -47,6 +47,28 @@ const shoppingList = {
       }
     );
   }),
+  setQuantity: withToken(
+    ([sku, quantity, listId, version, lineItemId], accessToken) => {
+      return groupFetchJson(
+        new URL(`${baseUrl}/me/shopping-lists/${listId}`),
+        {
+          method: "POST",
+          body: JSON.stringify({
+            version,
+            actions: [
+              {
+                action: "changeLineItemQuantity",
+                lineItemId,
+                quantity,
+                sku
+              },
+            ],
+          }),
+          ...makeConfig(accessToken),
+        }
+      );
+    }
+  ),
   addItem: withToken(
     ([sku, quantity, listId, version], accessToken) => {
       return groupFetchJson(

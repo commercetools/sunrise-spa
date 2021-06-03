@@ -17,13 +17,15 @@
               >
                 <ShoppingListProduct 
                   :id="lineItem.productId" 
+                  :variantId="lineItem.variantId"
                   :quantity="lineItem.quantity"
+                  :lineItemId="lineItem.id"
+                  @amountChange="amountChange"
                 />
                 <div class="cart-delete">
                   <a
                     href="javascript:;"
                     @click="()=>removeItem(lineItem.id)"
-                    data-test="shopping-list-item-delete"
                     class="edit-delete-section"
                   >
                     <i class="fa fa-trash-o"></i>
@@ -31,14 +33,6 @@
                 </div>
               </li>
             </ul>
-            <!-- <div class="cart-checkout-btn">
-              <router-link
-                :to="{ name: 'checkout' }"
-                data-test="checkout-button"
-                @click="close"
-                >{{ $t('checkout') }}</router-link
-              >
-            </div> -->
           </span>
           <span v-if="!listNotEmpty">
             <h5>{{ $t('emptyList') }}</h5>

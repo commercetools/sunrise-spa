@@ -1,4 +1,3 @@
-import { ref } from '@vue/composition-api';
 import useProductQuery from '../../../../composition/useProductQuery';
 
 export default {
@@ -7,15 +6,30 @@ export default {
       type: String,
       required: true,
     },
+    lineItemId: {
+      type: String,
+      required: true,
+    },
+    variantId: {
+      type: Number,
+      required: true,
+    },
     quantity: {
       type: Number,
       required: true,
     },
   },
   setup(props,ctx) {
-    const sku = ref(false)
-    const {masterVariant} = useProductQuery(props,ctx,sku,props.id);
-    return {masterVariant};
+    const {product} = useProductQuery(
+      props,
+      ctx,
+      undefined,
+      props.id,
+      props.variantId
+    );
+    return {
+      product
+    };
   },
   methods: {
     displayedImageUrl(variant) {
@@ -24,7 +38,12 @@ export default {
       }
       return null;
     },
-
+    amountChange(e) {
+      const newAmount = Number(e.target.value)
+      if(!isNaN(newAmount) && newAmount>0){
+        this.$emit('amountChange',newAmount,this.product.sku,this.lineItemId)
+      }
+    },
     productRoute(productSlug, sku) {
       return {
         name: 'product',

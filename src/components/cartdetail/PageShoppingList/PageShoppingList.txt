@@ -1,7 +1,7 @@
 en:
   yourList: "Your Shopping List"
   itemsTotal: "{n} item in total | {n} items in total"
-  empty: "Your shopping list is currently empty"
+  empty: "You have no shopping lists"
   continueShopping: "Continue Shopping"
   shopNow: "Shop now"
   startCheckout: "Start Checkout"

@@ -4,7 +4,7 @@ import { selectChannel, selectCurrency } from './selectors';
 import useCountry from './useCountry';
 import useLocale from './useLocale';
 import useStore from './useStore';
-export default (props,ctx,sku,id) => {
+export default (props,ctx,sku=ref(null),id,variantId) => {
   //step one to solve race condition
   const requested = {current:null};
   //example of watching locale
@@ -72,7 +72,10 @@ export default (props,ctx,sku,id) => {
           p=>({...p,name,slug})
         )
         variants.value = allVariants;
-        product.value = allVariants.find(v=>v.sku===sku.value);
+        product.value = allVariants.find(v=>sku.value
+          ? v.sku===sku.value
+          : v.id===variantId
+        );
         masterVariant.value = {...p.masterVariant,name,slug};
       }
     )

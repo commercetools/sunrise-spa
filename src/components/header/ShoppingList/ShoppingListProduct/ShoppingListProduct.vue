@@ -1,16 +1,16 @@
 <script src="./ShoppingListProduct.js"></script>
 
 <template>
-  <div v-if="masterVariant">
+  <div v-if="product">
     <div class="cart-img">
       <router-link
         :to="
-          productRoute(masterVariant.slug, masterVariant.sku)
+          productRoute(product.slug, product.sku)
         "
       >
         <img
-          :src="displayedImageUrl(masterVariant)"
-          :alt="masterVariant.name"
+          :src="displayedImageUrl(product)"
+          :alt="product.name"
         />
       </router-link>
     </div>
@@ -18,18 +18,14 @@
       <h4>
         <router-link
           :to="
-            productRoute(masterVariant.slug, masterVariant.sku)
+            productRoute(product.slug, product.sku)
           "
           data-test="shopping-list-item-link"
         >
-          {{ masterVariant.name }}
+          {{ product.name }}
         </router-link>
       </h4>
-      <span
-        data-test="shopping-list-item-quantity"
-      >
-        {{ quantity }} ×
-      </span>
+      <input type="number" :value="quantity" @keyup="amountChange" />
     </div>
   </div>
 </template>

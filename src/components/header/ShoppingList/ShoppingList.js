@@ -18,10 +18,15 @@ export default {
   },
   setup(props) {
     const shoppingList = ref(null)
-    const {getShoppingList, removeLineItem} = inject(SHOPPING_LIST);
-    const result = getShoppingList({name:props.shoppingListName})
-    result.then(
-      resolve=>shoppingList.value=resolve
+    const {
+      getShoppingList, 
+      removeLineItem,
+      changeQuantity
+    } = inject(SHOPPING_LIST);
+    getShoppingList({name:props.shoppingListName}).then(
+      resolve=>{
+        shoppingList.value=resolve
+      }
     )
     const items = computed(()=>{
       return (shoppingList.value?.lineItems||[])
@@ -38,7 +43,9 @@ export default {
         response=>shoppingList.value=response
       )
     }
-
+    const amountChange = (quantity,sku,lineItemId)=>{
+      changeQuantity(sku,quantity,shoppingList.value.name.en,lineItemId)
+    }
     const lineItems = computed(() => {
       return items.value.map(
         item=>({
@@ -52,6 +59,7 @@ export default {
       lineItems,
       removeLineItem,
       removeItem,
+      amountChange,
       shoppingList
     };
   },

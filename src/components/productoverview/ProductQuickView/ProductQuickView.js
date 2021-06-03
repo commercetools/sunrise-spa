@@ -52,6 +52,9 @@ export default {
     showModal() {
       if (this.showModal === true) {
         this.$modal.show(this.modalName);
+      }else{
+        this.$modal.hide(this.modalName);
+        this.$emit('close-modal');  
       }
     },
   },

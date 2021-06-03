@@ -3,7 +3,7 @@
 
 <template>
   <div>
-    <h1>hello world {{shoppingListName}}</h1>
+    <h1>{{shoppingListName}}</h1>
     <ShoppingList :shoppingListName="shoppingListName" />
   </div>
 </template>
