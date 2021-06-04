@@ -9,7 +9,7 @@ import { selectAuth, selectCurrency } from "./selectors";
 import useCountry from "./useCountry";
 import useStore from "./useStore";
 
-export default (props,ctx) => {
+export default (props,ctx,cart) => {
   const auth = useStore(ctx,selectAuth)
   const requested = { current: null };
   const shoppingLists = ref(undefined);
@@ -78,8 +78,7 @@ export default (props,ctx) => {
   const addShoppingListToCart = (listId) => {
     cartApi.addShoppingList([listId,currency.value,country.value])
     .then(
-      //really tried to invalidate apollo cache but won't work
-      ()=>location.reload()
+      ()=>cart.refreshCart()
     )
   }
   const addLineItemToCart = (productId,quantity,variantId) => {
@@ -91,8 +90,7 @@ export default (props,ctx) => {
       country.value
     ])
     .then(
-      //really tried to invalidate apollo cache but won't work
-      ()=>location.reload()
+      ()=>cart.refreshCart()
     )
 
   }

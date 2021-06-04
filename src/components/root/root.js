@@ -60,10 +60,10 @@ export default {
     provide('locale', locale);
     provide('country', country);
     provide(DefaultApolloClient, apolloClient)
-    const shoppingList = useShoppingList(undefined,ctx);
-    provide(SHOPPING_LIST,shoppingList);
     const cart = useCart(undefined,ctx);
     provide(CART,cart)
+    const shoppingList = useShoppingList(undefined,ctx,cart);
+    provide(SHOPPING_LIST,shoppingList);
   },
   computed: {
     computedLocale() {
