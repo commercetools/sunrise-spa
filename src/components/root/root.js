@@ -5,9 +5,7 @@ import { provide, watch,ref } from '@vue/composition-api';
 import { DefaultApolloClient } from '@vue/apollo-composable'
 import { apolloClient } from "../../apollo";
 import useShoppingList, { SHOPPING_LIST } from "../../composition/useShoppingList";
-import useStore from "../../composition/useStore";
-import { selectAuth } from "../../composition/selectors";
-import BASIC_CART_QUERY from '../../mixins/BasicCart.gql';
+import useCart, { CART } from "../../composition/useCart";
 // locale is an optional route parameter, if it's missing
 // then see if it's set in store (local storage) and use that
 // if it's not in store then default to en
@@ -52,7 +50,6 @@ export default {
   setup(props,ctx) {
     const locale=ref(props.locale);
     const country = ref(props.country);
-    const auth = useStore(ctx,selectAuth)
     watch(
       props,
       (props)=>{
@@ -60,18 +57,13 @@ export default {
         country.value=props.country;
       }
     );
-    watch(auth,()=>{
-      if(auth.value===false){
-        const data = apolloClient.readQuery({ query: BASIC_CART_QUERY });
-        data.me.activeCart = null;
-        apolloClient.writeQuery({ query: BASIC_CART_QUERY, data });
-      }
-    })
     provide('locale', locale);
     provide('country', country);
     provide(DefaultApolloClient, apolloClient)
     const shoppingList = useShoppingList(undefined,ctx);
     provide(SHOPPING_LIST,shoppingList);
+    const cart = useCart(undefined,ctx);
+    provide(CART,cart)
   },
   computed: {
     computedLocale() {

@@ -11,7 +11,7 @@ import {
 // import { locale } from "../components/common/shared";
 const cache = new Map();
 const groupFetchJson = groupApi(fetchJson,cache);
-const resetCache = ()=>cache.clear();
+const resetCartCache = ()=>cache.clear();
 
 
 const get = withToken((accessToken) => {
@@ -103,7 +103,7 @@ const cart = {
       )
     }
   ),
-  resetCache
+  resetCartCache
 };
 
 export default cart;
