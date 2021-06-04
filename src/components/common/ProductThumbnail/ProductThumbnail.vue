@@ -23,7 +23,7 @@
         </router-link>
         <div class="product-action">
           <a href @click.prevent="openAddToShoppingList"
-            ><i class="dl-icon-star"></i> <span>Shopping list</span></a
+            ><i class="dl-icon-heart"></i> <span>Shopping list</span></a
           >
           <a href @click.prevent="openQuickView"
             ><i class="dl-icon-view"></i> <span>Quick Shop</span></a
