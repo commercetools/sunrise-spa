@@ -67,10 +67,10 @@ export default {
         apolloClient.writeQuery({ query: BASIC_CART_QUERY, data });
       }
     })
-    const shoppingList = useShoppingList(undefined,ctx);
     provide('locale', locale);
     provide('country', country);
     provide(DefaultApolloClient, apolloClient)
+    const shoppingList = useShoppingList(undefined,ctx);
     provide(SHOPPING_LIST,shoppingList);
   },
   computed: {

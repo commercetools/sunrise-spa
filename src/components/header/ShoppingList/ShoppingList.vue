@@ -30,9 +30,21 @@
                   >
                     <i class="fa fa-trash-o"></i>
                   </a>
+                  <a
+                    href="javascript:;"
+                    @click="()=>addItemToCart(lineItem)"
+                  >
+                    Add item to cart
+                  </a>
                 </div>
               </li>
             </ul>
+            <a
+              @click="()=>addShoppingListToCart(shoppingList.id)"
+              class="btn-grey"
+            >
+              {{ $t('addToCart') }}
+            </a>
           </span>
           <span v-if="!listNotEmpty">
             <h5>{{ $t('emptyList') }}</h5>

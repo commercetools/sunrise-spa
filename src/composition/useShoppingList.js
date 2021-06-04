@@ -4,13 +4,18 @@ import {
   watch,
 } from "@vue/composition-api";
 import shoppingListApi from "../api/shoppingList";
-import { selectAuth } from "./selectors";
+import cartApi from "../api/cart";
+import { selectAuth, selectCurrency } from "./selectors";
+import useCountry from "./useCountry";
 import useStore from "./useStore";
 
 export default (props,ctx) => {
   const auth = useStore(ctx,selectAuth)
   const requested = { current: null };
   const shoppingLists = ref(undefined);
+  const country = useCountry();
+  const currency = useStore(ctx, selectCurrency);
+
   const getShoppingList = (query) => {
     const current = {};
     requested.current = current;
@@ -69,6 +74,28 @@ export default (props,ctx) => {
   const removeList = (list) => {
     shoppingListApi.remove(list).finally(refreshList)
   }
+
+  const addShoppingListToCart = (listId) => {
+    cartApi.addShoppingList([listId,currency.value,country.value])
+    .then(
+      //really tried to invalidate apollo cache but won't work
+      ()=>location.reload()
+    )
+  }
+  const addLineItemToCart = (productId,quantity,variantId) => {
+    cartApi.addShoppingListItem([
+      productId,
+      variantId,
+      quantity,
+      currency.value,
+      country.value
+    ])
+    .then(
+      //really tried to invalidate apollo cache but won't work
+      ()=>location.reload()
+    )
+
+  }
   onMounted(getShoppingList);
   watch(auth,()=>{
     shoppingListApi.resetCache();
@@ -80,6 +107,8 @@ export default (props,ctx) => {
     addToShoppingList,
     removeLineItem,
     changeQuantity,
+    addShoppingListToCart,
+    addLineItemToCart,
     removeList
   };
 };

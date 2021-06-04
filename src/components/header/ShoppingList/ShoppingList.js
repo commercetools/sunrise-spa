@@ -21,7 +21,9 @@ export default {
     const {
       getShoppingList, 
       removeLineItem,
-      changeQuantity
+      changeQuantity,
+      addShoppingListToCart,
+      addLineItemToCart:addLineToCart
     } = inject(SHOPPING_LIST);
     getShoppingList({name:props.shoppingListName}).then(
       resolve=>{
@@ -43,6 +45,13 @@ export default {
         response=>shoppingList.value=response
       )
     }
+    const addItemToCart = (lineItem) => {
+      addLineToCart(
+        lineItem.productId,
+        lineItem.quantity,
+        lineItem.variantId,
+      )
+    }
     const amountChange = (quantity,sku,lineItemId)=>{
       changeQuantity(sku,quantity,shoppingList.value.name.en,lineItemId)
     }
@@ -60,7 +69,9 @@ export default {
       removeLineItem,
       removeItem,
       amountChange,
-      shoppingList
+      shoppingList,
+      addItemToCart,
+      addShoppingListToCart
     };
   },
 
