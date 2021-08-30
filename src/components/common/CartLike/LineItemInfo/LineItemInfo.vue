@@ -19,7 +19,7 @@
       </td>
       <td class="product-img">
         <router-link
-          :to="productRoute(lineItem.productSlug, lineItem.variant.sku)"
+          :to="productRoute(productSlug(lineItem), lineItem.variant.sku)"
           class="img"
         >
           <img
@@ -30,7 +30,7 @@
       </td>
       <td class="product-name">
         <router-link
-          :to="productRoute(lineItem.productSlug, lineItem.variant.sku)"
+          :to="productRoute(productSlug(lineItem), lineItem.variant.sku)"
           data-test="cart-line-item-link"
         >
           {{ lineItem.name }}

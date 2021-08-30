@@ -42,6 +42,11 @@ export default {
       this.item = { lineItemId: this.lineItem.id, quantity: this.lineItem.quantity, shipmentState: 'Advised' };
     }
   },
+  methods:{
+    productSlug(lineItem) {
+      return lineItem.productSlug?.[locale(this)] || lineItem.productSlug
+    }
+  },
 
   watch: {
     selected() {
