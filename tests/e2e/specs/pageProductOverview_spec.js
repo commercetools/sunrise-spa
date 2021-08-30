@@ -58,7 +58,7 @@ describe('Product overview page', () => {
   });
 
   it('Displays a message when an error occurs', () => {
-    cy.visit('/products/accessories-men-sunglasses');
+    cy.visit('/products/women');
     cy.get('[data-test=empty-results]')
       .contains('No Results Found');
 

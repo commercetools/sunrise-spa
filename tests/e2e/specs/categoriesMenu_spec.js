@@ -16,13 +16,13 @@ describe('Categories menu', () => {
 
         cy.wrap($menu)
           .find('[data-test=category-2nd-level-link]')
-          .should('have.attr', 'href', '/products/women-shoes')
-          .contains('Shoes');
+          .should('have.attr', 'href', '/products/women-clothing')
+          .contains('Clothing');
 
         cy.wrap($menu)
           .find('[data-test=category-3rd-level-link]')
-          .should('have.attr', 'href', '/products/women-shoes-sneakers')
-          .contains('Sneakers');
+          .should('have.attr', 'href', '/products/women-clothing-jackets')
+          .contains('Jackets');
       });
   });
 });
