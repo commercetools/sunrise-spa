@@ -7,6 +7,7 @@ import {
 import useCountry from './useCountry'
 import useLocale from './useLocale';
 import cartApi from "../api/cart";
+import discountCodeApi from "../api/discountCode";
 import { selectAuth, selectCurrency } from "./selectors";
 import useStore from "./useStore";
 const translateLineItems = (response,locale)=>({
@@ -31,7 +32,16 @@ export default (props,ctx) => {
         cart.value=null;
         return;
       }
-      cart.value = translateLineItems(response,locale.value)
+      Promise.all(
+        response.discountCodes.map(
+          ({discountCode})=>discountCodeApi.get(discountCode)
+        )
+      ).then(
+        result=>{
+          response.discountCodes=result
+          cart.value = translateLineItems(response,locale.value)
+        }
+      )
     })
   };
   const createCart = () => {

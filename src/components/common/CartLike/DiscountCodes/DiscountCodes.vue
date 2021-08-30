@@ -9,20 +9,20 @@
     </div>
     <div
       v-for="discountInfo in cartLike.discountCodes"
-      :key="discountInfo.discountCode.id"
+      :key="discountInfo.id"
       class="single-grand-total-right col-sm-6"
       data-test="discount-code-name"
     >
       <b>
-        {{ discountInfo.discountCode.code }}
+        {{ discountInfo.code }}
       </b>
-      <span v-if="discountInfo.discountCode.name">
-        ({{ discountInfo.discountCode.name }})</span
+      <span v-if="discountInfo.name">
+        ({{ discountInfo.name }})</span
       >
       <span>
         <RemoveDiscountCodeForm
           v-if="editable"
-          :codeId="discountInfo.discountCode.id"
+          :codeId="discountInfo.id"
         />
       </span>
     </div>
