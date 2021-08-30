@@ -191,3 +191,6 @@ export const addLine = async (component) => {
   })
 
 }
+export const productSlug = (component,lineItem)=>
+  lineItem.productSlug?.[locale(component)] 
+  || lineItem.productSlug

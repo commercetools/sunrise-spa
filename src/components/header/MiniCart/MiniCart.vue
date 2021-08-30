@@ -31,7 +31,7 @@
                 <div class="cart-img">
                   <router-link
                     :to="
-                      productRoute(lineItem.productSlug, lineItem.variant.sku)
+                      productRoute(productSlug(lineItem), lineItem.variant.sku)
                     "
                   >
                     <img
@@ -44,7 +44,7 @@
                   <h4>
                     <router-link
                       :to="
-                        productRoute(lineItem.productSlug, lineItem.variant.sku)
+                        productRoute(productSlug(lineItem), lineItem.variant.sku)
                       "
                       data-test="cart-line-item-link"
                     >

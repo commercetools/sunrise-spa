@@ -6,7 +6,7 @@ import BasePrice from '../../common/BasePrice/MiniCardBasePrice.vue';
 import LineItemInfo from '../../common/CartLike/LineItemInfo/LineItemInfo.vue';
 import LineItemDeleteForm from '../../cartdetail/LineItemDeleteForm/LineItemDeleteForm.vue';
 import {
-  locale, totalPrice, subTotal, variantAttributes,
+  locale, totalPrice, subTotal, variantAttributes, productSlug,
 } from '../../common/shared';
 
 export default {
@@ -39,6 +39,9 @@ export default {
         ({ name, value }) => `${name}: ${value}`,
       ).join(', ')}`;
     },
+    productSlug(lineItem) {
+      return productSlug(this,lineItem)
+    }
   },
   watch: {
     show(newValue, oldValue) {

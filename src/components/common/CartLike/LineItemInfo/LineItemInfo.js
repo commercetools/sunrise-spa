@@ -3,7 +3,7 @@ import LineItemQuantityForm from '../../../cartdetail/LineItemQuantityForm/LineI
 import LineItemDeleteForm from '../../../cartdetail/LineItemDeleteForm/LineItemDeleteForm.vue';
 import Remove from '../../../cartdetail/LineItemQuantityForm/Remove/Remove.vue';
 import BasePrice from '../../BasePrice/BasePrice.vue';
-import { totalPrice, variantAttributes, locale } from '../../shared';
+import { totalPrice, variantAttributes, locale, productSlug } from '../../shared';
 
 export default {
   components: {
@@ -44,7 +44,7 @@ export default {
   },
   methods:{
     productSlug(lineItem) {
-      return lineItem.productSlug?.[locale(this)] || lineItem.productSlug
+      return productSlug(this,lineItem)
     }
   },
 
