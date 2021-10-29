@@ -40,11 +40,11 @@ describe('productMixin', () => {
   });
 
   it('returns the first available image', () => {
-    expect(productMixin.methods.displayedImageUrl({})).toBeNull();
+    expect(productMixin.methods.displayedImageUrl({})).toBe('/assets/img/missing.svg');
 
     expect(productMixin.methods.displayedImageUrl({
       images: [],
-    })).toBeNull();
+    })).toBe('/assets/img/missing.svg')
 
     expect(productMixin.methods.displayedImageUrl({
       images: [
