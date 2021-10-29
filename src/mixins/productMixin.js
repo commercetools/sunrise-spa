@@ -14,7 +14,7 @@ export default {
       if (Array.isArray(variant.images) && variant.images.length) {
         return variant.images[0].url;
       }
-      return null;
+      return "/assets/img/missing.svg";
     },
 
     productRoute(productSlug, sku) {
