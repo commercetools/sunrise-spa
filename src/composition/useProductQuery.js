@@ -19,8 +19,12 @@ export default (props,ctx,sku=ref(null),id,variantId) => {
     product.value || {}
   );
   const staged = computed(()=>Boolean(ctx?.root?.$route?.query?.staged))
-  const availability = computed(()=>
-    currentProduct.value?.availability?.channels?.[channel.value?.id]
+  const availability = computed(() =>
+    channel.value?.id
+      ? currentProduct.value?.availability?.channels?.[
+          channel.value?.id
+        ]
+      : currentProduct.value?.availability
   );
   const availableQuantity = computed(()=>
     availability.value?.availableQuantity
