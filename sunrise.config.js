@@ -16,16 +16,21 @@ export default {
       credentials: {
         clientId:
           process.env.VUE_APP_CT_CLIENT_ID ||
-          "jFVHj0-tO-THQt9evnGTJ2fD",
+          "1mnlpBq-fHCCkAzmSXxNBB37",
         clientSecret:
           process.env.VUE_APP_CT_CLIENT_SECRET ||
-          "eUQgmtanysDpYxlOePOhcFklrwa5X8Sj",
+          "WS9hXm6dKyqyuLOHciL6jkbCbFHrDSOL",
       },
       scopes: [
         process.env.VUE_APP_CT_SCOPE ||
-          "manage_my_profile:sunrise-spa create_anonymous_token:sunrise-spa" +
-            " manage_my_payments:sunrise-spa view_products:sunrise-spa manage_my_orders:sunrise-spa" +
-            " manage_my_shopping_lists:sunrise-spa",
+          "manage_my_orders:sunrise-spa "+
+          "manage_my_profile:sunrise-spa "+
+          "manage_my_payments:sunrise-spa "+
+          "view_published_products:sunrise-spa "+
+          "view_categories:sunrise-spa "+
+          "manage_my_shopping_lists:sunrise-spa "+
+          "manage_orders:sunrise-spa "+
+          "create_anonymous_token:sunrise-spa"
       ],
     },
     api:
