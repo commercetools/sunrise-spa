@@ -21,6 +21,52 @@ export default {
     me: null,
   }),
   computed: {
+    returned() {
+      if (this.me) {
+        return this.me.order.returnInfo.reduce(
+          (acc, { items }) =>
+            items.reduce(
+              (acc, { lineItemId, quantity }) => {
+                acc[lineItemId] =
+                  (acc[lineItemId] || 0) + quantity;
+                return acc;
+              },
+              acc
+            ),
+          {}
+        );
+      }
+      return [];
+    },
+    returnedItems() {
+      let lineItems = [];
+      // if (this.me) {
+      // }
+      return { ...this.me.order, lineItems };
+    },
+    lineItems() {
+      let lineItems;
+      if (this.me) {
+        lineItems = this.me.order.lineItems.map(
+          (lineItem) =>
+            this.returned[lineItem.id]
+              ? {
+                  ...lineItem,
+                  quantity:
+                    lineItem.quantity -
+                    this.returned[lineItem.id],
+                }
+              : lineItem
+        );
+      }
+      return { ...this.me.order, lineItems };
+    },
+    showLineItems() {
+      return Boolean(this.lineItems.lineItems.length);
+    },
+    showReturnedItems() {
+      return Boolean(this.returnedItems.lineItems.length);
+    },
     subtotal() {
       if (this.me) {
         const {

@@ -38,6 +38,15 @@ fragment OrderFields on Order {
       }
     }
   }
+  returnInfo {
+    items {
+      ... on LineItemReturnItem {
+        lineItemId
+        quantity
+      }
+      type
+    }
+  }
   totalPrice {
     ...MoneyFields
   }

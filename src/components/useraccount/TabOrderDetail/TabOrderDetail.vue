@@ -67,7 +67,7 @@
         </div>
       </div>
       <div class="mt-40">
-        <CartLikeContentDetail :editable="false" :cartLike="me.order" />
+        <CartLikeContentDetail :editable="false" :cartLike="lineItems" />
       </div>
       <div class="offset-md-6 text-right subtotal-price">
         <div class="row">
