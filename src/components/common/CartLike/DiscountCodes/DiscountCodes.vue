@@ -8,23 +8,26 @@
       <span>{{ $t('appliedDiscounts') }}</span>
     </div>
     <div
-      v-for="discountInfo in cartLike.discountCodes"
-      :key="discountInfo.id"
       class="single-grand-total-right col-sm-6"
       data-test="discount-code-name"
     >
-      <b>
-        {{ discountInfo.code }}
-      </b>
-      <span v-if="discountInfo.name">
-        ({{ discountInfo.name }})</span
+      <div
+        v-for="discountInfo in cartLike.discountCodes"
+        :key="discountInfo.id"
       >
-      <span>
-        <RemoveDiscountCodeForm
-          v-if="editable"
-          :codeId="discountInfo.id"
-        />
-      </span>
+        <b>
+          {{ discountInfo.code }}
+        </b>
+        <span v-if="discountInfo.name">
+          ({{ discountInfo.name }})</span
+        >
+        <span>
+          <RemoveDiscountCodeForm
+            v-if="editable"
+            :codeId="discountInfo.id"
+          />
+        </span>
+      </div>
     </div>
   </div>
 </template>
