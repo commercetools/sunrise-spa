@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       # the Docker image with Cypress dependencies
-      - image: cypress/base:12
+      - image: cypress/base:16.14.0
         environment:
           JEST_JUNIT_OUTPUT: test-results/unit/output.xml
 
@@ -28,16 +28,16 @@ jobs:
           command: yarn -v && node -v
       - run:
           name: Install dependencies
-          command: yarn install --immutable
+          command: yarn install --frozen-lockfile
       - save_cache:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
 
-      - run:
-          name: Run Unit tests
-          command: yarn test:unit --ci --reporters=default --reporters=jest-junit --no-cache
+      # - run:
+      #     name: Run Unit tests
+      #     command: yarn test:unit --ci --reporters=default --reporters=jest-junit --no-cache
       # cannot use reporter after update:
       #    https://github.com/cypress-io/cypress/issues/4304
       - run:

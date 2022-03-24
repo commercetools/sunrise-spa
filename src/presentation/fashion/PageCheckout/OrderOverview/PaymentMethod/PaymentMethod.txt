@@ -1,0 +1,6 @@
+en:
+  creditCard: "Credit card"
+  paymentMethod: "Payment method"
+de:
+  creditCard: "Kreditkarte"
+  paymentMethod: "Zahlungsweise"

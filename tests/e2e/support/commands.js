@@ -24,22 +24,31 @@
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-import createClient from './test-apollo';
+import { apolloClient as client } from '../../../src/apollo';
 import * as query from './queries';
 import * as mutation from './mutations';
 
-const clientPromise = createClient();
-
+const clientPromise = Promise.resolve(client);
+const later = (resolve, time = 3000) =>
+  new Promise((r) => setTimeout(() => r(resolve), time));
 Cypress.Commands.add('login', (customer) => {
   cy.visit('/login');
-  cy.get('[data-test=login-button]').click();
-  cy.get('[data-test=login-form-email]').type(customer.email);
-  cy.get('[data-test=login-form-password]').type(customer.password);
+  // cy.get('[data-test=login-button]').click();
+  cy.get('[data-test=login-form-email]').type(
+    customer.email
+  );
+  cy.get('[data-test=login-form-password]').type(
+    customer.password
+  );
   cy.get('[data-test=login-form-submit]').click();
+  cy.get(`[data-test="login-button"]`).should('not.exist');
 });
 Cypress.Commands.add('logout', () => {
   cy.visit('/user/dashboard');
   cy.get('[data-test=sign-out]').click();
+  cy.get(`[data-test="login-info-name"]`).should(
+    'not.exist'
+  );
 });
 
 Cypress.Commands.add('checkCustomerIsLoggedIn', () => {
@@ -61,37 +70,99 @@ Cypress.Commands.add('changeCountry', (country) => {
     .click({ force: true });
 });
 
-Cypress.Commands.add('createCustomer', (draft) => cy.wrap(clientPromise
-  .then((client) => mutation.deleteCustomer(client, draft.email)
-    .then(() => mutation.createCustomer(client, draft)))));
+Cypress.Commands.add('createCustomer', (draft) =>
+  cy.wrap(
+    clientPromise.then((client) =>
+      mutation
+        .deleteCustomer(client, draft.email)
+        .then(() => mutation.createCustomer(client, draft))
+    )
+  )
+);
 
-Cypress.Commands.add('deleteCustomer', ({ email }) => cy.wrap(clientPromise
-  .then((client) => mutation.deleteCustomer(client, email))));
+Cypress.Commands.add('deleteCustomer', ({ email }) =>
+  cy
+    .wrap(
+      clientPromise.then((client) =>
+        mutation.deleteCustomer(client, email)
+      )
+    )
+    //delete resolves but data is not gone yet
+    .then(later)
+);
 
 Cypress.Commands.add('addLineItem', (url, quantity) => {
   cy.visit(url);
   cy.get('input[data-test=add-to-cart-amount]')
     .clear()
     .type(quantity);
-  cy.get('[data-test=add-to-cart-button]').click({ force: true });
-  cy.get('[data-test=mini-cart-content]').should('be.visible');
+  cy.get('[data-test=add-to-cart-button]').click({
+    force: true,
+  });
+  cy.wait(3000);
 });
 
-Cypress.Commands.add('addDiscountCode', (cartDiscountDraft, code) => cy.wrap(clientPromise
-  .then((client) => mutation.deleteDiscountCode(client, code)
-    .then(() => mutation.createDiscountCode(client, cartDiscountDraft, code)))));
+Cypress.Commands.add(
+  'addDiscountCode',
+  (cartDiscountDraft, code) =>
+    cy.wrap(
+      clientPromise.then((client) =>
+        mutation
+          .deleteDiscountCode(client, code)
+          //delete resolves but data is not gone yet
+          .then(later)
+          .then(() =>
+            mutation.createDiscountCode(
+              client,
+              cartDiscountDraft,
+              code
+            )
+          )
+      )
+    )
+);
 
-Cypress.Commands.add('createOrder', (cartDraft, orderDraft) => cy.wrap(clientPromise
-  .then((client) => mutation.deleteOrder(client, orderDraft.orderNumber)
-    .then(() => query.customerByEmail(client, cartDraft.customerEmail)
-      .then((customer) => {
-        const draft = { ...cartDraft, customerId: customer.id };
-        return mutation.createCart(client, draft);
-      }).then((cart) => {
-        const draft = { ...orderDraft, id: cart.id, version: cart.version };
-        return mutation.createOrder(client, draft);
-      })))));
+Cypress.Commands.add(
+  'createOrder',
+  (cartDraft, orderDraft) =>
+    cy.wrap(
+      clientPromise.then((client) =>
+        mutation
+          .deleteOrder(client, orderDraft.orderNumber)
+          //delete resolves but data is not gone yet
+          .then(later)
+          .then(() =>
+            query
+              .customerByEmail(
+                client,
+                cartDraft.customerEmail
+              )
+              .then((customer) => {
+                const draft = {
+                  ...cartDraft,
+                  customerId: customer.id,
+                };
+                return mutation.createCart(client, draft);
+              })
+              .then((cart) => {
+                const draft = {
+                  ...orderDraft,
+                  id: cart.id,
+                  version: cart.version,
+                };
+                return mutation.createOrder(client, draft);
+              })
+          )
+      )
+    )
+);
 
-Cypress.Commands.add('addProduct', (draft) => cy.wrap(clientPromise
-  .then((client) => mutation.deleteProduct(client, draft.key)
-    .then(() => mutation.createProduct(client, draft)))));
+Cypress.Commands.add('addProduct', (draft) =>
+  cy.wrap(
+    clientPromise.then((client) =>
+      mutation
+        .deleteProduct(client, draft.key)
+        .then(() => mutation.createProduct(client, draft))
+    )
+  )
+);

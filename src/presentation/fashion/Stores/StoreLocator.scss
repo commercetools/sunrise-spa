@@ -1,0 +1,236 @@
+#googlePlaceBar {
+  height: 120px;
+  width: 60%;
+}
+#place-input {
+  width: 60%;
+  margin-right: 20px;
+}
+
+#place-radius {
+  margin-top: 20px;
+  display: flex;
+}
+
+#radius {
+  background: #eceff8;
+  border: 2px solid #eceff8;
+  height: 45px;
+  box-shadow: none;
+  padding-left: 10px;
+  font-size: 14px;
+  color: #737373;
+  width: 20%;
+}
+
+.no-stores-found {
+  text-align: center;
+  font-style: italic;
+  padding-top: 20px;
+}
+
+#store-finder-modal {
+  .modal-dialog {
+    width: 75%;
+  }
+}
+
+.store-finder-wrapper {
+  background-color: $white;
+}
+
+.pac-container {
+  z-index: 1100 !important;
+}
+
+#showStoreFinder {
+  cursor: pointer;
+
+  &.check {
+    color: #4bb543;
+  }
+
+  &.exclamation-triangle {
+    color: #ffae42;
+  }
+
+  &.times {
+    color: #f30000;
+  }
+}
+
+.store-location-wrapper {
+  margin-bottom: 50px;
+  overflow: hidden;
+
+  .pac-target-input {
+    width: 40%;
+  }
+
+  .store-selected {
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #4bb543;
+  }
+  .vue-map-container {
+    height: 655px;
+    width: 100%;
+  }
+  .map {
+    width: 60%;
+    background: $gray;
+    float: right;
+
+    @media screen and (max-width: 991px) {
+      width: 100%;
+    }
+
+    #map {
+      height: 655px;
+      width: 100%;
+      float: left;
+      @media screen and (max-width: 991px) {
+        height: 400px;
+      }
+    }
+  }
+
+  .store-distance {
+    font-style: italic;
+    font-size: 12px;
+    font-weight: 300;
+  }
+
+  .addresses {
+    float: right;
+    width: 40%;
+    height: 500px;
+    overflow: scroll;
+    padding: 0;
+    @media screen and (max-width: 991px) {
+      width: 100%;
+    }
+
+    .address {
+      float: left;
+      width: 100%;
+      background-color: $snow-grey;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      .distance {
+        color: $mine-shaft;
+        font-size: 18px;
+        width: 100%;
+        float: left;
+
+        .icon {
+          font-size: 20px;
+          margin: 3px 3px 0 0;
+          float: left;
+        }
+      }
+
+      .price {
+        width: 100%;
+        float: right;
+        font-size: 20px;
+        font-weight: normal;
+        text-align: right;
+      }
+
+      .price-discounted {
+        width: 50%;
+        float: right;
+        font-size: 15px;
+        font-weight: normal;
+        text-align: right;
+        text-decoration: line-through;
+      }
+      .title {
+        width: 100%;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .info {
+        color: $gray;
+        font-size: 13px;
+        margin-bottom: 10px;
+        display: none;
+
+        &-title {
+          width: 40%;
+          float: left;
+        }
+        &-content {
+          width: 60%;
+          float: left;
+        }
+      }
+
+      .title,
+      .info {
+        width: 100%;
+        float: left;
+      }
+
+      .box-footer {
+        @extend .product-availability !optional;
+        width: 100%;
+        float: left;
+      }
+
+      &--active {
+        background-color: $white;
+
+        &:hover {
+          background-color: $white !important;
+          cursor: default;
+        }
+
+        .price {
+          color: $my-sin;
+          font-weight: bold !important;
+        }
+
+        .info,
+        .action {
+          display: block !important;
+        }
+      }
+    }
+    /* custom Scrollbar spacing */
+    .mCSB_inside > .mCSB_container {
+      margin-right: 0;
+    }
+    .mCSB_scrollTools {
+      width: 2px;
+    }
+  }
+
+  .list {
+    width: 100%;
+    list-style: none;
+    float: left;
+    padding: 0;
+    margin: 0;
+
+    .item {
+      transition: all 0.15s ease;
+
+      .item-link {
+        width: 95%;
+        padding: 15px 20px;
+        float: left;
+        background-color: #f9f9f9;
+      }
+
+      &:hover {
+        background-color: $alto;
+      }
+    }
+  }
+}

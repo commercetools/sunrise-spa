@@ -6,29 +6,35 @@ describe('CartDetailPage', () => {
   });
 
   it('displays a message when cart is empty', () => {
-    cy.get('[data-test=empty-cart]')
-      .contains('Your cart is currently empty');
+    cy.get('[data-test=empty-cart]').contains(
+      'Your cart is currently empty'
+    );
   });
 
   it('displays content of cart', () => {
-    cy.addLineItem('/product/hoganrebel-r261-sneaker-6708K62AZC-grey/M0E20000000DX1Y', 2);
-    cy.addLineItem('/product/havaianas-flipflops-brasil-green/M0E20000000ELAJ', 3);
+    cy.addLineItem(
+      '/product/hoganrebel-r261-sneaker-6708K62AZC-grey/M0E20000000DX1Y',
+      2
+    );
+    cy.addLineItem(
+      '/product/havaianas-flipflops-brasil-green/M0E20000000ELAJ',
+      3
+    );
     cy.visit('/cart');
 
-    cy.get('[data-test=cart-total-price]')
-      .should((e) => {
-        expect(e.text()).to.include('347,00');
-      });
+    cy.get('[data-test=cart-total-price]').should((e) => {
+      expect(e.text()).to.include('347,00');
+    });
 
-    cy.get('[data-test=cart-taxes-amount]')
-      .should((e) => {
-        expect(e.text()).to.include('55,41');
-      });
+    cy.get('[data-test=cart-taxes-amount]').should((e) => {
+      expect(e.text()).to.include('55,41');
+    });
 
-    cy.get('[data-test=cart-subtotal-price]')
-      .should((e) => {
+    cy.get('[data-test=cart-subtotal-price]').should(
+      (e) => {
         expect(e.text()).to.include('347,00');
-      });
+      }
+    );
 
     cy.get('[data-test=cart-line-item]')
       .should('have.length', 2)
@@ -36,7 +42,11 @@ describe('CartDetailPage', () => {
       .then(($lineItem) => {
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-link]')
-          .should('have.attr', 'href', '/product/hoganrebel-r261-sneaker-6708K62AZC-grey/M0E20000000DX1Y')
+          .should(
+            'have.attr',
+            'href',
+            '/product/hoganrebel-r261-sneaker-6708K62AZC-grey/M0E20000000DX1Y'
+          )
           .should('contain', _const.one.NAME);
 
         cy.wrap($lineItem)
@@ -62,10 +72,15 @@ describe('CartDetailPage', () => {
   });
 
   it('manages line items in cart', () => {
-    cy.addLineItem('/product/havaianas-flipflops-brasil-green/M0E20000000ELAJ', 3);
+    cy.addLineItem(
+      '/product/havaianas-flipflops-brasil-green/M0E20000000ELAJ',
+      3
+    );
     cy.visit('/cart');
 
-    cy.get('[data-test=cart-line-item]', { timeout: Cypress.config('graphqlTimeout') })
+    cy.get('[data-test=cart-line-item]', {
+      timeout: Cypress.config('graphqlTimeout'),
+    })
       .should('have.length', 1)
       .then(($lineItem) => {
         cy.wrap($lineItem)
@@ -75,7 +90,9 @@ describe('CartDetailPage', () => {
           .type('5');
         cy.wrap($lineItem)
           .find('[data-test=line-total]')
-          .contains(/^\s*120,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
+          .contains(/^\s*120,00\s€\s*$/, {
+            timeout: Cypress.config('graphqlTimeout'),
+          });
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-quantity]')
@@ -83,7 +100,9 @@ describe('CartDetailPage', () => {
           .type(7);
         cy.wrap($lineItem)
           .find('[data-test=line-total]')
-          .contains(/^\s*168,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
+          .contains(/^\s*168,00\s€\s*$/, {
+            timeout: Cypress.config('graphqlTimeout'),
+          });
 
         cy.wrap($lineItem)
           .find('[data-test=cart-line-item-quantity]')
@@ -91,26 +110,40 @@ describe('CartDetailPage', () => {
           .type(6);
         cy.wrap($lineItem)
           .find('[data-test=line-total]')
-          .contains(/^\s*144,00\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
+          .contains(/^\s*144,00\s€\s*$/, {
+            timeout: Cypress.config('graphqlTimeout'),
+          });
 
         cy.wrap($lineItem)
-          .find('[data-test=cart-line-item-delete]').click();
+          .find('[data-test=cart-line-item-delete]')
+          .click();
       });
-    cy.get('[data-test=cart-line-item]')
-      .should('have.length', 0, { timeout: Cypress.config('graphqlTimeout') });
+    cy.get('[data-test=cart-line-item]').should(
+      'have.length',
+      0,
+      { timeout: Cypress.config('graphqlTimeout') }
+    );
   });
 
   it('removes line item when quantity is decreased to less than 1', () => {
-    cy.addLineItem('/product/havaianas-flipflops-brasil-green/M0E20000000ELAJ', 1);
+    cy.addLineItem(
+      '/product/havaianas-flipflops-brasil-green/M0E20000000ELAJ',
+      1
+    );
     cy.visit('/cart');
 
-    cy.get('[data-test=cart-line-item]')
-      .should('have.length', 1);
+    cy.get('[data-test=cart-line-item]').should(
+      'have.length',
+      1
+    );
 
     cy.get('[data-test=cart-line-item-delete]')
       .eq(1)
       .click();
-    cy.get('[data-test=cart-line-item]').should('have.length', 0);
+    cy.get('[data-test=cart-line-item]').should(
+      'have.length',
+      0
+    );
   });
 
   const cartDiscount = {
@@ -128,23 +161,34 @@ describe('CartDetailPage', () => {
 
   it('applies and deletes discount codes', () => {
     cy.addDiscountCode(cartDiscount, 'SUNRISE_CI');
-    cy.addLineItem('/product/hoganrebel-r261-sneaker-6708K62AZC-grey/M0E20000000DX1Y', 1);
+    cy.addLineItem(
+      '/product/hoganrebel-r261-sneaker-6708K62AZC-grey/M0E20000000DX1Y',
+      1
+    );
     cy.visit('/cart');
-    cy.get('[data-test=line-total]')
-      .contains(/^\s*137,50\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
+    cy.get('[data-test=line-total]').contains(
+      /^\s*137,50\s€\s*$/,
+      { timeout: Cypress.config('graphqlTimeout') }
+    );
 
-    cy.get('[data-test=discount-code-input]')
-      .type('SUNRISE_CI');
-    cy.get('[data-test=apply-discount-code-button]')
-      .click();
-    cy.get('[data-test=cart-total-price]')
-      .contains(/^\s*68,75\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
-    cy.get('[data-test=discount-code-name]')
-      .contains('SUNRISE_CI');
-    cy.get('[data-test=remove-discount-button]')
-      .click();
+    cy.get('[data-test=discount-code-input]').type(
+      'SUNRISE_CI'
+    );
+    cy.get(
+      '[data-test=apply-discount-code-button]'
+    ).click();
+    cy.get('[data-test=cart-total-price]').contains(
+      /^\s*68,75\s€\s*$/,
+      { timeout: Cypress.config('graphqlTimeout') }
+    );
+    cy.get('[data-test=discount-code-name]').contains(
+      'SUNRISE_CI'
+    );
+    cy.get('[data-test=remove-discount-button]').click();
 
-    cy.get('[data-test=line-total]')
-      .contains(/^\s*137,50\s€\s*$/, { timeout: Cypress.config('graphqlTimeout') });
+    cy.get('[data-test=line-total]').contains(
+      /^\s*137,50\s€\s*$/,
+      { timeout: Cypress.config('graphqlTimeout') }
+    );
   });
 });

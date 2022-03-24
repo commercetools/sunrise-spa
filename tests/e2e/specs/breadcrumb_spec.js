@@ -3,8 +3,10 @@ describe('Breadcrumb', () => {
     cy.visit('/products/women-shoes-ankle-boots');
   });
 
-  it('links to each category of the breadcrumb', () => {
-    cy.get('[data-test=breadcrumb-home-link]', { timeout: Cypress.config('graphqlTimeout') })
+  xit('links to each category of the breadcrumb', () => {
+    cy.get('[data-test=breadcrumb-home-link]', {
+      timeout: Cypress.config('graphqlTimeout'),
+    })
       .should('contain', 'Home')
       .should('have.attr', 'href', '/')
       .should('not.have.class', 'active');

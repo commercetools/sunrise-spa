@@ -1,0 +1,16 @@
+en:
+  cartTotals: "Cart totals"
+  subtotal: "Subtotal"
+  shipping: "Shipping"
+  salesTax: "Sales Tax"
+  total: "Total"
+  discount: "Discount"
+  checkout: "Checkout"
+de:
+  cartTotals: "Warenkorbsummen"
+  subtotal: "Zwischensumme"
+  shipping: "Versand"
+  salesTax: "MwSt."
+  total: "Gesamtpreis"
+  discount: "Rabatt"
+  checkout: "Zur Kasse"

@@ -1,4 +1,0 @@
-en:
-  delete: "Delete"
-de:
-  delete: "Löschen"

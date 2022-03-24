@@ -49,10 +49,18 @@ describe('user profile', () => {
     const password = `new-${customer.password}`;
     const customerNewPassword = { ...customer, password };
 
-    cy.get('[data-test=change-password-button]', { timeout: 10000 }).click();
-    cy.get('[data-test=change-password-form-currentpassword]').type(customer.password);
-    cy.get('[data-test=change-password-form-newpassword]').type(password);
-    cy.get('[data-test=change-password-form-newpasswordconfirm]').type(password);
+    cy.get('[data-test=change-password-button]', {
+      timeout: 10000,
+    }).click();
+    cy.get(
+      '[data-test=change-password-form-currentpassword]'
+    ).type(customer.password);
+    cy.get(
+      '[data-test=change-password-form-newpassword]'
+    ).type(password);
+    cy.get(
+      '[data-test=change-password-form-newpasswordconfirm]'
+    ).type(password);
 
     cy.get('[data-test=change-password-submit]').click();
     // cy.get('[data-test=success-state-success]')

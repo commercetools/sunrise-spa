@@ -1,4 +1,0 @@
-en:
-  inStore: "In Store"
-de:
-  inStore: "Auf Lager"

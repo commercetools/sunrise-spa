@@ -1,4 +1,0 @@
-en:
-  needHelp: "Need help? Customer Service"
-de:
-  needHelp: "Brauchen Sie Hilfe? Kundenservice"

@@ -1,4 +1,0 @@
-en:
-  retry: "Retry"
-de:
-  retry: "Wiederholen"

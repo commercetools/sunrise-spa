@@ -58,18 +58,19 @@ describe('OrderDetailPage', () => {
     shippingMethod: {
       key: 'express-EU',
     },
-    lineItems: [{
-      sku: 'M0E20000000ELAJ',
-    },
-    {
-      sku: 'M0E20000000DX1Y',
-      quantity: 2,
-    },
+    lineItems: [
+      {
+        sku: 'M0E20000000ELAJ',
+      },
+      {
+        sku: 'M0E20000000DX1Y',
+        quantity: 2,
+      },
     ],
     discountCodes: ['SUNRISE_CI'],
   };
 
-  before(() => {
+  beforeEach(() => {
     cy.addDiscountCode(cartDiscount, 'SUNRISE_CI');
     cy.createCustomer(customerDraft);
     cy.login(customerDraft);
@@ -78,21 +79,18 @@ describe('OrderDetailPage', () => {
 
   it('shows order details', () => {
     cy.get('[data-test=my-orders-button]').click();
-    cy.reload();
     cy.get('[data-test=view-order-btn]').click();
-    // this test can never pass because you cannot add order number
-    // to me route: https://docs.commercetools.com/http-api-projects-me-orders#myorderfromcartdraft
-    // cy.url().should('include', '/user/orders/12345');
-    // cy.get('[data-test=details-order-number]')
-    //   .contains('12345');
-    cy.get('[data-test=details-order-date]')
-      .contains(/^\s*\d{1,2}\.*\s*[A-Za-zäÄöÖüÜß].+\s*\d{4}\s*$/);
-    cy.get('[data-test=order-subtotal-price]')
-      .should((e) => {
+    cy.get('[data-test=details-order-date]').contains(
+      /^\s*\d{1,2}\.*\s*[A-Za-zäÄöÖüÜß].+\s*\d{4}\s*$/
+    );
+    cy.get('[data-test=order-subtotal-price]').should(
+      (e) => {
         expect(e.text()).to.match(/^\s*149,50\s€\s*$/);
-      });
-    cy.get('[data-test=cart-shipping-price]')
-      .contains(/^\s*10,00\s€\s*$/);
+      }
+    );
+    cy.get('[data-test=cart-shipping-price]').contains(
+      /^\s*10,00\s€\s*$/
+    );
     cy.get('[data-test=address-name]')
       .eq(0)
       .should((e) => {
@@ -113,10 +111,9 @@ describe('OrderDetailPage', () => {
     //   .should((e) => {
     //     expect(e.text()).to.match(/^\s*25,47\s€\s*$/);
     //   });
-    cy.get('[data-test=cart-total-price]')
-      .should((e) => {
-        expect(e.text()).to.match(/^\s*159,50\s€\s*$/);
-      });
+    cy.get('[data-test=cart-total-price]').should((e) => {
+      expect(e.text()).to.match(/^\s*159,50\s€\s*$/);
+    });
     cy.get('[data-test=cart-line-item]')
       .should('have.length', 2)
       .eq(1)
@@ -143,21 +140,23 @@ describe('OrderDetailPage', () => {
     // @todo: should order detail display discount code?
     // cy.get('[data-test=discount-code-name]')
     //   .contains('SUNRISE_CI');
-    cy.get('[data-test=remove-discount-button]')
-      .should('not.exist');
+    cy.get('[data-test=remove-discount-button]').should(
+      'not.exist'
+    );
   });
 
   it('returns items', () => {
-    cy.get('[data-test=return-button]').click()
+    cy.get(`[data-test="my-orders-button"]`).click();
+    cy.get(`[data-test="view-order-btn"]`).eq(0).click();
+    cy.get('[data-test=return-button]').click();
     cy.get('[data-test=cart-line-item]')
       .should('have.length', 2)
       .eq(1)
       .then(($item) => {
         cy.wrap($item)
-          .find('[data-test=line-item-checkbox]').click()
+          .find('[data-test=line-item-checkbox]')
+          .click();
       });
-    cy.get('[data-test=return-submit]').click()
-    cy.get('[data-test=return-modal]').should('be.visible')
-    cy.get('[data-test=close-button]').click()
-  })
+    cy.get('[data-test=return-submit]').click();
+  });
 });

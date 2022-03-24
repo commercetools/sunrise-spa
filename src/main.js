@@ -1,64 +1,26 @@
-import Vue from 'vue';
-import VModal from 'vue-js-modal';
-// Required until Cypress supports fetch API
-// https://github.com/cypress-io/cypress/issues/95
-import 'whatwg-fetch';
-import VueScrollTo from 'vue-scrollto';
-import Vuelidate from 'vuelidate';
-import ProductZoomer from 'vue-product-zoomer';
-import * as VueGoogleMaps from 'vue2-google-maps';
-import App from './App/App.vue';
-import router from './router/index';
-import store from './store';
-import apolloProvider from './apollo';
-import i18n from './i18n/i18n';
-import sunriseConfig from '../sunrise.config';
-import './registerServiceWorker';
-import './assets/scss/main.scss';
-import { locale } from './components/common/shared';
-import VueCompositionAPI from '@vue/composition-api'
+import { createApp, provide, h } from 'vue';
+import { DefaultApolloClient } from '@vue/apollo-composable';
+import App from './App.vue';
+import { apolloClient } from './apollo';
+import router from './router';
+import VueGoogleMaps from '@fawmi/vue-google-maps';
+import i18n from './i18n';
+import 'presentation/assets/scss/main.scss';
 
-Vue.config.productionTip = false;
-
-Vue.use(VueGoogleMaps, {
-  load: {
-    key: process.env.VUE_APP_GOOGLE_MAPS_API_KEY,
-    libraries: 'places', // necessary for places input
-    language: locale(this),
-  },
-});
-Vue.config.productionTip = false;
-Vue.use(VueScrollTo);
-Vue.use(VModal);
-Vue.use(Vuelidate);
-Vue.use(ProductZoomer);
-Vue.use(VueCompositionAPI);
-Vue.directive('vpshow', {
-  /* eslint-disable no-param-reassign */
-  bind(el, binding) {
-    el.$onScroll = function onScroll() {
-      binding.value(el);
-    };
-    document.addEventListener('scroll', el.$onScroll);
+const app = createApp({
+  setup() {
+    provide(DefaultApolloClient, apolloClient);
   },
 
-  inserted(el) {
-    el.$onScroll();
-  },
+  render: () => h(App),
+})
+  .use(VueGoogleMaps, {
+    load: {
+      key: process.env.VUE_APP_GOOGLE_MAPS_API_KEY,
+      libraries: 'places',
+    },
+  })
+  .use(i18n)
+  .use(router);
 
-  unbind(el) {
-    document.removeEventListener('scroll', el.$onScroll);
-    delete el.$onScroll;
-  },
-  /* eslint-enable no-param-reassign */
-});
-
-Vue.prototype.$sunrise = sunriseConfig;
-
-new Vue({
-  router,
-  store,
-  i18n,
-  apolloProvider,
-  render: (h) => h(App),
-}).$mount('#app');
+app.mount('#app');

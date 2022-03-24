@@ -1,0 +1,8 @@
+en:
+  signIn: "Sign In"
+  signOut: "Sign Out"
+  myAccount: "My Account"
+de:
+  signIn: "Anmelden"
+  signOut: "Abmelden"
+  myAccount: "Mein Konto"

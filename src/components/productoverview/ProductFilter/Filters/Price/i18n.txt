@@ -1,6 +1,0 @@
-en:
-  max: "max"
-  min: "min"
-de:
-  max: "max"
-  min: "min"

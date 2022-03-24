@@ -1,8 +1,0 @@
-{
-  me {
-    customer {
-      id
-      version
-    }
-  }
-}
