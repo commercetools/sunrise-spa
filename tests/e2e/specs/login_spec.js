@@ -1,8 +1,3 @@
-const MailSlurp = require('mailslurp-client').default;
-
-const apiKey = Cypress.env('MAILSLURP_KEY');
-const msEmail = Cypress.env('MAILSLURP_EMAIL');
-const mailslurp = new MailSlurp({ apiKey });
 
 describe('Login', () => {
   const customer = {
@@ -11,20 +6,6 @@ describe('Login', () => {
     email: 'charlie.bucket+ci@commercetools.com',
     password: 'p@ssword',
   };
-
-  const newCustomer = {
-    firstName: 'Andy',
-    lastName: 'Garcia',
-    email: msEmail,
-    password: 'p@ssword',
-  };
-
-  const newPassword = 'newp@ssword';
-  before(() => {
-    cy.wrap(mailslurp.getAllEmails().then((emails) => emails.content.forEach((e) => {
-      mailslurp.deleteEmail(e.id);
-    })));
-  });
 
   it('logs in', () => {
     cy.createCustomer(customer);
@@ -55,21 +36,21 @@ describe('Login', () => {
     cy.checkCustomerIsLoggedIn(customer);
   });
   //@todo: check why waitForEmailCount never resolves
-  xit('resets password', () => {
-    cy.createCustomer(newCustomer);
-    cy.visit('/forgot-password');
-    cy.get('[data-test=forgot-password-email]').type(newCustomer.email);
-    cy.get('[data-test=forgot-password-form-submit]').click();
-    cy.wrap(mailslurp.waitForEmailCount(1, msEmail.substring(0, msEmail.lastIndexOf('@')))
-      .then((response) => mailslurp.getEmail(response[0].id)
-        .then((fullEmail) => fullEmail.body.match(/a href="([^"]*)/)[1])))
-      .then((link) => {
-        cy.visit(link);
-        cy.get('[data-test=reset-new-password]').type(newPassword);
-        cy.get('[data-test=reset-confirm-password]').type(newPassword);
-        cy.get('[data-test=reset-password-submit]').click();
-        cy.login({ email: newCustomer.email, password: newPassword });
-        cy.checkCustomerIsLoggedIn(newCustomer);
-      });
-  });
+  // xit('resets password', () => {
+  //   cy.createCustomer(newCustomer);
+  //   cy.visit('/forgot-password');
+  //   cy.get('[data-test=forgot-password-email]').type(newCustomer.email);
+  //   cy.get('[data-test=forgot-password-form-submit]').click();
+  //   cy.wrap(mailslurp.waitForEmailCount(1, msEmail.substring(0, msEmail.lastIndexOf('@')))
+  //     .then((response) => mailslurp.getEmail(response[0].id)
+  //       .then((fullEmail) => fullEmail.body.match(/a href="([^"]*)/)[1])))
+  //     .then((link) => {
+  //       cy.visit(link);
+  //       cy.get('[data-test=reset-new-password]').type(newPassword);
+  //       cy.get('[data-test=reset-confirm-password]').type(newPassword);
+  //       cy.get('[data-test=reset-password-submit]').click();
+  //       cy.login({ email: newCustomer.email, password: newPassword });
+  //       cy.checkCustomerIsLoggedIn(newCustomer);
+  //     });
+  // });
 });
