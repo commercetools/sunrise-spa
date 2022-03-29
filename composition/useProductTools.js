@@ -15,7 +15,7 @@ function useProductTools(expand = false) {
   const allVariants = computed(() =>
     product.value
       ? [product.value.masterVariant]
-          .concat(product.value.variants)
+          .concat(product.value.variants || [])
           .map((p) => ({
             name: product.value.name,
             slug: product.value.slug,
