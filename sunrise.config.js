@@ -8,7 +8,6 @@ if (getEnv('VUE_APP_LOCAL_SUNRISE_CONFIG')) {
   localConfig = require(process.env
     .VUE_APP_LOCAL_SUNRISE_CONFIG).default;
 }
-getEnv('hello_world');
 const config = {
   ct: {
     auth: {
