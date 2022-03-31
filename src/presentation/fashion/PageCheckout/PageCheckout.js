@@ -27,6 +27,7 @@ export default {
     const error = shallowRef(null);
     const { cart, loading } = useCart();
     const cartTools = useCartTools();
+    //@todo: what happened to the payment method passed to this?
     const placeOrder = () => {
       if (!validBillingForm.value) {
         showError.value = true;
