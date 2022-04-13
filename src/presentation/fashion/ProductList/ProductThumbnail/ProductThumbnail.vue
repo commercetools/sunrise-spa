@@ -18,7 +18,12 @@
             data-test="product-thumbnail-sale-flag"
             v-if="hasDiscount"
             class="badge-pink badge-right"
-            >Sale</span
+            >{{
+              (
+                product.masterVariant.scopedPrice.discounted
+                  .discount.name || ''
+              ).toUpperCase()
+            }}</span
           >
         </router-link>
         <div class="product-action">

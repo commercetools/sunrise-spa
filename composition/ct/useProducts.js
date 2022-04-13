@@ -51,6 +51,9 @@ const query = (expand) => gql`
               fractionDigits
             }
             discounted {
+              discount {
+                name(locale: $locale)
+              }
               value {
                 currencyCode
                 centAmount
@@ -81,6 +84,9 @@ const query = (expand) => gql`
               fractionDigits
             }
             discounted {
+              discount {
+                name(locale: $locale)
+              }
               value {
                 currencyCode
                 centAmount
