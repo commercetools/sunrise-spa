@@ -110,7 +110,15 @@ const getProducts = (component) => {
               masterVariant: {
                 sku,
                 images,
-                price,
+                price:price?.discounted
+                  ? {
+                      ...price,
+                      discounted:{
+                        ...price.discounted,
+                        name:price.discounted.discount.obj.name[loc]
+                      }
+                    }
+                  : price,
               },
             },
           },

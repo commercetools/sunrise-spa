@@ -18,7 +18,7 @@
             data-test="product-thumbnail-sale-flag"
             v-if="hasPrice && hasDiscount"
             class="badge-pink badge-right"
-            >Sale</span
+            >{{ matchingVariant.price.discounted.name }}</span
           >
         </router-link>
         <div class="product-action">

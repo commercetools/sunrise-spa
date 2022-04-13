@@ -86,6 +86,16 @@ const products = {
                 locale
               )} counting products`,
             ]),
+            ...[
+              [
+                "expand",
+                "masterVariant.price.discounted.discount",
+              ],
+              [
+                "expand",
+                "variants[*].price.discounted.discount"
+              ]
+            ]
           ]),
           makeConfig(accessToken)
         ),

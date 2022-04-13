@@ -73,7 +73,18 @@ export default (props,ctx,sku=ref(null),id,variantId) => {
         const name = p?.name[locale.value]
         const slug = p?.slug[locale.value]
         const allVariants = p.variants.concat(p.masterVariant).map(
-          p=>({...p,name,slug})
+          p=>{
+            const price = p.price.discounted
+              ? {
+                  ...p.price,
+                  discounted: {
+                    ...p.price.discounted,
+                    name: p.price.discounted.discount.obj.name[locale.value]
+                  }
+                }
+              : price
+            return{...p, name, slug, price}
+          }
         )
         variants.value = allVariants;
         product.value = allVariants.find(v=>sku.value

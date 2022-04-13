@@ -18,6 +18,9 @@ export default {
     },
   },
   computed: {
+    discountName() {
+      return this.product?.price?.discounted?.name
+    },
     productImages() {
       return this.product.images;
     },

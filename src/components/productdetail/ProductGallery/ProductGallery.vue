@@ -13,5 +13,6 @@
         />
       </a>
     </div>
+    <h1>{{ discountName }}</h1>
   </div>
 </template>
