@@ -28,5 +28,15 @@ Then run the following commands to build the project, create a docker container 
 docker build --file ./Deploy/Dockerfile -t gcr.io/[your project]/[image name] .
 docker push gcr.io/[your project]/[image name]
 ```
+**Important**:
+
+ If you are using Mac with the new Apple M1 chip, you should use the following commands instead:
+```bash
+docker build --file ./Deploy/Dockerfile --platform linux/amd64 -t gcr.io/[your project]/[image name] .
+docker push gcr.io/[your project]/[image name]
+```
+When building your image using the Apple M1 you are building an ARM-compatible image which Google Cloud does not support.
+
+For the list of supported CPUs on GCP, check [this documentation](https://cloud.google.com/compute/docs/cpu-platforms).
 
 In the `./Deploy` directory run the following commands: `terraform init` (only the first time) and `terraform apply`.
