@@ -175,7 +175,7 @@ const createPriceSelector = (
   customerGroup
 ) => ({
   currency: getValue(currency),
-  country: getValue(country),
+  // country: getValue(country),//no prices in CLP for Chile
   channel: getValue(channel)
     ? {
         typeId: 'priceChannel',

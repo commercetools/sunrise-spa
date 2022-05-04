@@ -40,38 +40,31 @@ const config = {
       'https://api.europe-west1.gcp.commercetools.com',
   },
   languages: {
-    en: 'English',
-    de: 'Deutsch',
+    'es-CL': 'Spanish',
+    // de: "Deutsch",
   },
   countries: {
-    DE: 'Deutschland',
-    US: 'United States',
+    CL: 'Chile',
+    // US: "United States",
   },
   formats: {
     number: {
-      DE: {
+      CL: {
         currency: {
           style: 'currency',
-          currency: 'EUR',
+          currency: 'CLP',
           currencyDisplay: 'symbol',
         },
       },
-      US: {
-        currency: {
-          style: 'currency',
-          currency: 'USD',
-        },
-      },
+      // US: {
+      //   currency: {
+      //     style: "currency",
+      //     currency: "USD",
+      //   },
+      // },
     },
     datetime: {
-      US: {
-        short: {
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric',
-        },
-      },
-      DE: {
+      CL: {
         short: {
           year: 'numeric',
           month: 'short',
@@ -83,89 +76,24 @@ const config = {
   categories: {
     salesExternalId: '6',
   },
-  facetSearches: [
-    {
-      name: 'size',
-      type: 'text',
-      label: {
-        it: 'Size',
-        de: 'Größe',
-        en: 'Size',
-      },
-    },
-    {
-      name: 'color',
-      type: 'lnum',
-      component: 'colors',
-      label: {
-        de: 'Farbe',
-        it: 'Color',
-        en: 'Color',
-      },
-    },
-    {
-      name: 'designer',
-      type: 'enum',
-      component: 'designer',
-      label: {
-        it: 'Designer',
-        de: 'Designer',
-        en: 'Designer',
-      },
-    },
-  ],
-  detailAttributes: [
-    {
-      name: 'designer',
-      label: {
-        it: 'Designer',
-        de: 'Designer',
-        en: 'Designer',
-      },
-    },
-    {
-      name: 'colorFreeDefinition',
-      label: {
-        it: 'Color',
-        de: 'Farbe',
-        en: 'Color',
-      },
-    },
-    {
-      name: 'size',
-      label: {
-        it: 'Size',
-        de: 'Grösse',
-        en: 'Size',
-      },
-    },
-    {
-      name: 'style',
-      label: {
-        it: 'Style',
-        de: 'Stil',
-        en: 'Style',
-      },
-    },
-    {
-      name: 'gender',
-      label: {
-        it: 'Gender',
-        de: 'Zielgruppe',
-        en: 'Gender',
-      },
-    },
-    {
-      name: 'articleNumberManufacturer',
-      label: {
-        it: 'Manufacturer AID',
-        de: 'Herstellernummer',
-        en: 'Manufacturer AID',
-      },
-    },
-  ],
-  variantSelector: ['color', 'size'],
-  variantInProductName: ['size'],
+  facetSearches: [], //vue3 version does not use facet searches
+  detailAttributes: [], //what attributes to show in product detail
+  // detailAttributes: [
+  //   {
+  //     name: 'designer',
+  //     label: {
+  //       it: 'Designer',
+  //       de: 'Designer',
+  //       en: 'Designer',
+  //     },
+  //   },
+  // ],
+  // variantSelector: ['color', 'size'],
+  // If variants come in different colors then ["color"]
+  //  could be variantSelector, it is the name of the
+  //  attribute you can have different variants in
+  variantSelector: [],
+  variantInProductName: [],
   ...localConfig,
 };
 // eslint-disable-next-line no-console
