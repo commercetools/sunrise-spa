@@ -144,12 +144,12 @@
           <div class="col-6">
             <div class="mobile-header-right-wrap">
               <div class="same-style cart-wrap">
-                <a href="#" class="cart-active">
+                <router-link :to="{ name: 'cart' }">
                   <i class="dl-icon-cart1"></i>
                   <span class="count-style">{{
                     totalCartItems
                   }}</span>
-                </a>
+                </router-link>
               </div>
               <div class="same-style cart-wrap">
                 <a href="#" class="cart-active">
