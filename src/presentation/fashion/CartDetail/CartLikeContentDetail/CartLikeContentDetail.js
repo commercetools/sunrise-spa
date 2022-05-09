@@ -18,6 +18,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    returnedItem: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(_, { emit }) {
     const { t } = useI18n();

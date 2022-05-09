@@ -27,6 +27,10 @@ export default {
       type: Boolean,
       default: () => false,
     },
+    returnedItem: {
+      type: Boolean,
+      default: () => false,
+    },
   },
   setup(props, { emit }) {
     const selected = shallowRef(false);

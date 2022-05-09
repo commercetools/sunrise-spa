@@ -3,8 +3,10 @@ en:
   quantity: "Quantity"
   price: "Price"
   total: "Total"
+  returnStatus: "Status"
 de:
   description: "Beschreibung"
   quantity: "Menge"
   price: "Preis"
   total: "Gesamtpreis"
+  returnStatus: "Status"

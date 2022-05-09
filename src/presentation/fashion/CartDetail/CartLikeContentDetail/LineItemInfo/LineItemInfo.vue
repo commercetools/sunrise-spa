@@ -42,7 +42,10 @@
           {{ lineItem.variant.sku }}
         </span>
       </td>
-      <td v-if="!selectable" class="product-price">
+      <td
+        v-if="!selectable && !returnedItem"
+        class="product-price"
+      >
         <span class="amount" data-test="item-price">
           <BasePrice :price="lineItem.price" />
         </span>
@@ -70,13 +73,16 @@
         </div>
       </td>
       <td
-        v-if="!selectable"
+        v-if="!selectable && !returnedItem"
         class="product-total"
         data-test="line-total"
       >
         <span>
           <BasePrice :price="total(lineItem)" />
         </span>
+      </td>
+      <td v-if="returnedItem">
+        <span>returned test</span>
       </td>
     </tr>
   </tbody>

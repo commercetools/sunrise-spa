@@ -91,13 +91,11 @@
       </div>
       <div class="mt-40">
         <b>{{ t('returnedItemsTitle') }}</b>
-        <!--<CartLikeContentDetail
+        <CartLikeContentDetail
           :editable="false"
+          :returnedItem="true"
           :cart="order"
-        />-->
-        <p>
-          {{ order.returnInfo }}
-        </p>
+        />
       </div>
       <div class="offset-md-6 text-right subtotal-price">
         <div class="row">
