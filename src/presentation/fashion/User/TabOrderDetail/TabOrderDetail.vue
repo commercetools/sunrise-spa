@@ -89,7 +89,7 @@
           :cart="order"
         />
       </div>
-      <div class="mt-40">
+      <div v-if="order.returnInfo.length > 0" class="mt-40">
         <b>{{ t('returnedItemsTitle') }}</b>
         <CartLikeContentDetail
           :editable="false"
