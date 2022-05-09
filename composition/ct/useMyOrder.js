@@ -154,7 +154,7 @@ function useMyOrder({ locale, id }) {
               shipmentState,
               paymentState,
             }) => ({
-              ...order.linItems.find(
+              ...order.lineItems.find(
                 ({ lineId }) => lineId === lineItemId
               ),
               quantity,
