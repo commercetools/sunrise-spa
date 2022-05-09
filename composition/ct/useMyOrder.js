@@ -115,8 +115,22 @@ const query = gql`
             }
           }
         }
+        returnInfo {
+          items {
+            id
+            type
+            ...returnedItem
+          }
+        }
       }
     }
+  }
+
+  fragment returnedItem on LineItemReturnItem {
+    lineItemId
+    quantity
+    shipmentState
+    paymentState
   }
 `;
 
@@ -128,7 +142,29 @@ function useMyOrder({ locale, id }) {
       if (!data) {
         return;
       }
-      setOrder(data.me.order);
+      const order = data.me.order;
+      console.log(order.returnInfo);
+      setOrder({
+        ...order,
+        returnItems: [
+          (order.returnInfo.items || []).map(
+            ({
+              lineItemId,
+              quantity,
+              shipmentState,
+              paymentState,
+            }) => ({
+              ...order.linItems.find(
+                ({ lineId }) => lineId === lineItemId
+              ),
+              quantity,
+              shipmentState,
+              paymentState,
+            })
+          ),
+        ],
+      });
+      console.log(order);
     },
   });
 
