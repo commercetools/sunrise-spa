@@ -12,6 +12,8 @@ en:
   total: Total
   notFound: Order not found
   return: Return an item
+  orderItemsTitle: Order Items
+  returnedItemsTitle: Returned Items
 de:
   title: Ihre Bestelldetails
   orderNumber: Bestellnummer
@@ -26,3 +28,5 @@ de:
   total: Gesamtpreis
   notFound: Bestellung nicht gefunden
   return: Artikel zurückschicken
+  orderItemsTitle: Artikel bestellen
+  returnedItemsTitle: Zurückgegebene Artikel

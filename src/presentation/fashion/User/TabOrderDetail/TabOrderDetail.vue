@@ -83,6 +83,14 @@
         </div>
       </div>
       <div class="mt-40">
+        <b>{{ t('orderItemsTitle') }}</b>
+        <CartLikeContentDetail
+          :editable="false"
+          :cart="order"
+        />
+      </div>
+      <div class="mt-40">
+        <b>{{ t('returnedItemsTitle') }}</b>
         <CartLikeContentDetail
           :editable="false"
           :cart="order"
