@@ -143,7 +143,7 @@ function useMyOrder({ locale, id }) {
         return;
       }
       const order = data.me.order;
-      console.log(order.returnInfo);
+
       setOrder({
         ...order,
         returnItems: [
