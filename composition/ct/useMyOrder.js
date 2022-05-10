@@ -143,11 +143,10 @@ function useMyOrder({ locale, id }) {
         return;
       }
       const order = data.me.order;
-
       setOrder({
         ...order,
-        returnItems: [
-          (order.returnInfo.items || []).map(
+        returnItems: {
+          lineItems: (order.returnInfo[0]?.items || []).map(
             ({
               lineItemId,
               quantity,
@@ -162,12 +161,10 @@ function useMyOrder({ locale, id }) {
               paymentState,
             })
           ),
-        ],
+        },
       });
-      console.log(order);
     },
   });
-
   return { loading, error, order };
 }
 export default useMyOrder;

@@ -82,7 +82,7 @@
         </span>
       </td>
       <td v-if="returnedItem">
-        <span>returned test</span>
+        <span>{{ lineItem.paymentState }}</span>
       </td>
     </tr>
   </tbody>

@@ -94,9 +94,10 @@
         <CartLikeContentDetail
           :editable="false"
           :returnedItem="true"
-          :cart="order"
+          :cart="order.returnItems"
         />
       </div>
+
       <div class="offset-md-6 text-right subtotal-price">
         <div class="row">
           <span class="col-md-6 title">{{
