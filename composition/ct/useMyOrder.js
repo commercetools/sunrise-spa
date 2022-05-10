@@ -148,7 +148,7 @@ function useMyOrder({ locale, id }) {
         ...order,
         returnItems: {
           //TODO: I can have several returnInfos for one order. Need to create a map for each return info here.
-          lineItems: order.returnInfo[0].items?.map(
+          lineItems: order.returnInfo[0]?.items.map(
             ({
               lineItemId,
               quantity,
