@@ -7,7 +7,7 @@
     <vueper-slides
       autoplay
       class="slider-area"
-      :arrows="false"
+      :arrows="true"
       :pause-on-hover="false"
       :fade="true"
       :bulletsOutside="true"
