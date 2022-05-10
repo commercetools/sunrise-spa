@@ -142,11 +142,13 @@ function useMyOrder({ locale, id }) {
       if (!data) {
         return;
       }
+
       const order = data.me.order;
       setOrder({
         ...order,
         returnItems: {
-          lineItems: (order.returnInfo[0]?.items || []).map(
+          //TODO: I can have several returnInfos for one order. Need to create a map for each return info here.
+          lineItems: order.returnInfo[0].items?.map(
             ({
               lineItemId,
               quantity,
