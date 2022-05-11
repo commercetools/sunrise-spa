@@ -6,6 +6,7 @@ import {
 } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import useMyOrder from 'hooks/useMyOrder';
+import useProductDiscount from 'hooks/useProductDiscount';
 import useMyOrders from 'hooks/useMyOrders';
 import basic from './ct/useCustomerTools';
 import {
@@ -147,6 +148,7 @@ function useCustomerTools() {
     returnItems,
     gotoResetToken,
     updateMyCustomerPassword,
+    useProductDiscount,
   };
 }
 export default useCustomerTools;

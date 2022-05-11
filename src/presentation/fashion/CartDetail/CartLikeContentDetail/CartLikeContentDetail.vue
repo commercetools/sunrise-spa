@@ -35,6 +35,7 @@
         v-for="lineItem in cart.lineItems"
         :key="lineItem.id"
         :lineItem="lineItem"
+        :discount="lineItem.price.discount"
         @select-return-item="selectReturnItem"
         @unselect-return-item="unselectReturnItem"
         data-test="cart-line-item"

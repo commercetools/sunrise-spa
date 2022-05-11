@@ -48,6 +48,12 @@
       >
         <span class="amount" data-test="item-price">
           <BasePrice :price="lineItem.price" />
+          <span v-if="lineItem.price.discounted != null">
+            <DiscountTag
+              :discountId="
+                lineItem.price.discounted.discount.id
+              "
+          /></span>
         </span>
       </td>
       <td class="cart-quality">

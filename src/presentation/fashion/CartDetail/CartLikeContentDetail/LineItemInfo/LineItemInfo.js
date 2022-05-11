@@ -1,6 +1,7 @@
 import BasePrice from 'presentation/components/BasePrice/BasePrice.vue';
 import { computed, shallowRef, watch } from 'vue';
 import LineItemQuantityForm from 'presentation/components/LineItemQuantityForm/LineItemQuantityForm.vue';
+import DiscountTag from 'presentation/components/DiscountTag/DiscountTag.vue';
 
 import Remove from 'presentation/components/LineItemQuantityForm/Remove/Remove.vue';
 import useCartTools from 'hooks/useCartTools';
@@ -9,6 +10,7 @@ export default {
     LineItemQuantityForm,
     Remove,
     BasePrice,
+    DiscountTag,
   },
   props: {
     lineItem: {
@@ -30,6 +32,10 @@ export default {
     returnedItem: {
       type: Boolean,
       default: () => false,
+    },
+    discount: {
+      type: Object,
+      required: false,
     },
   },
   setup(props, { emit }) {

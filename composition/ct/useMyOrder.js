@@ -26,6 +26,9 @@ const query = gql`
                 currencyCode
                 fractionDigits
               }
+              discount {
+                id
+              }
             }
           }
           totalPrice {
