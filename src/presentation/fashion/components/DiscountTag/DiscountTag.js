@@ -4,10 +4,13 @@ export default {
   props: {
     discountId: String,
   },
-  setup() {
+
+  setup(props) {
     const tools = useCustomerTools();
-    const { loading, discount } =
-      tools.useProductDiscount();
+    console.log(props);
+    const { loading, discount } = tools.useProductDiscount(
+      props.discountId
+    );
     return { loading, discount };
   },
 };

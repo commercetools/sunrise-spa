@@ -1,4 +1,5 @@
 import useLocale from './useLocale';
+
 import useProductDiscountBasic from './ct/useProductDiscount';
 
 function useProductDiscount(id) {
