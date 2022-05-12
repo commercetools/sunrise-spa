@@ -28,6 +28,9 @@ const query = gql`
                 currencyCode
                 fractionDigits
               }
+              discount {
+                name(locale: $locale)
+              }
             }
           }
           totalPrice {

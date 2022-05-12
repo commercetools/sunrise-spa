@@ -3,6 +3,6 @@
 
 <template>
   <div class="discount-tag">
-    <span>{{ discount.name }}</span>
+    <span>{{ name }}</span>
   </div>
 </template>

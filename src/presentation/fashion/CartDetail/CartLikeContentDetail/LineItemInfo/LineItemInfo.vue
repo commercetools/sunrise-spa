@@ -50,8 +50,8 @@
           <BasePrice :price="lineItem.price" />
           <span v-if="lineItem.price.discounted != null">
             <DiscountTag
-              :discountId="
-                lineItem.price.discounted.discount.id
+              :name="
+                lineItem?.price?.discounted?.discount?.name
               "
           /></span>
         </span>

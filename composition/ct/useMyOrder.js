@@ -27,7 +27,7 @@ const query = gql`
                 fractionDigits
               }
               discount {
-                id
+                name(locale: $locale)
               }
             }
           }
