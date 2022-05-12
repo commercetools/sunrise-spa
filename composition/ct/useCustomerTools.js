@@ -43,7 +43,7 @@ const returnItems = (id, version, items) => {
       version,
       items: items.map((item) => ({
         ...item,
-        shipmentState: 'Advised',
+        shipmentState: 'Returned',
       })),
     },
   });

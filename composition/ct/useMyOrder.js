@@ -147,28 +147,48 @@ function useMyOrder({ locale, id }) {
       }
 
       const order = data.me.order;
-
+      const returned = data.me.order.returnInfo
+        .flatMap(({ items }) => items.map((item) => item))
+        .reduce((acc, item) => {
+          const q = acc.get(item.lineItemId)?.quantity || 0;
+          acc.set(item.lineItemId, {
+            ...item,
+            quantity: item.quantity + q,
+          });
+          return acc;
+        }, new Map());
+      console.log([...returned.values()]);
       setOrder({
         ...order,
+        lineItems: order.lineItems
+          .map((item) => {
+            const q = returned.get(item.lineId)?.quantity;
+            return q
+              ? { ...item, quantity: item.quantity - q }
+              : item;
+          })
+          .filter(({ quantity }) => Boolean(quantity)),
         returnItems: {
           //TODO: I can have several returnInfos for one order. Need to create a map for each return info here.
-          lineItems: order.returnInfo[
-            order.returnInfo.length - 1
-          ]?.items.map(
-            ({
-              lineItemId,
-              quantity,
-              shipmentState,
-              paymentState,
-            }) => ({
-              ...order.lineItems.find(
-                ({ lineId }) => lineId === lineItemId
-              ),
-              quantity,
-              shipmentState,
-              paymentState,
-            })
-          ),
+          lineItems: data.me.order.returnInfo
+            .flatMap(({ items }) =>
+              items.map((item) => item)
+            )
+            .map(
+              ({
+                lineItemId,
+                quantity,
+                shipmentState,
+                paymentState,
+              }) => ({
+                ...order.lineItems.find(
+                  ({ lineId }) => lineId === lineItemId
+                ),
+                quantity,
+                shipmentState,
+                paymentState,
+              })
+            ),
         },
       });
     },
