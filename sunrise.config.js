@@ -41,37 +41,39 @@ const config = {
   },
   languages: {
     en: 'English',
-    de: 'Deutsch',
+    'fr-Fr': 'French',
+    es: 'Spanish',
   },
   countries: {
-    DE: 'Deutschland',
-    US: 'United States',
+    ES: 'España',
+    FR: 'Francia',
   },
   formats: {
     number: {
-      DE: {
+      ES: {
         currency: {
           style: 'currency',
           currency: 'EUR',
           currencyDisplay: 'symbol',
         },
       },
-      US: {
+      FR: {
         currency: {
           style: 'currency',
-          currency: 'USD',
+          currency: 'EUR',
+          currencyDisplay: 'symbol',
         },
       },
     },
     datetime: {
-      US: {
+      ES: {
         short: {
           year: 'numeric',
           month: 'short',
           day: 'numeric',
         },
       },
-      DE: {
+      FR: {
         short: {
           year: 'numeric',
           month: 'short',
@@ -83,89 +85,25 @@ const config = {
   categories: {
     salesExternalId: '6',
   },
-  facetSearches: [
-    {
-      name: 'size',
-      type: 'text',
-      label: {
-        it: 'Size',
-        de: 'Größe',
-        en: 'Size',
-      },
-    },
-    {
-      name: 'color',
-      type: 'lnum',
-      component: 'colors',
-      label: {
-        de: 'Farbe',
-        it: 'Color',
-        en: 'Color',
-      },
-    },
-    {
-      name: 'designer',
-      type: 'enum',
-      component: 'designer',
-      label: {
-        it: 'Designer',
-        de: 'Designer',
-        en: 'Designer',
-      },
-    },
-  ],
+  //facet search not used in vue3
+  facetSearches: [],
+  //what attributes to sow in product detail
   detailAttributes: [
-    {
-      name: 'designer',
-      label: {
-        it: 'Designer',
-        de: 'Designer',
-        en: 'Designer',
-      },
-    },
-    {
-      name: 'colorFreeDefinition',
-      label: {
-        it: 'Color',
-        de: 'Farbe',
-        en: 'Color',
-      },
-    },
-    {
-      name: 'size',
-      label: {
-        it: 'Size',
-        de: 'Grösse',
-        en: 'Size',
-      },
-    },
-    {
-      name: 'style',
-      label: {
-        it: 'Style',
-        de: 'Stil',
-        en: 'Style',
-      },
-    },
-    {
-      name: 'gender',
-      label: {
-        it: 'Gender',
-        de: 'Zielgruppe',
-        en: 'Gender',
-      },
-    },
-    {
-      name: 'articleNumberManufacturer',
-      label: {
-        it: 'Manufacturer AID',
-        de: 'Herstellernummer',
-        en: 'Manufacturer AID',
-      },
-    },
+    // {
+    //   name: 'designer',
+    //   label: {
+    //     it: 'Designer',
+    //     de: 'Designer',
+    //     en: 'Designer',
+    //   },
+    // },
   ],
-  variantSelector: ['color', 'size'],
-  variantInProductName: ['size'],
+  //what variants can be selected in product detail
+  variantSelector: [], //['color', 'size'],
+  //what attribute will be shown in product name on cart and order
+  //  if user orders the same product in L and XL then sow it as
+  //  "shirt L", "shirt XL" instead of just "shirt"
+  variantInProductName: [], //['size'],
   ...localConfig,
 };
 // eslint-disable-next-line no-console
