@@ -7,6 +7,8 @@ const i18n = createI18n({
   numberFormats: config.formats.number,
   //bug in vue i18n, wrong casing for this prop
   datetimeFormats: config.formats.datetime,
+  fallbackWarn: false,
+  missingWarn: false,
 });
 
 export default i18n;
