@@ -2,7 +2,7 @@
 <script src="./DiscountTag.js"></script>
 
 <template>
-  <div>
-    <p>{{ discount.name }}</p>
+  <div class="discount-tag">
+    <span>{{ discount.name }}</span>
   </div>
 </template>
