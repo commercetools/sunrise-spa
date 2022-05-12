@@ -92,7 +92,7 @@ export const useCartActions = () => {
   }) => {
     return Promise.resolve()
       .then(() => {
-        if (createPayment) {
+        if (createPayment.value) {
           const createPayment = usePaymentMutation({
             currency: currency.value,
             centAmount: cart.value?.totalPrice?.centAmount,
