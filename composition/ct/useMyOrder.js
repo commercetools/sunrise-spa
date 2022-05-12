@@ -169,7 +169,6 @@ function useMyOrder({ locale, id }) {
           })
           .filter(({ quantity }) => Boolean(quantity)),
         returnItems: {
-          //TODO: I can have several returnInfos for one order. Need to create a map for each return info here.
           lineItems: data.me.order.returnInfo
             .flatMap(({ items }) =>
               items.map((item) => item)
