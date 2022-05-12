@@ -45,11 +45,22 @@ function useAccessRules() {
       config.ct.auth.scope.includes('manage_project')
     );
   });
+  const createPayment = computed(() => {
+    /**
+     * To create a payment from client you need manage_payments, this should
+     * be done by a proxy or BFF
+     */
+    return (
+      config.ct.auth.scope.includes('manage_payments') ||
+      config.ct.auth.scope.includes('manage_project')
+    );
+  });
   return {
     showResetPassword,
     showStoreSelector,
     showLocationSelector,
     showReturnItemButton,
+    createPayment,
   };
 }
 export default useAccessRules;

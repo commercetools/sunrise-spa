@@ -25,6 +25,8 @@
               <OrderOverview
                 @update-shipping="updateShippingMethod"
                 @complete-order="placeOrder"
+                @payment-changed="paymentChanged"
+                :paymentMethod="paymentMethod"
                 :showError="showError"
                 :cart="cart"
               />

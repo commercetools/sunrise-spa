@@ -17,6 +17,10 @@ export default {
       type: Object,
       required: true,
     },
+    paymentMethod: {
+      type: String,
+      required: true,
+    },
   },
   components: {
     ShippingMethod,
@@ -40,6 +44,8 @@ export default {
     const placeOrder = () => {
       emit('complete-order', paymentId);
     };
+    const paymentChanged = (value) =>
+      emit('payment-changed', value);
     return {
       ...useCartTools(),
       t,
@@ -47,6 +53,8 @@ export default {
       updateShippingMethod,
       paymentId,
       paid,
+      paymentMethod: props.paymentMethod,
+      paymentChanged,
       placeOrder,
     };
   },

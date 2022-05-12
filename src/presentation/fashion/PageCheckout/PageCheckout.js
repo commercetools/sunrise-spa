@@ -23,6 +23,7 @@ export default {
     const orderComplete = shallowRef(false);
     const validBillingForm = shallowRef(false);
     const validShippingForm = shallowRef(true);
+    const paymentMethod = shallowRef('card');
     const showError = shallowRef(false);
     const error = shallowRef(null);
     const { cart, loading } = useCart();
@@ -38,6 +39,8 @@ export default {
         .createMyOrderFromCart({
           billingAddress,
           shippingAddress,
+          cart,
+          paymentMethod,
         })
         .then(
           () => (orderComplete.value = true),
@@ -73,6 +76,9 @@ export default {
     const updateShippingMethod = (shippingId) => {
       shippingMethod.value = shippingId;
     };
+    const paymentChanged = (payment) => {
+      paymentMethod.value = payment;
+    };
 
     return {
       ...cartTools,
@@ -89,6 +95,8 @@ export default {
       updateBilling,
       updateShipping,
       updateShippingMethod,
+      paymentMethod,
+      paymentChanged,
       error,
       cart,
       t,
