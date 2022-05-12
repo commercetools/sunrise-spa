@@ -40,14 +40,28 @@ export default {
   },
   setup(props, { emit }) {
     const selected = shallowRef(false);
+    const quantity = shallowRef(props.lineItem.quantity);
     const item = computed(() =>
       props.selectable
         ? {
             lineItemId: props.lineItem.lineId,
-            quantity: props.lineItem.quantity,
+            quantity: quantity.value,
           }
         : null
     );
+    watch(item, (item) => {
+      if (item.quantity === '') {
+        return;
+      }
+      if (selected.value) {
+        const quantity = item.quantity;
+        if (quantity === 0) {
+          selected.value = false;
+        } else {
+          emit('select-return-item', item);
+        }
+      }
+    });
     watch(selected, (selected) => {
       if (selected === true) {
         emit('select-return-item', item.value);
@@ -59,6 +73,7 @@ export default {
     return {
       selected,
       item,
+      quantity,
       ...useCartTools(),
     };
   },

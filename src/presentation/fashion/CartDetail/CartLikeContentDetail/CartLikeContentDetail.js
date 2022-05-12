@@ -28,7 +28,9 @@ export default {
     const selectedReturnItems = shallowRef([]);
     const selectReturnItem = (item) => {
       selectedReturnItems.value = selectedReturnItems.value
-        .filter(({ id }) => id !== item.id)
+        .filter(
+          ({ lineItemId }) => lineItemId !== item.lineItemId
+        )
         .concat(item);
       emit(
         'update-selected-items',
@@ -38,7 +40,7 @@ export default {
     const unselectReturnItem = (item) => {
       selectedReturnItems.value =
         selectedReturnItems.value.filter(
-          ({ id }) => id !== item.id
+          ({ lineItemId }) => lineItemId !== item.lineItemId
         );
       emit(
         'update-selected-items',

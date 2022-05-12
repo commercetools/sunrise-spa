@@ -157,7 +157,6 @@ function useMyOrder({ locale, id }) {
           });
           return acc;
         }, new Map());
-      console.log([...returned.values()]);
       setOrder({
         ...order,
         lineItems: order.lineItems

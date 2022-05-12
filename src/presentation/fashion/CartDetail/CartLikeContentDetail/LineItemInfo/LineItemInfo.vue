@@ -65,7 +65,7 @@
         <div v-if="selectable">
           <div class="cart-plus-minus">
             <input
-              v-model.number="item.quantity"
+              v-model.number="quantity"
               class="cart-plus-minus-box"
               type="number"
             />
