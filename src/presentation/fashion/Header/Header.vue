@@ -131,7 +131,7 @@
         <div class="row align-items-center">
           <div class="col-6">
             <div class="mobile-logo logo-width">
-              <a href="index.html">
+              <a href="/">
                 <img
                   alt=""
                   :src="
