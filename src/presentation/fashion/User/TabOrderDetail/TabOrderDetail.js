@@ -16,6 +16,12 @@ export default {
     BaseAddress,
     LineItemInfo,
   },
+
+  computed: {
+    hasItemsAbleToReturn() {
+      return this.order.lineItems.length > 0 ? true : false;
+    },
+  },
   props: {},
   setup() {
     const { showReturnItemButton } = useAccessRules();

@@ -34,7 +34,9 @@
               name: 'return',
               params: { id: order.id },
             }"
-            v-if="showReturnItemButton"
+            v-if="
+              showReturnItemButton && hasItemsAbleToReturn
+            "
           >
             <button
               data-test="return-button"
