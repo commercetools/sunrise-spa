@@ -14,7 +14,7 @@
       <div class="pay-top sin-payment">
         <input
           id="payment_method_1"
-          v-model="paymentMethod"
+          v-model="pm"
           class="input-radio"
           type="radio"
           value="card"
@@ -32,7 +32,7 @@
       <div class="pay-top sin-payment">
         <input
           id="payment-method-2"
-          v-model="paymentMethod"
+          v-model="pm"
           class="input-radio"
           type="radio"
           value="paypal"

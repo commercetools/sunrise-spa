@@ -3,6 +3,42 @@ import { getValue } from '../../src/lib';
 import useMutation from '../useMutationFacade';
 import useCart from '../useCart';
 import gql from 'graphql-tag';
+export const usePaymentMutation = ({
+  currency,
+  centAmount,
+  method,
+}) => {
+  const createPayment = () => {
+    return apolloClient
+      .mutate({
+        mutation: gql`
+          mutation createPayment($draft: PaymentDraft!) {
+            createPayment(draft: $draft) {
+              paymentId: id
+              version
+            }
+          }
+        `,
+        variables: {
+          draft: {
+            amountPlanned: {
+              currencyCode: currency,
+              centAmount,
+            },
+            paymentMethodInfo: {
+              method,
+            },
+          },
+        },
+      })
+      .then((result) => ({
+        version: result.data.createPayment.version,
+        id: result.data.createPayment.paymentId,
+      }));
+  };
+  return createPayment;
+};
+
 const create = gql`
   mutation createCart($draft: MyCartDraft!) {
     createMyCart(draft: $draft) {

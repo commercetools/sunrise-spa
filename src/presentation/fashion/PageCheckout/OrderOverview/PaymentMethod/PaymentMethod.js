@@ -1,11 +1,20 @@
-import { onMounted, ref } from 'vue';
+import { onMounted, shallowRef, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 export default {
-  setup(_, { emit }) {
-    const paymentMethod = ref('card');
+  props: {
+    paymentMethod: {
+      type: String,
+      required: false,
+    },
+  },
+  setup(props, { emit }) {
     onMounted(() => emit('card-paid'));
+    const pm = shallowRef(props.paymentMethod);
     const { t } = useI18n();
-    return { paymentMethod, t };
+    watch(pm, (pm) => {
+      emit('payment-changed', pm);
+    });
+    return { pm, t };
   },
 };
