@@ -70,6 +70,7 @@ export default {
       isCurrentPage,
       pages,
       show,
+      // total: props.total,
     };
   },
 };

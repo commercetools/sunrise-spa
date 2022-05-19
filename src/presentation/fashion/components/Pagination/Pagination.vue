@@ -9,6 +9,7 @@
     v-if="show"
   >
     <ul>
+      <!-- <li>{{total}}</li> -->
       <li data-test="paginate-prev" v-if="!isInFirstPage">
         <a
           class="next"
