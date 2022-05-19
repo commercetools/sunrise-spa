@@ -1,20 +1,19 @@
 import { computed } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import useProducts from './useProducts';
+// import { useRoute, useRouter } from 'vue-router';
+import useTestProducts from './useTestProducts';
 
-function useProductTools(expand = false) {
-  const route = useRoute();
-  const router = useRouter();
+function useTestProductTools(expand = false) {
+  // const route = useRoute();
+  // const router = useRouter();
 
-  console.log('Route: ', route)
-  console.log('Router: ', router)
+  console.log('UseTestProductTools')
 
-  const sku = computed(() => route.params.sku);
+  // const sku = null;
+  // const sku = computed(() => route.params.sku);
+  const sku = computed(() => null);
 
-  console.log('SKU: ', sku)
-  
   const { products, total, loading, error, categoryError } =
-    useProducts({
+    useTestProducts({
       sku,
       expand: expand ? { variants: true } : {},
     });
@@ -38,17 +37,21 @@ function useProductTools(expand = false) {
       : null
   );
 
-  const setPage = (page) =>
-    router.push({
-      ...route,
-      params: {
-        ...route.params,
-        page,
-      },
-    });
-  const page = computed(() =>
-    Number(route.params.page || 1)
-  );
+  const setPage = (page) => page;
+  // const setPage = (page) =>
+  //   router.push({
+  //     ...route,
+  //     params: {
+  //       ...route.params,
+  //       page,
+  //     },
+  //   });
+  // const page = 1;
+  // const page = computed(() =>
+  //   Number(route.params.page || 1)
+  // );
+  const page = computed(() => 1);
+  
   const formatProduct = (product) => ({
     ...product,
     ...product.masterVariant,
@@ -56,6 +59,8 @@ function useProductTools(expand = false) {
   const allError = computed(
     () => error.value || categoryError.value
   );
+
+  console.log('useTestProductTools - Return: ', products, total)
   return {
     total,
     products,
@@ -69,4 +74,4 @@ function useProductTools(expand = false) {
     page,
   };
 }
-export default useProductTools;
+export default useTestProductTools;

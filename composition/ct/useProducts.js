@@ -205,6 +205,22 @@ const useProducts = ({
   customerGroup,
   channel,
 }) => {
+
+  // console.log('Hook - useProduct: ', {
+  //   search,
+  //   locale,
+  //   limit,
+  //   offset,
+  //   currency,
+  //   country,
+  //   sorts,
+  //   categorySlug,
+  //   expand = {},
+  //   sku,
+  //   customerGroup,
+  //   channel,
+  // })
+
   const [products, setProducts] = useState();
   const [priceSelector, setPriceSelector] = useState(
     createPriceSelector(
@@ -214,7 +230,7 @@ const useProducts = ({
       customerGroup
     )
   );
-  const [skip, setSkip] = useState(true);
+  const [skip, setSkip] = useState(true);       // Originally set to 'true' //
   const [total, setTotal] = useState();
   const { categoryId, error: categoryError } =
     useCategoryId({
@@ -266,6 +282,17 @@ const useProducts = ({
       ),
     [categoryId, categorySlug, sku]
   );
+
+  console.log('useProduct - useQuery: ', {
+    text: search,
+    locale,
+    limit,
+    offset,
+    sorts,
+    priceSelector,
+    filters,
+  })
+
   const { loading, error } = useQuery(query(expand), {
     variables: {
       text: search,
@@ -285,6 +312,7 @@ const useProducts = ({
     },
     skip,
   });
+  console.log('useProduct - Products: ', total, products, loading, error, categoryError)
   return { total, products, loading, error, categoryError };
 };
 export default useProducts;

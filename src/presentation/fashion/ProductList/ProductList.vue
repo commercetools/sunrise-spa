@@ -28,6 +28,7 @@
       /> -->
       <div class="shop-wrapper" v-if="products.length">
         <div class="row">
+          {{ products.length }}
           <!-- @open-quick-view="openQuickView"
             @open-add-shopping-list="openAddToShoppingList" -->
           <ProductThumbnail
@@ -44,7 +45,6 @@
           :setPage="setPage"
         />
       </div>
-
       <div v-else>
         <div class="empty-results-container">
           <span

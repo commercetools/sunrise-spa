@@ -117,6 +117,24 @@
         </div>
       </div>
     </div>
+   <div class="shop-wrapper">
+     {{ total }}
+   <!-- <div class="shop-wrapper" v-if="products.length"></div> -->
+      <div class="row">
+        <ProductThumbnail
+          v-for="product in products"
+          data-test="product-list"
+          :key="product.id"
+          :product="formatProduct(product)"
+          :addToCart="addToCart"
+        />
+      </div>
+      <Pagination
+        :total="total"
+        :page="page"
+        :setPage="setPage"
+      />  
+    </div>
     <div class="service-area pt-70 pb-70">
       <div class="container">
         <div class="row">

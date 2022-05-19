@@ -12,6 +12,8 @@ export default {
     });
     const isActive = (slug) =>
       slug === route.params.categorySlug;
+
+      console.log('CategoriesMenu: ', categories)
     return {
       categories,
       isActive,

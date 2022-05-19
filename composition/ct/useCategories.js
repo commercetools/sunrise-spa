@@ -31,6 +31,7 @@ const createWhere = (categorySlug, rootOnly, locale) => {
       : false,
     getValue(rootOnly) ? 'parent is not defined' : false,
   ].filter((x) => x);
+  console.log('Where: ', where)
   return where.length ? where.join(' and ') : null;
 };
 //this is the React api useQuery(query,options)
@@ -42,6 +43,15 @@ const useCategories = ({
   sort,
   skip,
 }) => {
+
+  console.log('UseCategories: ', {
+    locale,
+    categorySlug,
+    rootOnly,
+    sort,
+    skip,
+  })
+
   const [categories, setCategories] = useState();
   const [total, setTotal] = useState();
   const [where, setWhere] = useState(
@@ -75,6 +85,7 @@ const useCategories = ({
       sort,
     },
     onCompleted: (data) => {
+      console.log('useCategories (Data): ', data)
       if (!data) {
         return;
       }
@@ -83,6 +94,7 @@ const useCategories = ({
     },
     skip: skipQuery,
   });
+  // console.log('Use Categories: ', total, categories, loading, error)
   return { total, categories, loading, error };
 };
 export default useCategories;

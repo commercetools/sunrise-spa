@@ -3,11 +3,11 @@ import { useRoute, useRouter } from 'vue-router';
 import useLocale from './useLocale';
 import useLocation from './useLocation';
 import useCurrency from './useCurrency';
-import { ALL } from '../src/constants';
+// import { ALL } from '../src/constants';
 import useProducts from './ct/useProducts';
 import usePaging from './usePaging';
 import useSearch from './useSearch';
-import useCustomerTools from './useCustomerTools';
+// import useCustomerTools from './useCustomerTools';
 import useSelectedChannel from './useSelectedChannel';
 //vue specific useProducts
 export const useSorts = () => {
@@ -30,26 +30,39 @@ export const useSorts = () => {
 };
 
 export default ({ expand } = {}) => {
-  const { customer } = useCustomerTools();
-  const route = useRoute();
+  // const { customer } = useCustomerTools();
+  // const route = useRoute();
   const { locale } = useLocale();
   const { location } = useLocation();
   const currency = useCurrency();
+  // const categorySlug = 'women';
+  // const categorySlug = computed(() =>
+  // route.params.categorySlug === ALL
+  //   ? null
+  //   : route.params.categorySlug
+  // );
   const categorySlug = computed(() =>
-    route.params.categorySlug === ALL
-      ? null
-      : route.params.categorySlug
+  'women'
   );
+
+  // const customerGroup = null;
+  // const customerGroup = computed(
+  //   () => customer.value?.customerGroupRef?.customerGroupId
+  // );
   const customerGroup = computed(
-    () => customer.value?.customerGroupRef?.customerGroupId
+    () => null
   );
-
-  console.log('CategorySlug: ', categorySlug)
-
-  const sku = computed(() => route?.params?.sku);
-  const page = computed(() => route.params.page || 1);
+  // const sku = null;
+  // const sku = computed(() => route?.params?.sku);
+  const sku = computed(() => null);
+  // const page = 1;
+  // const page = computed(() => route.params.page || 1);
+  const page = computed(() => 1);
   const { limit, offset } = usePaging(page);
+  // const { sorts } = 'lastModifiedAt desc';
+  // const setSort = (sort) => sort;
   const { sorts, setSort } = useSorts();
+  // const search = '';
   const { search } = useSearch();
   const { channel } = useSelectedChannel();
   const { total, products, loading, error, categoryError } =
@@ -68,21 +81,22 @@ export default ({ expand } = {}) => {
       customerGroup,
     });
 
-    // console.log('Product Object: ', {
-    //   search,
-    //   limit,
-    //   offset,
-    //   locale,
-    //   currency,
-    //   sorts,
-    //   country: location,
-    //   categorySlug,
-    //   sku,
-    //   channel,
-    //   expand,
-    //   customerGroup,
-    // })
-    // console.log('useProduct: ', products)
+    console.log('Product Object: ', {
+      search,
+      limit,
+      offset,
+      locale,
+      currency,
+      sorts,
+      country: location,
+      categorySlug,
+      sku,
+      channel,
+      expand,
+      customerGroup,
+    })
+    console.log('useTestProduct: ', products);
+
   return {
     total,
     products,
