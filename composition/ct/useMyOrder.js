@@ -148,7 +148,7 @@ function useMyOrder({ locale, id }) {
 
       const order = data.me.order;
       const returned = data.me.order.returnInfo
-        .flatMap(({ items }) => items.map((item) => item))
+        .flatMap(({ items }) => items)
         .reduce((acc, item) => {
           const q = acc.get(item.lineItemId)?.quantity || 0;
           acc.set(item.lineItemId, {
@@ -169,9 +169,7 @@ function useMyOrder({ locale, id }) {
           .filter(({ quantity }) => Boolean(quantity)),
         returnItems: {
           lineItems: data.me.order.returnInfo
-            .flatMap(({ items }) =>
-              items.map((item) => item)
-            )
+            .flatMap(({ items }) => items)
             .map(
               ({
                 lineItemId,
