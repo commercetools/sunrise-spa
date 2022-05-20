@@ -1,24 +1,20 @@
-felipe will make home page style
-felipe footer style
+# CommerceTools  demo project - Vue SunriseSPA
 
-see what is shared:
-CartDetail.js
-CartLikeContentDetail/LineItemInfo/LineItemQuantityForm/Remove/Remove.js
-CartLikeContentDetail/LineItemInfo/LineItemQuantityForm/LineItemQuantityForm.js
-CartLikeContentDetail/LineItemInfo/LineItemInfo.js
-CartLikeContentDetail/CartLikeContentDetail.js
-AddDiscountCodeForm/AddDiscountCodeForm.js
-CartLikePriceDetail/DiscountCodes/RemoveDiscountCodeForm/RemoveDiscountCodeForm.js
-CartLikePriceDetail/DiscountCodes/DiscountCodes.js
-CartLikePriceDetail/CartLikePriceDetail.js
-./Cart.js
-./src/containers/views/Shop/Root/Product/PageProductDetail/PageProductDetail.js
-./src/containers/views/Shop/Root/Product/PageProductDetail/ProductInfo/DetailsSection/DetailsSection.js
-./src/containers/views/Shop/Root/Product/PageProductDetail/ProductInfo/ProductInfo.js
-./src/containers/views/Shop/Root/Product/PageProductDetail/ProductInfo/ProductGallery/ProductGallery.js
-./src/containers/views/Shop/Root/Product/PageProductDetail/ProductInfo/AddToCartForm/AddToCartForm.js
-./src/containers/views/Shop/Root/Product/Product.js
 
-harm minicart
-harm product needs variant selector and wishlist DetailsSection logic up
-harm
+## Links
+[Demo Sunrise website](https://sunrise-spa.now.sh/)
+
+[Sunrise frontend](https://docs.commercetools.com/sdk/sunrise)
+
+[Sunrise CommerceTools demo data](https://docs.commercetools.com/sdk/sunrise-data)
+
+
+### Start guide
+
+- add .env file into project with CommerceTools env variables
+  - every key in Vue 3 have to start with "VUE_APP_" prefix to be loaded during runing *vue-cli-service*
+
+
+```bash
+yarn serve
+```

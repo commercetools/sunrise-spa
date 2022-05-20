@@ -1,42 +1,47 @@
 const getEnv = (env) => {
   return typeof global?.Cypress?.env === 'function'
-    ? global.Cypress.env(env)
+    ? global?.Cypress?.env(env)
     : process.env[env];
 };
+
+const VUE_APP_CTP_PROJECT_KEY = getEnv('VUE_APP_CTP_PROJECT_KEY') || 'sunrise-spa'
+
 let localConfig = {};
+
 if (getEnv('VUE_APP_LOCAL_SUNRISE_CONFIG')) {
   localConfig = require(process.env
     .VUE_APP_LOCAL_SUNRISE_CONFIG).default;
 }
+
 const config = {
   ct: {
     auth: {
       host:
-        getEnv('VUE_APP_CT_AUTH_HOST') ||
+        getEnv('VUE_APP_CTP_AUTH_URL') ||
         'https://auth.europe-west1.gcp.commercetools.com',
       projectKey:
-        getEnv('VUE_APP_CT_PROJECT_KEY') || 'sunrise-spa',
+         VUE_APP_CTP_PROJECT_KEY,
       credentials: {
         clientId:
-          getEnv('VUE_APP_CT_CLIENT_ID') ||
+          getEnv('VUE_APP_CTP_CLIENT_ID') ||
           '1mnlpBq-fHCCkAzmSXxNBB37',
         clientSecret:
-          getEnv('VUE_APP_CT_CLIENT_SECRET') ||
+          getEnv('VUE_APP_CTP_CLIENT_SECRET') ||
           'WS9hXm6dKyqyuLOHciL6jkbCbFHrDSOL',
       },
       scope:
-        getEnv('VUE_APP_CT_SCOPE') ||
-        'manage_my_orders:sunrise-spa ' +
-          'manage_my_profile:sunrise-spa ' +
-          'manage_my_payments:sunrise-spa ' +
-          'view_published_products:sunrise-spa ' +
-          'view_categories:sunrise-spa ' +
-          'manage_my_shopping_lists:sunrise-spa ' +
-          'manage_orders:sunrise-spa ' +
-          'create_anonymous_token:sunrise-spa',
+        getEnv('VUE_APP_CTP_SCOPES') ||
+        `manage_my_orders:${VUE_APP_CTP_PROJECT_KEY} ` +
+          `manage_my_profile:${VUE_APP_CTP_PROJECT_KEY} ` +
+          `manage_my_payments:${VUE_APP_CTP_PROJECT_KEY} ` +
+          `view_published_products:${VUE_APP_CTP_PROJECT_KEY} ` +
+          `view_categories:${VUE_APP_CTP_PROJECT_KEY} ` +
+          `manage_my_shopping_lists:${VUE_APP_CTP_PROJECT_KEY} ` +
+          `manage_orders:${VUE_APP_CTP_PROJECT_KEY} ` +
+          `create_anonymous_token:${VUE_APP_CTP_PROJECT_KEY}`,
     },
     api:
-      getEnv('VUE_APP_CT_API_HOST') ||
+      getEnv('VUE_APP_CTP_API_URL') ||
       'https://api.europe-west1.gcp.commercetools.com',
   },
   languages: {
@@ -168,6 +173,8 @@ const config = {
   variantInProductName: ['size'],
   ...localConfig,
 };
+
 // eslint-disable-next-line no-console
-console.log('using config:', config);
+console.log('Used config: ', config);
+
 export default config;
