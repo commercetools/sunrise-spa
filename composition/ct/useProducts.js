@@ -280,7 +280,16 @@ const useProducts = ({
       if (!data) {
         return;
       }
-      setProducts(data.productProjectionSearch.results);
+      //missing data will break sunrise
+      setProducts(
+        data.productProjectionSearch.results.map(
+          (item) => ({
+            ...item,
+            name: item.name || 'Product name missing',
+            slug: item.slug || 'product slug missing',
+          })
+        )
+      );
       setTotal(data.productProjectionSearch.total);
     },
     skip,

@@ -19,6 +19,12 @@ const saveCustomerState = (c) => {
   customerGlobal.setValue(c);
 };
 const createResetToken = basic.createResetToken;
+const refreshUser = () =>
+  basic
+    .refreshUser()
+    .then((result) =>
+      saveCustomerState(result.data.me.customer)
+    );
 const updateUser = ({ firstName, lastName, email }) =>
   basic
     .updateUser({
@@ -146,6 +152,7 @@ function useCustomerTools() {
     useMyOrder,
     returnItems,
     gotoResetToken,
+    refreshUser,
     updateMyCustomerPassword,
   };
 }
