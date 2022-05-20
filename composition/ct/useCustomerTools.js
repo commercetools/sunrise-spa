@@ -8,6 +8,24 @@ export const loginVars = (email, password) => ({
     password,
   },
 });
+const customerFields = `
+customerId: id
+custom {
+  customFieldsRaw {
+    name
+    value
+  }
+}
+version
+email
+firstName
+lastName
+version
+customerNumber		
+customerGroupRef {
+  customerGroupId: id
+}
+`;
 const createResetToken = (email) =>
   apolloClient.mutate({
     mutation: gql`
@@ -76,15 +94,7 @@ const signup = (form) => {
       ) {
         customerSignMeUp(draft: $draft) {
           customer {
-            customerId: id
-            firstName
-            lastName
-            email
-            version
-            customerNumber
-            customerGroupRef {
-              customerGroupId: id
-            }
+            ${customerFields}
           }
         }
       }
@@ -99,6 +109,18 @@ const signup = (form) => {
     },
   });
 };
+const refreshUser = () =>
+  apolloClient.query({
+    query: gql`
+      query queryMyCustomer() {
+        me {
+          customer {
+            ${customerFields}
+          }
+        }
+      }
+    `,
+  });
 const updateUser = ({
   version,
   firstName,
@@ -115,15 +137,7 @@ const updateUser = ({
           version: $version
           actions: $actions
         ) {
-          customerId: id
-          version
-          email
-          firstName
-          lastName
-          version
-          customerGroupRef {
-            customerGroupId: id
-          }
+          ${customerFields}
         }
       }
     `,
@@ -144,29 +158,7 @@ const login = (email, password) =>
       ) {
         customerSignMeIn(draft: $draft) {
           customer {
-            customerId: id
-            # @todo: nice if we can actually show the points in the UI but
-            #  how to get them?
-            # Now you can see the points increased here:
-            #   https://impex.europe-west1.gcp.commercetools.com/playground?endpoint=customers&method=read&query-sort-order=asc
-            # Would be nice if there is any documentation on how to get
-            # this custom value in graphql but alas there is none
-            # custom {
-            #   typeRef {
-            #     customFieldsRaw() {
-            #       name,
-            #       value
-            #     }
-            #   }
-            # }
-            firstName
-            lastName
-            email
-            customerNumber
-            version
-            customerGroupRef {
-              customerGroupId: id
-            }
+            ${customerFields}
           }
         }
       }
@@ -190,15 +182,7 @@ const updateMyCustomerPassword = ({
           currentPassword: $currentPassword
           newPassword: $newPassword
         ) {
-          customerId: id
-          firstName
-          lastName
-          email
-          customerNumber
-          version
-          customerGroupRef {
-            customerGroupId: id
-          }
+          ${customerFields}
         }
       }
     `,
@@ -220,4 +204,5 @@ export default {
   returnItems,
   updateMyCustomerPassword,
   login,
+  refreshUser,
 };
