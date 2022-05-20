@@ -11,7 +11,9 @@
           >{{ customer.firstName }}
           {{ customer.lastName }}</strong
         >
-        ({{ t('notYou') }} -
+        <br />Your customer points: {{ points }}<br />
+        ({{ t('notYou') }}
+        -
         <a
           href="javascript:;"
           @click.prevent="logout"
