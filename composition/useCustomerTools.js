@@ -20,10 +20,11 @@ const saveCustomerState = (c) => {
 };
 const createResetToken = basic.createResetToken;
 const refreshUser = () =>
-  basic.refreshUser().then((result) => {
-    console.log('refresh user:', result);
-    // saveCustomerState(result.data.updateMyCustomer);
-  });
+  basic
+    .refreshUser()
+    .then((result) =>
+      saveCustomerState(result.data.me.customer)
+    );
 const updateUser = ({ firstName, lastName, email }) =>
   basic
     .updateUser({

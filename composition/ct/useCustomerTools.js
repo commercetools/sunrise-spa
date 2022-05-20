@@ -111,8 +111,9 @@ const signup = (form) => {
 };
 const refreshUser = () =>
   apolloClient.query({
+    fetchPolicy: 'network-only',
     query: gql`
-      query queryMyCustomer() {
+      query queryMyCustomer {
         me {
           customer {
             ${customerFields}

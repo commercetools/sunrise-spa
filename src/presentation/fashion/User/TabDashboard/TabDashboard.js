@@ -1,11 +1,15 @@
 import { useI18n } from 'vue-i18n';
 import useCustomerTools from 'hooks/useCustomerTools';
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 
 export default {
   setup() {
     const { t } = useI18n();
-    const { customer, logout } = useCustomerTools();
+    const { customer, logout, refreshUser } =
+      useCustomerTools();
+    onMounted(() => {
+      refreshUser();
+    });
     const points = computed(
       () =>
         customer?.value?.custom?.customFieldsRaw.find(
