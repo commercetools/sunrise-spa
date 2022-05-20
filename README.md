@@ -2,7 +2,7 @@
 
 ## Links
 
-[Demo Sunrise website](https://sunrise-spa.now.sh/)
+[Demo Sunrise website](https://demo.commercetools.com/)
 
 [Sunrise frontend](https://docs.commercetools.com/sdk/sunrise)
 
@@ -10,8 +10,7 @@
 
 ### Start guide
 
-- add .env file into project with CommerceTools env variables
-  - every key in Vue 3 have to start with "VUE*APP*" prefix to be loaded during runing _vue-cli-service_
+If you want to use the default merchant center project there is no need to add a `.env` file, if you want to connect to your own merchant center project you need to [set this up](https://github.com/commercetools/sunrise-spa/tree/development/Docs#Environment-variables)
 
 ```bash
 yarn start

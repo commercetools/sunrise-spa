@@ -163,7 +163,3 @@ VUE_APP_CT_API_HOST
 `VUE_APP_PAGE_SIZE` defines [how many products](https://github.com/commercetools/sunrise-spa/blob/f3114ca18ec192188476fa1ddf0c810c60e3f237/src/components/productoverview/ProductList/ProductList.js#L139) and [how many orders](https://github.com/commercetools/sunrise-spa/blob/a2b1759f0fdd26e076c0a6c2d9ce48e1c8f0d4d5/src/components/useraccount/TabOrderList/TabOrderList.js#L21) to show.
 
 `VUE_APP_GOOGLE_MAPS_API_KEY` is the google maps api key used for the [store selector](https://github.com/commercetools/sunrise-spa/blob/bcbe407c79e63adb640ec18e0211dd9dced195a9/src/main.js#L24).
-
-The [following values](https://github.com/commercetools/sunrise-spa/blob/a2b1759f0fdd26e076c0a6c2d9ce48e1c8f0d4d5/src/components/checkout/PaymentMethod/Adyen/Adyen.js#L7-L11) are used for Adyen payment configuration.
-
-`VUE_APP_MENU_TYPE` can be used to tell the compiler to use [a different menu](https://github.com/commercetools/sunrise-spa/blob/a19ec0b61f1ddbf9c1f7e0253f8d0bebae3f3317/src/components/header/CategoriesMenu/index.js#L2-L5).
