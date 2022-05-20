@@ -145,6 +145,20 @@ const login = (email, password) =>
         customerSignMeIn(draft: $draft) {
           customer {
             customerId: id
+            # @todo: nice if we can actually show the points in the UI but
+            #  how to get them?
+            # Now you can see the points increased here:
+            #   https://impex.europe-west1.gcp.commercetools.com/playground?endpoint=customers&method=read&query-sort-order=asc
+            # Would be nice if there is any documentation on how to get
+            # this custom value in graphql but alas there is none
+            # custom {
+            #   typeRef {
+            #     customFieldsRaw() {
+            #       name,
+            #       value
+            #     }
+            #   }
+            # }
             firstName
             lastName
             email
