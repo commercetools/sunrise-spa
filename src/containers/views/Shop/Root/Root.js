@@ -6,9 +6,9 @@ import {
   shallowRef,
   watch,
 } from 'vue';
-import { LOCALE } from '../../../../constants';
-import { LOCATION } from '../../../../constants';
-import { getValue } from '../../../../lib';
+import { LOCALE } from '@/constants';
+import { LOCATION } from '@/constants';
+import { getValue } from '@/lib';
 import i18n from '../../../../i18n';
 import useMiniCart from 'hooks/useMinicart';
 import MiniCart from 'presentation/Header/MiniCart/MiniCart.vue';

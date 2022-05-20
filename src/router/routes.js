@@ -1,6 +1,6 @@
 import Root from 'containers/views/Shop/Root/Root.vue';
-import harmRoutes from './harm';
-import felipeRoutes from './felipe';
+import basicRoutes from './basic';
+import extendedRoutes from './extended';
 import config from '../../sunrise.config';
 export default [
   {
@@ -11,6 +11,6 @@ export default [
     )})?`,
     name: 'root',
     component: Root,
-    children: [...harmRoutes, ...felipeRoutes],
+    children: [...extendedRoutes, ...basicRoutes],
   },
 ];

@@ -3,7 +3,7 @@
 <i18n src="./Home.txt" lang="yaml"></i18n>
 
 <template>
-  <span>
+  <div>
     <Banner />
     <div class="banner-area pt-30">
       <div class="custom-container">
@@ -187,5 +187,5 @@
         </div>
       </div>
     </div>
-  </span>
+  </div>
 </template>
