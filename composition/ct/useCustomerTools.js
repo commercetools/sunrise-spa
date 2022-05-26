@@ -8,6 +8,24 @@ export const loginVars = (email, password) => ({
     password,
   },
 });
+const customerFields = `
+customerId: id
+custom {
+  customFieldsRaw {
+    name
+    value
+  }
+}
+version
+email
+firstName
+lastName
+version
+customerNumber		
+customerGroupRef {
+  customerGroupId: id
+}
+`;
 const createResetToken = (email) =>
   apolloClient.mutate({
     mutation: gql`
@@ -76,15 +94,7 @@ const signup = (form) => {
       ) {
         customerSignMeUp(draft: $draft) {
           customer {
-            customerId: id
-            firstName
-            lastName
-            email
-            version
-            customerNumber
-            customerGroupRef {
-              customerGroupId: id
-            }
+            ${customerFields}
           }
         }
       }
@@ -99,6 +109,19 @@ const signup = (form) => {
     },
   });
 };
+const refreshUser = () =>
+  apolloClient.query({
+    fetchPolicy: 'network-only',
+    query: gql`
+      query queryMyCustomer {
+        me {
+          customer {
+            ${customerFields}
+          }
+        }
+      }
+    `,
+  });
 const updateUser = ({
   version,
   firstName,
@@ -115,15 +138,7 @@ const updateUser = ({
           version: $version
           actions: $actions
         ) {
-          customerId: id
-          version
-          email
-          firstName
-          lastName
-          version
-          customerGroupRef {
-            customerGroupId: id
-          }
+          ${customerFields}
         }
       }
     `,
@@ -144,15 +159,7 @@ const login = (email, password) =>
       ) {
         customerSignMeIn(draft: $draft) {
           customer {
-            customerId: id
-            firstName
-            lastName
-            email
-            customerNumber
-            version
-            customerGroupRef {
-              customerGroupId: id
-            }
+            ${customerFields}
           }
         }
       }
@@ -176,15 +183,7 @@ const updateMyCustomerPassword = ({
           currentPassword: $currentPassword
           newPassword: $newPassword
         ) {
-          customerId: id
-          firstName
-          lastName
-          email
-          customerNumber
-          version
-          customerGroupRef {
-            customerGroupId: id
-          }
+          ${customerFields}
         }
       }
     `,
@@ -206,4 +205,5 @@ export default {
   returnItems,
   updateMyCustomerPassword,
   login,
+  refreshUser,
 };
