@@ -88,42 +88,39 @@ After entering old and new passwords and clicking 'Change Password' it runs the 
 
 ## Discount codes
 
-Reusable component that allows to show and remove discount codes in 'CartLike' components like cart or order.
-
-Component takes two parameters:
-
-- **CartLike (Object)**: Object that contains cart or order details
-- **editable (Boolean)**: when set `true` allows to remove discount codes, when set `false` it has read-only view
-
-In order to apply a discount code in cart, [AddDiscountCodeForm](https://github.com/commercetools/sunrise-spa/tree/master/src/components/cartdetail/AddDiscountCodeForm) is used.
+In order to apply a discount code in cart, [AddDiscountCodeForm](https://github.com/commercetools/sunrise-spa/tree/247dce6d042f23477a1eea24de3089451dfcf168/src/presentation/fashion/CartDetail/AddDiscountCodeForm) will call [applyDiscount](https://github.com/commercetools/sunrise-spa/blob/247dce6d042f23477a1eea24de3089451dfcf168/composition/useCartMutation.js#L145).
 
 ## Forgot password
 
 Form to reset password at the login page.
 
-When the user [submits the email form](https://github.com/commercetools/sunrise-spa/blob/3a435ec1ddaa9641310551fd7bf916a479bb81df/src/components/login/ForgotPassword/ForgotPassword.vue#L18) a token is [requested](https://github.com/commercetools/sunrise-spa/blob/3a435ec1ddaa9641310551fd7bf916a479bb81df/src/components/login/ForgotPassword/ForgotPassword.js#L24). You need `manage_customers` scope to ask for this token. In a production environment this request would be made by your server and then that token will be used to email a reset password url to the client to reset their password. In the demo the reset password url will be opened when [we got the token](https://github.com/commercetools/sunrise-spa/blob/3a435ec1ddaa9641310551fd7bf916a479bb81df/src/components/login/ForgotPassword/ForgotPassword.js#L26).
+When the user [ForgotPassword](https://github.com/commercetools/sunrise-spa/tree/247dce6d042f23477a1eea24de3089451dfcf168/src/presentation/fashion/Login/ForgotPassword) creates a [reset token](https://github.com/commercetools/sunrise-spa/blob/247dce6d042f23477a1eea24de3089451dfcf168/src/presentation/fashion/Login/ForgotPassword/ForgotPassword.js#L21). You need `manage_customers` scope to ask for this token. In a production environment this request would be made by your server and then that token will be used to email a reset password url to the client to reset their password. In the demo the reset password url will be opened when [we got the token](https://github.com/commercetools/sunrise-spa/blob/247dce6d042f23477a1eea24de3089451dfcf168/src/presentation/fashion/Login/ForgotPassword/ForgotPassword.js#L23-L26).
 
-In the [reset password route](https://github.com/commercetools/sunrise-spa/blob/64a8e7191c64a91e7b103901e4ec3af893782794/src/router.js#L84-L90) a token is stored in a url parameter. When the user [submits the new password](https://github.com/commercetools/sunrise-spa/blob/bac3cd78ffc576523b78c62895becba7d0e8410f/src/components/login/ResetPassword/ResetPassword.vue#L17) that token will be used to [reset the password](https://github.com/commercetools/sunrise-spa/blob/3a435ec1ddaa9641310551fd7bf916a479bb81df/src/components/login/ResetPassword/ResetPassword.js#L22) and when the password is successfully reset the user will be [re routed](https://github.com/commercetools/sunrise-spa/blob/3a435ec1ddaa9641310551fd7bf916a479bb81df/src/components/login/ResetPassword/ResetPassword.js#L35) to the login page.
+In the [reset password route](https://github.com/commercetools/sunrise-spa/blob/247dce6d042f23477a1eea24de3089451dfcf168/src/router/routes.js#L79-L87) a token is stored in a url parameter. When the user [submits the new password](https://github.com/commercetools/sunrise-spa/blob/247dce6d042f23477a1eea24de3089451dfcf168/src/presentation/fashion/User/ResetPassword/ResetPassword.vue#L20) that token will be used to [reset the password](https://github.com/commercetools/sunrise-spa/blob/247dce6d042f23477a1eea24de3089451dfcf168/src/presentation/fashion/User/ResetPassword/ResetPassword.js#L33-L37) and when the password is successfully reset the user will be [re routed](https://github.com/commercetools/sunrise-spa/blob/247dce6d042f23477a1eea24de3089451dfcf168/composition/useCustomerTools.js#L83-L88) to the login page.
 
 ## Pagination
 
-Reusable component that allows to have pages, for example in products list or orders.
+Reusable hook/composition api that allows to have pages, for example in products list or orders.
 
-It takes [3 parameters](https://github.com/commercetools/sunrise-spa/blob/89f03bf67bd06b69e74064f433b7c7aec89d04cf/src/components/common/Pagination/Pagination.js#L2):
+It takes [2 parameters](https://github.com/commercetools/sunrise-spa/blob/247dce6d042f23477a1eea24de3089451dfcf168/composition/usePaging.js#L14):
 
 - **pageSize**: number of items per page
-- **total**: number of total items
 - **page**: current page number
 
-Component also [emits](https://github.com/commercetools/sunrise-spa/blob/master/src/components/common/Pagination/Pagination.js#L26-L34) `pagechanged` with changed current page as data so a consuming component can [listen to this event](https://github.com/commercetools/sunrise-spa/blob/cc366c2d55c00d342a0f17fbf21e83c0091ff127/src/components/productoverview/ProductList/ProductList.vue#L40) and [act accordingly](https://github.com/commercetools/sunrise-spa/blob/f3114ca18ec192188476fa1ddf0c810c60e3f237/src/components/productoverview/ProductList/ProductList.js#L190).
+The component takes [3 parameters](https://github.com/commercetools/sunrise-spa/blob/247dce6d042f23477a1eea24de3089451dfcf168/src/presentation/fashion/components/Pagination/Pagination.js#L7-L23)
+
+- **pageSize**: number of items per page
+- **page**: current page number
+- **total**: total number of items
+- **setPage**: function to change current page
 
 ## Return items
 
 Page shows order items that can be returned.
 
-This can only work with `manage_orders` scope permission in the API client.
+This can only work with [manage_orders](https://github.com/commercetools/sunrise-spa/blob/247dce6d042f23477a1eea24de3089451dfcf168/composition/useAccessRules.js#L23-L34) scope permission in the API client.
 
-It sends all selected items with the [mutation](https://github.com/commercetools/sunrise-spa/blob/master/src/components/useraccount/TabReturn/TabReturn.js#L35-L50). After a successful update it will [show a modal](https://github.com/commercetools/sunrise-spa/blob/master/src/components/useraccount/TabReturn/TabReturn.js#L53) informing the user that the order was updated successfully.
+It sends all selected items with the [mutation](https://github.com/commercetools/sunrise-spa/blob/247dce6d042f23477a1eea24de3089451dfcf168/composition/useCustomerTools.js#L102-L103). After a successful update it will [evict the apollo cache](https://github.com/commercetools/sunrise-spa/blob/247dce6d042f23477a1eea24de3089451dfcf168/composition/useCustomerTools.js#L104-L106) and navigate to the [order detail](https://github.com/commercetools/sunrise-spa/blob/247dce6d042f23477a1eea24de3089451dfcf168/composition/useCustomerTools.js#L107-L110).
 
 ## Environment variables
 
@@ -142,6 +139,6 @@ VUE_APP_CT_API_HOST
 
 `CT_CLIENT_ID` and `CT_CLIENT_SECRET` are the client id and secret from the api client used for cypress end to end testing.
 
-`VUE_APP_PAGE_SIZE` defines [how many products](https://github.com/commercetools/sunrise-spa/blob/f3114ca18ec192188476fa1ddf0c810c60e3f237/src/components/productoverview/ProductList/ProductList.js#L139) and [how many orders](https://github.com/commercetools/sunrise-spa/blob/a2b1759f0fdd26e076c0a6c2d9ce48e1c8f0d4d5/src/components/useraccount/TabOrderList/TabOrderList.js#L21) to show.
+`VUE_APP_PAGE_SIZE` sets [DEFAULT_PAGE_SIZE](https://github.com/commercetools/sunrise-spa/blob/247dce6d042f23477a1eea24de3089451dfcf168/src/constants.js#L6-L8) that is used in page size for product list and order list.
 
-`VUE_APP_GOOGLE_MAPS_API_KEY` is the google maps api key used for the [store selector](https://github.com/commercetools/sunrise-spa/blob/bcbe407c79e63adb640ec18e0211dd9dced195a9/src/main.js#L24).
+`VUE_APP_GOOGLE_MAPS_API_KEY` configures the google maps [api key](https://github.com/commercetools/sunrise-spa/blob/247dce6d042f23477a1eea24de3089451dfcf168/src/main.js#L19) used for the [store selector](https://github.com/commercetools/sunrise-spa/blob/247dce6d042f23477a1eea24de3089451dfcf168/src/presentation/fashion/Stores/StoreLocator.vue#L9-L20).
