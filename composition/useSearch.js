@@ -5,14 +5,20 @@ const useSearch = () => {
   const route = useRoute();
   const router = useRouter();
   const search = computed(() => route?.query?.q || '');
-  const setSearch = (q) =>
-    router.push({
+  const setSearch = (q) => {
+    const params = {
+      categorySlug: route?.params?.categorySlug || 'all',
+    };
+    return router.push({
       ...route,
+      name: 'products',
       query: {
         ...route.query,
         q,
       },
+      params,
     });
+  };
 
   return {
     search,

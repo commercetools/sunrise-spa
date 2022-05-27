@@ -5,7 +5,7 @@ import LoginButton from './LoginButton/LoginButton.vue';
 import Selector from './Selector/Selector.vue';
 import CategoriesMenu from 'presentation/components/CategoriesMenu';
 import { useI18n } from 'vue-i18n';
-import { computed, ref } from 'vue';
+import { computed, ref, shallowRef } from 'vue';
 import useSearch from 'hooks/useSearch';
 import useLocale from 'hooks/useLocale';
 import useLocation from 'hooks/useLocation';
@@ -20,7 +20,8 @@ export default {
     const locale = useLocale();
     const location = useLocation();
     const { cart, exist } = useCart();
-    const { search, setSearch } = useSearch();
+    const { search: s, setSearch } = useSearch();
+    const search = shallowRef(s.value);
     const totalCartItems = computed(() =>
       exist.value && cart.value
         ? cart.value.lineItems
