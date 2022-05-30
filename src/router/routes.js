@@ -5,6 +5,7 @@ import Footer from 'presentation/Footer/Footer.vue';
 import Products from 'presentation/ProductList/ProductList.vue';
 import Product from 'presentation/PageProductDetail/PageProductDetail.vue';
 import Checkout from 'presentation/PageCheckout/PageCheckout.vue';
+import Pay from 'presentation/Pay/Pay.vue';
 import Login from 'presentation/Login/Login.vue';
 import User from 'presentation/User/User.vue';
 import TabDashboard from 'presentation/User/TabDashboard/TabDashboard.vue';
@@ -54,6 +55,16 @@ export default [
         // meta: { requiresCart },
         components: {
           default: Checkout,
+          header: Header,
+          footer: Footer,
+        },
+      },
+      {
+        path: 'pay/:method',
+        name: 'pay',
+        // meta: { requiresCart },
+        components: {
+          default: Pay,
           header: Header,
           footer: Footer,
         },

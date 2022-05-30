@@ -1,0 +1,6 @@
+en:
+  continueShopping: "Continue Shopping"
+  thankYou: "Thank you for your order!"
+de:
+  continueShopping: "Weiter einkaufen"
+  thankYou: "Vielen Dank für Ihre Bestellung!"

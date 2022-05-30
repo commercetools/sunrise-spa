@@ -1,6 +1,4 @@
-import org, {
-  usePaymentMutation,
-} from './ct/useCartMutation';
+import org, { createPayment } from './ct/useCartMutation';
 import useCurrency from './useCurrency';
 import useLocation from './useLocation';
 import {
@@ -17,7 +15,6 @@ import {
 import useSelectedChannel from './useSelectedChannel';
 import { getValue } from '../src/lib';
 import { apolloClient, cache } from '../src/apollo';
-import useAccessRules from './useAccessRules';
 export {
   addLineItem,
   changeCartLineItemQuantity,
@@ -40,7 +37,6 @@ export const useCartActions = () => {
   const { location } = useLocation();
   const { channel } = useSelectedChannel();
   const currency = useCurrency();
-  const { createPayment } = useAccessRules();
   const debounce = (fn, time = 200) => {
     const current = {};
     const check = { current };
@@ -84,58 +80,57 @@ export const useCartActions = () => {
 
   const setShipping = (address) =>
     mutateCart(setShippingAddress(address));
-  const createMyOrder = ({
-    billingAddress,
-    shippingAddress,
-    cart,
-    paymentMethod,
-  }) => {
-    return Promise.resolve()
-      .then(() => {
-        if (createPayment.value) {
-          const createPayment = usePaymentMutation({
-            currency: currency.value,
-            centAmount: cart.value?.totalPrice?.centAmount,
-            method: paymentMethod.value,
-          });
-          return createPayment();
-        }
-        return { id: false };
-      })
-      .then(({ id }) => {
-        const actions = [
-          setBillingAddress({
-            ...getValue(billingAddress),
-            country: location.value,
-          }),
-          setShippingAddress({
-            ...(getValue(shippingAddress) ||
-              getValue(billingAddress)),
-            country: location.value,
-          }),
-        ];
-        if (id) {
-          actions.push({
+
+  const createMyOrder = ({ method, cart }) => {
+    return createPayment({
+      currency: currency.value,
+      centAmount: cart?.totalPrice?.centAmount,
+      method,
+    })
+      .then(({ id }) =>
+        mutateCart([
+          {
             addPayment: {
               payment: {
-                typeId: 'payment',
                 id,
               },
             },
-          });
-        }
-        return mutateCart(actions)
-          .then(({ data }) => {
-            const { id, version } = data.updateMyCart;
-            return apolloClient.mutate(
-              createMyOrderFromCart(id, version)
-            );
-          })
-          .then(() => {
-            cache.evict({ id: 'activeCart' });
-            cache.gc();
-          });
+          },
+        ])
+      )
+      .then(({ data }) => {
+        const { id, version } = data.updateMyCart;
+        return apolloClient.mutate(
+          createMyOrderFromCart(id, version)
+        );
+      })
+      .then(() => {
+        cache.evict({ id: 'activeCart' });
+        cache.gc();
       });
+  };
+
+  const setAddressForCart = ({
+    billingAddress,
+    shippingAddress,
+  }) => {
+    return Promise.resolve().then(() => {
+      const actions = [
+        setBillingAddress({
+          ...getValue(billingAddress),
+          country: location.value,
+        }),
+        setShippingAddress({
+          ...(getValue(shippingAddress) ||
+            getValue(billingAddress)),
+          country: location.value,
+        }),
+      ];
+      return mutateCart(actions).then(() => {
+        cache.evict({ id: 'activeCart' });
+        cache.gc();
+      });
+    });
   };
 
   return {
@@ -149,5 +144,6 @@ export const useCartActions = () => {
     setBillingAddress: setBilling,
     setShippingAddress: setShipping,
     createMyOrderFromCart: createMyOrder,
+    setAddressForCart,
   };
 };
