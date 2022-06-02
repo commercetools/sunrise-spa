@@ -50,7 +50,7 @@ Even though you can completely change all logic of the menu the [products route]
 
 ## Payment
 
-Payments are not fully implemented yet, I will save the cart and then navigate to a payment url that will create a payment entry for the cart and then create an order from the cart.
+Payment methods can be defined [here](https://github.com/commercetools/sunrise-spa/blob/171950e08fe0143a7b77a23a549d0b87780a3be9/src/presentation/fashion/PageCheckout/OrderOverview/PaymentMethod/PaymentMethod.js#L3-L14) after "Place Order" is clicked the cart will update with the addresses and then navigate to the [pay](https://github.com/commercetools/sunrise-spa/blob/171950e08fe0143a7b77a23a549d0b87780a3be9/src/presentation/fashion/PageCheckout/PageCheckout.js#L43-L46) route. This is handled in pay.js where it currently just [creates the order from cart](https://github.com/commercetools/sunrise-spa/blob/171950e08fe0143a7b77a23a549d0b87780a3be9/src/presentation/fashion/Pay/Pay.js#L20-L23) passing a method, this method is used to create a [payment](https://github.com/commercetools/sunrise-spa/blob/171950e08fe0143a7b77a23a549d0b87780a3be9/composition/useCartMutation.js#L85-L89), then [add the payment to the cart](https://github.com/commercetools/sunrise-spa/blob/171950e08fe0143a7b77a23a549d0b87780a3be9/composition/useCartMutation.js#L91-L99) and finally [create an order](https://github.com/commercetools/sunrise-spa/blob/171950e08fe0143a7b77a23a549d0b87780a3be9/composition/useCartMutation.js#L103-L105) from this cart.
 
 ## Product Item
 

@@ -10,41 +10,26 @@
         }}</span>
       </div>
     </div>
-    <div class="payment-method">
+
+    <div
+      class="payment-method"
+      v-for="method in paymentMethods"
+      :key="method.name"
+    >
       <div class="pay-top sin-payment">
         <input
-          id="payment_method_1"
+          :id="method.name"
           v-model="pm"
           class="input-radio"
           type="radio"
-          value="card"
+          :value="method.name"
           name="payment_method"
         />
-        <label for="payment_method_1"
-          >{{ t('creditCard') }}
+        <label :for="method.name"
+          >{{ t(method.description) }}
           <img
             class="payment-method-img"
-            :src="
-              require('presentation/assets/img/CREDIT CARDS.png')
-            "
-        /></label>
-      </div>
-      <div class="pay-top sin-payment">
-        <input
-          id="payment-method-2"
-          v-model="pm"
-          class="input-radio"
-          type="radio"
-          value="paypal"
-          name="payment_method"
-        />
-        <label for="payment-method-2"
-          >PayPal
-          <img
-            class="payment-method-img"
-            :src="
-              require('presentation/assets/img/PayPal.png')
-            "
+            :src="getImgUrl(method.image)"
         /></label>
       </div>
     </div>

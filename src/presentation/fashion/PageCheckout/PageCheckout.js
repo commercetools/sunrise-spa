@@ -20,7 +20,6 @@ export default {
     const shippingMethod = shallowRef(null);
     const billingAddress = shallowRef(null);
     const shippingAddress = shallowRef(null);
-    const orderComplete = shallowRef(false);
     const validBillingForm = shallowRef(false);
     const validShippingForm = shallowRef(true);
     const paymentMethod = shallowRef('card');
@@ -36,27 +35,25 @@ export default {
       }
       showError.value = false;
       return cartTools
-        .createMyOrderFromCart({
+        .setAddressForCart({
           billingAddress,
           shippingAddress,
-          cart,
-          paymentMethod,
         })
-        .then(
-          () => (orderComplete.value = true),
-          (e) => {
-            error.value = e;
-          }
-        );
+        .then(() => {
+          router.push({
+            name: 'pay',
+            params: { method: paymentMethod.value },
+          });
+        })
+        .catch((e) => {
+          error.value = e;
+        });
     };
-    watch(
-      [cart, loading, orderComplete],
-      ([cart, loading, orderComplete]) => {
-        if (!orderComplete && !cart && !loading) {
-          router.replace({ path: '/' });
-        }
+    watch([cart, loading], ([cart, loading]) => {
+      if (!cart && !loading) {
+        router.replace({ path: '/' });
       }
-    );
+    });
     const setValidBillingForm = (valid) => {
       validBillingForm.value = valid;
     };
@@ -86,7 +83,6 @@ export default {
       shippingMethod,
       billingAddress,
       shippingAddress,
-      orderComplete,
       validBillingForm,
       validShippingForm,
       showError,
