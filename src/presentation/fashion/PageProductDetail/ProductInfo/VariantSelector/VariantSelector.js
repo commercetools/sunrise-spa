@@ -92,7 +92,7 @@ export default {
       newScore.forEach((v, sku) => {
         const newV = { ...v };
         newV.score =
-          v[label] === value
+          String(v[label]) === value
             ? 100
             : v[label] === userSet.value[label]
             ? 20
