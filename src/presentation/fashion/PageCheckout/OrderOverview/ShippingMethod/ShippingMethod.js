@@ -16,7 +16,7 @@ export default {
   },
   setup(props) {
     const { total, loading, error, shippingMethods } =
-      useShippingMethods();
+      useShippingMethods(props.cart.cartId);
     const selectedShippingMethod = ref(
       props.cart?.shippingInfo?.shippingMethod?.methodId
     );
@@ -45,7 +45,7 @@ export default {
     };
     const price = (shippingMethod) => {
       //zone rates not for this country will be filtered out by graphql
-      //  shipping rates are not.
+      //  shipping rates, not sure
       const rate = shippingMethod?.zoneRates
         ?.flatMap(({ shippingRates }) => shippingRates)
         .find(({ isMatching }) => isMatching);

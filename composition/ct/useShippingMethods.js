@@ -2,17 +2,8 @@ import gql from 'graphql-tag';
 import useQueryFacade from '../useQueryFacade';
 import { useState } from 'react';
 const query = gql`
-  query shippingMethods(
-    $currency: Currency!
-    $country: Country!
-    $state: String
-    $locale: Locale!
-  ) {
-    shippingMethodsByLocation(
-      currency: $currency
-      country: $country
-      state: $state
-    ) {
+  query shippingMethods($id: String!, $locale: Locale!) {
+    shippingMethodsByCart(id: $id) {
       methodId: id
       name
       localizedDescription(locale: $locale)
@@ -36,25 +27,19 @@ const query = gql`
 
 //this is the React api useQuery(query,options)
 // https://www.apollographql.com/docs/react/api/react/hooks/#function-signature
-const useShippingMethods = ({
-  locale,
-  currency,
-  country,
-}) => {
+const useShippingMethods = ({ locale, id }) => {
   const [shippingMethods, setShippingMethods] = useState();
 
   const { loading, error } = useQueryFacade(query, {
     variables: {
-      currency,
-      country,
-      // state,
+      id,
       locale,
     },
     onCompleted: (data) => {
       if (!data) {
         return;
       }
-      setShippingMethods(data.shippingMethodsByLocation);
+      setShippingMethods(data.shippingMethodsByCart);
     },
   });
   return { shippingMethods, loading, error };
