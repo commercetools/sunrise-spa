@@ -76,7 +76,7 @@ const productRoute = (lineItem) => {
   };
 };
 const displayedImageUrl = (variant) => {
-  return variant?.images?.[0].url;
+  return variant?.images?.[0]?.url;
 };
 const taxes = (cart) => {
   const { taxedPrice } = cart;
