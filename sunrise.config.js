@@ -11,8 +11,8 @@ const config = {
       host: "https://api.europe-west1.gcp.commercetools.com",
       projectKey: "sunrise-spa",
       credentials: {
-        clientId: "dX-gnzl-razMgFca7TZHdaHs",
-        clientSecret: "noTN9jQWanauFLfs4iP4aJ_Qa_Ob9O-B",
+        clientId: "LbKkM2CUaeqND4Sb9d45Q7RS",
+        clientSecret: "5IZ8y4RPYDe8_zGJqrAUDjPOD9LMfWSX",
       },
       scopes: [
         "manage_my_orders:sunrise-spa " +
