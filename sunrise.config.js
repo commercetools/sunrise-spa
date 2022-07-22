@@ -1,12 +1,11 @@
 // eslint-disable-next-line no-console
-console.log("using host:", process.env.VUE_APP_CT_API_HOST);
 let localConfig = {};
 if (process.env.VUE_APP_LOCAL_SUNRISE_CONFIG) {
   localConfig = require(process.env
     .VUE_APP_LOCAL_SUNRISE_CONFIG).default;
 }
 
-export default {
+const config = {
   ct: {
     auth: {
       host: "https://api.europe-west1.gcp.commercetools.com",
@@ -164,3 +163,5 @@ export default {
   variantInProductName: ["size"],
   ...localConfig,
 };
+console.log("using config:", config);
+export default config;
