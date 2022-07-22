@@ -1,36 +1,34 @@
 // eslint-disable-next-line no-console
 console.log("using host:", process.env.VUE_APP_CT_API_HOST);
 let localConfig = {};
-if(process.env.VUE_APP_LOCAL_SUNRISE_CONFIG){
-  localConfig = require(process.env.VUE_APP_LOCAL_SUNRISE_CONFIG).default;
+if (process.env.VUE_APP_LOCAL_SUNRISE_CONFIG) {
+  localConfig = require(process.env
+    .VUE_APP_LOCAL_SUNRISE_CONFIG).default;
 }
 
 export default {
   ct: {
     auth: {
-      host:
-        process.env.VUE_APP_CT_AUTH_HOST ||
-        "https://auth.europe-west1.gcp.commercetools.com",
-      projectKey:
-        process.env.VUE_APP_CT_PROJECT_KEY || "sunrise-spa",
+      host: "https://api.europe-west1.gcp.commercetools.com",
+      projectKey: "sunrise-spa",
       credentials: {
-        clientId:
-          process.env.VUE_APP_CT_CLIENT_ID ||
-          "1mnlpBq-fHCCkAzmSXxNBB37",
-        clientSecret:
-          process.env.VUE_APP_CT_CLIENT_SECRET ||
-          "WS9hXm6dKyqyuLOHciL6jkbCbFHrDSOL",
+        clientId: "dX-gnzl-razMgFca7TZHdaHs",
+        clientSecret: "noTN9jQWanauFLfs4iP4aJ_Qa_Ob9O-B",
       },
       scopes: [
-        process.env.VUE_APP_CT_SCOPE ||
-          "manage_my_orders:sunrise-spa "+
-          "manage_my_profile:sunrise-spa "+
-          "manage_my_payments:sunrise-spa "+
-          "view_published_products:sunrise-spa "+
-          "view_categories:sunrise-spa "+
-          "manage_my_shopping_lists:sunrise-spa "+
-          "manage_orders:sunrise-spa "+
-          "create_anonymous_token:sunrise-spa"
+        "manage_my_orders:sunrise-spa " +
+          "manage_my_profile:sunrise-spa " +
+          "manage_my_business_units:sunrise-spa " +
+          "manage_my_payments:sunrise-spa " +
+          "view_products:sunrise-spa " +
+          "view_published_products:sunrise-spa " +
+          "manage_my_quotes:sunrise-spa " +
+          "manage_my_quote_requests:sunrise-spa " +
+          "view_categories:sunrise-spa " +
+          "manage_orders:sunrise-spa " +
+          "create_anonymous_token:sunrise-spa " +
+          "manage_my_shopping_lists:sunrise-spa " +
+          "manage_customers:sunrise-spa",
       ],
     },
     api:
@@ -114,31 +112,31 @@ export default {
   ],
   detailAttributes: [
     {
-      name:"designer",
-        label: {
-          it: "Designer",
-          de: "Designer",
-          en: "Designer",
-        },
+      name: "designer",
+      label: {
+        it: "Designer",
+        de: "Designer",
+        en: "Designer",
+      },
     },
     {
-      name:"colorFreeDefinition",
-        label: {
-          it: "Color",
-          de: "Farbe",
-          en: "Color",
-        },
+      name: "colorFreeDefinition",
+      label: {
+        it: "Color",
+        de: "Farbe",
+        en: "Color",
+      },
     },
     {
-      name:"size",
-        label: {
-          it: "Size",
-          de: "Grösse",
-          en: "Size",
-        },
+      name: "size",
+      label: {
+        it: "Size",
+        de: "Grösse",
+        en: "Size",
+      },
     },
     {
-      name:"style",
+      name: "style",
       label: {
         it: "Style",
         de: "Stil",
@@ -146,7 +144,7 @@ export default {
       },
     },
     {
-      name:"gender",
+      name: "gender",
       label: {
         it: "Gender",
         de: "Zielgruppe",
@@ -154,7 +152,7 @@ export default {
       },
     },
     {
-      name:"articleNumberManufacturer",
+      name: "articleNumberManufacturer",
       label: {
         it: "Manufacturer AID",
         de: "Herstellernummer",
@@ -164,5 +162,5 @@ export default {
   ],
   variantSelector: ["color", "size"],
   variantInProductName: ["size"],
-  ...localConfig
+  ...localConfig,
 };
