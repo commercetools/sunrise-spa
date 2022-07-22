@@ -163,5 +163,6 @@ const config = {
   variantInProductName: ["size"],
   ...localConfig,
 };
+// eslint-disable-next-line no-console
 console.log("using config:", config);
 export default config;
