@@ -8,11 +8,11 @@ if (process.env.VUE_APP_LOCAL_SUNRISE_CONFIG) {
 const config = {
   ct: {
     auth: {
-      host: "https://api.europe-west1.gcp.commercetools.com",
+      host: "https://auth.europe-west1.gcp.commercetools.com",
       projectKey: "sunrise-spa",
       credentials: {
-        clientId: "LbKkM2CUaeqND4Sb9d45Q7RS",
-        clientSecret: "5IZ8y4RPYDe8_zGJqrAUDjPOD9LMfWSX",
+        clientId: "QVfW_G6MTZ-SQ32oi6gFRurn",
+        clientSecret: "khxaH4HobKmlMeLtpNy7WBaUggoK9Nrb",
       },
       scopes: [
         "manage_my_orders:sunrise-spa " +
