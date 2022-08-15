@@ -15,6 +15,18 @@ import {
 import { cache } from '../src/apollo';
 import { CUSTOMER } from '../src/constants';
 import { createReactive } from './lib';
+import addVisibilityChangeListener from './lib';
+
+addVisibilityChangeListener((status) => {
+  if (status) {
+    cache.reset();
+    cache.gc();
+    saveCustomerState(
+      JSON.parse(localStorage.getItem(CUSTOMER))
+    );
+  }
+});
+
 const saveCustomerState = (c) => {
   customerGlobal.setValue(c);
 };
