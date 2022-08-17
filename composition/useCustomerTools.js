@@ -17,15 +17,26 @@ import { CUSTOMER } from '../src/constants';
 import { createReactive } from './lib';
 import addVisibilityChangeListener from './lib';
 
-addVisibilityChangeListener((status) => {
-  if (status) {
-    cache.reset();
-    cache.gc();
-    saveCustomerState(
-      JSON.parse(localStorage.getItem(CUSTOMER))
-    );
-  }
-});
+addVisibilityChangeListener(
+  ((value) => (status) => {
+    const currentValue = localStorage.getItem(CUSTOMER);
+    if (status) {
+      //tab/window became visible see if item changed
+      if (currentValue !== value) {
+        //item changed in other tab or window, reset
+        //  cache and reload from local storage
+        value = currentValue;
+        cache.reset();
+        cache.gc();
+        saveCustomerState(
+          JSON.parse(localStorage.getItem(CUSTOMER))
+        );
+      }
+    }
+
+    value = currentValue;
+  })(localStorage.getItem(CUSTOMER))
+);
 
 const saveCustomerState = (c) => {
   customerGlobal.setValue(c);
