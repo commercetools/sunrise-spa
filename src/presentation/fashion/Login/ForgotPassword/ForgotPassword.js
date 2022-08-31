@@ -1,3 +1,6 @@
+//this is only to demonstrate how it works, you should use a proxy
+//  in production:
+//  https://github.com/commercetools/sunrise-spa/blob/f7a1b591b05d919cc59f1bbca05adf6095334fe8/composition/useAccessRules.js#L35-L47
 import ServerError from 'presentation/components/ServerError/ServerError.vue';
 import BaseForm from 'presentation/components/BaseForm/BaseForm.vue';
 import LoadingButton from 'presentation/components/LoadingButton/LoadingButton.vue';
