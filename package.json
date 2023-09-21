@@ -19,7 +19,7 @@
     "@vuelidate/core": "^2.0.0-alpha.34",
     "@vuelidate/validators": "^2.0.0-alpha.26",
     "core-js": "^3.6.5",
-    "graphql": "^16.3.0",
+    "graphql": "^16.8.1",
     "graphql-tag": "^2.12.6",
     "isomorphic-fetch": "^3.0.0",
     "js-base64": "^3.7.2",
