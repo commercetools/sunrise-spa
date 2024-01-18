@@ -1,12 +1,14 @@
 import { VueperSlides, VueperSlide } from 'vueperslides';
 import 'vueperslides/dist/vueperslides.css';
 import { useI18n } from 'vue-i18n';
+import localMessages from './Banner.json'
 
 export default {
   setup() {
     const { t } = useI18n({
       inheritLocale: true,
       useScope: 'local',
+      messages: localMessages
     });
     return {
       t,

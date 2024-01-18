@@ -1,0 +1,17 @@
+{
+  "en": {
+    "creditCard": "Credit card",
+    "paymentMethod": "Payment method",
+    "PayPal": "PayPal"
+  },
+  "fr": {
+    "creditCard": "Carte de crédit",
+    "paymentMethod": "Méthode de paiement",
+    "PayPal": "PayPal"
+  },
+  "de": {
+    "creditCard": "Kreditkarte",
+    "paymentMethod": "Zahlungsweise",
+    "PayPal": "PayPal"
+  }
+}

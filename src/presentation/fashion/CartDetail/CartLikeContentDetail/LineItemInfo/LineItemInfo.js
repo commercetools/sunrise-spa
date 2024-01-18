@@ -5,6 +5,8 @@ import DiscountTag from 'presentation/components/DiscountTag/DiscountTag.vue';
 
 import Remove from 'presentation/components/LineItemQuantityForm/Remove/Remove.vue';
 import useCartTools from 'hooks/useCartTools';
+import localMessages from './LineItemInfo.json'
+import { useI18n } from 'vue-i18n';
 export default {
   components: {
     LineItemQuantityForm,
@@ -70,11 +72,13 @@ export default {
         emit('unselect-return-item', item.value);
       }
     });
+    const { t } = useI18n({messages: localMessages});
     return {
       selected,
       item,
       quantity,
       ...useCartTools(),
+      t,
     };
   },
 };

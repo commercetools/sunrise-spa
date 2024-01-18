@@ -1,0 +1,26 @@
+{
+  "en": {
+    "unknownValidation": "Invalid field",
+    "required": "Required field",
+    "email": "A valid email is required",
+    "minLength": "It should contain at least {min} characters",
+    "sameAsPassword": "Passwords are not the same",
+    "mustBeAgreed": "Please agree to the terms"
+  },
+  "fr": {
+    "unknownValidation": "Champ invalidz",
+    "required": "Champ requis",
+    "email": "Un email valide est requis",
+    "minLength": "Ce champs doit être de {min} caractères",
+    "sameAsPassword": "Les mots de passe ne sont pas identiques",
+    "mustBeAgreed": "Veuillez agréer au CGV"
+  },
+  "de": {
+    "unknownValidation": "Ungültiger Feldwert",
+    "required": "Pflichtfeld",
+    "email": "Eine gültige E-Mail ist erforderlich",
+    "minLength": "Es sollte mindestens {min} Zeichen enthalten",
+    "sameAsPassword": "Passwörter sind nicht gleich",
+    "mustBeAgreed": "Bitte stimmen Sie den Bedingungen zu"
+  }
+}

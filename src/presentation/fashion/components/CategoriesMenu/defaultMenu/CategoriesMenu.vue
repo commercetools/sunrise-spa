@@ -1,4 +1,3 @@
-<i18n src="./CategoriesMenu.txt" lang="yaml"></i18n>
 <script src="./CategoriesMenu.js"></script>
 
 <template>

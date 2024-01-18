@@ -1,5 +1,4 @@
 <style src="./SidebarMenu.scss" lang="scss" scoped></style>
-<i18n src="./SidebarMenu.txt" lang="yaml"></i18n>
 <script src="./SidebarMenu.js"></script>
 
 <template>

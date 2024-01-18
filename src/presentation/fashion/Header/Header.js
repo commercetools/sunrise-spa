@@ -13,6 +13,7 @@ import useCart from 'hooks/useCart';
 import useMiniCart from 'hooks/useMinicart';
 import sunriseConfig from '../../../../sunrise.config';
 import useAccessRules from 'hooks/useAccessRules';
+import localMessages from './Header.json';
 
 export default {
   name: 'HeaderPresentation',
@@ -34,7 +35,7 @@ export default {
     const miniCart = useMiniCart();
 
     //@todo: what do we do with this one? Do we have to get this every time?
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const searchOpen = ref(false);
     // const mobileMenuOpen = ref(false);
 

@@ -6,6 +6,7 @@ import ProductThumbnail from './ProductThumbnail/ProductThumbnail.vue';
 import { useI18n } from 'vue-i18n';
 import useProductTools from 'hooks/useProductTools';
 import useCartTools from 'hooks/useCartTools';
+import localMessages from './ProductList.json';
 
 export default {
   name: 'ProductList',
@@ -17,7 +18,7 @@ export default {
     // TopBar,
   },
   setup() {
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const { addLine } = useCartTools();
     const {
       formatProduct,

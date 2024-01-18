@@ -6,6 +6,7 @@ import LineItemDeleteForm from 'presentation/components/LineItemQuantityForm/Rem
 import useMiniCart from 'hooks/useMinicart';
 import useCart from 'hooks/useCart';
 import useCartTools from 'hooks/useCartTools';
+import localMessages from './MiniCart.json';
 
 export default {
   name: 'MiniCart',
@@ -21,7 +22,7 @@ export default {
 
     //@todo: close minicart if deleting line has empty cart
     //  usecartNotEmpty from CartLike
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     return {
       t,
       open,

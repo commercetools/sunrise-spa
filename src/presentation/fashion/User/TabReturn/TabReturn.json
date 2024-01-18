@@ -1,0 +1,23 @@
+{
+  "en": {
+    "title": "What would you like to return?",
+    "return": "Return",
+    "alert": "Please select at least one item to return",
+    "modalText": "Your return was successfull",
+    "close": "Close"
+  },
+  "fr": {
+    "title": "Que voudriez vous retourner ?",
+    "return": "Retour",
+    "alert": "Merci de sélectionner au moins 1 objet à retourner",
+    "modalText": "Votre retour est réussi",
+    "close": "Fermer"
+  },
+  "de": {
+    "title": "Was möchten Sie zurückschicken?",
+    "return": "Zurückschicken",
+    "alert": "Bitte wählen Sie mindestens einen Artikel aus, der zurückgegeben werden soll",
+    "modalText": "Ihre Rückgabe war erfolgreich",
+    "close": "Schließen"
+  }
+}

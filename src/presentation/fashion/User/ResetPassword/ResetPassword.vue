@@ -1,4 +1,3 @@
-<i18n src="./ResetPassword.txt" lang="yaml"></i18n>
 <script src="./ResetPassword.js"></script>
 
 <template>

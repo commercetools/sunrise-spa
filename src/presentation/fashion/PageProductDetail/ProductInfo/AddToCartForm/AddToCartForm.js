@@ -7,6 +7,7 @@ import BaseForm from 'presentation/components/BaseForm/BaseForm.vue';
 import BaseInput from 'presentation/components/BaseInput/BaseInput.vue';
 import ServerError from 'presentation/components/ServerError/ServerError.vue';
 import useCartTools from 'hooks/useCartTools';
+import localMessages from './AddToCartForm.json';
 function Rules() {
   this.quantity = { required, numeric };
 }
@@ -37,7 +38,7 @@ export default {
     BaseInput,
   },
   setup(props) {
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const form = ref({ quantity: 1 });
     const rules = new Rules(form);
     const v = useVuelidate(rules, form);

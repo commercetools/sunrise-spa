@@ -1,0 +1,20 @@
+{
+  "de": {
+    "productDetails": "Produktdetails",
+    "deliveryReturns": "Versand & Retoure",
+    "freeReturns": "Kostenlose Retoure.",
+    "moreDeliveryInfo": "Versandinformationen"
+  },
+  "fr": {
+    "productDetails": "Détails du produit",
+    "deliveryReturns": "Livraison et retour",
+    "freeReturns": "Retours gratuits pour toute commande.",
+    "moreDeliveryInfo": "Information de livraison"
+  },
+  "en": {
+    "productDetails": "Product details",
+    "deliveryReturns": "Delivery & Returns",
+    "freeReturns": "Free return for all orders.",
+    "moreDeliveryInfo": "Delivery information"
+  }
+}

@@ -5,6 +5,7 @@ import AddDiscountCodeForm from './AddDiscountCodeForm/AddDiscountCodeForm.vue';
 import CartLikePriceDetail from './CartLikePriceDetail/CartLikePriceDetail.vue';
 import useCartTools from 'hooks/useCartTools';
 import useCart from 'hooks/useCart';
+import localMessages from './CartDetail.json'
 
 // import AddDiscountCodeForm from '../AddDiscountCodeForm/AddDiscountCodeForm.vue';
 export default {
@@ -16,7 +17,7 @@ export default {
     CartLikePriceDetail,
   },
   setup() {
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const { cart, loading, error } = useCart();
     return {
       t,

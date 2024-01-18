@@ -2,6 +2,7 @@ import { shallowRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import useChannels from 'hooks/useChannels';
 import useSelectedChannel from 'hooks/useSelectedChannel';
+import localMessages from './StoreLocator.json';
 const getCoordinates = ({ lat, lng }) => ({
   lat: parseFloat(lat),
   lng: parseFloat(lng),
@@ -47,7 +48,7 @@ function initialLocation(channel) {
 export default {
   name: 'StoreLocator',
   setup() {
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const { channel, setChannel } = useSelectedChannel();
     const center = shallowRef(initialLocation(channel));
     const radiusOptions = [

@@ -1,5 +1,4 @@
-<i18n src="./LoginForm.txt" lang="yaml"></i18n>
-<script src="./LoginForm.js" lang="yaml"></script>
+<script src="./LoginForm.js"></script>
 
 <template>
   <div class="login-register-wrap">

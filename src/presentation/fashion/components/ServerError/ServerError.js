@@ -1,5 +1,6 @@
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import localMessages from './ServerError.json';
 
 export default {
   props: {
@@ -8,7 +9,7 @@ export default {
     },
   },
   setup(props) {
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const isNetworkError = computed(() => {
       return props.error?.networkError;
     });

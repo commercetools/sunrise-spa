@@ -1,0 +1,20 @@
+{
+  "en": {
+    "greeting": "Hello",
+    "notYou": "If it's not you",
+    "logout": "Logout",
+    "description": "From your account dashboard you can easily check & view your recent orders, manage your shipping and billing addresses and edit your password and account details."
+  },
+  "fr": {
+    "greeting": "Bonjour",
+    "notYou": "Si ce n'est pas vous",
+    "logout": "Déconnexion",
+    "description": "Depuis le tableau de bord de votre compte, vous pouvez facilement vérifier et visualiser vos commandes récentes, gérez vos adresses de livraison et de facturation et modifiez votre mot de passe et les détails de votre compte."
+  },
+  "de": {
+    "greeting": "Hallo",
+    "notYou": "Wenn das nicht Sie sind",
+    "logout": "Abmelden",
+    "description": "Über Ihr Konto-Dashboard können Sie ganz einfach Ihre letzten Bestellungen überprüfen und anzeigen. Verwalten Sie Ihre Versand- und Rechnungsadressen und bearbeiten Sie Ihr Passwort und Ihre Kontodaten."
+  }
+}

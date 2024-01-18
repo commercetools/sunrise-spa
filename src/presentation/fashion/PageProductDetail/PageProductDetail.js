@@ -3,6 +3,8 @@
 import { ref } from 'vue';
 import useProductTools from 'hooks/useProductTools';
 import ProductInfo from './ProductInfo/ProductInfo.vue';
+import localMessages from './PageProductDetail.json';
+import { useI18n } from 'vue-i18n';
 
 export default {
   name: 'PageProductDetail',
@@ -17,6 +19,7 @@ export default {
     const closeAddToShoppingList = () => {
       showAddToShoppingList.value = false;
     };
+    const { t } = useI18n({messages: localMessages});
     return {
       openAddToShoppingList,
       closeAddToShoppingList,
@@ -25,6 +28,7 @@ export default {
       currentVariant,
       error,
       sku,
+      t
     };
   },
   components: {

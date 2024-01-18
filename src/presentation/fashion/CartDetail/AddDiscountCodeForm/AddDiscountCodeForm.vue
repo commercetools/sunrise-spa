@@ -1,5 +1,4 @@
 <style src="./AddDiscountCodeForm.scss" lang="scss"></style>
-<i18n src="./AddDiscountCodeForm.txt" lang="yaml"></i18n>
 <script src="./AddDiscountCodeForm.js"></script>
 
 <template>

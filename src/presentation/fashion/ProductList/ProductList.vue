@@ -1,4 +1,3 @@
-<i18n src="./ProductList.txt" lang="yaml"></i18n>
 <style src="./ProductList.scss" lang="scss"></style>
 <script src="./ProductList.js"></script>
 

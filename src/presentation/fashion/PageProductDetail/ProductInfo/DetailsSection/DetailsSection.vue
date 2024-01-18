@@ -1,5 +1,4 @@
 <style src="./DetailsSection.scss" lang="scss" scoped></style>
-<i18n src="./DetailsSection.txt" lang="yaml"></i18n>
 <script src="./DetailsSection.js"></script>
 
 <template>

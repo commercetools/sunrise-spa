@@ -1,0 +1,17 @@
+{
+  "en": {
+    "suggestions": {
+      "title": "You may also like"
+    }
+  },
+  "fr": {
+    "suggestions": {
+      "title": "Vous aimerez sans doute"
+    }
+  },
+  "de": {
+    "suggestions": {
+      "title": "Das könnte Ihnen auch gefallen"
+    }
+  }
+}

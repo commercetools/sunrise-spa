@@ -1,0 +1,35 @@
+{
+  "en": {
+    "location": "Location",
+    "language": "Language",
+    "country": "Country",
+    "FR": "France",
+    "DE": "Germany",
+    "US": "United States",
+    "en": "English",
+    "de": "German",
+    "fr": "French"
+  },
+  "fr": {
+    "location": "Emplacement",
+    "language": "Langue",
+    "country": "Pays",
+    "FR": "France",
+    "DE": "Allemagne",
+    "US": "U.S.A.",
+    "fr": "Français",
+    "en": "Anglais",
+    "de": "Allemand"
+  },
+  "de": {
+    "location": "Ort",
+    "language": "Sprache",
+    "country": "Land",
+    "FR": "Frankreich",
+    "DE": "Deutschland",
+    "US": "Vereinigte Staaten",
+    "en": "Englisch",
+    "de": "Deutsch",
+    "fr": "Französisch"
+  }
+}

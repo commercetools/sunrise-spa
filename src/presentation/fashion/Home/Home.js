@@ -2,6 +2,7 @@ import { useI18n } from 'vue-i18n';
 import Banner from 'presentation/Banner/Banner.vue';
 import BaseMoney from 'presentation/components/BaseMoney/BaseMoney.vue';
 import { useRouter } from 'vue-router';
+import localMessages from './Home.json';
 
 export default {
   name: 'Home',
@@ -15,7 +16,7 @@ export default {
         params: { categorySlug: 'all' },
       });
     }
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     return {
       t,
     };

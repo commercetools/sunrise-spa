@@ -1,0 +1,25 @@
+{
+  "en": {
+    "sale": "Sale",
+    "new": "New",
+    "quickView": "Quick view",
+    "moreColors": "More colours",
+    "add": "Add item to wishlist",
+    "addToCart": "Add to Bag"
+  },
+  "fr": {
+    "sale": "Vente",
+    "quickView": "Vue rapide",
+    "moreColors": "+ de couleurs",
+    "add": "Ajouter à ma liste d'envie",
+    "addToCart": "Ajouter au panier"
+  },
+  "de": {
+    "sale": "Sale",
+    "new": "Neu",
+    "quickView": "Schnellansicht",
+    "moreColors": "Mehr Farben",
+    "add": "Auf den Wunschzettel",
+    "addToCart": "Zum Warenkorb Hinzufügen"
+  }
+}

@@ -1,4 +1,5 @@
 import { useI18n } from 'vue-i18n';
+import localMessages from './Footer.json';
 
 export default {
   name: 'Footer',
@@ -6,6 +7,7 @@ export default {
     const { t } = useI18n({
       inheritLocale: true,
       useScope: 'local',
+      messages: localMessages
     });
     return { t };
   },

@@ -6,6 +6,7 @@ import ServerError from 'presentation/components/ServerError/ServerError.vue';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import useCustomerTools from 'hooks/useCustomerTools';
+import localMessages from './TabAccountDetails.json';
 function Rules() {
   this.email = { required, email };
   this.firstName = { required };
@@ -18,7 +19,7 @@ export default {
     ServerError,
   },
   setup() {
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const tools = useCustomerTools();
     const form = ref({
       ...tools.customer.value,

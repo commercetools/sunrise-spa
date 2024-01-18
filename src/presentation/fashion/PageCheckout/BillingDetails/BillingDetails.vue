@@ -1,4 +1,3 @@
-<i18n src="./BillingDetails.txt" lang="yaml"></i18n>
 <script src="./BillingDetails.js"></script>
 
 <template>

@@ -1,6 +1,5 @@
 <style src="./PageCheckout.scss" lang="scss"></style>
 <script src="./PageCheckout.js"></script>
-<i18n src="./PageCheckout.txt" lang="yaml"></i18n>
 
 <template>
   <span>

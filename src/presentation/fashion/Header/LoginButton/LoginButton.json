@@ -1,0 +1,17 @@
+{
+  "en": {
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "myAccount": "My Account"
+  },
+  "fr": {
+    "signIn": "Se connecter",
+    "signOut": "Se déconnecter",
+    "myAccount": "Mon compte"
+  },
+  "de": {
+    "signIn": "Anmelden",
+    "signOut": "Abmelden",
+    "myAccount": "Mein Konto"
+  }
+}

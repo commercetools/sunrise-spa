@@ -1,0 +1,29 @@
+{
+  "en": {
+    "cartTotals": "Cart totals",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "salesTax": "Sales Tax",
+    "total": "Total",
+    "discount": "Discount",
+    "checkout": "Checkout"
+  },
+  "fr": {
+    "cartTotals": "Total Panier",
+    "subtotal": "Sous-total",
+    "shipping": "Expedition",
+    "salesTax": "Taxes",
+    "total": "Total",
+    "discount": "Réduction",
+    "checkout": "Panier"
+  },
+  "de": {
+    "cartTotals": "Warenkorbsummen",
+    "subtotal": "Zwischensumme",
+    "shipping": "Versand",
+    "salesTax": "MwSt.",
+    "total": "Gesamtpreis",
+    "discount": "Rabatt",
+    "checkout": "Zur Kasse"
+  }
+}

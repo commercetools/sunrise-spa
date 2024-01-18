@@ -40,15 +40,24 @@ const config = {
       'https://api.europe-west1.gcp.commercetools.com',
   },
   languages: {
+    fr: 'French',
     en: 'English',
     de: 'Deutsch',
   },
   countries: {
+    FR: 'France',
     DE: 'Deutschland',
     US: 'United States',
   },
   formats: {
     number: {
+      FR: {
+        currency: {
+          style: 'currency',
+          currency: 'EUR',
+          currencyDisplay: 'symbol',
+        },
+      },
       DE: {
         currency: {
           style: 'currency',
@@ -65,6 +74,13 @@ const config = {
     },
     datetime: {
       US: {
+        short: {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        },
+      },
+      FR: {
         short: {
           year: 'numeric',
           month: 'short',
@@ -88,6 +104,7 @@ const config = {
       name: 'size',
       type: 'text',
       label: {
+        fr: 'Taille',
         it: 'Size',
         de: 'Größe',
         en: 'Size',
@@ -98,6 +115,7 @@ const config = {
       type: 'lnum',
       component: 'colors',
       label: {
+        fr: 'Couleur',
         de: 'Farbe',
         it: 'Color',
         en: 'Color',
@@ -108,6 +126,7 @@ const config = {
       type: 'enum',
       component: 'designer',
       label: {
+        fr: 'Designer',
         it: 'Designer',
         de: 'Designer',
         en: 'Designer',
@@ -118,6 +137,7 @@ const config = {
     {
       name: 'designer',
       label: {
+        fr: 'Designer',
         it: 'Designer',
         de: 'Designer',
         en: 'Designer',
@@ -126,6 +146,7 @@ const config = {
     {
       name: 'colorFreeDefinition',
       label: {
+        fr: 'Couleur',
         it: 'Color',
         de: 'Farbe',
         en: 'Color',
@@ -134,6 +155,7 @@ const config = {
     {
       name: 'size',
       label: {
+        fr: 'Taille',
         it: 'Size',
         de: 'Grösse',
         en: 'Size',
@@ -142,6 +164,7 @@ const config = {
     {
       name: 'style',
       label: {
+        fr: 'Style',
         it: 'Style',
         de: 'Stil',
         en: 'Style',
@@ -150,6 +173,7 @@ const config = {
     {
       name: 'gender',
       label: {
+        fr: 'Genre',
         it: 'Gender',
         de: 'Zielgruppe',
         en: 'Gender',
@@ -158,6 +182,7 @@ const config = {
     {
       name: 'articleNumberManufacturer',
       label: {
+        fr: 'AID fabriquant',
         it: 'Manufacturer AID',
         de: 'Herstellernummer',
         en: 'Manufacturer AID',

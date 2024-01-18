@@ -1,5 +1,4 @@
 <style src="./Pagination.scss" lang="scss"></style>
-<i18n src="./Pagination.txt" lang="yaml"></i18n>
 <script src="./Pagination.js"></script>
 
 <template>

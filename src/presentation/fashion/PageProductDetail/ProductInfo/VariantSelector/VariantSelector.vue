@@ -1,5 +1,4 @@
 <script src="./VariantSelector.js"></script>
-<i18n src="./VariantSelector.txt" lang="yaml"></i18n>
 
 <template>
   <div>

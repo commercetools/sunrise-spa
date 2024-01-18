@@ -7,6 +7,7 @@ import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import useCustomerTools from 'hooks/useCustomerTools';
 import useAccessRules from 'hooks/useAccessRules';
+import localMessages from './TabOrderDetail.json';
 
 export default {
   components: {
@@ -26,7 +27,7 @@ export default {
   setup() {
     const { showReturnItemButton } = useAccessRules();
     const tools = useCustomerTools();
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const { loading, order } = tools.useMyOrder();
     const subtotal = computed(() => {
       //@todo: is this not already done in cart tools?

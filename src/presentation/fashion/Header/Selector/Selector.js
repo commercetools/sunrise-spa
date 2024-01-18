@@ -1,4 +1,5 @@
 import { useI18n } from 'vue-i18n';
+import localMessages from './Selector.json';
 
 export default {
   name: 'Selector',
@@ -7,6 +8,7 @@ export default {
     const { t } = useI18n({
       inheritLocale: true,
       useScope: 'local',
+      messages: localMessages
     });
     return { t };
   },

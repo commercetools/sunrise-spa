@@ -1,6 +1,4 @@
 <script src="./Pay.js"></script>
-<i18n src="./Pay.txt" lang="yaml"></i18n>
-
 
 <template>
   <div v-if="orderComplete" class="pt-80 pb-100">

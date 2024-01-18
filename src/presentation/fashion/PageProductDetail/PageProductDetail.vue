@@ -1,4 +1,3 @@
-<i18n src="./PageProductDetail.txt" lang="yaml"></i18n>
 <script src="./PageProductDetail.js"></script>
 
 <template>

@@ -1,7 +1,6 @@
 // this is only to demonstrate how it works, you should use a proxy
 //  in production:
 //  https://github.com/commercetools/sunrise-spa/blob/f7a1b591b05d919cc59f1bbca05adf6095334fe8/composition/useAccessRules.js#L35-L47
-<i18n src="./ForgotPassword.txt" lang="yaml"></i18n>
 <script src="./ForgotPassword.js"></script>
 <style src="./ForgotPassword.scss" lang="scss"></style>
 

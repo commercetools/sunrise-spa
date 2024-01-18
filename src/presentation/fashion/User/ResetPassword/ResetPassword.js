@@ -7,6 +7,7 @@ import LoadingButton from 'presentation/components/LoadingButton/LoadingButton.v
 import { useI18n } from 'vue-i18n';
 import { ref } from 'vue';
 import useCustomerTools from 'hooks/useCustomerTools';
+import localMessages from './ResetPassword.json';
 function Rules(form) {
   const sameAs = (value) =>
     value === form.value.newPassword;
@@ -25,7 +26,7 @@ export default {
     ServerError,
   },
   setup() {
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const form = ref({});
     const rules = new Rules(form);
     const v = useVuelidate(rules, form);

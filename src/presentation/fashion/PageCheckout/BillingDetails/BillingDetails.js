@@ -1,6 +1,7 @@
 import { computed, shallowRef, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import BaseAddressForm from './BaseAddressForm/BaseAddressForm.vue';
+import localMessages from './BillingDetails.json';
 export default {
   props: {
     billingAddress: {
@@ -20,6 +21,7 @@ export default {
     const { t } = useI18n({
       inheritLocale: true,
       useScope: 'local',
+      messages: localMessages
     });
     const differentAddress = shallowRef(false);
     const newBillingAddress = shallowRef(null);

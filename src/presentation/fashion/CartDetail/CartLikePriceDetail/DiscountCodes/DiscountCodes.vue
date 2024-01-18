@@ -1,5 +1,4 @@
 <style src="./style.css" scoped></style>
-<i18n src="./DiscountCodes.txt" lang="yaml"></i18n>
 <script src="./DiscountCodes.js"></script>
 
 <template>

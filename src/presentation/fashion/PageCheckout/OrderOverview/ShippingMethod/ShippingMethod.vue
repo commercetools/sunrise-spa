@@ -1,4 +1,3 @@
-<i18n src="./ShippingMethod.txt" lang="yaml"></i18n>
 <script src="./ShippingMethod.js"></script>
 
 <template>

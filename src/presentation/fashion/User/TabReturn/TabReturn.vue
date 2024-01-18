@@ -1,4 +1,3 @@
-<i18n src="./TabReturn.txt" lang="yaml"></i18n>
 <script src="./TabReturn.js"></script>
 <style lang="scss" src="./TabReturn.scss"></style>
 

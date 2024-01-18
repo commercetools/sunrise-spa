@@ -1,5 +1,4 @@
 <style src="./TabOrderList.scss" lang="scss"></style>
-<i18n src="./TabOrderList.txt" lang="yaml"></i18n>
 <script src="./TabOrderList.js"></script>
 
 <template>

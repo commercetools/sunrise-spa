@@ -4,6 +4,8 @@ import BaseMoney from 'presentation/components/BaseMoney/BaseMoney.vue';
 import { ref, shallowRef, watch } from 'vue';
 import useShippingMethods from 'hooks/useShippingMethods';
 import useCartTools from 'hooks/useCartTools';
+import { useI18n } from 'vue-i18n';
+import localMessages from './ShippingMethod.json';
 export default {
   props: {
     cart: {
@@ -15,6 +17,7 @@ export default {
     BaseMoney,
   },
   setup(props) {
+    const { t } = useI18n({messages: localMessages});
     const { total, loading, error, shippingMethods } =
       useShippingMethods(props.cart.cartId);
     const selectedShippingMethod = ref(
@@ -68,6 +71,7 @@ export default {
       price,
       selectedShippingMethod,
       setSelectedShippingMethod,
+      t
     };
   },
 };

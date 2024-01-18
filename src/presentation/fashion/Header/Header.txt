@@ -1,8 +1,0 @@
-en:
-  search: "Search"
-  stores: "Stores"
-  help: "Help"
-de:
-  search: "Suche"
-  stores: "Filiale"
-  help: "Hilfe"

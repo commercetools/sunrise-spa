@@ -6,6 +6,7 @@ import { useRoute, useRouter } from 'vue-router';
 import config from '../../../../../../sunrise.config';
 import { getAttributeValue } from 'containers/lib';
 import { move } from '../../../../../lib';
+import localMessages from './VariantSelector.json';
 
 export default {
   props: {
@@ -19,7 +20,7 @@ export default {
     },
   },
   setup(props) {
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const route = useRoute();
     const router = useRouter();
     const { locale } = useLocale();

@@ -1,4 +1,3 @@
-<i18n src="./TabOrderDetail.txt" lang="yaml"></i18n>
 <script src="./TabOrderDetail.js"></script>
 <style lang="scss" src="./TabOrderDetail.scss"></style>
 

@@ -1,5 +1,4 @@
 <style src="./Header.scss" lang="scss"></style>
-<i18n src="./Header.txt" lang="yaml"></i18n>
 <script src="./Header.js"></script>
 
 <template>

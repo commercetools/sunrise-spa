@@ -3,6 +3,7 @@ import BaseInput from 'presentation/components/BaseInput/BaseInput.vue';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import useBaseAddress from 'hooks/useBaseAddress';
+import localMessages from './BaseAddressForm.json';
 
 export default {
   props: {
@@ -16,7 +17,7 @@ export default {
     // BaseSelect,
   },
   setup(props, { emit }) {
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const { form, v } = useBaseAddress();
     v.value.$touch();
     watch(

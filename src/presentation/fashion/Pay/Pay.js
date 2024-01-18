@@ -3,10 +3,11 @@ import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 import useCart from '../../../../composition/useCart';
 import useCartTools from '../../../../composition/useCartTools';
+import localMessages from './Pay.json';
 
 export default {
   setup() {
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const orderComplete = shallowRef(false);
     const route = useRoute();
     const { cart } = useCart();

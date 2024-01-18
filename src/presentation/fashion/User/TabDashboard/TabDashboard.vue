@@ -1,4 +1,3 @@
-<i18n src="./TabDashboard.txt" lang="yaml"></i18n>
 <script src="./TabDashboard.js"></script>
 
 <template>

@@ -1,6 +1,5 @@
 <script src="./Home.js" />
 <style src="./Home.scss" lang="scss"></style>
-<i18n src="./Home.txt" lang="yaml"></i18n>
 
 <template>
   <span>

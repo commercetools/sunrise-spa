@@ -1,0 +1,38 @@
+{
+  "en": {
+    "itemsTotal": "{n} item in total | {n} items in total",
+    "editMyCart": "Edit my shopping cart",
+    "orderSummary": "Order Summary",
+    "product": "Product",
+    "quantity": "Quantity",
+    "price": "Price",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "placeOrder": "Place Order"
+  },
+  "fr": {
+    "itemsTotal": "{n} objet au total | {n} objets au total",
+    "editMyCart": "Éditer mon panier",
+    "orderSummary": "Récapitulatif commande",
+    "product": "Produit",
+    "quantity": "Quantité",
+    "price": "Prix",
+    "total": "Total",
+    "subtotal": "Sous-total",
+    "shipping": "Expédition",
+    "placeOrder": "Commander"
+  },
+  "de": {
+    "itemsTotal": "{n} Artikel im Warenkorb",
+    "editMyCart": "Warenkorb bearbeiten",
+    "orderSummary": "Bestellübersicht",
+    "product": "Produkt",
+    "quantity": "Menge",
+    "price": "Preis",
+    "total": "Gesamtpreis",
+    "subtotal": "Zwischensumme",
+    "shipping": "Vesrsand",
+    "placeOrder": "Bestellen"
+  }
+}

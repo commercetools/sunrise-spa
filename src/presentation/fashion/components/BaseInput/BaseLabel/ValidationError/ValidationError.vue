@@ -1,5 +1,4 @@
 <style src="./style.css" scoped></style>
-<i18n src="./ValidationError.txt" lang="yaml"></i18n>
 <script src="./ValidationError.js"></script>
 
 <template>

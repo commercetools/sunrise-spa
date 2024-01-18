@@ -1,6 +1,7 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import ValidationError from './ValidationError/ValidationError.vue';
+import localMessages from './BaseLabel.json'
 
 export default {
   components: { ValidationError },
@@ -16,7 +17,7 @@ export default {
     },
   },
   setup(props) {
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const required = computed(
       () => props.vuelidate?.required
     );

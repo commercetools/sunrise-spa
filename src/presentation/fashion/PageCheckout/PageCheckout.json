@@ -1,0 +1,14 @@
+{
+  "en": {
+    "thankYou": "Thank you for your order!",
+    "continueShopping": "Continue shopping"
+  },
+  "fr": {
+    "thankYou": "Merci pour votre commande !",
+    "continueShopping": "Continuer mes achats"
+  },
+  "de": {
+    "thankYou": "Vielen Dank für Ihre Bestellung!",
+    "continueShopping": "Weiter einkaufen"
+  }
+}

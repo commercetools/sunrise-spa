@@ -1,6 +1,6 @@
-<i18n src="./StoreLocator.txt" lang="yaml"></i18n>
 <script src="./StoreLocator.js" />
 <style lang="scss" src="./StoreLocator.scss"></style>
+
 <template>
   <div class="store-finder-wrapper">
     <div class="container pt-50">

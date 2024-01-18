@@ -1,0 +1,17 @@
+{
+  "en": {
+    "go-to-top": "go to top",
+    "notFound": "No Results Found",
+    "categoryNotFound": "Category Not Found"
+  },
+  "fr": {
+    "go-to-top": "Retourner en haut",
+    "notFound": "Aucun résultat trouvé",
+    "categoryNotFound": "Categorie non trouvée"
+  },
+  "de": {
+    "go-to-top": "Seitenanfang\"",
+    "notFound": "Keine Ergebnisse Gefunden",
+    "categoryNotFound": "Kategorie nicht gefunden"
+  }
+}

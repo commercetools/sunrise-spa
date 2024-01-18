@@ -1,0 +1,17 @@
+{
+  "en": {
+    "code": "Discount code",
+    "apply": "Apply",
+    "nonApplicable": "This discount code is non applicable"
+  },
+  "fr": {
+    "code": "Code Promo",
+    "apply": "Appliquer",
+    "nonApplicable": "Ce code n'est pas applicable"
+  },
+  "de": {
+    "code": "Rabattcode",
+    "apply": "Anwenden",
+    "nonApplicable": "Dieser Rabattcode ist nicht anwendbar"
+  }
+}
