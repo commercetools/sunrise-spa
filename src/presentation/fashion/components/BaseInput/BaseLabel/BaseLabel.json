@@ -1,0 +1,11 @@
+{
+  "en": {
+    "required": "Required field"
+  },
+  "fr": {
+    "required": "Champ requis"
+  },
+  "de": {
+    "required": "Pflichtfeld"
+  }
+}

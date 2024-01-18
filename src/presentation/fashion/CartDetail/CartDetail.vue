@@ -1,5 +1,4 @@
 <style src="./CartDetail.scss" lang="scss"></style>
-<i18n src="./CartDetail.txt" lang="yaml"></i18n>
 <script src="./CartDetail.js"></script>
 
 <template>

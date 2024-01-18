@@ -1,4 +1,3 @@
-<i18n src="./Selector.txt" lang="yaml"></i18n>
 <script src="./Selector.js"></script>
 
 <template>

@@ -1,5 +1,6 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+import localMessages from './ValidationError.json'
 
 export default {
   props: {
@@ -15,7 +16,7 @@ export default {
     },
   },
   setup(props) {
-    const { t, te } = useI18n();
+    const { t, te } = useI18n({messages: localMessages});
     const validations = computed(() => {
       const errors = props.vuelidate.$errors.map(
         ({ $validator }) => $validator

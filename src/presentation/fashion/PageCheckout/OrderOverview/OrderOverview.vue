@@ -1,5 +1,4 @@
 <style src="./OrderOverview.scss" lang="scss" scoped></style>
-<i18n src="./OrderOverview.txt" lang="yaml"></i18n>
 <script src="./OrderOverview.js"></script>
 
 <template>

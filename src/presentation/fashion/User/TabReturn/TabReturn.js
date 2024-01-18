@@ -6,6 +6,7 @@ import BaseAddress from 'presentation/components/BaseAddress/BaseAddress.vue';
 import { shallowRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import useCustomerTools from 'hooks/useCustomerTools';
+import localMessages from './TabReturn.json';
 
 export default {
   components: {
@@ -16,7 +17,7 @@ export default {
     LineItemInfo,
   },
   setup() {
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const selectedItems = shallowRef([]);
     const tools = useCustomerTools();
     const { loading, order } = tools.useMyOrder();

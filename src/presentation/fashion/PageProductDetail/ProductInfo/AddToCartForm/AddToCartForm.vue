@@ -1,5 +1,4 @@
 <style src="./AddToCartForm.scss" lang="scss"></style>
-<i18n src="./AddToCartForm.txt" lang="yaml"></i18n>
 <script src="./AddToCartForm.js"></script>
 
 <template>

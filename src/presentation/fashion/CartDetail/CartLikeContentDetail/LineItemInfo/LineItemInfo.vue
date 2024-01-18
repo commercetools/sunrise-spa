@@ -1,6 +1,5 @@
 <style src="./LineItemInfo.scss" lang="scss"></style>
 <script src="./LineItemInfo.js"></script>
-<i18n src="./LineItemInfo.txt" lang="yaml"></i18n>
 
 <template>
   <tbody>

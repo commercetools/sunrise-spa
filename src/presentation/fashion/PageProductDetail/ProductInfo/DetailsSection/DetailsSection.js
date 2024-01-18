@@ -5,6 +5,7 @@ import {
   productAttributes,
 } from 'containers/lib';
 import useLocale from 'hooks/useLocale';
+import localMessages from './DetailsSection.json';
 
 export default {
   props: {
@@ -14,7 +15,7 @@ export default {
     },
   },
   setup(props) {
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const expanded = shallowRef([true, false]);
     const { locale } = useLocale();
     const attributes = computed(() => {

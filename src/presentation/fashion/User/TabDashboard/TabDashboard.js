@@ -1,10 +1,11 @@
 import { useI18n } from 'vue-i18n';
 import useCustomerTools from 'hooks/useCustomerTools';
 import { onMounted } from 'vue';
+import localMessages from './TabDashboard.json';
 
 export default {
   setup() {
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const { customer, logout, refreshUser } =
       useCustomerTools();
     onMounted(() => {

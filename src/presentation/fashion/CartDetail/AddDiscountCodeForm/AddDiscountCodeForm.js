@@ -5,6 +5,7 @@ import BaseInput from 'presentation/components/BaseInput/BaseInput.vue';
 import { useI18n } from 'vue-i18n';
 import useCartTools from 'hooks/useCartTools';
 import useDiscountCode from 'hooks/useDiscountCode';
+import localMessages from './AddDiscountCodeForm.json'
 
 export default {
   components: {
@@ -13,7 +14,7 @@ export default {
     ServerError,
   },
   setup() {
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const { applyDiscount: ad } = useCartTools();
     const { form, v } = useDiscountCode();
     const applyDiscount = () => ad(form.value.code);

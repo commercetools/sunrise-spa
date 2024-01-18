@@ -1,0 +1,23 @@
+{
+  "en": {
+    "midSeasonSale": "MID-SEASON SALE",
+    "up50": "UP TO 50%",
+    "shopNow": "SHOP NOW",
+    "checkout": "CHECK OUT",
+    "newCollection": "NEW COLLECTION"
+  },
+  "fr": {
+    "midSeasonSale": "PROMO MI-SAISON",
+    "up50": "JUSQU'A 50%",
+    "shopNow": "ACHETE MAINTENANT",
+    "checkout": "PANIER",
+    "newCollection": "NOUVELLE COLLECTION"
+  },
+  "de": {
+    "midSeasonSale": "SOMMERSCHLUSSVERKAUF",
+    "up50": "BIS ZU 50%",
+    "shopNow": "JETZT SHOPPEN",
+    "checkout": "checkout",
+    "newCollection": "NEUE KOLLEKTION"
+  }
+}

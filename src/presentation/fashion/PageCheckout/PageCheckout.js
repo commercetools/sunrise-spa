@@ -6,6 +6,7 @@ import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 import useCart from 'hooks/useCart';
 import useCartTools from 'hooks/useCartTools';
+import localMessages from './PageCheckout.json';
 
 export default {
   components: {
@@ -15,7 +16,7 @@ export default {
     ServerError,
   },
   setup() {
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const router = useRouter();
     const shippingMethod = shallowRef(null);
     const billingAddress = shallowRef(null);

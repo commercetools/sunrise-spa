@@ -1,0 +1,11 @@
+{
+  "en": {
+    "shippingMethod": "Shipping method"
+  },
+  "fr": {
+    "shippingMethod": "Methode d'expédition"
+  },
+  "de": {
+    "shippingMethod": "Versandart"
+  }
+}

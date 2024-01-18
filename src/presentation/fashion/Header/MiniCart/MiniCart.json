@@ -1,0 +1,35 @@
+{
+  "de": {
+    "miniCart": "Warenkorb",
+    "viewBag": "Warenkorb",
+    "quantity": "Menge",
+    "price": "Price",
+    "totalPrice": "Gesamtpreis",
+    "delete": "Löschen",
+    "checkout": "Zur Kasse",
+    "emptyCart": "Ihr Warenkorb ist derzeit leer",
+    "subtotal": "Zwischensumme"
+  },
+  "en": {
+    "miniCart": "Shopping Cart",
+    "viewBag": "View Cart",
+    "quantity": "Quantity",
+    "price": "Price",
+    "totalPrice": "Total",
+    "delete": "Delete",
+    "checkout": "Checkout",
+    "emptyCart": "Your cart is currently empty",
+    "subtotal": "Subtotal"
+  },
+  "fr": {
+    "miniCart": "Panier",
+    "viewBag": "Voir le panier",
+    "quantity": "Quantité",
+    "price": "Prix",
+    "totalPrice": "Total",
+    "delete": "Supprimer",
+    "checkout": "Commander",
+    "emptyCart": "Votre panier est vide",
+    "subtotal": "Sous-total"
+  }
+}

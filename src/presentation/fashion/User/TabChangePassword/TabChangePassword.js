@@ -7,6 +7,7 @@ import LoadingButton from 'presentation/components/LoadingButton/LoadingButton.v
 import { useI18n } from 'vue-i18n';
 import { ref } from 'vue';
 import useCustomerTools from 'hooks/useCustomerTools';
+import localMessages from './TabChangePassword.json';
 function Rules(form) {
   this.currentPassword = { required };
   this.newPassword = { required };
@@ -25,7 +26,7 @@ export default {
   },
   setup() {
     const tools = useCustomerTools();
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const getErrorMessage = ({ code }) => {
       if (code === 'InvalidCurrentPassword') {
         return t('invalidPassword');

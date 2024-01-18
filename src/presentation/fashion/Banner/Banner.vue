@@ -1,6 +1,5 @@
 <script src="./Banner.js" />
 <style src="./Banner.scss" lang="scss"></style>
-<i18n src="./Banner.txt" lang="yaml"></i18n>
 
 <template>
   <transition name="slide-fade" appear>

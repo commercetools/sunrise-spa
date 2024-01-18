@@ -1,4 +1,3 @@
-<i18n src="./Login.txt" lang="yaml"></i18n>
 <style src="./Login.scss" lang="scss"></style>
 <script src="./Login.js"></script>
 

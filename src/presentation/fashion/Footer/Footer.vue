@@ -1,6 +1,5 @@
 <script src="./Footer.js" />
 <style src="./Footer.scss" lang="scss"></style>
-<i18n src="./Footer.txt" lang="yaml"></i18n>
 
 <template>
   <footer class="footer-area border-top-2 pt-50">

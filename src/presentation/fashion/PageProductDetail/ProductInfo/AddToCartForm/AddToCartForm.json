@@ -1,0 +1,20 @@
+{
+  "de": {
+    "addToCart": "Zum Warenkorb Hinzufügen",
+    "addToShoppingList": "??????",
+    "notInStock": "Artikel ist nicht auf Lager",
+    "quantityError": "Geben Sie den Wert kleiner oder gleich {quantity} ein"
+  },
+  "fr": {
+    "addToCart": "Ajouter au panier",
+    "addToShoppingList": "Ajouter à ma liste d'achat",
+    "notInStock": "Le produit n'est pas en stock",
+    "quantityError": "Entrez une valeur égale ou moins que {quantity}"
+  },
+  "en": {
+    "addToCart": "Add to Shopping Bag",
+    "addToShoppingList": "Add to Shopping List",
+    "notInStock": "Item is not in stock",
+    "quantityError": "Enter the value less or equal to {quantity}"
+  }
+}

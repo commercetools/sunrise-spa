@@ -1,5 +1,4 @@
 <style src="./BaseLabel.scss" lang="scss" scoped></style>
-<i18n src="./BaseLabel.txt" lang="yaml"></i18n>
 <script src="./BaseLabel.js"></script>
 
 <template>

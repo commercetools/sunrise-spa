@@ -1,0 +1,17 @@
+{
+  "en": {
+    "search": "Search",
+    "stores": "Stores",
+    "help": "Help"
+  },
+  "fr": {
+    "search": "Recherche",
+    "stores": "Boutiques",
+    "help": "Aide"
+  },
+  "de": {
+    "search": "Suche",
+    "stores": "Filiale",
+    "help": "Hilfe"
+  }
+}

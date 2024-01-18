@@ -1,0 +1,17 @@
+{
+  "de": {
+    "showMore": "Mehr",
+    "showLess": "Weniger",
+    "available": "Verfügbar"
+  },
+  "fr": {
+    "showMore": "Voir +",
+    "showLess": "Voir -",
+    "available": "Disponible"
+  },
+  "en": {
+    "showMore": "Show more",
+    "showLess": "Show less",
+    "available": "Available"
+  }
+}

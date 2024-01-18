@@ -1,6 +1,7 @@
 import { useI18n } from 'vue-i18n';
 import LineItemInfo from './LineItemInfo/LineItemInfo.vue';
 import { shallowRef } from 'vue';
+import localMessages from './CartLikeContentDetail.json'
 export default {
   components: {
     LineItemInfo,
@@ -24,7 +25,7 @@ export default {
     },
   },
   setup(_, { emit }) {
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const selectedReturnItems = shallowRef([]);
     const selectReturnItem = (item) => {
       selectedReturnItems.value = selectedReturnItems.value

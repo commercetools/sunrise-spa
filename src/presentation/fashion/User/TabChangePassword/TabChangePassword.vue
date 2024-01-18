@@ -1,4 +1,3 @@
-<i18n src="./TabChangePassword.txt" lang="yaml"></i18n>
 <script src="./TabChangePassword.js"></script>
 <style src="./TabChangePassword.scss" lang="scss" scope></style>
 

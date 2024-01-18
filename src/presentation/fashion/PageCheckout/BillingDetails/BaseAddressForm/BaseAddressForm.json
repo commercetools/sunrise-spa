@@ -1,0 +1,47 @@
+{
+  "en": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "address": "Address",
+    "streetName": "House number and street name",
+    "additional": "Apartment, suite, unit etc. (optional)",
+    "city": "City",
+    "postCode": "Postcode / ZIP",
+    "country": "Country",
+    "email": "Email",
+    "phone": "Phone",
+    "back": "Back",
+    "continue": "Continue",
+    "selectCountry": "Select country"
+  },
+  "fr": {
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "address": "Adresse",
+    "streetName": "Numéro et nom de la rue",
+    "additional": "Appartement, étage, etc. (optionnel)",
+    "city": "Ville",
+    "postCode": "Code postal",
+    "country": "Pays",
+    "email": "Email",
+    "phone": "Numéro de téléphone",
+    "back": "Retour",
+    "continue": "Continuer",
+    "selectCountry": "Selectionnez un pays"
+  },
+  "de": {
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "address": "Adresse",
+    "streetName": "Straße und Hausnummer",
+    "additional": "Wohnung, Suite, Einheit etc. (optional)",
+    "city": "Stadt",
+    "postCode": "PLZ",
+    "country": "Land",
+    "email": "E-Mail-Adresse",
+    "phone": "Telefon",
+    "back": "Zurück",
+    "continue": "Weiter",
+    "selectCountry": "Land auswählen"
+  }
+}

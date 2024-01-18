@@ -3,6 +3,8 @@ import BasePrice from 'presentation/components/BasePrice/BasePrice.vue';
 import AddToCartForm from './AddToCartForm/AddToCartForm.vue';
 import DetailsSection from './DetailsSection/DetailsSection.vue';
 import ProductGallery from './ProductGallery/ProductGallery.vue';
+import localMessages from './ProductInfo.json';
+import { useI18n } from 'vue-i18n';
 
 export default {
   name: 'ProductInfo',
@@ -28,7 +30,8 @@ export default {
         sku: props.currentVariant.sku,
       });
     };
-    return { openAddToShoppingList };
+    const { t } = useI18n({messages: localMessages});
+    return { openAddToShoppingList, t };
   },
   components: {
     DetailsSection,

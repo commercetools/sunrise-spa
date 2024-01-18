@@ -1,0 +1,20 @@
+{
+  "en": {
+    "page": "Page",
+    "of": "of",
+    "next": "Next",
+    "previous": "Previous"
+  },
+  "fr": {
+    "page": "Page",
+    "of": "de",
+    "next": "Suivant",
+    "previous": "Précedent"
+  },
+  "de": {
+    "page": "Seite",
+    "of": "von",
+    "next": "Nächste",
+    "previous": "Vorherige"
+  }
+}

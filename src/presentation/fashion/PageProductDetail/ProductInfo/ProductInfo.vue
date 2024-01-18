@@ -1,5 +1,4 @@
 <style src="./ProductInfo.scss" lang="scss" scoped></style>
-<i18n src="./ProductInfo.txt" lang="yaml"></i18n>
 <script src="./ProductInfo.js"></script>
 
 <template>

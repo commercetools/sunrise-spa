@@ -6,6 +6,7 @@ import { useI18n } from 'vue-i18n';
 import ShippingMethod from './ShippingMethod/ShippingMethod.vue';
 import { ref } from 'vue';
 import useCartTools from 'hooks/useCartTools';
+import localMessages from './OrderOverview.json';
 
 export default {
   props: {
@@ -29,7 +30,7 @@ export default {
     // VuePerfectScrollbar,
   },
   setup(props, { emit }) {
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const paid = ref(false);
     const paymentId = ref(null);
     const cardPaid = (paymentId) => {

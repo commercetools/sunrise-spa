@@ -1,4 +1,3 @@
-<i18n src="./TabAccountDetails.txt" lang="yaml"></i18n>
 <script src="./TabAccountDetails.js"></script>
 <style src="./TabAccountDetails.scss" lang="scss" scope></style>
 

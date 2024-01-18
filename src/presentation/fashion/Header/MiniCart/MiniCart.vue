@@ -1,5 +1,4 @@
 <style src="./MiniCart.scss" lang="scss" scoped></style>
-<i18n src="./MiniCart.txt" lang="yaml"></i18n>
 <script src="./MiniCart.js"></script>
 
 <template>

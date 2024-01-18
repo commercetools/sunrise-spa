@@ -1,0 +1,35 @@
+{
+  "en": {
+    "accountDetails": "Account Details",
+    "addressBook": "Address Book",
+    "paymentDetails": "Payment Details",
+    "myOrders": "My Orders",
+    "returnsExchange": "Returns / Exchange",
+    "wishlist": "Wishlist",
+    "signOut": "Sign Out",
+    "changePassword": "Change password",
+    "dashboard": "Dashboard"
+  },
+  "fr": {
+    "accountDetails": "Détail du compte",
+    "addressBook": "Carnet d'adresse",
+    "paymentDetails": "Détails de paiement",
+    "myOrders": "Mes commandes",
+    "returnsExchange": "Retours / Échanges",
+    "wishlist": "Liste d'envie",
+    "signOut": "Se déconnecter",
+    "changePassword": "Changer mot de passe",
+    "dashboard": "Tableau de bord"
+  },
+  "de": {
+    "accountDetails": "Benutzerdaten",
+    "addressBook": "Adressbuch",
+    "paymentDetails": "Meine Zahlungdaten",
+    "myOrders": "Meine Bestellungen",
+    "returnsExchange": "Meine Retouren",
+    "wishlist": "Wunschliste",
+    "signOut": "Abmelden",
+    "changePassword": "Passwort ändern",
+    "dashboard": "Dashboard"
+  }
+}

@@ -5,6 +5,7 @@ import Pagination from 'presentation/components/Pagination/Pagination.vue';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import useCustomerTools from 'hooks/useCustomerTools';
+import localMessages from './TabOrderList.json';
 
 export default {
   components: {
@@ -17,7 +18,7 @@ export default {
     const tools = useCustomerTools();
     const { setPage, loading, orders, total, page } =
       tools.useMyOrders();
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const orderListNotEmpty = computed(() => {
       return Boolean(orders.value.length);
     });

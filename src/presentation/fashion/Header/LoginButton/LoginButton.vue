@@ -1,5 +1,4 @@
 <style src="./LoginButton.scss" lang="scss"></style>
-<i18n src="./LoginButton.txt" lang="yaml"></i18n>
 <script src="./LoginButton.js"></script>
 
 <template>

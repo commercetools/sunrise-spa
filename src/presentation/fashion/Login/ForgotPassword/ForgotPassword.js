@@ -8,6 +8,7 @@ import BaseInput from 'presentation/components/BaseInput/BaseInput.vue';
 import { useI18n } from 'vue-i18n';
 import useCustomerTools from 'hooks/useCustomerTools';
 import useResetPasswordForm from 'hooks/useResetPasswordForm';
+import localMessages from './ForgotPassword.json';
 export default {
   components: {
     BaseForm,
@@ -18,7 +19,7 @@ export default {
   setup() {
     const { createResetToken, gotoResetToken } =
       useCustomerTools();
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const { form, v } = useResetPasswordForm();
     const createToken = () => {
       return createResetToken(form.value.email).then(

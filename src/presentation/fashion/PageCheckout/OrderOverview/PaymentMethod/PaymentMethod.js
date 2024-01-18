@@ -1,5 +1,7 @@
 import { onMounted, shallowRef, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import localMessages from './PaymentMethod.json';
+
 const paymentMethods = [
   {
     name: 'card',
@@ -22,7 +24,7 @@ export default {
   setup(props, { emit }) {
     onMounted(() => emit('card-paid'));
     const pm = shallowRef(props.paymentMethod);
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     watch(pm, (pm) => {
       emit('payment-changed', pm);
     });

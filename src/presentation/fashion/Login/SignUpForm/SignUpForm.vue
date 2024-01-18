@@ -1,5 +1,4 @@
 <style src="./SignUpForm.scss" lang="scss"></style>
-<i18n src="./SignUpForm.txt" lang="yaml"></i18n>
 <script src="./SignUpForm.js"></script>
 
 <template>

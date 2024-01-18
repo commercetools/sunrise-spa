@@ -1,0 +1,16 @@
+{
+  "en": {
+    "title": "Store Locator",
+    "search": "Search by location",
+    "enterPostalCode": "Enter your Zip Code"
+  },
+  "fr": {
+    "title": "Magasins",
+    "search": "Recherche",
+    "enterPostalCode": "Entrez votre code postal"
+  },
+  "de": {
+    "title": "Filialsuche",
+    "search": "Nach Ort suchen"
+  }
+}

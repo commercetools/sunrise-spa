@@ -2,7 +2,6 @@
   src="./CartLikeContentDetail.scss"
   lang="scss"
 ></style>
-<i18n src="./CartLikeContentDetail.txt" lang="yaml"></i18n>
 <script src="./CartLikeContentDetail.js"></script>
 
 <template>

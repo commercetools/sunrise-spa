@@ -12,6 +12,7 @@ import BaseForm from 'presentation/components/BaseForm/BaseForm.vue';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import useCustomerTools from 'hooks/useCustomerTools';
+import localMessages from './SignUpForm.json';
 function Rules(form) {
   this.firstName = { required };
   this.lastName = { required };
@@ -35,7 +36,7 @@ export default {
   },
   props: {},
   setup() {
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const form = ref({
       firstName: '',
       lastName: '',

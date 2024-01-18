@@ -1,6 +1,7 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { DEFAULT_PAGE_SIZE } from '../../../../constants';
+import localMessages from './Pagination.json';
 
 export default {
   props: {
@@ -25,6 +26,7 @@ export default {
     const { t } = useI18n({
       inheritLocale: true,
       useScope: 'local',
+      messages: localMessages
     });
     const totalPages = computed(() => {
       return Math.ceil(props.total / props.pageSize);

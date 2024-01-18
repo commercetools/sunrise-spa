@@ -1,0 +1,17 @@
+{
+  "en": {
+    "badRequestError": "There seems to be an issue with the request",
+    "networkError": "There was a error in the connection, please try again later",
+    "unknownError": "Something went wrong"
+  },
+  "fr": {
+    "badRequestError": "Une erreur est survenue",
+    "networkError": "La connexion a échouée, veuillez réessayer plus tard",
+    "unknownError": "Une erreur est survenue"
+  },
+  "de": {
+    "badRequestError": "Es gibt ein Problem mit der Anfrage",
+    "networkError": "Bei der Verbindung ist ein Fehler aufgetreten, versuchen Sie es bitte später nochmals",
+    "unknownError": "Etwas ist schief gelaufen"
+  }
+}

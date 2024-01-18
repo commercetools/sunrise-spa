@@ -1,5 +1,4 @@
 <style src="./style.css" scoped></style>
-<i18n src="./CartLikePriceDetail.txt" lang="yaml"></i18n>
 <script src="./CartLikePriceDetail.js"></script>
 <template>
   <div v-if="cart" class="grand-total-wrap">

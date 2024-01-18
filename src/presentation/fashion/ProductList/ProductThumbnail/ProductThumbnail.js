@@ -1,6 +1,7 @@
 import { useI18n } from 'vue-i18n';
 import BasePrice from 'presentation/components/BasePrice/BasePrice.vue';
 import { computed } from 'vue';
+import localMessages from './ProductThumbnail.json';
 
 export default {
   name: 'ProductThumbnail',
@@ -34,7 +35,7 @@ export default {
       }
       return require('presentation/assets/img/missing.svg');
     };
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const hasPrice = computed(
       () => props?.product?.masterVariant?.scopedPrice
     );

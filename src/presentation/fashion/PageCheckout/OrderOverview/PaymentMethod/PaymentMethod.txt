@@ -1,8 +1,0 @@
-en:
-  creditCard: "Credit card"
-  paymentMethod: "Payment method"
-  PayPal: "PayPal"
-de:
-  creditCard: "Kreditkarte"
-  paymentMethod: "Zahlungsweise"
-  PayPal: "PayPal"

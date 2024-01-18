@@ -1,5 +1,4 @@
 <script src="./PaymentMethod.js"></script>
-<i18n src="./PaymentMethod.txt" lang="yaml"></i18n>
 
 <template>
   <span>

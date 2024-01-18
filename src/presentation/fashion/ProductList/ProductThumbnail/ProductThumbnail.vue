@@ -1,5 +1,4 @@
 <style src="./ProductThumbnail.scss" lang="scss"></style>
-<i18n src="./ProductThumbnail.txt" lang="yaml"></i18n>
 <script src="./ProductThumbnail.js"></script>
 
 <template>

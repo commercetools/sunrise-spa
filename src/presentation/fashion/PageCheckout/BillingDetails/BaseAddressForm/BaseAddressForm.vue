@@ -1,4 +1,3 @@
-<i18n src="./BaseAddressForm.txt" lang="yaml"></i18n>
 <script src="./BaseAddressForm.js"></script>
 
 <template>

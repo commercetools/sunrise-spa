@@ -8,6 +8,7 @@ import { useI18n } from 'vue-i18n';
 import useCustomerTools from 'hooks/useCustomerTools';
 import { ref } from 'vue';
 import useAccessRules from 'hooks/useAccessRules';
+import localMessages from './LoginForm.json';
 function Rules() {
   this.password = { required };
   this.email = {
@@ -26,7 +27,7 @@ export default {
   props: {},
   setup() {
     const { showResetPassword } = useAccessRules();
-    const { t } = useI18n();
+    const { t } = useI18n({messages: localMessages});
     const form = ref({
       email: '',
       password: '',
